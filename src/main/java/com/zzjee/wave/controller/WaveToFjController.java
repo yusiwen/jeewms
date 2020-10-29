@@ -428,6 +428,7 @@ public class WaveToFjController extends BaseController {
 		WaveToFjEntity waveToFj =  (WaveToFjEntity)JSONHelper.json2Object(waveToFjstr,WaveToFjEntity.class);
 		//保存
 		try{
+			String omnoticeid ="";
 			WmOmQmIEntity wmOmQmI = systemService.getEntity(
 					WmOmQmIEntity.class, waveToFj.getId());
 			if (wmOmQmI != null&&wmOmQmI.getBinSta().equals("H")) {
@@ -436,10 +437,14 @@ public class WaveToFjController extends BaseController {
 				systemService.saveOrUpdate(wmOmQmI);
 				String hql = "From WmOmQmIEntity where omNoticeId = ? and  binSta = ?";
 				List<WmOmQmIEntity> listom = systemService.findHql(hql,wmOmQmI.getOmNoticeId(),"H");
+				omnoticeid = wmOmQmI.getOmNoticeId();
 				for(WmOmQmIEntity tom: listom){
 					tom.setSecondRq(waveToFj.getSecondRq());
 					systemService.saveOrUpdate(tom);
 				}
+				WmOmNoticeHEntity wmom = systemService.findUniqueByProperty(WmOmNoticeHEntity.class, "omNoticeId", omnoticeid);
+				wmom.setOmSta("操作中");
+				systemService.updateEntitie(wmom);
 			}
 			} catch (Exception e) {
 			e.printStackTrace();
