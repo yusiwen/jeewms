@@ -371,23 +371,39 @@ public class WaveToFjController extends BaseController {
 			listWaveToFjs=waveToFjService.findHql(hql,searchstr,searchstr2);
 		}
 //		List<WaveToFjEntity> listWaveToFjs=waveToFjService.getList(WaveToFjEntity.class);
+		String omnoticeid="1";
+		String siji = "";
+		String chehao = "";
  		for(WaveToFjEntity t:listWaveToFjs) {
 			if (StringUtil.isNotEmpty(searchstr3)) {
 				if (!StringUtil.strPos(t.getGoodsId(), searchstr3)) {
 					continue;
 				}
 			}
-			try {
-				String siji = "";
-				String chehao = "";
-				WmOmNoticeHEntity wmom = systemService.findUniqueByProperty(WmOmNoticeHEntity.class, "omNoticeId", t.getOmNoticeId());
-				siji = wmom.getReMember();
-				chehao = wmom.getReCarno();
-				t.setBy1(siji);//司机
-				t.setBy2(chehao);//车号
-			} catch (Exception e) {
+			WaveToFjEntity t1 = new WaveToFjEntity();
+			try{
+				MyBeanUtils.copyBean2Bean(t1,t);
+
+			}catch (Exception e){
+
 			}
-			listWaveToFjsnew.add(t);
+			try {
+				if(omnoticeid.equals( t.getOmNoticeId())){
+					t1.setBy1(siji);//司机
+					t1.setBy2(chehao);//车号
+				}else{
+					WmOmNoticeHEntity wmom = systemService.findUniqueByProperty(WmOmNoticeHEntity.class, "omNoticeId", t.getOmNoticeId());
+					omnoticeid =t.getOmNoticeId();
+					siji = wmom.getReMember();
+					chehao = wmom.getReCarno();
+					t1.setBy1(siji);//司机
+					t1.setBy2(chehao);//车号
+				}
+
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			listWaveToFjsnew.add(t1);
 		}
 
 		D0.setObj(listWaveToFjsnew);
