@@ -398,9 +398,13 @@ public class WaveToDownController extends BaseController {
 
 				}
 			}
+			D0.setObj(listWaveToDownsnew);
+
+		}else{
+			D0.setObj(listWaveToDowns);
+
 		}
 
-         D0.setObj(listWaveToDownsnew);
         return new ResponseEntity(D0, HttpStatus.OK);
     }
 
