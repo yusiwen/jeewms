@@ -1,16 +1,15 @@
 package com.zzjee.tms.controller;
 
 import com.alibaba.fastjson.JSONArray;
+import com.xiaoleilu.hutool.date.DateTime;
 import com.zzjee.api.ResultDO;
 import com.zzjee.md.entity.MdGoodsEntity;
+import com.zzjee.rfid.entity.RfidBuseEntity;
 import com.zzjee.tms.entity.DdPage;
 import com.zzjee.tms.entity.TmsMdDzEntity;
 import com.zzjee.tms.entity.TmsYwDingdanEntity;
 import com.zzjee.tms.service.TmsYwDingdanServiceI;
-import com.zzjee.wm.entity.WmOmNoticeHEntity;
-import com.zzjee.wm.entity.WmOmNoticeIEntity;
-import com.zzjee.wm.entity.WmTmsNoticeHEntity;
-import com.zzjee.wm.entity.WmTmsNoticeIEntity;
+import com.zzjee.wm.entity.*;
 import com.zzjee.wm.service.WmOmNoticeHServiceI;
 import com.zzjee.wmutil.wmUtil;
 import io.swagger.annotations.Api;
@@ -587,6 +586,53 @@ public class TmsYwDingdanController extends BaseController {
         D0.setObj(listWaveToDowns);
         return new ResponseEntity(D0, HttpStatus.OK);
     }
+
+	@RequestMapping(value = "/saveweizhi/{username}", method = RequestMethod.GET)
+	@ResponseBody
+	@ApiOperation(value = "保存位置", notes = "保存位置", httpMethod = "GET", produces = "application/json")
+	public ResponseMessage<?> saveweizhi(@ApiParam(required = true, name = "username", value = "username") @PathVariable("username") String username
+			, HttpServletRequest request) {
+
+		try{
+			String jingdu = request.getParameter("jingdu");
+			String weidu = request.getParameter("weidu");
+			RfidBuseEntity rfidBuseEntity = new RfidBuseEntity();
+			rfidBuseEntity.setRfidId1(username);
+			rfidBuseEntity.setRfidId2(jingdu);
+			rfidBuseEntity.setRfidId3(weidu);
+			rfidBuseEntity.setCreateDate(DateTime.now());
+			systemService.save(rfidBuseEntity);
+			return Result.success(rfidBuseEntity);
+
+		}catch (Exception e){
+			return Result.error("保存失败");
+
+		}
+
+	}@RequestMapping(value = "/getweizhi/{username}", method = RequestMethod.GET)
+	@ResponseBody
+	@ApiOperation(value = "获取位置", notes = "获取位置", httpMethod = "GET", produces = "application/json")
+	public ResponseMessage<?> getweizhi(@ApiParam(required = true, name = "username", value = "username") @PathVariable("username") String username
+			, HttpServletRequest request) {
+
+		try{
+
+			String hql = "from RfidBuseEntity where rfidId1 = ? order by createDate desc";
+			List<RfidBuseEntity> lista = systemService.findHql(hql,username);
+			if(lista!=null&&lista.size()>0){
+				return Result.success(lista.get(0));
+			}else{
+				return Result.error("暂无司机位置");
+
+			}
+
+		}catch (Exception e){
+			return Result.error("保存失败");
+
+		}
+
+	}
+
 	/**
 	 *  取消派车
 	 *
