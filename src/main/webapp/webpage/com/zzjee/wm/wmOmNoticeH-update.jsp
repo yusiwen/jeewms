@@ -38,19 +38,19 @@
  <script type="text/javascript">
  $(document).ready(function(){
 	 init();
-	 $("#jform_tab .con-wrapper").hide(); //Hide all tab content  
-	 $("#jform_tab li:first").addClass("active").show(); //Activate first tab  
+	 $("#jform_tab .con-wrapper").hide(); //Hide all tab content
+	 $("#jform_tab li:first").addClass("active").show(); //Activate first tab
 	 $("#jform_tab .con-wrapper:first").show(); //Show first tab content
-	 
-	 
-	 //On Click Event  
-    $("#jform_tab li").click(function() {  
-        $("#jform_tab li").removeClass("active"); //Remove any "active" class  
-        $(this).addClass("active"); //Add "active" class to selected tab  
-        $("#jform_tab .con-wrapper").hide(); //Hide all tab content  
-        var activeTab = $(this).find("a").attr("href"); //Find the rel attribute value to identify the active tab + content  
+
+
+	 //On Click Event
+    $("#jform_tab li").click(function() {
+        $("#jform_tab li").removeClass("active"); //Remove any "active" class
+        $(this).addClass("active"); //Add "active" class to selected tab
+        $("#jform_tab .con-wrapper").hide(); //Hide all tab content
+        var activeTab = $(this).find("a").attr("href"); //Find the rel attribute value to identify the active tab + content
         $(activeTab).fadeIn(); //Fade in the active content
-        //$(""+activeTab).show();   
+        //$(""+activeTab).show();
         if( $(activeTab).html()!="") {
         	return false;
         }else{
@@ -59,11 +59,11 @@
         	$.post(url, {}, function(data) {
         		 //$(this).attr("tab-ajax-cached", true);
         		$(activeTab).html(data);
-        		
+
             });
-        }  
-        return false;  
-    });  
+        }
+        return false;
+    });
   });
   //初始化下标
 	function resetTrNum(tableId) {
@@ -85,10 +85,10 @@
 			$(this).find('div[name=\'xh\']').html(i+1);
 		});
 	}
-	
+
 	function init(){
     	var tabHead =$("#jform_tab li:first");
-    	var tabBox = $("#jform_tab .con-wrapper:first"); 
+    	var tabBox = $("#jform_tab .con-wrapper:first");
     	var url = tabHead.attr("tab-ajax-url");
     	tabBox.html('正在加载内容，请稍后...');
     	$.post(url, {}, function(data) {
@@ -123,29 +123,29 @@
 			          </div>
 			          <div class="col-xs-2">
 			          <t:dictSelect field="cusCode" type="list" extendJson="{class:'form-control',datatype:'*',style:'width:230px'}"
-						readonly="${wmOmNoticeHPage.readonly}" 		dictTable="mv_cus" dictField="cus_code" dictText="cus_name"  defaultVal='${wmOmNoticeHPage.cusCode}'  hasLabel="false"  title="客户编码"></t:dictSelect>     
-	
+						readonly="${wmOmNoticeHPage.readonly}" 		dictTable="mv_cus" dictField="cus_code" dictText="cus_name"  defaultVal='${wmOmNoticeHPage.cusCode}'  hasLabel="false"  title="客户编码"></t:dictSelect>
+
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
 						<label class="Validform_label" style="display: none">客户</label>
 			          </div>
-			          
-			        
+
+
 			          <div class="col-xs-1 text-center">
 			          	<b>要求交货时间：</b>
 			          </div>
 			          <div class="col-xs-2">
-								<input id="delvData" name="delvData" type="text" class="form-control" 
+								<input id="delvData" name="delvData" type="text" class="form-control"
 									 value='${wmOmNoticeHPage.delvData}' />
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
 						<label class="Validform_label" style="display: none">要求交货时间</label>
 			          </div>
-			          
+
 			               <div class="col-xs-1 text-center">
 			          	<b>订单类型：</b>
 			          </div>
 			          <div class="col-xs-2">
-								<t:dictSelect field="orderTypeCode" type="list" extendJson="{class:'form-control',style:'width:150px'}"  
-								dictTable="ba_order_type" dictField="order_type_code" dictText="order_type_name"  defaultVal="${wmOmNoticeHPage.orderTypeCode}" hasLabel="false"  title="订单类型"></t:dictSelect>     
+								<t:dictSelect field="orderTypeCode" type="list" extendJson="{class:'form-control',style:'width:150px'}"
+								dictTable="ba_order_type" dictField="order_type_code" dictText="order_type_name"  defaultVal="${wmOmNoticeHPage.orderTypeCode}" hasLabel="false"  title="订单类型"></t:dictSelect>
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
 						<label class="Validform_label" style="display: none">订单类型</label>
 			          </div>
@@ -215,20 +215,20 @@
 
 
 
-			          
-			        
+
+
 							<div class="row show-grid">
 			          <div class="col-xs-1 text-center">
 			          	<b>收货人地址：</b>
 			          </div>
 			          <div class="col-xs-2">
-								<input id="delvAddr" name="delvAddr" type="text" class="form-control" 
+								<input id="delvAddr" name="delvAddr" type="text" class="form-control"
 									 value='${wmOmNoticeHPage.delvAddr}' />
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
 						<label class="Validform_label" style="display: none">收货人地址</label>
 			          </div>
-			          
-			        
+
+
 			          <div class="col-xs-1 text-center">
 			          	<b>运输人：</b>
 			          </div>
@@ -241,7 +241,7 @@
 						<label class="Validform_label" style="display: none">运输人</label>
 			          </div>
 
-			        
+
 							<div class="row show-grid">
 			          <%--<div class="col-xs-1 text-center">--%>
 			          	<%--<b>承运人电话：</b>--%>
@@ -252,39 +252,39 @@
 						<%--<span class="Validform_checktip" style="float:left;height:0px;"></span>--%>
 						<%--<label class="Validform_label" style="display: none">承运人电话</label>--%>
 			          <%--</div>--%>
-			          
-			        
+
+
 			          <div class="col-xs-1 text-center">
 			          	<b>发货运单号或车号：</b>
 			          </div>
 			          <div class="col-xs-2">
-								<input id="reCarno" name="reCarno" type="text" class="form-control" 
+								<input id="reCarno" name="reCarno" type="text" class="form-control"
 									 value='${wmOmNoticeHPage.reCarno}' />
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
 						<label class="Validform_label" style="display: none">发货运单号或车号</label>
 			          </div>
 
 							</div>
-			          
-			        
+
+
 							<div class="row show-grid">
-			          <%--<div class="col-xs-1 text-center">--%>
-			          	<%--<b>发货月台：</b>--%>
-			          <%--</div>--%>
-			          <%--<div class="col-xs-2">--%>
-								<%--<input id="omPlatNo" name="omPlatNo" type="text" class="form-control" --%>
-									<%--ignore="ignore"--%>
-								 <%--value='${wmOmNoticeHPage.omPlatNo}' />--%>
-						<%--<span class="Validform_checktip" style="float:left;height:0px;"></span>--%>
-						<%--<label class="Validform_label" style="display: none">发货月台</label>--%>
-			          <%--</div>--%>
-			          
-			        
+			          <div class="col-xs-1 text-center">
+			          	<b>发货月台：</b>
+			          </div>
+			          <div class="col-xs-2">
+								<input id="omPlatNo" name="omPlatNo" type="text" class="form-control"
+									ignore="ignore"
+								 value='${wmOmNoticeHPage.omPlatNo}' />
+						<span class="Validform_checktip" style="float:left;height:0px;"></span>
+						<label class="Validform_label" style="display: none">发货月台</label>
+			          </div>
+
+
 			          <div class="col-xs-1 text-center">
 			          	<b>备注：</b>
 			          </div>
 			          <div class="col-xs-2">
-								<input id="omBeizhu" name="omBeizhu" type="text" class="form-control" 
+								<input id="omBeizhu" name="omBeizhu" type="text" class="form-control"
 									ignore="ignore"
 								 value='${wmOmNoticeHPage.omBeizhu}' />
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
@@ -297,21 +297,21 @@
 			          	<b>状态：</b>
 			          </div>
 			          <div class="col-xs-2">
-								<input id="omSta" name="omSta" type="text" class="form-control" 
+								<input id="omSta" name="omSta" type="text" class="form-control"
 									ignore="ignore" readonly="readonly"
 								 value='${wmOmNoticeHPage.omSta}' />
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
 						<label class="Validform_label" style="display: none">状态</label>
 			          </div>
 
-			        
+
 <div class="col-xs-1 text-center">
 			          	<b>附件</b>
 			          </div>
 			          </div>
 			          <div class="col-xs-2">
 			<t:webUploader auto="true" pathValues="${wmOmNoticeHPage.fuJian}" name="fuJian" duplicate="true" fileNumLimit="3"></t:webUploader>
-				
+
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
 						<label class="Validform_label" style="display: none">附件</label>
 			          </div>
@@ -321,19 +321,19 @@
 							</div>
 				  </div>
 			   </div>
-			   
+
 			   <div class="con-wrapper" style="display: block;"></div>
 	</div>
-		
-			
-			
+
+
+
 <script type="text/javascript">
    $(function(){
     //查看模式情况下,删除和上传附件功能禁止使用
 	if(location.href.indexOf("load=detail")!=-1){
 		$(".jeecgDetail").hide();
 	}
-	
+
 	if(location.href.indexOf("mode=read")!=-1){
 		//查看模式控件禁用 ||("已完成"=="${wmOmNoticeHPage.omSta}")
 		$("#formobj").find(":input").attr("disabled","disabled");
@@ -346,7 +346,7 @@
 
   var neibuClickFlag = false;
   function neibuClick() {
-	  neibuClickFlag = true; 
+	  neibuClickFlag = true;
 	  $('#btn_sub').trigger('click');
   }
 </script>
@@ -363,7 +363,7 @@
 </div>
 
 
-			
+
 		<div align="center"  id = "sub_tr" style="display: none;" > <input type="button" value="提交" onclick="neibuClick();" class="ui_state_highlight"></div>
 		<script src="plug-in/layer/layer.js"></script>
 		<script type="text/javascript">
@@ -437,7 +437,7 @@
 			});
 		});
 		</script>
-		
+
 		</form>
 
 
@@ -549,6 +549,6 @@
 	  </tr>
 	  </tbody>
   </table>
-	<script src = "webpage/com/zzjee/wm/wmOmNoticeH.js"></script>	
+	<script src = "webpage/com/zzjee/wm/wmOmNoticeH.js"></script>
  </body>
  </html>

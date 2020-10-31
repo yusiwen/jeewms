@@ -299,15 +299,15 @@
 
 
 							<div class="row show-grid">
-			          <%--<div class="col-xs-1 text-center">--%>
-			          	<%--<b>发货月台：</b>--%>
-			          <%--</div>--%>
-			          <%--<div class="col-xs-2">--%>
-								<%--<t:dictSelect field="omPlatNo" type="list" extendJson="{class:'form-control',style:'width:150px'}"  --%>
-								<%--dictTable="ba_platform" dictField="platform_code" dictText="platform_name" hasLabel="false"  title="月台"></t:dictSelect>     --%>
-						<%--<span class="Validform_checktip" style="float:left;height:0px;"></span>--%>
-						<%--<label class="Validform_label" style="display: none">月台</label>--%>
-			          <%--</div>		          --%>
+			          <div class="col-xs-1 text-center">
+			          	<b>发货月台：</b>
+			          </div>
+			          <div class="col-xs-2">
+								<t:dictSelect field="omPlatNo" type="list" extendJson="{class:'form-control',style:'width:150px'}"
+								dictTable="ba_platform" dictField="platform_code" dictText="platform_name" hasLabel="false"  title="月台"></t:dictSelect>
+						<span class="Validform_checktip" style="float:left;height:0px;"></span>
+						<label class="Validform_label" style="display: none">月台</label>
+			          </div>
 
 			          <div class="col-xs-1 text-center">
 			          	<b>备注 </b>
