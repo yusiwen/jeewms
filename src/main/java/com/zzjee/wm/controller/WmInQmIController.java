@@ -225,7 +225,13 @@ public class WmInQmIController extends BaseController {
 		message = "上架成功";
 		try {
 			System.out.println(request.getParameter("id"));
-			toup(request.getParameter("id"));
+			    boolean isup=   toup(request.getParameter("id"));
+			    if(!isup){
+					j.setSuccess(false);
+ 					message = "上架失败";
+					return j;
+
+				}
 
 			systemService.addLog(message, Globals.Log_Type_DEL,
 					Globals.Log_Leavel_INFO);
