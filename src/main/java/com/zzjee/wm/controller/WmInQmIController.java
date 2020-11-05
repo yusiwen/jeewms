@@ -224,7 +224,7 @@ public class WmInQmIController extends BaseController {
 		AjaxJson j = new AjaxJson();
 		message = "上架成功";
 		try {
-
+			System.out.println(request.getParameter("id"));
 			toup(request.getParameter("id"));
 
 			systemService.addLog(message, Globals.Log_Type_DEL,
@@ -245,7 +245,9 @@ public class WmInQmIController extends BaseController {
 		String hql0 = "from WmInQmIEntity where binSta = 'N' and  id = ?";
 		List<WmInQmIEntity> WmInQmIEntityList = systemService.findHql(hql0,
 				id);// 获取行项目
+		System.out.println(id+"111111");
 		for (WmInQmIEntity wmInQmIEntity : WmInQmIEntityList) {
+			System.out.println(wmInQmIEntity.getId()+"222222");
 
 			try{
 				WmToUpGoodsEntity wmToUpGoodsEntityold = systemService.findUniqueByProperty(WmToUpGoodsEntity.class,"orderIdI",wmInQmIEntity.getId());
@@ -255,6 +257,7 @@ public class WmInQmIController extends BaseController {
 			}catch (Exception e){
 				e.printStackTrace();
 			}
+			System.out.println(wmInQmIEntity.getId()+"33333");
 
 			WmToUpGoodsEntity wmToUpGoodsEntity = new WmToUpGoodsEntity();
 			wmToUpGoodsEntity.setGoodsId(wmInQmIEntity.getGoodsId());
@@ -273,9 +276,12 @@ public class WmInQmIController extends BaseController {
 //			String sql = "select     md.suo_shu_ke_hu as cuscode from    md_bin md  where    md.ku_wei_bian_ma = '"
 //					+ wmInQmIEntity.getBinId() + "'";
 //			Map<String, Object> binMap = systemService.findOneForJdbc(sql);
+			System.out.println(wmInQmIEntity.getBinId()+"444444");
+
 			if (!wmUtil.checkbin(wmInQmIEntity.getBinId())) {
 				return false;
 			}
+			System.out.println(wmInQmIEntity.getBinId()+"555555");
 
 			try {
 
