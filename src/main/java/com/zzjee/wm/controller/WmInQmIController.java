@@ -253,7 +253,7 @@ public class WmInQmIController extends BaseController {
 					continue;
 				}
 			}catch (Exception e){
-
+				e.printStackTrace();
 			}
 
 			WmToUpGoodsEntity wmToUpGoodsEntity = new WmToUpGoodsEntity();
@@ -293,6 +293,7 @@ public class WmInQmIController extends BaseController {
 										* Double.parseDouble(wmToUpGoodsEntity.getGoodsQua())));
 					} catch (Exception e) {
 						// TODO: handle exception
+						e.printStackTrace();
 					}
 
 				} else {
@@ -302,7 +303,7 @@ public class WmInQmIController extends BaseController {
 
 
 			} catch (Exception e) {
-
+e.printStackTrace();
 			}
 
 

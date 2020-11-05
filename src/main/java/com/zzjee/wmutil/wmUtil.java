@@ -492,7 +492,7 @@ public class wmUtil {
 
 			}
 		}catch (Exception e){
-
+e.printStackTrace();
 		}
 		return  flag;
 	}
