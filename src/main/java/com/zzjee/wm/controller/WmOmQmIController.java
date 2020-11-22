@@ -234,6 +234,8 @@ public class WmOmQmIController extends BaseController {
 				try {
 					t.setWaveId("BC"+waveId);
 				    t.setBinSta("N");//波次直接设置为未下架
+					t.setFirstRq("");
+
 					if(StringUtil.isNotEmpty(firstrongqi)){
 						t.setFirstRq(firstrongqi);
 					}
