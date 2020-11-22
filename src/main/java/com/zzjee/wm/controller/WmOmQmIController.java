@@ -226,6 +226,7 @@ public class WmOmQmIController extends BaseController {
 		AjaxJson j = new AjaxJson();
 		message = "波次生成成功";
 		String waveId = "";
+		String firstrongqi = request.getParameter("firstrongqi");
 		waveId = DateUtils.date2Str(DateUtils.yyyymmddhhmmss);
 		try {
 			for (String id : ids.split(",")) {
@@ -233,6 +234,9 @@ public class WmOmQmIController extends BaseController {
 				try {
 					t.setWaveId("BC"+waveId);
 				    t.setBinSta("N");//波次直接设置为未下架
+					if(StringUtil.isNotEmpty(firstrongqi)){
+						t.setFirstRq(firstrongqi);
+					}
 					systemService.updateEntitie(t);
 					systemService.addLog(message, Globals.Log_Type_UPDATE,
 							Globals.Log_Leavel_INFO);

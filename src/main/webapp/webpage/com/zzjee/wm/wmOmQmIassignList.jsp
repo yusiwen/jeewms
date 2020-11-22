@@ -55,7 +55,8 @@
 
       <t:dgFunOpt title="任务确认" funname="taskassign(id)"  urlclass="ace_button"  exp="binSta#eq#I"  />
       <t:dgToolBar title="批量确认"   url="wmOmQmIController.do?doassignbatch" funname="doassignALLSelect"></t:dgToolBar>
-      <t:dgToolBar title="波次生成"   url="wmOmQmIController.do?doassignwave" funname="dowaveALLSelect"></t:dgToolBar>
+      <t:dgToolBar title="波次生成"     funname="dowaveALLSelect"></t:dgToolBar>
+      <t:dgToolBar title="波次生成到指定容器"     funname="dowaveALLSelectrongqi"></t:dgToolBar>
       <t:dgToolBar title="删除"   url="wmOmQmIController.do?dodelwave" funname="dodelwaveALLSelect"></t:dgToolBar>
 
       <t:dgToolBar title="选择批量更改" icon="icon-edit"  funname="editRow"></t:dgToolBar>
@@ -74,8 +75,9 @@
 
           <t:autocomplete   entityName="TSBaseUser" searchField="userName" name="assgnuserName"></t:autocomplete>
 
-
-      </div>
+          <span style="vertical-align:middle;display:-moz-inline-box;display:inline-block;width: 90px;text-align:right;" title="波次容器">波次容器: </span>
+          <input type="text" name="firstrongqi" style="width: 100px; height: 30px;">
+       </div>
 
   </div>
  </div>
@@ -118,7 +120,39 @@
          }
      }
 
- function dowaveALLSelect(){
+     function dowaveALLSelectrongqi(){
+
+         var firstrongqi;
+         firstrongqi = $('input[name="firstrongqi"]').attr("value");
+         if(firstrongqi==""){
+             alert("波次容器不能为空");
+         }else{
+             var ids = [];
+             var rows = $('#wmOmQmIList').datagrid('getSelections');
+             for(var i=0; i<rows.length; i++){
+                 ids.push(rows[i].id);
+             }
+             var url = "wmOmQmIController.do?doassignwave&ids="+ids+"&firstrongqi="+firstrongqi;
+             $.ajax({
+                 async : true,
+                 cache : false,
+                 type : 'POST',
+                 url : url,// 请求的action路径
+                 error : function() {// 请求失败处理函数
+                 },
+                 success : function(data) {
+                     var d = $.parseJSON(data);
+                     if (d.success) {
+                         tip("波次生成成功");
+                         $('#wmOmQmIList').datagrid('reload',{});
+                     }
+                 }
+             });
+         }
+
+     }
+
+     function dowaveALLSelect(){
 
 	 var ids = [];
 	 var rows = $('#wmOmQmIList').datagrid('getSelections');
