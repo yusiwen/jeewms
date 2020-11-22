@@ -393,10 +393,15 @@ public class WaveToDownController extends BaseController {
 		}
 		if(StringUtil.isNotEmpty(searchstr3)){
 			for(WaveToDownEntity t: listWaveToDowns ){
-				if(StringUtil.strPos(t.getGoodsId(),searchstr3)){
-					listWaveToDownsnew.add(t);
+				try{
+					if(StringUtil.strPos(t.getGoodsId(),searchstr3)||StringUtil.strPos(t.getShpTiaoMa(),searchstr3)){
+						listWaveToDownsnew.add(t);
+
+					}
+				}catch (Exception e){
 
 				}
+
 			}
 			D0.setObj(listWaveToDownsnew);
 

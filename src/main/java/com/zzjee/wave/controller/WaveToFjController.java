@@ -376,9 +376,14 @@ public class WaveToFjController extends BaseController {
 		String chehao = "";
  		for(WaveToFjEntity t:listWaveToFjs) {
 			if (StringUtil.isNotEmpty(searchstr3)) {
-				if (!StringUtil.strPos(t.getGoodsId(), searchstr3)) {
-					continue;
+				try{
+					if (!StringUtil.strPos(t.getGoodsId(), searchstr3)||StringUtil.strPos(t.getShpTiaoMa(),searchstr3)) {
+						continue;
+					}
+				}catch (Exception e){
+
 				}
+
 			}
 			WaveToFjEntity t1 = new WaveToFjEntity();
 			try{

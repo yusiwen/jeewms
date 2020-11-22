@@ -18,12 +18,12 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.SequenceGenerator;
 import org.jeecgframework.poi.excel.annotation.Excel;
 
-/**   
+/**
  * @Title: Entity
  * @Description: wave_to_down
  * @author onlineGenerator
  * @date 2019-12-11 11:32:25
- * @version V1.0   
+ * @version V1.0
  *
  */
 @Entity
@@ -95,7 +95,8 @@ public class WaveToDownEntity implements java.io.Serializable {
 	/**by5*/
 	@Excel(name="by5")
 	private String by5;
-	
+	@Excel(name="商品条码")
+	private java.lang.String shpTiaoMa;
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  主键
@@ -450,5 +451,21 @@ public class WaveToDownEntity implements java.io.Serializable {
 	 */
 	public void setBy5(String by5){
 		this.by5 = by5;
+	}
+	/**
+	 *方法: 取得java.lang.String
+	 *@return: java.lang.String  shpTiaoMa
+	 */
+	@Column(name ="SHP_TIAO_MA",nullable=true,length=32)
+	public java.lang.String getShpTiaoMa(){
+		return this.shpTiaoMa;
+	}
+
+	/**
+	 *方法: 设置java.lang.String
+	 *@param: java.lang.String  shpTiaoMa
+	 */
+	public void setShpTiaoMa(java.lang.String shpTiaoMa){
+		this.shpTiaoMa = shpTiaoMa;
 	}
 }
