@@ -3,7 +3,7 @@
 <t:base type="jquery,easyui,tools,DatePicker"></t:base>
 <div class="easyui-layout" fit="true">
   <div region="center" style="padding:0px;border:0px">
-  <t:datagrid name="baPlatformList" checkbox="false" pagination="true" fitColumns="false" title="月台主数据" actionUrl="baPlatformController.do?datagrid" idField="id" fit="true" queryMode="group">
+  <t:datagrid name="baPlatformList" checkbox="true" pagination="true" fitColumns="false" title="月台主数据" actionUrl="baPlatformController.do?datagrid" idField="id" fit="true" queryMode="group">
     <t:dgCol title="主键"  field="id"  hidden="true"  queryMode="single"  width="120"></t:dgCol>
     <t:dgCol title="创建人名称"  field="createName"  hidden="true"  queryMode="single"  width="120"></t:dgCol>
     <t:dgCol title="创建人登录名称"  field="createBy"  hidden="true"  queryMode="single"  width="120"></t:dgCol>
@@ -28,13 +28,13 @@
   </t:datagrid>
   </div>
  </div>
- <script src = "webpage/com/zzjee/ba/baPlatformList.js"></script>		
+ <script src = "webpage/com/zzjee/ba/baPlatformList.js"></script>
  <script type="text/javascript">
  $(document).ready(function(){
  });
- 
-   
- 
+
+
+
 //导入
 function ImportXls() {
 	openuploadwin('Excel导入', 'baPlatformController.do?upload', "baPlatformList");
