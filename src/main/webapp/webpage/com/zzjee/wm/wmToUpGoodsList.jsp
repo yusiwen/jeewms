@@ -36,6 +36,9 @@
 <%--    <t:dgToolBar title="批量删除"  icon="icon-remove" url="wmToUpGoodsController.do?doBatchDel" funname="deleteALLSelect"></t:dgToolBar> --%>
    <t:dgToolBar title="查看" icon="icon-search" url="wmToUpGoodsController.do?goUpdate" funname="detail"></t:dgToolBar>
     <t:dgToolBar title="导入库存" icon="icon-put" funname="ImportXls"></t:dgToolBar>
+    <t:dgToolBar title="清空基础数据" icon="icon-put" funname="ImportXls"></t:dgToolBar>
+    <t:dgToolBar title="清空库存数据" icon="icon-put" funname="ImportXls"></t:dgToolBar>
+    <t:dgToolBar title="清空业务数据" icon="icon-put" funname="ImportXls"></t:dgToolBar>
     <t:dgToolBar title="导出" icon="icon-putout" funname="ExportXls"></t:dgToolBar>
     <t:dgToolBar title="模板下载" icon="icon-putout" funname="ExportXlsByT"></t:dgToolBar>
 
@@ -46,11 +49,16 @@
   </t:datagrid>
   </div>
  </div>
- <script src = "webpage/com/zzjee/wm/wmToUpGoodsList.js"></script>		
+ <script src = "webpage/com/zzjee/wm/wmToUpGoodsList.js"></script>
  <script type="text/javascript">
  $(document).ready(function(){
  });
-
+ // set sql_safe_updates=0;
+ // delete from wms.wm_to_up_goods;
+ // delete from wms.wm_day_his;
+ // delete from wms.wm_his_stock;
+ // delete from wms.wm_his_stock_ku;
+ // delete from wms.wm_his_stock_data;
  //添加行
  function addRow(title,addurl,gname){
      $('#'+gname).datagrid('appendRow',{});
@@ -120,7 +128,7 @@
 
 
  }
- 
+
 //导入
 function ImportXls() {
 	openuploadwin('Excel导入', 'wmToUpGoodsController.do?upload', "wmToUpGoodsList");
