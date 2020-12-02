@@ -30,8 +30,8 @@
     <!-- redis服务器中心 -->
     <bean id="redisConnectionFactory" class="org.springframework.data.redis.connection.jedis.JedisConnectionFactory">
         <property name="poolConfig" ref="poolConfig" />
-        <property name="port" value="6379" />
-        <property name="hostName" value="127.0.0.1" />
+        <property name="port" value="#{systemEnvironment['REDIS_PORT']}" />
+        <property name="hostName" value="#{systemEnvironment['REDIS_HOST']}" />
         <property name="password" value="" />
         <property name="timeout" value="10000" />
         <property name="database" value="0" />
