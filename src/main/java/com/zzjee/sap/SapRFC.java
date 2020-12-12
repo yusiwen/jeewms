@@ -68,10 +68,10 @@ public class SapRFC {
 			// router = ResourceUtil.getConfigByName("rfc.router");
 		}catch (Exception e){
 			clientName = "300";
-			userid = "DY_EZCAO";
+			userid = "**";
 			password = "123123";
 			language = "ZH";
-			host = "192.168.254.99";
+			host = "**";
 			system = "00";
 
 		}
@@ -97,7 +97,7 @@ public class SapRFC {
 			destination = JCoDestinationManager.getDestination(ABAP_AS);
 
 		} catch (JCoException ex) {
-     
+
 			System.out.print("destinoo**++++++"+ex.getMessage());
 		}
 	}
@@ -120,7 +120,7 @@ public class SapRFC {
 	public SapRFC prepare(String functionName) {
 		//this.functionName = functionName;
 		//Unread field: com.zzjee.sap.SapRFC.functionName
-		//Bug type URF_UNREAD_FIELD (click for details) 
+		//Bug type URF_UNREAD_FIELD (click for details)
 		try {
 			// 取得要执行的方法
 			function = destination.getRepository().getFunction(functionName);
