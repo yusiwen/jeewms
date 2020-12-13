@@ -258,6 +258,8 @@ public class WmInQmIController extends BaseController {
 			try{
 				WmToUpGoodsEntity wmToUpGoodsEntityold = systemService.findUniqueByProperty(WmToUpGoodsEntity.class,"orderIdI",wmInQmIEntity.getId());
 				if (wmToUpGoodsEntityold!=null){
+					wmInQmIEntity.setBinSta("Y");
+					systemService.saveOrUpdate(wmInQmIEntity);
 					continue;
 				}
 			}catch (Exception e){

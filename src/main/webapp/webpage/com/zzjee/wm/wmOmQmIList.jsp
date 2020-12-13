@@ -14,6 +14,8 @@
     <t:dgCol title="所属部门"  field="sysOrgCode"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
     <t:dgCol title="所属公司"  field="sysCompanyCode"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
     <t:dgCol title="操作" field="opt" width="100"></t:dgCol>
+    <t:dgCol title="波次号"  field="waveId"   query="true"    queryMode="single"  width="120"></t:dgCol>
+
     <t:dgCol title="出库通知单"  field="omNoticeId" query="true"   queryMode="single"  width="100"></t:dgCol>
     <t:dgCol title="出库通知行项目"  field="iomNoticeItem"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
     <t:dgCol title="商品编码"  field="goodsId"   query="true"     queryMode="single"  width="100"></t:dgCol>
@@ -28,7 +30,7 @@
     <t:dgCol title="备注"  field="itemText"    queryMode="group"  width="50"></t:dgCol>
     <t:dgCol title="生产日期"  field="proData"      queryMode="group"  width="80"></t:dgCol>
     <t:dgCol title="托盘"  field="tinId"   query="true"   queryMode="single"  width="70"></t:dgCol>
-   
+
      <t:dgCol title="任务接收人"  field="assgnTo"    queryMode="single"  width="120"></t:dgCol>
     <t:dgCol title="仓位"  field="binId"   query="true"   queryMode="single"  width="90"></t:dgCol>
 <%--     <t:dgCol title="体积"  field="tinTj"    queryMode="group"  width="70"></t:dgCol> --%>
@@ -36,7 +38,6 @@
     <t:dgCol title="下架状态"  field="binSta"   query="true"    queryMode="single" dictionary="sf_yn" width="50"></t:dgCol>
     <t:dgCol title="货主"  field="cusCode"   query="true"    queryMode="single" dictionary="mv_cus,cus_code,cus_name"  width="120"></t:dgCol>
 <%--     <t:dgCol title="温度"  field="recDeg"    queryMode="group"  width="120"></t:dgCol> --%>
-    <t:dgCol title="波次号"  field="waveId"   query="true"    queryMode="single"  width="120"></t:dgCol>
 
 <%--     <t:dgCol title="客户名称"  field="cusName"    queryMode="group"  width="120"></t:dgCol> --%>
 <%--     <t:dgCol title="商品名称"  field="goodsName"    queryMode="group"  width="120"></t:dgCol> --%>
@@ -46,6 +47,7 @@
     <t:dgToolBar title="编辑" icon="icon-edit" url="wmOmQmIController.do?goUpdate" funname="update"></t:dgToolBar>
 <%--          <t:dgFunOpt title="任务确认" funname="taskassign(id)"  urlclass="ace_button"  exp="binSta#eq#I"  /> --%>
       <t:dgToolBar title="批量下架"    funname="doalltodown"></t:dgToolBar>
+      <t:dgToolBar title="批量波次下架"    funname="doallwavetodown"></t:dgToolBar>
       <t:dgToolBar title="选择批量更改" icon="icon-edit"  funname="editRow"></t:dgToolBar>
       <t:dgToolBar  title="批量保存" icon="icon-save" url="wmOmQmIController.do?saveRows" funname="saveData"></t:dgToolBar>
       <t:dgToolBar   title="取消批量更改" icon="icon-undo" funname="reject"></t:dgToolBar>
@@ -62,7 +64,7 @@
 
   </div>
  </div>
- <script src = "webpage/com/zzjee/wm/wmOmQmIList.js"></script>		
+ <script src = "webpage/com/zzjee/wm/wmOmQmIList.js"></script>
  <script type="text/javascript">
  $(document).ready(function(){
  });
@@ -80,6 +82,38 @@
  }
 
 
+
+ function doallwavetodown(){
+
+   var ids = [];
+   var rows = $('#wmOmQmIList').datagrid('getSelections');
+   for(var i=0; i<rows.length; i++){
+     wmwavetodown(rows[i].id);
+   }
+
+ }
+
+
+ function wmwavetodown(id){
+   var url = "wmOmQmIController.do?dotowavedown&id="+id;
+   $.ajax({
+     async : true,
+     cache : false,
+     type : 'POST',
+     url : url,// 请求的action路径
+     error : function() {// 请求失败处理函数
+     },
+     success : function(data) {
+       var d = $.parseJSON(data);
+       if (d.success) {
+         tip("下架成功");
+         $('#wmOmQmIList').datagrid('reload',{});
+       }
+     }
+   });
+ }
+
+
  function wmtodown(id){
 		var url = "wmOmQmIController.do?dotodown&id="+id;
 		$.ajax({
@@ -94,7 +128,7 @@
 				if (d.success) {
 					tip("下架成功");
 			        $('#wmOmQmIList').datagrid('reload',{});
-				}		
+				}
 			}
 		});
 	}
@@ -163,7 +197,7 @@
 
  }
 
- 
+
 //导入
 function ImportXls() {
 	openuploadwin('Excel导入', 'wmOmQmIController.do?upload', "wmOmQmIList");

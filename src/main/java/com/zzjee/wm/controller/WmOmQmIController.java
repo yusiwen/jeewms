@@ -361,6 +361,54 @@ public class WmOmQmIController extends BaseController {
 		return j;
 	}
 
+	@RequestMapping(params = "dotowavedown")
+	@ResponseBody
+	public AjaxJson dotowavedown(HttpServletRequest request) {
+		String message = null;
+		AjaxJson j = new AjaxJson();
+		message = "下架成功";
+		try {
+			WmOmQmIEntity wmOmQmI = systemService.getEntity(
+					WmOmQmIEntity.class, request.getParameter("id").toString());
+			if (wmOmQmI != null&&wmOmQmI.getBinSta().equals("N")) {
+				WmToDownGoodsEntity wmToDownGoods = new WmToDownGoodsEntity();
+				wmToDownGoods.setBinIdFrom(wmOmQmI.getTinId());//下架托盘
+				wmToDownGoods.setKuWeiBianMa(wmOmQmI.getBinId());//储位
+				wmToDownGoods.setBinIdTo(wmOmQmI.getOmNoticeId());//到托盘
+				wmToDownGoods.setCusCode(wmOmQmI.getCusCode());//货主
+				wmToDownGoods.setGoodsId(wmOmQmI.getGoodsId());//
+				wmToDownGoods.setGoodsProData(wmOmQmI.getProData());//生产日期
+				wmToDownGoods.setOrderId(wmOmQmI.getOmNoticeId());//出货通知单
+				wmToDownGoods.setOrderIdI(wmOmQmI.getId());//出货通知项目
+				wmToDownGoods.setBaseUnit(wmOmQmI.getBaseUnit());//基本单位
+				wmToDownGoods.setBaseGoodscount(wmOmQmI.getBaseGoodscount());//基本单位数量
+				wmToDownGoods.setGoodsUnit(wmOmQmI.getGoodsUnit());//出货单位
+				wmToDownGoods.setGoodsQua(wmOmQmI.getQmOkQuat());//出货数量
+				wmToDownGoods.setGoodsQuaok(wmOmQmI.getQmOkQuat());//出货数量
+				wmToDownGoods.setGoodsName(wmOmQmI.getGoodsName());//商品名称
+				wmToDownGoods.setOmBeizhu(wmOmQmI.getOmBeizhu());//备注
+				wmToDownGoods.setImCusCode(wmOmQmI.getImCusCode());//客户单号
+				wmToDownGoods.setOrderType("01");//默认为01
+				systemService.save(wmToDownGoods);
+				wmOmQmI.setBinSta("H");
+				systemService.saveOrUpdate(wmOmQmI);
+				systemService.addLog(message, Globals.Log_Type_DEL,
+						Globals.Log_Leavel_INFO);
+			} else {
+				j.setSuccess(false);
+
+				message = "下架任务找不到";
+			}
+
+		} catch (Exception e) {
+			j.setSuccess(false);
+			e.printStackTrace();
+			message = "下架失败";
+			throw new BusinessException(e.getMessage());
+		}
+		j.setMsg(message);
+		return j;
+	}
 
 
 	@RequestMapping(params = "dotodown")

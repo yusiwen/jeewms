@@ -69,6 +69,8 @@ import java.net.URI;
 import org.springframework.http.MediaType;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import static com.xiaoleilu.hutool.date.DateTime.now;
+
 /**
  * @Title: Controller
  * @Description: wave_to_down
@@ -391,8 +393,12 @@ public class WaveToDownController extends BaseController {
             hql="from WaveToDownEntity where waveId = ? and  binId = ?";
 			listWaveToDowns = waveToDownService.findHql(hql,searchstr,searchstr2);
 		}
+		System.out.println("11111searchstr3="+searchstr3);
+
 		if(StringUtil.isNotEmpty(searchstr3)){
 			for(WaveToDownEntity t: listWaveToDowns ){
+				System.out.println("t.getGoodsId()="+t.getGoodsId());
+				System.out.println("searchstr3="+searchstr3);
 				try{
 					if(StringUtil.strPos(t.getGoodsId(),searchstr3)||StringUtil.strPos(t.getShpTiaoMa(),searchstr3)){
 						listWaveToDownsnew.add(t);
@@ -492,6 +498,8 @@ public class WaveToDownController extends BaseController {
 				wmToDownGoods.setOmBeizhu(wmOmQmI.getOmBeizhu());//备注
 				wmToDownGoods.setImCusCode(wmOmQmI.getImCusCode());//客户单号
 				wmToDownGoods.setOrderType("99");//默认为01
+				wmToDownGoods.setCreateDate(now());
+
 				systemService.save(wmToDownGoods);
 				wmOmQmI.setBinSta("H");
 				wmOmQmI.setFirstRq(waveToDown.getFirstRq());

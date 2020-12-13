@@ -374,10 +374,14 @@ public class WaveToFjController extends BaseController {
 		String omnoticeid="1";
 		String siji = "";
 		String chehao = "";
- 		for(WaveToFjEntity t:listWaveToFjs) {
+		System.out.println("11111searchstr3="+searchstr3);
+
+		for(WaveToFjEntity t:listWaveToFjs) {
 			if (StringUtil.isNotEmpty(searchstr3)) {
+				System.out.println("t.getGoodsId()="+t.getGoodsId());
+				System.out.println("searchstr3="+searchstr3);
 				try{
-					if (!StringUtil.strPos(t.getGoodsId(), searchstr3)||StringUtil.strPos(t.getShpTiaoMa(),searchstr3)) {
+					if (!(StringUtil.strPos(t.getGoodsId(), searchstr3)||StringUtil.strPos(t.getShpTiaoMa(),searchstr3))) {
 						continue;
 					}
 				}catch (Exception e){
