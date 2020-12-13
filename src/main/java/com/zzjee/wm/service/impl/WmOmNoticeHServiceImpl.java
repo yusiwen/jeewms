@@ -177,14 +177,15 @@ public class WmOmNoticeHServiceImpl extends CommonServiceImpl implements WmOmNot
 		}
 
 
-
+//		wmOmNoticeHPage.setReMember(tSdSoHead.getSdBz3());//维度
+//		wmOmNoticeHPage.setReCarno(tSdSoHead.getSdBz4());//经度
 		TmsYwDingdanEntity tms = new TmsYwDingdanEntity();
 		tms.setYwkhdh(wmOmNoticeH.getImCusCode());//单号
 		tms.setYwddbz(wmOmNoticeH.getOmBeizhu());//备注
 		tms.setShrsj(wmOmNoticeH.getDelvMobile());//收货人手机
 		tms.setShouhuoren(wmOmNoticeH.getDelvMember());//收货人
 		tms.setShrdh(wmOmNoticeH.getDelvAddr());//收货人地址
-		tms.setBy1(wmOmNoticeH.getReMember());//区域
+		tms.setBy1(wmOmNoticeH.getPiMaster());//区域
 		tms.setHwshjs(jishu.toString());
 		tms.setTiji(tiji.toString());
 		tms.setZhongl(zhongl.toString());
@@ -192,7 +193,7 @@ public class WmOmNoticeHServiceImpl extends CommonServiceImpl implements WmOmNot
 		String siji = "";
 		String chel = "";
 		try{
-			String qu = wmOmNoticeH.getReMember();
+			String qu = wmOmNoticeH.getPiMaster();
 			String hqlsearchquyu = "from TmsMdCheliangEntity where quyu like '%"+qu+"%'";
 			List<TmsMdCheliangEntity>  listcl = this.findHql(hqlsearchquyu);
 			siji = listcl.get(0).getUsername();
