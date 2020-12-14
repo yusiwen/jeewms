@@ -2692,7 +2692,15 @@ public class WmOmNoticeHController extends BaseController {
 			}catch (Exception e){
 
 			}
+            //
+			String hqlrongqi = "from WmOmQmIEntity where omNoticeId = ?";
+			List<WmOmQmIEntity> listom =new ArrayList<>();
+			listom = wmOmNoticeHService.findHql(hqlrongqi, t.getOmNoticeId());
+			try{
+				t.setOmPlatNo(listom.get(0).getSecondRq());
+			}catch (Exception e){
 
+			}
 			listWaveToDownsnew.add(t);
 		}
 		D0.setObj(listWaveToDownsnew);

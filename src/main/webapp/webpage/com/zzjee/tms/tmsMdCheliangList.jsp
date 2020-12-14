@@ -14,7 +14,7 @@
    <t:dgCol title="所属部门"  field="sysOrgCode"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
    <t:dgCol title="所属公司"  field="sysCompanyCode"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
    <t:dgCol title="流程状态"  field="bpmStatus"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
-   <t:dgCol title="车牌号"  field="chepaihao"  query="true"  queryMode="single"  width="120"></t:dgCol>
+   <t:dgCol title="车号"  field="chepaihao"  query="true"  queryMode="single"  width="120"></t:dgCol>
    <t:dgCol title="车型"  field="chexing"  query="true"  queryMode="single"  width="120"></t:dgCol>
    <t:dgCol title="最大体积"  field="zuidatiji"  queryMode="group"  width="120"></t:dgCol>
    <t:dgCol title="载重"  field="zaizhong"  queryMode="group"  width="120"></t:dgCol>
@@ -23,7 +23,7 @@
    <t:dgCol title="是否可用"  field="zhuangtai"  queryMode="group"  dictionary="sf_yn"  width="120"></t:dgCol>
    <t:dgCol title="备注"  field="beizhu"  queryMode="group"  width="120"></t:dgCol>
    <t:dgCol title="默认司机"  field="username"  queryMode="group"  width="120"></t:dgCol>
-   <t:dgCol title="gps"  field="gpsid"  queryMode="group"  width="120"></t:dgCol>
+   <t:dgCol title="车牌号"  field="gpsid"  queryMode="group"  width="120"></t:dgCol>
    <t:dgCol title="区域"  field="quyu"  queryMode="single"  width="120"></t:dgCol>
 
    <t:dgCol title="操作" field="opt" width="100"></t:dgCol>
@@ -38,13 +38,13 @@
   </t:datagrid>
   </div>
  </div>
- <script src = "webpage/com/zzjee/tms/tmsMdCheliangList.js"></script>		
+ <script src = "webpage/com/zzjee/tms/tmsMdCheliangList.js"></script>
  <script type="text/javascript">
  $(document).ready(function(){
  });
- 
-   
- 
+
+
+
 //导入
 function ImportXls() {
 	openuploadwin('Excel导入', 'tmsMdCheliangController.do?upload', "tmsMdCheliangList");

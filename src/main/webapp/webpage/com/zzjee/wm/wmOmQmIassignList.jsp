@@ -132,11 +132,14 @@
              for(var i=0; i<rows.length; i++){
                  ids.push(rows[i].id);
              }
-             var url = "wmOmQmIController.do?doassignwave&ids="+ids+"&firstrongqi="+firstrongqi;
+             var url = "wmOmQmIController.do?doassignwave"+"&firstrongqi="+firstrongqi;
              $.ajax({
                  async : true,
                  cache : false,
                  type : 'POST',
+                 data : {
+                     ids : ids.join(',')
+                 },
                  url : url,// 请求的action路径
                  error : function() {// 请求失败处理函数
                  },
@@ -159,11 +162,14 @@
 	 for(var i=0; i<rows.length; i++){
 			 	ids.push(rows[i].id);
 	 }
-		var url = "wmOmQmIController.do?doassignwave&ids="+ids;
+		var url = "wmOmQmIController.do?doassignwave";
 		$.ajax({
 			async : true,
 			cache : false,
 			type : 'POST',
+            data : {
+                ids : ids.join(',')
+            },
 			url : url,// 请求的action路径
 			error : function() {// 请求失败处理函数
 			},

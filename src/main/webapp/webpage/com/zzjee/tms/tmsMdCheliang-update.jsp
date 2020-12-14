@@ -20,7 +20,7 @@
 			<input id="bpmStatus" name="bpmStatus" type="hidden" value="${tmsMdCheliangPage.bpmStatus }"/>
 		<fieldset class="step">
 			<div class="form">
-		      <label class="Validform_label">车牌号:</label>
+		      <label class="Validform_label">车号:</label>
 		     	 <input id="chepaihao" name="chepaihao" type="text" style="width: 150px" class="inputxt"  ignore="ignore"  value='${tmsMdCheliangPage.chepaihao}'/>
 		      <span class="Validform_checktip"></span>
 		    </div>
@@ -51,7 +51,7 @@
 		    </div>
 			<div class="form">
 		      <label class="Validform_label">是否可用:</label>
-					<t:dictSelect field="zhuangtai" type="radio"   typeGroupCode="sf_yn"  defaultVal="${tmsMdCheliangPage.zhuangtai}" hasLabel="false"  title="是否可用"></t:dictSelect>     
+					<t:dictSelect field="zhuangtai" type="radio"   typeGroupCode="sf_yn"  defaultVal="${tmsMdCheliangPage.zhuangtai}" hasLabel="false"  title="是否可用"></t:dictSelect>
 		      <span class="Validform_checktip"></span>
 		    </div>
 			<div class="form">
@@ -65,7 +65,7 @@
 		      <span class="Validform_checktip"></span>
 		    </div>
 			<div class="form">
-		      <label class="Validform_label">gps:</label>
+		      <label class="Validform_label">车牌号:</label>
 		     	 <input id="gpsid" name="gpsid" type="text" style="width: 150px" class="inputxt"  ignore="ignore"  value='${tmsMdCheliangPage.gpsid}'/>
 		      <span class="Validform_checktip"></span>
 		    </div>
@@ -77,4 +77,4 @@
 	    </fieldset>
   </t:formvalid>
  </body>
-  <script src = "webpage/com/zzjee/tms/tmsMdCheliang.js"></script>		
+  <script src = "webpage/com/zzjee/tms/tmsMdCheliang.js"></script>
