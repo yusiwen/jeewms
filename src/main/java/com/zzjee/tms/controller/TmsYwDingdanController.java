@@ -554,7 +554,7 @@ public class TmsYwDingdanController extends BaseController {
         D0.setOK(true);
 		System.out.println("/list/omNoticeId"+omnoticeid );
 
-		String hql="from WmTmsNoticeIEntity  where omNoticeId = ?";
+		String hql="from WmTmsNoticeIEntity  where omNoticeId = ? order by goodsId";
         List<WmTmsNoticeIEntity> listWaveToDowns =new ArrayList<>();
         listWaveToDowns = wmOmNoticeHService.findHql(hql,omnoticeid);
         D0.setObj(listWaveToDowns);
