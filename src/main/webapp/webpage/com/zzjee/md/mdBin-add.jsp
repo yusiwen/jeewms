@@ -344,6 +344,46 @@
 					  </div>
 
 
+					  <div class="row show-grid">
+
+
+
+						  <div class="col-xs-3 text-center">
+							  <b>X坐标</b>
+						  </div>
+
+						  <div class="col-xs-3">
+							  <input id="xnode" name="xnode" type="text" class="form-control"
+									 ignore="ignore" style="text-align:right" />
+							  <span class="Validform_checktip" style="float:left;height:0px;"></span>
+							  <label class="Validform_label" style="display: none">X坐标</label>
+						  </div>
+
+						  <div class="col-xs-3 text-center">
+							  <b>y坐标</b>
+						  </div>
+
+						  <div class="col-xs-3">
+							  <input id="ynode" name="ynode" type="text" class="form-control"
+									 ignore="ignore" style="text-align:right"/>
+							  <span class="Validform_checktip" style="float:left;height:0px;"></span>
+							  <label class="Validform_label" style="display: none">y坐标</label>
+						  </div>
+
+						  <div class="col-xs-3 text-center">
+							  <b>z坐标</b>
+						  </div>
+
+						  <div class="col-xs-3">
+							  <input id="znode" name="znode" type="text" class="form-control"
+									 ignore="ignore" style="text-align:right"/>
+							  <span class="Validform_checktip" style="float:left;height:0px;"></span>
+							  <label class="Validform_label" style="display: none">z坐标</label>
+						  </div>
+
+					  </div>
+
+
 			          <div class="row" id = "sub_tr" style="display: none;">
 				        <div class="col-xs-12 layout-header">
 				          <div class="col-xs-6"></div>

@@ -227,6 +227,18 @@ public class MdBinController extends BaseController {
 		    			jsonParts.put("binid", resultt.get(i).get("binid"));
 		    			jsonParts.put("des", resultt.get(i).get("des"));
 		    			jsonParts.put("tincount", resultt.get(i).get("tincount"));
+		    			try{
+							jsonParts.put("xnode", resultt.get(i).get("xnode"));
+
+							jsonParts.put("ynode", resultt.get(i).get("ynode"));
+
+							jsonParts.put("znode", resultt.get(i).get("znode"));
+
+							jsonParts.put("colour", resultt.get(i).get("colour"));
+
+						}catch (Exception e){
+
+						}
 			    		result.add(jsonParts);
 		    		}
 		        	j.setObj(resultt.size());

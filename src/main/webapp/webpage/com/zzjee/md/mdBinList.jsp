@@ -16,7 +16,7 @@
     <t:dgCol title="库存地点"  field="kuWeiMingCheng"    queryMode="group"  width="120"></t:dgCol>
     <t:dgCol title="仓库"  field="binStore" query="true"   queryMode="single" dictionary="ba_store,store_code,store_name"  width="90"></t:dgCol>
     <t:dgCol title="库位编码"  field="kuWeiBianMa"   query="true" queryMode="single"  width="120"></t:dgCol>
-    <t:dgCol title="库位条码"  field="kuWeiTiaoMa"   query="true" queryMode="single"  width="120"></t:dgCol>
+    <t:dgCol title="库位条码"  field="kuWeiTiaoMa"   query="true" queryMode="single"                         width="120"></t:dgCol>
     <t:dgCol title="库位类型"  field="kuWeiLeiXing"   query="true" queryMode="single" dictionary="ba_bin_type,bin_type_code,bin_type_name"  width="80"></t:dgCol>
     <t:dgCol title="库位属性"  field="kuWeiShuXing"    queryMode="group" dictionary="ba_deg_type,deg_type_code,deg_type_name"  width="80"></t:dgCol>
     <t:dgCol title="产品属性"  field="chpShuXing"  queryMode="single" dictionary="ba_goods_type,goods_type_code,goods_type_name"   width="120"></t:dgCol>
@@ -44,6 +44,9 @@
 
     <t:dgCol title="备注2"  field="mingXi2"    queryMode="group"  width="120"></t:dgCol>
     <t:dgCol title="电子标签ID"  field="lorabqId"    queryMode="group"  width="120"></t:dgCol>
+    <t:dgCol title="x坐标"  field="xnode"    query="true" queryMode="single"    width="120"></t:dgCol>
+    <t:dgCol title="y坐标"  field="ynode"    query="true" queryMode="single"    width="120"></t:dgCol>
+    <t:dgCol title="z坐标"  field="znode"    query="true" queryMode="single"    width="120"></t:dgCol>
 
     <t:dgCol title="操作" field="opt" width="100"></t:dgCol>
    <t:dgDelOpt title="停用" url="mdBinController.do?doDel&id={id}" urlclass="ace_button"  urlfont="fa-trash-o"  exp="tingYong#ne#Y"/>
