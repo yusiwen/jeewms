@@ -214,6 +214,11 @@ public class MdBinController extends BaseController {
 			if(!StringUtil.isEmpty(req.getParameter("des"))){
 				 tsql =  tsql  + "  and  ws.des like  '%"+req.getParameter("des")+"%' ";
 			}
+			if(!StringUtil.isEmpty(req.getParameter("cengshu"))){
+				tsql =  tsql  + "  and  ws.znode like  '%"+req.getParameter("cengshu")+"%' ";
+			}
+
+
 					System.out.print(tsql);
 			List<Map<String, Object>> resultt = systemService
 					.findForJdbc(tsql);
