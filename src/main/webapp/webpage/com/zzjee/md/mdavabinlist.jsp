@@ -160,7 +160,7 @@
                         // console.log(width)
                         for (let i = 1; i < list.length; i++) {
                             messageContent += " <a class='all' href='javascript:void(0);' style='background:" +list[i].colour+"' onclick='javascript:addtab(\"" + list[i].des + "\")';return false;'>";
-                            messageContent += [i] + " </a> ";
+                            messageContent += list[i].binid+ " </a> ";
                             // tincount = list[i].tincount + 0;
                             // if (tincount > 0) {
                             //     messageContent += " <a class='a01 all' href='javascript:void(0);'  onclick='javascript:addtab(\"" + list[i].des + "\")';return false;'>";
