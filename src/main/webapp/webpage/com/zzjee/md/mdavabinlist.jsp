@@ -3,7 +3,7 @@
 <t:base type="jquery,easyui,tools,DatePicker"></t:base>
 <div class="easyui-layout" fit="true">
     <div style="padding:0px;border:0px">
-        <div style="margin-left:100px"> 桃红色标识此储位有货，淡绿色标识此储位为空</div>
+<%--        <div style="margin-left:100px"> 桃红色标识此储位有货，淡绿色标识此储位为空</div>--%>
         <div name="searchColums" style="float: left; padding-left: 0px;padding-top: 5px;">
             <span style="vertical-align:middle;display:-moz-inline-box;display:inline-block;width: 90px;text-align:right;"
                   title="仓库">仓库: </span>
@@ -23,11 +23,11 @@
             </span>
             <span style="vertical-align:middle;display:-moz-inline-box;display:inline-block;width: 90px;text-align:right;"
                   title="行数">行数: </span>
-            <input type="text" name="hangshu" value="46" style="width: 100px; height: 30px;">
+            <input type="text" name="hangshu" value="42" style="width: 100px; height: 30px;">
             </span>
             <span style="vertical-align:middle;display:-moz-inline-box;display:inline-block;width: 90px;text-align:right;"
                   title="列数">列数: </span>
-            <input type="text" name="lieshu"  value="46"  style="width: 100px; height: 30px;">
+            <input type="text" name="lieshu"  value="34"  style="width: 100px; height: 30px;">
             </span>
             <span style="vertical-align:middle;display:-moz-inline-box;display:inline-block;width: 90px;text-align:right;">
           <button onclick="chaxun()">查询</button>  </span>
@@ -83,10 +83,18 @@
         display: inline-table;
     }
     .all{
-        display: inline-block;
-        width: 20px;
-        height:20px;
+        /*display: inline-block;*/
+        width: 16.5px;
+        height:16.5px;
+        line-height: 16.5px;
         text-align: center;
+        margin-right: 1px;
+        margin-bottom: 1px;
+    }
+    #bottom{
+        display: flex;
+        flex-wrap: wrap;
+        margin: auto;
     }
 
 </style>
@@ -148,21 +156,22 @@
                         }
                         for(let o = 0; o < messageList.length; o++){
                             if(messageList[o].ynode*1 == 1){
-                                console.log(messageList[o].ynode*1 * messageList[o].xnode*1 - 1)
-                                list[messageList[o].ynode*1 * messageList[o].xnode*1 - 1] = messageList[o]
+                                console.log(messageList[o].ynode*1 * messageList[o].xnode*1 )
+                                list[messageList[o].ynode*1 * messageList[o].xnode*1 ] = messageList[o]
                             }
                         else{
-                                console.log((messageList[o].ynode*1 - 1) * hangshu*1 + messageList[o].xnode*1 -1)
-                                list[(messageList[o].ynode*1 - 1) * hangshu*1 + messageList[o].xnode*1 -1] = messageList[o]
+                                console.log((messageList[o].ynode*1 - 1) * hangshu*1 + messageList[o].xnode*1)
+                                list[(messageList[o].ynode*1 - 1) * hangshu*1 + messageList[o].xnode*1 ] = messageList[o]
                             }
                         }
                         // console.log(list)
                         //计算宽度
-                        // var width = 100 / hangshu*1
-                        // console.log(width)
+                        var width = 17.5 * hangshu*1
+                        $("#bottom").css("width",width);
+
                         for (let i = 1; i < list.length; i++) {
-                            messageContent += " <a class='all' href='javascript:void(0);' style='background:" +list[i].colour+"' onclick='javascript:addtab(\"" + list[i].des + "\")';return false;'>";
-                            messageContent += list[i].tincount+ " </a> ";
+                            messageContent += " <div class='all' href='javascript:void(0);' style='background:" +list[i].colour+"' onclick='javascript:addtab(\"" + list[i].des + "\")';return false;'>";
+                            messageContent += list[i].tincount+ " </div> ";
                             // tincount = list[i].tincount + 0;
                             // if (tincount > 0) {
                             //     messageContent += " <a class='a01 all' href='javascript:void(0);'  onclick='javascript:addtab(\"" + list[i].des + "\")';return false;'>";
@@ -174,7 +183,7 @@
                             //
                             // }
                         }
-                       var aList =  $('.all')
+                       // var aList =  $('.all')
                         // console.log(aList)
 
                         // for (var i = 0; i < messageList.length; i++) {
