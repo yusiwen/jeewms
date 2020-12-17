@@ -346,7 +346,8 @@ public class WaveToFjController extends BaseController {
 	public ResponseEntity<?> list(@RequestParam(value="username", required=false) String username,
 								  @RequestParam(value="searchstr", required=false)String searchstr,
 								  @RequestParam(value="searchstr2", required=false)String searchstr2,
-								  @RequestParam(value="searchstr3", required=false)String searchstr3) {
+								  @RequestParam(value="searchstr3", required=false)String searchstr3,
+								  @RequestParam(value="searchstr3", required=false)String searchstr4) {
 		ResultDO D0 = new  ResultDO();
 		D0.setOK(true);
 		String hql="from WaveToDownEntity where waveId = ?  ";
@@ -355,7 +356,7 @@ public class WaveToFjController extends BaseController {
 		List<WaveToFjEntity> listWaveToFjsnew =new ArrayList<>();
 
 		if(StringUtil.isEmpty(searchstr)&&StringUtil.isEmpty(searchstr2)){
-			hql="from WaveToFjEntity    ";
+			hql="from WaveToFjEntity  where 1 =  1  ";
 			listWaveToFjs=waveToFjService.findHql(hql);
 		}
 		if(StringUtil.isNotEmpty(searchstr)&&StringUtil.isEmpty(searchstr2)){
@@ -370,6 +371,7 @@ public class WaveToFjController extends BaseController {
 			hql="from WaveToFjEntity where waveId = ? and  firstRq = ?";
 			listWaveToFjs=waveToFjService.findHql(hql,searchstr,searchstr2);
 		}
+
 //		List<WaveToFjEntity> listWaveToFjs=waveToFjService.getList(WaveToFjEntity.class);
 		String omnoticeid="1";
 		String siji = "";
@@ -377,6 +379,13 @@ public class WaveToFjController extends BaseController {
 		System.out.println("11111searchstr3="+searchstr3);
 
 		for(WaveToFjEntity t:listWaveToFjs) {
+
+			if(StringUtil.isNotEmpty(searchstr4)){
+				if ( !StringUtil.strPos(t.getSecondRq(), searchstr4) ) {
+					continue;
+				}
+			}
+
 			if (StringUtil.isNotEmpty(searchstr3)) {
 				System.out.println("t.getGoodsId()="+t.getGoodsId());
 				System.out.println("searchstr3="+searchstr3);
