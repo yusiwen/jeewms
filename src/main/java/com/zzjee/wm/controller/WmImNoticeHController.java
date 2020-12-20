@@ -2884,8 +2884,18 @@ Double sum =0.00;
 			@RequestBody WmImNoticeHPage wmImNoticeHPage) {
 		// 调用JSR303 Bean Validator进行校验，如果出错返回含400错误码及json格式的错误信息.
 		ResultDO D0 = new ResultDO();
-
-
+		try{//如果已经创建则直接返回
+			String hql = "from WmImNoticeHEntity where imCusCode = ? ";
+			String imCusCode = wmImNoticeHPage.getImCusCode();
+			if(StringUtil.isNotEmpty(imCusCode)){
+				List<WmImNoticeHEntity> listim = systemService.findHql(hql,imCusCode);
+				if(listim!=null&&listim.size()>0){
+					D0.setOK(true);
+					return new ResponseEntity(D0, HttpStatus.OK);
+				}
+			}
+		}catch (Exception e){
+		}
 		// 保存
 		List<WmImNoticeIEntity> wmImNoticeIList = wmImNoticeHPage
 				.getWmImNoticeIList();
