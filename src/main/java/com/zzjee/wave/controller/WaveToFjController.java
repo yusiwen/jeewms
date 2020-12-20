@@ -347,7 +347,7 @@ public class WaveToFjController extends BaseController {
 								  @RequestParam(value="searchstr", required=false)String searchstr,
 								  @RequestParam(value="searchstr2", required=false)String searchstr2,
 								  @RequestParam(value="searchstr3", required=false)String searchstr3,
-								  @RequestParam(value="searchstr3", required=false)String searchstr4) {
+								  @RequestParam(value="searchstr4", required=false)String searchstr4) {
 		ResultDO D0 = new  ResultDO();
 		D0.setOK(true);
 		String hql="from WaveToDownEntity where waveId = ?  ";
@@ -379,7 +379,7 @@ public class WaveToFjController extends BaseController {
 		System.out.println("11111searchstr3="+searchstr3);
 
 		for(WaveToFjEntity t:listWaveToFjs) {
-
+ 			System.out.println("searchstr4="+searchstr4);
 			if(StringUtil.isNotEmpty(searchstr4)){
 				if ( !StringUtil.strPos(t.getSecondRq(), searchstr4) ) {
 					continue;
