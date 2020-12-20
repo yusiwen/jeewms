@@ -461,12 +461,15 @@ public class WaveToDownController extends BaseController {
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity(HttpStatus.NO_CONTENT);
+			D0.setOK(false);
+			return new ResponseEntity(D0, HttpStatus.OK);
 		}
+		D0.setOK(true);
+
+		return new ResponseEntity(D0, HttpStatus.OK);
 
 
-		return new ResponseEntity(waveToDown, HttpStatus.OK);
-	}
+ 	}
 
 	@RequestMapping(value = "/jsondown", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> update(@RequestBody WaveToDownEntity waveToDown) {
@@ -505,14 +508,14 @@ public class WaveToDownController extends BaseController {
 				wmOmQmI.setFirstRq(waveToDown.getFirstRq());
 				systemService.saveOrUpdate(wmOmQmI);
 			}
+			D0.setOK(true);
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity(HttpStatus.NO_CONTENT);
+			D0.setOK(false);
+			return new ResponseEntity(D0, HttpStatus.OK);
 		}
-
-
-		return new ResponseEntity(waveToDown, HttpStatus.OK);
+		return new ResponseEntity(D0, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)

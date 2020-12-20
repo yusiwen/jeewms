@@ -463,12 +463,15 @@ public class WaveToFjController extends BaseController {
 				WmOmNoticeHEntity wmom = systemService.findUniqueByProperty(WmOmNoticeHEntity.class, "omNoticeId", omnoticeid);
 				wmom.setOmSta("操作中");
 				systemService.updateEntitie(wmom);
+				D0.setOK(true);
 			}
 			} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity(HttpStatus.NO_CONTENT);
+			D0.setOK(false);
+
+			return new ResponseEntity(D0, HttpStatus.OK);
 		}
-		return new ResponseEntity(waveToFj, HttpStatus.OK);
+		return new ResponseEntity(D0, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/jsonfj", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)

@@ -122,6 +122,9 @@ public class WmImNoticeIEntity implements java.io.Serializable {
 	/**保质期*/
 //	@Excel(name="保质期")
 	private java.lang.String bzhiQi;
+	/**产品属性*/
+	@Excel(name="产品属性")
+	private java.lang.String chpShuXing;
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  主键
@@ -694,5 +697,17 @@ public class WmImNoticeIEntity implements java.io.Serializable {
 	 */
 	public void setBzhiQi(java.lang.String bzhiQi){
 		this.bzhiQi = bzhiQi;
+	}
+	@Column(name ="CHP_SHU_XING",nullable=true,length=32)
+	public java.lang.String getChpShuXing(){
+		return this.chpShuXing;
+	}
+
+	/**
+	 *方法: 设置java.lang.String
+	 *@param: java.lang.String  产品属性
+	 */
+	public void setChpShuXing(java.lang.String chpShuXing){
+		this.chpShuXing = chpShuXing;
 	}
 }

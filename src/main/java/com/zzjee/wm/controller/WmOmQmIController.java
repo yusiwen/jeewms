@@ -239,6 +239,16 @@ public class WmOmQmIController extends BaseController {
 					if(StringUtil.isNotEmpty(firstrongqi)){
 						t.setFirstRq(firstrongqi);
 					}
+
+
+					String recarno = "";
+					try{
+						WmOmNoticeHEntity wmOmNoticeHEntity = systemService.findUniqueByProperty(WmOmNoticeHEntity.class,"omNoticeId",t.getOmNoticeId());
+						recarno = wmOmNoticeHEntity.getReCarno();
+					}catch (Exception e){
+
+					}
+					t.setSecondRq(recarno);
 					systemService.updateEntitie(t);
 					systemService.addLog(message, Globals.Log_Type_UPDATE,
 							Globals.Log_Leavel_INFO);

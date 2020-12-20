@@ -9,12 +9,12 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 import org.jeecgframework.poi.excel.annotation.Excel;
 
-/**   
+/**
  * @Title: Entity
  * @Description: 商品视图
  * @author erzhongxmu
  * @date 2017-09-11 20:01:15
- * @version V1.0   
+ * @version V1.0
  *
  */
 @Entity
@@ -79,6 +79,8 @@ public class MvGoodsEntity implements java.io.Serializable {
 	/**高整箱*/
 	@Excel(name="高")
 	private java.lang.String gaoZhXiang;
+	@Excel(name="产品属性")
+	private java.lang.String chpShuXing;
 	@Id
 	@GeneratedValue(generator = "paymentableGenerator")
 	@GenericGenerator(name = "paymentableGenerator", strategy = "uuid")
@@ -94,7 +96,7 @@ public class MvGoodsEntity implements java.io.Serializable {
 	public void setId(java.lang.String id){
 		this.id = id;
 	}
-	
+
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  cusCode
@@ -115,7 +117,7 @@ public class MvGoodsEntity implements java.io.Serializable {
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  goodsCode
 	 */
-	
+
 	@Column(name ="GOODS_ID",nullable=true,length=33)
 	public java.lang.String getGoodsId(){
 		return this.goodsId;
@@ -128,7 +130,7 @@ public class MvGoodsEntity implements java.io.Serializable {
 	public void setGoodsId(java.lang.String goodsId){
 		this.goodsId = goodsId;
 	}
-	
+
 	@Column(name ="GOODS_CODE",nullable=true,length=33)
 	public java.lang.String getGoodsCode(){
 		return this.goodsCode;
@@ -157,7 +159,7 @@ public class MvGoodsEntity implements java.io.Serializable {
 	public void setGoodsName(java.lang.String goodsName){
 		this.goodsName = goodsName;
 	}
-	
+
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  商品名称
@@ -174,7 +176,7 @@ public class MvGoodsEntity implements java.io.Serializable {
 	public void setShpMingCheng(java.lang.String shpMingCheng){
 		this.shpMingCheng = shpMingCheng;
 	}
-	
+
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  shlDanWei
@@ -414,4 +416,16 @@ public class MvGoodsEntity implements java.io.Serializable {
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  商品条码
 	 */
+	@Column(name ="CHP_SHU_XING",nullable=true,length=32)
+	public java.lang.String getChpShuXing(){
+		return this.chpShuXing;
+	}
+
+	/**
+	 *方法: 设置java.lang.String
+	 *@param: java.lang.String  产品属性
+	 */
+	public void setChpShuXing(java.lang.String chpShuXing){
+		this.chpShuXing = chpShuXing;
+	}
 }

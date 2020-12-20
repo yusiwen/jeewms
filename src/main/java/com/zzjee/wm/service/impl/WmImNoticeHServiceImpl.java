@@ -33,26 +33,26 @@ import java.io.Serializable;
 @Service("wmImNoticeHService")
 @Transactional
 public class WmImNoticeHServiceImpl extends CommonServiceImpl implements WmImNoticeHServiceI {
-	
+
  	public <T> void delete(T entity) {
  		super.delete(entity);
  		//执行删除操作配置的sql增强
 		this.doDelSql((WmImNoticeHEntity)entity);
  	}
-	
+
 	public void addMain(WmImNoticeHEntity wmImNoticeH,
 	        List<WmImNoticeIEntity> wmImNoticeIList){
 			//保存主信息
 			this.save(wmImNoticeH);
-		
+
 			/**保存-进货通知明细*/
 			for(WmImNoticeIEntity wmImNoticeI:wmImNoticeIList){
 				//外键设置
-				MvGoodsEntity mvgoods = this.findUniqueByProperty(MvGoodsEntity.class, "goodsCode", wmImNoticeI.getGoodsCode()) ;		
+				MvGoodsEntity mvgoods = this.findUniqueByProperty(MvGoodsEntity.class, "goodsCode", wmImNoticeI.getGoodsCode()) ;
 				if(mvgoods!=null){
 					wmImNoticeI.setGoodsName(mvgoods.getGoodsName());
 					wmImNoticeI.setBarCode(mvgoods.getShpTiaoMa());
-
+					wmImNoticeI.setChpShuXing(mvgoods.getChpShuXing());
 					try {
 						try {
 							wmImNoticeI.setGoodsFvol(String.valueOf(Double.parseDouble(mvgoods.getTiJiCm())*Double.parseDouble(wmImNoticeI.getGoodsCount())));
@@ -78,7 +78,7 @@ public class WmImNoticeHServiceImpl extends CommonServiceImpl implements WmImNot
 					} catch (Exception e) {
 						// TODO: handle exception
 					}
-					
+
 					try {
 //						wmImNoticeI.setGoodsFvol(String.valueOf(Long.parseLong(mdgoods.getTiJiCm())*Long.parseLong(wmImNoticeI.getGoodsCount())));
 						wmImNoticeI.setGoodsWeight(String.valueOf(Double.parseDouble(mvgoods.getZhlKg())*Double.parseDouble(wmImNoticeI.getGoodsCount())));
@@ -87,7 +87,7 @@ public class WmImNoticeHServiceImpl extends CommonServiceImpl implements WmImNot
 					} catch (Exception e) {
 						// TODO: handle exception
 					}
-					
+
 				}
 				if("04".equals(wmImNoticeH.getOrderTypeCode())){//越库任务
 					wmImNoticeI.setGoodsQmCount("0");
@@ -133,20 +133,20 @@ public class WmImNoticeHServiceImpl extends CommonServiceImpl implements WmImNot
 							wmImNoticeI.setBinPre("I");
 						}
 					}
-					
+
 					wmImNoticeI.setImNoticeId(wmImNoticeH.getNoticeId());
 					wmImNoticeI.setImBeizhu(wmImNoticeH.getImBeizhu());
 					wmImNoticeI.setImCusCode(wmImNoticeH.getImCusCode());
 					this.save(wmImNoticeI);
 				}
 
-	
+
 			}
 			//执行新增操作配置的sql增强
  			this.doAddSql(wmImNoticeH);
 	}
 
-	
+
 	public void updateMain(WmImNoticeHEntity wmImNoticeH,
 	        List<WmImNoticeIEntity> wmImNoticeIList) {
 		//保存主表信息
@@ -180,14 +180,14 @@ public class WmImNoticeHServiceImpl extends CommonServiceImpl implements WmImNot
 		    		//如果数据库存在的明细，前台没有传递过来则是删除-进货通知明细
 		    		super.delete(oldE);
 	    		}
-	    		
+
 			}
 			//3.持久化新增的数据-进货通知明细
 			for(WmImNoticeIEntity wmImNoticeI:wmImNoticeIList){
 				if(oConvertUtils.isEmpty(wmImNoticeI.getId())){
 					//外键设置
 					MvGoodsEntity mvgoods = new MvGoodsEntity();
-					mvgoods = this.findUniqueByProperty(MvGoodsEntity.class, "goodsCode", wmImNoticeI.getGoodsCode()) ;				
+					mvgoods = this.findUniqueByProperty(MvGoodsEntity.class, "goodsCode", wmImNoticeI.getGoodsCode()) ;
 					if(mvgoods!=null){
 						try {
 							wmImNoticeI.setGoodsUnit(mvgoods.getShlDanWei());
@@ -231,7 +231,7 @@ public class WmImNoticeHServiceImpl extends CommonServiceImpl implements WmImNot
  		this.doUpdateSql(wmImNoticeH);
 	}
 
-	
+
 	public void delMain(WmImNoticeHEntity wmImNoticeH) {
 		//删除主表信息
 		this.delete(wmImNoticeH);
@@ -244,8 +244,8 @@ public class WmImNoticeHServiceImpl extends CommonServiceImpl implements WmImNot
 	    List<WmImNoticeIEntity> wmImNoticeIOldList = this.findHql(hql0,id0);
 		this.deleteAllEntitie(wmImNoticeIOldList);
 	}
-	
- 	
+
+
  	/**
 	 * 默认按钮-sql增强-新增操作
 	 * @return
@@ -267,7 +267,7 @@ public class WmImNoticeHServiceImpl extends CommonServiceImpl implements WmImNot
  	public boolean doDelSql(WmImNoticeHEntity t){
 	 	return true;
  	}
- 	
+
  	/**
 	 * 替换sql中的变量
 	 * @param sql

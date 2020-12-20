@@ -2721,7 +2721,7 @@ public class WmOmNoticeHController extends BaseController {
 //			hql="from WmImNoticeIEntity where  noticeiSta <> ? and  omNoticeId = ?";
 //			listWaveToDowns = wmOmNoticeHService.findHql(hql,"已核货",searchstr);
 //			hql="from WmOmNoticeIEntity ";
-			hql="from WmOmNoticeIEntity where   omNoticeId = ? order by  goodsId";
+			hql="from WmOmNoticeIEntity where   omNoticeId = ? order by  chpShuXing";
 //			listWaveToDowns = wmOmNoticeHService.findHql(hql);
 			listWaveToDowns = wmOmNoticeHService.findHql(hql, omnoticeid);
 		D0.setObj(listWaveToDowns);
