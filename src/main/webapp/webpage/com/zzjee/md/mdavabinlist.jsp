@@ -30,7 +30,8 @@
             <input type="text" name="lieshu"  value="34"  style="width: 100px; height: 30px;">
             </span>
             <span style="vertical-align:middle;display:-moz-inline-box;display:inline-block;width: 90px;text-align:right;">
-          <button onclick="chaxun()">查询</button>  </span>
+          <button onclick="chaxun('zhengxiang')">正向排列查询</button>  </span>
+          <button onclick="chaxun('fanxiang')">反向排列查询</button>  </span>
         </div>
 
 
@@ -112,7 +113,7 @@
 
     });
 
-    function chaxun() {
+    function chaxun(type) {
 
         var cangku;
         var chuwei;
@@ -124,7 +125,7 @@
         var cengshu = $('input[name="cengshu"]').attr("value");
         des = $('input[name="des"]').attr("value");
         //加载消息
-        var url = "mdBinController.do?getbinall&binstore=" + cangku + "&binid=" + chuwei + "&des=" + des+ "&cengshu=" + cengshu;
+        var url = "mdBinController.do?getbinall&binstore=" + cangku + "&binid=" + chuwei + "&des=" + des+ "&cengshu=" + cengshu+ "&hangshu=" + hangshu+ "&type=" + type;
         $.ajax({
             url: url,
             type: "GET",

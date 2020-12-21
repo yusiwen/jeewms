@@ -218,6 +218,8 @@ public class MdBinController extends BaseController {
 				tsql =  tsql  + "  and  ws.znode like  '%"+req.getParameter("cengshu")+"%' ";
 			}
 
+					String  hangshu = req.getParameter("hangshu");
+					String  type = req.getParameter("type");
 
 					System.out.print(tsql);
 			List<Map<String, Object>> resultt = systemService
@@ -233,7 +235,23 @@ public class MdBinController extends BaseController {
 		    			jsonParts.put("des", resultt.get(i).get("des"));
 		    			jsonParts.put("tincount", resultt.get(i).get("tincount"));
 		    			try{
-							jsonParts.put("xnode", resultt.get(i).get("xnode"));
+
+		    				if("fanxiang".equals(type)){
+		    					try{
+									int hangshuint = Integer.parseInt(hangshu);
+									int xnode =  Integer.parseInt(resultt.get(i).get("xnode").toString());
+
+									jsonParts.put("xnode", hangshuint+1-xnode);
+								}catch (Exception e){
+
+								}
+
+
+
+							}else{
+								jsonParts.put("xnode", resultt.get(i).get("xnode"));
+
+							}
 
 							jsonParts.put("ynode", resultt.get(i).get("ynode"));
 
