@@ -3,6 +3,8 @@ package com.zzjee.tms.controller;
 import com.alibaba.fastjson.JSONArray;
 import com.zzjee.tms.entity.TmsMdCheliangEntity;
 import com.zzjee.tms.service.TmsMdCheliangServiceI;
+import com.zzjee.wm.entity.WmOmNoticeHEntity;
+import com.zzjee.wm.entity.WmOmQmIEntity;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -15,10 +17,7 @@ import org.jeecgframework.core.common.hibernate.qbc.CriteriaQuery;
 import org.jeecgframework.core.common.model.json.AjaxJson;
 import org.jeecgframework.core.common.model.json.DataGrid;
 import org.jeecgframework.core.constant.Globals;
-import org.jeecgframework.core.util.ExceptionUtil;
-import org.jeecgframework.core.util.MyBeanUtils;
-import org.jeecgframework.core.util.ResourceUtil;
-import org.jeecgframework.core.util.StringUtil;
+import org.jeecgframework.core.util.*;
 import org.jeecgframework.jwt.util.ResponseMessage;
 import org.jeecgframework.jwt.util.Result;
 import org.jeecgframework.poi.excel.ExcelImportUtil;
@@ -49,12 +48,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/**   
- * @Title: Controller  
+/**
+ * @Title: Controller
  * @Description: 车辆管理
  * @author onlineGenerator
  * @date 2018-01-29 21:57:07
- * @version V1.0   
+ * @version V1.0
  *
  */
 @Api(value="TmsMdCheliang",description="车辆管理",tags="tmsMdCheliangController")
@@ -72,12 +71,12 @@ public class TmsMdCheliangController extends BaseController {
 	private SystemService systemService;
 	@Autowired
 	private Validator validator;
-	
+
 
 
 	/**
 	 * 车辆管理列表 页面跳转
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "list")
@@ -87,7 +86,7 @@ public class TmsMdCheliangController extends BaseController {
 
 	/**
 	 * easyui AJAX请求数据
-	 * 
+	 *
 	 * @param request
 	 * @param response
 	 * @param dataGrid
@@ -120,10 +119,43 @@ public class TmsMdCheliangController extends BaseController {
 		this.tmsMdCheliangService.getDataGridReturn(cq, true);
 		TagUtil.datagrid(response, dataGrid);
 	}
-	
+
+
+	@RequestMapping(params = "doassignwave")
+	@ResponseBody
+	public AjaxJson dowavebatch(String ids, String waveid,HttpServletRequest request) {
+		String message = null;
+		AjaxJson j = new AjaxJson();
+
+		try {
+			String[]   charray = ids.split(",");
+			int lenth = 1;
+			try{
+				lenth = charray.length;
+			}catch (Exception e){
+
+			}
+			int aint =(int)Math.round(Math.random()*9);
+			for (String id : ids.split(",")) {
+				TmsMdCheliangEntity t = tmsMdCheliangService.get(TmsMdCheliangEntity.class, id);
+				t.setChepaihao(Integer.toString(aint));
+				aint++;
+				tmsMdCheliangService.updateEntitie(t);
+
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			message = "重排车号失败";
+			throw new BusinessException(e.getMessage());
+		}
+		j.setMsg(message);
+		return j;
+
+	}
+
 	/**
 	 * 删除车辆管理
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "doDel")
@@ -145,10 +177,10 @@ public class TmsMdCheliangController extends BaseController {
 		j.setMsg(message);
 		return j;
 	}
-	
+
 	/**
 	 * 批量删除车辆管理
-	 * 
+	 *
 	 * @return
 	 */
 	 @RequestMapping(params = "doBatchDel")
@@ -178,7 +210,7 @@ public class TmsMdCheliangController extends BaseController {
 
 	/**
 	 * 添加车辆管理
-	 * 
+	 *
 	 * @param ids
 	 * @return
 	 */
@@ -200,10 +232,10 @@ public class TmsMdCheliangController extends BaseController {
 		j.setMsg(message);
 		return j;
 	}
-	
+
 	/**
 	 * 更新车辆管理
-	 * 
+	 *
 	 * @param ids
 	 * @return
 	 */
@@ -226,11 +258,11 @@ public class TmsMdCheliangController extends BaseController {
 		j.setMsg(message);
 		return j;
 	}
-	
+
 
 	/**
 	 * 车辆管理新增页面跳转
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "goAdd")
@@ -243,7 +275,7 @@ public class TmsMdCheliangController extends BaseController {
 	}
 	/**
 	 * 车辆管理编辑页面跳转
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "goUpdate")
@@ -254,10 +286,10 @@ public class TmsMdCheliangController extends BaseController {
 		}
 		return new ModelAndView("com/zzjee/tms/tmsMdCheliang-update");
 	}
-	
+
 	/**
 	 * 导入功能跳转
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "upload")
@@ -265,10 +297,10 @@ public class TmsMdCheliangController extends BaseController {
 		req.setAttribute("controller_name","tmsMdCheliangController");
 		return new ModelAndView("common/upload/pub_excel_upload");
 	}
-	
+
 	/**
 	 * 导出excel
-	 * 
+	 *
 	 * @param request
 	 * @param response
 	 */
@@ -287,7 +319,7 @@ public class TmsMdCheliangController extends BaseController {
 	}
 	/**
 	 * 导出excel 使模板
-	 * 
+	 *
 	 * @param request
 	 * @param response
 	 */
@@ -301,13 +333,13 @@ public class TmsMdCheliangController extends BaseController {
     	modelMap.put(NormalExcelConstants.DATA_LIST,new ArrayList());
     	return NormalExcelConstants.JEECG_EXCEL_VIEW;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@RequestMapping(params = "importExcel", method = RequestMethod.POST)
 	@ResponseBody
 	public AjaxJson importExcel(HttpServletRequest request, HttpServletResponse response) {
 		AjaxJson j = new AjaxJson();
-		
+
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 		Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
 		for (Map.Entry<String, MultipartFile> entity : fileMap.entrySet()) {
@@ -335,7 +367,7 @@ public class TmsMdCheliangController extends BaseController {
 		}
 		return j;
 	}
-	
+
 	@RequestMapping(method = RequestMethod.GET)
 	@ResponseBody
 	@ApiOperation(value="车辆管理列表信息",produces="application/json",httpMethod="GET")
@@ -343,7 +375,7 @@ public class TmsMdCheliangController extends BaseController {
 		List<TmsMdCheliangEntity> listTmsMdCheliangs=tmsMdCheliangService.getList(TmsMdCheliangEntity.class);
 		return Result.success(listTmsMdCheliangs);
 	}
-	
+
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	@ResponseBody
 	@ApiOperation(value="根据ID获取车辆管理信息",notes="根据ID获取车辆管理信息",httpMethod="GET",produces="application/json")

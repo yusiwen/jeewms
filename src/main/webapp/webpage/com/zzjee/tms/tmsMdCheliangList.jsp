@@ -28,6 +28,8 @@
 
    <t:dgCol title="操作" field="opt" width="100"></t:dgCol>
    <t:dgDelOpt title="删除" url="tmsMdCheliangController.do?doDel&id={id}" urlclass="ace_button"  urlfont="fa-trash-o"/>
+   <t:dgToolBar title="重排车号"     funname="dowaveALLSelect"></t:dgToolBar>
+
    <t:dgToolBar title="录入" icon="icon-add" url="tmsMdCheliangController.do?goAdd" funname="add"></t:dgToolBar>
    <t:dgToolBar title="编辑" icon="icon-edit" url="tmsMdCheliangController.do?goUpdate" funname="update"></t:dgToolBar>
    <t:dgToolBar title="批量删除"  icon="icon-remove" url="tmsMdCheliangController.do?doBatchDel" funname="deleteALLSelect"></t:dgToolBar>
@@ -43,7 +45,33 @@
  $(document).ready(function(){
  });
 
+ function dowaveALLSelect(){
 
+  var ids = [];
+  var rows = $('#tmsMdCheliangList').datagrid('getSelections');
+  for(var i=0; i<rows.length; i++){
+   ids.push(rows[i].id);
+  }
+  var url = "tmsMdCheliangController.do?doassignwave";
+  $.ajax({
+   async : true,
+   cache : false,
+   type : 'POST',
+   data : {
+    ids : ids.join(',')
+   },
+   url : url,// 请求的action路径
+   error : function() {// 请求失败处理函数
+   },
+   success : function(data) {
+    var d = $.parseJSON(data);
+    if (d.success) {
+     tip("重排车号成功");
+     $('#tmsMdCheliangList').datagrid('reload',{});
+    }
+   }
+  });
+ }
 
 //导入
 function ImportXls() {
