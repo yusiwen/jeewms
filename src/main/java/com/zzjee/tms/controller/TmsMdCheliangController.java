@@ -114,7 +114,7 @@ public class TmsMdCheliangController extends BaseController {
 //			}
 //
 //		}
-		cq.eq("zhuangtai","Y");
+//		cq.eq("zhuangtai","Y");
 		cq.add();
 		this.tmsMdCheliangService.getDataGridReturn(cq, true);
 		TagUtil.datagrid(response, dataGrid);

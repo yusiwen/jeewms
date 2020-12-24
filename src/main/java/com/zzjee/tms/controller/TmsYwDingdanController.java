@@ -6,6 +6,7 @@ import com.zzjee.api.ResultDO;
 import com.zzjee.md.entity.MdGoodsEntity;
 import com.zzjee.rfid.entity.RfidBuseEntity;
 import com.zzjee.tms.entity.DdPage;
+import com.zzjee.tms.entity.TmsMdCheliangEntity;
 import com.zzjee.tms.entity.TmsMdDzEntity;
 import com.zzjee.tms.entity.TmsYwDingdanEntity;
 import com.zzjee.tms.service.TmsYwDingdanServiceI;
@@ -616,11 +617,26 @@ public class TmsYwDingdanController extends BaseController {
 			, HttpServletRequest request) {
 
 		try{
+            String hqlom = "from WmTmsNoticeHEntity where omBeizhu = ?";
+            List<WmTmsNoticeHEntity> listom = systemService.findHql(hqlom,username);
+            String sji = "siji";
+            try{
+				sji = listom.get(0).getReMember();
+			}catch (Exception e){
 
+			}
 			String hql = "from RfidBuseEntity where rfidId1 = ? order by createDate desc";
-			List<RfidBuseEntity> lista = systemService.findHql(hql,username);
+			List<RfidBuseEntity> lista = systemService.findHql(hql,sji);
 			if(lista!=null&&lista.size()>0){
-				return Result.success(lista.get(0));
+				RfidBuseEntity out = lista.get(0);
+				try{
+					TmsMdCheliangEntity tmsMdCheliangEntity = systemService.findUniqueByProperty(TmsMdCheliangEntity.class,"username",sji);
+					out.setRfidBuseno(tmsMdCheliangEntity.getZhuangtai());
+					out.setRfidBusecont(tmsMdCheliangEntity.getBeizhu());
+				}catch (Exception e){
+
+				}
+				return Result.success(out);
 			}else{
 				return Result.error("暂无司机位置");
 

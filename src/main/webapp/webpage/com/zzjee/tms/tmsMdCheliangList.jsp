@@ -20,8 +20,8 @@
    <t:dgCol title="载重"  field="zaizhong"  queryMode="group"  width="120"></t:dgCol>
    <t:dgCol title="载人数"  field="zairen"  queryMode="group"  width="120"></t:dgCol>
    <t:dgCol title="准驾驾照"  field="jiazhao"  query="true"  queryMode="single"  width="120"></t:dgCol>
-   <t:dgCol title="是否可用"  field="zhuangtai"  queryMode="group"  dictionary="sf_yn"  width="120"></t:dgCol>
-   <t:dgCol title="备注"  field="beizhu"  queryMode="group"  width="120"></t:dgCol>
+   <t:dgCol title="姓名"  field="zhuangtai"  queryMode="group"  width="120"></t:dgCol>
+   <t:dgCol title="电话"  field="beizhu"  queryMode="group"  width="120"></t:dgCol>
    <t:dgCol title="默认司机"  field="username"  queryMode="group"  width="120"></t:dgCol>
    <t:dgCol title="车牌号"  field="gpsid"  queryMode="group"  width="120"></t:dgCol>
    <t:dgCol title="区域"  field="quyu"  queryMode="single"  width="120"></t:dgCol>

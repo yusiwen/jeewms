@@ -50,12 +50,12 @@
 		      <span class="Validform_checktip"></span>
 		    </div>
 			<div class="form">
-		      <label class="Validform_label">是否可用:</label>
-					<t:dictSelect field="zhuangtai" type="radio"   typeGroupCode="sf_yn"  defaultVal="${tmsMdCheliangPage.zhuangtai}" hasLabel="false"  title="是否可用"></t:dictSelect>
+		      <label class="Validform_label">姓名:</label>
+ 				<input id="zhuangtai" name="zhuangtai" type="text" style="width: 150px" class="inputxt"  ignore="ignore"  value='${tmsMdCheliangPage.zhuangtai}'/>
 		      <span class="Validform_checktip"></span>
 		    </div>
 			<div class="form">
-		      <label class="Validform_label">备注:</label>
+		      <label class="Validform_label">电话:</label>
 		     	 <input id="beizhu" name="beizhu" type="text" style="width: 150px" class="inputxt"  ignore="ignore"  value='${tmsMdCheliangPage.beizhu}'/>
 		      <span class="Validform_checktip"></span>
 		    </div>

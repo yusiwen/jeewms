@@ -57,10 +57,10 @@ public class TmsMdCheliangEntity implements java.io.Serializable {
     @Excel(name="准假驾照",width=15)
 	private String jiazhao;
 	/**是否可用*/
-    @Excel(name="是否可用",width=15,dicCode="sf_yn")
+    @Excel(name="姓名",width=15)
 	private String zhuangtai;
 	/**备注*/
-    @Excel(name="备注",width=15)
+    @Excel(name="电话",width=15)
 	private String beizhu;
 	/**默认司机*/
     @Excel(name="默认司机",width=15)
