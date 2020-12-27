@@ -2714,6 +2714,9 @@ public class WmOmNoticeHController extends BaseController {
 
 			}
 			for(WmOmNoticeIEntity dt2: listWaveToDowndetial){
+				if("复核完成".equals(dt2.getOmSta())){
+					continue;
+				}
 				WmOmNoticeHEntity tout = new WmOmNoticeHEntity();
 				try{
 					MyBeanUtils.copyBean2Bean(tout,t);
@@ -2731,7 +2734,7 @@ public class WmOmNoticeHController extends BaseController {
 
 					}
 				}
-				tout.setPiMaster(dt2.getGoodsId()+ dt2.getGoodsName());
+				tout.setPiMaster( dt2.getGoodsName());
 				tout.setPiClass(dt2.getBaseGoodscount()+ dt2.getBaseUnit());
 				listWaveToDownsnew.add(tout);
  			}
@@ -2754,9 +2757,9 @@ public class WmOmNoticeHController extends BaseController {
 //			hql="from WmImNoticeIEntity where  noticeiSta <> ? and  omNoticeId = ?";
 //			listWaveToDowns = wmOmNoticeHService.findHql(hql,"已核货",searchstr);
 //			hql="from WmOmNoticeIEntity ";
-			hql="from WmOmNoticeIEntity where   id = ? and omSta <> ? order by  chpShuXing";
+			hql="from WmOmNoticeIEntity where   id = ?  order by  chpShuXing";
 //			listWaveToDowns = wmOmNoticeHService.findHql(hql);
-			listWaveToDowns = wmOmNoticeHService.findHql(hql, omnoticeid,"复核完成");
+			listWaveToDowns = wmOmNoticeHService.findHql(hql, omnoticeid);
 		D0.setObj(listWaveToDowns);
 		System.out.println("/listdetail/hehuolistWaveToDowns==="+listWaveToDowns.toString()+listWaveToDowns.size());
 
