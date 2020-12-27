@@ -2696,8 +2696,20 @@ public class WmOmNoticeHController extends BaseController {
 			String hqlrongqi = "from WmOmQmIEntity where omNoticeId = ?";
 			List<WmOmQmIEntity> listom =new ArrayList<>();
 			listom = wmOmNoticeHService.findHql(hqlrongqi, t.getOmNoticeId());
+			boolean isshow = true;
+			for(WmOmQmIEntity tom: listom ){
+				if("H".equals(tom.getBinSta())){
+					isshow = false;
+				}
+
+			}
 			try{
-				t.setOmPlatNo(listom.get(0).getSecondRq());
+				if(isshow){
+					t.setOmPlatNo(listom.get(0).getSecondRq());
+				}else{
+					t.setOmPlatNo("未分拣完成");
+
+				}
 			}catch (Exception e){
 
 			}
