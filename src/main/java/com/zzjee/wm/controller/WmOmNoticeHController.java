@@ -2733,9 +2733,9 @@ public class WmOmNoticeHController extends BaseController {
 //			hql="from WmImNoticeIEntity where  noticeiSta <> ? and  omNoticeId = ?";
 //			listWaveToDowns = wmOmNoticeHService.findHql(hql,"已核货",searchstr);
 //			hql="from WmOmNoticeIEntity ";
-			hql="from WmOmNoticeIEntity where   omNoticeId = ? order by  chpShuXing";
+			hql="from WmOmNoticeIEntity where   omNoticeId = ? and omSta <> ? order by  chpShuXing";
 //			listWaveToDowns = wmOmNoticeHService.findHql(hql);
-			listWaveToDowns = wmOmNoticeHService.findHql(hql, omnoticeid);
+			listWaveToDowns = wmOmNoticeHService.findHql(hql, omnoticeid,"复核完成");
 		D0.setObj(listWaveToDowns);
 		System.out.println("/listdetail/hehuolistWaveToDowns==="+listWaveToDowns.toString()+listWaveToDowns.size());
 
@@ -2752,14 +2752,26 @@ public class WmOmNoticeHController extends BaseController {
 		hql=" from WmOmNoticeIEntity where   id = ?";
 		listWaveToDowns = wmOmNoticeHService.findHql(hql,id);
 		if(listWaveToDowns!=null&&listWaveToDowns.size()>0){
-			String noticeid = listWaveToDowns.get(0).getOmNoticeId();
-			String hqlh=" from WmOmNoticeHEntity where omNoticeId = ? ";
-			List<WmOmNoticeHEntity> listWaveToDowns11 = wmOmNoticeHService.findHql(hqlh,noticeid);
+			for(WmOmNoticeIEntity tom: listWaveToDowns){
+				tom.setOmSta("复核完成");
+				systemService.updateEntitie(tom);
 
-			for(WmOmNoticeHEntity t: listWaveToDowns11){
-				t.setOmSta("复核完成");
-				wmOmNoticeHService.updateEntitie(t);
 			}
+			List<WmOmNoticeIEntity> listWaveToDownsafter =new ArrayList<>();
+			hql="from WmOmNoticeIEntity where   omNoticeId = ? and omSta <> ? order by  chpShuXing";
+//			listWaveToDowns = wmOmNoticeHService.findHql(hql);
+			listWaveToDownsafter = wmOmNoticeHService.findHql(hql, listWaveToDowns.get(0).getOmNoticeId(),"复核完成");
+			if(listWaveToDownsafter==null||(listWaveToDownsafter!=null&&listWaveToDownsafter.size()==0)){
+				String noticeid = listWaveToDowns.get(0).getOmNoticeId();
+				String hqlh=" from WmOmNoticeHEntity where omNoticeId = ? ";
+				List<WmOmNoticeHEntity> listWaveToDowns11 = wmOmNoticeHService.findHql(hqlh,noticeid);
+
+				for(WmOmNoticeHEntity t: listWaveToDowns11){
+					t.setOmSta("复核完成");
+					wmOmNoticeHService.updateEntitie(t);
+				}
+			}
+
 		}else{
 			String hql1=" from WmOmNoticeHEntity where omNoticeId = ? ";
 			List<WmOmNoticeHEntity> listWaveToDowns11 = wmOmNoticeHService.findHql(hql1,id);

@@ -87,6 +87,7 @@ public class WmOmNoticeHServiceImpl extends CommonServiceImpl implements WmOmNot
 				wmOmNoticeI.setOmNoticeId(wmOmNoticeH.getOmNoticeId());
 				wmOmNoticeI.setImCusCode(wmOmNoticeH.getImCusCode());
 				wmOmNoticeI.setOmBeizhu(wmOmNoticeH.getOmBeizhu());
+				wmOmNoticeI.setOmSta("未复核");
 				this.save(wmOmNoticeI);
 			}
 
