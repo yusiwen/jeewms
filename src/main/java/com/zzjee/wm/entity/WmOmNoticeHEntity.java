@@ -17,12 +17,12 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.SequenceGenerator;
 import org.jeecgframework.poi.excel.annotation.Excel;
 
-/**   
+/**
  * @Title: Entity
  * @Description: 出货通知抬头
  * @author erzhongxmu
  * @date 2017-09-11 15:24:58
- * @version V1.0   
+ * @version V1.0
  *
  */
 @Entity
@@ -34,25 +34,25 @@ public class WmOmNoticeHEntity implements java.io.Serializable {
 	/**创建人名称*/
 	private java.lang.String createName;
 	/**创建人登录名称*/
-  
+
 	private java.lang.String createBy;
 	/**创建日期*/
-  
+
 	private java.util.Date createDate;
 	/**更新人名称*/
-  
+
 	private java.lang.String updateName;
 	/**更新人登录名称*/
- 
+
 	private java.lang.String updateBy;
 	/**更新日期*/
-   
+
 	private java.util.Date updateDate;
 	/**所属部门*/
 	private java.lang.String readonly;
-	
+
 	private java.lang.String wherecon;
-	
+
 	private java.lang.String sysOrgCode;
 	/**所属公司*/
 	private java.lang.String orderTypeCode;
@@ -107,6 +107,7 @@ public class WmOmNoticeHEntity implements java.io.Serializable {
 	private java.lang.String ocusName;
 
 	private java.lang.String printStatus;
+	@Excel(name="第三方单号汇总")
 	private java.lang.String piClass;
 
 	private java.lang.String piMaster;
@@ -118,7 +119,7 @@ public class WmOmNoticeHEntity implements java.io.Serializable {
 	@Id
 	@GeneratedValue(generator = "paymentableGenerator")
 	@GenericGenerator(name = "paymentableGenerator", strategy = "uuid")
-	
+
 	@Column(name ="ID",nullable=false,length=36)
 	public java.lang.String getId(){
 		return this.id;
@@ -147,7 +148,7 @@ public class WmOmNoticeHEntity implements java.io.Serializable {
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  创建人名称
 	 */
-	
+
 	@Column(name ="CREATE_NAME",nullable=true,length=50)
 	public java.lang.String getCreateName(){
 		return this.createName;
@@ -160,12 +161,12 @@ public class WmOmNoticeHEntity implements java.io.Serializable {
 	public void setCreateName(java.lang.String createName){
 		this.createName = createName;
 	}
-	
+
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  创建人登录名称
 	 */
-	
+
 	@Column(name ="CREATE_BY",nullable=true,length=50)
 	public java.lang.String getCreateBy(){
 		return this.createBy;
@@ -178,12 +179,12 @@ public class WmOmNoticeHEntity implements java.io.Serializable {
 	public void setCreateBy(java.lang.String createBy){
 		this.createBy = createBy;
 	}
-	
+
 	/**
 	 *方法: 取得java.util.Date
 	 *@return: java.util.Date  创建日期
 	 */
-	
+
 	@Column(name ="CREATE_DATE",nullable=true)
 	public java.util.Date getCreateDate(){
 		return this.createDate;
@@ -196,12 +197,12 @@ public class WmOmNoticeHEntity implements java.io.Serializable {
 	public void setCreateDate(java.util.Date createDate){
 		this.createDate = createDate;
 	}
-	
+
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  更新人名称
 	 */
-	
+
 	@Column(name ="UPDATE_NAME",nullable=true,length=50)
 	public java.lang.String getUpdateName(){
 		return this.updateName;
@@ -214,12 +215,12 @@ public class WmOmNoticeHEntity implements java.io.Serializable {
 	public void setUpdateName(java.lang.String updateName){
 		this.updateName = updateName;
 	}
-	
+
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  更新人登录名称
 	 */
-	
+
 	@Column(name ="UPDATE_BY",nullable=true,length=50)
 	public java.lang.String getUpdateBy(){
 		return this.updateBy;
@@ -232,12 +233,12 @@ public class WmOmNoticeHEntity implements java.io.Serializable {
 	public void setUpdateBy(java.lang.String updateBy){
 		this.updateBy = updateBy;
 	}
-	
+
 	/**
 	 *方法: 取得java.util.Date
 	 *@return: java.util.Date  更新日期
 	 */
-	
+
 	@Column(name ="UPDATE_DATE",nullable=true)
 	public java.util.Date getUpdateDate(){
 		return this.updateDate;
@@ -250,12 +251,12 @@ public class WmOmNoticeHEntity implements java.io.Serializable {
 	public void setUpdateDate(java.util.Date updateDate){
 		this.updateDate = updateDate;
 	}
-	
+
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  所属部门
 	 */
-	
+
 	@Column(name ="SYS_ORG_CODE",nullable=true,length=50)
 	public java.lang.String getSysOrgCode(){
 		return this.sysOrgCode;
@@ -268,12 +269,12 @@ public class WmOmNoticeHEntity implements java.io.Serializable {
 	public void setSysOrgCode(java.lang.String sysOrgCode){
 		this.sysOrgCode = sysOrgCode;
 	}
-	
+
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  所属公司
 	 */
-	
+
 	@Column(name ="SYS_COMPANY_CODE",nullable=true,length=50)
 	public java.lang.String getSysCompanyCode(){
 		return this.sysCompanyCode;
@@ -286,12 +287,12 @@ public class WmOmNoticeHEntity implements java.io.Serializable {
 	public void setSysCompanyCode(java.lang.String sysCompanyCode){
 		this.sysCompanyCode = sysCompanyCode;
 	}
-	
+
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  客户
 	 */
-	
+
 	@Column(name ="CUS_CODE",nullable=true,length=32)
 	public java.lang.String getCusCode(){
 		return this.cusCode;
@@ -304,12 +305,12 @@ public class WmOmNoticeHEntity implements java.io.Serializable {
 	public void setCusCode(java.lang.String cusCode){
 		this.cusCode = cusCode;
 	}
-	
+
 	/**
 	 *方法: 取得java.util.Date
 	 *@return: java.util.Date  要求交货时间
 	 */
-	
+
 	@Column(name ="DELV_DATA",nullable=true)
 	public java.util.Date getDelvData(){
 		return this.delvData;
@@ -322,12 +323,12 @@ public class WmOmNoticeHEntity implements java.io.Serializable {
 	public void setDelvData(java.util.Date delvData){
 		this.delvData = delvData;
 	}
-	
+
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  收货人
 	 */
-	
+
 	@Column(name ="DELV_MEMBER",nullable=true,length=32)
 	public java.lang.String getDelvMember(){
 		return this.delvMember;
@@ -340,12 +341,12 @@ public class WmOmNoticeHEntity implements java.io.Serializable {
 	public void setDelvMember(java.lang.String delvMember){
 		this.delvMember = delvMember;
 	}
-	
+
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  收货人电话
 	 */
-	
+
 	@Column(name ="DELV_MOBILE",nullable=true,length=32)
 	public java.lang.String getDelvMobile(){
 		return this.delvMobile;
@@ -358,12 +359,12 @@ public class WmOmNoticeHEntity implements java.io.Serializable {
 	public void setDelvMobile(java.lang.String delvMobile){
 		this.delvMobile = delvMobile;
 	}
-	
+
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  收货人地址
 	 */
-	
+
 	@Column(name ="DELV_ADDR",nullable=true,length=32)
 	public java.lang.String getDelvAddr(){
 		return this.delvAddr;
@@ -376,12 +377,12 @@ public class WmOmNoticeHEntity implements java.io.Serializable {
 	public void setDelvAddr(java.lang.String delvAddr){
 		this.delvAddr = delvAddr;
 	}
-	
+
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  承运人
 	 */
-	
+
 	@Column(name ="RE_MEMBER",nullable=true,length=32)
 	public java.lang.String getReMember(){
 		return this.reMember;
@@ -394,12 +395,12 @@ public class WmOmNoticeHEntity implements java.io.Serializable {
 	public void setReMember(java.lang.String reMember){
 		this.reMember = reMember;
 	}
-	
+
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  承运人电话
 	 */
-	
+
 	@Column(name ="RE_MOBILE",nullable=true,length=32)
 	public java.lang.String getReMobile(){
 		return this.reMobile;
@@ -412,12 +413,12 @@ public class WmOmNoticeHEntity implements java.io.Serializable {
 	public void setReMobile(java.lang.String reMobile){
 		this.reMobile = reMobile;
 	}
-	
+
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  承运人车号
 	 */
-	
+
 	@Column(name ="RE_CARNO",nullable=true,length=32)
 	public java.lang.String getReCarno(){
 		return this.reCarno;
@@ -430,12 +431,12 @@ public class WmOmNoticeHEntity implements java.io.Serializable {
 	public void setReCarno(java.lang.String reCarno){
 		this.reCarno = reCarno;
 	}
-	
+
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  发货月台
 	 */
-	
+
 	@Column(name ="OM_PLAT_NO",nullable=true,length=32)
 	public java.lang.String getOmPlatNo(){
 		return this.omPlatNo;
@@ -448,12 +449,12 @@ public class WmOmNoticeHEntity implements java.io.Serializable {
 	public void setOmPlatNo(java.lang.String omPlatNo){
 		this.omPlatNo = omPlatNo;
 	}
-	
+
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  备注
 	 */
-	
+
 	@Column(name ="OM_BEIZHU",nullable=true,length=32)
 	public java.lang.String getOmBeizhu(){
 		return this.omBeizhu;
@@ -466,12 +467,12 @@ public class WmOmNoticeHEntity implements java.io.Serializable {
 	public void setOmBeizhu(java.lang.String omBeizhu){
 		this.omBeizhu = omBeizhu;
 	}
-	
+
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  状态
 	 */
-	
+
 	@Column(name ="OM_STA",nullable=true,length=32)
 	public java.lang.String getOmSta(){
 		return this.omSta;
@@ -484,12 +485,12 @@ public class WmOmNoticeHEntity implements java.io.Serializable {
 	public void setOmSta(java.lang.String omSta){
 		this.omSta = omSta;
 	}
-	
+
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  出货单号
 	 */
-	
+
 	@Column(name ="OM_NOTICE_ID",nullable=true,length=32)
 	public java.lang.String getOmNoticeId(){
 		return this.omNoticeId;
@@ -502,12 +503,12 @@ public class WmOmNoticeHEntity implements java.io.Serializable {
 	public void setOmNoticeId(java.lang.String omNoticeId){
 		this.omNoticeId = omNoticeId;
 	}
-	
+
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  附件
 	 */
-	
+
 	@Column(name ="FU_JIAN",nullable=true,length=128)
 	public java.lang.String getFuJian(){
 		return this.fuJian;

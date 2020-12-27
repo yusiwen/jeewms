@@ -429,7 +429,7 @@ public class TmsYwDingdanController extends BaseController {
 		String message = null;
 		AjaxJson j = new AjaxJson();
  		message = "运输订单派车成功";
-		try{
+ 		try{
 			for(String id1:id.split(",")) {
 				TmsYwDingdanEntity tmsYwDingdan = systemService.getEntity(TmsYwDingdanEntity.class,
 						id1
@@ -442,6 +442,7 @@ public class TmsYwDingdanController extends BaseController {
 				systemService.addLog(message, Globals.Log_Type_DEL, Globals.Log_Leavel_INFO);
 			}
 			Map<String,String> maphz = new HashMap<>();
+			Map<String,String> mapsfoderid = new HashMap<>();
 
 			for(String id1:id.split(",")) {//计算总货主和单数
 				TmsYwDingdanEntity tmsYwDingdan1 = systemService.getEntity(TmsYwDingdanEntity.class,
@@ -457,10 +458,15 @@ public class TmsYwDingdanController extends BaseController {
 
 				if(!maphz.containsKey(wmsom.getCusCode())){
 					maphz.put(wmsom.getCusCode(),wmsom.getOmNoticeId());
+					mapsfoderid.put(wmsom.getCusCode(),wmsom.getOmBeizhu());
 				}else{
 					String ys = maphz.get(wmsom.getCusCode());
 					ys = ys+";"+wmsom.getOmNoticeId();
 					maphz.put(wmsom.getCusCode(),ys);
+				   String 	 sforderid = mapsfoderid.get(wmsom.getCusCode());
+				   sforderid = sforderid+";"+wmsom.getOmBeizhu();
+				   mapsfoderid.put(wmsom.getCusCode(),sforderid);
+
 				}
 			}
 			Set<String> keySets = maphz.keySet();
@@ -471,6 +477,7 @@ public class TmsYwDingdanController extends BaseController {
 				wmOmNoticeH.setReMember(siji);//司机
 				String mapkey = ki.next();
 				String mapvv = maphz.get(mapkey);
+				String sforderid = mapsfoderid.get(mapkey);
 				String[]   strva= mapvv.split(";");
 				String sqla = "(" ;
 				for(int a = 0;a<strva.length;a++){
@@ -492,6 +499,7 @@ public class TmsYwDingdanController extends BaseController {
 				wmOmNoticeH.setOmNoticeId(noticeid);
 				List<WmOmNoticeIEntity> wmOmNoticeIListnew = new ArrayList<>();
 				wmOmNoticeH.setCusCode(mapkey);
+				wmOmNoticeH.setPiClass(sforderid);//三方单号
 				if (resultz != null && resultz.size() > 0) {
 					for (int i = 0; i < resultz.size(); i++) {
 						WmOmNoticeIEntity t = new  WmOmNoticeIEntity();
