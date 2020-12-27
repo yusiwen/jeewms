@@ -2666,7 +2666,7 @@ public class WmOmNoticeHController extends BaseController {
 		String hql="from WmOmNoticeHEntity  ";
 
 		List<WmOmNoticeHEntity> listWaveToDowns =new ArrayList<>();
-		List<WmOmNoticeHEntity> listWaveToDownsnew =new ArrayList<>();
+ 		List<WmOmNoticeHEntity> listWaveToDownsnew =new ArrayList<>();
 		if(StringUtil.isNotEmpty(searchstr)&&!"null".equals(searchstr)){
 			hql="from WmOmNoticeHEntity where  omSta <> ? and  reMember = ? and  omNoticeId = ?";
 			listWaveToDowns = wmOmNoticeHService.findHql(hql,"复核完成",username,searchstr);
@@ -2713,8 +2713,29 @@ public class WmOmNoticeHController extends BaseController {
 			}catch (Exception e){
 
 			}
-			listWaveToDownsnew.add(t);
-		}
+			for(WmOmNoticeIEntity dt2: listWaveToDowndetial){
+				WmOmNoticeHEntity tout = new WmOmNoticeHEntity();
+				try{
+					MyBeanUtils.copyBean2Bean(tout,t);
+
+				}catch (Exception e){
+
+				}
+				tout.setId(dt2.getId());//设置ID
+				if(StringUtil.isNotEmpty(searchstr2)){
+					try{
+						if (!(StringUtil.strPos(dt2.getGoodsId(), searchstr2)||StringUtil.strPos(dt2.getBarCode(),searchstr2))) {
+							continue;
+						}
+					}catch (Exception e){
+
+					}
+				}
+				tout.setPiMaster(dt2.getGoodsId()+ dt2.getGoodsName());
+				tout.setPiClass(dt2.getBaseGoodscount()+ dt2.getBaseUnit());
+				listWaveToDownsnew.add(tout);
+ 			}
+ 		}
 		D0.setObj(listWaveToDownsnew);
 
 
@@ -2733,7 +2754,7 @@ public class WmOmNoticeHController extends BaseController {
 //			hql="from WmImNoticeIEntity where  noticeiSta <> ? and  omNoticeId = ?";
 //			listWaveToDowns = wmOmNoticeHService.findHql(hql,"已核货",searchstr);
 //			hql="from WmOmNoticeIEntity ";
-			hql="from WmOmNoticeIEntity where   omNoticeId = ? and omSta <> ? order by  chpShuXing";
+			hql="from WmOmNoticeIEntity where   id = ? and omSta <> ? order by  chpShuXing";
 //			listWaveToDowns = wmOmNoticeHService.findHql(hql);
 			listWaveToDowns = wmOmNoticeHService.findHql(hql, omnoticeid,"复核完成");
 		D0.setObj(listWaveToDowns);

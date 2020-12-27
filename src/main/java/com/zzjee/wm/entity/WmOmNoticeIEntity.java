@@ -123,7 +123,8 @@ public class WmOmNoticeIEntity implements java.io.Serializable {
 	/**产品属性*/
 	@Excel(name="产品属性")
 	private java.lang.String chpShuXing;
-
+	@Excel(name="商品条码")
+	private java.lang.String barCode;
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  主键
@@ -683,4 +684,16 @@ public class WmOmNoticeIEntity implements java.io.Serializable {
 		this.chpShuXing = chpShuXing;
 	}
 
+	@Column(name ="BARCODE",nullable=true,length=32)
+	public java.lang.String getBarCode(){
+		return this.barCode;
+	}
+
+	/**
+	 *方法: 设置java.lang.String
+	 *@param: java.lang.String  商品条码
+	 */
+	public void setBarCode(java.lang.String barCode){
+		this.barCode = barCode;
+	}
 }
