@@ -628,6 +628,27 @@ public class TmsYwDingdanController extends BaseController {
             String hqlom = "from WmTmsNoticeHEntity where omBeizhu = ?";
             List<WmTmsNoticeHEntity> listom = systemService.findHql(hqlom,username);
             String sji = "siji";
+            String orderstatus = "";
+
+            try{
+				orderstatus = listom.get(0).getOmSta();
+			}catch (Exception e){
+
+			}
+			try{
+				String hqlomh = "from WmOmNoticeHEntity where piClass like '%" +username+
+						"%'";
+				List<WmOmNoticeHEntity> listomh = systemService.findHql(hqlomh);
+				if(StringUtil.isNotEmpty(orderstatus)){
+					orderstatus = orderstatus+"-"+listomh.get(0).getOmSta();
+
+				}else{
+					orderstatus =  listomh.get(0).getOmSta();
+
+				}
+			}catch (Exception e){
+
+			}
             try{
 				sji = listom.get(0).getReMember();
 			}catch (Exception e){
@@ -638,15 +659,17 @@ public class TmsYwDingdanController extends BaseController {
 			if(lista!=null&&lista.size()>0){
 				RfidBuseEntity out = lista.get(0);
 				try{
+
 					TmsMdCheliangEntity tmsMdCheliangEntity = systemService.findUniqueByProperty(TmsMdCheliangEntity.class,"username",sji);
 					out.setRfidBuseno(tmsMdCheliangEntity.getZhuangtai());
 					out.setRfidBusecont(tmsMdCheliangEntity.getBeizhu());
+					out.setRfidType(orderstatus);
 				}catch (Exception e){
 
 				}
 				return Result.success(out);
 			}else{
-				return Result.error("暂无司机位置");
+				return Result.error(orderstatus+"-暂无司机位置");
 
 			}
 
