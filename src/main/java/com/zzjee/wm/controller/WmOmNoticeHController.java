@@ -2688,7 +2688,7 @@ public class WmOmNoticeHController extends BaseController {
 					sumcount = sumcount + Double.parseDouble(dt.getBaseGoodscount());
 				}
 
-				t.setOmBeizhu(Double.toString(sumcount));
+				t.setOmBeizhu(Integer.toString((int) Math.round(sumcount)) );
 			}catch (Exception e){
 
 			}
@@ -2708,7 +2708,7 @@ public class WmOmNoticeHController extends BaseController {
 					t.setOmPlatNo(listom.get(0).getSecondRq());
 				}else{
 					t.setOmPlatNo("未分拣完成");
-
+				continue;//未分拣完成不允许核货
 				}
 			}catch (Exception e){
 
@@ -2735,7 +2735,8 @@ public class WmOmNoticeHController extends BaseController {
 					}
 				}
 				tout.setPiMaster( dt2.getGoodsName());
-				tout.setPiClass(dt2.getBaseGoodscount()+ dt2.getBaseUnit());
+//				tout.setPiClass(dt2.getBaseGoodscount()+ "dt2.getBaseUnit()");
+				tout.setPiClass( (int) Math.round(Double.parseDouble(dt2.getBaseGoodscount()))  + "份");
 				listWaveToDownsnew.add(tout);
  			}
  		}
