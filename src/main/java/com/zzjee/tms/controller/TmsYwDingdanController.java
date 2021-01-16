@@ -543,11 +543,11 @@ public class TmsYwDingdanController extends BaseController {
 
 		List<WmTmsNoticeHEntity> listWaveToDowns =new ArrayList<>();
 		if(StringUtil.isNotEmpty(searchstr)&&!"null".equals(searchstr)){
-			hql="from WmTmsNoticeHEntity where  omSta <> ? and  reMember = ? and  delvMobile like ?";
-			listWaveToDowns = wmOmNoticeHService.findHql(hql,"已送货",username,"%"+searchstr+"%");
+			hql="from WmTmsNoticeHEntity where  omSta = ? and  reMember = ? and  delvMobile like ?";
+			listWaveToDowns = wmOmNoticeHService.findHql(hql,"复核完成",username,"%"+searchstr+"%");
 		}else{
-			hql="from WmTmsNoticeHEntity where omSta <> ? and reMember = ? ";
-			listWaveToDowns = wmOmNoticeHService.findHql(hql,"已送货",username);
+			hql="from WmTmsNoticeHEntity where omSta = ? and reMember = ? ";
+			listWaveToDowns = wmOmNoticeHService.findHql(hql,"复核完成",username);
 
 		}
 		D0.setObj(listWaveToDowns);
@@ -566,7 +566,18 @@ public class TmsYwDingdanController extends BaseController {
 		String hql="from WmTmsNoticeIEntity  where omNoticeId = ? order by goodsId";
         List<WmTmsNoticeIEntity> listWaveToDowns =new ArrayList<>();
         listWaveToDowns = wmOmNoticeHService.findHql(hql,omnoticeid);
-        D0.setObj(listWaveToDowns);
+        for(WmTmsNoticeIEntity t: listWaveToDowns){
+			try{
+				t.setGoodsQua( (int) Math.round(Double.parseDouble(t.getGoodsQua()))+"");
+				t.setBaseGoodscount( (int) Math.round(Double.parseDouble(t.getBaseGoodscount()))+"");
+				t.setBaseUnit("份");
+				t.setGoodsUnit("份");
+			}catch (Exception e){
+			}
+		}
+//		tout.setPiClass( (int) Math.round(Double.parseDouble(dt2.getBaseGoodscount()))  + "份");
+
+		D0.setObj(listWaveToDowns);
         try{
 			System.out.println("/listdetail/songhuolistWaveToDowns==="+listWaveToDowns.get(0).toString()+listWaveToDowns.size());
 
@@ -581,7 +592,8 @@ public class TmsYwDingdanController extends BaseController {
     @RequestMapping(value = "/update/songhuo",  method = RequestMethod.GET)   //总订单
     @ResponseBody
     public ResponseEntity<?> updatesonghuo(
-            @RequestParam(value="omnoticeid", required=false)String omnoticeid) {
+            @RequestParam(value="omnoticeid", required=false)String omnoticeid,
+			@RequestParam(value="remark", required=false)String remark) {
         ResultDO D0 = new  ResultDO();
         D0.setOK(true);
         String hql="from WmTmsNoticeHEntity  where  omNoticeId = ?";
@@ -772,7 +784,7 @@ public class TmsYwDingdanController extends BaseController {
 		try{
 			tmsYwDingdan.setZhuangtai("已装车");
 			tmsYwDingdanService.updateEntitie(tmsYwDingdan);
-			systemService.addLog(message, Globals.Log_Type_DEL, Globals.Log_Leavel_INFO);
+//			systemService.addLog(message, Globals.Log_Type_DEL, Globals.Log_Leavel_INFuO);
 		}catch(Exception e){
 			e.printStackTrace();
 			message = "运输订单取消回单失败";

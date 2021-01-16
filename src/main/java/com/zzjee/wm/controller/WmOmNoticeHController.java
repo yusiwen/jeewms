@@ -2727,7 +2727,7 @@ public class WmOmNoticeHController extends BaseController {
 				tout.setId(dt2.getId());//设置ID
 				if(StringUtil.isNotEmpty(searchstr2)){
 					try{
-						if (!(StringUtil.strPos(dt2.getGoodsId(), searchstr2)||StringUtil.strPos(dt2.getBarCode(),searchstr2))) {
+						if (!(StringUtil.strPos(dt2.getChpShuXing(), searchstr2))) {
 							continue;
 						}
 					}catch (Exception e){
@@ -2794,6 +2794,8 @@ public class WmOmNoticeHController extends BaseController {
 				for(WmOmNoticeHEntity t: listWaveToDowns11){
 					t.setOmSta("复核完成");
 					wmOmNoticeHService.updateEntitie(t);
+					updatetms(t.getPiClass());
+
 				}
 			}
 
@@ -2803,6 +2805,8 @@ public class WmOmNoticeHController extends BaseController {
 			for(WmOmNoticeHEntity t: listWaveToDowns11){
 				t.setOmSta("复核完成");
 				wmOmNoticeHService.updateEntitie(t);
+				updatetms(t.getPiClass());
+
 			}
 
 			String hql2=" from WmOmNoticeHEntity where id = ? ";
@@ -2810,11 +2814,30 @@ public class WmOmNoticeHController extends BaseController {
 			for(WmOmNoticeHEntity t: listWaveToDowns12){
 				t.setOmSta("复核完成");
 				wmOmNoticeHService.updateEntitie(t);
+				updatetms(t.getPiClass());
 			}
 
 		}
 
 		D0.setObj(listWaveToDowns);
 		return new ResponseEntity(D0, HttpStatus.OK);
+	}
+
+
+	private  void updatetms(String sfordeid){
+		for(String ombeizhu:sfordeid.split(";")){
+			try{
+				WmTmsNoticeHEntity wmsom = systemService.findUniqueByProperty(WmTmsNoticeHEntity.class,"omBeizhu",ombeizhu);
+				if(wmsom!=null){
+					wmsom.setOmSta("复核完成");
+					systemService.updateEntitie(wmsom);
+				}
+
+			}catch (Exception e){
+
+			}
+
+		}
+
 	}
 }
