@@ -50,9 +50,9 @@
     function saveData(title,addurl,gname){
         if(!endEdit(gname))
             return false;
-        var rows=$('#'+gname).datagrid("getChanges","inserted");
-        var uprows=$('#'+gname).datagrid("getChanges","updated");
-        rows=rows.concat(uprows);
+        var rows=$('#'+gname).datagrid("getSelections");
+        // var uprows=$('#'+gname).datagrid("getChanges","updated");
+        // rows=rows.concat(uprows);
         if(rows.length<=0){
             tip("没有需要保存的数据！")
             return false;
