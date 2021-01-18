@@ -1,9 +1,6 @@
 package com.zzjee.wm.controller;
 import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.IOException;
-import java.io.OutputStream;
+import java.io.*;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -2725,9 +2722,19 @@ public class WmOmNoticeHController extends BaseController {
 
 				}
 				tout.setId(dt2.getId());//设置ID
-				if(StringUtil.isNotEmpty(searchstr2)){
+				System.out.println("searchstr2===="+searchstr2);
+				String  keyword = "";
+				try {
+					  keyword = new String(searchstr2.getBytes("iso-8859-1"), "utf-8");
+					System.out.println("keyword===="+keyword);
+				} catch (UnsupportedEncodingException e) {
+					e.printStackTrace();
+				}
+				if(StringUtil.isNotEmpty(keyword)){
 					try{
-						if (!(StringUtil.strPos(dt2.getChpShuXing(), searchstr2))) {
+						if (!(StringUtil.strPos(dt2.getChpShuXing(), keyword))) {
+							System.out.println("dt2.getChpShuXing()===="+dt2.getChpShuXing());
+
 							continue;
 						}
 					}catch (Exception e){
