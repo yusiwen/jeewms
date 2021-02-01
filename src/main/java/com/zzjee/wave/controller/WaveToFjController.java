@@ -347,28 +347,33 @@ public class WaveToFjController extends BaseController {
 								  @RequestParam(value="searchstr", required=false)String searchstr,
 								  @RequestParam(value="searchstr2", required=false)String searchstr2,
 								  @RequestParam(value="searchstr3", required=false)String searchstr3,
-								  @RequestParam(value="searchstr4", required=false)String searchstr4) {
+								  @RequestParam(value="searchstr4", required=false)String searchstr4,//二次容器
+								  @RequestParam(value="searchstr5", required=false)String searchstr5)
+	{
 		ResultDO D0 = new  ResultDO();
 		D0.setOK(true);
 		String hql="from WaveToDownEntity where waveId = ?  ";
 
 		List<WaveToFjEntity> listWaveToFjs =new ArrayList<>();
 		List<WaveToFjEntity> listWaveToFjsnew =new ArrayList<>();
-
+		if(StringUtil.isEmpty(searchstr5)||"null".equals(searchstr5)){
+			searchstr5 = "asc";
+		}
+      String orderby = "order by secondRq  " + searchstr5;
 		if(StringUtil.isEmpty(searchstr)&&StringUtil.isEmpty(searchstr2)){
-			hql="from WaveToFjEntity  where 1 =  1  ";
+			hql="from WaveToFjEntity  where 1 =  1  "+orderby;
 			listWaveToFjs=waveToFjService.findHql(hql);
 		}
 		if(StringUtil.isNotEmpty(searchstr)&&StringUtil.isEmpty(searchstr2)){
-			hql="from WaveToFjEntity where waveId = ?  ";
+			hql="from WaveToFjEntity where waveId = ?  "+orderby;
 			listWaveToFjs=waveToFjService.findHql(hql,searchstr);
 		}
 		if(StringUtil.isEmpty(searchstr)&&StringUtil.isNotEmpty(searchstr2)){
-			hql="from WaveToFjEntity where firstRq = ?  ";
+			hql="from WaveToFjEntity where firstRq = ?  "+orderby;
 			listWaveToFjs=waveToFjService.findHql(hql,searchstr2);
 		}
 		if(StringUtil.isNotEmpty(searchstr)&&StringUtil.isNotEmpty(searchstr2)){
-			hql="from WaveToFjEntity where waveId = ? and  firstRq = ?";
+			hql="from WaveToFjEntity where waveId = ? and  firstRq = ?"+orderby;
 			listWaveToFjs=waveToFjService.findHql(hql,searchstr,searchstr2);
 		}
 
