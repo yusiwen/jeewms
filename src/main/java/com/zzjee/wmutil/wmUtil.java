@@ -298,19 +298,20 @@ public class wmUtil {
 		}
 		try{
 			TSUser user = ResourceUtil.getSessionUserName();
+			System.out.println("user.getId()========"+user.getId());
 			String roles = "";
 			if (user != null) {
 				List<TSRoleUser> rUsers = systemService.findByProperty(TSRoleUser.class, "TSUser.id", user.getId());
 				for (TSRoleUser ru : rUsers) {
+
 					TSRole role = ru.getTSRole();
 					roles += role.getRoleCode() + ",";
+					System.out.println("role.getRoleCode()========"+role.getRoleCode());
 				}
-				if (roles.length() > 0) {
-					roles = roles.substring(0, roles.length() - 1);
-				}
-				if(roles.equals(cusrole)){
+				System.out.println("roles========"+roles);
+				System.out.println("cusrole========"+cusrole);
+				if( StringUtil.strPos(roles,cusrole) ){
 					cusCode =  user.getUserName();
-
 				}
 			}
 		}catch (Exception e) {
