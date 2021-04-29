@@ -1,6 +1,6 @@
 
 QQ交流群：335607153  有任何问题可以加群交流
-测试系统地址 http://www.jeewms.cn/wms  用户名：test  密码：123456 本地启动的用户名：admin 密码：llg123
+测试系统地址 http://47.113.229.131:9080/wms  用户名：test  密码：123456 本地启动的用户名：admin 密码：llg123
 android app也已经开源，近期更新会比较频繁 app开源地址  https://gitee.com/erzhongxmu/jeewmsapp
 大家看到了，star一下，谢谢，本团队会持续更新，一直开源！
 欢迎喜欢的朋友一起来优化功能。
@@ -53,9 +53,9 @@ android app也已经开源，近期更新会比较频繁 app开源地址  https:
 	
 四、技术支持：
 
-    演示环境：http://www.jeewms.cn/wmstest     用户： test   密码：123456
+    演示环境：http://47.113.229.131:9080/wms     用户： test   密码：123456
     QQ群：335607153    
-
+![输入图片说明](https://images.gitee.com/uploads/images/2021/0426/110925_73d97edd_544004.jpeg "微信图片_20210426110805.jpg")
 五、修改日志：
     
     1，测试环境已恢复
