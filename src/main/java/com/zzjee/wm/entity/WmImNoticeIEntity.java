@@ -125,6 +125,8 @@ public class WmImNoticeIEntity implements java.io.Serializable {
 	/**产品属性*/
 	@Excel(name="产品属性")
 	private java.lang.String chpShuXing;
+	@Excel(name="托盘")
+	private java.lang.String tinId;
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  主键
@@ -709,5 +711,17 @@ public class WmImNoticeIEntity implements java.io.Serializable {
 	 */
 	public void setChpShuXing(java.lang.String chpShuXing){
 		this.chpShuXing = chpShuXing;
+	}
+	@Column(name ="TIN_ID",nullable=true,length=32)
+	public java.lang.String getTinId(){
+		return this.tinId;
+	}
+
+	/**
+	 *方法: 设置java.lang.String
+	 *@param: java.lang.String  托盘
+	 */
+	public void setTinId(java.lang.String tinId){
+		this.tinId = tinId;
 	}
 }

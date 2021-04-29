@@ -593,6 +593,7 @@ e.printStackTrace();
 					wminqm.setImNoticeId(jeecgDemo.getImNoticeId());
 					wminqm.setGoodsName(jeecgDemo.getGoodsName());
 					wminqm.setBinId(jeecgDemo.getBinPlan());
+					wminqm.setTinId(jeecgDemo.getTinId());
 					wminqm.setGoodsUnit(jeecgDemo.getGoodsUnit());
 					wminqm.setGoodsBatch(jeecgDemo.getGoodsBatch());
 					if(StringUtil.isEmpty(wminqm.getGoodsBatch())){

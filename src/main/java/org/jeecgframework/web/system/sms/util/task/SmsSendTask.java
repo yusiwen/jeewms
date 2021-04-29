@@ -103,7 +103,10 @@ public class SmsSendTask {
 						String  binplantuopan = "0";
 						try{
 							WmImNoticeIEntity wmImNoticeIEntity = systemService.get(WmImNoticeIEntity.class,wmInQmIEntity.getImNoticeItem()) ;
-							binplantuopan =  wmImNoticeIEntity.getBinPlan() ;
+
+							if(StringUtil.isNotEmpty(wmImNoticeIEntity.getBinPlan() )){
+								binplantuopan =  wmImNoticeIEntity.getBinPlan() ;
+							}
 						}catch (Exception e){
 
 						}
