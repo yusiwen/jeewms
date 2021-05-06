@@ -55,7 +55,7 @@ android app也已经开源，近期更新会比较频繁 app开源地址  https:
 
     演示环境：http://47.113.229.131:9080/wms     用户： test   密码：123456
     QQ群：335607153    
-![输入图片说明](https://images.gitee.com/uploads/images/2021/0426/110925_73d97edd_544004.jpeg "微信图片_20210426110805.jpg")
+    ![输入图片说明](https://images.gitee.com/uploads/images/2021/0506/190316_c44f67a3_544004.jpeg "31cfa866c02081ae4319c4036719057.jpg")
 五、修改日志：
     
     1，测试环境已恢复
