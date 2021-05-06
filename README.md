@@ -55,7 +55,6 @@ android app也已经开源，近期更新会比较频繁 app开源地址  https:
 
     演示环境：http://47.113.229.131:9080/wms     用户： test   密码：123456
     QQ群：335607153    
-    ![输入图片说明](https://images.gitee.com/uploads/images/2021/0506/190316_c44f67a3_544004.jpeg "31cfa866c02081ae4319c4036719057.jpg")
 五、修改日志：
     
     1，测试环境已恢复
@@ -73,6 +72,8 @@ android app也已经开源，近期更新会比较频繁 app开源地址  https:
     2、商务合作：本项目同时支持开源版实施和定制开发服务，商务合作请 统一联系 QQ：290813851
 
 # 问题&BUG&建议：请在此提交https://gitee.com/erzhongxmu/jeewms/issues
+
+![微信群](https://images.gitee.com/uploads/images/2021/0506/190316_c44f67a3_544004.jpeg "31cfa866c02081ae4319c4036719057.jpg")
 ![主页](https://images.gitee.com/uploads/images/2018/1014/235739_2c29bbbf_544004.png "wmshome.png")
 ![仓位使用率](https://images.gitee.com/uploads/images/2018/1015/000747_4eafc335_544004.png "cwsyl.png")
 ![仓位图](https://images.gitee.com/uploads/images/2018/1015/000802_e438ced8_544004.png "cwt.png")
