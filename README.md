@@ -73,7 +73,7 @@ android app也已经开源，近期更新会比较频繁 app开源地址  https:
 
 # 问题&BUG&建议：请在此提交https://gitee.com/erzhongxmu/jeewms/issues
 
-![微信群](https://images.gitee.com/uploads/images/2021/0506/190316_c44f67a3_544004.jpeg "31cfa866c02081ae4319c4036719057.jpg")
+![微信群](https://images.gitee.com/uploads/images/2021/0513/111753_11c28c2a_544004.jpeg "LTWLLMX_HYFTX8VAPZC~QF4.jpg")
 ![主页](https://images.gitee.com/uploads/images/2018/1014/235739_2c29bbbf_544004.png "wmshome.png")
 ![仓位使用率](https://images.gitee.com/uploads/images/2018/1015/000747_4eafc335_544004.png "cwsyl.png")
 ![仓位图](https://images.gitee.com/uploads/images/2018/1015/000802_e438ced8_544004.png "cwt.png")
