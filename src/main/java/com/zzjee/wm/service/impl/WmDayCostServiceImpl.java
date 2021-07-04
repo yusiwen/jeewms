@@ -18,20 +18,23 @@ import org.jeecgframework.web.cgform.enhance.CgformEnhanceJavaInter;
 public class WmDayCostServiceImpl extends CommonServiceImpl implements WmDayCostServiceI {
 
 	
- 	public void delete(WmDayCostEntity entity) throws Exception{
+ 	@Override
+    public void delete(WmDayCostEntity entity) throws Exception{
  		super.delete(entity);
  		//执行删除操作增强业务
 		this.doDelBus(entity);
  	}
  	
- 	public Serializable save(WmDayCostEntity entity) throws Exception{
+ 	@Override
+    public Serializable save(WmDayCostEntity entity) throws Exception{
  		Serializable t = super.save(entity);
  		//执行新增操作增强业务
  		this.doAddBus(entity);
  		return t;
  	}
  	
- 	public void saveOrUpdate(WmDayCostEntity entity) throws Exception{
+ 	@Override
+    public void saveOrUpdate(WmDayCostEntity entity) throws Exception{
  		super.saveOrUpdate(entity);
  		//执行更新操作增强业务
  		this.doUpdateBus(entity);
@@ -63,7 +66,7 @@ public class WmDayCostServiceImpl extends CommonServiceImpl implements WmDayCost
  	}
  	/**
 	 * 删除操作增强业务
-	 * @param id
+	 * @param t
 	 * @return
 	 */
 	private void doDelBus(WmDayCostEntity t) throws Exception{

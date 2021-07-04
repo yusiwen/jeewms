@@ -19,14 +19,16 @@ import java.util.UUID;
 @Transactional
 public class TWzCkHeadServiceImpl extends CommonServiceImpl implements TWzCkHeadServiceI {
 
- 	public <T> void delete(T entity) {
+ 	@Override
+    public <T> void delete(T entity) {
  		super.delete(entity);
  		//执行删除操作配置的sql增强
 		this.doDelSql((TWzCkHeadEntity)entity);
  	}
 
-	public void addMain(TWzCkHeadEntity tWzCkHead,
-	        List<TWzCkItemEntity> tWzCkItemList){
+	@Override
+    public void addMain(TWzCkHeadEntity tWzCkHead,
+                        List<TWzCkItemEntity> tWzCkItemList){
 			//保存主信息
 //		    tWzCkHead.setBpmStatus("0");
 			this.save(tWzCkHead);
@@ -43,8 +45,9 @@ public class TWzCkHeadServiceImpl extends CommonServiceImpl implements TWzCkHead
 	}
 
 
-	public void updateMain(TWzCkHeadEntity tWzCkHead,
-	        List<TWzCkItemEntity> tWzCkItemList) {
+	@Override
+    public void updateMain(TWzCkHeadEntity tWzCkHead,
+                           List<TWzCkItemEntity> tWzCkItemList) {
 		//保存主表信息
 		if(StringUtil.isNotEmpty(tWzCkHead.getId())){
 			try {
@@ -102,7 +105,8 @@ public class TWzCkHeadServiceImpl extends CommonServiceImpl implements TWzCkHead
 	}
 
 
-	public void delMain(TWzCkHeadEntity tWzCkHead) {
+	@Override
+    public void delMain(TWzCkHeadEntity tWzCkHead) {
 		//删除主表信息
 		this.delete(tWzCkHead);
 		//===================================================================================
@@ -118,10 +122,11 @@ public class TWzCkHeadServiceImpl extends CommonServiceImpl implements TWzCkHead
 
  	/**
 	 * 默认按钮-sql增强-新增操作
-	 * @param id
+	 * @param t
 	 * @return
 	 */
- 	public boolean doAddSql(TWzCkHeadEntity t){
+ 	@Override
+    public boolean doAddSql(TWzCkHeadEntity t){
 
 		String tsql = "call p_wz_shenpi("+"'"+t.getId()+")";
 		try {
@@ -134,18 +139,20 @@ public class TWzCkHeadServiceImpl extends CommonServiceImpl implements TWzCkHead
  	}
  	/**
 	 * 默认按钮-sql增强-更新操作
-	 * @param id
+	 * @param t
 	 * @return
 	 */
- 	public boolean doUpdateSql(TWzCkHeadEntity t){
+ 	@Override
+    public boolean doUpdateSql(TWzCkHeadEntity t){
 	 	return true;
  	}
  	/**
 	 * 默认按钮-sql增强-删除操作
-	 * @param id
+	 * @param t
 	 * @return
 	 */
- 	public boolean doDelSql(TWzCkHeadEntity t){
+ 	@Override
+    public boolean doDelSql(TWzCkHeadEntity t){
 	 	return true;
  	}
 

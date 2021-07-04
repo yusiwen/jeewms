@@ -18,14 +18,16 @@ import java.util.UUID;
 @Transactional
 public class TMdBomHeadServiceImpl extends CommonServiceImpl implements TMdBomHeadServiceI {
 	
- 	public <T> void delete(T entity) {
+ 	@Override
+    public <T> void delete(T entity) {
  		super.delete(entity);
  		//执行删除操作配置的sql增强
 		this.doDelSql((TMdBomHeadEntity)entity);
  	}
 	
-	public void addMain(TMdBomHeadEntity tMdBomHead,
-	        List<TMdBomItemEntity> tMdBomItemList){
+	@Override
+    public void addMain(TMdBomHeadEntity tMdBomHead,
+                        List<TMdBomItemEntity> tMdBomItemList){
 			//保存主信息
 			this.save(tMdBomHead);
 		
@@ -40,8 +42,9 @@ public class TMdBomHeadServiceImpl extends CommonServiceImpl implements TMdBomHe
 	}
 
 	
-	public void updateMain(TMdBomHeadEntity tMdBomHead,
-	        List<TMdBomItemEntity> tMdBomItemList) {
+	@Override
+    public void updateMain(TMdBomHeadEntity tMdBomHead,
+                           List<TMdBomItemEntity> tMdBomItemList) {
 		//保存主表信息
 		this.saveOrUpdate(tMdBomHead);
 		//===================================================================================
@@ -89,7 +92,8 @@ public class TMdBomHeadServiceImpl extends CommonServiceImpl implements TMdBomHe
 	}
 
 	
-	public void delMain(TMdBomHeadEntity tMdBomHead) {
+	@Override
+    public void delMain(TMdBomHeadEntity tMdBomHead) {
 		//删除主表信息
 		this.delete(tMdBomHead);
 		//===================================================================================
@@ -105,26 +109,29 @@ public class TMdBomHeadServiceImpl extends CommonServiceImpl implements TMdBomHe
  	
  	/**
 	 * 默认按钮-sql增强-新增操作
-	 * @param id
+	 * @param t
 	 * @return
 	 */
- 	public boolean doAddSql(TMdBomHeadEntity t){
+ 	@Override
+    public boolean doAddSql(TMdBomHeadEntity t){
 	 	return true;
  	}
  	/**
 	 * 默认按钮-sql增强-更新操作
-	 * @param id
+	 * @param t
 	 * @return
 	 */
- 	public boolean doUpdateSql(TMdBomHeadEntity t){
+ 	@Override
+    public boolean doUpdateSql(TMdBomHeadEntity t){
 	 	return true;
  	}
  	/**
 	 * 默认按钮-sql增强-删除操作
-	 * @param id
+	 * @param t
 	 * @return
 	 */
- 	public boolean doDelSql(TMdBomHeadEntity t){
+ 	@Override
+    public boolean doDelSql(TMdBomHeadEntity t){
 	 	return true;
  	}
  	

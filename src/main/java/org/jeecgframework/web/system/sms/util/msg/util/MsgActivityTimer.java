@@ -20,7 +20,8 @@ public class MsgActivityTimer extends QuartzJobBean {
 	 * @param arg0 JobExecutionContext
 	 * @exception JobExecutionException JobExecutionException
 	 */ 
-	protected void executeInternal(JobExecutionContext arg0)
+	@Override
+    protected void executeInternal(JobExecutionContext arg0)
 			throws JobExecutionException {
 		LogUtil.info("×××××××××××××开始链路检查××××××××××××××");
 		int count = 0;

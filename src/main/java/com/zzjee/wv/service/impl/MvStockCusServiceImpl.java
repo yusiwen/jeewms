@@ -18,20 +18,23 @@ import org.jeecgframework.web.cgform.enhance.CgformEnhanceJavaInter;
 public class MvStockCusServiceImpl extends CommonServiceImpl implements MvStockCusServiceI {
 
 	
- 	public void delete(MvStockCusEntity entity) throws Exception{
+ 	@Override
+    public void delete(MvStockCusEntity entity) throws Exception{
  		super.delete(entity);
  		//执行删除操作增强业务
 		this.doDelBus(entity);
  	}
  	
- 	public Serializable save(MvStockCusEntity entity) throws Exception{
+ 	@Override
+    public Serializable save(MvStockCusEntity entity) throws Exception{
  		Serializable t = super.save(entity);
  		//执行新增操作增强业务
  		this.doAddBus(entity);
  		return t;
  	}
  	
- 	public void saveOrUpdate(MvStockCusEntity entity) throws Exception{
+ 	@Override
+    public void saveOrUpdate(MvStockCusEntity entity) throws Exception{
  		super.saveOrUpdate(entity);
  		//执行更新操作增强业务
  		this.doUpdateBus(entity);
@@ -63,7 +66,7 @@ public class MvStockCusServiceImpl extends CommonServiceImpl implements MvStockC
  	}
  	/**
 	 * 删除操作增强业务
-	 * @param id
+	 * @param t
 	 * @return
 	 */
 	private void doDelBus(MvStockCusEntity t) throws Exception{

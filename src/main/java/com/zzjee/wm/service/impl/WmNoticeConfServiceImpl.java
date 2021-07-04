@@ -18,20 +18,23 @@ import org.jeecgframework.web.cgform.enhance.CgformEnhanceJavaInter;
 public class WmNoticeConfServiceImpl extends CommonServiceImpl implements WmNoticeConfServiceI {
 
 	
- 	public void delete(WmNoticeConfEntity entity) throws Exception{
+ 	@Override
+    public void delete(WmNoticeConfEntity entity) throws Exception{
  		super.delete(entity);
  		//执行删除操作增强业务
 		this.doDelBus(entity);
  	}
  	
- 	public Serializable save(WmNoticeConfEntity entity) throws Exception{
+ 	@Override
+    public Serializable save(WmNoticeConfEntity entity) throws Exception{
  		Serializable t = super.save(entity);
  		//执行新增操作增强业务
  		this.doAddBus(entity);
  		return t;
  	}
  	
- 	public void saveOrUpdate(WmNoticeConfEntity entity) throws Exception{
+ 	@Override
+    public void saveOrUpdate(WmNoticeConfEntity entity) throws Exception{
  		super.saveOrUpdate(entity);
  		//执行更新操作增强业务
  		this.doUpdateBus(entity);
@@ -63,7 +66,7 @@ public class WmNoticeConfServiceImpl extends CommonServiceImpl implements WmNoti
  	}
  	/**
 	 * 删除操作增强业务
-	 * @param id
+	 * @param t
 	 * @return
 	 */
 	private void doDelBus(WmNoticeConfEntity t) throws Exception{

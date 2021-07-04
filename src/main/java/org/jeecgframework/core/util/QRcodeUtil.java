@@ -64,7 +64,9 @@ public class QRcodeUtil {
  
     /** 在二维码中间插入logo图片 */
     private static void insertImage(BufferedImage source, InputStream logo, boolean needCompress)throws Exception {
-        if(logo==null)return;
+        if(logo==null) {
+            return;
+        }
         Image src = ImageIO.read(logo);
         int width = src.getWidth(null);
         int height = src.getHeight(null);
@@ -215,6 +217,7 @@ public class QRcodeUtil {
             this.top = top;
         }
  
+        @Override
         public byte[] getRow(int y, byte[] row) {
             if (y < 0 || y >= getHeight()) {
                 throw new IllegalArgumentException("Requested row is outside the image: " + y);
@@ -227,6 +230,7 @@ public class QRcodeUtil {
             return row;
         }
  
+        @Override
         public byte[] getMatrix() {
             int width = getWidth();
             int height = getHeight();
@@ -236,19 +240,23 @@ public class QRcodeUtil {
             return matrix;
         }
  
+        @Override
         public boolean isCropSupported() {
             return true;
         }
  
+        @Override
         public LuminanceSource crop(int left, int top, int width, int height) {
             return new BufferedImageLuminanceSource(image, this.left + left, this.top + top, width,
                     height);
         }
  
+        @Override
         public boolean isRotateSupported() {
             return true;
         }
  
+        @Override
         public LuminanceSource rotateCounterClockwise() {
             int sourceWidth = image.getWidth();
             int sourceHeight = image.getHeight();

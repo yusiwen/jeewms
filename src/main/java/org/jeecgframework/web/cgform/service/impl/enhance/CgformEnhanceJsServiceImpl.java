@@ -20,7 +20,8 @@ public class CgformEnhanceJsServiceImpl extends CommonServiceImpl implements Cgf
 	 * @return
 	 */
 	
-	public CgformEnhanceJsEntity getCgformEnhanceJsByTypeFormId(String cgJsType, String formId) {
+	@Override
+    public CgformEnhanceJsEntity getCgformEnhanceJsByTypeFormId(String cgJsType, String formId) {
 		StringBuilder hql = new StringBuilder("");
 		hql.append(" from CgformEnhanceJsEntity t");
 		hql.append(" where t.formId='").append(formId).append("'");

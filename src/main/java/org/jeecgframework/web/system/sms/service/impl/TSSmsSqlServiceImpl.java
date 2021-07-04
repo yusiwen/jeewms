@@ -38,7 +38,8 @@ public class TSSmsSqlServiceImpl extends CommonServiceImpl implements TSSmsSqlSe
 /**
  * 执行业务查询出来的sql
  */
-	public Map<String, Object> getMap(String sql,Map<String, Object> map){
+	@Override
+    public Map<String, Object> getMap(String sql, Map<String, Object> map){
 		return this.jdbcTemplate.queryForMap(sql, map);
 		
 	}

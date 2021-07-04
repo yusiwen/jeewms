@@ -23,20 +23,23 @@ import org.jeecgframework.web.cgform.enhance.CgformEnhanceJavaInter;
 public class MdBinServiceImpl extends CommonServiceImpl implements MdBinServiceI {
 
 	
- 	public void delete(MdBinEntity entity) throws Exception{
+ 	@Override
+    public void delete(MdBinEntity entity) throws Exception{
  		super.delete(entity);
  		//执行删除操作增强业务
 		this.doDelBus(entity);
  	}
  	
- 	public Serializable save(MdBinEntity entity) throws Exception{
+ 	@Override
+    public Serializable save(MdBinEntity entity) throws Exception{
  		Serializable t = super.save(entity);
  		//执行新增操作增强业务
  		this.doAddBus(entity);
  		return t;
  	}
  	
- 	public void saveOrUpdate(MdBinEntity entity) throws Exception{
+ 	@Override
+    public void saveOrUpdate(MdBinEntity entity) throws Exception{
  		super.saveOrUpdate(entity);
  		//执行更新操作增强业务
  		this.doUpdateBus(entity);
@@ -68,7 +71,7 @@ public class MdBinServiceImpl extends CommonServiceImpl implements MdBinServiceI
  	}
  	/**
 	 * 删除操作增强业务
-	 * @param id
+	 * @param t
 	 * @return
 	 */
 	private void doDelBus(MdBinEntity t) throws Exception{

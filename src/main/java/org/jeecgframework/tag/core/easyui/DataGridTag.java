@@ -386,8 +386,9 @@ public class DataGridTag extends TagSupport {
 		Set<String> operationCodes = (Set<String>) super.pageContext.getRequest().getAttribute(Globals.OPERATIONCODES);
 		if (null!=operationCodes) {
 			for (String MyoperationCode : operationCodes) {
-				if (oConvertUtils.isEmpty(MyoperationCode))
-					break;
+				if (oConvertUtils.isEmpty(MyoperationCode)) {
+                    break;
+                }
 				systemService = ApplicationContextUtil.getContext().getBean(
 							SystemService.class);
 				TSOperation operation = systemService.getEntity(TSOperation.class, MyoperationCode);
@@ -433,8 +434,9 @@ public class DataGridTag extends TagSupport {
 					text += map.get("text") + ",";
 					value += map.get("field") + ",";
 				}
-				if(list.size()>0)
-					setColumn(field, text, value);
+				if(list.size()>0) {
+                    setColumn(field, text, value);
+                }
 			}else{
 				String text = "";
 				String value = "";
@@ -494,11 +496,13 @@ public class DataGridTag extends TagSupport {
 		columnValueList.add(columnValue);
 	}
 
+	@Override
 	public int doStartTag() throws JspTagException {
 		return EVAL_PAGE;
 	}
 
 	
+	@Override
 	public int doEndTag() throws JspException {
 		JspWriter out = null;
 		try {
@@ -963,8 +967,9 @@ public class DataGridTag extends TagSupport {
 				sb.append(",\"bSearchable\":" + column.isQuery() + "");
 			}
 			sb.append("}");
-			if (i < columnList.size())
-				sb.append(",");
+			if (i < columnList.size()) {
+                sb.append(",");
+            }
 		}
 
 		sb.append("]" + "});" + "});" + "</script>");
@@ -1009,10 +1014,11 @@ public class DataGridTag extends TagSupport {
 		}
 	
 		
-		if(autoLoadData)
-		   sb.append("url:\'" + actionUrl + "&field=" + fields + "\',");
-		else
-			sb.append("url:\'',");
+		if(autoLoadData) {
+            sb.append("url:\'" + actionUrl + "&field=" + fields + "\',");
+        } else {
+            sb.append("url:\'',");
+        }
 		if(StringUtils.isNotEmpty(rowStyler)){
 			sb.append("rowStyler: function(index,row){ return "+rowStyler+"(index,row);},");
 		}
@@ -2005,8 +2011,9 @@ public class DataGridTag extends TagSupport {
 			Set<String> operationCodes = (Set<String>) super.pageContext.getRequest().getAttribute(Globals.OPERATIONCODES);
 			if (null!=operationCodes) {
 				for (String MyoperationCode : operationCodes) {
-					if (oConvertUtils.isEmpty(MyoperationCode))
-						break;
+					if (oConvertUtils.isEmpty(MyoperationCode)) {
+                        break;
+                    }
 					systemService = ApplicationContextUtil.getContext().getBean(
 								SystemService.class);
 					TSOperation operation = systemService.getEntity(TSOperation.class, MyoperationCode);
@@ -2043,8 +2050,9 @@ public class DataGridTag extends TagSupport {
 			if (null!=operationCodes) {
 				List<String> operationCodesStr = new ArrayList<String>();
 				for (String MyoperationCode : operationCodes) {
-					if (oConvertUtils.isEmpty(MyoperationCode))
-						break;
+					if (oConvertUtils.isEmpty(MyoperationCode)) {
+                        break;
+                    }
 					systemService = ApplicationContextUtil.getContext().getBean(
 								SystemService.class);
 					TSOperation operation = systemService.getEntity(TSOperation.class, MyoperationCode);
@@ -2176,10 +2184,11 @@ public class DataGridTag extends TagSupport {
 			sb.append("title: \'" + title + "\',");
 		}
 		
-		if(autoLoadData)
-		   sb.append("url:\'" + actionUrl + "&field=" + fields + "\',");
-		else
-			sb.append("url:\'',");
+		if(autoLoadData) {
+            sb.append("url:\'" + actionUrl + "&field=" + fields + "\',");
+        } else {
+            sb.append("url:\'',");
+        }
 		if(StringUtils.isNotEmpty(rowStyler)){
 			sb.append("rowStyler: function(index,row){ return "+rowStyler+"(index,row);},");
 		}
@@ -2532,7 +2541,9 @@ appendLine(sb,"					}}\">关系</th>");
 		fieldArray.append("	[  ");
 		for (int i=0;i<columnList.size();i++){
 			DataGridColumn col =columnList.get(i);
-			if("opt".equals(col.getField()))continue;//忽略操作虚拟字段
+			if("opt".equals(col.getField())) {
+                continue;//忽略操作虚拟字段
+            }
 			fieldArray.append("	{'fieldId':'"+getDBFieldName(col.getField())+"','fieldName':'"+col.getTitle()+"'");
 			if(col.getEditor()!=null){
 				fieldArray.append(",editor:'"+col.getEditor()+"'");

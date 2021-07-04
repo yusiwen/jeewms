@@ -34,14 +34,16 @@ import java.io.Serializable;
 @Transactional
 public class WmImNoticeHServiceImpl extends CommonServiceImpl implements WmImNoticeHServiceI {
 
- 	public <T> void delete(T entity) {
+ 	@Override
+    public <T> void delete(T entity) {
  		super.delete(entity);
  		//执行删除操作配置的sql增强
 		this.doDelSql((WmImNoticeHEntity)entity);
  	}
 
-	public void addMain(WmImNoticeHEntity wmImNoticeH,
-	        List<WmImNoticeIEntity> wmImNoticeIList){
+	@Override
+    public void addMain(WmImNoticeHEntity wmImNoticeH,
+                        List<WmImNoticeIEntity> wmImNoticeIList){
 			//保存主信息
 			this.save(wmImNoticeH);
 
@@ -147,8 +149,9 @@ public class WmImNoticeHServiceImpl extends CommonServiceImpl implements WmImNot
 	}
 
 
-	public void updateMain(WmImNoticeHEntity wmImNoticeH,
-	        List<WmImNoticeIEntity> wmImNoticeIList) {
+	@Override
+    public void updateMain(WmImNoticeHEntity wmImNoticeH,
+                           List<WmImNoticeIEntity> wmImNoticeIList) {
 		//保存主表信息
 		this.saveOrUpdate(wmImNoticeH);
 		//===================================================================================
@@ -232,7 +235,8 @@ public class WmImNoticeHServiceImpl extends CommonServiceImpl implements WmImNot
 	}
 
 
-	public void delMain(WmImNoticeHEntity wmImNoticeH) {
+	@Override
+    public void delMain(WmImNoticeHEntity wmImNoticeH) {
 		//删除主表信息
 		this.delete(wmImNoticeH);
 		//===================================================================================
@@ -250,21 +254,24 @@ public class WmImNoticeHServiceImpl extends CommonServiceImpl implements WmImNot
 	 * 默认按钮-sql增强-新增操作
 	 * @return
 	 */
- 	public boolean doAddSql(WmImNoticeHEntity t){
+ 	@Override
+    public boolean doAddSql(WmImNoticeHEntity t){
 	 	return true;
  	}
  	/**
 	 * 默认按钮-sql增强-更新操作
 	 * @return
 	 */
- 	public boolean doUpdateSql(WmImNoticeHEntity t){
+ 	@Override
+    public boolean doUpdateSql(WmImNoticeHEntity t){
 	 	return true;
  	}
  	/**
 	 * 默认按钮-sql增强-删除操作
 	 * @return
 	 */
- 	public boolean doDelSql(WmImNoticeHEntity t){
+ 	@Override
+    public boolean doDelSql(WmImNoticeHEntity t){
 	 	return true;
  	}
 

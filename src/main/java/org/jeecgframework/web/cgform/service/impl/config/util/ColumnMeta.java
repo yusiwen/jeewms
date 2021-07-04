@@ -16,7 +16,8 @@ public class ColumnMeta {
 	private String oldColumnName;//原来的字段名
 	
 	
-	public boolean equals(Object obj) {
+	@Override
+    public boolean equals(Object obj) {
 		 if (obj == this) {
 	            return true;
 	        }
@@ -87,7 +88,8 @@ public class ColumnMeta {
 	}
 	
 	
-	    public int hashCode() {
+	    @Override
+        public int hashCode() {
 	        return columnSize + colunmType.hashCode()*columnName.hashCode();
 	    }
 	public void setColumnName(String columnName) {
@@ -113,7 +115,8 @@ public class ColumnMeta {
 		this.oldColumnName = oldColumnName;
 	}
 	
-	public String toString() {
+	@Override
+    public String toString() {
 		return columnName+","+colunmType+","+isNullable+","+columnSize;
 	}
 	public String getColumnId() {

@@ -14,7 +14,8 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class DeclareServiceImpl extends CommonServiceImpl implements DeclareService {
 
-	public List<TSAttachment> getAttachmentsByCode(String businessKey,String description)
+	@Override
+    public List<TSAttachment> getAttachmentsByCode(String businessKey, String description)
 	{
 		String hql="from TSAttachment t where t.businessKey='"+businessKey+"' and t.description='"+description+"'";
 		return commonDao.findByQueryString(hql);

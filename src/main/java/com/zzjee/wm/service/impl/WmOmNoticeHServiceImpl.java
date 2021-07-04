@@ -30,14 +30,16 @@ import java.io.Serializable;
 @Transactional
 public class WmOmNoticeHServiceImpl extends CommonServiceImpl implements WmOmNoticeHServiceI {
 
- 	public <T> void delete(T entity) {
+ 	@Override
+    public <T> void delete(T entity) {
  		super.delete(entity);
  		//执行删除操作配置的sql增强
 		this.doDelSql((WmOmNoticeHEntity)entity);
  	}
 
-	public void addMain(WmOmNoticeHEntity wmOmNoticeH,
-	        List<WmOmNoticeIEntity> wmOmNoticeIList){
+	@Override
+    public void addMain(WmOmNoticeHEntity wmOmNoticeH,
+                        List<WmOmNoticeIEntity> wmOmNoticeIList){
 			//保存主信息
 			this.save(wmOmNoticeH);
 			Double jishu = 0.00;
@@ -125,8 +127,9 @@ public class WmOmNoticeHServiceImpl extends CommonServiceImpl implements WmOmNot
 			//执行新增操作配置的sql增强
  			this.doAddSql(wmOmNoticeH);
 	}
-	public void addMaintms(WmTmsNoticeHEntity wmOmNoticeH,
-						List<WmTmsNoticeIEntity> wmOmNoticeIList){
+	@Override
+    public void addMaintms(WmTmsNoticeHEntity wmOmNoticeH,
+                           List<WmTmsNoticeIEntity> wmOmNoticeIList){
 		//保存主信息
 		this.save(wmOmNoticeH);
 		Double jishu = 0.00;
@@ -215,8 +218,9 @@ public class WmOmNoticeHServiceImpl extends CommonServiceImpl implements WmOmNot
 	}
 
 
-	public void updateMain(WmOmNoticeHEntity wmOmNoticeH,
-	        List<WmOmNoticeIEntity> wmOmNoticeIList,List<TmsYwDingdanEntity> wmOmtmsIList) {
+	@Override
+    public void updateMain(WmOmNoticeHEntity wmOmNoticeH,
+                           List<WmOmNoticeIEntity> wmOmNoticeIList, List<TmsYwDingdanEntity> wmOmtmsIList) {
 		//保存主表信息
 		this.saveOrUpdate(wmOmNoticeH);
 		//===================================================================================
@@ -328,7 +332,8 @@ public class WmOmNoticeHServiceImpl extends CommonServiceImpl implements WmOmNot
 	}
 
 
-	public void delMain(WmOmNoticeHEntity wmOmNoticeH) {
+	@Override
+    public void delMain(WmOmNoticeHEntity wmOmNoticeH) {
 		//删除主表信息
 		this.delete(wmOmNoticeH);
 		//===================================================================================
@@ -346,21 +351,24 @@ public class WmOmNoticeHServiceImpl extends CommonServiceImpl implements WmOmNot
 	 * 默认按钮-sql增强-新增操作
 	 * @return
 	 */
- 	public boolean doAddSql(WmOmNoticeHEntity t){
+ 	@Override
+    public boolean doAddSql(WmOmNoticeHEntity t){
 	 	return true;
  	}
  	/**
 	 * 默认按钮-sql增强-更新操作
 	 * @return
 	 */
- 	public boolean doUpdateSql(WmOmNoticeHEntity t){
+ 	@Override
+    public boolean doUpdateSql(WmOmNoticeHEntity t){
 	 	return true;
  	}
  	/**
 	 * 默认按钮-sql增强-删除操作
 	 * @return
 	 */
- 	public boolean doDelSql(WmOmNoticeHEntity t){
+ 	@Override
+    public boolean doDelSql(WmOmNoticeHEntity t){
 	 	return true;
  	}
 

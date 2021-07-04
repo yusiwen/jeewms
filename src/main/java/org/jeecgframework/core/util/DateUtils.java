@@ -140,10 +140,8 @@ public class DateUtils extends PropertyEditorSupport {
 
 	/**
 	 * 日期转换为字符串
-	 * 
-	 * @param date
-	 *            日期
-	 * @param format
+	 *
+	 * @param date_sdf
 	 *            日期格式
 	 * @return 字符串
 	 */
@@ -177,7 +175,7 @@ public class DateUtils extends PropertyEditorSupport {
 	 * 
 	 * @param date
 	 *            日期
-	 * @param format
+	 * @param date_sdf
 	 *            日期格式
 	 * @return 字符串
 	 */
@@ -189,8 +187,7 @@ public class DateUtils extends PropertyEditorSupport {
 	}
 	/**
 	 * 日期转换为字符串
-	 * 
-	 * @param date
+	 *
 	 *            日期
 	 * @param format
 	 *            日期格式
@@ -521,7 +518,7 @@ public class DateUtils extends PropertyEditorSupport {
 	 *            转换的匹配格式
 	 * @return 如果转换成功则返回转换后的日期
 	 * @throws ParseException
-	 * @throws AIDateFormatException
+	 * @throws
 	 */
 	public static Date parseDate(String src, String pattern)
 			throws ParseException {
@@ -538,7 +535,7 @@ public class DateUtils extends PropertyEditorSupport {
 	 *            转换的匹配格式
 	 * @return 如果转换成功则返回转换后的日期
 	 * @throws ParseException
-	 * @throws AIDateFormatException
+	 * @throws
 	 */
 	public static Calendar parseCalendar(String src, String pattern)
 			throws ParseException {
@@ -566,7 +563,7 @@ public class DateUtils extends PropertyEditorSupport {
 	 *            转换的匹配格式
 	 * @return 如果转换成功则返回转换后的时间戳
 	 * @throws ParseException
-	 * @throws AIDateFormatException
+	 * @throws
 	 */
 	public static Timestamp parseTimestamp(String src, String pattern)
 			throws ParseException {
@@ -623,7 +620,8 @@ public class DateUtils extends PropertyEditorSupport {
      * * @param text
 	 *             String类型的时间值
      */
-	public void setAsText(String text) throws IllegalArgumentException {
+	@Override
+    public void setAsText(String text) throws IllegalArgumentException {
 		if (StringUtils.hasText(text)) {
 			try {
 				if (text.indexOf(":") == -1 && text.length() == 10) {

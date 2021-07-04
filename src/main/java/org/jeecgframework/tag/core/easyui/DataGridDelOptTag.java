@@ -29,10 +29,12 @@ public class DataGridDelOptTag extends TagSupport {
 	private String urlfont;//按钮图标
 
 	
-	public int doStartTag() throws JspTagException {
+	@Override
+    public int doStartTag() throws JspTagException {
 		return EVAL_PAGE;
 	}
-	public int doEndTag() throws JspTagException {
+	@Override
+    public int doEndTag() throws JspTagException {
 		title = MutiLangUtil.doMutiLang(title, langArg);
 		
 		Tag t = findAncestorWithClass(this, DataGridTag.class);

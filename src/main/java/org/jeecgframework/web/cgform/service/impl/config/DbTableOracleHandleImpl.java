@@ -13,22 +13,26 @@ import org.jeecgframework.web.cgform.service.impl.config.util.ColumnMeta;
 public class DbTableOracleHandleImpl implements DbTableHandleI {
 
 	
-	public String getAddColumnSql(ColumnMeta columnMeta) {
+	@Override
+    public String getAddColumnSql(ColumnMeta columnMeta) {
 		return " ADD  "+getAddFieldDesc(columnMeta)+"";
 	}
 
 	
-	public String getReNameFieldName(ColumnMeta columnMeta) {
+	@Override
+    public String getReNameFieldName(ColumnMeta columnMeta) {
 		return "RENAME COLUMN  "+columnMeta.getOldColumnName() +" TO "+columnMeta.getColumnName()+"";
 	}
 
 	
-	public String getUpdateColumnSql(ColumnMeta cgformcolumnMeta,ColumnMeta datacolumnMeta) {
+	@Override
+    public String getUpdateColumnSql(ColumnMeta cgformcolumnMeta, ColumnMeta datacolumnMeta) {
 		return " MODIFY   "+getUpdateFieldDesc(cgformcolumnMeta,datacolumnMeta)+"";
 	}
 
 	
-	public String getMatchClassTypeByDataType(String dataType,int digits) {
+	@Override
+    public String getMatchClassTypeByDataType(String dataType, int digits) {
 		String result ="";
 		if (dataType.equalsIgnoreCase("varchar2")) {
 			result="string";
@@ -49,12 +53,14 @@ public class DbTableOracleHandleImpl implements DbTableHandleI {
 	}
 
 	
-	public String dropTableSQL(String tableName) {
+	@Override
+    public String dropTableSQL(String tableName) {
 		return " DROP TABLE  "+tableName.toLowerCase()+" ";
 	}
 
 	
-	public String getDropColumnSql(String fieldName) {
+	@Override
+    public String getDropColumnSql(String fieldName) {
 		return " DROP COLUMN "+fieldName.toUpperCase()+"";
 	}
 	
@@ -107,13 +113,15 @@ public class DbTableOracleHandleImpl implements DbTableHandleI {
 	}
 
 	
-	public String getCommentSql(ColumnMeta columnMeta) {
+	@Override
+    public String getCommentSql(ColumnMeta columnMeta) {
 		return "COMMENT ON COLUMN "+columnMeta.getTableName()+"."+columnMeta.getColumnName()+" IS '" +columnMeta.getComment()+"'";
 	}
 
 	
-	public String getSpecialHandle(ColumnMeta cgformcolumnMeta,
-			ColumnMeta datacolumnMeta) {
+	@Override
+    public String getSpecialHandle(ColumnMeta cgformcolumnMeta,
+                                   ColumnMeta datacolumnMeta) {
 		return null;
 	}
 

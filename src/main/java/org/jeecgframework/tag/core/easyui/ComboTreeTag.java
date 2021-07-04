@@ -21,11 +21,13 @@ public class ComboTreeTag extends TagSupport {
 	protected String width;// 宽度
 	protected String value;// 控件值
 	private boolean multiple=false;//是否多选
-	public int doStartTag() throws JspTagException {
+	@Override
+    public int doStartTag() throws JspTagException {
 		return EVAL_PAGE;
 	}
 
-	public int doEndTag() throws JspTagException {
+	@Override
+    public int doEndTag() throws JspTagException {
 		JspWriter out = null;
 		try {
 			out = this.pageContext.getOut();
@@ -63,7 +65,8 @@ public class ComboTreeTag extends TagSupport {
 		return sb;
 	}
 
-	public void setId(String id) {
+	@Override
+    public void setId(String id) {
 		this.id = id;
 	}
 

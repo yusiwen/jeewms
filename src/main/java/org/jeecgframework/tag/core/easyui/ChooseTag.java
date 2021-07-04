@@ -37,11 +37,13 @@ public class ChooseTag extends TagSupport {
 	protected String langArg;
 	protected Boolean isInit = false;//是否初始化
 
-	public int doStartTag() throws JspTagException {
+	@Override
+    public int doStartTag() throws JspTagException {
 		return EVAL_PAGE;
 	}
 
-	public int doEndTag() throws JspTagException {
+	@Override
+    public int doEndTag() throws JspTagException {
 		JspWriter out = null;
 		try {
 			title = MutiLangUtil.doMutiLang(title, langArg);

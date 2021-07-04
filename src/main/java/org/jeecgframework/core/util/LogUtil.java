@@ -205,8 +205,9 @@ public class LogUtil {
       String input = sw.getBuffer().toString();
       StringReader sr = new StringReader(input);
       BufferedReader br = new BufferedReader(sr);
-      for(int i=0;i<4;i++)
-        br.readLine(); 
+      for(int i=0;i<4;i++) {
+          br.readLine();
+      }
       String line = br.readLine();
       //at com.media.web.action.DicManageAction.list(DicManageAction.java:89)
       int paren = line.indexOf("at ");

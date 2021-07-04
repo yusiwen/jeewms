@@ -19,7 +19,8 @@ public class DataBaseSchedulerFactoryBean extends SchedulerFactoryBean {
 	/**
 	 * 读取数据库判断是否开始定时任务
 	 */
-	public void afterPropertiesSet() throws Exception {
+	@Override
+    public void afterPropertiesSet() throws Exception {
 		super.afterPropertiesSet();
 		String[] trigerrNames = this.getScheduler().getTriggerNames(Scheduler.DEFAULT_GROUP);
 		TSTimeTaskEntity task;

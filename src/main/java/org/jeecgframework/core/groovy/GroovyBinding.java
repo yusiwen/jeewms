@@ -23,7 +23,8 @@ public class GroovyBinding extends Binding {
 		setVariable("args", args);
 	}
 
-	public Object getVariable(String name) {
+	@Override
+    public Object getVariable(String name) {
 		Map<String, Object> map = localVars.get();
 		Object result = null;
 		if ((map != null) && (map.containsKey(name))) {
@@ -35,7 +36,8 @@ public class GroovyBinding extends Binding {
 		return result;
 	}
 
-	public void setVariable(String name, Object value) {
+	@Override
+    public void setVariable(String name, Object value) {
 		if (localVars.get() == null) {
 			Map<String, Object> vars = new LinkedHashMap<String, Object>();
 			vars.put(name, value);
@@ -45,7 +47,8 @@ public class GroovyBinding extends Binding {
 		}
 	}
 
-	public Map<String, Object> getVariables() {
+	@Override
+    public Map<String, Object> getVariables() {
 		if (localVars.get() == null) {
 			return new LinkedHashMap<String, Object>();
 		}
@@ -57,11 +60,13 @@ public class GroovyBinding extends Binding {
 		localVars.remove();
 	}
 
-	public Object getProperty(String property) {
+	@Override
+    public Object getProperty(String property) {
 		return propertyMap.get(property);
 	}
 
-	public void setProperty(String property, Object newValue) {
+	@Override
+    public void setProperty(String property, Object newValue) {
 		propertyMap.put(property, newValue);
 	}
 }

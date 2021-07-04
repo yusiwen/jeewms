@@ -20,14 +20,16 @@ import org.jeecgframework.web.cgreport.entity.core.CgreportConfigParamEntity;
 @Transactional
 public class CgreportConfigHeadServiceImpl extends CommonServiceImpl implements CgreportConfigHeadServiceI {
 	
- 	public <T> void delete(T entity) {
+ 	@Override
+    public <T> void delete(T entity) {
  		super.delete(entity);
  		//执行删除操作配置的sql增强
 		this.doDelSql((CgreportConfigHeadEntity)entity);
  	}
 	
-	public void addMain(CgreportConfigHeadEntity cgreportConfigHead,
-	        List<CgreportConfigItemEntity> cgreportConfigItemList,List<CgreportConfigParamEntity> cgreportConfigParamList){
+	@Override
+    public void addMain(CgreportConfigHeadEntity cgreportConfigHead,
+                        List<CgreportConfigItemEntity> cgreportConfigItemList, List<CgreportConfigParamEntity> cgreportConfigParamList){
 			//保存主信息
 			this.save(cgreportConfigHead);
 		
@@ -50,8 +52,9 @@ public class CgreportConfigHeadServiceImpl extends CommonServiceImpl implements 
 	}
 
 	
-	public void updateMain(CgreportConfigHeadEntity cgreportConfigHead,
-	        List<CgreportConfigItemEntity> cgreportConfigItemList,List<CgreportConfigParamEntity> cgreportConfigParamList) {
+	@Override
+    public void updateMain(CgreportConfigHeadEntity cgreportConfigHead,
+                           List<CgreportConfigItemEntity> cgreportConfigItemList, List<CgreportConfigParamEntity> cgreportConfigParamList) {
 		//保存主表信息
 		this.saveOrUpdate(cgreportConfigHead);
 		//===================================================================================
@@ -133,7 +136,8 @@ public class CgreportConfigHeadServiceImpl extends CommonServiceImpl implements 
 	}
 
 	
-	public void delMain(CgreportConfigHeadEntity cgreportConfigHead) {
+	@Override
+    public void delMain(CgreportConfigHeadEntity cgreportConfigHead) {
 		//删除主表信息
 		this.delete(cgreportConfigHead);
 		//===================================================================================
@@ -153,26 +157,29 @@ public class CgreportConfigHeadServiceImpl extends CommonServiceImpl implements 
  	
  	/**
 	 * 默认按钮-sql增强-新增操作
-	 * @param id
+	 * @param t
 	 * @return
 	 */
- 	public boolean doAddSql(CgreportConfigHeadEntity t){
+ 	@Override
+    public boolean doAddSql(CgreportConfigHeadEntity t){
 	 	return true;
  	}
  	/**
 	 * 默认按钮-sql增强-更新操作
-	 * @param id
+	 * @param t
 	 * @return
 	 */
- 	public boolean doUpdateSql(CgreportConfigHeadEntity t){
+ 	@Override
+    public boolean doUpdateSql(CgreportConfigHeadEntity t){
 	 	return true;
  	}
  	/**
 	 * 默认按钮-sql增强-删除操作
-	 * @param id
+	 * @param t
 	 * @return
 	 */
- 	public boolean doDelSql(CgreportConfigHeadEntity t){
+ 	@Override
+    public boolean doDelSql(CgreportConfigHeadEntity t){
 	 	return true;
  	}
  	

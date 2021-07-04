@@ -21,7 +21,8 @@ public class SWFToolsSWFConverter implements SWFConverter {
        return p.toLowerCase().indexOf("windows") >= 0 ? true : false;
    }
 
-	public void convert2SWF(String inputFile, String swfFile, String extend) {
+	@Override
+    public void convert2SWF(String inputFile, String swfFile, String extend) {
 		File pdfFile = new File(inputFile);
 		File outFile = new File(swfFile);
 		
@@ -80,7 +81,8 @@ public class SWFToolsSWFConverter implements SWFConverter {
 		}
 	}
 	
-	public void convert2SWF(String inputFile, String extend) {
+	@Override
+    public void convert2SWF(String inputFile, String extend) {
 		String swfFile = PinyinUtil.getPinYinHeadChar(FileUtils.getFilePrefix2(inputFile)) + ".swf";
 		convert2SWF(inputFile, swfFile, extend);
 	}

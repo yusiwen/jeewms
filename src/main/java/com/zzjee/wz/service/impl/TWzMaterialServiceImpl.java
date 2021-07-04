@@ -21,20 +21,23 @@ import java.util.UUID;
 public class TWzMaterialServiceImpl extends CommonServiceImpl implements TWzMaterialServiceI {
 
 
- 	public void delete(TWzMaterialEntity entity) throws Exception{
+ 	@Override
+    public void delete(TWzMaterialEntity entity) throws Exception{
  		super.delete(entity);
  		//执行删除操作增强业务
 		this.doDelBus(entity);
  	}
 
- 	public Serializable save(TWzMaterialEntity entity) throws Exception{
+ 	@Override
+    public Serializable save(TWzMaterialEntity entity) throws Exception{
  		Serializable t = super.save(entity);
  		//执行新增操作增强业务
  		this.doAddBus(entity);
  		return t;
  	}
 
- 	public void saveOrUpdate(TWzMaterialEntity entity) throws Exception{
+ 	@Override
+    public void saveOrUpdate(TWzMaterialEntity entity) throws Exception{
  		super.saveOrUpdate(entity);
  		//执行更新操作增强业务
  		this.doUpdateBus(entity);
@@ -66,7 +69,7 @@ public class TWzMaterialServiceImpl extends CommonServiceImpl implements TWzMate
  	}
  	/**
 	 * 删除操作增强业务
-	 * @param id
+	 * @param t
 	 * @return
 	 */
 	private void doDelBus(TWzMaterialEntity t) throws Exception{

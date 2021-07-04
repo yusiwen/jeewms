@@ -225,8 +225,6 @@ public class CgDynamGraphController extends BaseController {
 	/**
 	 * 动态报表数据查询
 	 * @param configId 配置id-code
-	 * @param page 分页页面
-	 * @param rows 分页大小
 	 * @param request 
 	 * @param response
 	 */
@@ -269,7 +267,7 @@ public class CgDynamGraphController extends BaseController {
 
         String dbKey=(String)configM.get("db_source");
         List<Map<String, Object>> result=null;
-        Long size=0l;
+        Long size= 0L;
         if(StringUtils.isNotBlank(dbKey)){
         	
             result= DynamicDBUtil.findList(dbKey,querySql);
@@ -402,7 +400,7 @@ public class CgDynamGraphController extends BaseController {
 	/**
 	 * 装载数据字典
 	 * @param m	要放入freemarker的数据
-	 * @param bean 读取出来的动态配置数据
+	 * @param cgDynamGraphMap 读取出来的动态配置数据
 	 */
 	@SuppressWarnings("unchecked")
 	private void loadDic(Map m, Map<String, Object> cgDynamGraphMap) {

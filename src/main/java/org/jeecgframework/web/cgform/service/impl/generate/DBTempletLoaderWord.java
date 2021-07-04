@@ -45,7 +45,8 @@ public class DBTempletLoaderWord implements TemplateLoader {
 	@Autowired
 	private CgformTemplateServiceI cgformTemplateService;
 	
-    public Object findTemplateSource(String name) throws IOException {
+    @Override
+	public Object findTemplateSource(String name) throws IOException {
     	//update by Robin  postgreSQL 修正大小写的问题 2013-03-13
 		name = name.replace("_zh_cn", "").replace("_ZH_CN", "").replace("_zh_CN", "");
 		name = name.replace("_en_us", "").replace("_EN_US", "").replace("_en_US", "");
@@ -56,12 +57,14 @@ public class DBTempletLoaderWord implements TemplateLoader {
     }
 
     
-    public long getLastModified(Object templateSource) {
+    @Override
+	public long getLastModified(Object templateSource) {
         return 0;
     }
 
     
-    public Reader getReader(Object templateSource, String encoding) throws IOException {
+    @Override
+	public Reader getReader(Object templateSource, String encoding) throws IOException {
     	Reader br = new StringReader("");
     	if (templateSource instanceof InputStreamReader) {
 			br = new BufferedReader((InputStreamReader)templateSource);
@@ -95,7 +98,9 @@ public class DBTempletLoaderWord implements TemplateLoader {
     	if(name.lastIndexOf(".ftl")==-1){//判断是否为include的模板
 	    	//如果是主表直接走一对多模板
 	    	CgFormHeadEntity head = cgFormFieldService.getCgFormHeadByTableName(name);
-	    	if(head==null)return null;
+	    	if(head==null) {
+                return null;
+            }
 
 			CgformTemplateEntity entity=cgformTemplateService.findByCode(head.getFormTemplate());
 
@@ -147,7 +152,8 @@ public class DBTempletLoaderWord implements TemplateLoader {
     }
     
     
-    public void closeTemplateSource(Object templateSource) throws IOException {
+    @Override
+	public void closeTemplateSource(Object templateSource) throws IOException {
       
     }
 

@@ -20,20 +20,23 @@ import java.util.UUID;
 public class VTmsDzServiceImpl extends CommonServiceImpl implements VTmsDzServiceI {
 
 	
- 	public void delete(VTmsDzEntity entity) throws Exception{
+ 	@Override
+    public void delete(VTmsDzEntity entity) throws Exception{
  		super.delete(entity);
  		//执行删除操作增强业务
 		this.doDelBus(entity);
  	}
  	
- 	public Serializable save(VTmsDzEntity entity) throws Exception{
+ 	@Override
+    public Serializable save(VTmsDzEntity entity) throws Exception{
  		Serializable t = super.save(entity);
  		//执行新增操作增强业务
  		this.doAddBus(entity);
  		return t;
  	}
  	
- 	public void saveOrUpdate(VTmsDzEntity entity) throws Exception{
+ 	@Override
+    public void saveOrUpdate(VTmsDzEntity entity) throws Exception{
  		super.saveOrUpdate(entity);
  		//执行更新操作增强业务
  		this.doUpdateBus(entity);
@@ -65,7 +68,7 @@ public class VTmsDzServiceImpl extends CommonServiceImpl implements VTmsDzServic
  	}
  	/**
 	 * 删除操作增强业务
-	 * @param id
+	 * @param t
 	 * @return
 	 */
 	private void doDelBus(VTmsDzEntity t) throws Exception{

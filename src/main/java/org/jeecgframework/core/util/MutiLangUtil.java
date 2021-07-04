@@ -80,7 +80,9 @@ public class MutiLangUtil {
 	 */
 	public static void setMutiTree(List<?> treeList)
 	{
-		if(ListUtils.isNullOrEmpty(treeList)) return;
+		if(ListUtils.isNullOrEmpty(treeList)) {
+            return;
+        }
 		
 		for(Object treeItem : treeList)
 		{

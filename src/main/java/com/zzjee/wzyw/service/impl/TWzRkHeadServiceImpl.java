@@ -19,13 +19,15 @@ import java.util.UUID;
 @Transactional
 public class TWzRkHeadServiceImpl extends CommonServiceImpl implements TWzRkHeadServiceI {
 
- 	public <T> void delete(T entity) {
+ 	@Override
+    public <T> void delete(T entity) {
  		super.delete(entity);
  		//执行删除操作配置的sql增强
 		this.doDelSql((TWzRkHeadEntity)entity);
  	}
 
-	public void addMain(TWzRkHeadEntity tWzRkHead,
+	@Override
+    public void addMain(TWzRkHeadEntity tWzRkHead,
                         List<TWzRkItemEntity> tWzRkItemList){
 			//保存主信息
 		    tWzRkHead.setBpmStatus("0");
@@ -43,7 +45,8 @@ public class TWzRkHeadServiceImpl extends CommonServiceImpl implements TWzRkHead
 	}
 
 
-	public void updateMain(TWzRkHeadEntity tWzRkHead,
+	@Override
+    public void updateMain(TWzRkHeadEntity tWzRkHead,
                            List<TWzRkItemEntity> tWzRkItemList) {
 		//保存主表信息
 		if(StringUtil.isNotEmpty(tWzRkHead.getId())){
@@ -102,7 +105,8 @@ public class TWzRkHeadServiceImpl extends CommonServiceImpl implements TWzRkHead
 	}
 
 
-	public void delMain(TWzRkHeadEntity tWzRkHead) {
+	@Override
+    public void delMain(TWzRkHeadEntity tWzRkHead) {
 		//删除主表信息
 		this.delete(tWzRkHead);
 		//===================================================================================
@@ -118,27 +122,30 @@ public class TWzRkHeadServiceImpl extends CommonServiceImpl implements TWzRkHead
 
  	/**
 	 * 默认按钮-sql增强-新增操作
-	 * @param id
+	 * @param t
 	 * @return
 	 */
- 	public boolean doAddSql(TWzRkHeadEntity t){
+ 	@Override
+    public boolean doAddSql(TWzRkHeadEntity t){
 
 	 	return true;
  	}
  	/**
 	 * 默认按钮-sql增强-更新操作
-	 * @param id
+	 * @param t
 	 * @return
 	 */
- 	public boolean doUpdateSql(TWzRkHeadEntity t){
+ 	@Override
+    public boolean doUpdateSql(TWzRkHeadEntity t){
 	 	return true;
  	}
  	/**
 	 * 默认按钮-sql增强-删除操作
-	 * @param id
+	 * @param t
 	 * @return
 	 */
- 	public boolean doDelSql(TWzRkHeadEntity t){
+ 	@Override
+    public boolean doDelSql(TWzRkHeadEntity t){
 	 	return true;
  	}
 

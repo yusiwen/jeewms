@@ -46,6 +46,7 @@ public class CommonDao extends GenericBaseCommonDao implements ICommonDao, IGene
 	/**
 	 * 检查用户是否存在
 	 * */
+	@Override
 	public TSUser getUserByUserIdAndUserNameExits(TSUser user) {
 //		String password = PasswordUtil.encrypt(user.getUserName(), user.getPassword(), PasswordUtil.getStaticSalt());
 //		String query = "from TSUser u where u.userName = :username and u.password=:passowrd";
@@ -100,6 +101,7 @@ public class CommonDao extends GenericBaseCommonDao implements ICommonDao, IGene
 	/**
 	 * 检查用户是否存在
 	 * */
+	@Override
 	public TSUser findUserByAccountAndPassword(String username,String inpassword) {
 //		String password = PasswordUtil.encrypt(username, inpassword, PasswordUtil.getStaticSalt());
 //		String query = "from TSUser u where u.userName = :username and u.password=:passowrd";
@@ -150,6 +152,7 @@ public class CommonDao extends GenericBaseCommonDao implements ICommonDao, IGene
 	/**
 	 * admin账户初始化
 	 */
+	@Override
 	public void pwdInit(TSUser user,String newPwd){
 		String query ="from TSUser u where u.userName = :username ";
 		Query queryObject = getSession().createQuery(query);
@@ -165,6 +168,7 @@ public class CommonDao extends GenericBaseCommonDao implements ICommonDao, IGene
 	}
 	
 
+	@Override
 	public String getUserRole(TSUser user) {
 		String userRole = "";
 		List<TSRoleUser> sRoleUser = findByProperty(TSRoleUser.class, "TSUser.id", user.getId());
@@ -180,6 +184,7 @@ public class CommonDao extends GenericBaseCommonDao implements ICommonDao, IGene
 	 * 
 	 * @throws Exception
 	 */
+	@Override
 	@SuppressWarnings("unchecked")
 	public Object uploadFile(UploadFile uploadFile) {
 		Object object = uploadFile.getObject();
@@ -343,6 +348,7 @@ public class CommonDao extends GenericBaseCommonDao implements ICommonDao, IGene
 	 * @throws Exception
 	 * @throws Exception
 	 */
+	@Override
 	@SuppressWarnings("unchecked")
 	public HttpServletResponse viewOrDownloadFile(UploadFile uploadFile) {
 		uploadFile.getResponse().setContentType("UTF-8");
@@ -363,8 +369,9 @@ public class CommonDao extends GenericBaseCommonDao implements ICommonDao, IGene
 				e.printStackTrace();
 			}
 		} else {
-			if (uploadFile.getContent() != null)
-				bis = new ByteArrayInputStream(uploadFile.getContent());
+			if (uploadFile.getContent() != null) {
+                bis = new ByteArrayInputStream(uploadFile.getContent());
+            }
 			fileLength = uploadFile.getContent().length;
 		}
 		try {
@@ -408,6 +415,7 @@ public class CommonDao extends GenericBaseCommonDao implements ICommonDao, IGene
 		return response;
 	}
 
+	@Override
 	public Map<Object, Object> getDataSourceMap(Template template) {
 		return DataSourceMap.getDataSourceMap();
 	}
@@ -415,6 +423,7 @@ public class CommonDao extends GenericBaseCommonDao implements ICommonDao, IGene
 	/**
 	 * 生成XML importFile 导出xml工具类
 	 */
+	@Override
 	public HttpServletResponse createXml(ImportFile importFile) {
 		HttpServletResponse response = importFile.getResponse();
 		HttpServletRequest request = importFile.getRequest();
@@ -465,6 +474,7 @@ public class CommonDao extends GenericBaseCommonDao implements ICommonDao, IGene
 	/**
 	 * 解析XML文件将数据导入数据库中
 	 */
+	@Override
 	@SuppressWarnings("unchecked")
 	public void parserXml(String fileName) {
 		try {
@@ -533,6 +543,7 @@ public class CommonDao extends GenericBaseCommonDao implements ICommonDao, IGene
 	 *            模型
 	 * @return
 	 */
+	@Override
 	public List<ComboTree> comTree(List<TSDepart> all, ComboTree comboTree) {
 		List<ComboTree> trees = new ArrayList<ComboTree>();
 		for (TSDepart depart : all) {
@@ -565,6 +576,7 @@ public class CommonDao extends GenericBaseCommonDao implements ICommonDao, IGene
 		return tree;
 	}
 
+	@Override
 	public List<ComboTree> ComboTree(List all, ComboTreeModel comboTreeModel, List in, boolean recursive) {
 		List<ComboTree> trees = new ArrayList<ComboTree>();
 		for (Object obj : all) {
@@ -634,6 +646,7 @@ public class CommonDao extends GenericBaseCommonDao implements ICommonDao, IGene
 	/**
 	 * 构建树形数据表
 	 */
+	@Override
 	public List<TreeGrid> treegrid(List all, TreeGridModel treeGridModel) {
 		List<TreeGrid> treegrid = new ArrayList<TreeGrid>();
 		for (Object obj : all) {

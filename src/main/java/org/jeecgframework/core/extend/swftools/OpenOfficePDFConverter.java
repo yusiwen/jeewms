@@ -22,7 +22,8 @@ public class OpenOfficePDFConverter implements PDFConverter {
 	private static String OFFICE_HOME = ConStant.OFFICE_HOME;
 	private static int[] port = { 8100 };
 
-	public void convert2PDF(String inputFile, String pdfFile, String extend) {
+	@Override
+    public void convert2PDF(String inputFile, String pdfFile, String extend) {
 
 //		if (extend.equals("txt")) {
 //
@@ -59,7 +60,8 @@ public class OpenOfficePDFConverter implements PDFConverter {
 	    org.jeecgframework.core.util.LogUtil.info("进行文档转换转换---- 结束----");
 	}
 
-	public void convert2PDF(String inputFile, String extend) {
+	@Override
+    public void convert2PDF(String inputFile, String extend) {
 		//inputFile = inputFile.replaceAll(" ", "").replaceAll("　", "");
 		String pdfFile = FileUtils.getFilePrefix2(inputFile) + ".pdf";
 		convert2PDF(inputFile, pdfFile, extend);

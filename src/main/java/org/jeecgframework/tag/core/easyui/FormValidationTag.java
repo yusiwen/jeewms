@@ -80,6 +80,7 @@ public class FormValidationTag extends TagSupport {
 	}
 
 	
+	@Override
 	public int doStartTag() throws JspException {
 		JspWriter out = null;
 		StringBuffer sb = new StringBuffer();
@@ -110,8 +111,9 @@ public class FormValidationTag extends TagSupport {
 			}
 
 					sb.append(" action=\"" + action + "\" name=\"" + formid + "\" method=\"post\">");
-			if ("btn_sub".equals(btnsub) && dialog)
-				sb.append("<input type=\"hidden\" id=\"" + btnsub + "\" class=\"" + btnsub + "\"/>");
+			if ("btn_sub".equals(btnsub) && dialog) {
+                sb.append("<input type=\"hidden\" id=\"" + btnsub + "\" class=\"" + btnsub + "\"/>");
+            }
 			out.print(sb.toString());
 			out.flush();
 		} catch (IOException e) {
@@ -129,6 +131,7 @@ public class FormValidationTag extends TagSupport {
 	}
 
 	
+	@Override
 	public int doEndTag() throws JspException {
 		StringBuffer sb = new StringBuffer();
 		JspWriter out = null;
@@ -153,8 +156,9 @@ public class FormValidationTag extends TagSupport {
 //				}
 				//divfrom.css
 				sb.append(SysThemesUtil.getValidformDivfromTheme(sysThemesEnum));
-				if (tabtitle != null)
-					sb.append("<script type=\"text/javascript\" src=\"plug-in/Validform/js/form.js\"></script>");
+				if (tabtitle != null) {
+                    sb.append("<script type=\"text/javascript\" src=\"plug-in/Validform/js/form.js\"></script>");
+                }
 			}
 //			if("metro".equals(cssTheme)){
 //				sb.append("<link rel=\"stylesheet\" href=\"plug-in/Validform/css/"+cssTheme+"/style.css\" type=\"text/css\"/>");

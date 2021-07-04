@@ -14,28 +14,33 @@ import org.jeecgframework.web.cgform.service.impl.config.util.ColumnMeta;
 public class DbTablePostgresHandleImpl implements DbTableHandleI {
 
 	
-	public String getAddColumnSql(ColumnMeta columnMeta) {
+	@Override
+    public String getAddColumnSql(ColumnMeta columnMeta) {
 		return " ADD COLUMN "+getAddFieldDesc(columnMeta)+";";
 	}
 
 	
-	public String getReNameFieldName(ColumnMeta columnMeta) {
+	@Override
+    public String getReNameFieldName(ColumnMeta columnMeta) {
 		return " RENAME  COLUMN  "+columnMeta.getOldColumnName() +" to "+columnMeta.getColumnName()+";";
 	}
 
 	
-	public String getUpdateColumnSql(ColumnMeta cgformcolumnMeta,ColumnMeta datacolumnMeta)throws DBException {
+	@Override
+    public String getUpdateColumnSql(ColumnMeta cgformcolumnMeta, ColumnMeta datacolumnMeta)throws DBException {
 		return "  ALTER  COLUMN   "+getUpdateFieldDesc(cgformcolumnMeta,datacolumnMeta)+";";
 	}
 
 	
-	public String getSpecialHandle(ColumnMeta cgformcolumnMeta,
-			ColumnMeta datacolumnMeta) {
+	@Override
+    public String getSpecialHandle(ColumnMeta cgformcolumnMeta,
+                                   ColumnMeta datacolumnMeta) {
 		return "  ALTER  COLUMN   "+getUpdateFieldDefault(cgformcolumnMeta,datacolumnMeta)+";";
 	}
 	
 	
-	public String getMatchClassTypeByDataType(String dataType,int digits) {
+	@Override
+    public String getMatchClassTypeByDataType(String dataType, int digits) {
 		String result ="";
 		if (dataType.equalsIgnoreCase("varchar")) {
 			result="string";
@@ -61,12 +66,14 @@ public class DbTablePostgresHandleImpl implements DbTableHandleI {
 	}
 
 	
-	public String dropTableSQL(String tableName) {
+	@Override
+    public String dropTableSQL(String tableName) {
 		return " DROP TABLE  "+tableName+" ;";
 	}
 
 	
-	public String getDropColumnSql(String fieldName) {
+	@Override
+    public String getDropColumnSql(String fieldName) {
 		 return " DROP COLUMN "+fieldName+";";
 	}
 	
@@ -158,7 +165,8 @@ public class DbTablePostgresHandleImpl implements DbTableHandleI {
 	}
 
 	
-	public String getCommentSql(ColumnMeta columnMeta) {
+	@Override
+    public String getCommentSql(ColumnMeta columnMeta) {
 		return "COMMENT ON COLUMN "+columnMeta.getTableName()+"."+columnMeta.getColumnName()+" IS '" +columnMeta.getComment()+"'";
 	}
 

@@ -24,8 +24,9 @@ public class MyExceptionHandler implements HandlerExceptionResolver {
 	private static final Logger logger = Logger
 			.getLogger(MyExceptionHandler.class);
 
-	public ModelAndView resolveException(HttpServletRequest request,
-			HttpServletResponse response, Object handler, Exception ex) {
+	@Override
+    public ModelAndView resolveException(HttpServletRequest request,
+                                         HttpServletResponse response, Object handler, Exception ex) {
 		String exceptionMessage = ExceptionUtil.getExceptionMessage(ex);
 		logger.error(exceptionMessage);
 		Map<String, Object> model = new HashMap<String, Object>();

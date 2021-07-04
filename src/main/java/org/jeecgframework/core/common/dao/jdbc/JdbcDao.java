@@ -46,54 +46,59 @@ public class JdbcDao extends SimpleJdbcTemplate{
 
 	/**
 	 * 根据sql语句，返回对象集合
-	 * @param sql语句(参数用冒号加参数名，例如select * from tb where id=:id)
-	 * @param clazz类型
-	 * @param parameters参数集合(key为参数名，value为参数值)
+	 * @param sql 语句 (参数用冒号加参数名，例如select * from tb where id=:id)
+	 * @param clazz 类型
+	 * @param parameters 参数集合(key为参数名，value为参数值)
 	 * @return bean对象集合
 	 */
-	public List find(String sql,Class clazz,Map parameters){
+	@Override
+    public List find(String sql, Class clazz, Map parameters){
 		return super.find(sql,clazz,parameters);
 	}
 
 	/**
 	 * 根据sql语句，返回对象
-	 * @param sql语句(参数用冒号加参数名，例如select * from tb where id=:id)
-	 * @param clazz类型
-	 * @param parameters参数集合(key为参数名，value为参数值)
+	 * @param sql 语句 (参数用冒号加参数名，例如select * from tb where id=:id)
+	 * @param clazz 类型
+	 * @param parameters 参数集合(key为参数名，value为参数值)
 	 * @return bean对象
 	 */
-	public Object findForObject(String sql,Class clazz,Map parameters){
+	@Override
+    public Object findForObject(String sql, Class clazz, Map parameters){
 		return super.findForObject(sql, clazz, parameters);
 	}
 
 	/**
 	 * 根据sql语句，返回数值型返回结果
-	 * @param sql语句(参数用冒号加参数名，例如select count(*) from tb where id=:id)
-	 * @param parameters参数集合(key为参数名，value为参数值)
+	 * @param sql 语句(参数用冒号加参数名，例如select count(*) from tb where id=:id)
+	 * @param parameters 参数集合(key为参数名，value为参数值)
 	 * @return bean对象
 	 */
-	public long findForLong(String sql,Map parameters){
+	@Override
+    public long findForLong(String sql, Map parameters){
 		return super.findForLong(sql, parameters);
 	}
 
 	/**
 	 * 根据sql语句，返回Map对象,对于某些项目来说，没有准备Bean对象，则可以使用Map代替Key为字段名,value为值
-	 * @param sql语句(参数用冒号加参数名，例如select count(*) from tb where id=:id)
-	 * @param parameters参数集合(key为参数名，value为参数值)
+	 * @param sql 语句(参数用冒号加参数名，例如select count(*) from tb where id=:id)
+	 * @param parameters 参数集合(key为参数名，value为参数值)
 	 * @return bean对象
 	 */
-	public Map findForMap(String sql,Map parameters){
+	@Override
+    public Map findForMap(String sql, Map parameters){
 		return super.findForMap(sql, parameters);
 	}
 
 	/**
 	 * 根据sql语句，返回Map对象集合
-	 * @see findForMap
-	 * @param sql语句(参数用冒号加参数名，例如select count(*) from tb where id=:id)
-	 * @param parameters参数集合(key为参数名，value为参数值)
+	 * @see
+	 * @param sql 语句(参数用冒号加参数名，例如select count(*) from tb where id=:id)
+	 * @param parameters 参数集合(key为参数名，value为参数值)
 	 * @return bean对象
 	 */
-	public List<Map<String,Object>> findForListMap(String sql,Map parameters){
+	@Override
+    public List<Map<String,Object>> findForListMap(String sql, Map parameters){
 		return super.findForListMap(sql, parameters);
 	}
 
@@ -104,7 +109,8 @@ public class JdbcDao extends SimpleJdbcTemplate{
 	 * @param sql
 	 * @param bean
 	 */
-	public int executeForObject(String sql,Object bean){
+	@Override
+    public int executeForObject(String sql, Object bean){
 		return super.executeForObject(sql, bean);
 	}
 
@@ -115,7 +121,8 @@ public class JdbcDao extends SimpleJdbcTemplate{
 	 * @param sql
 	 * @param parameters
 	 */
-	public int executeForMap(String sql,Map parameters){
+	@Override
+    public int executeForMap(String sql, Map parameters){
 		return super.executeForMap(sql, parameters);
 	}
 	/*
@@ -123,7 +130,8 @@ public class JdbcDao extends SimpleJdbcTemplate{
 	 * 例如：update t_actor set first_name = :firstName, last_name = :lastName where id = :id
 	 * 参数用冒号
 	 */
-	public int[] batchUpdate(final String sql,List<Object[]> batch ){
+	@Override
+    public int[] batchUpdate(final String sql, List<Object[]> batch ){
         return super.batchUpdate(sql,batch);
 	}
 
@@ -169,9 +177,9 @@ public class JdbcDao extends SimpleJdbcTemplate{
 	/**
 	 * 使用指定的检索标准检索数据并分页返回数据-采用预处理方式
 	 *
-	 * @param criteria
-	 * @param firstResult
-	 * @param maxResults
+	 * @param sql
+	 * @param page
+	 * @param rows
 	 * @return
 	 * @throws DataAccessException
 	 */

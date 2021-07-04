@@ -139,7 +139,6 @@ public class CgformSqlController extends BaseController {
 	/**
 	 * 导入sql文件跳转
 	 * 
-	 * @param icon
 	 * @param req
 	 * @return
 	 */
@@ -151,7 +150,7 @@ public class CgformSqlController extends BaseController {
 	/**
 	 * 导入Form(采用SQL方式)
 	 * 
-	 * @param ids
+	 * @param request
 	 * @return
 	 * @throws Exception
 	 */
@@ -224,10 +223,11 @@ public class CgformSqlController extends BaseController {
 			LogUtil.error(e1.toString());
 			message = e1.toString();
 		}
-		if (StringUtil.isNotEmpty(message))
-			j.setMsg("SQL文件导入失败," + message);
-		else
-			j.setMsg("SQL文件导入成功");
+		if (StringUtil.isNotEmpty(message)) {
+            j.setMsg("SQL文件导入失败," + message);
+        } else {
+            j.setMsg("SQL文件导入成功");
+        }
 
 		return j;
 	}
@@ -236,7 +236,9 @@ public class CgformSqlController extends BaseController {
 		Class<T> clazz = dbTable.getClass1();
 		if(null != clazz){
 			List<T> dataList = dbTable.getTableData();
-			if(null == dataList || dataList.size() < 1) return;
+			if(null == dataList || dataList.size() < 1) {
+                return;
+            }
 			Map<String, String> idMap = new HashMap<String, String>();
 			String id = "";
 			String countSql = "";

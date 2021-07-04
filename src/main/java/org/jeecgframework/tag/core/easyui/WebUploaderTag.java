@@ -33,10 +33,12 @@ public class WebUploaderTag extends TagSupport {
 	private String extendParams;//类似css写法 这是文件上传时候需要传递的参数
 	private String readOnly="false";//保留字段
 	//private static String imgexts="gif,jpg,jpeg,bmp,png";
-	public int doStartTag() throws JspTagException {
+	@Override
+    public int doStartTag() throws JspTagException {
 		return EVAL_PAGE;
 	}
-	public int doEndTag() throws JspTagException {
+	@Override
+    public int doEndTag() throws JspTagException {
 		JspWriter out = null;
 		StringBuffer sb = new StringBuffer();
 		try {

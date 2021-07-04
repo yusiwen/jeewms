@@ -25,10 +25,12 @@ public class DataGridOpenOptTag extends TagSupport {
 	private String urlfont;//按钮图标
 
 	private String openModel = "OpenWin";	//弹出方式
-	public int doStartTag() throws JspTagException {
+	@Override
+    public int doStartTag() throws JspTagException {
 		return EVAL_PAGE;
 	}
-	public int doEndTag() throws JspTagException {
+	@Override
+    public int doEndTag() throws JspTagException {
 		Tag t = findAncestorWithClass(this, DataGridTag.class);
 		DataGridTag parent = (DataGridTag) t;
 		parent.setOpenUrl(url,title,width,height,exp,operationCode,openModel,urlStyle,urlclass,urlfont);

@@ -17,12 +17,14 @@ import org.springframework.web.context.support.WebApplicationContextUtils;
 public class InitListener  implements javax.servlet.ServletContextListener {
 
 	
-	public void contextDestroyed(ServletContextEvent arg0) {
+	@Override
+    public void contextDestroyed(ServletContextEvent arg0) {
 		
 	}
 
 	
-	public void contextInitialized(ServletContextEvent event) {
+	@Override
+    public void contextInitialized(ServletContextEvent event) {
 		WebApplicationContext webApplicationContext = WebApplicationContextUtils.getWebApplicationContext(event.getServletContext());
 		SystemService systemService = (SystemService) webApplicationContext.getBean("systemService");
 //		MenuInitService menuInitService = (MenuInitService) webApplicationContext.getBean("menuInitService");

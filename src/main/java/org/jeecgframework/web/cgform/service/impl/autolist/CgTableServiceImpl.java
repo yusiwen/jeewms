@@ -46,7 +46,8 @@ public class CgTableServiceImpl extends CommonServiceImpl implements CgTableServ
 	@Autowired
 	private CgFormFieldServiceI cgFormFieldService;
 
-	@SuppressWarnings("unchecked")
+	@Override
+    @SuppressWarnings("unchecked")
 	
 	public List<Map<String, Object>> querySingle(String table, String field, Map params,
 			int page, int rows) {
@@ -57,8 +58,9 @@ public class CgTableServiceImpl extends CommonServiceImpl implements CgTableServ
 		return result;
 	}
 	
-	public List<Map<String, Object>> querySingle(String table, String field, Map params,
-			String sort, String order, int page, int rows) {
+	@Override
+    public List<Map<String, Object>> querySingle(String table, String field, Map params,
+                                                 String sort, String order, int page, int rows) {
 		StringBuilder sqlB = new StringBuilder();
 		dealQuerySql(table,field,params,sqlB);
 		if(!StringUtil.isEmpty(sort)&& !StringUtil.isEmpty(order)){
@@ -69,7 +71,8 @@ public class CgTableServiceImpl extends CommonServiceImpl implements CgTableServ
 		return result;
 	}
 	
-	@SuppressWarnings("unchecked")
+	@Override
+    @SuppressWarnings("unchecked")
 	
 	public boolean delete(String table, Object id) {
 		try{
@@ -165,7 +168,8 @@ public class CgTableServiceImpl extends CommonServiceImpl implements CgTableServ
 	}
 
 
-	@SuppressWarnings("unchecked")
+	@Override
+    @SuppressWarnings("unchecked")
 	
 	public Long getQuerySingleSize(String table, String field, Map params) {
 		StringBuilder sqlB = new StringBuilder();
@@ -178,7 +182,8 @@ public class CgTableServiceImpl extends CommonServiceImpl implements CgTableServ
 		}
 	}
 	
-	public boolean deleteBatch(String table, String[] ids) {
+	@Override
+    public boolean deleteBatch(String table, String[] ids) {
 		try{
 			for(String id:ids){
 				delete(table, id);

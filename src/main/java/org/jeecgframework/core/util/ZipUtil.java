@@ -101,8 +101,9 @@ public class ZipUtil {
 
 			while (true) {
 				length = bis.read(buffere);
-				if (length == -1)
-					break;
+				if (length == -1) {
+                    break;
+                }
 				zos.write(buffere, 0, length);
 			}
 			bis.close();
@@ -141,8 +142,9 @@ public class ZipUtil {
 		File baseFile = new File(base);
 		String filename = file.getPath();
 		// int index=filename.lastIndexOf(baseFile.getName());
-		if (baseFile.getParentFile().getParentFile() == null)
-			return filename.substring(baseFile.getParent().length());
+		if (baseFile.getParentFile().getParentFile() == null) {
+            return filename.substring(baseFile.getParent().length());
+        }
 		return filename.substring(baseFile.getParent().length() + 1);
 	}
 	

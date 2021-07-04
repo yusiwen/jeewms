@@ -16,20 +16,23 @@ import org.springframework.transaction.annotation.Transactional;
 public class CgformEnhanceJavaServiceImpl extends CommonServiceImpl implements CgformEnhanceJavaServiceI {
 
 	
- 	public <T> void delete(T entity) {
+ 	@Override
+	public <T> void delete(T entity) {
  		super.delete(entity);
  		//执行删除操作配置的sql增强
 		this.doDelSql((CgformEnhanceJavaEntity)entity);
  	}
  	
- 	public <T> Serializable save(T entity) {
+ 	@Override
+	public <T> Serializable save(T entity) {
  		Serializable t = super.save(entity);
  		//执行新增操作配置的sql增强
  		this.doAddSql((CgformEnhanceJavaEntity)entity);
  		return t;
  	}
  	
- 	public <T> void saveOrUpdate(T entity) {
+ 	@Override
+	public <T> void saveOrUpdate(T entity) {
  		super.saveOrUpdate(entity);
  		//执行更新操作配置的sql增强
  		this.doUpdateSql((CgformEnhanceJavaEntity)entity);
@@ -40,7 +43,8 @@ public class CgformEnhanceJavaServiceImpl extends CommonServiceImpl implements C
 	 * @param
 	 * @return
 	 */
- 	public boolean doAddSql(CgformEnhanceJavaEntity t){
+ 	@Override
+	public boolean doAddSql(CgformEnhanceJavaEntity t){
 	 	return true;
  	}
  	/**
@@ -48,7 +52,8 @@ public class CgformEnhanceJavaServiceImpl extends CommonServiceImpl implements C
 	 * @param
 	 * @return
 	 */
- 	public boolean doUpdateSql(CgformEnhanceJavaEntity t){
+ 	@Override
+	public boolean doUpdateSql(CgformEnhanceJavaEntity t){
 	 	return true;
  	}
  	/**
@@ -56,7 +61,8 @@ public class CgformEnhanceJavaServiceImpl extends CommonServiceImpl implements C
 	 * @param
 	 * @return
 	 */
- 	public boolean doDelSql(CgformEnhanceJavaEntity t){
+ 	@Override
+	public boolean doDelSql(CgformEnhanceJavaEntity t){
 	 	return true;
  	}
  	/**
@@ -110,14 +116,16 @@ public class CgformEnhanceJavaServiceImpl extends CommonServiceImpl implements C
 			try {
 				if("class".equals(cgJavaType)){
 					Class clazz = Class.forName(cgJavaValue);
-					if(clazz==null || clazz.newInstance()==null)
-						return false;
+					if(clazz==null || clazz.newInstance()==null) {
+                        return false;
+                    }
 				}
 				
 				if("spring".equals(cgJavaType)){
 					Object obj = ApplicationContextUtil.getContext().getBean(cgJavaValue);
-					if(obj==null)
-						return false;
+					if(obj==null) {
+                        return false;
+                    }
 				}
 			} catch (Exception e) {
 				e.printStackTrace();

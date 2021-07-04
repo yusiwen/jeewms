@@ -28,20 +28,23 @@ import com.sun.mail.smtp.SMTPAddressFailedException;
 public class TSSmsServiceImpl extends CommonServiceImpl implements TSSmsServiceI {
 
 	
- 	public <T> void delete(T entity) {
+ 	@Override
+    public <T> void delete(T entity) {
  		super.delete(entity);
  		//执行删除操作配置的sql增强
 		this.doDelSql((TSSmsEntity)entity);
  	}
  	
- 	public <T> Serializable save(T entity) {
+ 	@Override
+    public <T> Serializable save(T entity) {
  		Serializable t = super.save(entity);
  		//执行新增操作配置的sql增强
  		this.doAddSql((TSSmsEntity)entity);
  		return t;
  	}
  	
- 	public <T> void saveOrUpdate(T entity) {
+ 	@Override
+    public <T> void saveOrUpdate(T entity) {
  		super.saveOrUpdate(entity);
  		//执行更新操作配置的sql增强
  		this.doUpdateSql((TSSmsEntity)entity);
@@ -49,26 +52,29 @@ public class TSSmsServiceImpl extends CommonServiceImpl implements TSSmsServiceI
  	
  	/**
 	 * 默认按钮-sql增强-新增操作
-	 * @param id
+	 * @param t
 	 * @return
 	 */
- 	public boolean doAddSql(TSSmsEntity t){
+ 	@Override
+    public boolean doAddSql(TSSmsEntity t){
 	 	return true;
  	}
  	/**
 	 * 默认按钮-sql增强-更新操作
-	 * @param id
+	 * @param t
 	 * @return
 	 */
- 	public boolean doUpdateSql(TSSmsEntity t){
+ 	@Override
+    public boolean doUpdateSql(TSSmsEntity t){
 	 	return true;
  	}
  	/**
 	 * 默认按钮-sql增强-删除操作
-	 * @param id
+	 * @param t
 	 * @return
 	 */
- 	public boolean doDelSql(TSSmsEntity t){
+ 	@Override
+    public boolean doDelSql(TSSmsEntity t){
 	 	return true;
  	}
  	
@@ -162,7 +168,8 @@ public class TSSmsServiceImpl extends CommonServiceImpl implements TSSmsServiceI
 		LogUtil.info("===============消息发扫描结束=================");
 	}
 
-	public List<TSSmsEntity> getMsgsList(String curUser,String curDate) {
+	@Override
+    public List<TSSmsEntity> getMsgsList(String curUser, String curDate) {
 		List<TSSmsEntity> list = new ArrayList<TSSmsEntity>();
 		String hql=null;
 		if("sqlserver".equals(DBTypeUtil.getDBType())){

@@ -45,8 +45,9 @@ public class HttpUtil {
 //			httpUrlConn.setRequestProperty("content-type", "text/html");
 			// 设置请求方式（GET/POST）
 			httpUrlConn.setRequestMethod(requestMethod);
-			if ("GET".equalsIgnoreCase(requestMethod))
-				httpUrlConn.connect();
+			if ("GET".equalsIgnoreCase(requestMethod)) {
+                httpUrlConn.connect();
+            }
 
 			// 当有数据需要提交时
 			if (null != outputStr) {

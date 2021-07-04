@@ -26,10 +26,12 @@ public class ComboBoxTag extends TagSupport {
 	protected Integer listWidth;//下拉框宽度
 	protected Integer listHeight;//下拉框高度
 	protected boolean editable;//定义是否可以直接到文本域中键入文本
-	public int doStartTag() throws JspTagException {
+	@Override
+    public int doStartTag() throws JspTagException {
 		return EVAL_PAGE;
 	}
-	public int doEndTag() throws JspTagException {
+	@Override
+    public int doEndTag() throws JspTagException {
 		JspWriter out = null;
 		try {
 			out = this.pageContext.getOut();
@@ -73,7 +75,8 @@ public class ComboBoxTag extends TagSupport {
 				+"multiple=\"true\" panelHeight=\"auto\" name=\""+name+"name\" id=\""+name+"\" >");
 		return sb;
 	}
-	public void setId(String id) {
+	@Override
+    public void setId(String id) {
 		this.id = id;
 	}
 	public void setText(String text) {

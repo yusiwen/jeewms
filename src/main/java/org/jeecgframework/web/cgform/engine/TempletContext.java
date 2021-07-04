@@ -49,8 +49,9 @@ public class TempletContext {
 
 	@PostConstruct
 	public void init() {
-		if (tags == null)
-			return;
+		if (tags == null) {
+            return;
+        }
 		for (String key : tags.keySet()) {
 			freemarker.setSharedVariable(key, tags.get(key));
 		}
@@ -91,7 +92,7 @@ public class TempletContext {
 	
 	/**
 	 * 从缓存中读取ftl模板
-	 * @param template
+	 * @param tableName
 	 * @param encoding
 	 * @return
 	 */
@@ -116,8 +117,7 @@ public class TempletContext {
 	
 	/**
 	 * 从缓存中读取ftl模板
-	 * @param template
-	 * @param encoding
+	 * @param tableName
 	 * @return
 	 */
 	public void removeTemplateFromCache(String tableName){

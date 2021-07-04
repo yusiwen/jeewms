@@ -31,8 +31,9 @@ public class SysContextSqlConvert {
 	 * @throws
 	 */
 	public static String setSqlModel(TSDataRule dataRule){
-		if(dataRule == null) 
-		return "";
+		if(dataRule == null) {
+            return "";
+        }
 		String sqlValue="";
 		HqlRuleEnum ruleEnum=HqlRuleEnum.getByValue(dataRule.getRuleConditions());
 		//#{sys_user_code}%

@@ -18,7 +18,8 @@ public class CgUploadServiceImpl extends CommonServiceImpl implements CgUploadSe
 	@Autowired
 	private CgFormUploadDao cgFormUploadDao;
 	
-	public void deleteFile(CgUploadEntity file) {
+	@Override
+    public void deleteFile(CgUploadEntity file) {
 		//step.1 删除附件
 		String sql = "select * from t_s_attachment where id = ?";
 		Map<String, Object> attachmentMap = commonDao.findOneForJdbc(sql, file.getId());
@@ -36,7 +37,8 @@ public class CgUploadServiceImpl extends CommonServiceImpl implements CgUploadSe
 	}
 
 	
-	public void writeBack(String cgFormId,String cgFormName,String cgFormField,String fileId,String fileUrl) {
+	@Override
+    public void writeBack(String cgFormId, String cgFormName, String cgFormField, String fileId, String fileUrl) {
 		try{
 			cgFormUploadDao.updateBackFileInfo(cgFormId, cgFormName, cgFormField, fileId, fileUrl);
 		}catch (Exception e) {

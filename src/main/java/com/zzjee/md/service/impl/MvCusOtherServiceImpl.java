@@ -18,20 +18,23 @@ import org.jeecgframework.web.cgform.enhance.CgformEnhanceJavaInter;
 public class MvCusOtherServiceImpl extends CommonServiceImpl implements MvCusOtherServiceI {
 
 	
- 	public void delete(MvCusOtherEntity entity) throws Exception{
+ 	@Override
+    public void delete(MvCusOtherEntity entity) throws Exception{
  		super.delete(entity);
  		//执行删除操作增强业务
 		this.doDelBus(entity);
  	}
  	
- 	public Serializable save(MvCusOtherEntity entity) throws Exception{
+ 	@Override
+    public Serializable save(MvCusOtherEntity entity) throws Exception{
  		Serializable t = super.save(entity);
  		//执行新增操作增强业务
  		this.doAddBus(entity);
  		return t;
  	}
  	
- 	public void saveOrUpdate(MvCusOtherEntity entity) throws Exception{
+ 	@Override
+    public void saveOrUpdate(MvCusOtherEntity entity) throws Exception{
  		super.saveOrUpdate(entity);
  		//执行更新操作增强业务
  		this.doUpdateBus(entity);
@@ -63,7 +66,7 @@ public class MvCusOtherServiceImpl extends CommonServiceImpl implements MvCusOth
  	}
  	/**
 	 * 删除操作增强业务
-	 * @param id
+	 * @param t
 	 * @return
 	 */
 	private void doDelBus(MvCusOtherEntity t) throws Exception{

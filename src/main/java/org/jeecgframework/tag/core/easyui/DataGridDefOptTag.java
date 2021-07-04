@@ -23,10 +23,12 @@ public class DataGridDefOptTag extends TagSupport {
 	private String urlfont;//按钮图标
 
 	
-	public int doStartTag() throws JspTagException {
+	@Override
+    public int doStartTag() throws JspTagException {
 		return EVAL_PAGE;
 	}
-	public int doEndTag() throws JspTagException {
+	@Override
+    public int doEndTag() throws JspTagException {
 		Tag t = findAncestorWithClass(this, DataGridTag.class);
 		DataGridTag parent = (DataGridTag) t;
 		parent.setDefUrl(url, title, exp,operationCode,urlStyle,urlclass,urlfont);

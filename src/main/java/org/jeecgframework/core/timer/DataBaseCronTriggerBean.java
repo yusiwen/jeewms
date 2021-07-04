@@ -21,7 +21,8 @@ public class DataBaseCronTriggerBean extends CronTriggerBean{
 	/**
 	 * 读取数据库更新文件
 	 */
-	public void afterPropertiesSet() {
+	@Override
+    public void afterPropertiesSet() {
 		super.afterPropertiesSet();
 		TSTimeTaskEntity task = timeTaskService.findUniqueByProperty
 				(TSTimeTaskEntity.class,"taskId",this.getName());

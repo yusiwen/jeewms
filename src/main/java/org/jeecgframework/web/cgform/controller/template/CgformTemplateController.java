@@ -195,8 +195,9 @@ public class CgformTemplateController extends BaseController {
 			cgformTemplateService.save(cgformTemplate);
 			String basePath=getUploadBasePath(request);
 			File templeDir=new File(basePath+File.separator+cgformTemplate.getTemplateCode());
-			if(!templeDir.exists())
-				templeDir.mkdirs();
+			if(!templeDir.exists()) {
+                templeDir.mkdirs();
+            }
 			removeZipFile(basePath+File.separator+"temp"+File.separator+cgformTemplate.getTemplateZipName(),templeDir.getAbsolutePath());
 			removeIndexFile(basePath + File.separator + "temp" + File.separator + cgformTemplate.getTemplatePic(), templeDir.getAbsolutePath());
 			systemService.addLog(message, Globals.Log_Type_INSERT, Globals.Log_Leavel_INFO);
@@ -260,8 +261,9 @@ public class CgformTemplateController extends BaseController {
 			MyBeanUtils.copyBeanNotNull2Bean(cgformTemplate, t);
 			String basePath=getUploadBasePath(request);
 			File templeDir=new File(basePath+File.separator+t.getTemplateCode());
-			if(!templeDir.exists())
-				templeDir.mkdirs();
+			if(!templeDir.exists()) {
+                templeDir.mkdirs();
+            }
 			removeZipFile(basePath+File.separator+"temp"+File.separator+t.getTemplateZipName(),templeDir.getAbsolutePath());
 			removeIndexFile(basePath + File.separator + "temp" + File.separator + t.getTemplatePic(), templeDir.getAbsolutePath());
 			cgformTemplateService.saveOrUpdate(t);
@@ -438,14 +440,16 @@ public class CgformTemplateController extends BaseController {
 		Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
 		File picTempFile=null;
 		File tempDir=new File(getUploadBasePath(request),"temp");
-		if(!tempDir.exists())
-			tempDir.mkdirs();
+		if(!tempDir.exists()) {
+            tempDir.mkdirs();
+        }
 		for (Map.Entry<String, MultipartFile> entity : fileMap.entrySet()) {
 			MultipartFile file = entity.getValue();
 			picTempFile=new File(tempDir.getAbsolutePath(),"/index_"+request.getSession().getId()+"."+FileUtils.getExtend(file.getOriginalFilename()));
 			try{
-				if(picTempFile.exists())
-					org.apache.commons.io.FileUtils.forceDelete(picTempFile);
+				if(picTempFile.exists()) {
+                    org.apache.commons.io.FileUtils.forceDelete(picTempFile);
+                }
 				FileCopyUtils.copy(file.getBytes(),picTempFile);
 			}catch (Exception e){
 				e.printStackTrace();
@@ -473,14 +477,16 @@ public class CgformTemplateController extends BaseController {
 		Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
 		File picTempFile=null;
 		File tempDir=new File(getUploadBasePath(request),"temp");
-		if(!tempDir.exists())
-			tempDir.mkdirs();
+		if(!tempDir.exists()) {
+            tempDir.mkdirs();
+        }
 		for (Map.Entry<String, MultipartFile> entity : fileMap.entrySet()) {
 			MultipartFile file = entity.getValue();
 			picTempFile=new File(tempDir.getAbsolutePath(),"/zip_"+request.getSession().getId()+"."+ FileUtils.getExtend(file.getOriginalFilename()));
 			try{
-				if(picTempFile.exists())
-					org.apache.commons.io.FileUtils.forceDelete(picTempFile);
+				if(picTempFile.exists()) {
+                    org.apache.commons.io.FileUtils.forceDelete(picTempFile);
+                }
 				FileCopyUtils.copy(file.getBytes(),picTempFile);
 			}catch (Exception e){
 				e.printStackTrace();
@@ -631,8 +637,9 @@ public class CgformTemplateController extends BaseController {
 		}
 		response.setContentType("application/octet-stream; charset=utf-8");
 		response.setHeader("Content-Disposition", "attachment;filename="+fileName);
-		if(size>0)
-			response.addHeader("Content-Length",size+"");
+		if(size>0) {
+            response.addHeader("Content-Length",size+"");
+        }
 		OutputStream stream= null;
 		try {
 			stream = response.getOutputStream();
