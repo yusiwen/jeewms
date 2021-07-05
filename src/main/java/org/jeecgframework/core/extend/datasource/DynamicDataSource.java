@@ -15,23 +15,27 @@ public class DynamicDataSource extends AbstractRoutingDataSource {
 	 * 该方法必须要重写  方法是为了根据数据库标示符取得当前的数据库
 	 */
 	
-	protected Object determineCurrentLookupKey() {
+	@Override
+    protected Object determineCurrentLookupKey() {
 		DataSourceType dataSourceType= DataSourceContextHolder.getDataSourceType();
 		return dataSourceType;
 	}
 
 	
-	public void setDataSourceLookup(DataSourceLookup dataSourceLookup) {
+	@Override
+    public void setDataSourceLookup(DataSourceLookup dataSourceLookup) {
 		super.setDataSourceLookup(dataSourceLookup);
 	}
 
 	
-	public void setDefaultTargetDataSource(Object defaultTargetDataSource) {
+	@Override
+    public void setDefaultTargetDataSource(Object defaultTargetDataSource) {
 		super.setDefaultTargetDataSource(defaultTargetDataSource);
 	}
 
 	
-	public void setTargetDataSources(Map targetDataSources) {
+	@Override
+    public void setTargetDataSources(Map targetDataSources) {
 		super.setTargetDataSources(targetDataSources);
 	}
 

@@ -248,8 +248,9 @@ public class LogController extends BaseController {
 				} else if (type.equals("application/pdf")) {
 					ext = "pdf";
 					t = (Transcoder) new PDFTranscoder();
-				} else if (type.equals("image/svg+xml"))
-					ext = "svg";
+				} else if (type.equals("image/svg+xml")) {
+                    ext = "svg";
+                }
 				response.addHeader("Content-Disposition",
 						"attachment; filename=" + new String(filename.getBytes("GBK"),"ISO-8859-1") + "." + ext);
 				response.addHeader("Content-Type", type);
@@ -271,8 +272,9 @@ public class LogController extends BaseController {
 							"UTF-8");
 					writer.append(svg);
 					writer.close();
-				} else
-					out.print("Invalid type: " + type);
+				} else {
+                    out.print("Invalid type: " + type);
+                }
 			} else {
 				response.addHeader("Content-Type", "text/html");
 				out

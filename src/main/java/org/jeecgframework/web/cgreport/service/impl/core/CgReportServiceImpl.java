@@ -32,7 +32,8 @@ public class CgReportServiceImpl extends CommonServiceImpl implements
 	private CgReportDao cgReportDao;
 	
 	
-	public Map<String, Object> queryCgReportConfig(String reportId) {
+	@Override
+    public Map<String, Object> queryCgReportConfig(String reportId) {
 		Map<String,Object> cgReportM = new HashMap<String, Object>(0);
 		Map<String,Object> mainM = queryCgReportMainConfig(reportId);
 		List<Map<String,Object>> itemsM = queryCgReportItems(reportId);
@@ -43,7 +44,8 @@ public class CgReportServiceImpl extends CommonServiceImpl implements
 		return cgReportM;
 	}
 	
-	public Map<String,Object> queryCgReportMainConfig(String reportId){
+	@Override
+    public Map<String,Object> queryCgReportMainConfig(String reportId){
 //		String sql = JeecgSqlUtil.getMethodSql(JeecgSqlUtil.getMethodUrl());
 //		Map<String,Object> parameters = new LinkedHashMap<String,Object>();
 //		parameters.put("id", reportId);
@@ -53,7 +55,8 @@ public class CgReportServiceImpl extends CommonServiceImpl implements
 		return cgReportDao.queryCgReportMainConfig(reportId);
 	}
 	
-	public List<Map<String,Object>> queryCgReportItems(String reportId){
+	@Override
+    public List<Map<String,Object>> queryCgReportItems(String reportId){
 //		String sql = JeecgSqlUtil.getMethodSql(JeecgSqlUtil.getMethodUrl());
 //		Map<String,Object> parameters = new LinkedHashMap<String,Object>();
 //		parameters.put("configId", reportId);
@@ -77,7 +80,8 @@ public class CgReportServiceImpl extends CommonServiceImpl implements
 		return list;
 	}
 	
-	@SuppressWarnings("unchecked")
+	@Override
+    @SuppressWarnings("unchecked")
 	
 	public List<Map<String, Object>> queryByCgReportSql(String sql, Map params,
 			int page, int rows) {
@@ -116,7 +120,8 @@ public class CgReportServiceImpl extends CommonServiceImpl implements
 		}
 		return sqlB.toString();
 	}
-	@SuppressWarnings("unchecked")
+	@Override
+    @SuppressWarnings("unchecked")
 	
 	public long countQueryByCgReportSql(String sql, Map params) {
 		String querySql = getFullSql(sql,params);
@@ -124,7 +129,8 @@ public class CgReportServiceImpl extends CommonServiceImpl implements
 		long result = jdbcDao.findForLong(querySql,new HashMap(0));
 		return result;
 	}
-	@SuppressWarnings( "unchecked" )
+	@Override
+    @SuppressWarnings( "unchecked" )
 	
 	public List<String> getSqlFields(String sql) {
 		if(oConvertUtils.isEmpty(sql)){

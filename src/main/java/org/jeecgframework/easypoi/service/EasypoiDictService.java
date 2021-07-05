@@ -31,7 +31,8 @@ public class EasypoiDictService implements EasypoiDictServiceI {
 	 * @author：qinfeng
 	 * @since：2017-4-12 下午06:10:22
 	 */
-	public String[] queryDict(String dicTable, String dicCode,String dicText){
+	@Override
+    public String[] queryDict(String dicTable, String dicCode, String dicText){
 		List<String> dictReplace = new ArrayList<String>();;
 		List<DictEntity> dictList = null;
 		//step.1 如果没有字典表则使用系统字典表

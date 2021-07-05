@@ -110,7 +110,6 @@ public class CgFormHeadController extends BaseController {
 	 * @param request
 	 * @param response
 	 * @param dataGrid
-	 * @param user
 	 */
 
 	@RequestMapping(params = "datagrid")
@@ -216,7 +215,9 @@ public class CgFormHeadController extends BaseController {
 	/**
 	 * 同步表单配置到数据库
 	 * 
-	 * @param ids
+	 * @param cgFormHead
+	 * @param synMethod
+	 * @param request
 	 * @return
 	 */
 	@RequestMapping(params = "doDbSynch")
@@ -260,7 +261,7 @@ public class CgFormHeadController extends BaseController {
 	/**
 	 * 添加自动生成表属性
 	 * 
-	 * @param ids
+	 * @param cgFormHead
 	 * @return
 	 */
 	@RequestMapping(params = "save")
@@ -306,8 +307,9 @@ public class CgFormHeadController extends BaseController {
 					cgFormFieldEntity.setOldFieldName(cgFormFieldEntity.getFieldName());
 				}
 
-				if (StringUtil.isNotEmpty(cgFormFieldEntity.getFieldName()))
-					cgFormFieldEntity.setFieldName(cgFormFieldEntity.getFieldName().trim());
+				if (StringUtil.isNotEmpty(cgFormFieldEntity.getFieldName())) {
+                    cgFormFieldEntity.setFieldName(cgFormFieldEntity.getFieldName().trim());
+                }
 
 			}
 
@@ -333,8 +335,9 @@ public class CgFormHeadController extends BaseController {
 					cgFormFieldEntity.setOldFieldName(cgFormFieldEntity.getFieldName());
 				}
 
-				if (StringUtil.isNotEmpty(cgFormFieldEntity.getFieldName()))
-					cgFormFieldEntity.setFieldName(cgFormFieldEntity.getFieldName().trim());
+				if (StringUtil.isNotEmpty(cgFormFieldEntity.getFieldName())) {
+                    cgFormFieldEntity.setFieldName(cgFormFieldEntity.getFieldName().trim());
+                }
 
 			}
 			cgFormFieldService.saveTable(cgFormHead);

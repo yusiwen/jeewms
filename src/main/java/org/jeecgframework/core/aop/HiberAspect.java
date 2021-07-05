@@ -24,8 +24,9 @@ public class HiberAspect extends EmptyInterceptor {
 
 
 
+@Override
 public boolean onSave(Object entity, Serializable id, Object[] state,
-		String[] propertyNames, Type[] types) {
+                      String[] propertyNames, Type[] types) {
 	TSUser currentUser = null;
 	try {
 		currentUser = ResourceUtil.getSessionUserName();
@@ -102,9 +103,10 @@ public boolean onSave(Object entity, Serializable id, Object[] state,
 }
 
 
+@Override
 public boolean onFlushDirty(Object entity, Serializable id,
-		Object[] currentState, Object[] previousState,
-		String[] propertyNames, Type[] types) {
+                            Object[] currentState, Object[] previousState,
+                            String[] propertyNames, Type[] types) {
 	TSUser currentUser = null;
 	try {
 		currentUser = ResourceUtil.getSessionUserName();

@@ -13,24 +13,28 @@ import org.jeecgframework.web.cgform.service.impl.config.util.ColumnMeta;
 public class TableSQLServerHandleImpl implements DbTableHandleI {
 
 	
-	public String getAddColumnSql(ColumnMeta columnMeta) {
+	@Override
+    public String getAddColumnSql(ColumnMeta columnMeta) {
 		return " ADD  "+getAddFieldDesc(columnMeta)+";";
 	}
 
 	
-	public String getReNameFieldName(ColumnMeta columnMeta) {
+	@Override
+    public String getReNameFieldName(ColumnMeta columnMeta) {
 		//sp_rename 'TOA_E_ARTICLE.version','processVersion','COLUMN';  
 		return  "  sp_rename '"+columnMeta.getTableName()+"."+columnMeta.getOldColumnName()+"', '"+columnMeta.getColumnName()+"', 'COLUMN';";
 		//return "ALTER COLUMN  "+columnMeta.getOldColumnName() +" "+getRenameFieldDesc(columnMeta)+";";
 	}
 
 	
-	public String getUpdateColumnSql(ColumnMeta cgformcolumnMeta,ColumnMeta datacolumnMeta) {
+	@Override
+    public String getUpdateColumnSql(ColumnMeta cgformcolumnMeta, ColumnMeta datacolumnMeta) {
 		return " ALTER COLUMN  "+getUpdateFieldDesc(cgformcolumnMeta,datacolumnMeta)+";";
 	}
 
 	
-	public String getMatchClassTypeByDataType(String dataType,int digits) {
+	@Override
+    public String getMatchClassTypeByDataType(String dataType, int digits) {
 		String result ="";
 		if (dataType.equalsIgnoreCase("varchar")) {
 			result="string";
@@ -49,12 +53,14 @@ public class TableSQLServerHandleImpl implements DbTableHandleI {
 	}
 
 	
-	public String dropTableSQL(String tableName) {
+	@Override
+    public String dropTableSQL(String tableName) {
 		return " DROP TABLE "+tableName+" ;";
 	}
 
 	
-	public String getDropColumnSql(String fieldName) {
+	@Override
+    public String getDropColumnSql(String fieldName) {
 		 return " DROP COLUMN "+fieldName+";";
 	}
 	
@@ -109,7 +115,8 @@ public class TableSQLServerHandleImpl implements DbTableHandleI {
 	}
 
 	
-	public String getCommentSql(ColumnMeta columnMeta) {
+	@Override
+    public String getCommentSql(ColumnMeta columnMeta) {
 		StringBuffer commentSql = new StringBuffer("EXECUTE ");
 		if(StringUtil.isEmpty(columnMeta.getOldColumnName())){
 			commentSql.append("sp_addextendedproperty");
@@ -126,8 +133,9 @@ public class TableSQLServerHandleImpl implements DbTableHandleI {
 	}
 
 	
-	public String getSpecialHandle(ColumnMeta cgformcolumnMeta,
-			ColumnMeta datacolumnMeta) {
+	@Override
+    public String getSpecialHandle(ColumnMeta cgformcolumnMeta,
+                                   ColumnMeta datacolumnMeta) {
 		return null;
 	}
 

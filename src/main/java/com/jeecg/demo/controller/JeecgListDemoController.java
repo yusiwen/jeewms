@@ -146,7 +146,6 @@ public class JeecgListDemoController extends BaseController {
 	 * @param request
 	 * @param response
 	 * @param dataGrid
-	 * @param user
 	 */
 
 	@RequestMapping(params = "datagrid")
@@ -240,10 +239,12 @@ public class JeecgListDemoController extends BaseController {
 		if (StringUtil.isNotEmpty(jeecgDemo.getId())) {
 			jeecgDemo = jeecgDemoService.getEntity(JeecgDemoEntity.class, jeecgDemo.getId());
 			req.setAttribute("jgDemo", jeecgDemo);
-			if ("0".equals(jeecgDemo.getSex()))
-				req.setAttribute("sex", "男");
-			if ("1".equals(jeecgDemo.getSex()))
-				req.setAttribute("sex", "女");
+			if ("0".equals(jeecgDemo.getSex())) {
+                req.setAttribute("sex", "男");
+            }
+			if ("1".equals(jeecgDemo.getSex())) {
+                req.setAttribute("sex", "女");
+            }
 		}
 		return new ModelAndView("com/jeecg/demo/jeecgDemo-print");
 	}
@@ -304,7 +305,7 @@ public class JeecgListDemoController extends BaseController {
 	/**
 	 * 添加jeecg_demo
 	 * 
-	 * @param ids
+	 * @param jeecgDemo
 	 * @return
 	 */
 	@RequestMapping(params = "doAdd")
@@ -328,7 +329,7 @@ public class JeecgListDemoController extends BaseController {
 	/**
 	 * 更新jeecg_demo
 	 * 
-	 * @param ids
+	 * @param jeecgDemo
 	 * @return
 	 */
 	@RequestMapping(params = "doUpdate")

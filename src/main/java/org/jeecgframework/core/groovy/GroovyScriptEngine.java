@@ -25,8 +25,9 @@ public class GroovyScriptEngine implements BeanPostProcessor {
 	}
 
 	private void setParameters(GroovyShell shell, Map<String, Object> vars) {
-		if (vars == null)
-			return;
+		if (vars == null) {
+            return;
+        }
 		Set<?> set = vars.entrySet();
 		for (Iterator<?> it = set.iterator(); it.hasNext();) {
 			@SuppressWarnings("rawtypes")
@@ -68,6 +69,7 @@ public class GroovyScriptEngine implements BeanPostProcessor {
 		return rtn;
 	}
 
+	@Override
 	public Object postProcessAfterInitialization(Object bean, String beanName) throws BeansException {
 		boolean isImplScript = bean.getClass().isInstance(IScript.class);
 		if (isImplScript) {
@@ -76,6 +78,7 @@ public class GroovyScriptEngine implements BeanPostProcessor {
 		return bean;
 	}
 
+	@Override
 	public Object postProcessBeforeInitialization(Object bean, String beanName) throws BeansException {
 		return bean;
 	}

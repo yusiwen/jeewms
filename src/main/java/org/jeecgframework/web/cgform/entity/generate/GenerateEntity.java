@@ -184,7 +184,8 @@ public class GenerateEntity implements java.io.Serializable{
 		this.packageStyle = packageStyle;
 	}
 
-	public Object clone() throws CloneNotSupportedException {
+	@Override
+    public Object clone() throws CloneNotSupportedException {
 		return super.clone();
 	}
 

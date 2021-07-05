@@ -18,6 +18,13 @@ import com.jeecg.demo.entity.JeecgLogReport;
 @MiniDao
 public interface JeecgMinidaoDao {
 	
+	/**
+	 * @Description 
+	 * @Author xushanchang
+	 * @Date 2021/7/411:08
+	 * @Param 
+	 * @return
+	 **/
 	@Arguments("pid")
  	@Sql("select ID,NAME,PID from t_s_region where pid=:pid order by name_en")
     List<Map<String, String>> getProCity(String pid);

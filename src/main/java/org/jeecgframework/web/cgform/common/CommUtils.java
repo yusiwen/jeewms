@@ -27,7 +27,9 @@ public class CommUtils {
     {
       for(int i=0;i<filterName.length;i++)
       {
-       if(map.containsKey(filterName[i]))map.remove(filterName[i]);
+       if(map.containsKey(filterName[i])) {
+           map.remove(filterName[i]);
+       }
       }
       return map;
     }

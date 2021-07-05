@@ -245,7 +245,7 @@ public class MigrateForm<T> {
 	/**
 	 * 执行sql并返回插入sql语句
 	 * 
-	 * @param sqlRsmd
+	 * @param jdbcTemplate
 	 * @param listSQL
 	 * @throws SQLException
 	 */
@@ -268,7 +268,6 @@ public class MigrateForm<T> {
 	 * 获取列名和列值
 	 * 
 	 * @param listSQL
-	 * @param sqlRowSet
 	 * @param jdbcTemplate
 	 * @return
 	 * @throws SQLException
@@ -312,11 +311,14 @@ public class MigrateForm<T> {
 							if (Types.CHAR == sqlRsmd.getColumnType(i) || Types.VARCHAR == sqlRsmd.getColumnType(i)) {
 								ColumnValue.append("'").append(value).append("',");
 							} else if (Types.SMALLINT == sqlRsmd.getColumnType(i) || Types.INTEGER == sqlRsmd.getColumnType(i) || Types.BIGINT == sqlRsmd.getColumnType(i) || Types.FLOAT == sqlRsmd.getColumnType(i) || Types.DOUBLE == sqlRsmd.getColumnType(i) || Types.NUMERIC == sqlRsmd.getColumnType(i) || Types.DECIMAL == sqlRsmd.getColumnType(i)) {
-								if ("".equals(value))	value = "0";
+								if ("".equals(value)) {
+                                    value = "0";
+                                }
 								ColumnValue.append(value).append(",");
 							} else if (Types.DATE == sqlRsmd.getColumnType(i) || Types.TIME == sqlRsmd.getColumnType(i) || Types.TIMESTAMP == sqlRsmd.getColumnType(i)) {
-								if ("".equals(value))
-									value = "2000-01-01";
+								if ("".equals(value)) {
+                                    value = "2000-01-01";
+                                }
 								ColumnValue.append("'").append(value).append("',");
 							} else {
 								ColumnValue.append(value).append(",");
@@ -326,11 +328,14 @@ public class MigrateForm<T> {
 							if (Types.CHAR == sqlRsmd.getColumnType(i) || Types.VARCHAR == sqlRsmd.getColumnType(i) || Types.LONGVARCHAR == sqlRsmd.getColumnType(i)) {
 								ColumnValue.append("'").append(value).append("'");
 							} else if (Types.SMALLINT == sqlRsmd.getColumnType(i) || Types.INTEGER == sqlRsmd.getColumnType(i) || Types.BIGINT == sqlRsmd.getColumnType(i) || Types.FLOAT == sqlRsmd.getColumnType(i) || Types.DOUBLE == sqlRsmd.getColumnType(i) || Types.NUMERIC == sqlRsmd.getColumnType(i) || Types.DECIMAL == sqlRsmd.getColumnType(i)) {
-								if ("".equals(value))	value = "0";
+								if ("".equals(value)) {
+                                    value = "0";
+                                }
 								ColumnValue.append(value);
 							} else if (Types.DATE == sqlRsmd.getColumnType(i) || Types.TIME == sqlRsmd.getColumnType(i) || Types.TIMESTAMP == sqlRsmd.getColumnType(i)) {
-								if ("".equals(value))
-									value = "2000-01-01";
+								if ("".equals(value)) {
+                                    value = "2000-01-01";
+                                }
 								ColumnValue.append("'").append(value).append("'");
 							} else {
 								ColumnValue.append(value).append("");
@@ -340,11 +345,14 @@ public class MigrateForm<T> {
 							if (Types.CHAR == sqlRsmd.getColumnType(i) || Types.VARCHAR == sqlRsmd.getColumnType(i) || Types.LONGVARCHAR == sqlRsmd.getColumnType(i)) {
 								ColumnValue.append("'").append(value).append("'").append(",");
 							} else if (Types.SMALLINT == sqlRsmd.getColumnType(i) || Types.INTEGER == sqlRsmd.getColumnType(i) || Types.BIGINT == sqlRsmd.getColumnType(i) || Types.FLOAT == sqlRsmd.getColumnType(i) || Types.DOUBLE == sqlRsmd.getColumnType(i) || Types.NUMERIC == sqlRsmd.getColumnType(i) || Types.DECIMAL == sqlRsmd.getColumnType(i)) {
-								if ("".equals(value))	value = "0";
+								if ("".equals(value)) {
+                                    value = "0";
+                                }
 								ColumnValue.append(value).append(",");
 							} else if (Types.DATE == sqlRsmd.getColumnType(i) || Types.TIME == sqlRsmd.getColumnType(i) || Types.TIMESTAMP == sqlRsmd.getColumnType(i)) {
-								if ("".equals(value))
-									value = "2000-01-01";
+								if ("".equals(value)) {
+                                    value = "2000-01-01";
+                                }
 								ColumnValue.append("'").append(value).append("',");
 							} else if (Types.BLOB == sqlRsmd.getColumnType(i) || Types.LONGVARCHAR == sqlRsmd.getColumnType(i) || Types.LONGNVARCHAR == sqlRsmd.getColumnType(i) || Types.BINARY == sqlRsmd.getColumnType(i) || Types.LONGVARBINARY == sqlRsmd.getColumnType(i) || Types.VARBINARY == sqlRsmd.getColumnType(i)) {
 								String ls_tmp = getBlob(ls_id, tableName, sqlRsmd.getColumnName(i), jdbcTemplate);
@@ -443,7 +451,7 @@ public class MigrateForm<T> {
 	 *            字段主键
 	 * @param tableName
 	 *            表名
-	 * @param ColumnName
+	 * @param columnName
 	 *            字段名
 	 * @param jdbcTemplate
 	 */
@@ -453,6 +461,7 @@ public class MigrateForm<T> {
 		// 查询并获得输入流
 		jdbcTemplate.query(ls_sql, new RowCallbackHandler() {
 			
+			@Override
 			public void processRow(ResultSet rs) throws SQLException {
 				inStream = rs.getBinaryStream(columnName);
 			}
@@ -492,13 +501,15 @@ public class MigrateForm<T> {
 		String hs = "";
 		String stmp = "";
 		for (int n = 0; n < b.length; n++) {
-			if (b[n] == 0)
-				break; // 判断数据结束
+			if (b[n] == 0) {
+                break; // 判断数据结束
+            }
 			stmp = (Integer.toHexString(b[n] & 0XFF));
-			if (stmp.length() == 1)
-				hs = hs + "0" + stmp;
-			else
-				hs = hs + stmp;
+			if (stmp.length() == 1) {
+                hs = hs + "0" + stmp;
+            } else {
+                hs = hs + stmp;
+            }
 		}
 		return hs.toUpperCase();
 	}
@@ -713,7 +724,9 @@ public class MigrateForm<T> {
 		PropertyDescriptor[] pds = BeanUtils.getPropertyDescriptors(clazz);
 		for (PropertyDescriptor pd : pds) {
 			if(null != ignores && ignores.size()>0){
-				if(ignores.contains(pd.getName())) continue;
+				if(ignores.contains(pd.getName())) {
+                    continue;
+                }
 			}
 			if (pd.getWriteMethod() != null) {
 				if(tableField.length()>0 && clazzProperties.length()>0){
@@ -738,7 +751,9 @@ public class MigrateForm<T> {
 		PropertyDescriptor[] pds = BeanUtils.getPropertyDescriptors(clazz);
 		for (PropertyDescriptor pd : pds) {
 			if(null != ignores && ignores.size()>0){
-				if(ignores.contains(pd.getName())) continue;
+				if(ignores.contains(pd.getName())) {
+                    continue;
+                }
 			}
 			if(pd.getName().toLowerCase().equals("id")){// || pd.getPropertyType().equals(List.class)
 				continue;

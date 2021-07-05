@@ -18,20 +18,23 @@ import org.jeecgframework.web.cgform.enhance.CgformEnhanceJavaInter;
 public class RpWmUpAndDownServiceImpl extends CommonServiceImpl implements RpWmUpAndDownServiceI {
 
 	
- 	public void delete(RpWmUpAndDownEntity entity) throws Exception{
+ 	@Override
+    public void delete(RpWmUpAndDownEntity entity) throws Exception{
  		super.delete(entity);
  		//执行删除操作增强业务
 		this.doDelBus(entity);
  	}
  	
- 	public Serializable save(RpWmUpAndDownEntity entity) throws Exception{
+ 	@Override
+    public Serializable save(RpWmUpAndDownEntity entity) throws Exception{
  		Serializable t = super.save(entity);
  		//执行新增操作增强业务
  		this.doAddBus(entity);
  		return t;
  	}
  	
- 	public void saveOrUpdate(RpWmUpAndDownEntity entity) throws Exception{
+ 	@Override
+    public void saveOrUpdate(RpWmUpAndDownEntity entity) throws Exception{
  		super.saveOrUpdate(entity);
  		//执行更新操作增强业务
  		this.doUpdateBus(entity);
@@ -63,7 +66,7 @@ public class RpWmUpAndDownServiceImpl extends CommonServiceImpl implements RpWmU
  	}
  	/**
 	 * 删除操作增强业务
-	 * @param id
+	 * @param t
 	 * @return
 	 */
 	private void doDelBus(RpWmUpAndDownEntity t) throws Exception{

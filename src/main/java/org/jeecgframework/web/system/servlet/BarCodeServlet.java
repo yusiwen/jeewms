@@ -82,6 +82,7 @@ public class BarCodeServlet extends HttpServlet {
     /**
      * @see javax.servlet.http.HttpServlet#doGet(HttpServletRequest, HttpServletResponse)
      */
+    @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
                 throws ServletException, IOException {
 

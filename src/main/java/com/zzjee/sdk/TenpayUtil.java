@@ -13,8 +13,9 @@ public class TenpayUtil {
      * @return String 转换成字符串,若对象为null,则返回空字符串.
      */
     public static String toString(Object obj) {
-        if(obj == null)
+        if(obj == null) {
             return "";
+        }
 
         return obj.toString();
     }
@@ -29,8 +30,9 @@ public class TenpayUtil {
     public static int toInt(Object obj) {
         int a = 0;
         try {
-            if (obj != null)
+            if (obj != null) {
                 a = Integer.parseInt(obj.toString());
+            }
         } catch (Exception e) {
 
         }

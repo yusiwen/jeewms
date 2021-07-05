@@ -71,8 +71,9 @@ public class TempletContextWord {
 
 	@PostConstruct
 	public void init() {
-		if (tags == null)
-			return;
+		if (tags == null) {
+            return;
+        }
 		for (String key : tags.keySet()) {
 			freemarker.setSharedVariable(key, tags.get(key));
 		}
@@ -113,7 +114,7 @@ public class TempletContextWord {
 	
 	/**
 	 * 从缓存中读取ftl模板
-	 * @param template
+	 * @param tableName
 	 * @param encoding
 	 * @return
 	 */
@@ -153,8 +154,8 @@ public class TempletContextWord {
 	}
 	/**
 	 * 预处理一些
-	 * @param html
-	 * @param cgFormHead
+	 * @param tableName
+	 * @param mode
 	 * @return
 	 */
 	public String autoFormGenerateHtml(String tableName,String id,String mode) {
@@ -254,7 +255,6 @@ public class TempletContextWord {
 	/**
 	 * 获取表配置中存储的风格模板
 	 * @param templateName
-	 * @param request
 	 * @param data
 	 * @return
 	 */

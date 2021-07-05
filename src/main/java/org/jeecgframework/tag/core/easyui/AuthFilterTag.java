@@ -27,11 +27,13 @@ public class AuthFilterTag extends TagSupport{
 	@Autowired
 	private SystemService systemService;
 	
-	public int doStartTag() throws JspException {
+	@Override
+    public int doStartTag() throws JspException {
 		return super.doStartTag();
 	}
 	
-	public int doEndTag() throws JspException {
+	@Override
+    public int doEndTag() throws JspException {
 		JspWriter out = null;
 		try {
 			out = this.pageContext.getOut();

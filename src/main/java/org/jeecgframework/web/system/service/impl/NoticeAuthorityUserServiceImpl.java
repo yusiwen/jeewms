@@ -15,20 +15,23 @@ import org.springframework.transaction.annotation.Transactional;
 public class NoticeAuthorityUserServiceImpl extends CommonServiceImpl implements NoticeAuthorityUserServiceI {
 
 	
- 	public <T> void delete(T entity) {
+ 	@Override
+    public <T> void delete(T entity) {
  		super.delete(entity);
  		//执行删除操作配置的sql增强
 		this.doDelSql((TSNoticeAuthorityUser)entity);
  	}
  	
- 	public <T> Serializable save(T entity) {
+ 	@Override
+    public <T> Serializable save(T entity) {
  		Serializable t = super.save(entity);
  		//执行新增操作配置的sql增强
  		this.doAddSql((TSNoticeAuthorityUser)entity);
  		return t;
  	}
  	
- 	public <T> void saveOrUpdate(T entity) {
+ 	@Override
+    public <T> void saveOrUpdate(T entity) {
  		super.saveOrUpdate(entity);
  		//执行更新操作配置的sql增强
  		this.doUpdateSql((TSNoticeAuthorityUser)entity);
@@ -36,26 +39,29 @@ public class NoticeAuthorityUserServiceImpl extends CommonServiceImpl implements
  	
  	/**
 	 * 默认按钮-sql增强-新增操作
-	 * @param id
+	 * @param t
 	 * @return
 	 */
- 	public boolean doAddSql(TSNoticeAuthorityUser t){
+ 	@Override
+    public boolean doAddSql(TSNoticeAuthorityUser t){
 	 	return true;
  	}
  	/**
 	 * 默认按钮-sql增强-更新操作
-	 * @param id
+	 * @param t
 	 * @return
 	 */
- 	public boolean doUpdateSql(TSNoticeAuthorityUser t){
+ 	@Override
+    public boolean doUpdateSql(TSNoticeAuthorityUser t){
 	 	return true;
  	}
  	/**
 	 * 默认按钮-sql增强-删除操作
-	 * @param id
+	 * @param t
 	 * @return
 	 */
- 	public boolean doDelSql(TSNoticeAuthorityUser t){
+ 	@Override
+    public boolean doDelSql(TSNoticeAuthorityUser t){
 	 	return true;
  	}
  	
@@ -75,7 +81,8 @@ public class NoticeAuthorityUserServiceImpl extends CommonServiceImpl implements
  	/**
  	 * 检查通知公告授权用户是否存在
  	 */
- 	public boolean checkAuthorityUser(String noticeId, String userid) {
+ 	@Override
+    public boolean checkAuthorityUser(String noticeId, String userid) {
 		CriteriaQuery cq = new CriteriaQuery(TSNoticeAuthorityUser.class);
 		cq.eq("user.id", userid);
 		cq.eq("noticeId", noticeId);

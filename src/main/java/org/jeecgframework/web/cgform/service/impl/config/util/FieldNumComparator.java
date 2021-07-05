@@ -11,9 +11,11 @@ import org.jeecgframework.web.cgform.entity.config.CgFormFieldEntity;
 public class FieldNumComparator implements Comparator<CgFormFieldEntity> {
 
 	
+	@Override
 	public int compare(CgFormFieldEntity o1, CgFormFieldEntity o2) {
-		if (o1 == null || o1.getOrderNum() == null || o2 == null || o2.getOrderNum() == null)
-			return -1;
+		if (o1 == null || o1.getOrderNum() == null || o2 == null || o2.getOrderNum() == null) {
+            return -1;
+        }
 		Integer thisVal = o1.getOrderNum();
 		Integer anotherVal = o2.getOrderNum();
 		return (thisVal < anotherVal ? -1 : (thisVal == anotherVal ? 0 : 1));

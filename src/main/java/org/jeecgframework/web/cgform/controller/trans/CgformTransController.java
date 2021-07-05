@@ -77,12 +77,14 @@ public class CgformTransController {
 		List<String> index = new ArrayList<String>();
 		if (StringUtil.isNotEmpty(tableName)) {
 			for (int i = 0; i < list.size(); i++) {
-				if (list.get(i).contains(tableName))
-					index.add(list.get(i));
+				if (list.get(i).contains(tableName)) {
+                    index.add(list.get(i));
+                }
 			}
 			html = getJson(index, index.size());
-		} else
-			html = getJson(list, list.size());
+		} else {
+            html = getJson(list, list.size());
+        }
 		PrintWriter writer = null;
 		try {
 			response.setContentType("text/html");
@@ -114,8 +116,9 @@ public class CgformTransController {
 						.findByProperty(CgFormHeadEntity.class, "tableName",
 								ids[i]);
 				if (cffList.size() > 0) {
-					if (no != "")
-						no += ",";
+					if (no != "") {
+                        no += ",";
+                    }
 					no += ids[i];
 					continue;
 				}
@@ -138,10 +141,11 @@ public class CgformTransController {
 					CgFormFieldEntity cgFormField = new CgFormFieldEntity();
 					cgFormField.setFieldName(columnt.getFieldDbName()
 							.toLowerCase());
-					if (StringUtil.isNotEmpty(columnt.getFiledComment()))
-						cgFormField.setContent(columnt.getFiledComment());
-					else
-						cgFormField.setContent(columnt.getFieldName());
+					if (StringUtil.isNotEmpty(columnt.getFiledComment())) {
+                        cgFormField.setContent(columnt.getFiledComment());
+                    } else {
+                        cgFormField.setContent(columnt.getFieldName());
+                    }
 					cgFormField.setIsKey("N");
 					cgFormField.setIsShow("Y");
 					cgFormField.setIsShowList("Y");
@@ -207,9 +211,10 @@ public class CgformTransController {
 							}
 						}
 
-						if (StringUtil.isNotEmpty(columnt.getScale()))
-							cgFormField.setPointLength(Integer.valueOf(columnt
-									.getScale()));
+						if (StringUtil.isNotEmpty(columnt.getScale())) {
+                            cgFormField.setPointLength(Integer.valueOf(columnt
+                                    .getScale()));
+                        }
 
 					}
 					columnsList.add(cgFormField);
@@ -221,8 +226,9 @@ public class CgformTransController {
 				}
 
 				cgFormFieldService.saveTable(cgFormHead, "");
-				if (yes != "")
-					yes += ",";
+				if (yes != "") {
+                    yes += ",";
+                }
 				yes += ids[i];
 			}
 		}
@@ -254,6 +260,7 @@ public class CgformTransController {
 		}
 
 		
+		@Override
 		public int compare(String prev, String next) {
 			return sortOrder.equals(SortDirection.asc)?
 					prev.compareTo(next):next.compareTo(prev);

@@ -30,12 +30,14 @@ public class AliasToBean implements ResultTransformer {
 	private final Class<?> resultClass;
 	
 	public AliasToBean(Class<?> pojoClass) {
-		if(pojoClass==null) throw new IllegalArgumentException("resultClass cannot be null");
+		if(pojoClass==null) {
+            throw new IllegalArgumentException("resultClass cannot be null");
+        }
 		this.resultClass = pojoClass;
 	}
 
+	@Override
 	@SuppressWarnings("unchecked")
-	
 	public List transformList(List collection) {
 		return collection;
 	}
@@ -49,6 +51,7 @@ public class AliasToBean implements ResultTransformer {
 	 * @return 单个POJO实例--查询结果
 	 */
 	
+	@Override
 	public Object transformTuple(Object[] tuple, String[] aliases) {
 		try {
 			Object root = resultClass.newInstance();

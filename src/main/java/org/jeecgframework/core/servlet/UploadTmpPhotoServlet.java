@@ -37,6 +37,7 @@ import org.apache.commons.fileupload.servlet.ServletFileUpload;
 public class UploadTmpPhotoServlet extends HttpServlet {
 
 	
+	@Override
 	public void doGet(HttpServletRequest request, HttpServletResponse response)
 
 	throws ServletException, IOException {
@@ -44,6 +45,7 @@ public class UploadTmpPhotoServlet extends HttpServlet {
 	}
 
 	
+	@Override
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 
 	throws ServletException, IOException {
@@ -60,9 +62,9 @@ public class UploadTmpPhotoServlet extends HttpServlet {
 
 		File file = new File(base);
 
-		if (!file.exists())
-
+		if (!file.exists()) {
 			file.mkdirs();
+		}
 
 		factory.setRepository(file);
 
@@ -70,11 +72,11 @@ public class UploadTmpPhotoServlet extends HttpServlet {
 
 		// 设置单个文件的最大上传值
 
-		upload.setFileSizeMax(10002400000l);
+		upload.setFileSizeMax(10002400000L);
 
 		// 设置整个request的最大值
 
-		upload.setSizeMax(10002400000l);
+		upload.setSizeMax(10002400000L);
 
 		upload.setHeaderEncoding("UTF-8");
 

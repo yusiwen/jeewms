@@ -76,7 +76,8 @@ public class CgFormFieldServiceImpl extends CommonServiceImpl implements
 	private CgFormIndexServiceI cgFormIndexService;
 
 	
-	public synchronized void updateTable(CgFormHeadEntity t, String sign,boolean isChange) {
+	@Override
+	public synchronized void updateTable(CgFormHeadEntity t, String sign, boolean isChange) {
 		CgFormFieldEntity column;
 		boolean databaseFieldIsChange = false;
 		for (int i = 0; i < t.getColumns().size(); i++) {
@@ -146,6 +147,7 @@ public class CgFormFieldServiceImpl extends CommonServiceImpl implements
 	
 	
 	
+	@Override
 	public void saveTable(CgFormHeadEntity cgFormHead) {
 		cgFormHead.setJformVersion("1");
 		cgFormHead.setIsDbSynch("N");
@@ -169,6 +171,7 @@ public class CgFormFieldServiceImpl extends CommonServiceImpl implements
 	 * @param a
 	 */
 	
+	@Override
 	public void saveTable(CgFormHeadEntity cgFormHead, String a) {
 		cgFormHead.setId((String) this.getSession().save(cgFormHead));
 		CgFormFieldEntity column;
@@ -184,6 +187,7 @@ public class CgFormFieldServiceImpl extends CommonServiceImpl implements
 	}
 
 	
+	@Override
 	public Boolean judgeTableIsExit(String tableName) {
 		Connection conn = null;
 		ResultSet rs = null;
@@ -223,7 +227,8 @@ public class CgFormFieldServiceImpl extends CommonServiceImpl implements
 	 * 
 	 * @throws BusinessException
 	 */
-	public boolean dbSynch(CgFormHeadEntity cgFormHead,String synMethod)
+	@Override
+	public boolean dbSynch(CgFormHeadEntity cgFormHead, String synMethod)
 			throws BusinessException {
 		try {
 			if(SYN_NORMAL.equals(synMethod)){
@@ -281,6 +286,7 @@ public class CgFormFieldServiceImpl extends CommonServiceImpl implements
 	}
 
 	
+	@Override
 	public void deleteCgForm(CgFormHeadEntity cgFormHead) {
 		if (judgeTableIsExit(cgFormHead.getTableName())) {
 			String sql = getTableUtil().dropTableSQL(cgFormHead.getTableName());
@@ -300,6 +306,7 @@ public class CgFormFieldServiceImpl extends CommonServiceImpl implements
 	}
 
 	
+	@Override
 	public List<Map<String, Object>> getCgFormFieldByTableName(String tableName) {
 		List<Map<String, Object>> list = cgFormFieldDao.getCgFormFieldByTableName(tableName);
 		return list;
@@ -322,6 +329,7 @@ public class CgFormFieldServiceImpl extends CommonServiceImpl implements
 	}
 
 	
+	@Override
 	public Map<String, CgFormFieldEntity> getCgFormFieldByFormId(String formid) {
 		StringBuilder hql = new StringBuilder("");
 		hql.append("from CgFormFieldEntity f");
@@ -337,6 +345,7 @@ public class CgFormFieldServiceImpl extends CommonServiceImpl implements
 	}
 
 	
+	@Override
 	public Map<String, CgFormFieldEntity> getAllCgFormFieldByTableName(
 			String tableName) {
 		StringBuilder hql = new StringBuilder("");
@@ -353,6 +362,7 @@ public class CgFormFieldServiceImpl extends CommonServiceImpl implements
 	}
 
 	
+	@Override
 	@Ehcache
 	public Map<String, CgFormFieldEntity> getAllCgFormFieldByTableName(
 			String tableName, String version) {
@@ -370,6 +380,7 @@ public class CgFormFieldServiceImpl extends CommonServiceImpl implements
 	}
 
 	
+	@Override
 	public CgFormHeadEntity getCgFormHeadByTableName(String tableName) {
 		StringBuilder hql = new StringBuilder("");
 		hql.append("from CgFormHeadEntity f");
@@ -382,8 +393,9 @@ public class CgFormFieldServiceImpl extends CommonServiceImpl implements
 	}
 
 	
+	@Override
 	public List<Map<String, Object>> getSubTableData(String mainTableName,
-			String subTableName, Object mainTableId) {
+													 String subTableName, Object mainTableId) {
 
 		mainTableName = PublicUtil.replaceTableName(mainTableName);
 		subTableName = PublicUtil.replaceTableName(subTableName);
@@ -418,6 +430,7 @@ public class CgFormFieldServiceImpl extends CommonServiceImpl implements
 	}
 
 	
+	@Override
 	public boolean appendSubTableStr4Main(CgFormHeadEntity entity) {
 		// step.1 获取本表的名称
 		String thisSubTable = entity.getTableName();
@@ -455,6 +468,7 @@ public class CgFormFieldServiceImpl extends CommonServiceImpl implements
 	}
 
 	
+	@Override
 	public boolean removeSubTableStr4Main(CgFormHeadEntity entity) {
 		if (entity == null) {
 			return false;
@@ -499,9 +513,11 @@ public class CgFormFieldServiceImpl extends CommonServiceImpl implements
 	}
 
 	
+	@Override
 	public void sortSubTableStr(CgFormHeadEntity entity) {
-		if (entity == null)
-			return;
+		if (entity == null) {
+            return;
+        }
 		CgFormHeadEntity main = null;
 		List<CgFormFieldEntity> columns = entity.getColumns();
 		for (CgFormFieldEntity fieldE : columns) {
@@ -521,14 +537,16 @@ public class CgFormFieldServiceImpl extends CommonServiceImpl implements
 		String subTableStr = main.getSubTableStr();
 		if(StringUtils.isNotEmpty(subTableStr)){
 			String [] subTables = subTableStr.split(",");
-			if (subTables.length <= 1)
-				return;
+			if (subTables.length <= 1) {
+                return;
+            }
 			List<CgFormHeadEntity> subList = new ArrayList<CgFormHeadEntity>();
 			for(String subTable : subTables){
 				CgFormHeadEntity sub = this.getCgFormHeadByTableName(subTable);
 				subList.add(sub);
 			}
 			Collections.sort(subList, new Comparator<CgFormHeadEntity>() {
+				@Override
 				public int compare(CgFormHeadEntity arg0, CgFormHeadEntity arg1) {
 					Integer tabOrder0 = arg0.getTabOrder();
 					if (tabOrder0 == null) {
@@ -552,6 +570,7 @@ public class CgFormFieldServiceImpl extends CommonServiceImpl implements
 	}
 
 	
+	@Override
 	public String getCgFormVersionByTableName(String tableName) {
 		String version = cgFormVersionDao
 				.getCgFormVersionByTableName(tableName);
@@ -560,6 +579,7 @@ public class CgFormFieldServiceImpl extends CommonServiceImpl implements
 	}
 
 	
+	@Override
 	public String getCgFormVersionById(String id) {
 		String version = cgFormVersionDao.getCgFormVersionById(id);
 		return StringUtil.isEmpty(version) ? "0" : version;
@@ -572,6 +592,7 @@ public class CgFormFieldServiceImpl extends CommonServiceImpl implements
 	 * @param version
 	 * @return
 	 */
+	@Override
 	public Map<String, Object> getFtlFormConfig(String tableName, String version) {
 		Map<String, Object> data = new HashMap<String, Object>();
 		Map<String, Object> field = new HashMap<String, Object>();
@@ -723,6 +744,7 @@ public class CgFormFieldServiceImpl extends CommonServiceImpl implements
 	 * @param version
 	 * @return
 	 */
+	@Override
 	@Ehcache
 	public CgFormHeadEntity getCgFormHeadByTableName(String tableName,
 			String version) {
@@ -737,6 +759,7 @@ public class CgFormFieldServiceImpl extends CommonServiceImpl implements
 	}
 
 	
+	@Override
 	public synchronized boolean updateVersion(String formId) {
 		try {
 			int newV = Integer.parseInt(cgFormVersionDao
@@ -751,6 +774,7 @@ public class CgFormFieldServiceImpl extends CommonServiceImpl implements
 	}
 
 	
+	@Override
 	public List<CgFormFieldEntity> getHiddenCgFormFieldByTableName(
 			String tableName) {
 		StringBuilder hql = new StringBuilder("");
@@ -771,6 +795,7 @@ public class CgFormFieldServiceImpl extends CommonServiceImpl implements
 	}
 
 	
+	@Override
 	public boolean checkTableExist(String tableName) {
 		boolean result =true;
 		try{

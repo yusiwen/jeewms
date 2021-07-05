@@ -140,8 +140,6 @@ public class HttpUtil {
 	 * 
 	 * @param url
 	 * @param params
-	 * @param connTimeout
-	 * @param readTimeout
 	 * @return
 	 * @throws ConnectTimeoutException
 	 * @throws SocketTimeoutException
@@ -218,7 +216,6 @@ public class HttpUtil {
 	 * 发送一个 GET 请求
 	 * 
 	 * @param url
-	 * @param charset
 	 * @return
 	 * @throws Exception
 	 */
@@ -323,28 +320,33 @@ public class HttpUtil {
 	private static CloseableHttpClient createSSLInsecureClient() throws GeneralSecurityException {
 		try {
 			SSLContext sslContext = new SSLContextBuilder().loadTrustMaterial(null, new TrustStrategy() {
-				public boolean isTrusted(X509Certificate[] chain, String authType) throws CertificateException {
+				@Override
+                public boolean isTrusted(X509Certificate[] chain, String authType) throws CertificateException {
 					return true;
 				}
 			}).build();
 			SSLConnectionSocketFactory sslsf = new SSLConnectionSocketFactory(sslContext, new X509HostnameVerifier() {
 
-				public boolean verify(String arg0, SSLSession arg1) {
+				@Override
+                public boolean verify(String arg0, SSLSession arg1) {
 					// TODO Auto-generated method stub
 					return true;
 				}
 
-				public void verify(String host, SSLSocket ssl) throws IOException {
+				@Override
+                public void verify(String host, SSLSocket ssl) throws IOException {
 					// TODO Auto-generated method stub
 
 				}
 
-				public void verify(String host, X509Certificate cert) throws SSLException {
+				@Override
+                public void verify(String host, X509Certificate cert) throws SSLException {
 					// TODO Auto-generated method stub
 
 				}
 
-				public void verify(String host, String[] cns, String[] subjectAlts) throws SSLException {
+				@Override
+                public void verify(String host, String[] cns, String[] subjectAlts) throws SSLException {
 					// TODO Auto-generated method stub
 
 				}
@@ -361,7 +363,6 @@ public class HttpUtil {
 	 * 
 	 * @param url
 	 *            http://www.xxx.com/img/333.jpg
-	 * @param destFileName
 	 *            xxx.jpg/xxx.png/xxx.txt
 	 * @throws ClientProtocolException
 	 * @throws IOException

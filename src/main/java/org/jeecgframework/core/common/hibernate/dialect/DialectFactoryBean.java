@@ -15,7 +15,8 @@ public class DialectFactoryBean implements FactoryBean<Dialect> {
 		this.dbType = dbType;
 	}
 
-	public Dialect getObject() throws Exception {
+	@Override
+    public Dialect getObject() throws Exception {
 		if (this.dbType.equals("oracle")) {
 			this.dialect = new OracleDialect();
 		} else if (this.dbType.equals("sqlserver")) {
@@ -32,11 +33,13 @@ public class DialectFactoryBean implements FactoryBean<Dialect> {
 		return this.dialect;
 	}
 
-	public Class<?> getObjectType() {
+	@Override
+    public Class<?> getObjectType() {
 		return Dialect.class;
 	}
 
-	public boolean isSingleton() {
+	@Override
+    public boolean isSingleton() {
 		return true;
 	}
 }

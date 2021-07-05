@@ -22,7 +22,8 @@ public class MutiLangServiceImpl extends CommonServiceImpl implements MutiLangSe
 	private  HttpServletRequest request; 
 	
 	/**初始化语言信息，TOMCAT启动时直接加入到内存中**/
-	public void initAllMutiLang() {
+	@Override
+    public void initAllMutiLang() {
 		List<MutiLangEntity> mutiLang = this.commonDao.loadAll(MutiLangEntity.class);
 		
 		for (MutiLangEntity mutiLangEntity : mutiLang) {
@@ -33,20 +34,23 @@ public class MutiLangServiceImpl extends CommonServiceImpl implements MutiLangSe
 	/**
 	 * 更新缓存，插入缓存
 	 */
-	public void putMutiLang(String langKey,String langCode,String langContext) {
+	@Override
+    public void putMutiLang(String langKey, String langCode, String langContext) {
 		ResourceUtil.mutiLangMap.put(langKey + "_" + langCode, langContext);
 	}
 	
 	/**
 	 * 更新缓存，插入缓存
 	 */
-	public void putMutiLang(MutiLangEntity mutiLangEntity) {
+	@Override
+    public void putMutiLang(MutiLangEntity mutiLangEntity) {
 		ResourceUtil.mutiLangMap.put(mutiLangEntity.getLangKey() + "_" + mutiLangEntity.getLangCode(), mutiLangEntity.getLangContext());
 	}
 	
 	
 	/**取 o_muti_lang.lang_key 的值返回当前语言的值**/
-	public String getLang(String langKey)
+	@Override
+    public String getLang(String langKey)
 	{
 		String language = BrowserUtils.getBrowserLanguage(request);
 		
@@ -68,7 +72,8 @@ public class MutiLangServiceImpl extends CommonServiceImpl implements MutiLangSe
 		return langContext;
 	}
 
-	public String getLang(String lanKey, String langArg) {
+	@Override
+    public String getLang(String lanKey, String langArg) {
 		String langContext = StringUtil.getEmptyString();
 		if(StringUtil.isEmpty(langArg))
 		{
@@ -89,7 +94,8 @@ public class MutiLangServiceImpl extends CommonServiceImpl implements MutiLangSe
 	}
 
 	/** 刷新多语言cach **/
-	public void refleshMutiLangCach() {
+	@Override
+    public void refleshMutiLangCach() {
 		ResourceUtil.mutiLangMap.clear();
 		initAllMutiLang();
 	}

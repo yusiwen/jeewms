@@ -141,7 +141,6 @@ public class CgformFtlController extends BaseController {
 	 * @param request
 	 * @param response
 	 * @param dataGrid
-	 * @param user
 	 */
 
 	@SuppressWarnings("unchecked")
@@ -251,7 +250,7 @@ public class CgformFtlController extends BaseController {
 	/**
 	 * 添加Word转Ftl
 	 * 
-	 * @param ids
+	 * @param cgformFtl
 	 * @return
 	 */
 	@RequestMapping(params = "save")
@@ -363,7 +362,7 @@ public class CgformFtlController extends BaseController {
 	/**
 	 * 保存转换表单文件
 	 * 
-	 * @param ids
+	 * @param request
 	 * @return
 	 * @throws Exception
 	 */
@@ -503,10 +502,11 @@ public class CgformFtlController extends BaseController {
 		}
 
 		attributes.put("id", cgformFtl.getId());
-		if (StringUtil.isNotEmpty(message))
-			j.setMsg("Word 模板上传失败," + message);
-		else
-			j.setMsg("Word 模板上传成功");
+		if (StringUtil.isNotEmpty(message)) {
+            j.setMsg("Word 模板上传失败," + message);
+        } else {
+            j.setMsg("Word 模板上传成功");
+        }
 		j.setAttributes(attributes);
 
 		return j;
@@ -541,24 +541,30 @@ public class CgformFtlController extends BaseController {
 				.getParameter("createName"));
 		String createDate = oConvertUtils.getString(request
 				.getParameter("createDate"));
-		if (oConvertUtils.isEmpty(ftlStatus))
-			ftlStatus = "0";
+		if (oConvertUtils.isEmpty(ftlStatus)) {
+            ftlStatus = "0";
+        }
 
 		cgformFtl.setCgformId(cgformId);
 		cgformFtl.setCgformName(cgformName);
 		cgformFtl.setFtlStatus(ftlStatus);
 		if (StringUtil.isNotEmpty(fileKey)) {
 			cgformFtl.setId(fileKey);
-			if(StringUtil.isNotEmpty(ftlVersion))
-				cgformFtl.setFtlVersion(Integer.valueOf(ftlVersion));
-			if (StringUtil.isNotEmpty(ftlWordUrl))
-				cgformFtl.setFtlWordUrl(ftlWordUrl);
-			if (StringUtil.isNotEmpty(createBy))
-				cgformFtl.setCreateBy(createBy);
-			if (StringUtil.isNotEmpty(createName))
-				cgformFtl.setCreateName(createName);
-			if (StringUtil.isNotEmpty(createDate))
-				cgformFtl.setCreateDate(DateUtils.str2Date(createDate, DateUtils.date_sdf));
+			if(StringUtil.isNotEmpty(ftlVersion)) {
+                cgformFtl.setFtlVersion(Integer.valueOf(ftlVersion));
+            }
+			if (StringUtil.isNotEmpty(ftlWordUrl)) {
+                cgformFtl.setFtlWordUrl(ftlWordUrl);
+            }
+			if (StringUtil.isNotEmpty(createBy)) {
+                cgformFtl.setCreateBy(createBy);
+            }
+			if (StringUtil.isNotEmpty(createName)) {
+                cgformFtl.setCreateName(createName);
+            }
+			if (StringUtil.isNotEmpty(createDate)) {
+                cgformFtl.setCreateDate(DateUtils.str2Date(createDate, DateUtils.date_sdf));
+            }
 
 			if (cgformFtl.getFtlContent()!=null&&cgformFtl.getFtlContent().indexOf("<form")<0){
 				//!"<form".equalsIgnoreCase(cgformFtl.getFtlContent())) {

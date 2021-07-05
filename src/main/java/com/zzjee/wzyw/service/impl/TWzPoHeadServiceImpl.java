@@ -19,14 +19,16 @@ import java.util.UUID;
 @Transactional
 public class TWzPoHeadServiceImpl extends CommonServiceImpl implements TWzPoHeadServiceI {
 
- 	public <T> void delete(T entity) {
+ 	@Override
+    public <T> void delete(T entity) {
  		super.delete(entity);
  		//执行删除操作配置的sql增强
 		this.doDelSql((TWzPoHeadEntity)entity);
  	}
 
-	public void addMain(TWzPoHeadEntity tWzPoHead,
-	        List<TWzPoItemEntity> tWzPoItemList){
+	@Override
+    public void addMain(TWzPoHeadEntity tWzPoHead,
+                        List<TWzPoItemEntity> tWzPoItemList){
 			//保存主信息
 			this.save(tWzPoHead);
 
@@ -41,8 +43,9 @@ public class TWzPoHeadServiceImpl extends CommonServiceImpl implements TWzPoHead
 	}
 
 
-	public void updateMain(TWzPoHeadEntity tWzPoHead,
-	        List<TWzPoItemEntity> tWzPoItemList) {
+	@Override
+    public void updateMain(TWzPoHeadEntity tWzPoHead,
+                           List<TWzPoItemEntity> tWzPoItemList) {
 		//保存主表信息
 		if(StringUtil.isNotEmpty(tWzPoHead.getId())){
 			try {
@@ -100,7 +103,8 @@ public class TWzPoHeadServiceImpl extends CommonServiceImpl implements TWzPoHead
 	}
 
 
-	public void delMain(TWzPoHeadEntity tWzPoHead) {
+	@Override
+    public void delMain(TWzPoHeadEntity tWzPoHead) {
 		//删除主表信息
 		this.delete(tWzPoHead);
 		//===================================================================================
@@ -116,26 +120,29 @@ public class TWzPoHeadServiceImpl extends CommonServiceImpl implements TWzPoHead
 
  	/**
 	 * 默认按钮-sql增强-新增操作
-	 * @param id
+	 * @param t
 	 * @return
 	 */
- 	public boolean doAddSql(TWzPoHeadEntity t){
+ 	@Override
+    public boolean doAddSql(TWzPoHeadEntity t){
 	 	return true;
  	}
  	/**
 	 * 默认按钮-sql增强-更新操作
-	 * @param id
+	 * @param t
 	 * @return
 	 */
- 	public boolean doUpdateSql(TWzPoHeadEntity t){
+ 	@Override
+    public boolean doUpdateSql(TWzPoHeadEntity t){
 	 	return true;
  	}
  	/**
 	 * 默认按钮-sql增强-删除操作
-	 * @param id
+	 * @param t
 	 * @return
 	 */
- 	public boolean doDelSql(TWzPoHeadEntity t){
+ 	@Override
+    public boolean doDelSql(TWzPoHeadEntity t){
 	 	return true;
  	}
 

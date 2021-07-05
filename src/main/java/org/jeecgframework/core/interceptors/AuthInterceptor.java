@@ -72,17 +72,20 @@ public class AuthInterceptor implements HandlerInterceptor {
 	/**
 	 * 在controller后拦截
 	 */
-	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object object, Exception exception) throws Exception {
+	@Override
+    public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object object, Exception exception) throws Exception {
 	}
 
-	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object object, ModelAndView modelAndView) throws Exception {
+	@Override
+    public void postHandle(HttpServletRequest request, HttpServletResponse response, Object object, ModelAndView modelAndView) throws Exception {
 
 	}
 
 	/**
 	 * 在controller前拦截
 	 */
-	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object object) throws Exception {
+	@Override
+    public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object object) throws Exception {
 		String requestPath = ResourceUtil.getRequestPath(request);// 用户访问的资源地址
 		//logger.info("-----authInterceptor----requestPath------"+requestPath);
 		//步骤一： 判断是否是排除拦截请求，直接返回TRUE
@@ -269,8 +272,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 	/**
 	 * 转发
 	 * 
-	 * @param user
-	 * @param req
+	 * @param request
 	 * @return
 	 */
 	@RequestMapping(params = "forword")

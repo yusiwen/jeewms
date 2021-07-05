@@ -146,30 +146,40 @@ public class HqlGenerateUtil {
 
 						Object beginValue_=null , endValue_ =null;
 						if ("class java.lang.Integer".equals(type)) {
-							if(!"".equals(beginValue)&&null!=beginValue)
-								beginValue_ = Integer.parseInt(beginValue);
-							if(!"".equals(endValue)&&null!=endValue)
-								endValue_ =Integer.parseInt(endValue);
+							if(!"".equals(beginValue)&&null!=beginValue) {
+                                beginValue_ = Integer.parseInt(beginValue);
+                            }
+							if(!"".equals(endValue)&&null!=endValue) {
+                                endValue_ =Integer.parseInt(endValue);
+                            }
 						} else if ("class java.math.BigDecimal".equals(type)) {
-							if(!"".equals(beginValue)&&null!=beginValue)
-								beginValue_ = new BigDecimal(beginValue);
-							if(!"".equals(endValue)&&null!=endValue)
-								endValue_ = new BigDecimal(endValue);
+							if(!"".equals(beginValue)&&null!=beginValue) {
+                                beginValue_ = new BigDecimal(beginValue);
+                            }
+							if(!"".equals(endValue)&&null!=endValue) {
+                                endValue_ = new BigDecimal(endValue);
+                            }
 						} else if ("class java.lang.Short".equals(type)) {
-							if(!"".equals(beginValue)&&null!=beginValue)
-								beginValue_ =Short.parseShort(beginValue);
-							if(!"".equals(endValue)&&null!=endValue)
-								endValue_ =Short.parseShort(endValue);
+							if(!"".equals(beginValue)&&null!=beginValue) {
+                                beginValue_ =Short.parseShort(beginValue);
+                            }
+							if(!"".equals(endValue)&&null!=endValue) {
+                                endValue_ =Short.parseShort(endValue);
+                            }
 						} else if ("class java.lang.Long".equals(type)) {
-							if(!"".equals(beginValue)&&null!=beginValue)
-								beginValue_ = Long.parseLong(beginValue);
-							if(!"".equals(endValue)&&null!=endValue)
-								endValue_ =Long.parseLong(endValue);
+							if(!"".equals(beginValue)&&null!=beginValue) {
+                                beginValue_ = Long.parseLong(beginValue);
+                            }
+							if(!"".equals(endValue)&&null!=endValue) {
+                                endValue_ =Long.parseLong(endValue);
+                            }
 						} else if ("class java.lang.Float".equals(type)) {
-							if(!"".equals(beginValue)&&null!=beginValue)
-								beginValue_ = Float.parseFloat(beginValue);
-							if(!"".equals(endValue)&&null!=endValue)
-								endValue_ =Float.parseFloat(endValue);
+							if(!"".equals(beginValue)&&null!=beginValue) {
+                                beginValue_ = Float.parseFloat(beginValue);
+                            }
+							if(!"".equals(endValue)&&null!=endValue) {
+                                endValue_ =Float.parseFloat(endValue);
+                            }
 						}else{
 							 beginValue_ = beginValue;
 							 endValue_ = endValue;
@@ -353,7 +363,7 @@ public class HqlGenerateUtil {
 	 * 根据对象拼装sql 
 	 * TODO 结合DataRule
 	 * @param list
-	 * @param tab格式化
+	 * @param tab 格式化
 	 * @return
 	 */
 	public static String getSql(List<QueryCondition> list,String tab,Class claszz){

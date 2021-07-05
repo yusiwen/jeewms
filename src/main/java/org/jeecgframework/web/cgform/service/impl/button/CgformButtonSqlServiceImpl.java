@@ -15,11 +15,12 @@ public class CgformButtonSqlServiceImpl extends CommonServiceImpl implements Cgf
 
 	/**
 	 * 校验按钮sql增强唯一性
-	 * @param cgformButtonEntity
+	 * @param cgformButtonSqlEntity
 	 * @return
 	 */
 	
-	public List<CgformButtonSqlEntity> checkCgformButtonSql(
+	@Override
+    public List<CgformButtonSqlEntity> checkCgformButtonSql(
 			CgformButtonSqlEntity cgformButtonSqlEntity) {
 		StringBuilder hql = new StringBuilder("");
 		hql.append(" from CgformButtonSqlEntity t");
@@ -33,7 +34,8 @@ public class CgformButtonSqlServiceImpl extends CommonServiceImpl implements Cgf
 	}
 	
 	
-	public CgformButtonSqlEntity getCgformButtonSqlByCodeFormId(String buttonCode, String formId) {
+	@Override
+    public CgformButtonSqlEntity getCgformButtonSqlByCodeFormId(String buttonCode, String formId) {
 		StringBuilder hql = new StringBuilder("");
 		hql.append(" from CgformButtonSqlEntity t");
 		hql.append(" where t.formId='").append(formId).append("'");

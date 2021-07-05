@@ -304,7 +304,7 @@ public class CgReportController extends BaseController {
 
         String dbKey=(String)configM.get("db_source");
         List<Map<String, Object>> result=null;
-        Long size=0l;
+        Long size= 0L;
         if(StringUtils.isNotBlank(dbKey)){
             result= DynamicDBUtil.findList(dbKey,SqlUtil.jeecgCreatePageSql(dbKey,querySql,queryparams,p,r));
             Map map=(Map)DynamicDBUtil.findOne(dbKey,SqlUtil.getCountSql(querySql,null));
@@ -436,7 +436,7 @@ public class CgReportController extends BaseController {
 	/**
 	 * 装载数据字典
 	 * @param m	要放入freemarker的数据
-	 * @param bean 读取出来的动态配置数据
+	 * @param cgReportMap 读取出来的动态配置数据
 	 */
 	@SuppressWarnings("unchecked")
 	private void loadDic(Map m, Map<String, Object> cgReportMap) {

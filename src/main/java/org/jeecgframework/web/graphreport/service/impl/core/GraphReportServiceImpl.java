@@ -32,7 +32,8 @@ public class GraphReportServiceImpl extends CommonServiceImpl implements
 
 	
 	
-	public Map<String, Object> queryCgReportConfig(String reportId) {
+	@Override
+    public Map<String, Object> queryCgReportConfig(String reportId) {
 		Map<String,Object> cgReportM = new HashMap<String, Object>(0);
 		Map<String,Object> mainM = jdbcDao.findForJdbc("SELECT * from jform_graphreport_head where code=?", new Object[]{reportId}).get(0);
 		List<Map<String,Object>> itemsM = jdbcDao.findForJdbc("SELECT * from jform_graphreport_item where cgreport_head_id=? order by order_num asc", new Object[]{mainM.get("id")});
@@ -62,7 +63,8 @@ public class GraphReportServiceImpl extends CommonServiceImpl implements
 //	}
 
 	
-	@SuppressWarnings("unchecked")
+	@Override
+    @SuppressWarnings("unchecked")
 	public List<Map<String, Object>> queryByCgReportSql(String sql, Map params,
 			int page, int rows) {
 		sql = handleElInSQL(sql, params);
@@ -151,7 +153,8 @@ public class GraphReportServiceImpl extends CommonServiceImpl implements
 		return sqlB.toString();
 	}
 	
-	@SuppressWarnings("unchecked")
+	@Override
+    @SuppressWarnings("unchecked")
 	public long countQueryByCgReportSql(String sql, Map params) {
 		String querySql = getFullSql(sql,params);
 		querySql = "SELECT COUNT(*) FROM ("+querySql+") t2";
@@ -159,7 +162,8 @@ public class GraphReportServiceImpl extends CommonServiceImpl implements
 		return result;
 	}
 	
-	@SuppressWarnings( "unchecked" )
+	@Override
+    @SuppressWarnings( "unchecked" )
 	public List<String> getSqlFields(String sql) {
 		if(oConvertUtils.isEmpty(sql)){
 			return null;

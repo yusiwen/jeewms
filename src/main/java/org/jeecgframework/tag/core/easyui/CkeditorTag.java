@@ -44,10 +44,12 @@ public class CkeditorTag extends TagSupport {
 		this.type = type;
 	}
 
+	@Override
 	public int doStartTag() throws JspTagException {
 		return EVAL_PAGE;
 	}
 
+	@Override
 	public int doEndTag() throws JspTagException {
 		JspWriter out = null;
 		try {
@@ -73,8 +75,9 @@ public class CkeditorTag extends TagSupport {
 				+ value + "</textarea>");
 		sb.append("<script type=\"text/javascript\">var ckeditor_" + name
 				+ "=CKEDITOR.replace(\"" + name + "_text\",{");
-		if (StringUtil.isNotEmpty(type))
-			sb.append(type);
+		if (StringUtil.isNotEmpty(type)) {
+            sb.append(type);
+        }
 		sb.append("});");
 		sb.append("</script>");
 		return sb;

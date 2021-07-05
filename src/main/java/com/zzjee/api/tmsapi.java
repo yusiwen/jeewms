@@ -1,16 +1,12 @@
 package com.zzjee.api;
 
-import com.sap.conn.jco.JCoParameterList;
-import com.sap.conn.jco.JCoTable;
-
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.jeecgframework.core.util.*;
- import org.jeecgframework.web.system.service.SystemService;
+import org.jeecgframework.core.util.StringUtil;
+import org.jeecgframework.web.system.service.SystemService;
 import org.jeecgframework.web.system.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
- import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -18,12 +14,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.validation.Validator;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
-
-import static com.xiaoleilu.hutool.date.DateTime.now;
 
 @Controller
 @RequestMapping(value = "/tmsapi")

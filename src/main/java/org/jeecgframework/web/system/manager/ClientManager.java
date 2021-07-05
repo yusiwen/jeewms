@@ -124,8 +124,9 @@ public class ClientManager {
 			HashMap<String, Client> onLineClients = (HashMap<String, Client>) EhcacheUtil.get(CACHENAME,OnlineClientsKey);
 			return onLineClients.values();
 		}
-		else
-			return new ArrayList<Client>();
+		else {
+            return new ArrayList<Client>();
+        }
 	}
 }
 

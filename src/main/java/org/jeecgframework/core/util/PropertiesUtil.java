@@ -83,10 +83,12 @@ public class PropertiesUtil {
 			e.printStackTrace();
 		} finally {
 			try {
-				if (null != is)
-					is.close();
-				if (null != os)
-					os.close();
+				if (null != is) {
+                    is.close();
+                }
+				if (null != os) {
+                    os.close();
+                }
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();

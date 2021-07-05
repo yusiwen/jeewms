@@ -40,8 +40,9 @@ public class GlobalExceptionResolver implements HandlerExceptionResolver {
 	/**
 	 * 对异常信息进行统一处理，区分异步和同步请求，分别处理
 	 */
-	public ModelAndView resolveException(HttpServletRequest request,
-			HttpServletResponse response, Object handler, Exception ex) {
+	@Override
+    public ModelAndView resolveException(HttpServletRequest request,
+                                         HttpServletResponse response, Object handler, Exception ex) {
         boolean isajax = isAjax(request,response);
         Throwable deepestException = deepestException(ex);
         return processException(request, response, handler, deepestException, isajax);
@@ -75,7 +76,6 @@ public class GlobalExceptionResolver implements HandlerExceptionResolver {
 	 * @param request
 	 * @param response
 	 * @param handler
-	 * @param deepestException
 	 * @param isajax
 	 * @return
 	 */
@@ -142,7 +142,7 @@ public class GlobalExceptionResolver implements HandlerExceptionResolver {
 	 * @param request
 	 * @param response
 	 * @param handler
-	 * @param deepestException
+	 * @param ex
 	 * @return
 	 */
 	private ModelAndView processNotAjax(HttpServletRequest request,

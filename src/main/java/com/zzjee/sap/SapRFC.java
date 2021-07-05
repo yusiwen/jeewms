@@ -183,8 +183,9 @@ public class SapRFC {
 	}
 
 	public String convertNull(String str) {
-		if (str == null)
-			return "";
+		if (str == null) {
+            return "";
+        }
 		return str;
 	}
 

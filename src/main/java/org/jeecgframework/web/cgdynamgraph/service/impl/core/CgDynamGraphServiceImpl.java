@@ -30,7 +30,8 @@ public class CgDynamGraphServiceImpl extends CommonServiceImpl implements
 		private CgDynamGraphDao cgDynamGraphDao;
 		
 		
-		public Map<String, Object> queryCgDynamGraphConfig(String reportId) {
+		@Override
+        public Map<String, Object> queryCgDynamGraphConfig(String reportId) {
 			Map<String,Object> cgDynamGraphM = new HashMap<String, Object>(0);
 			Map<String,Object> mainM = queryCgDynamGraphMainConfig(reportId);
 			List<Map<String,Object>> itemsM = queryCgDynamGraphItems(reportId);
@@ -41,7 +42,8 @@ public class CgDynamGraphServiceImpl extends CommonServiceImpl implements
 			return cgDynamGraphM;
 		}
 		
-		public Map<String,Object> queryCgDynamGraphMainConfig(String reportId){
+		@Override
+        public Map<String,Object> queryCgDynamGraphMainConfig(String reportId){
 //			String sql = JeecgSqlUtil.getMethodSql(JeecgSqlUtil.getMethodUrl());
 //			Map<String,Object> parameters = new LinkedHashMap<String,Object>();
 //			parameters.put("id", reportId);
@@ -51,7 +53,8 @@ public class CgDynamGraphServiceImpl extends CommonServiceImpl implements
 			return cgDynamGraphDao.queryCgDynamGraphMainConfig(reportId);
 		}
 		
-		public List<Map<String,Object>> queryCgDynamGraphItems(String reportId){
+		@Override
+        public List<Map<String,Object>> queryCgDynamGraphItems(String reportId){
 //			String sql = JeecgSqlUtil.getMethodSql(JeecgSqlUtil.getMethodUrl());
 //			Map<String,Object> parameters = new LinkedHashMap<String,Object>();
 //			parameters.put("configId", reportId);
@@ -75,7 +78,8 @@ public class CgDynamGraphServiceImpl extends CommonServiceImpl implements
 			return list;
 		}
 		
-		@SuppressWarnings("unchecked")
+		@Override
+        @SuppressWarnings("unchecked")
 		public List<Map<String, Object>> queryByCgDynamGraphSql(String sql, Map params) {
 			String querySql = getFullSql(sql,params);
 			List<Map<String,Object>> result = null;
@@ -108,7 +112,8 @@ public class CgDynamGraphServiceImpl extends CommonServiceImpl implements
 			}
 			return sqlB.toString();
 		}
-		@SuppressWarnings("unchecked")
+		@Override
+        @SuppressWarnings("unchecked")
 		
 		public long countQueryByCgDynamGraphSql(String sql, Map params) {
 			String querySql = getFullSql(sql,params);
@@ -116,7 +121,8 @@ public class CgDynamGraphServiceImpl extends CommonServiceImpl implements
 			long result = jdbcDao.findForLong(querySql,new HashMap(0));
 			return result;
 		}
-		@SuppressWarnings( "unchecked" )
+		@Override
+        @SuppressWarnings( "unchecked" )
 		
 		public List<String> getSqlFields(String sql) {
 			if(oConvertUtils.isEmpty(sql)){

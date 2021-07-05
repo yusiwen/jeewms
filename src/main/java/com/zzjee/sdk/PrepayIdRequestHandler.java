@@ -52,8 +52,9 @@ public class PrepayIdRequestHandler extends RequestHandler {
             resContent = httpClient.getResContent();
             System.out.println("获取prepayid的返回值："+resContent);
             Map<String,String> map=XMLUtil.doXMLParse(resContent);
-            if(map.containsKey("prepay_id"))
+            if(map.containsKey("prepay_id")) {
                 prepayid=map.get("prepay_id");
+            }
         }
         return prepayid;
     }

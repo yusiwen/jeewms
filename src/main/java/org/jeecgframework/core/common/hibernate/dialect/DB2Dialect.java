@@ -3,11 +3,13 @@ package org.jeecgframework.core.common.hibernate.dialect;
 
 public class DB2Dialect extends Dialect
 {
+  @Override
   public boolean supportsLimit()
   {
     return true;
   }
 
+  @Override
   public boolean supportsLimitOffset()
   {
     return true;
@@ -30,6 +32,7 @@ public class DB2Dialect extends Dialect
     return sql.toLowerCase().indexOf("select distinct") >= 0;
   }
 
+  @Override
   public String getLimitString(String sql, int offset, String offsetPlaceholder, int limit, String limitPlaceholder)
   {
     int startOfSelect = sql.toLowerCase().indexOf("select");
@@ -57,6 +60,7 @@ public class DB2Dialect extends Dialect
     return pagingSelect.toString();
   }
 
+  @Override
   public String getCountSql(String sql)
   {
     return null;

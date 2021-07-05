@@ -20,20 +20,23 @@ import com.jeecg.demo.service.JeecgDemoServiceI;
 public class JeecgDemoServiceImpl extends CommonServiceImpl implements JeecgDemoServiceI {
 
 	
- 	public void delete(JeecgDemoEntity entity) throws Exception{
+ 	@Override
+    public void delete(JeecgDemoEntity entity) throws Exception{
  		super.delete(entity);
  		//执行删除操作增强业务
 		this.doDelBus(entity);
  	}
  	
- 	public Serializable save(JeecgDemoEntity entity) throws Exception{
+ 	@Override
+    public Serializable save(JeecgDemoEntity entity) throws Exception{
  		Serializable t = super.save(entity);
  		//执行新增操作增强业务
  		this.doAddBus(entity);
  		return t;
  	}
  	
- 	public void saveOrUpdate(JeecgDemoEntity entity) throws Exception{
+ 	@Override
+    public void saveOrUpdate(JeecgDemoEntity entity) throws Exception{
  		super.saveOrUpdate(entity);
  		//执行更新操作增强业务
  		this.doUpdateBus(entity);
@@ -55,7 +58,7 @@ public class JeecgDemoServiceImpl extends CommonServiceImpl implements JeecgDemo
  	}
  	/**
 	 * 删除操作增强业务
-	 * @param id
+	 * @param t
 	 * @return
 	 */
 	private void doDelBus(JeecgDemoEntity t) throws Exception{

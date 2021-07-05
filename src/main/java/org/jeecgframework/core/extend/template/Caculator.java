@@ -214,7 +214,9 @@ public class Caculator {
                 
             default:
                 int j=i;
-                for(;j<cin.length && ((cin[j]>='0'&&cin[j]<='9') ||cin[j]=='.' || cin[j]=='E');j++);
+                for(;j<cin.length && ((cin[j]>='0'&&cin[j]<='9') ||cin[j]=='.' || cin[j]=='E');j++) {
+                    ;
+                }
                 if(j==i)
                 {
                     throw new RuntimeException("wrong input.");

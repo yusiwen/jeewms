@@ -45,7 +45,9 @@ public class IconImageUtil {
 
     //byte数组到图片
     private static void byte2image(byte[] data,File file){
-        if( data.length < 3 ) return;
+        if( data.length < 3 ) {
+            return;
+        }
         FileImageOutputStream imageOutput = null;
         String fileName=null;
         try {

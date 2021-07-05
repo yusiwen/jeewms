@@ -8,7 +8,8 @@ import java.util.List;
 
 public interface TWzRkHeadServiceI extends CommonService {
 
- 	public <T> void delete(T entity);
+ 	@Override
+    public <T> void delete(T entity);
 	/**
 	 * 添加一对多
 	 *
@@ -25,19 +26,19 @@ public interface TWzRkHeadServiceI extends CommonService {
 
  	/**
 	 * 默认按钮-sql增强-新增操作
-	 * @param id
+	 * @param t
 	 * @return
 	 */
  	public boolean doAddSql(TWzRkHeadEntity t);
  	/**
 	 * 默认按钮-sql增强-更新操作
-	 * @param id
+	 * @param t
 	 * @return
 	 */
  	public boolean doUpdateSql(TWzRkHeadEntity t);
  	/**
 	 * 默认按钮-sql增强-删除操作
-	 * @param id
+	 * @param t
 	 * @return
 	 */
  	public boolean doDelSql(TWzRkHeadEntity t);

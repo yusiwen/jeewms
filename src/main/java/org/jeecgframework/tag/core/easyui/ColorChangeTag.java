@@ -15,10 +15,12 @@ import javax.servlet.jsp.tagext.TagSupport;
  * @version 1.0
  */
 public class ColorChangeTag extends TagSupport {
-	public int doStartTag() throws JspTagException {
+	@Override
+    public int doStartTag() throws JspTagException {
 		return EVAL_PAGE;
 	}
-	public int doEndTag() throws JspTagException {
+	@Override
+    public int doEndTag() throws JspTagException {
 		JspWriter out = null;
 		try {
 			out = this.pageContext.getOut();

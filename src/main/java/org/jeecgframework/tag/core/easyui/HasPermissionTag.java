@@ -27,6 +27,7 @@ public class HasPermissionTag extends TagSupport{
 	@Autowired
 	private SystemService systemService;
 	
+	@Override
 	public int doStartTag() throws JspException {
         boolean show = showTagBody(code);
         if (show) {
@@ -45,8 +46,9 @@ public class HasPermissionTag extends TagSupport{
 			systemService = ApplicationContextUtil.getContext().getBean(SystemService.class);
 			if (null!=operationCodeIds) {
 				for (String operationCodeId : operationCodeIds) {
-					if (oConvertUtils.isEmpty(operationCodeId))
-						break;
+					if (oConvertUtils.isEmpty(operationCodeId)) {
+                        break;
+                    }
 					TSOperation operation = systemService.getEntity(TSOperation.class, operationCodeId);
 					if (operation!=null && operation.getOperationcode().equals(code)){
 						return true;
