@@ -26,6 +26,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
+import org.apache.log4j.spi.ErrorCode;
 import org.apache.tools.zip.ZipEntry;
 import org.apache.tools.zip.ZipFile;
 import org.apache.tools.zip.ZipOutputStream;
@@ -42,10 +43,12 @@ import org.jeecgframework.web.cgform.pojo.config.CgFormHeadPojo;
 import org.jeecgframework.web.cgform.pojo.config.CgFormIndexPojo;
 import org.jeecgframework.web.cgform.util.PublicUtil;
 import org.springframework.beans.BeanUtils;
+import org.springframework.dao.DataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowCallbackHandler;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.jdbc.support.rowset.SqlRowSetMetaData;
@@ -56,12 +59,12 @@ import com.thoughtworks.xstream.converters.basic.NullConverter;
 
 /**
  * 迁移表单工具类
- * 
+ *
  * @author duanqilu
  * @author Hank
  * @param <T>
- * @date 2013-09-10  
- * @date 2014-01-25 
+ * @date 2013-09-10
+ * @date 2014-01-25
  */
 @Service("MigrateForm")
 public class MigrateForm<T> {
@@ -72,11 +75,11 @@ public class MigrateForm<T> {
 
 	private static List<String> insertList = new ArrayList<String>();// 全局存放insertsql文件的数据
 	private static String basePath = "";
-	
+
 
 	/**
 	 * 拼装查询语句
-	 * 
+	 *
 	 * @ids:选中表单的IDs
 	 * @return 返回select集合
 	 */
@@ -155,7 +158,7 @@ public class MigrateForm<T> {
 		}
 		return listSQL;
 	}
-	
+
 	public static List<DBTable> buildExportDbTableList(String ids, JdbcTemplate jdbcTemplate) throws Exception {
 		List<DBTable> listTables = new ArrayList<DBTable>();// SQL语句列表
 		listTables.clear();
@@ -169,33 +172,41 @@ public class MigrateForm<T> {
 		Map subSqlMap = null;
 		String[] idList = ids.split(",");// 获得指定的ID数据
 		for (String id : idList) {
-			ls_sql = "select * from cgform_head where id='" + id + "'"; // 获得导出表单
-			listTables.add(bulidDbTableFromSQL(ls_sql, CgFormHeadPojo.class, jdbcTemplate));
+			/**
+			 * 判断字符串是否是整数
+			 */
+			try {
+				Integer.parseInt(id);
+			} catch (NumberFormatException e) {
+				return new ArrayList<DBTable>();
+			}
 
-			ls_tmpsql = "select * from cgform_index where table_id='" + id + "'"; // 获得导出索引的字段
-			listTables.add(bulidDbTableFromSQL(ls_tmpsql, CgFormIndexPojo.class, jdbcTemplate));
-
-
-
-			ls_tmpsql = "select * from cgform_field where table_id='" + id + "'"; // 获得导出表单的字段
-			listTables.add(bulidDbTableFromSQL(ls_tmpsql, CgFormFieldPojo.class, jdbcTemplate));
+			ls_sql = "select * from cgform_head where id=:id"; // 获得导出表单
+			listTables.add(bulidDbTableFromSQL(ls_sql,id, CgFormHeadPojo.class, jdbcTemplate));
+			ls_tmpsql = "select * from cgform_index where table_id=:id"; // 获得导出索引的字段
+			listTables.add(bulidDbTableFromSQL(ls_tmpsql,id, CgFormIndexPojo.class, jdbcTemplate));
+			ls_tmpsql = "select * from cgform_field where table_id=:id"; // 获得导出表单的字段
+			listTables.add(bulidDbTableFromSQL(ls_tmpsql,id, CgFormFieldPojo.class, jdbcTemplate));
 			// 获得自定义按钮数据
-			ls_tmpsql = "select * from cgform_button where form_id ='" + id + "'";
-			listTables.add(bulidDbTableFromSQL(ls_tmpsql, CgformButtonEntity.class, jdbcTemplate));
+			ls_tmpsql = "select * from cgform_button where form_id =:id";
+			listTables.add(bulidDbTableFromSQL(ls_tmpsql,id, CgformButtonEntity.class, jdbcTemplate));
 			// 获得JS增强数据
-			ls_tmpsql = "select * from cgform_enhance_js where form_id ='" + id + "'";
-			listTables.add(bulidDbTableFromSQL(ls_tmpsql, CgformEnhanceJsEntity.class, jdbcTemplate));
+			ls_tmpsql = "select * from cgform_enhance_js where form_id =:id";
+			listTables.add(bulidDbTableFromSQL(ls_tmpsql,id, CgformEnhanceJsEntity.class, jdbcTemplate));
 			// 获得SQL增强数据
-			ls_tmpsql = "select * from cgform_button_sql where form_id ='" + id + "'";
-			listTables.add(bulidDbTableFromSQL(ls_tmpsql, CgformButtonSqlEntity.class, jdbcTemplate));
+			ls_tmpsql = "select * from cgform_button_sql where form_id =:id";
+			listTables.add(bulidDbTableFromSQL(ls_tmpsql,id, CgformButtonSqlEntity.class, jdbcTemplate));
 			// 获得模板数据
-			ls_tmpsql = "select * from cgform_ftl where cgform_id ='" + id + "'";
-			listTables.add(bulidDbTableFromSQL(ls_tmpsql, CgformFtlEntity.class, jdbcTemplate));
+			ls_tmpsql = "select * from cgform_ftl where cgform_id =:id";
+			listTables.add(bulidDbTableFromSQL(ls_tmpsql,id, CgformFtlEntity.class, jdbcTemplate));
 			// 获得上传文件数据
-			ls_tmpsql = "select * from cgform_uploadfiles where cgform_id ='" + id + "'";
-			listTables.add(bulidDbTableFromSQL(ls_tmpsql, CgUploadEntity.class, jdbcTemplate));
+			ls_tmpsql = "select * from cgform_uploadfiles where cgform_id =:id";
+			listTables.add(bulidDbTableFromSQL(ls_tmpsql,id, CgUploadEntity.class, jdbcTemplate));
 
-			rowsList = jdbcTemplate.queryForList(ls_sql);
+			NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(jdbcTemplate);
+			MapSqlParameterSource parameters = new MapSqlParameterSource();
+			parameters.addValue("id", id);
+			rowsList = namedParameterJdbcTemplate.queryForList(ls_sql,parameters);
 			if (rowsList != null && rowsList.size() > 0) {
 				sqlMap = (Map) rowsList.get(0);
 				subTable = (String) sqlMap.get("sub_table_str"); // 获得子表
@@ -209,12 +220,9 @@ public class MigrateForm<T> {
 						if (subRowsList != null && subRowsList.size() > 0) {
 							subSqlMap = (Map) subRowsList.get(0);
 							ls_subid = (String) subSqlMap.get("id");
-
 							// 获得导出子表索引
 							ls_tmpsql = "select * from cgform_index where table_id='" + ls_subid + "'";
 							listTables.add(bulidDbTableFromSQL(ls_tmpsql, CgFormIndexPojo.class, jdbcTemplate));
-
-
 							// 获得导出子表字段
 							ls_tmpsql = "select * from cgform_field where table_id='" + ls_subid + "'";
 							listTables.add(bulidDbTableFromSQL(ls_tmpsql, CgFormFieldPojo.class, jdbcTemplate));
@@ -244,7 +252,7 @@ public class MigrateForm<T> {
 
 	/**
 	 * 执行sql并返回插入sql语句
-	 * 
+	 *
 	 * @param jdbcTemplate
 	 * @param listSQL
 	 * @throws SQLException
@@ -263,10 +271,23 @@ public class MigrateForm<T> {
 		dbTable.setTableData(dataList);
 		return dbTable;
 	}
+	public static <T> DBTable<T> bulidDbTableFromSQL(String sql,String id, Class<T> clazz, JdbcTemplate jdbcTemplate) throws InstantiationException, IllegalAccessException, Exception {
+		DBTable<T> dbTable = new DBTable<T>();
+		dbTable.setTableName(PublicUtil.getTableName(sql));
+		dbTable.setClass1(clazz);
+
+		NamedParameterJdbcTemplate namedParameterJdbcTemplate = new NamedParameterJdbcTemplate(jdbcTemplate);
+		MapSqlParameterSource parameters = new MapSqlParameterSource();
+		parameters.addValue("id", id);
+		List<T> dataList = namedParameterJdbcTemplate.queryForList(sql, parameters, clazz);
+
+		dbTable.setTableData(dataList);
+		return dbTable;
+	}
 
 	/**
 	 * 获取列名和列值
-	 * 
+	 *
 	 * @param listSQL
 	 * @param jdbcTemplate
 	 * @return
@@ -366,18 +387,18 @@ public class MigrateForm<T> {
 
 					insertSQL(tableName, ColumnName, ColumnValue);// 拼装并放到全局list里面
 					if(tableName.equals("cgform_head")){
-						insertList.add("update cgform_head set is_dbsynch='N' where id='"+tableId+"';");// 设为未同步		
+						insertList.add("update cgform_head set is_dbsynch='N' where id='"+tableId+"';");// 设为未同步
 					}
 
 				}
 			}
-			
+
 		}
 	}
 
 	/**
 	 * 拼装insertsql 放到全局list里面
-	 * 
+	 *
 	 * @param ColumnName
 	 * @param ColumnValue
 	 */
@@ -387,7 +408,7 @@ public class MigrateForm<T> {
 		insertSQL.append(insert).append(" ").append(tablename).append("(").append(ColumnName.toString()).append(")").append(values).append("(").append(ColumnValue.toString()).append(");");
 		insertList.add(insertSQL.toString()); // 放到全局list里面
 	}
-	
+
 	public static void generateXmlDataOutFlieContent(List<DBTable> dbTables, String parentDir) throws BusinessException{
 		File file = new File(parentDir);
 		if (!file.exists()) {
@@ -405,7 +426,7 @@ public class MigrateForm<T> {
 			throw new BusinessException(e.getMessage());
 		}
 	}
-	
+
 	/**
 	 * 创建insertsql.sql并导出数据
 	 */
@@ -446,7 +467,7 @@ public class MigrateForm<T> {
 
 	/**
 	 * 以流方式获得blog,image等大数据
-	 * 
+	 *
 	 * @param id
 	 *            字段主键
 	 * @param tableName
@@ -460,7 +481,7 @@ public class MigrateForm<T> {
 
 		// 查询并获得输入流
 		jdbcTemplate.query(ls_sql, new RowCallbackHandler() {
-			
+
 			@Override
 			public void processRow(ResultSet rs) throws SQLException {
 				inStream = rs.getBinaryStream(columnName);
@@ -493,7 +514,7 @@ public class MigrateForm<T> {
 
 	/**
 	 * 转换byte[]为16进制字符串
-	 * 
+	 *
 	 * @param b
 	 *            要转换的byte数据
 	 */
@@ -516,7 +537,7 @@ public class MigrateForm<T> {
 
 	/**
 	 * 压缩
-	 * 
+	 *
 	 * @param zipFileName
 	 *            压缩产生的zip包文件名--带路径,如果为null或空则默认按文件名生产压缩文件名
 	 * @param relativePath
@@ -555,7 +576,7 @@ public class MigrateForm<T> {
 
 	/**
 	 * 压缩
-	 * 
+	 *
 	 * @param zos
 	 *            压缩输出流
 	 * @param relativePath
@@ -585,7 +606,7 @@ public class MigrateForm<T> {
 
 	/**
 	 * * 压缩文件
-	 * 
+	 *
 	 * @param zos
 	 *            压缩输出流
 	 * @param file
@@ -619,7 +640,7 @@ public class MigrateForm<T> {
 
 	/**
 	 * 创建目录
-	 * 
+	 *
 	 * @param zos
 	 *            zip输出流
 	 * @param relativePath
@@ -634,7 +655,7 @@ public class MigrateForm<T> {
 
 	/**
 	 * 解压缩zip包
-	 * 
+	 *
 	 * @param zipFilePath
 	 *            zip文件路径
 	 * @param targetPath
@@ -698,7 +719,7 @@ public class MigrateForm<T> {
 
 	/**
 	 * 生产文件 如果文件所在路径不存在则生成路径
-	 * 
+	 *
 	 * @param fileName
 	 *            文件名 带路径
 	 * @param isDirectory
@@ -716,7 +737,7 @@ public class MigrateForm<T> {
 		}
 		return target;
 	}
-	
+
 	public static <T> String generateInsertSql(String tableName, Class<T> clazz, List<String> ignores){
 		StringBuffer insertSql = new StringBuffer("insert into " + tableName + "(");
 		String tableField = "";
@@ -744,7 +765,7 @@ public class MigrateForm<T> {
 		org.jeecgframework.core.util.LogUtil.info("generate insertSql for "+ clazz.getName() + ":" +insertSql.toString());
 		return insertSql.toString();
 	}
-	
+
 	public static <T> String generateUpdateSql(String tableName, Class<T> clazz, List<String> ignores){
 		StringBuffer updateSql = new StringBuffer("update " + tableName + " set ");
 		String updateProperties = "";
@@ -770,7 +791,7 @@ public class MigrateForm<T> {
 		org.jeecgframework.core.util.LogUtil.info("generate updateSql for "+ clazz.getName() + ":" +updateSql.toString());
 		return updateSql.toString();
 	}
-	
+
 	public static SqlParameterSource generateParameterMap(Object t, List<String> ignores){
 		Map<String, Object> paramMap = new HashMap<String, Object>();
 		ReflectHelper reflectHelper = new ReflectHelper(t);

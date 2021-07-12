@@ -43,9 +43,9 @@ import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 
 /**
- * 获取和删除token的请求地址， 
+ * 获取和删除token的请求地址，
  * 在Restful设计中其实就对应着登录和退出登录的资源映射
- * 
+ *
  * @author scott
  * @date 2015/7/30.
  */
@@ -318,6 +318,7 @@ public class TokenController {
 			if (!f.exists()) {
 				f.mkdirs();
 			}
+			fileAddr = f.getCanonicalPath();
 			OutputStream os = new FileOutputStream(fileAddr + File.separator + fileName);
 			int bytesRead = 0;
 			byte[] buffer = new byte[8192];
