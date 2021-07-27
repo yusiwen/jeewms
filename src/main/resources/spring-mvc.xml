@@ -148,10 +148,33 @@
 					<list>
                         <value>systemController/showOrDownByurl.do</value>
 						<value>wmOmNoticeHController.do</value>
+						<value>wmsApiController.do</value>
 					</list>
 				</property>
-
-
+			</bean>
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/**"/>
+			<bean class="org.jeecgframework.core.interceptors.WmsApiInterceptor">
+				<property name="containUrls">
+					<list>
+						<value>wmsApiController.do?goodsList</value>
+						<value>wmsApiController.do?goodsDoAdd</value>
+						<value>wmsApiController.do?goodsDoUpdate</value>
+						<value>wmsApiController.do?cusList</value>
+						<value>wmsApiController.do?cusDoAdd</value>
+						<value>wmsApiController.do?cusDoUpdate</value>
+						<value>wmsApiController.do?binList</value>
+						<value>wmsApiController.do?binDoAdd</value>
+						<value>wmsApiController.do?imNoticeHDoAdd</value>
+						<value>wmsApiController.do?imNoticeHDoDel</value>
+						<value>wmsApiController.do?omNoticeHDoAdd</value>
+						<value>wmsApiController.do?omNoticeHDoDel</value>
+						<value>wmsApiController.do?imNoticeHList</value>
+						<value>wmsApiController.do?omNoticeHList</value>
+						<value>wmsApiController.do?getStock</value>
+					</list>
+				</property>
 			</bean>
 		</mvc:interceptor>
 	</mvc:interceptors>

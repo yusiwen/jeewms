@@ -34,16 +34,16 @@
   </t:datagrid>
   </div>
  </div>
- <script src = "webpage/com/zzjee/conf/fxjOtherLoginList.js"></script>		
+ <script src = "webpage/com/zzjee/conf/fxjOtherLoginList.js"></script>
  <script type="text/javascript">
  $(document).ready(function(){
  });
- 
-   
- 
+
+
+
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'fxjOtherLoginController.do?upload', "fxjOtherLoginList");
+	openwindow('Excel导入', 'fxjOtherLoginController.do?upload', "fxjOtherLoginList");
 }
 
 //导出

@@ -76,7 +76,7 @@
     </div>
   </div>
  </div>
- <script src = "webpage/com/zzjee/md/mdCusOtherList.js"></script>		
+ <script src = "webpage/com/zzjee/md/mdCusOtherList.js"></script>
  <script type="text/javascript">
  $(document).ready(function(){
  });
@@ -103,11 +103,11 @@
          $('#mdCusOtherList').datagrid('reload',{});
 
  }
-   
- 
+
+
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'mdCusOtherController.do?upload', "mdCusOtherList");
+	openwindow('Excel导入', 'mdCusOtherController.do?upload', "mdCusOtherList");
 }
 
 //导出

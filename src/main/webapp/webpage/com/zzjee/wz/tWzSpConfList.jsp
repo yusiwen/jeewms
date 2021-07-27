@@ -34,12 +34,12 @@
  <script type="text/javascript">
  $(document).ready(function(){
  });
- 
-   
- 
+
+
+
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'tWzSpConfController.do?upload', "tWzSpConfList");
+	openwindow('Excel导入', 'tWzSpConfController.do?upload', "tWzSpConfList");
 }
 
 //导出

@@ -40,7 +40,7 @@
     <t:dgCol title="传真"  field="chuanZhen"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
     <t:dgCol title="联系人1"  field="zhuLianXiRen1"    width="70"></t:dgCol>
     <t:dgCol title="电话1"  field="dianHua1"       width="70"></t:dgCol>
-    
+
     <t:dgCol title="Email地址"  field="emaildiZhi"    queryMode="group"  width="120"></t:dgCol>
     <t:dgCol title="网页地址"  field="wangYeDiZhi"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
     <t:dgCol title="法人代表"  field="faRenDaiBiao"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
@@ -69,16 +69,16 @@
   </t:datagrid>
   </div>
  </div>
- <script src = "webpage/com/zzjee/md/mdCusList.js"></script>		
+ <script src = "webpage/com/zzjee/md/mdCusList.js"></script>
  <script type="text/javascript">
  $(document).ready(function(){
  });
- 
-   
- 
+
+
+
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'mdCusController.do?upload', "mdCusList");
+	openwindow('Excel导入', 'mdCusController.do?upload', "mdCusList");
 }
 
 //导出

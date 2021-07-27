@@ -9,7 +9,7 @@
         <t:dgCol title="创建人名称"  field="createName"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
     <t:dgCol title="创建人登录名称"  field="createBy"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
     <t:dgCol title="移动日期"  field="lastMove" formatter="yyyy-MM-dd hh:mm:ss" query="true"  queryMode="group"  width="120"></t:dgCol>
-       
+
     <t:dgCol title="库存类型"  field="kuctype"   query="true" queryMode="single"  width="120"></t:dgCol>
     <t:dgCol title="储位"  field="kuWeiBianMa"   query="true" queryMode="single"  width="120"></t:dgCol>
     <t:dgCol title="托盘"  field="binId"   query="true" queryMode="single"  width="120"></t:dgCol>
@@ -46,7 +46,7 @@
       </div>
   </div>
  </div>
- <script src = "webpage/com/zzjee/wm/wvStockList.js"></script>		
+ <script src = "webpage/com/zzjee/wm/wvStockList.js"></script>
  <script type="text/javascript">
  $(document).ready(function(){
 
@@ -73,7 +73,7 @@
 	 var rows = $('#wvStockList').datagrid('getSelections');
 	 for(var i=0; i<rows.length; i++){
 		 if(rows[i].moveSta=="计划中"){
-		
+
 		 }else{
 			 	ids.push(rows[i].id);
 		 }
@@ -91,11 +91,11 @@
 				if (d.success) {
 					tip("添加到托盘转移清单成功");
 			        $('#wvStockList').datagrid('reload',{});
-				}		
+				}
 			}
 		});
 	}
- 
+
  function dostttpzy(id){
 		var url = "wvStockController.do?dostttpzy&id="+id;
 		$.ajax({
@@ -110,14 +110,14 @@
 				if (d.success) {
 					tip("添加到托盘转移清单成功");
 			        $('#wvStockList').datagrid('reload',{});
-				}		
+				}
 			}
 		});
 	}
- 
+
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'wmToMoveGoodsController.do?upload', "wvStockList");
+	openwindow('Excel导入', 'wmToMoveGoodsController.do?upload', "wvStockList");
 }
 
 //导出

@@ -239,6 +239,16 @@
 								<t:dictSelect     field="supCode" type="list"   extendJson="  {class:'form-control',style:'width:230px'}"
 											     dictTable="md_sup" dictField="GYS_BIAN_MA" dictText="ZHONG_WEN_QCH"   hasLabel="false"  title="供应商"></t:dictSelect>
 
+								<div class="col-xs-1 text-center">
+									<b>预约库区：</b>
+								</div>
+								<div class="col-xs-2">
+									<t:dictSelect   field="areaCode" type="list"   extendJson="  {class:'form-control',datatype:'*',style:'width:230px'}"
+												   defaultVal="存货区" typeGroupCode="area_type"    hasLabel="false"  title="预约库区"></t:dictSelect>
+									<span class="Validform_checktip" style="float:left;height:0px;"></span>
+									<label class="Validform_label" style="display: none">预约库区</label>
+									<%-- 						<t:autocomplete    searchField="cusName"   name="cusCode" entityName="MvCusEntity" ></t:autocomplete> --%>
+								</div>
 
 							<%--								<div class="col-xs-1 text-center">--%>
 <%--									<b>供应商编码：</b>--%>

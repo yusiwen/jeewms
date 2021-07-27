@@ -73,7 +73,7 @@
     </div>
   </div>
  </div>
- <script src = "webpage/com/zzjee/md/mdSupList.js"></script>		
+ <script src = "webpage/com/zzjee/md/mdSupList.js"></script>
  <script type="text/javascript">
  $(document).ready(function(){
  });
@@ -106,7 +106,7 @@
  }
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'mdSupController.do?upload', "mdSupList");
+	openwindow('Excel导入', 'mdSupController.do?upload', "mdSupList");
 }
 
 //导出

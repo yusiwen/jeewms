@@ -21,13 +21,13 @@
     <t:dgCol title="预约数量"  field="goodsCount"    queryMode="single"  width="80"></t:dgCol>
     <t:dgCol title="已登记数量"  field="goodsQmCount"    queryMode="single"  width="80"></t:dgCol>
     <t:dgCol title="单位"  field="goodsUnit"    queryMode="single"  width="50"></t:dgCol>
-      
+
 <%--    <t:dgDelOpt title="删除" url="wmInQmIController.do?doDel&id={id}" urlclass="ace_button"  urlfont="fa-trash-o"/> --%>
    <t:dgFunOpt title="验收" funname="wmim(id)"  urlclass="ace_button"   />
 
 <%--    <t:dgToolBar title="录入" icon="icon-add" url="wmInQmIController.do?goAdd" funname="add"></t:dgToolBar> --%>
 <%--    <t:dgToolBar title="编辑" icon="icon-edit" url="wmInQmIController.do?goUpdate" funname="update"></t:dgToolBar> --%>
-<%--   <t:dgToolBar title="批量删除"  icon="icon-remove" url="wmInQmIController.do?doBatchDel" funname="deleteALLSelect"></t:dgToolBar> --%> 
+<%--   <t:dgToolBar title="批量删除"  icon="icon-remove" url="wmInQmIController.do?doBatchDel" funname="deleteALLSelect"></t:dgToolBar> --%>
 <%--    <t:dgToolBar title="查看" icon="icon-search" url="wmInQmIController.do?goUpdate" funname="detail"></t:dgToolBar> --%>
 <%--    <t:dgToolBar title="导入" icon="icon-put" funname="ImportXls"></t:dgToolBar> --%>
 <%--    <t:dgToolBar title="导出" icon="icon-putout" funname="ExportXls"></t:dgToolBar> --%>
@@ -49,7 +49,7 @@ function wmim(id) {
 }
     //导入
     function ImportXls() {
-        openuploadwin('Excel导入', 'departController.do?upload', "departList");
+        openwindow('Excel导入', 'departController.do?upload', "departList");
     }
 
     //导出

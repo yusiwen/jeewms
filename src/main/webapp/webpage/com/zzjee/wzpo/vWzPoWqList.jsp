@@ -113,10 +113,10 @@
 
 
  }
- 
+
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'vWzPoWqController.do?upload', "vWzPoWqList");
+ openwindow('Excel导入', 'vWzPoWqController.do?upload', "vWzPoWqList");
 }
 
 //导出

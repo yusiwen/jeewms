@@ -298,7 +298,6 @@ public class wmUtil {
 		}
 		try{
 			TSUser user = ResourceUtil.getSessionUserName();
-			System.out.println("user.getId()========"+user.getId());
 			String roles = "";
 			if (user != null) {
 				List<TSRoleUser> rUsers = systemService.findByProperty(TSRoleUser.class, "TSUser.id", user.getId());

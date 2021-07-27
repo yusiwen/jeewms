@@ -17,7 +17,7 @@
      <t:dgCol title="邮箱"  field="email"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
      <t:dgCol title="入职状态"  field="status" query="true" extend="{style:{width:'300px';color:'red'};datatype:'*';}" defaultVal='N'  dictionary="sf_yn" width="80"></t:dgCol>
     <t:dgCol title="个人介绍"  field="content"  hidden="true"   queryMode="group"  width="500"></t:dgCol>
-   
+
     <t:dgCol title="创建人id"  field="createBy"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
     <t:dgCol title="创建人"  field="createName"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
     <t:dgCol title="修改人id"  field="updateBy"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
@@ -42,7 +42,7 @@
  </div>
  <script type="text/javascript">
  function testReloadPage(){
-		document.location = "http://www.baidu.com"; 
+		document.location = "http://www.baidu.com";
 	}
 	function szqm(id) {
 		createwindow('审核入职', 'jeecgListDemoController.do?goCheck&id=' + id,320,180);
@@ -50,16 +50,16 @@
 	function addNewPage(id){
 		addOneTab("TAB方式添加", "jeecgListDemoController.do?addTab&type=table&id="+id);
 	}
-	
+
 function addWithbtn(title,addurl,gname,width,height){
 	//createdetailwindow("添加", addurl,770);
 	openwindow("添加",addurl,gname,770,500);
-	
+
 }
- 
+
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'jeecgListDemoController.do?upload', "jeecgDemoList");
+	openwindow('Excel导入', 'jeecgListDemoController.do?upload', "jeecgDemoList");
 }
 
 //导出

@@ -9,9 +9,17 @@
 <body style="overflow-y: hidden" scroll="no">
 <t:formvalid formid="formobj" layout="div" dialog="true" beforeSubmit="upload">
 	<fieldset class="step">
-	<div class="form"><t:upload name="fiels" buttonText="选择要导入的文件" uploader="${controller_name}.do?importExcel" extend="*.xls;*.xlsx" id="file_upload" formData="documentTitle"></t:upload></div>
-	<div class="form" id="filediv" style="height: 50px"></div>
+<%--	<div class="form"><t:upload name="fiels" buttonText="选择要导入的文件" uploader="${controller_name}.do?importExcel" extend="*.xls;*.xlsx" id="file_upload" formData="documentTitle"></t:upload></div>--%>
+<%--		<div class="form" id="filediv" style="height: 50px"></div>--%>
+	<div class="col-xs-5">
+		<t:webUploader auto="false"   name="fuJian" duplicate="true" fileNumLimit="3" url="${controller_name}.do?importExcel"></t:webUploader>
+
+	</div>
 	</fieldset>
 </t:formvalid>
 </body>
+
+<script>
+
+</script>
 </html>

@@ -31,12 +31,12 @@
   </t:datagrid>
   </div>
  </div>
- <script src = "webpage/com/zzjee/wm/wmCusCostHList.js"></script>		
+ <script src = "webpage/com/zzjee/wm/wmCusCostHList.js"></script>
  <script type="text/javascript">
- 
+
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'wmCusCostHController.do?upload', "wmCusCostHList");
+	openwindow('Excel导入', 'wmCusCostHController.do?upload', "wmCusCostHList");
 }
 
 //导出

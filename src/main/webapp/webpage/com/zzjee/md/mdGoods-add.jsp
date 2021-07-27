@@ -12,10 +12,10 @@
   <link rel="stylesheet" href="online/template/ledefault/css/bootstrap-theme.css">
   <link rel="stylesheet" href="online/template/ledefault/css/bootstrap.css">
   <link rel="stylesheet" href="online/template/ledefault/css/app.css">
-  
+
   <link rel="stylesheet" href="plug-in/Validform/css/metrole/style.css" type="text/css"/>
   <link rel="stylesheet" href="plug-in/Validform/css/metrole/tablefrom.css" type="text/css"/>
-  
+
   <script type="text/javascript" src="plug-in/jquery/jquery-1.8.3.js"></script>
   <script type="text/javascript" src="plug-in/tools/dataformat.js"></script>
   <script type="text/javascript" src="plug-in/easyui/jquery.easyui.min.1.3.2.js"></script>
@@ -31,7 +31,7 @@
   <script type="text/javascript" src="plug-in/Validform/plugin/passwordStrength/passwordStrength-min.js"></script>
   <script type="text/javascript"  charset="utf-8" src="plug-in/ueditor/ueditor.config.js"></script>
   <script type="text/javascript"  charset="utf-8" src="plug-in/ueditor/ueditor.all.min.js"></script>
-								
+
    <script type="text/javascript">
   //编写自定义JS代码
 function counttiji(){
@@ -72,8 +72,8 @@ function counttiji(){
 			          	<b  style="color:red">存放温层</b>
 			          </div>
 			          <div class="col-xs-3">
-								<t:dictSelect field="cfWenCeng" type="list" extendJson="{class:'form-control';datatype:'*'}"  
-								dictTable="ba_deg_type" dictField="deg_type_code" dictText="deg_type_name" hasLabel="false"  title="存放温层"></t:dictSelect>     
+								<t:dictSelect field="cfWenCeng" type="list" extendJson="{class:'form-control';datatype:'*'}"
+								dictTable="ba_deg_type" dictField="deg_type_code" dictText="deg_type_name" hasLabel="false"  title="存放温层"></t:dictSelect>
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
 						<label class="Validform_label" style="display: none">存放温层</label>
 			          </div>
@@ -81,8 +81,8 @@ function counttiji(){
 			          	<b  style="color:red">产品属性</b>
 			          </div>
 			          <div class="col-xs-3">
-								<t:dictSelect field="chpShuXing" type="list" extendJson="{class:'form-control';datatype:'*'}"  
-								dictTable="ba_goods_type" dictField="goods_type_code" dictText="goods_type_name" hasLabel="false"  title="产品属性"></t:dictSelect>     
+								<t:dictSelect field="chpShuXing" type="list" extendJson="{class:'form-control';datatype:'*'}"
+								dictTable="ba_goods_type" dictField="goods_type_code" dictText="goods_type_name" hasLabel="false"  title="产品属性"></t:dictSelect>
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
 						<label class="Validform_label" style="display: none">产品属性</label>
 			          </div>
@@ -97,15 +97,15 @@ function counttiji(){
 						<label class="Validform_label" style="display: none">价格</label>
 			          </div>
 						</div>
-			          
-			        
+
+
 							<div class="row show-grid">
-							
+
 							         <div class="col-xs-3 text-center">
 			          	<b  style="color:red">商品编码</b>
 			          </div>
 			          <div class="col-xs-3">
-								<input id="shpBianMa" name="shpBianMa" type="text" class="form-control" 
+								<input id="shpBianMa" name="shpBianMa" type="text" class="form-control"
 									ignore="checked"
 									   datatype="*" required="required" />
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
@@ -115,7 +115,7 @@ function counttiji(){
 			          	<b   >客户商品编码</b>
 			          </div>
 			          <div class="col-xs-3">
-								<input id="shpBianMakh" name="shpBianMakh" type="text" class="form-control" 
+								<input id="shpBianMakh" name="shpBianMakh" type="text" class="form-control"
 									ignore="checked"
 								   />
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
@@ -125,7 +125,7 @@ function counttiji(){
 			          	<b  >商品条码</b>
 			          </div>
 			          <div class="col-xs-3">
-								<input id="shpTiaoMa" name="shpTiaoMa" type="text" class="form-control" 
+								<input id="shpTiaoMa" name="shpTiaoMa" type="text" class="form-control"
 									ignore="ignore"
 								 />
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
@@ -152,15 +152,15 @@ function counttiji(){
 									<label class="Validform_label" style="display: none">商品品牌</label>
 								</div>
 						</div>
-			          
+
 							<div class="row show-grid">
-	          
-			          
+
+
 			          	          <div class="col-xs-3 text-center">
 			          	<b  style="color:red">商品名称</b>
 			          </div>
 			          <div class="col-xs-3">
-								<input id="shpMingCheng" name="shpMingCheng" type="text" class="form-control" 
+								<input id="shpMingCheng" name="shpMingCheng" type="text" class="form-control"
 									ignore="checked" style="width:490px"
 									   datatype="*" required="required" />
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
@@ -197,37 +197,37 @@ function counttiji(){
 							  <label class="Validform_label" style="display: none">日文名称</label>
 						  </div>
 					  </div>
-		        
+
 							<div class="row show-grid">
 			          <div class="col-xs-3 text-center">
 			          	<b  style="color:red">单位</b>
 			          </div>
 			          <div class="col-xs-3">
 								<t:dictSelect field="shlDanWei" type="list" extendJson="{class:'form-control';datatype:'*'}"
-								dictTable="ba_unit" dictField="unit_code" dictText="unit_zh_name" hasLabel="false"  title="单位"></t:dictSelect>     
+								dictTable="ba_unit" dictField="unit_code" dictText="unit_zh_name" hasLabel="false"  title="单位"></t:dictSelect>
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
 						<label class="Validform_label" style="display: none">单位</label>
 			          </div>
-			          	    
+
 			               <div class="col-xs-3 text-center">
 			          	<b  style="color:red">重量</b>
 			          </div>
 			          <div class="col-xs-3">
-								<input id="zhlKg" name="zhlKg" type="text" class="form-control" 
+								<input id="zhlKg" name="zhlKg" type="text" class="form-control"
 									ignore="ignore" style="text-align:right"    required="required"
 								 />
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
 						<label class="Validform_label" style="display: none">重量</label>
 			          </div>
-			
-			          		          
+
+
 							<div class="row show-grid">
-			    
+
 			          	          <div class="col-xs-3 text-center">
 			          	<b   >长</b>
 			          </div>
 			          <div class="col-xs-3">
-								<input id="chZhXiang" name="chZhXiang" type="text" class="form-control" 
+								<input id="chZhXiang" name="chZhXiang" type="text" class="form-control"
 									ignore="ignore" style="text-align:right"
 								 />
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
@@ -237,7 +237,7 @@ function counttiji(){
 			          	<b  >宽</b>
 			          </div>
 			          <div class="col-xs-3">
-								<input id="kuZhXiang" name="kuZhXiang" type="text" class="form-control" 
+								<input id="kuZhXiang" name="kuZhXiang" type="text" class="form-control"
 									ignore="ignore" style="text-align:right"
 								 />
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
@@ -247,7 +247,7 @@ function counttiji(){
 			          	<b  >高</b>
 			          </div>
 			          <div class="col-xs-3">
-								<input id="gaoZhXiang" name="gaoZhXiang" type="text" class="form-control" 
+								<input id="gaoZhXiang" name="gaoZhXiang" type="text" class="form-control"
 									ignore="ignore" style="text-align:right"     onchange="counttiji()"
 								 />
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
@@ -257,7 +257,7 @@ function counttiji(){
 			          	<b   >体积</b>
 			          </div>
 			          <div class="col-xs-3">
-								<input id="tiJiCm" name="tiJiCm" type="text" class="form-control" 
+								<input id="tiJiCm" name="tiJiCm" type="text" class="form-control"
 									ignore="ignore" style="text-align:right"
 								 />
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
@@ -270,7 +270,7 @@ function counttiji(){
 			          	<b   > 保质期</b>
 			          </div>
 			          <div class="col-xs-3">
-								<input id="bzhiQi" name="bzhiQi" type="text" class="form-control" 
+								<input id="bzhiQi" name="bzhiQi" type="text" class="form-control"
 									ignore="ignore" style="text-align:right"
 								 />
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
@@ -280,8 +280,8 @@ function counttiji(){
 			          	<b   >允收天数</b>
 			          </div>
 			          <div class="col-xs-3">
-								<input id="zhlKgm" name="zhlKgm" type="text" class="form-control" 
-									ignore="ignore" style="text-align:right"  
+								<input id="zhlKgm" name="zhlKgm" type="text" class="form-control"
+									ignore="ignore" style="text-align:right"
 								 />
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
 						<label class="Validform_label" style="display: none">允收天数</label>
@@ -292,16 +292,16 @@ function counttiji(){
 			          </div>
 			          <div class="col-xs-3">
 								<t:dictSelect field="jfShpLei" type="list"   defaultVal="10"
-								dictTable="ba_goods_class" dictField="goods_class_code" dictText="goods_class_name" hasLabel="false"  title="计费商品类"></t:dictSelect>     
+								dictTable="ba_goods_class" dictField="goods_class_code" dictText="goods_class_name" hasLabel="false"  title="计费商品类"></t:dictSelect>
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
 						<label class="Validform_label" style="display: none">计费商品类</label>
 			          </div>
-			          
+
 			          <div class="col-xs-3 text-center">
 			          	<b   >码盘单层数量</b>
 			          </div>
 			          <div class="col-xs-3">
-								<input id="mpDanCeng" name="mpDanCeng" type="text" class="form-control" 
+								<input id="mpDanCeng" name="mpDanCeng" type="text" class="form-control"
 									ignore="ignore" style="text-align:right"
 								 />
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
@@ -311,14 +311,14 @@ function counttiji(){
 			          	<b   >码盘层高</b>
 			          </div>
 			          <div class="col-xs-3">
-								<input id="mpCengGao" name="mpCengGao" type="text" class="form-control" 
+								<input id="mpCengGao" name="mpCengGao" type="text" class="form-control"
 									ignore="ignore" style="text-align:right"  datatype="d"
 								 />
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
 						<label class="Validform_label" style="display: none">码盘层高</label>
 			          </div>
 						</div>
-			          
+
 
 						<div class="row show-grid">
 						<div class="col-xs-3 text-center">
@@ -326,7 +326,7 @@ function counttiji(){
 			          </div>
 			          <div class="col-xs-3">
 								<t:dictSelect field="chlKongZhi" type="radio"
-								typeGroupCode="sf_yn" hasLabel="false"  defaultVal="N" title="拆零控制" ></t:dictSelect>     
+								typeGroupCode="sf_yn" hasLabel="false"  defaultVal="N" title="拆零控制" ></t:dictSelect>
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
 						<label class="Validform_label" style="display: none">拆零控制</label>
 			          </div>
@@ -335,7 +335,7 @@ function counttiji(){
 			          </div>
 			          <div class="col-xs-3">
 								<t:dictSelect field="jshDanWei" type="list"
-								dictTable="ba_unit" dictField="unit_code" dictText="unit_zh_name" hasLabel="false"  title="拆零单位"></t:dictSelect>     
+								dictTable="ba_unit" dictField="unit_code" dictText="unit_zh_name" hasLabel="false"  title="拆零单位"></t:dictSelect>
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
 						<label class="Validform_label" style="display: none">拆零单位</label>
 			          </div>
@@ -343,22 +343,33 @@ function counttiji(){
 			          	<b   >拆零数量</b>
 			          </div>
 			          <div class="col-xs-3">
-								<input id="chlShl" name="chlShl" type="text" class="form-control" 
+								<input id="chlShl" name="chlShl" type="text" class="form-control"
 									ignore="ignore" style="text-align:right"  value="1"    datatype="*" required="required"
 								 />
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
 						<label class="Validform_label" style="display: none">拆零数量</label>
 			          </div>
 						</div>
-			          
-			        
-		
-			          
+					  <div class="col-xs-3 text-center">
+						  <b   >最小库存量</b>
+					  </div>
+							<div class="col-xs-3">
+								<input id="minStock" name="minStock" type="text" class="form-control"
+									   ignore="ignore" style="text-align:right"   datatype="*" required="required"
+								/>
+								<span class="Validform_checktip" style="float:left;height:0px;"></span>
+								<label class="Validform_label" style="display: none">最小库存量</label>
+							</div>
+						</div>
 
- 
-			        
 
-			       
+
+
+
+
+
+
+
 			          <div class="row" id = "sub_tr" style="display: none;">
 				        <div class="col-xs-12 layout-header">
 				          <div class="col-xs-6"></div>
@@ -367,7 +378,7 @@ function counttiji(){
 				      </div>
 			     </div>
 			   </div>
-			   
+
 			   <div class="con-wrapper" id="con-wrapper2" style="display: block;"></div>
 			 </div>
   </t:formvalid>
@@ -378,7 +389,7 @@ function counttiji(){
 	if(location.href.indexOf("load=detail")!=-1){
 		$(".jeecgDetail").hide();
 	}
-	
+
 	if(location.href.indexOf("mode=read")!=-1){
 		//查看模式控件禁用
 		$("#formobj").find(":input").attr("disabled","disabled");
@@ -391,11 +402,11 @@ function counttiji(){
 
   var neibuClickFlag = false;
   function neibuClick() {
-	  neibuClickFlag = true; 
+	  neibuClickFlag = true;
 	  $('#btn_sub').trigger('click');
   }
 
 </script>
  </body>
-<script src = "webpage/com/zzjee/md/mdGoods.js"></script>		
+<script src = "webpage/com/zzjee/md/mdGoods.js"></script>
 </html>

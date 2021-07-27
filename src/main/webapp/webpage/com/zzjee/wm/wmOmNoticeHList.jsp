@@ -43,7 +43,8 @@
    <%--<t:dgFunOpt title="回写" funname="dopost(id)"  urlclass="ace_button"   exp="omSta#eq#已完成"   />--%>
 
    <t:dgFunOpt title="导出出库单" funname="printckd(id)"  urlclass="ace_button"  urlfont="fa-print" exp="omSta#ne#已删除"/>
-   <t:dgFunOpt title="打印出库单" funname="printckdpage(id)"  urlclass="ace_button"  urlfont="fa-print" exp="omSta#ne#已删除"/>
+   <t:dgFunOpt title="打印出库单" funname="printoutstorage(id)"  urlclass="ace_button"  urlfont="fa-print" exp="omSta#ne#已删除"/>
+<%--   <t:dgFunOpt title="打印出库单" funname="printckdpage(id)"  urlclass="ace_button"  urlfont="fa-print" exp="omSta#ne#已删除"/>--%>
     <%--<t:dgFunOpt title="装箱单" funname="printckd(id)"  urlclass="ace_button"  urlfont="	fa-print" exp="omSta#ne#已删除"/>--%>
    <t:dgToolBar title="录入" icon="icon-add" url="wmOmNoticeHController.do?goAdd&orderTypeCode=11" funname="add" width="100%" height="100%"></t:dgToolBar>
    <t:dgToolBar title="编辑" icon="icon-edit"  operationCode="omnoedit" url="wmOmNoticeHController.do?goUpdate" funname="update" width="100%" height="100%"></t:dgToolBar>
@@ -121,13 +122,17 @@
          var url = "wmOmNoticeHController.do?doPrintpage&id="+id;
          createdetailwindow(" 拣货单", url, 1200, 800);
 
-         // window.open(url);
+      // window.open(url);
      }
      function doprintzhuisu(id){
          var url = "wmOmNoticeHController.do?doPrintzhuisu&id="+id;
          createdetailwindow(" 追溯单", url, 1200, 800);
 
          // window.open(url);
+     }
+     function printoutstorage(id){
+      var url = "wmOmNoticeHController.do?doPrintOutStorage&id="+id;
+      createdetailwindow(" 出货单", url, 1200, 500);
      }
  $(document).ready(function(){
 	 $("#wmOmNoticeHListtb").find("input[name='delvData_begin']").attr("class","Wdate").click(function(){WdatePicker({dateFmt:'yyyy-MM-dd hh:mm:ss'});});
@@ -154,7 +159,7 @@
 
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'wmOmNoticeHController.do?upload', "wmOmNoticeHList");
+	openwindow('Excel导入', 'wmOmNoticeHController.do?upload', "wmOmNoticeHList");
 }
 
 //导出
@@ -168,7 +173,7 @@ function ExportXlsByT() {
 }
      //导入
      function ImportXls2() {
-         openuploadwin('Excel导入', 'wmOmNoticeHController.do?upload2', "wmOmNoticeHList");
+         openwindow('Excel导入', 'wmOmNoticeHController.do?upload2', "wmOmNoticeHList");
      }
      //模板下载
      function ExportXlsByT2() {

@@ -38,16 +38,16 @@
   </t:datagrid>
   </div>
  </div>
- <script src = "webpage/com/zzjee/report/rpWmInQmList.js"></script>		
+ <script src = "webpage/com/zzjee/report/rpWmInQmList.js"></script>
  <script type="text/javascript">
  $(document).ready(function(){
  });
- 
-   
- 
+
+
+
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'rpWmInQmController.do?upload', "rpWmInQmList");
+	openwindow('Excel导入', 'rpWmInQmController.do?upload', "rpWmInQmList");
 }
 
 //导出

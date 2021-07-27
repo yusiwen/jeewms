@@ -29,16 +29,16 @@
   </t:datagrid>
   </div>
  </div>
- <script src = "webpage/com/zzjee/wm/wmNoticeConfList.js"></script>		
+ <script src = "webpage/com/zzjee/wm/wmNoticeConfList.js"></script>
  <script type="text/javascript">
  $(document).ready(function(){
  });
- 
-   
- 
+
+
+
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'wmNoticeConfController.do?upload', "wmNoticeConfList");
+	openwindow('Excel导入', 'wmNoticeConfController.do?upload', "wmNoticeConfList");
 }
 
 //导出

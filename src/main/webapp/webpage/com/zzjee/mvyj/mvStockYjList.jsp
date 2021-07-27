@@ -5,7 +5,7 @@
   <div region="center" style="padding:0px;border:0px">
   <t:datagrid sortName="resDate" sortOrder="asc" name="mvStockYjList" checkbox="true" pagination="true" fitColumns="false" title="效期预警" actionUrl="mvStockYjController.do?datagrid" idField="id" fit="true" queryMode="group">
     <t:dgCol title="id"  field="id"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
-    <t:dgCol title="库存类型"  field="kuctype"    queryMode="group"  width="80"></t:dgCol> 
+    <t:dgCol title="库存类型"  field="kuctype"    queryMode="group"  width="80"></t:dgCol>
      <t:dgCol title="商品编码"  field="goodsId"  query="true"   queryMode="single"   width="100"></t:dgCol>
          <t:dgCol title="客户商品编码"  field="shpBianmakh"  query="true"   queryMode="single"   width="100"></t:dgCol>
     <t:dgCol title="商品名称"  field="shpMingCheng"  query="true"   queryMode="single"  width="300"></t:dgCol>
@@ -15,7 +15,7 @@
 <%--     <t:dgCol title="托盘"  field="binId"  query="true"   queryMode="single"   width="60"></t:dgCol> --%>
     <t:dgCol title="客户编码"  field="cusCode"   query="true"  queryMode="single"   width="80"></t:dgCol>
     <t:dgCol title="客户名称"  field="zhongWenQch"   query="true"  queryMode="single"  width="120"></t:dgCol>
-  
+
     <t:dgCol title="生产日期"  field="goodsProData"  query="true" formatter="yyyy-MM-dd"   queryMode="single"   width="90"></t:dgCol>
     <t:dgCol title="保质期天"  field="bzhiQi"    queryMode="group"  width="80"></t:dgCol>
     <t:dgCol title="到期日"  field="dqr"  query="true" formatter="yyyy-MM-dd"    queryMode="single"  width="90"></t:dgCol>
@@ -35,16 +35,16 @@
   </t:datagrid>
   </div>
  </div>
- <script src = "webpage/com/zzjee/mvyj/mvStockYjList.js"></script>		
+ <script src = "webpage/com/zzjee/mvyj/mvStockYjList.js"></script>
  <script type="text/javascript">
  $(document).ready(function(){
  });
- 
-   
- 
+
+
+
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'mvStockYjController.do?upload', "mvStockYjList");
+	openwindow('Excel导入', 'mvStockYjController.do?upload', "mvStockYjList");
 }
 
 //导出

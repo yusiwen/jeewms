@@ -33,16 +33,16 @@
   </t:datagrid>
   </div>
  </div>
- <script src = "webpage/com/zzjee/md/mvGoodsList.js"></script>		
+ <script src = "webpage/com/zzjee/md/mvGoodsList.js"></script>
  <script type="text/javascript">
  $(document).ready(function(){
  });
- 
-   
- 
+
+
+
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'mvGoodsController.do?upload', "mvGoodsList");
+	openwindow('Excel导入', 'mvGoodsController.do?upload', "mvGoodsList");
 }
 
 //导出

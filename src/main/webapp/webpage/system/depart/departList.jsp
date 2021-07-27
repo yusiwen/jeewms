@@ -93,7 +93,7 @@
     }
     //导入
     function ImportXls() {
-        openuploadwin('Excel导入', 'departController.do?upload', "departList");
+      openwindow('Excel导入', 'departController.do?upload', "departList");
     }
 
     //导出

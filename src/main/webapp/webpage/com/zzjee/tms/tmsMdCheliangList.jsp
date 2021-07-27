@@ -75,7 +75,7 @@
 
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'tmsMdCheliangController.do?upload', "tmsMdCheliangList");
+	openwindow('Excel导入', 'tmsMdCheliangController.do?upload', "tmsMdCheliangList");
 }
 
 //导出

@@ -27,7 +27,7 @@
    <t:dgToolBar title="导出" icon="icon-putout" funname="ExportXls"></t:dgToolBar>
    <t:dgToolBar title="模板下载" icon="icon-putout" funname="ExportXlsByT"></t:dgToolBar>
   </t:datagrid>
-        
+
     </div>
 </div>
 <div data-options="region:'east',
@@ -95,7 +95,7 @@
     }
     //导入
     function ImportXls() {
-        openuploadwin('Excel导入', 'departController.do?upload', "departList");
+        openwindow('Excel导入', 'departController.do?upload', "departList");
     }
 
     //导出

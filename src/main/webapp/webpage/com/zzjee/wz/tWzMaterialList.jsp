@@ -51,7 +51,7 @@
 
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'tWzMaterialController.do?upload', "tWzMaterialList");
+	openwindow('Excel导入', 'tWzMaterialController.do?upload', "tWzMaterialList");
 }
 
 //导出

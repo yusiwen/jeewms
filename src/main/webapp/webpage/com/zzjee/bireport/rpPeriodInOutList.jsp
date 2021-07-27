@@ -42,12 +42,12 @@
  <script type="text/javascript">
  $(document).ready(function(){
  });
- 
-   
- 
+
+
+
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'rpPeriodInOutController.do?upload', "rpPeriodInOutList");
+	openwindow('Excel导入', 'rpPeriodInOutController.do?upload', "rpPeriodInOutList");
 }
 
 //导出

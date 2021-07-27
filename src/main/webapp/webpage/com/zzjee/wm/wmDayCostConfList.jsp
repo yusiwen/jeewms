@@ -31,14 +31,14 @@
   </t:datagrid>
   </div>
  </div>
- <script src = "webpage/com/zzjee/wm/wmDayCostConfList.js"></script>		
+ <script src = "webpage/com/zzjee/wm/wmDayCostConfList.js"></script>
  <script type="text/javascript">
  $(document).ready(function(){
  });
  function dosttALLSelect(){
-	 
-	 
-	 
+
+
+
 	 var rows = $('#wmDayCostConfList').datagrid('getSelections');
 	 for(var i=0; i<rows.length; i++){
 		 var url = "wmDayCostConfController.do?doCount&id="+rows[i].id;
@@ -53,18 +53,18 @@
 					 var d = $.parseJSON(data);
 					if (d.success) {
 // 						tip("成功");
-				       
-					}		
+
+					}
 				}
-			});	
+			});
 
 	 }
 	 $('#wmDayCostConfList').datagrid('reload',{});
-	 
+
  }
  function docount(id){
 		var url = "wmDayCostConfController.do?doCount&id="+id;
-		
+
 		$.ajax({
 			async : false,
 			cache : false,
@@ -77,15 +77,15 @@
 				if (d.success) {
 					tip("成功");
 			        $('#wmDayCostConfList').datagrid('reload',{});
-				}		
+				}
 			}
 		});
 	}
-   
- 
+
+
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'wmDayCostConfController.do?upload', "wmDayCostConfList");
+  openwindow('Excel导入', 'wmDayCostConfController.do?upload', "wmDayCostConfList");
 }
 
 //导出

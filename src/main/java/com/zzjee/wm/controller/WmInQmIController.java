@@ -16,6 +16,7 @@ import com.zzjee.wm.entity.*;
 import com.zzjee.wm.page.confrowpage;
 import com.zzjee.wm.page.wminqmpage;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.jeecgframework.core.beanvalidator.BeanValidators;
 import org.jeecgframework.core.common.controller.BaseController;
@@ -287,7 +288,7 @@ public class WmInQmIController extends BaseController {
 			System.out.println(wmInQmIEntity.getBinId()+"444444");
 
 			if (!wmUtil.checkbin(wmInQmIEntity.getBinId())) {
-				return false;
+				throw new RuntimeException("储位不存在！");
 			}
 			System.out.println(wmInQmIEntity.getBinId()+"555555");
 
@@ -331,6 +332,7 @@ e.printStackTrace();
 			//重复增加二次判断
 
 			systemService.save(wmToUpGoodsEntity);
+			systemService.addLog("上架:"+wmInQmIEntity.getGoodsId(), Globals.Log_Type_DEL, Globals.Log_Leavel_INFO);
 		}
 		return true;
 	}
@@ -466,7 +468,9 @@ e.printStackTrace();
 		try {
 			//托盘占用判断
 			if("yes".equals(ResourceUtil.getConfigByName("usetuopan"))){
-
+				if (StringUtils.isEmpty(wmInQmI.getTinId())) {
+					throw new BusinessException("请填写托盘");
+				}
 			}else{
 				if (StringUtil.isEmpty(wmInQmI.getTinId())){
 					wmInQmI.setTinId(ResourceUtil.getConfigByName("tuopanma"));
@@ -563,7 +567,7 @@ e.printStackTrace();
                 if("on".equals(ResourceUtil.getConfigByName("webonestepup"))&&StringUtil.isNotEmpty(wmInQmI.getBinId())){
                 	toup(id);
 				}
-				systemService.addLog(message, Globals.Log_Type_INSERT,
+				systemService.addLog("批量收货"+wmInQmI.getGoodsId(), Globals.Log_Type_INSERT,
 						Globals.Log_Leavel_INFO);
 			}
 		} catch (Exception e) {
@@ -572,6 +576,7 @@ e.printStackTrace();
 			throw new BusinessException(e.getMessage());
 		}
 		j.setMsg(message);
+		systemService.addLog(message, Globals.Log_Type_DEL, Globals.Log_Leavel_INFO);
 		return j;
 	}
 
@@ -953,6 +958,11 @@ for (WmInQmIEntity wmInQmIEntity : wmInQmIso) {
 
 	}
 
+	/**
+	 * pda收货
+	 * @param id
+	 * @return
+	 */
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	@ResponseBody
 	public ResponseEntity<?> get(@PathVariable("id") String id) {
@@ -1013,6 +1023,12 @@ for (WmInQmIEntity wmInQmIEntity : wmInQmIso) {
 			wmInQmI.setBinSta("N");
 			if("no".equals(ResourceUtil.getConfigByName("usetuopan"))){
 				wmInQmI.setTinId(ResourceUtil.getConfigByName("tuopanma"));
+			}else {
+				if (StringUtils.isEmpty(wmInQmI.getTinId())) {
+					D0.setErrorMsg("请填写托盘");
+					D0.setOK(false);
+					return new ResponseEntity( D0,HttpStatus.OK );
+				}
 			}
 			if(flag.equals("n")){
 				D0.setErrorMsg("不允许超收");

@@ -200,7 +200,7 @@
 
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'wmOmQmIController.do?upload', "wmOmQmIList");
+	openwindow('Excel导入', 'wmOmQmIController.do?upload', "wmOmQmIList");
 }
 
 //导出

@@ -38,10 +38,10 @@
  </div>
  <script src = "webpage/com/scm/md/tMdBomHeadList.js"></script>
  <script type="text/javascript">
- 
+
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'tMdBomHeadController.do?upload', "tMdBomHeadList");
+	openwindow('Excel导入', 'tMdBomHeadController.do?upload', "tMdBomHeadList");
 }
 
 //导出

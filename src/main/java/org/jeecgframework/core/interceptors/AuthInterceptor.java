@@ -33,12 +33,12 @@ import org.springframework.web.servlet.view.RedirectView;
 
 /**
  * 权限拦截器
- * 
+ *
  * @author  admin
- * 
+ *
  */
 public class AuthInterceptor implements HandlerInterceptor {
-	 
+
 	private static final Logger logger = Logger.getLogger(AuthInterceptor.class);
 	private SystemService systemService;
 	private List<String> excludeUrls;
@@ -115,14 +115,14 @@ public class AuthInterceptor implements HandlerInterceptor {
 				if(requestPath.endsWith("?olstylecode=")) {
 					requestPath = requestPath.replace("?olstylecode=", "");
 				}
-				
+
 				//步骤三：  根据重组请求URL,进行权限授权判断
 				if((!hasMenuAuth(requestPath,clickFunctionId,currLoginUser)) && !currLoginUser.getUserName().equals("admin")){
 					response.sendRedirect(request.getSession().getServletContext().getContextPath()+"/loginController.do?noAuth");
 					return false;
-				} 
+				}
 
-				
+
 				//解决rest风格下 权限失效问题
 				String functionId="";
 				String uri= request.getRequestURI().substring(request.getContextPath().length() + 1);
@@ -154,31 +154,31 @@ public class AuthInterceptor implements HandlerInterceptor {
 					request.setAttribute(Globals.OPERATIONCODES, operationCodes);
 				}
 				if(!oConvertUtils.isEmpty(functionId)){
-					
+
 //					List<TSOperation> allOperation=this.systemService.findByProperty(TSOperation.class, "TSFunction.id", functionId);
 //					List<TSOperation> newall = new ArrayList<TSOperation>();
 //					if(allOperation.size()>0){
-//						for(TSOperation s:allOperation){ 
+//						for(TSOperation s:allOperation){
 //						    //s=s.replaceAll(" ", "");
-//							newall.add(s); 
+//							newall.add(s);
 //						}
 
 //						String hasOperSql="SELECT operation FROM t_s_role_function fun, t_s_role_user role WHERE  " +
 //							"fun.functionid='"+functionId+"' AND fun.operation is not null  AND fun.roleid=role.roleid AND role.userid='"+currLoginUser.getId()+"' ";
-//						List<String> hasOperList = this.systemService.findListbySql(hasOperSql); 
+//						List<String> hasOperList = this.systemService.findListbySql(hasOperSql);
 //					    for(String operationIds:hasOperList){
 //							    for(String operationId:operationIds.split(",")){
 //							    	operationId=operationId.replaceAll(" ", "");
 //							        TSOperation operation =  new TSOperation();
 //							        operation.setId(operationId);
 //							    	newall.remove(operation);
-//							    } 
-//						} 
+//							    }
+//						}
 //					}
 					List<TSOperation> newall = new ArrayList<TSOperation>();
 					String hasOperSql="SELECT operation FROM t_s_role_function fun, t_s_role_user role WHERE  " +
 										"fun.functionid='"+functionId+"' AND fun.operation is not null  AND fun.roleid=role.roleid AND role.userid='"+currLoginUser.getId()+"' ";
-					List<String> hasOperList = this.systemService.findListbySql(hasOperSql); 
+					List<String> hasOperList = this.systemService.findListbySql(hasOperSql);
 				    for(String operationIds:hasOperList){
 						    for(String operationId:operationIds.split(",")){
 						    	operationId=operationId.replaceAll(" ", "");
@@ -187,15 +187,15 @@ public class AuthInterceptor implements HandlerInterceptor {
 						        		(operation.getOperationcode().startsWith("#")|| operation.getOperationcode().startsWith("."))){
 						        	newall.add(operation);
 						        }
-						    } 
-					} 
+						    }
+					}
 					request.setAttribute(Globals.NOAUTO_OPERATIONCODES, newall);
-					
+
 					 //Step.2  第二部分处理列表数据级权限 (菜单数据规则集合)
-					 List<TSDataRule> MENU_DATA_AUTHOR_RULES = new ArrayList<TSDataRule>(); 
+					 List<TSDataRule> MENU_DATA_AUTHOR_RULES = new ArrayList<TSDataRule>();
 					 String MENU_DATA_AUTHOR_RULE_SQL="";
 
-					
+
 				 	//数据权限规则的查询
 				 	//查询所有的当前这个用户所对应的角色和菜单的datarule的数据规则id
 					Set<String> dataruleCodes = systemService.getOperationCodesByUserIdAndDataId(currLoginUser.getId(), functionId);
@@ -204,7 +204,7 @@ public class AuthInterceptor implements HandlerInterceptor {
 						TSDataRule dataRule = systemService.getEntity(TSDataRule.class, dataRuleId);
 						    MENU_DATA_AUTHOR_RULES.add(dataRule);
 							MENU_DATA_AUTHOR_RULE_SQL += SysContextSqlConvert.setSqlModel(dataRule);
-					
+
 					}
 					 JeecgDataAutorUtils.installDataSearchConditon(request, MENU_DATA_AUTHOR_RULES);//菜单数据规则集合
 					 JeecgDataAutorUtils.installDataSearchConditon(request, MENU_DATA_AUTHOR_RULE_SQL);//菜单数据规则sql
@@ -246,7 +246,7 @@ public class AuthInterceptor implements HandlerInterceptor {
         if(hasMenuCount<=0){
         	return true;
         }
-        
+
         //step.2 判断菜单是否有角色权限
         Long authSize = Long.valueOf(0);
 		String sql = "SELECT count(*) FROM t_s_function f,t_s_role_function  rf,t_s_role_user ru " +
@@ -268,10 +268,10 @@ public class AuthInterceptor implements HandlerInterceptor {
 
 	}
 
-	
+
 	/**
 	 * 转发
-	 * 
+	 *
 	 * @param request
 	 * @return
 	 */

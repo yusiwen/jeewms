@@ -24,7 +24,7 @@
     <t:dgCol title="计划进入时间"  field="planIndata" formatter="yyyy-MM-dd hh:mm:ss"  query="false" queryMode="group"  width="120"></t:dgCol>
     <t:dgCol title="计划驶出时间"  field="planOutdata" formatter="yyyy-MM-dd hh:mm:ss"   queryMode="single"  width="120"></t:dgCol>
 <%--     <t:dgCol title="月台操作"  field="platOper"    queryMode="single"  width="80"></t:dgCol> --%>
-   
+
    <t:dgConfOpt exp="platSta#eq#计划中"  title="占用" url="wmPlatIoController.do?doOnplat&id={id}" urlclass="ace_button"  message="确定要占用此月台" urlfont="fa-plus-circle"/>
     <t:dgConfOpt exp="platSta#eq#占用"  title="释放" url="wmPlatIoController.do?doOutplat&id={id}" urlclass="ace_button"  message="确定要释放此月台" urlfont="fa-minus-circle"/>
    <t:dgToolBar title="录入" icon="icon-add" url="wmPlatIoController.do?goAdd" funname="add"></t:dgToolBar>
@@ -37,16 +37,16 @@
   </t:datagrid>
   </div>
  </div>
- <script src = "webpage/com/zzjee/wm/wmPlatIoList.js"></script>		
+ <script src = "webpage/com/zzjee/wm/wmPlatIoList.js"></script>
  <script type="text/javascript">
  $(document).ready(function(){
  });
- 
-   
- 
+
+
+
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'wmPlatIoController.do?upload', "wmPlatIoList");
+	openwindow('Excel导入', 'wmPlatIoController.do?upload', "wmPlatIoList");
 }
 
 //导出

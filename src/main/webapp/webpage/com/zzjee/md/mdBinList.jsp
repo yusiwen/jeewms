@@ -70,7 +70,7 @@
 
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'mdBinController.do?upload', "mdBinList");
+	openwindow('Excel导入', 'mdBinController.do?upload', "mdBinList");
 }
 
 //导出

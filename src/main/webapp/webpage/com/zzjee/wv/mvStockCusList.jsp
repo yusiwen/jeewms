@@ -26,7 +26,7 @@
     <t:dgCol title="到期日"  field="dqr"    queryMode="group"  width="70"></t:dgCol>
     <t:dgCol title="HITI"  field="hiti"    queryMode="group"  width="50"></t:dgCol>
         <t:dgCol title="库位类型"  field="kuWeiLeiXing"    queryMode="group"  width="50"></t:dgCol>
-    
+
 <%--     <t:dgCol title="取货次序"  field="quHuoCiXu"    queryMode="group"  width="90"></t:dgCol> --%>
 <%--     <t:dgCol title="上架次序"  field="shangJiaCiXu"    queryMode="group"  width="90"></t:dgCol> --%>
 <%--    <t:dgCol title="操作" field="opt" width="100"></t:dgCol> --%>
@@ -41,16 +41,16 @@
   </t:datagrid>
   </div>
  </div>
- <script src = "webpage/com/zzjee/wv/mvStockCusList.js"></script>		
+ <script src = "webpage/com/zzjee/wv/mvStockCusList.js"></script>
  <script type="text/javascript">
  $(document).ready(function(){
  });
- 
-   
- 
+
+
+
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'mvStockCusController.do?upload', "mvStockCusList");
+	openwindow('Excel导入', 'mvStockCusController.do?upload', "mvStockCusList");
 }
 
 //导出

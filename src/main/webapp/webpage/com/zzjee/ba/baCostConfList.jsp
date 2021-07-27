@@ -40,7 +40,7 @@
 
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'baCostConfController.do?upload', "baCostConfList");
+	openwindow('Excel导入', 'baCostConfController.do?upload', "baCostConfList");
 }
 
 //导出

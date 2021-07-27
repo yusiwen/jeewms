@@ -32,7 +32,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 /**
- * 
+ *
  * @Title:CgReportController
  * @description:动态报表展示控制器
  * @author 赵俊夫
@@ -88,7 +88,7 @@ public class CgReportController extends BaseController {
 			}
 		}
 	}
-	
+
 	private String getHtmlHead(HttpServletRequest request){
 		HttpSession session = ContextHolderUtils.getSession();
 		String lang = (String)session.getAttribute("lang");
@@ -107,11 +107,11 @@ public class CgReportController extends BaseController {
 
 		sb.append("<script type=\"text/javascript\" src=\"plug-in/layer/layer.js\"></script>");
 
-		sb.append(StringUtil.replace("<script type=\"text/javascript\" src=\"plug-in/tools/curdtools_{0}.js\"></script>", "{0}", lang));
+		//sb.append(StringUtil.replace("<script type=\"text/javascript\" src=\"plug-in/tools/curdtools_{0}.js\"></script>", "{0}", lang));
 		sb.append("<script type=\"text/javascript\" src=\"plug-in/tools/easyuiextend.js\"></script>");
 		return sb.toString();
 	}
-	
+
 	/**
 	 * popup入口
 	 * @param id 动态配置ID-code
@@ -191,8 +191,8 @@ public class CgReportController extends BaseController {
 		//获取传递参数
 		cgReportMap.put(CgReportConstant.CONFIG_PARAMS, sb.toString());
 	}
-	
-	
+
+
 	/**
 	 * 处理数据字典
 	 * @param result 查询的结果集
@@ -260,7 +260,7 @@ public class CgReportController extends BaseController {
 	 * @param configId 配置id-code
 	 * @param page 分页页面
 	 * @param rows 分页大小
-	 * @param request 
+	 * @param request
 	 * @param response
 	 */
 	@SuppressWarnings("unchecked")
@@ -359,7 +359,7 @@ public class CgReportController extends BaseController {
 
 			//无法直接捕捉到:java.net.ConnectException异常
 			int i = e.getMessage().indexOf("Connection refused: connect");
-			
+
 			if (i != -1) {//非链接异常
 				errorInfo += "数据源连接失败.";
 			}else{
@@ -375,7 +375,7 @@ public class CgReportController extends BaseController {
 		reJson.put("params", params);
 		return reJson;
 	}
-	
+
 	private List<String> getFields(String sql,String dbKey){
 		List<String> fields = null;
 		sql = getSql(sql);
@@ -391,7 +391,7 @@ public class CgReportController extends BaseController {
 		}
 		return fields;
 	}
-	
+
 	private String getSql(String sql){
 		String regex = "\\$\\{\\w+\\}";
 		Pattern p = Pattern.compile(regex);
@@ -415,14 +415,14 @@ public class CgReportController extends BaseController {
 		}
 		return sql;
 	}
-	
+
 	public List<String> getSqlParams(String sql) {
 		if(oConvertUtils.isEmpty(sql)){
 			return null;
 		}
 		List<String> params = new ArrayList<String>();
 		String regex = "\\$\\{\\w+\\}";
-		
+
 		Pattern p = Pattern.compile(regex);
 		Matcher m = p.matcher(sql);
 		while(m.find()){
@@ -431,8 +431,8 @@ public class CgReportController extends BaseController {
 		}
 		return params;
 	}
-	
-	
+
+
 	/**
 	 * 装载数据字典
 	 * @param m	要放入freemarker的数据

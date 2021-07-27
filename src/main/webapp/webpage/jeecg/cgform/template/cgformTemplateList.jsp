@@ -26,12 +26,12 @@
    <t:dgToolBar title="编辑" icon="icon-edit" url="cgformTemplateController.do?goUpdate" funname="update" width="900" height="500"></t:dgToolBar>
    <t:dgToolBar title="批量删除"  icon="icon-remove" url="cgformTemplateController.do?doBatchDel" funname="deleteALLSelect"></t:dgToolBar>
    <t:dgToolBar title="查看" icon="icon-search" url="cgformTemplateController.do?goUpdate" funname="detail"  width="900" height="500"></t:dgToolBar>
-   <%-- 
+   <%--
    <t:dgToolBar title="导入" icon="icon-put" funname="ImportXls"></t:dgToolBar>
    <t:dgToolBar title="导出" icon="icon-putout" funname="ExportXls"></t:dgToolBar>
     --%>
    <t:dgToolBar title="模板下载" icon="icon-putout"   funname="downloadTemplate"></t:dgToolBar>
-  
+
   </t:datagrid>
   </div>
  </div>
@@ -41,10 +41,10 @@
  			$("#cgformTemplateListtb").find("input[name='createDate']").attr("class","Wdate").click(function(){WdatePicker({dateFmt:'yyyy-MM-dd'});});
  			$("#cgformTemplateListtb").find("input[name='updateDate']").attr("class","Wdate").click(function(){WdatePicker({dateFmt:'yyyy-MM-dd'});});
  });
- 
+
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'cgformTemplateController.do?upload', "cgformTemplateList");
+	openwindow('Excel导入', 'cgformTemplateController.do?upload', "cgformTemplateList");
 }
 
 //导出

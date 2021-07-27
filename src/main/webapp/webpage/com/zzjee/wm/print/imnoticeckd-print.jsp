@@ -192,13 +192,27 @@
 				</tr>
 
 			</c:forEach>
+			<tr height=33 style='mso-height-source:userset;height:50px'>
+				<td class=xl65 style='border:1.0pt solid black;text-align: center'>合计</td>
+				<td class=xl65 style='border:1.0pt solid black;text-align: center;word-break:break-all;'><span style='word-break:break-all;width: auto;font-size: 14pt'></span></td>
+				<td class=xl65 style='border:1.0pt solid black;text-align: center'></td>
+
+				<td class=xl65 style='border:1.0pt solid black;text-align: center'></td>
+				<td class=xl65 style='border:1.0pt solid black;text-align: center'></td>
+				<td class=xl65 style='border:1.0pt solid black;text-align: center'>${printHeader.header12}</td>
+
+				<td class=xl65 style='border:1.0pt solid black;text-align: center'>${printHeader.header13}</td>
+				<td class=xl65 style='border:1.0pt solid black;text-align: center'></td>
+
+				<td class=xl65 style='border:1.0pt solid black;text-align: center'></td>
+			</tr>
 		</c:if>
 		<tr height=20 style='height:25.0pt'>
-			<td height=20 class=xl66 colspan=8 style='height:15.0pt;mso-ignore:colspan;text-align: justify'>制单人：<span
+			<td height=20 class=xl66 colspan=8 style='height:15.0pt;mso-ignore:colspan;text-align: justify'>订单员：<span
 					style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  </span>合计重量： ${printHeader.header13}<span
+  </span>库管：<span
 					style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  </span>合计数量:${printHeader.header12}<span
+  </span>司机:<span
 					style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   </span>客户签字（盖章）<span
 			<td></td>

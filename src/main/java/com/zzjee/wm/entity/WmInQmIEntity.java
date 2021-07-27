@@ -18,12 +18,12 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.SequenceGenerator;
 import org.jeecgframework.poi.excel.annotation.Excel;
 
-/**   
+/**
  * @Title: Entity
  * @Description: 批量收货
  * @author erzhongxmu
  * @date 2017-09-11 15:08:53
- * @version V1.0   
+ * @version V1.0
  *
  */
 @Entity
@@ -41,19 +41,19 @@ public class WmInQmIEntity implements java.io.Serializable {
 	@Excel(name="收货日期",format = "yyyy-MM-dd")
 	private java.util.Date createDate;
 	/**更新人名称*/
-	
+
 	private java.lang.String updateName;
 	/**更新人登录名称*/
-	
+
 	private java.lang.String updateBy;
 	/**更新日期*/
 
 	private java.util.Date updateDate;
 	/**所属部门*/
-	
+
 	private java.lang.String sysOrgCode;
 	/**所属公司*/
-	
+
 	private java.lang.String sysCompanyCode;
 	/**到货通知单*/
 	@Excel(name="到货通知单")
@@ -119,7 +119,7 @@ public class WmInQmIEntity implements java.io.Serializable {
 	/**基本单位收货数量*/
 //	@Excel(name="基本单位收货数量")
 	private java.lang.String baseQmcount;
-	
+
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  主键

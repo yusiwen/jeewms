@@ -39,7 +39,7 @@
   </t:datagrid>
   </div>
  </div>
- <script src = "webpage/com/zzjee/wm/wmImNoticeHList.js"></script>		
+ <script src = "webpage/com/zzjee/wm/wmImNoticeHList.js"></script>
  <script type="text/javascript">
  $(document).ready(function(){
 	 $("#wmImNoticeHListtb").find("input[name='imData_begin1']").attr("class","Wdate").click(function(){WdatePicker({dateFmt:'yyyy-MM-dd hh:mm:ss'});});
@@ -48,17 +48,17 @@
  });
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'wmImNoticeHController.do?upload', "wmImNoticeHList");
+ openwindow('Excel导入', 'wmImNoticeHController.do?upload', "wmImNoticeHList");
 }
 
 function print(id){
 	var url = "wmImNoticeHController.do?doPrint&id="+id;
-	
+
 	window.open(url);
 }
 function printysd(id){
 	var url = "wmImNoticeHController.do?doPrintysd&id="+id;
-	
+
 	window.open(url);
 }
 //导出

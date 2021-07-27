@@ -29,10 +29,10 @@
  $(document).ready(function(){
  		//给时间控件加上样式
  });
- 
+
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'jformGraphreportHeadController.do?goImportExcel', "jformGraphreportHeadList");
+	openwindow('Excel导入', 'jformGraphreportHeadController.do?goImportExcel', "jformGraphreportHeadList");
 }
 
 //导出

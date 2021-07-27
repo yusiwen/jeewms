@@ -131,7 +131,7 @@
 
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'wmToUpGoodsController.do?upload', "wmToUpGoodsList");
+	openwindow('Excel导入', 'wmToUpGoodsController.do?upload', "wmToUpGoodsList");
 }
 
 //导出

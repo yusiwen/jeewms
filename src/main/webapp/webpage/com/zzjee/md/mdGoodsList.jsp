@@ -119,7 +119,7 @@
  }
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'mdGoodsController.do?upload', "mdGoodsList");
+	openwindow('Excel导入', 'mdGoodsController.do?upload', "mdGoodsList");
 }
 
 //导出

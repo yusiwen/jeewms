@@ -1,5 +1,6 @@
 package com.zzjee.wm.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.zzjee.wm.entity.*;
 import com.zzjee.wm.page.Delrowpage;
 import com.zzjee.wm.page.omqmpage;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.log4j.Logger;
 import org.jeecgframework.core.util.*;
+import org.jeecgframework.web.system.pojo.base.TSRole;
 import org.jeecgframework.web.system.sms.util.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -59,6 +61,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.jeecgframework.core.beanvalidator.BeanValidators;
 
+import java.util.Random;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
@@ -198,6 +201,15 @@ public class WmOmQmIController extends BaseController {
 		message = "添加到下架任务清单成功";
 		WmOmQmIEntity t = wmOmQmIService.get(WmOmQmIEntity.class, request
 				.getParameter("id").toString());
+		//查询所有拣货员
+		List<String> usernameList = systemService.findListbySql("SELECT u.username  FROM t_s_role_user ru LEFT JOIN t_s_role r ON ru.roleid=r.id LEFT JOIN t_s_base_user u ON ru.userid=u.id LEFT JOIN (\n" +
+				"SELECT assign_to,count(1) num FROM wm_om_qm_i WHERE bin_sta='N' GROUP BY assign_to) i ON u.username=i.assign_to WHERE r.rolecode='jhy' ORDER BY num");
+		if (usernameList != null && usernameList.size() > 0) {
+			//查询正在进行操作的拣货员
+			System.out.println(JSON.toJSONString(usernameList));
+			wmOmQmI.setAssignTo(usernameList.get(0));
+		}
+
 		if(!wmUtil.checkstcoka( t.getBinId(),t.getTinId(),t.getGoodsId(),t.getProData(),t.getBaseGoodscount())){
 			message = "库存不足";
 			j.setMsg(message);

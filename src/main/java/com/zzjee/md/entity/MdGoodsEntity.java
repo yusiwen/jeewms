@@ -9,12 +9,12 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 import org.jeecgframework.poi.excel.annotation.Excel;
 
-/**   
+/**
  * @Title: Entity
  * @Description: 商品信息
  * @author erzhongxmu
  * @date 2017-08-15 23:16:53
- * @version V1.0   
+ * @version V1.0
  *
  */
 @Entity
@@ -145,7 +145,8 @@ public class MdGoodsEntity implements java.io.Serializable {
 	private java.lang.String shpMiaoShu;
 	/**停用*/
 	private java.lang.String zhuangTai;
-	
+	private java.lang.String minStock;
+
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  主键
@@ -833,7 +834,7 @@ public class MdGoodsEntity implements java.io.Serializable {
 	public void setGaoZhXiang(java.lang.String gaoZhXiang){
 		this.gaoZhXiang = gaoZhXiang;
 	}
-	
+
 	@Column(name ="JIZHUN_WENDU",nullable=true,length=32)
 	public java.lang.String getJiZhunwendu(){
 		return this.jiZhunwendu;
@@ -846,7 +847,7 @@ public class MdGoodsEntity implements java.io.Serializable {
 	public void setJiZhunwendu(java.lang.String jiZhunwendu){
 		this.jiZhunwendu = jiZhunwendu;
 	}
-	
+
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  商品描述
@@ -915,5 +916,15 @@ public class MdGoodsEntity implements java.io.Serializable {
 
 	public void setPeisongdian(String peisongdian) {
 		this.peisongdian = peisongdian;
+	}
+
+	@Column(name ="min_stock",nullable=true,length=32)
+	public String getMinStock() {
+		return minStock;
+	}
+
+	public MdGoodsEntity setMinStock(String minStock) {
+		this.minStock = minStock;
+		return this;
 	}
 }

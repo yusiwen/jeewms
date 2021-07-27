@@ -45,7 +45,7 @@
   </t:datagrid>
   </div>
  </div>
- <script src = "webpage/com/zzjee/wm/wmDayCostList.js"></script>		
+ <script src = "webpage/com/zzjee/wm/wmDayCostList.js"></script>
  <script type="text/javascript">
  $(document).ready(function(){
  });
@@ -103,10 +103,10 @@
      }
 
  }
- 
+
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'wmDayCostController.do?upload', "wmDayCostList");
+	openwindow('Excel导入', 'wmDayCostController.do?upload', "wmDayCostList");
 }
 
 //导出

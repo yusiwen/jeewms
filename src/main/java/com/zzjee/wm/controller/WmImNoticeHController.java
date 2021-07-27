@@ -11,6 +11,7 @@ import com.zzjee.wm.page.WmNoticeImpPage;
 import com.zzjee.wm.service.WmImNoticeHServiceI;
 import com.zzjee.wmutil.*;
 import net.sf.json.JSONArray;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.ss.usermodel.*;
@@ -1330,7 +1331,7 @@ public class WmImNoticeHController extends BaseController {
 				cellHead5.setCellStyle(cs2);
 
 				Cell cellHead52 = rowHead5.createCell(3);
-				cellHead52.setCellValue("月台： " +wmImNoticeH.getPlatformCode());
+				cellHead52.setCellValue("月台： " +(StringUtils.isEmpty(wmImNoticeH.getPlatformCode())?"":wmImNoticeH.getPlatformCode()));
 				cellHead52.setCellStyle(cs2);
 
 				Row rowHead6 = sheet.createRow((short) page*20+6); // 头部第二行
@@ -1801,7 +1802,7 @@ public class WmImNoticeHController extends BaseController {
 			cellHead5.setCellStyle(cs2);
 
 			Cell cellHead52 = rowHead5.createCell(3);
-			cellHead52.setCellValue("月台： " +wmImNoticeH.getPlatformCode());
+			cellHead52.setCellValue("月台： " +(StringUtils.isEmpty(wmImNoticeH.getPlatformCode())?"":wmImNoticeH.getPlatformCode()));
 			cellHead52.setCellStyle(cs2);
 
 			Row rowHead6 = sheet.createRow((short) page*20+6); // 头部第二行

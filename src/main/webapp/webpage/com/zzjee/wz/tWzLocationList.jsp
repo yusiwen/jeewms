@@ -31,12 +31,12 @@
  <script type="text/javascript">
  $(document).ready(function(){
  });
- 
-   
- 
+
+
+
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'tWzLocationController.do?upload', "tWzLocationList");
+	openwindow('Excel导入', 'tWzLocationController.do?upload', "tWzLocationList");
 }
 
 //导出

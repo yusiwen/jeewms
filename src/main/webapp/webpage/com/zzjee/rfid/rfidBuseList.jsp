@@ -32,16 +32,16 @@
   </t:datagrid>
   </div>
  </div>
- <script src = "webpage/com/zzjee/rfid/rfidBuseList.js"></script>		
+ <script src = "webpage/com/zzjee/rfid/rfidBuseList.js"></script>
  <script type="text/javascript">
  $(document).ready(function(){
  });
- 
-   
- 
+
+
+
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'rfidBuseController.do?upload', "rfidBuseList");
+	openwindow('Excel导入', 'rfidBuseController.do?upload', "rfidBuseList");
 }
 
 //导出

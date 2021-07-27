@@ -49,7 +49,10 @@
 <%--    <t:dgToolBar title="批量删除"  icon="icon-remove" url="wmImNoticeHController.do?doBatchDel" funname="deleteALLSelect"></t:dgToolBar> --%>
    <t:dgToolBar title="查看" icon="icon-search" url="wmImNoticeHController.do?goUpdate" funname="detail" width="100%" height="100%"></t:dgToolBar>
     <t:dgToolBar title="导入" icon="icon-put" funname="ImportXls"></t:dgToolBar>
-   <t:dgToolBar operationCode="uasimpimn" title="第三方系统导入" icon="icon-put" funname="otherimp"></t:dgToolBar>
+<%--    <t:upload name="intruction" dialog="false" queueID="instructionfile" view="true" auto="true"--%>
+<%--              uploader="wmImNoticeHController.do?upload" id="instruction"--%>
+<%--              extend="pic[*.jpg;*,jpeg;*.png;*.gif;*.bmp;*.ico;*.tif],office[*.doc;*.docx;*.txt;*.ppt;*.xls;*.xlsx;*.html;*.htm]" formData=""></t:upload>--%>
+   <t:dgToolBar operationCode="uasimpimn" title="第三方系统导入" icon="icon-put" funname="documentTitle"></t:dgToolBar>
 
    <%--<t:dgToolBar title="导出" icon="icon-putout" funname="ExportXls"></t:dgToolBar>--%>
    <t:dgToolBar title="模板下载" icon="icon-putout" funname="ExportXlsByT"></t:dgToolBar>
@@ -107,7 +110,8 @@
  	openwindow("添加",url,"进货",770,500);
 }
 function ImportXls() {
-	openuploadwin('Excel导入', 'wmImNoticeHController.do?upload', "wmImNoticeHList");
+	openwindow('Excel导入', 'wmImNoticeHController.do?upload', "wmImNoticeHList");
+
 }
 
 function print(id){

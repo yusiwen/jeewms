@@ -37,7 +37,7 @@
 
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'baCostController.do?upload', "baCostList");
+	openwindow('Excel导入', 'baCostController.do?upload', "baCostList");
 }
 
 //导出

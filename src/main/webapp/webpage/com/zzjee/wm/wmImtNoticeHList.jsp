@@ -53,7 +53,7 @@
  });
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'wmImNoticeHController.do?upload', "wmImNoticeHList");
+ openwindow('Excel导入', 'wmImNoticeHController.do?upload', "wmImNoticeHList");
 }
 
 function print(id){

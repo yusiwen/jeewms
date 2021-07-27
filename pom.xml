@@ -129,6 +129,12 @@
 	</repositories>
 
 	<dependencies>
+
+		<dependency>
+			<groupId>net.sf.ezmorph</groupId>
+			<artifactId>ezmorph</artifactId>
+			<version>1.0.6</version>
+		</dependency>
 		<!-- activation -->
 		<dependency>
 			<groupId>javax.activation</groupId>
@@ -997,6 +1003,12 @@
 			<version>${jedis.version}</version>
 		</dependency>
 		<!-- redis cache end -->
+
+		<dependency>
+			<groupId>com.nimbusds</groupId>
+			<artifactId>nimbus-jose-jwt</artifactId>
+			<version>6.0</version>
+		</dependency>
 
 
 	</dependencies>

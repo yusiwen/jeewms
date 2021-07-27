@@ -77,7 +77,7 @@
  $(document).ready(function(){
  });
 
- 
+
  function batchupdatepro() {
      var batchdate;
      batchdate = $('input[name="batchdate"]').attr("value");
@@ -111,7 +111,7 @@
 
      }
  }
- 
+
  function  batchupbin() {
      var rows = $('#wmInQmIList').datagrid('getSelections');
      if(rows.length > 0){
@@ -185,7 +185,7 @@ function batchupdate() {
 				if (d.success) {
 					tip("上架成功");
 			        $('#wmInQmIList').datagrid('reload',{});
-				}		
+				}
 			}
 		});
 	}
@@ -194,7 +194,7 @@ function batchupdate() {
 
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'wmInQmIController.do?upload', "wmInQmIList");
+	openwindow('Excel导入', 'wmInQmIController.do?upload', "wmInQmIList");
 }
 
 //导出

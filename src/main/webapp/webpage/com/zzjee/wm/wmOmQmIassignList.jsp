@@ -229,7 +229,7 @@
 			success : function(data) {
 				 var d = $.parseJSON(data);
 				if (d.success) {
-					tip("添加到下架任务清单成功");
+					tip(data.msg);
 			        $('#wmOmQmIList').datagrid('reload',{});
 				}
 			}
@@ -248,7 +248,7 @@
 			success : function(data) {
 				 var d = $.parseJSON(data);
 				if (d.success) {
-					tip("添加到下架任务清单成功");
+					tip(d.msg);
 			        $('#wmOmQmIList').datagrid('reload',{});
                     windows.open("http://192.168.0.102:9080/fxj-boot/fxj/base/getxiajia");
 
@@ -340,7 +340,7 @@
  }
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'wmOmQmIController.do?upload', "wmOmQmIList");
+	openwindow('Excel导入', 'wmOmQmIController.do?upload', "wmOmQmIList");
 }
 
 //导出

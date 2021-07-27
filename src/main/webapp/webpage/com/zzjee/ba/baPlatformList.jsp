@@ -37,7 +37,7 @@
 
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'baPlatformController.do?upload', "baPlatformList");
+	openwindow('Excel导入', 'baPlatformController.do?upload', "baPlatformList");
 }
 
 //导出

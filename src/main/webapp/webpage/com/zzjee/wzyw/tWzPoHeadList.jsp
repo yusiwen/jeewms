@@ -64,7 +64,7 @@
      }
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'tWzPoHeadController.do?upload', "tWzPoHeadList");
+ openwindow('Excel导入', 'tWzPoHeadController.do?upload', "tWzPoHeadList");
 }
 
 //导出

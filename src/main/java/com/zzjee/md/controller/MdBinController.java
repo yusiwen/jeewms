@@ -45,6 +45,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
@@ -570,5 +571,37 @@ public class MdBinController extends BaseController {
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable("id") String id) {
 		mdBinService.deleteEntityById(MdBinEntity.class, id);
+	}
+
+	@RequestMapping(params = "addMdBin")
+	@ResponseBody
+	public void addMdBin(){
+		List<MdBinEntity> mdBinEntityList = new ArrayList<>();
+		for (int i = 1; i <= 15; i++) {
+			for (int j = 1; j <= 6; j++) {
+				for (int k = 1; k <= 30; k++) {
+					MdBinEntity mdBinEntity = new MdBinEntity();
+					String kuweibianma = "A"+String.format("%02d",i)+"-"+String.format("%02d",j)+"-"+String.format("%02d",k);
+					mdBinEntity.setKuWeiBianMa(kuweibianma);
+					mdBinEntity.setKuWeiTiaoMa(kuweibianma);
+					mdBinEntity.setKuWeiMingCheng("A1");
+					mdBinEntity.setKuWeiLeiXing("收货储位");
+					mdBinEntity.setKuWeiShuXing("常温");
+					mdBinEntity.setShangJiaCiXu(String.format("%02d",i)+String.format("%02d",j)+String.format("%02d",k));
+					mdBinEntity.setQuHuoCiXu(String.format("%02d",i)+String.format("%02d",j)+String.format("%02d",k));
+					mdBinEntity.setTiJiDanWei("0");
+					mdBinEntity.setZhongLiangDanWei("5");
+					mdBinEntity.setZuiDaTuoPan("2");
+					mdBinEntity.setTingYong("N");
+					mdBinEntity.setBinStore("BJTZ7");
+					mdBinEntity.setXnode(String.format("%02d",i));
+					mdBinEntity.setYnode(String.format("%02d",j));
+					mdBinEntity.setZnode(String.format("%02d",k));
+					mdBinEntityList.add(mdBinEntity);
+				}
+			}
+		}
+		mdBinService.batchSave(mdBinEntityList);
+
 	}
 }

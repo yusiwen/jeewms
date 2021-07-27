@@ -40,11 +40,11 @@
   </t:datagrid>
   </div>
  </div>
- <script src = "webpage/com/zzjee/wm/wmSttInGoodsList.js"></script>		
+ <script src = "webpage/com/zzjee/wm/wmSttInGoodsList.js"></script>
  <script type="text/javascript">
  $(document).ready(function(){
  });
- 
+
  function dosttfp(id){
 		var url = "wmSttInGoodsController.do?dostt&id="+id;
 		$.ajax({
@@ -59,11 +59,11 @@
 				if (d.success) {
 					tip("添加到盘点清单成功");
 			        $('#wmSttInGoodsList').datagrid('reload',{});
-				}		
+				}
 			}
 		});
-	}  
- 
+	}
+
  function dorun(id){
 		var url = "wmSttInGoodsController.do?dorun&id="+id;
 		$.ajax({
@@ -78,13 +78,13 @@
 				if (d.success) {
 					tip("盘点过账成功");
 			        $('#wmSttInGoodsList').datagrid('reload',{});
-				}		
+				}
 			}
 		});
 	}
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'wmSttInGoodsController.do?upload', "wmSttInGoodsList");
+	openwindow('Excel导入', 'wmSttInGoodsController.do?upload', "wmSttInGoodsList");
 }
 
 //导出

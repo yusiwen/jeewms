@@ -69,7 +69,7 @@
      }
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'tWzRkHeadController.do?upload', "tWzRkHeadList");
+ openwindow('Excel导入', 'tWzRkHeadController.do?upload', "tWzRkHeadList");
 }
 
 //导出

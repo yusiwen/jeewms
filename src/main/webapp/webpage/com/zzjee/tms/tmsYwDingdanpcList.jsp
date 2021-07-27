@@ -138,7 +138,7 @@
 
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'tmsYwDingdanController.do?upload', "tmsYwDingdanList");
+	openwindow('Excel导入', 'tmsYwDingdanController.do?upload', "tmsYwDingdanList");
 }
 
 //导出

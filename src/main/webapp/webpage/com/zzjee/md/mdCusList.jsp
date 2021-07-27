@@ -77,7 +77,7 @@
 
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'mdCusController.do?upload', "mdCusList");
+	openwindow('Excel导入', 'mdCusController.do?upload', "mdCusList");
 }
 
 //导出

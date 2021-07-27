@@ -13,10 +13,10 @@
     <t:dgCol title="电话"  field="phone" queryMode="group"  width="200"></t:dgCol>
     <t:dgCol title="工资"  field="salary"  queryMode="group"  width="200"></t:dgCol>
   </t:datagrid>
-  
+
 	  <div id="jeecgMysearchListtb" style="padding: 3px; height: 25px">
 		  	 <div style="float: left;">
-				  <a href="#" id="add" class="easyui-linkbutton" plain="true" icon="icon-add" onclick="add('录入','jeecgListDemoController.do?goAdd','jeecgMysearchList')">用户录入</a> 
+				  <a href="#" id="add" class="easyui-linkbutton" plain="true" icon="icon-add" onclick="add('录入','jeecgListDemoController.do?goAdd','jeecgMysearchList')">用户录入</a>
 				  <a href="#" class="easyui-linkbutton" plain="true" icon="icon-edit" onclick="update('编辑','jeecgListDemoController.do?goUpdate','jeecgMysearchList')">用户编辑</a>
 			  </div>
 	  		  <div align="right">
@@ -26,11 +26,11 @@
 				 <a href="#" class="easyui-linkbutton" iconCls="icon-reload" onclick="searchReset('jeecgMysearchList')">重置</a>
 	  		 </div>
   	  </div>
- </div> 
+ </div>
 </div>
  <script type="text/javascript">
  function testReloadPage(){
-		document.location = "http://www.baidu.com"; 
+		document.location = "http://www.baidu.com";
 	}
 	function szqm(id) {
 		createwindow('审核', 'jeecgListDemoController.do?doCheck&id=' + id);
@@ -38,7 +38,7 @@
 	function addNewPage(id){
 		addOneTab("TAB方式添加", jeecgListDemoController.do?addTab&type=table&id="+id);
 	}
-	
+
  $(document).ready(function(){
  		//给时间控件加上样式
  			$("#jeecgDemoListtb").find("input[name='birthday_begin']").attr("class","Wdate").click(function(){WdatePicker({dateFmt:'yyyy-MM-dd'});});
@@ -48,12 +48,12 @@
  			$("#jeecgDemoListtb").find("input[name='updateDate_begin']").attr("class","Wdate").click(function(){WdatePicker({dateFmt:'yyyy-MM-dd'});});
  			$("#jeecgDemoListtb").find("input[name='updateDate_end']").attr("class","Wdate").click(function(){WdatePicker({dateFmt:'yyyy-MM-dd'});});
  });
- 
-   
- 
+
+
+
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'jeecgListDemoController.do?upload', "jeecgDemoList");
+	openwindow('Excel导入', 'jeecgListDemoController.do?upload', "jeecgDemoList");
 }
 
 //导出

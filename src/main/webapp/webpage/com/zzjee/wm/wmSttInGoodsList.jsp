@@ -23,7 +23,7 @@
    <t:dgCol title="创建人名称"  field="createName"     queryMode="group"  width="80"></t:dgCol>
     <t:dgCol title="创建人登录名称"  field="createBy"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
     <t:dgCol title="创建日期"  field="createDate" formatter="yyyy-MM-dd hh:mm:ss"  query="true"   queryMode="group"  width="130"></t:dgCol>
- 
+
        <t:dgCol title="更新人名称"  field="updateName"    queryMode="group"  width="80"></t:dgCol>
     <t:dgCol title="更新人登录名称"  field="updateBy"    queryMode="group"  width="130"></t:dgCol>
     <t:dgCol title="更新日期"  field="updateDate"  formatter="yyyy-MM-dd hh:mm:ss"    queryMode="group"  width="120"></t:dgCol>
@@ -39,12 +39,12 @@
   </t:datagrid>
   </div>
  </div>
- <script src = "webpage/com/zzjee/wm/wmSttInGoodsList.js"></script>		
+ <script src = "webpage/com/zzjee/wm/wmSttInGoodsList.js"></script>
  <script type="text/javascript">
  $(document).ready(function(){
  });
- 
-   
+
+
  function dorun(id){
 		var url = "wmSttInGoodsController.do?dorun&id="+id;
 		$.ajax({
@@ -59,13 +59,13 @@
 				if (d.success) {
 					tip(d.msg);
 			        $('#wmSttInGoodsList').datagrid('reload',{});
-				}		
+				}
 			}
 		});
 	}
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'wmSttInGoodsController.do?upload', "wmSttInGoodsList");
+	openwindow('Excel导入', 'wmSttInGoodsController.do?upload', "wmSttInGoodsList");
 }
 
 //导出
