@@ -23,11 +23,11 @@
             </span>
             <span style="vertical-align:middle;display:-moz-inline-box;display:inline-block;width: 90px;text-align:right;"
                   title="行数">行数: </span>
-            <input type="text" name="hangshu" value="42" style="width: 100px; height: 30px;">
+            <input type="text" name="hangshu" value="60" style="width: 100px; height: 30px;">
             </span>
             <span style="vertical-align:middle;display:-moz-inline-box;display:inline-block;width: 90px;text-align:right;"
                   title="列数">列数: </span>
-            <input type="text" name="lieshu"  value="34"  style="width: 100px; height: 30px;">
+            <input type="text" name="lieshu"  value="60"  style="width: 100px; height: 30px;">
             </span>
             <span style="vertical-align:middle;display:-moz-inline-box;display:inline-block;width: 90px;text-align:right;">
           <button onclick="chaxun('zhengxiang')">正向排列查询</button>  </span>
