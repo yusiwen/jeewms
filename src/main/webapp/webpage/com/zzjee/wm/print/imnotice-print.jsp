@@ -103,7 +103,7 @@
 <div class="printdiv"><t:formvalid formid="formobj" dialog="true" usePlugin="password" layout="table"  >
 	<input id="content" type="hidden" value="${wmOmNoticeHPage.omNoticeId}">
 	<table border=0 cellpadding=0 cellspacing=0 width=680 style='border-collapse:
- collapse;table-layout:fixed;width:438pt;margin-left: 30px;margin-top: -30px'>
+ collapse;table-layout:fixed;width:438pt;margin-left: 50px;margin-top: -30px'>
 		<col width=102 style='mso-width-source:userset;mso-width-alt:3612;width:76pt'>
 
 			<%--<col width=84 style='mso-width-source:userset;mso-width-alt:2986;width:63pt'>--%>
@@ -129,18 +129,20 @@
 		</tr>
 		<tr height=25 style='mso-height-source:userset;height:25.0pt'>
 			<td colspan=4 height=25 class=xl68 width=242 style='height:25.0pt;width:182pt'>日期：${kprq}</td>
-			<td colspan=4 class=xl68 width=168 style='width:126pt'>单号：${noticeid}</td>
+			<td colspan=4 class=xl68 width=168 style='width:126pt'>采购单号：${noticeid}</td>
 			<td  rowspan="3" class=xl69>
 				<img src="rest/wmBaseController/showOrDownqrcodeByurl?qrvalue=${wmImNoticeHPage.noticeId}" style="width:80px;height:80px;vertical-align:right">
 			</td>
+			<td></td>
+			<td rowspan="7" style="font-size: 10px;">①<br/>白<br/>存<br/>根<br/><br/>②<br/>红<br/>货<br/>主<br/><br/>③<br/>绿<br/>回<br/>单<br/><br/>④<br/>黄<br/>财<br/>务<br/></td>
 		</tr>
 		<tr height=25 style='mso-height-source:userset;height:25.0pt'>
 			<td colspan=4 height=25 class=xl68 width=242 style='height:25.0pt;width:182pt'>货主：${cusname}</td>
-			<td colspan=4 height=25 class=xl68 width=242 style='height:25pt;width:182pt'>供应商：${supname}</td>
+			<td colspan=4 height=25 class=xl68 width=242 style='height:25pt;width:182pt'>生产厂商：${supname}</td>
 		</tr>
 		<tr height=25 style='mso-height-source:userset;height:25.0pt'>
 			<td colspan=4 class=xl68 width=337 style='width:252pt'>备注：${wmImNoticeHPage.imBeizhu}</td>
-			<td colspan=4 >WMS单号：${wmImNoticeHPage.noticeId}</td>
+			<td colspan=4 >进货单号：${wmImNoticeHPage.noticeId}</td>
 		</tr>
 
 
@@ -163,7 +165,6 @@
 
 			<td class=xl65 style='border:1.0pt solid black;text-align: center'>二维码</td>
 
-			<td  ></td>
 		</tr>
 
 		<c:if test="${fn:length(wmImNoticeIList)  > 0 }">
@@ -215,11 +216,11 @@
 		</c:if>
 		<tr height=20 style='height:25.0pt'>
 			<td height=20 class=xl66 colspan=8 style='height:15.0pt;mso-ignore:colspan;text-align: justify'>制单：<span
-					style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   </span>仓管： ${wmOmNoticeHPage.createBy}<span
-					style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   </span>主管：<span
-					style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+					style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   </span>叉车：<span
 					style='mso-spacerun:yes'></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 			</td>

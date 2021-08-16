@@ -173,11 +173,11 @@
 							<div class="row show-grid">
 
 			          <div class="col-xs-1 text-center">
-			          	<b>客户编码：</b>
+			          	<b>货主：</b>
 			          </div>
 			          <div class="col-xs-2">
 								<t:dictSelect  readonly="${wmImNoticeHPage.readonly}"   field="cusCode" type="list"   extendJson="  {class:'form-control',datatype:'*',style:'width:230px'}"
-								 								  defaultVal="${wmImNoticeHPage.cusCode}" dictTable="mv_cus" dictField="cus_code" dictText="cus_name"   hasLabel="false"  title="客户编码"></t:dictSelect>
+								 								  defaultVal="${wmImNoticeHPage.cusCode}" dictTable="mv_cus" dictField="cus_code" dictText="cus_name"   hasLabel="false"  title="货主"></t:dictSelect>
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
 						<label class="Validform_label" style="display: none">客户编码</label>
 <%-- 						<t:autocomplete    searchField="cusName"   name="cusCode" entityName="MvCusEntity" ></t:autocomplete> --%>
