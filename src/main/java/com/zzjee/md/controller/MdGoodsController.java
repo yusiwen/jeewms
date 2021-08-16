@@ -237,7 +237,19 @@ public class MdGoodsController extends BaseController {
 				} catch (Exception e) {
 					// TODO: handle exception
 				}
-
+				//查询当前商品类型的商品数量
+				Map<String, Object> countMap = systemService.findOneForJdbc("select right(shp_bian_ma,7) shp_bian_ma  from md_goods where chp_shu_xing=? and shp_bian_ma like ? ORDER BY shp_bian_ma desc LIMIT 1",mdGoods.getChpShuXing(),mdGoods.getChpShuXing()+"%");
+				if (countMap == null) {
+					mdGoods.setShpBianMa(mdGoods.getChpShuXing()+String.format("%07d", 1));
+				}else {
+					Object goodsCode = countMap.get("shp_bian_ma");
+					if (goodsCode != null) {
+						mdGoods.setShpBianMa(mdGoods.getChpShuXing()+String.format("%07d",Integer.parseInt(((String) goodsCode))+1));
+					}else {
+						mdGoods.setShpBianMa(mdGoods.getChpShuXing()+String.format("%07d", 1));
+					}
+				}
+				mdGoods.setShpTiaoMa(mdGoods.getShpBianMa());
 				mdGoodsService.save(mdGoods);
 				systemService.addLog(message, Globals.Log_Type_INSERT,
 						Globals.Log_Leavel_INFO);
@@ -436,6 +448,25 @@ public class MdGoodsController extends BaseController {
 							MdGoodsEntity.class, "shpBianMa", mdGoods.getShpBianMa());
 					if(mdGoods1 ==null ){
 						try {
+							//查询当前商品类型的商品数量
+//							Map<String, Object> map = systemService.findOneForJdbc("select ifnull(count(1),0) num  from ba_goods_type where goods_type_code = ? order by create_date desc limit 1",mdGoods.getChpShuXing());
+//							if ((Long)map.get("num") <= 0L) {
+//								j.setSuccess(false);
+//								j.setMsg("产品属性错误："+mdGoods.getChpShuXing());
+//								return j;
+//							}
+							Map<String, Object> countMap = systemService.findOneForJdbc("select right(shp_bian_ma,7) shp_bian_ma  from md_goods where chp_shu_xing=? and shp_bian_ma like ? ORDER BY shp_bian_ma desc LIMIT 1",mdGoods.getChpShuXing(),mdGoods.getChpShuXing()+"%");
+							if (countMap == null) {
+								mdGoods.setShpBianMa(mdGoods.getChpShuXing()+String.format("%07d", 1));
+							}else {
+								Object goodsCode = countMap.get("shp_bian_ma");
+								if (goodsCode != null) {
+									mdGoods.setShpBianMa(mdGoods.getChpShuXing()+String.format("%07d",Integer.parseInt(((String) goodsCode))+1));
+								}else {
+									mdGoods.setShpBianMa(mdGoods.getChpShuXing()+String.format("%07d", 1));
+								}
+							}
+
 							if(StringUtil.isEmpty(mdGoods.getZhlKgm())){
 								if(!StringUtil.isEmpty(mdGoods.getBzhiQi())){
 									int bzhiq = Integer.parseInt(mdGoods.getBzhiQi());
@@ -457,6 +488,7 @@ public class MdGoodsController extends BaseController {
 
 						} catch (Exception e) {
 							// TODO: handle exception
+							e.printStackTrace();
 						}
 						mdGoodsService.save(mdGoods);
 					}else{
@@ -469,6 +501,7 @@ public class MdGoodsController extends BaseController {
 
 							}
 						} catch (Exception e) {
+							e.printStackTrace();
 							// TODO: handle exception
 						}
 				  		MyBeanUtils.copyBeanNotNull2Bean(mdGoods, mdGoods1);

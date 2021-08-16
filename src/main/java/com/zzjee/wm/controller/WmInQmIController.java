@@ -926,7 +926,7 @@ for (WmInQmIEntity wmInQmIEntity : wmInQmIso) {
 		String hql = " from WmInQmIEntity where 1 = 1 and binSta = 'N'  ";
 		D0.setOK(true);
 		if(!StringUtil.isEmpty(searchstr)) {
-			hql=hql+"  and imNoticeId like '%" + searchstr + "%'";
+			hql=hql+"  and (imNoticeId like '%" + searchstr + "%' or tin_id like '%"+searchstr+"%')";
 		}
 		if(!StringUtil.isEmpty(searchstr2)) {
 			try{

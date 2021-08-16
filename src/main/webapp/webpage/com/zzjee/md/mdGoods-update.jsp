@@ -128,7 +128,7 @@
 						<label class="Validform_label" style="display: none">客户商品编码</label>
 			          </div>
 			                    <div class="col-xs-3 text-center">
-			          	<b  style="color:red">商品条码</b>
+			          	<b  >商品条码</b>
 			          </div>
 			          <div class="col-xs-3">
 								<input id="shpTiaoMa" name="shpTiaoMa" type="text" class="form-control"
@@ -207,7 +207,7 @@
 			          </div>
 
 			          <div class="col-xs-3 text-center">
-			          	<b  style="color:red">体积</b>
+			          	<b >体积</b>
 			          </div>
 			          <div class="col-xs-3">
 								<input id="tiJiCm" name="tiJiCm" type="text" class="form-control"
@@ -218,7 +218,7 @@
 			          </div>
 
 			          <div class="col-xs-3 text-center">
-			          	<b  style="color:red">重量</b>
+			          	<b  >重量</b>
 			          </div>
 			          <div class="col-xs-3">
 								<input id="zhlKg" name="zhlKg" type="text" class="form-control"
@@ -234,7 +234,7 @@
 			        				<div class="row show-grid">
 
 			          	          <div class="col-xs-3 text-center">
-			          	<b  style="color:red">长</b>
+			          	<b  >长</b>
 			          </div>
 			          <div class="col-xs-3">
 								<input id="chZhXiang" name="chZhXiang" type="text" class="form-control"
@@ -244,7 +244,7 @@
 						<label class="Validform_label" style="display: none">长</label>
 			          </div>
 			               <div class="col-xs-3 text-center">
-			          	<b  style="color:red">宽</b>
+			          	<b  >宽</b>
 			          </div>
 			          <div class="col-xs-3">
 								<input id="kuZhXiang" name="kuZhXiang" type="text" class="form-control"

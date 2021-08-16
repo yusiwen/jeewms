@@ -347,7 +347,7 @@ public class WvNoticeController extends BaseController {
 			}
  			String[] ss = searchstr2.split(",");
 			if (ss.length == 1) {
-				hql = hql + "  and goodsCode like '%" + searchstr2 + "%'";
+				hql = hql + "  and (goodsCode like '%" + searchstr2 + "%'"+"or shp_ming_cheng like '%"+searchstr2+"%')";
 
 			} else {
 				String insearch = "";

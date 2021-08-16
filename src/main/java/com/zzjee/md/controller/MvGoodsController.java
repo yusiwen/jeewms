@@ -51,12 +51,12 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.zzjee.md.entity.MvGoodsEntity;
 import com.zzjee.md.service.MvGoodsServiceI;
 
-/**   
- * @Title: Controller  
+/**
+ * @Title: Controller
  * @Description: 商品视图
  * @author erzhongxmu
  * @date 2017-11-02 23:59:31
- * @version V1.0   
+ * @version V1.0
  *
  */
 @Controller
@@ -78,7 +78,7 @@ public class MvGoodsController extends BaseController {
 
 	/**
 	 * 商品视图列表 页面跳转
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "list")
@@ -89,7 +89,7 @@ public class MvGoodsController extends BaseController {
 //		mv.addObject("coscode", oConvertUtils.getString(request.getParameter("coscode")));
 //		mv.addObject("goodsCode", mvGoods.getGoodsCode());
 		return mv;
-	
+
 	}
 	/**
 	 * 删除销售订单
@@ -109,7 +109,7 @@ public class MvGoodsController extends BaseController {
 	}
 	/**
 	 * easyui AJAX请求数据
-	 * 
+	 *
 	 * @param request
 	 * @param response
 	 * @param dataGrid
@@ -125,8 +125,9 @@ public class MvGoodsController extends BaseController {
 		//自定义追加查询条件
 			System.out.print("ResourceUtil.getSessionUserName().setBrowser(cusCode)data"+		ResourceUtil.getSessionUserName().getBrowser());
 
+		//	String cusCode = ResourceUtil.getSessionUserName().getBrowser();
 			if(!StringUtil.isEmpty(ResourceUtil.getSessionUserName().getBrowser())){
-				cq.like("cusCode", ResourceUtil.getSessionUserName().getBrowser());
+				cq.eq("cusCode", coscode);
 			}
 			cq.add();
 			if(!StringUtil.isEmpty(goodsCode)){
@@ -139,7 +140,7 @@ public class MvGoodsController extends BaseController {
 //		TSUser user = ResourceUtil.getSessionUserName();
 //		String roles = "";
 		System.out.println("datagrid"+goodsCode);
-	
+
 
 //		if (user != null) {
 //			List<TSRoleUser> rUsers = systemService.findByProperty(TSRoleUser.class, "TSUser.id", user.getId());
@@ -152,17 +153,17 @@ public class MvGoodsController extends BaseController {
 //			}
 //			if(roles.equals("CUS")){
 //				cq.eq("cusCode", user.getUserName());
-//				
+//
 //			}
 //		}
 		cq.add();
 		this.mvGoodsService.getDataGridReturn(cq, true);
 		TagUtil.datagrid(response, dataGrid);
 	}
-	
+
 	/**
 	 * 删除商品视图
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "doDel")
@@ -183,10 +184,10 @@ public class MvGoodsController extends BaseController {
 		j.setMsg(message);
 		return j;
 	}
-	
+
 	/**
 	 * 批量删除商品视图
-	 * 
+	 *
 	 * @return
 	 */
 	 @RequestMapping(params = "doBatchDel")
@@ -197,7 +198,7 @@ public class MvGoodsController extends BaseController {
 		message = "商品视图删除成功";
 		try{
 			for(String id:ids.split(",")){
-				MvGoodsEntity mvGoods = systemService.getEntity(MvGoodsEntity.class, 
+				MvGoodsEntity mvGoods = systemService.getEntity(MvGoodsEntity.class,
 				id
 				);
 				mvGoodsService.delete(mvGoods);
@@ -215,7 +216,7 @@ public class MvGoodsController extends BaseController {
 
 	/**
 	 * 添加商品视图
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "doAdd")
@@ -235,10 +236,10 @@ public class MvGoodsController extends BaseController {
 		j.setMsg(message);
 		return j;
 	}
-	
+
 	/**
 	 * 更新商品视图
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "doUpdate")
@@ -260,11 +261,11 @@ public class MvGoodsController extends BaseController {
 		j.setMsg(message);
 		return j;
 	}
-	
+
 
 	/**
 	 * 商品视图新增页面跳转
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "goAdd")
@@ -277,7 +278,7 @@ public class MvGoodsController extends BaseController {
 	}
 	/**
 	 * 商品视图编辑页面跳转
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "goUpdate")
@@ -288,10 +289,10 @@ public class MvGoodsController extends BaseController {
 		}
 		return new ModelAndView("com/zzjee/md/mvGoods-update");
 	}
-	
+
 	/**
 	 * 导入功能跳转
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "upload")
@@ -299,10 +300,10 @@ public class MvGoodsController extends BaseController {
 		req.setAttribute("controller_name","mvGoodsController");
 		return new ModelAndView("common/upload/pub_excel_upload");
 	}
-	
+
 	/**
 	 * 导出excel
-	 * 
+	 *
 	 * @param request
 	 * @param response
 	 */
@@ -321,7 +322,7 @@ public class MvGoodsController extends BaseController {
 	}
 	/**
 	 * 导出excel 使模板
-	 * 
+	 *
 	 * @param request
 	 * @param response
 	 */
@@ -335,13 +336,13 @@ public class MvGoodsController extends BaseController {
     	modelMap.put(NormalExcelConstants.DATA_LIST,new ArrayList());
     	return NormalExcelConstants.JEECG_EXCEL_VIEW;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@RequestMapping(params = "importExcel", method = RequestMethod.POST)
 	@ResponseBody
 	public AjaxJson importExcel(HttpServletRequest request, HttpServletResponse response) {
 		AjaxJson j = new AjaxJson();
-		
+
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 		Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
 		for (Map.Entry<String, MultipartFile> entity : fileMap.entrySet()) {
@@ -369,14 +370,14 @@ public class MvGoodsController extends BaseController {
 		}
 		return j;
 	}
-	
+
 	@RequestMapping(method = RequestMethod.GET)
 	@ResponseBody
 	public List<MvGoodsEntity> list() {
 		List<MvGoodsEntity> listMvGoodss=mvGoodsService.getList(MvGoodsEntity.class);
 		return listMvGoodss;
 	}
-	
+
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	@ResponseBody
 	public ResponseEntity<?> get(@PathVariable("id") String id) {

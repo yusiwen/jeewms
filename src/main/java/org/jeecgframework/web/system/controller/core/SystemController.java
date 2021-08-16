@@ -143,7 +143,7 @@ public class SystemController extends BaseController {
 		return ajaxJson;
 	}
 
-	
+
 	/**
 	 * 类型字典列表页面跳转
 	 *
@@ -196,7 +196,7 @@ public class SystemController extends BaseController {
             }
             MutiLangSqlCriteriaUtil.assembleCondition(typegroupnameKeyList, cq, "typegroupname", typegroupname);
         }
-        
+
         String typegroupcode = request.getParameter("typegroupcode");
         if(oConvertUtils.isNotEmpty(typegroupcode)) {
         	 cq.eq("typegroupcode", typegroupcode);
@@ -1040,8 +1040,8 @@ public class SystemController extends BaseController {
 			}
 		}
 	}
-	
-	
+
+
 	/**
 	 * 在线用户列表
 	 * @param request
@@ -1188,7 +1188,7 @@ public class SystemController extends BaseController {
 				}else{
 					dataLogDiff.setValue1("");
 				}
-				
+
 				if (map2.containsKey(string)) {
 					value2 = map2.get(string).toString();
 					if (value2 == null) {
@@ -1200,7 +1200,7 @@ public class SystemController extends BaseController {
 					dataLogDiff.setValue2("");
 				}
 
-				
+
 				if (value1 == null && value2 == null) {
 					dataLogDiff.setDiff("N");
 				}else {
@@ -1229,7 +1229,7 @@ public class SystemController extends BaseController {
 		return new ModelAndView("system/dataLog/diffDataVersion");
 	}
 
-	
+
 	/**
 	 * WebUploader
 	 * 文件上传处理/删除处理
@@ -1247,10 +1247,10 @@ public class SystemController extends BaseController {
 	        //如果是上传操作
 	        if("1".equals(upFlag)){
 	        	String fileName = null;
-	        	String nowday=new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+	        	String nowday=new SimpleDateFormat("yyyyMMdd").format(new Date());
 	    		File file = new File(ctxPath+File.separator+nowday);
 	    		if (!file.exists()) {
-	    			file.mkdir();// 创建文件根目录
+	    			file.mkdirs();// 创建文件根目录
 	    		}
 	            MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 	            MultipartFile mf=multipartRequest.getFile("file");// 获取上传文件对象
@@ -1311,7 +1311,7 @@ public class SystemController extends BaseController {
 		}else{
 			response.setContentType("image/jpeg;charset=utf-8");
 		}
-	
+
 		InputStream inputStream = null;
 		OutputStream outputStream=null;
 		try {
@@ -1336,5 +1336,5 @@ public class SystemController extends BaseController {
 			}
 		}
 	}
-	
+
 }

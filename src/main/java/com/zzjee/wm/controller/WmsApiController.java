@@ -135,6 +135,17 @@ public class WmsApiController {
                     MdGoodsEntity.class, "shpBianMa", mdGoods.getShpBianMa());
 
             if(mdGoods1 ==null ){
+                Map<String, Object> countMap = systemService.findOneForJdbc("select right(shp_bian_ma,7) shp_bian_ma  from md_goods where chp_shu_xing=? and shp_bian_ma like ? ORDER BY shp_bian_ma desc LIMIT 1",mdGoods.getChpShuXing(),mdGoods.getChpShuXing()+"%");
+                if (countMap == null) {
+                    mdGoods.setShpBianMa(mdGoods.getChpShuXing()+String.format("%07d", 1));
+                }else {
+                    Object goodsCode = countMap.get("shp_bian_ma");
+                    if (goodsCode != null) {
+                        mdGoods.setShpBianMa(mdGoods.getChpShuXing()+String.format("%07d",Integer.parseInt(((String) goodsCode))+1));
+                    }else {
+                        mdGoods.setShpBianMa(mdGoods.getChpShuXing()+String.format("%07d", 1));
+                    }
+                }
                 if(StringUtil.isEmpty(mdGoods.getChlKongZhi()) ){
                     mdGoods.setChlKongZhi("N");
                 }

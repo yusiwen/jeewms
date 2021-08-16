@@ -55,6 +55,7 @@ import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.OutputStream;
+import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -158,6 +159,7 @@ public class WmImNoticeHController extends BaseController {
 			try {
 				List<WmImNoticeIEntity> wmImNoticeIEntityList = systemService
 						.findHql(hql0, id0);
+				BigDecimal totalCount = BigDecimal.ZERO;
 				for (WmImNoticeIEntity wmImNoticeIEntity : wmImNoticeIEntityList) {
 					if (StringUtil.isEmpty(wmImNoticeIEntity.getBinPlan())){
 						String hqlup = "from WmToUpGoodsEntity where 1 = 1 AND goodsId = ?  order by createDate desc";
@@ -193,13 +195,13 @@ public class WmImNoticeHController extends BaseController {
 					}catch (Exception e){
 
 					}
-
+                    totalCount = totalCount.add(new BigDecimal(wmImNoticeIEntity.getGoodsCount()));
 
 
 					wmImNoticeIEntitynewList.add(wmImNoticeIEntity);
 				}
-
 			request.setAttribute("wmImNoticeIList", wmImNoticeIEntitynewList);
+				request.setAttribute("totalCount",totalCount);
 		}catch (Exception e){
 
 		}
@@ -2080,7 +2082,8 @@ public class WmImNoticeHController extends BaseController {
 
 		printHeader.setHeader08("客户名称： " +wmImNoticeH.getCusCode()+md.getZhongWenQch());
 
-		printHeader.setHeader09("供应商： "+wmImNoticeH.getSupCode()+ wmImNoticeH.getSupName());
+		printHeader.setHeader09("供应商： "+(StringUtils.isEmpty(wmImNoticeH.getSupCode())||StringUtils.isEmpty(wmImNoticeH.getSupName())?"":wmImNoticeH.getSupCode()+ wmImNoticeH.getSupName()));
+
 
 		printHeader.setHeader10("客户电话： " +md.getDianHua());
 

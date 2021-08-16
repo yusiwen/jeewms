@@ -16,7 +16,7 @@
     <t:dgCol title="用户名"  field="userName"    queryMode="single"  width="120"></t:dgCol>
     <t:dgCol title="打印类型"  field="printType"   query="true" queryMode="single" dictionary="print_type" width="120"></t:dgCol>
     <t:dgCol title="打印模板"  field="printModel"   query="true" queryMode="single"  width="120"></t:dgCol>
-    <t:dgCol title="打印服务器地址"  field="printServerAddress"   query="true" queryMode="single"  width="120"></t:dgCol>
+    <t:dgCol title="模板地址"  field="printServerAddress"    queryMode="single"  width="120"></t:dgCol>
     <t:dgCol title="打印文件类型"  field="printFileType"   query="true" queryMode="single"  width="120"></t:dgCol>
     <t:dgCol title="备用1"  field="query1"  hidden="true"  queryMode="single"  width="120"></t:dgCol>
     <t:dgCol title="备用2"  field="query2"  hidden="true"  queryMode="single"  width="120"></t:dgCol>
