@@ -238,18 +238,17 @@ public class MdGoodsController extends BaseController {
 					// TODO: handle exception
 				}
 				//查询当前商品类型的商品数量
-				Map<String, Object> countMap = systemService.findOneForJdbc("select right(shp_bian_ma,7) shp_bian_ma  from md_goods where chp_shu_xing=? and shp_bian_ma like ? ORDER BY shp_bian_ma desc LIMIT 1",mdGoods.getChpShuXing(),mdGoods.getChpShuXing()+"%");
+				Map<String, Object> countMap = systemService.findOneForJdbc("select right(shp_bian_ma,7) shp_bian_ma  from md_goods where chp_shu_xing=? and suo_shu_ke_hu  = ? and shp_bian_ma like ? ORDER BY shp_bian_ma desc LIMIT 1",mdGoods.getChpShuXing(),mdGoods.getSuoShuKeHu(),mdGoods.getSuoShuKeHu()+"&"+mdGoods.getChpShuXing()+"%");
 				if (countMap == null) {
-					mdGoods.setShpBianMa(mdGoods.getChpShuXing()+String.format("%07d", 1));
+					mdGoods.setShpBianMa(mdGoods.getSuoShuKeHu()+"&"+mdGoods.getChpShuXing()+String.format("%07d", 1));
 				}else {
 					Object goodsCode = countMap.get("shp_bian_ma");
 					if (goodsCode != null) {
-						mdGoods.setShpBianMa(mdGoods.getChpShuXing()+String.format("%07d",Integer.parseInt(((String) goodsCode))+1));
+						mdGoods.setShpBianMa(mdGoods.getSuoShuKeHu()+"&"+mdGoods.getChpShuXing()+String.format("%07d",Integer.parseInt(((String) goodsCode))+1));
 					}else {
-						mdGoods.setShpBianMa(mdGoods.getChpShuXing()+String.format("%07d", 1));
+						mdGoods.setShpBianMa(mdGoods.getSuoShuKeHu()+"&"+mdGoods.getChpShuXing()+String.format("%07d", 1));
 					}
 				}
-				mdGoods.setShpTiaoMa(mdGoods.getShpBianMa());
 				mdGoodsService.save(mdGoods);
 				systemService.addLog(message, Globals.Log_Type_INSERT,
 						Globals.Log_Leavel_INFO);
@@ -455,15 +454,15 @@ public class MdGoodsController extends BaseController {
 //								j.setMsg("产品属性错误："+mdGoods.getChpShuXing());
 //								return j;
 //							}
-							Map<String, Object> countMap = systemService.findOneForJdbc("select right(shp_bian_ma,7) shp_bian_ma  from md_goods where chp_shu_xing=? and shp_bian_ma like ? ORDER BY shp_bian_ma desc LIMIT 1",mdGoods.getChpShuXing(),mdGoods.getChpShuXing()+"%");
+							Map<String, Object> countMap = systemService.findOneForJdbc("select right(shp_bian_ma,7) shp_bian_ma  from md_goods where chp_shu_xing=? and suo_shu_ke_hu  = ? and shp_bian_ma like ? ORDER BY shp_bian_ma desc LIMIT 1",mdGoods.getChpShuXing(),mdGoods.getSuoShuKeHu(),mdGoods.getSuoShuKeHu()+"&"+mdGoods.getChpShuXing()+"%");
 							if (countMap == null) {
-								mdGoods.setShpBianMa(mdGoods.getChpShuXing()+String.format("%07d", 1));
+								mdGoods.setShpBianMa(mdGoods.getSuoShuKeHu()+"&"+mdGoods.getChpShuXing()+String.format("%07d", 1));
 							}else {
 								Object goodsCode = countMap.get("shp_bian_ma");
 								if (goodsCode != null) {
-									mdGoods.setShpBianMa(mdGoods.getChpShuXing()+String.format("%07d",Integer.parseInt(((String) goodsCode))+1));
+									mdGoods.setShpBianMa(mdGoods.getSuoShuKeHu()+"&"+mdGoods.getChpShuXing()+String.format("%07d",Integer.parseInt(((String) goodsCode))+1));
 								}else {
-									mdGoods.setShpBianMa(mdGoods.getChpShuXing()+String.format("%07d", 1));
+									mdGoods.setShpBianMa(mdGoods.getSuoShuKeHu()+"&"+mdGoods.getChpShuXing()+String.format("%07d", 1));
 								}
 							}
 

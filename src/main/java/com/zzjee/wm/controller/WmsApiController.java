@@ -1,5 +1,7 @@
 package com.zzjee.wm.controller;
 
+import com.zzjee.ba.entity.BaGoodsTypeEntity;
+import com.zzjee.ba.service.BaGoodsTypeServiceI;
 import com.zzjee.md.entity.MdBinEntity;
 import com.zzjee.md.entity.MdCusEntity;
 import com.zzjee.md.entity.MdCusOtherEntity;
@@ -33,6 +35,7 @@ import org.jeecgframework.core.util.StringUtil;
 import org.jeecgframework.jwt.util.JwtUtils;
 import org.jeecgframework.jwt.util.ResponseMessage;
 import org.jeecgframework.jwt.util.Result;
+import org.jeecgframework.tag.core.easyui.TagUtil;
 import org.jeecgframework.web.system.pojo.base.TSRole;
 import org.jeecgframework.web.system.pojo.base.TSRoleUser;
 import org.jeecgframework.web.system.pojo.base.TSUser;
@@ -78,6 +81,8 @@ public class WmsApiController {
     private WmImNoticeHServiceI wmImNoticeHService;
     @Autowired
     private WmOmNoticeHServiceI wmOmNoticeHService;
+    @Autowired
+    private BaGoodsTypeServiceI baGoodsTypeService;
 
     @RequestMapping(params = "getToken")
     @ResponseBody
@@ -135,15 +140,15 @@ public class WmsApiController {
                     MdGoodsEntity.class, "shpBianMa", mdGoods.getShpBianMa());
 
             if(mdGoods1 ==null ){
-                Map<String, Object> countMap = systemService.findOneForJdbc("select right(shp_bian_ma,7) shp_bian_ma  from md_goods where chp_shu_xing=? and shp_bian_ma like ? ORDER BY shp_bian_ma desc LIMIT 1",mdGoods.getChpShuXing(),mdGoods.getChpShuXing()+"%");
+                Map<String, Object> countMap = systemService.findOneForJdbc("select right(shp_bian_ma,7) shp_bian_ma  from md_goods where chp_shu_xing=? and suo_shu_ke_hu  = ? and shp_bian_ma like ? ORDER BY shp_bian_ma desc LIMIT 1",mdGoods.getChpShuXing(),mdGoods.getSuoShuKeHu(),mdGoods.getSuoShuKeHu()+"&"+mdGoods.getChpShuXing()+"%");
                 if (countMap == null) {
-                    mdGoods.setShpBianMa(mdGoods.getChpShuXing()+String.format("%07d", 1));
+                    mdGoods.setShpBianMa(mdGoods.getSuoShuKeHu()+"&"+mdGoods.getChpShuXing()+String.format("%07d", 1));
                 }else {
                     Object goodsCode = countMap.get("shp_bian_ma");
                     if (goodsCode != null) {
-                        mdGoods.setShpBianMa(mdGoods.getChpShuXing()+String.format("%07d",Integer.parseInt(((String) goodsCode))+1));
+                        mdGoods.setShpBianMa(mdGoods.getSuoShuKeHu()+"&"+mdGoods.getChpShuXing()+String.format("%07d",Integer.parseInt(((String) goodsCode))+1));
                     }else {
-                        mdGoods.setShpBianMa(mdGoods.getChpShuXing()+String.format("%07d", 1));
+                        mdGoods.setShpBianMa(mdGoods.getSuoShuKeHu()+"&"+mdGoods.getChpShuXing()+String.format("%07d", 1));
                     }
                 }
                 if(StringUtil.isEmpty(mdGoods.getChlKongZhi()) ){
@@ -170,6 +175,7 @@ public class WmsApiController {
                 mdGoodsService.save(mdGoods);
                 systemService.addLog(message, Globals.Log_Type_INSERT,
                         Globals.Log_Leavel_INFO);
+                j.setObj(mdGoods);
             }else{
                 message = "商品编码或者条码已经存在";
                 j.setSuccess(false);
@@ -211,6 +217,14 @@ public class WmsApiController {
         return j;
     }
 
+    /**
+     * 客户信息查询
+     * @param mdCus
+     * @param request
+     * @param response
+     * @param dataGrid
+     * @return
+     */
     @RequestMapping(params = "cusList")
     @ResponseBody
     public ResponseMessage<DataGridReturn> datagrid(MdCusEntity mdCus, HttpServletRequest request, HttpServletResponse response, DataGrid dataGrid) {
@@ -738,6 +752,52 @@ public class WmsApiController {
         return Result.success(data);
     }
 
+    @RequestMapping(params = "goodsTypeList")
+    @ResponseBody
+    public void goodsTypeList(BaGoodsTypeEntity baGoodsType, HttpServletRequest request, HttpServletResponse response, DataGrid dataGrid) {
+        CriteriaQuery cq = new CriteriaQuery(BaGoodsTypeEntity.class, dataGrid);
+        //查询条件组装器
+        org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq, baGoodsType, request.getParameterMap());
+        try{
+            //自定义追加查询条件
+        }catch (Exception e) {
+            throw new BusinessException(e.getMessage());
+        }
+        cq.add();
+        this.baGoodsTypeService.getDataGridReturn(cq, true);
+        TagUtil.datagrid(response, dataGrid);
+    }
 
+    /**
+     * 添加产品属性
+     *
+     * @param ids
+     * @return
+     */
+    @RequestMapping(params = "addGoodsType")
+    @ResponseBody
+    public AjaxJson addGoodsType(BaGoodsTypeEntity baGoodsType, HttpServletRequest request) {
+        String message = null;
+        AjaxJson j = new AjaxJson();
+        message = "产品属性添加成功";
+        try{
+            //查询编码是否重复
+            BaGoodsTypeEntity goodsType = systemService.findUniqueByProperty(
+                    BaGoodsTypeEntity.class, "goodsTypeCode", baGoodsType.getGoodsTypeCode());
+            if (goodsType != null ) {
+                j.setSuccess(false);
+                j.setMsg("编码重复");
+                return j;
+            }
+            baGoodsTypeService.save(baGoodsType);
+            systemService.addLog(message, Globals.Log_Type_INSERT, Globals.Log_Leavel_INFO);
+        }catch(Exception e){
+            e.printStackTrace();
+            message = "产品属性添加失败";
+            throw new BusinessException(e.getMessage());
+        }
+        j.setMsg(message);
+        return j;
+    }
 
 }

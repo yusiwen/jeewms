@@ -25,6 +25,7 @@ import org.jeecgframework.core.online.exception.CgReportNotFoundException;
 import org.jeecgframework.core.online.util.CgReportQueryParamUtil;
 import org.jeecgframework.core.online.util.FreemarkerHelper;
 import org.jeecgframework.core.util.*;
+import org.jeecgframework.web.cgreport.entity.core.CgreportConfigParamEntity;
 import org.jeecgframework.web.cgreport.service.core.CgReportServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -163,7 +164,7 @@ public class CgReportController extends BaseController {
 	private void loadVars(Map<String, Object> cgReportMap,HttpServletRequest request) {
 		Map mainM = (Map) cgReportMap.get(CgReportConstant.MAIN);
 		List<Map<String,Object>> fieldList = (List<Map<String, Object>>) cgReportMap.get(CgReportConstant.ITEMS);
-		List<String> paramList = (List<String>)cgReportMap.get(CgReportConstant.PARAMS);
+		List<CgreportConfigParamEntity>  paramList = (List<CgreportConfigParamEntity> )cgReportMap.get(CgReportConstant.PARAMS);
 		List<Map<String,Object>> queryList = new ArrayList<Map<String,Object>>(0);
 		for(Map<String,Object> fl:fieldList){
 			fl.put(CgReportConstant.ITEM_FIELDNAME, ((String)fl.get(CgReportConstant.ITEM_FIELDNAME)).toLowerCase());
@@ -176,9 +177,9 @@ public class CgReportController extends BaseController {
 		StringBuilder sb = new StringBuilder("");
 		if(paramList!=null&&paramList.size()>0){
 			queryList = new ArrayList<Map<String,Object>>(0);
-			for(String param:paramList){
-				sb.append("&").append(param).append("=");
-				String value = request.getParameter(param);
+			for(CgreportConfigParamEntity param:paramList){
+				sb.append("&").append(param.getParamName()).append("=");
+				String value = request.getParameter(param.getParamName());
     			if(StringUtil.isNotEmpty(value)){
     				sb.append(value);
     			}
@@ -281,13 +282,13 @@ public class CgReportController extends BaseController {
 		Map configM = (Map) cgReportMap.get(CgReportConstant.MAIN);
 		String querySql = (String) configM.get(CgReportConstant.CONFIG_SQL);
 		List<Map<String,Object>> items = (List<Map<String, Object>>) cgReportMap.get(CgReportConstant.ITEMS);
-		List<String> paramList = (List<String>) cgReportMap.get(CgReportConstant.PARAMS);
+		List<CgreportConfigParamEntity> paramList = (List<CgreportConfigParamEntity>) cgReportMap.get(CgReportConstant.PARAMS);
 		Map queryparams =  new LinkedHashMap<String,Object>();
 		if(paramList!=null&&paramList.size()>0){
-			for(String param :paramList){
-				String value = request.getParameter(param);
-				value = value==null?"":value;
-				querySql = querySql.replace("${"+param+"}", value);
+			for(CgreportConfigParamEntity param :paramList){
+				String value = request.getParameter(param.getParamName());
+				value = StringUtil.isEmpty(value)?param.getParamValue():value;
+				querySql = querySql.replace("${"+param.getParamName()+"}", value);
 			}
 		}else{
 			for(Map<String,Object> item:items){

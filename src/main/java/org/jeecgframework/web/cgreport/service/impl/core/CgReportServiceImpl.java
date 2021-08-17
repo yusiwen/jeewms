@@ -30,59 +30,59 @@ public class CgReportServiceImpl extends CommonServiceImpl implements
 	private JdbcDao jdbcDao;
 	@Autowired
 	private CgReportDao cgReportDao;
-	
-	
+
+
 	@Override
     public Map<String, Object> queryCgReportConfig(String reportId) {
 		Map<String,Object> cgReportM = new HashMap<String, Object>(0);
 		Map<String,Object> mainM = queryCgReportMainConfig(reportId);
 		List<Map<String,Object>> itemsM = queryCgReportItems(reportId);
-		List<String> params =queryCgReportParam(reportId);
+		List<CgreportConfigParamEntity> params =queryCgReportParam(reportId);
 		cgReportM.put(CgReportConstant.MAIN, mainM);
 		cgReportM.put(CgReportConstant.ITEMS, itemsM);
 		cgReportM.put(CgReportConstant.PARAMS, params);
 		return cgReportM;
 	}
-	
+
 	@Override
     public Map<String,Object> queryCgReportMainConfig(String reportId){
 //		String sql = JeecgSqlUtil.getMethodSql(JeecgSqlUtil.getMethodUrl());
 //		Map<String,Object> parameters = new LinkedHashMap<String,Object>();
 //		parameters.put("id", reportId);
 //		Map mainM = jdbcDao.findForMap(sql, parameters);
-		
+
 		//采用MiniDao实现方式
 		return cgReportDao.queryCgReportMainConfig(reportId);
 	}
-	
+
 	@Override
     public List<Map<String,Object>> queryCgReportItems(String reportId){
 //		String sql = JeecgSqlUtil.getMethodSql(JeecgSqlUtil.getMethodUrl());
 //		Map<String,Object> parameters = new LinkedHashMap<String,Object>();
 //		parameters.put("configId", reportId);
 //		List<Map<String,Object>> items = jdbcDao.findForListMap(sql, parameters);
-		
+
 		//采用MiniDao实现方式
 		return cgReportDao.queryCgReportItems(reportId);
 	}
-	
-	public List<String> queryCgReportParam(String reportId){
+
+	public List<CgreportConfigParamEntity> queryCgReportParam(String reportId){
 		List<String> list = null;
 		CgreportConfigHeadEntity cgreportConfigHead = this.findUniqueByProperty(CgreportConfigHeadEntity.class, "code", reportId);
     	String hql0 = "from CgreportConfigParamEntity where 1 = 1 AND cgrheadId = ? ";
     	List<CgreportConfigParamEntity> cgreportConfigParamList = this.findHql(hql0,cgreportConfigHead.getId());
-    	if(cgreportConfigParamList!=null&cgreportConfigParamList.size()>0){
-    		list = new ArrayList<String>();
-    		for(CgreportConfigParamEntity cgreportConfigParam :cgreportConfigParamList){
-    			list.add(cgreportConfigParam.getParamName());
-    		}
-    	}
-		return list;
+//    	if(cgreportConfigParamList!=null&cgreportConfigParamList.size()>0){
+//    		list = new ArrayList<String>();
+//    		for(CgreportConfigParamEntity cgreportConfigParam :cgreportConfigParamList){
+//    			list.add(cgreportConfigParam.getParamName());
+//    		}
+//    	}
+		return cgreportConfigParamList;
 	}
-	
+
 	@Override
     @SuppressWarnings("unchecked")
-	
+
 	public List<Map<String, Object>> queryByCgReportSql(String sql, Map params,
 			int page, int rows) {
 		String querySql = getFullSql(sql,params);
@@ -122,7 +122,7 @@ public class CgReportServiceImpl extends CommonServiceImpl implements
 	}
 	@Override
     @SuppressWarnings("unchecked")
-	
+
 	public long countQueryByCgReportSql(String sql, Map params) {
 		String querySql = getFullSql(sql,params);
 		querySql = "SELECT COUNT(*) FROM ("+querySql+") t2";
@@ -131,7 +131,7 @@ public class CgReportServiceImpl extends CommonServiceImpl implements
 	}
 	@Override
     @SuppressWarnings( "unchecked" )
-	
+
 	public List<String> getSqlFields(String sql) {
 		if(oConvertUtils.isEmpty(sql)){
 			return null;
