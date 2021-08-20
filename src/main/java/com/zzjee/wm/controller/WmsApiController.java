@@ -758,8 +758,8 @@ public class WmsApiController {
 
     @RequestMapping(params = "getStock")
     @ResponseBody
-    public ResponseMessage<List<Map<String, Object>>> getStock () {
-        List<Map<String,Object>> data = systemService.findForJdbc("SELECT * from wv_stock where base_goodscount <> 0");
+    public ResponseMessage<List<Map<String, Object>>> getStock (String sku) {
+        List<Map<String,Object>> data = systemService.findForJdbc("SELECT goods_id,shp_ming_cheng goods_name,sku,base_goodscount,goods_unit from wv_stock where base_goodscount <> 0 and sku = ? GROUP BY goods_id",sku);
 
         return Result.success(data);
     }
