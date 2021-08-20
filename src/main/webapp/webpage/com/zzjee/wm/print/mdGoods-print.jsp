@@ -115,26 +115,22 @@ function printview(){
 
 			<td    height=20 class=xl65 style='height:20.05pt;border:1.0pt solid black;text-align: center'>品名</td>
 
-			<td  colspan=3  class=xl65 style='border:1.0pt solid black;text-align: left'> ${mdGoodsPage.shpMingCheng} </td>
+			<td  colspan=3  class=xl65 style='border:1.0pt solid black;text-align: center'> ${mdGoodsPage.shpMingCheng} </td>
 
         </tr>
-		<tr height=20 style='mso-height-source:userset;height:20.05pt'>
+		<%--<tr height=20 style='mso-height-source:userset;height:20.05pt'>
 
 			<td    height=20 class=xl65 style='height:20.05pt;border:1.0pt solid black;text-align: center'>编码</td>
 
-			<td  colspan=3  class=xl65 style='border:1.0pt solid black;text-align: left'> ${mdGoodsPage.shpBianMa} </td>
+			<td  colspan=3  class=xl65 style='border:1.0pt solid black;text-align: center'> ${mdGoodsPage.shpBianMa} </td>
 
-		</tr>
+		</tr>--%>
 
 		<tr height=20 style='mso-height-source:userset;height:20.05pt'>
-
-			<td    height=20 class=xl65 style='height:20.05pt;border:1.0pt solid black;text-align: center'>型号</td>
-
+			<td    height=20 class=xl65 style='height:20.05pt;border:1.0pt solid black;text-align: center'>规格</td>
 			<td    class=xl65 style='border:1.0pt solid black;text-align: center'> ${mdGoodsPage.shpGuiGe} </td>
 			<td    height=20 class=xl65 style='height:20.05pt;border:1.0pt solid black;text-align: center'>单位</td>
-
-			<td    class=xl65 style='border:1.0pt solid black;text-align: center'> ${mdGoodsPage.shlDanWei}  </td>
-
+			<td    class=xl65 style='border:1.0pt solid black;text-align: center'> ${mdGoodsPage.shlDanWei} </td>
 		</tr>
 <%--		<tr height=20 style='mso-height-source:userset;height:20.05pt'>--%>
 
@@ -155,8 +151,8 @@ function printview(){
 
 
 		<tr height=40 style='mso-height-source:userset '>
-			<td    height=20 class=xl65 style='height:20.05pt;border:1.0pt solid black;text-align: center' >条码</td>
-			<th colspan=3 height=80 class=xl65   ><span style="font-size: 18pt"><img src="rest/wmBaseController/showOrDownbarcodeByurl.do?qrvalue=${mdGoodsPage.shpBianMa }"    ></span></th>
+			<td height=20 class=xl65 style='height:20.05pt;border:1.0pt solid black;text-align: center' >条码</td>
+			<th colspan=3 height=80 class=xl65  style='border:1.0pt solid black;text-align: center' ><span style="font-size: 15pt"><img width="90%" src="rest/wmBaseController/showOrDownbarcodeByurl.do?qrvalue=${mdGoodsPage.shpBianMa }" /></span></th>
 		</tr>
 	</table>
 </t:formvalid></div>

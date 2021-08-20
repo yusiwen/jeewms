@@ -52,6 +52,25 @@ public class wmUtil {
 			// TODO: handle exception
 		}
 	}
+
+	public static List<Map<String, Object>>  genrp2(String datafrom,String datato,String username){
+		SystemService systemService =ApplicationContextUtil.getContext().getBean(SystemService.class);
+
+		String tsql = "SELECT goods_name,goods_id,IFNULL(sum(in_goods_qua),0) goods_in,IFNULL(sum(out_goods_qua),0) goods_out,(IFNULL(sum(in_goods_qua)-IFNULL(sum(out_goods_qua),0),0))goods_now,CONCAT('"+datafrom+"','~','"+datato+"') date_period from (" +
+				"SELECT goods_name,sum(goods_qua) in_goods_qua,0 as out_goods_qua,goods_id from wm_to_up_goods where order_id != 'ZY' and DATE_FORMAT(create_date,'%Y-%m-%d') >= '"+datafrom+"' and DATE_FORMAT(create_date,'%Y-%m-%d') <= '"+datato+"' GROUP BY goods_id " +
+				"UNION all \n" +
+				"SELECT goods_name,0 as in_goods_qua,sum(goods_qua) out_goods_qua,goods_id from wm_to_down_goods where order_id != 'ZY' and DATE_FORMAT(create_date,'%Y-%m-%d') >= '"+datafrom+"'  and DATE_FORMAT(create_date,'%Y-%m-%d') <= '"+datato+"' GROUP BY goods_id " +
+				") tb GROUP BY goods_id";
+		List<Map<String, Object>> forJdbc= new ArrayList<>();
+		try {
+			forJdbc = systemService.findForJdbc(tsql);
+		} catch (Exception e) {
+
+		}
+		forJdbc.forEach(System.out::println);
+		return forJdbc;
+	}
+
 	public  static  String getNextNoticeid(String orderType){
 		String noticeid=null;
 		SystemService systemService =ApplicationContextUtil.getContext().getBean(SystemService.class);
@@ -61,7 +80,7 @@ public class wmUtil {
 		int newcount = 1;
 
 		try{
-			newcount=	((Long) countMap.get("count")).intValue();
+			newcount = ((Long) countMap.get("count")).intValue();
 		}catch (Exception e){
 			newcount = 1;
 		}
