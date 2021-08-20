@@ -60,13 +60,13 @@ function counttiji(){
 			      <div class="row form-wrapper">
 							<div class="row show-grid">
 			          <div class="col-xs-3 text-center">
-			          	<b  style="color:red">所属客户</b>
+			          	<b  style="color:red">所属供应商</b>
 			          </div>
 			          <div class="col-xs-3">
 								<t:dictSelect field="suoShuKeHu" type="list" extendJson="{class:'form-control';datatype:'*'}"
 											  dictTable="mv_cus" dictField="cus_code" dictText="cus_name"  hasLabel="false"  title="所属客户"></t:dictSelect>
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
-						<label class="Validform_label" style="display: none">所属客户</label>
+						<label class="Validform_label" style="display: none">所属供应商</label>
 			          </div>
 			          			          <div class="col-xs-3 text-center">
 			          	<b  style="color:red">存放温层</b>

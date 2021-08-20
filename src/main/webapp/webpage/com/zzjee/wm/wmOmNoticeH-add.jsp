@@ -144,7 +144,7 @@
 			      <div class="row form-wrapper">
 							<div class="row show-grid">
 			          <div class="col-xs-1 text-center">
-			          	<b>客户：</b>
+			          	<b>供应商：</b>
 			          </div>
 			          <div class="col-xs-2">
 								<t:dictSelect  field="cusCode" type="list" extendJson="{class:'form-control',datatype:'*',style:'width:230px'}"
@@ -197,7 +197,7 @@
 						  <t:dictSelect id="ocusCodeid" field="ocusCode" type="list" extendJson="{class:'form-control',style:'width:230px'}"
 										 	 	  dictTable="mv_cus_other" dictField="cus_code" dictText="cus_name"  hasLabel="false"  title="三方客户编码"></t:dictSelect>
 						  <span class="Validform_checktip" style="float:left;height:0px;"></span>
-						  <label class="Validform_label" style="display: none">三方客户</label>
+						  <label class="Validform_label" style="display: none">客户</label>
 					  </div>
 
 

@@ -16,14 +16,14 @@
    <t:dgCol title="所属部门"  field="sysOrgCode"  hidden="true"  queryMode="single"  width="120"></t:dgCol>
    <t:dgCol title="所属公司"  field="sysCompanyCode"  hidden="true"  queryMode="single"  width="120"></t:dgCol>
       <t:dgCol title="进货通知单号"  field="noticeId" query="true" sortable="true"    queryMode="single"  width="120"></t:dgCol>
-   <t:dgCol title="货主"  field="cusCode"  query="true"   queryMode="single" dictionary="mv_cus,cus_code,cus_name"  width="200"></t:dgCol>
+   <t:dgCol title="供应商"  field="cusCode"  query="true"   queryMode="single" dictionary="mv_cus,cus_code,cus_name"  width="200"></t:dgCol>
    <t:dgCol title="预计到货时间"  field="imData" formatter="yyyy-MM-dd hh:mm:ss"  query="true" queryMode="group"  width="120"></t:dgCol>
    <t:dgCol title="客户订单号"  field="imCusCode"   query="true" queryMode="single"  width="90"></t:dgCol>
    <t:dgCol title="运输号码"  field="imCarNo"   query="true" queryMode="single"  width="50"></t:dgCol>
    <t:dgCol title="运输公司"  field="imCarDri"   query="true" queryMode="single"  width="50"></t:dgCol>
    <t:dgCol title="供应商编号"  field="supCode"   query="true" queryMode="single"  width="100"></t:dgCol>
 
-   <t:dgCol title="供应商名称"  field="supName"   query="true" queryMode="single"  width="120"></t:dgCol>
+   <t:dgCol title="生产厂家名称"  field="supName"   query="true" queryMode="single"  width="120"></t:dgCol>
 
    <%--<t:dgCol title="司机电话"  field="imCarMobile"   query="true" queryMode="single"  width="60"></t:dgCol>--%>
    <t:dgCol title="订单类型"  field="orderTypeCode"   query="true" queryMode="single" dictionary="ba_order_type,order_type_code,order_type_name"  width="60"></t:dgCol>

@@ -119,7 +119,7 @@
 			      <div class="row form-wrapper">
 							<div class="row show-grid">
 			          <div class="col-xs-1 text-center">
-			          	<b>客户：</b>
+			          	<b>供应商：</b>
 			          </div>
 			          <div class="col-xs-2">
 			          <t:dictSelect field="cusCode" type="list" extendJson="{class:'form-control',datatype:'*',style:'width:230px'}"
@@ -172,7 +172,7 @@
 						  <input id="ocusCode" name="ocusCode"
 								 value="${wmOmNoticeHPage.ocusCode}"	  hasLabel="false"  class="form-control"/>
 						  <span class="Validform_checktip" style="float:left;height:0px;"></span>
-						  <label class="Validform_label" style="display: none">三方客户</label>
+						  <label class="Validform_label" style="display: none">客户</label>
 					  </div>
 
 					  <div class="col-xs-1 text-center">

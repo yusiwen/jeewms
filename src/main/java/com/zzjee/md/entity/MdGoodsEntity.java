@@ -147,6 +147,20 @@ public class MdGoodsEntity implements java.io.Serializable {
 	private java.lang.String zhuangTai;
 	private java.lang.String minStock;
 
+	private String sku;
+
+	private Integer categoryId;
+
+	@Column(name ="category_id",nullable=false,length=36)
+	public Integer getCategoryId() {
+		return categoryId;
+	}
+
+	public MdGoodsEntity setCategoryId(Integer categoryId) {
+		this.categoryId = categoryId;
+		return this;
+	}
+
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  主键
@@ -925,6 +939,16 @@ public class MdGoodsEntity implements java.io.Serializable {
 
 	public MdGoodsEntity setMinStock(String minStock) {
 		this.minStock = minStock;
+		return this;
+	}
+
+	@Column(name ="sku",nullable=true,length=32)
+	public String getSku() {
+		return sku;
+	}
+
+	public MdGoodsEntity setSku(String sku) {
+		this.sku = sku;
 		return this;
 	}
 }

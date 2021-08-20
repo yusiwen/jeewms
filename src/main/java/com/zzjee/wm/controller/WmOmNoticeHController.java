@@ -1669,11 +1669,11 @@ public class WmOmNoticeHController extends BaseController {
 				sheet.addMergedRegion(c72);
 
 				Cell cell73 = row.createCell(10);
-				cell73.setCellValue("① 财务联 ② 客户联 ③司机联 ④回单联                                   ");
+				cell73.setCellValue("①财务联 ②客户联 ③司机联 ④回单联");
 				cell73.setCellStyle(cs52);
 
 
-				CellRangeAddress c73 = new CellRangeAddress(page*20, page*20+19, 10, 10);//第7行打印时间
+				CellRangeAddress c73 = new CellRangeAddress(page*20, page*20+16, 10, 10);//第7行打印时间
 				sheet.addMergedRegion(c73);
 
 				Row rowColumnName = sheet.createRow((short) page*20+8); // 列名

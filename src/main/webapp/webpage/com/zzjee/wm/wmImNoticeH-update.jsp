@@ -123,7 +123,7 @@
 			<div class="row form-wrapper">
 				<div class="row show-grid">
 					<div class="col-xs-1 text-center">
-						<b>货主：</b>
+						<b>供应商：</b>
 					</div>
 					<div class="col-xs-2">
 						<t:dictSelect readonly="${wmImNoticeHPage.readonly}"  field="cusCode" type="list" extendJson="{class:'form-control',style:'width:230px'}"
@@ -202,7 +202,7 @@
 						   ignore="ignore" value='${wmImNoticeHPage.supCode}'
 					/>
 					<span class="Validform_checktip" style="float:left;height:0px;"></span>
-					<label class="Validform_label" style="display: none">供应商/label>
+					<label class="Validform_label" style="display: none">生产厂家/label>
 				</div>
 					<div class="col-xs-1 text-center">
 						<b>预约库区：</b>

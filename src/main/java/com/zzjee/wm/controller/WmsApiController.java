@@ -137,7 +137,7 @@ public class WmsApiController {
         message = "商品信息添加成功";
         try {
             MdGoodsEntity mdGoods1 = systemService.findUniqueByProperty(
-                    MdGoodsEntity.class, "shpBianMa", mdGoods.getShpBianMa());
+                    MdGoodsEntity.class, "sku", mdGoods.getSku());
 
             if(mdGoods1 ==null ){
                 Map<String, Object> countMap = systemService.findOneForJdbc("select right(shp_bian_ma,7) shp_bian_ma  from md_goods where chp_shu_xing=? and suo_shu_ke_hu  = ? and shp_bian_ma like ? ORDER BY shp_bian_ma desc LIMIT 1",mdGoods.getChpShuXing(),mdGoods.getSuoShuKeHu(),mdGoods.getSuoShuKeHu()+"&"+mdGoods.getChpShuXing()+"%");
@@ -177,8 +177,20 @@ public class WmsApiController {
                         Globals.Log_Leavel_INFO);
                 j.setObj(mdGoods);
             }else{
-                message = "商品编码或者条码已经存在";
-                j.setSuccess(false);
+                try {
+                    if(StringUtil.isEmpty(mdGoods.getZhlKgm())){
+                        if(!StringUtil.isEmpty(mdGoods.getBzhiQi())){
+                            int bzhiq = Integer.parseInt(mdGoods.getBzhiQi());
+                            mdGoods.setZhlKgm(Integer.toString(bzhiq));
+                        }
+
+                    }
+                } catch (Exception e) {
+                    e.printStackTrace();
+                    // TODO: handle exception
+                }
+                MyBeanUtils.copyBeanNotNull2Bean(mdGoods, mdGoods1);
+                mdGoodsService.updateEntitie(mdGoods1);
             }
 
         } catch (Exception e) {
