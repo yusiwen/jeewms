@@ -147,9 +147,23 @@ public class MdGoodsEntity implements java.io.Serializable {
 	private java.lang.String zhuangTai;
 	private java.lang.String minStock;
 
+	@Excel(name="sku")
 	private String sku;
 
+//	@Excel(name="类目id")
 	private Integer categoryId;
+
+	private String categoryCode;
+
+	@Column(name ="category_code",nullable=false,length=50)
+	public String getCategoryCode() {
+		return categoryCode;
+	}
+
+	public MdGoodsEntity setCategoryCode(String categoryCode) {
+		this.categoryCode = categoryCode;
+		return this;
+	}
 
 	@Column(name ="category_id",nullable=false,length=36)
 	public Integer getCategoryId() {

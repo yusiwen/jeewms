@@ -31,6 +31,7 @@ import org.jeecgframework.poi.excel.annotation.Excel;
 @SuppressWarnings("serial")
 public class BaGoodsCategoryEntity implements java.io.Serializable {
 	/**id*/
+	@Excel(name="类目id")
 	private Integer id;
 	/**创建人名称*/
 	private String createName;

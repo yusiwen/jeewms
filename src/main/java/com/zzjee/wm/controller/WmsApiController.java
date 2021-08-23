@@ -1,6 +1,8 @@
 package com.zzjee.wm.controller;
 
+import com.zzjee.ba.entity.BaGoodsCategoryEntity;
 import com.zzjee.ba.entity.BaGoodsTypeEntity;
+import com.zzjee.ba.service.BaGoodsCategoryServiceI;
 import com.zzjee.ba.service.BaGoodsTypeServiceI;
 import com.zzjee.md.entity.MdBinEntity;
 import com.zzjee.md.entity.MdCusEntity;
@@ -21,6 +23,7 @@ import com.zzjee.wm.page.WmOmNoticeHPage;
 import com.zzjee.wm.service.WmImNoticeHServiceI;
 import com.zzjee.wm.service.WmOmNoticeHServiceI;
 import com.zzjee.wmutil.wmUtil;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.jeecgframework.core.common.exception.BusinessException;
 import org.jeecgframework.core.common.hibernate.qbc.CriteriaQuery;
@@ -83,6 +86,8 @@ public class WmsApiController {
     private WmOmNoticeHServiceI wmOmNoticeHService;
     @Autowired
     private BaGoodsTypeServiceI baGoodsTypeService;
+    @Autowired
+    private BaGoodsCategoryServiceI baGoodsCategoryService;
 
     @RequestMapping(params = "getToken")
     @ResponseBody
@@ -138,17 +143,22 @@ public class WmsApiController {
         try {
             MdGoodsEntity mdGoods1 = systemService.findUniqueByProperty(
                     MdGoodsEntity.class, "sku", mdGoods.getSku());
+            if (StringUtils.isEmpty(mdGoods.getCategoryCode())) {
+                j.setSuccess(false);
+                j.setMsg("类目编码为空");
+                return j;
+            }
 
             if(mdGoods1 ==null ){
-                Map<String, Object> countMap = systemService.findOneForJdbc("select right(shp_bian_ma,7) shp_bian_ma  from md_goods where chp_shu_xing=? and suo_shu_ke_hu  = ? and shp_bian_ma like ? ORDER BY shp_bian_ma desc LIMIT 1",mdGoods.getChpShuXing(),mdGoods.getSuoShuKeHu(),mdGoods.getSuoShuKeHu()+"&"+mdGoods.getChpShuXing()+"%");
+                Map<String, Object> countMap = systemService.findOneForJdbc("select right(shp_bian_ma,7) shp_bian_ma  from md_goods where category_code =? and suo_shu_ke_hu  = ? and shp_bian_ma like ? ORDER BY shp_bian_ma desc LIMIT 1",mdGoods.getCategoryCode(),mdGoods.getSuoShuKeHu(),mdGoods.getSuoShuKeHu()+mdGoods.getCategoryCode()+"%");
                 if (countMap == null) {
-                    mdGoods.setShpBianMa(mdGoods.getSuoShuKeHu()+"&"+mdGoods.getChpShuXing()+String.format("%07d", 1));
+                    mdGoods.setShpBianMa(mdGoods.getSuoShuKeHu()+mdGoods.getCategoryCode()+String.format("%07d", 1));
                 }else {
                     Object goodsCode = countMap.get("shp_bian_ma");
                     if (goodsCode != null) {
-                        mdGoods.setShpBianMa(mdGoods.getSuoShuKeHu()+"&"+mdGoods.getChpShuXing()+String.format("%07d",Integer.parseInt(((String) goodsCode))+1));
+                        mdGoods.setShpBianMa(mdGoods.getSuoShuKeHu()+mdGoods.getCategoryCode()+String.format("%07d",Integer.parseInt(((String) goodsCode))+1));
                     }else {
-                        mdGoods.setShpBianMa(mdGoods.getSuoShuKeHu()+"&"+mdGoods.getChpShuXing()+String.format("%07d", 1));
+                        mdGoods.setShpBianMa(mdGoods.getSuoShuKeHu()+mdGoods.getCategoryCode()+String.format("%07d", 1));
                     }
                 }
                 if(StringUtil.isEmpty(mdGoods.getChlKongZhi()) ){
@@ -442,7 +452,7 @@ public class WmsApiController {
             for (WmImNoticeIEntity wmImNoticeIEntity : wmImNoticeIList) {
                 if(!StringUtil.isEmpty(wmImNoticeIEntity.getGoodsCode())){
                     try {
-                        MvGoodsEntity mvgoods = systemService.findUniqueByProperty(MvGoodsEntity.class,"goodsName",wmImNoticeIEntity.getGoodsCode());
+                        MvGoodsEntity mvgoods = systemService.findUniqueByProperty(MvGoodsEntity.class,"goodsId",wmImNoticeIEntity.getGoodsCode());
 //					String date[]=wmImNoticeIEntity.getGoodsCode().split("-");
 
                         long hiti = 0;
@@ -588,7 +598,7 @@ public class WmsApiController {
                     try {
 
 
-                        MvGoodsEntity mvgoods = systemService.findUniqueByProperty(MvGoodsEntity.class,"goodsName",wmomNoticeIEntity.getGoodsId());
+                        MvGoodsEntity mvgoods = systemService.findUniqueByProperty(MvGoodsEntity.class,"goodsId",wmomNoticeIEntity.getGoodsId());
 
 //					String date[]=wmImNoticeIEntity.getGoodsCode().split("-");
 //						wmImNoticeIEntity.setGoodsCode(mvgoods.getGoodsCode());
@@ -806,6 +816,53 @@ public class WmsApiController {
         }catch(Exception e){
             e.printStackTrace();
             message = "产品属性添加失败";
+            throw new BusinessException(e.getMessage());
+        }
+        j.setMsg(message);
+        return j;
+    }
+
+    @RequestMapping(params = "goodsCategoryList")
+    public void datagrid(BaGoodsCategoryEntity baGoodsCategory, HttpServletRequest request, HttpServletResponse response, DataGrid dataGrid) {
+        CriteriaQuery cq = new CriteriaQuery(BaGoodsCategoryEntity.class, dataGrid);
+        //查询条件组装器
+        org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq, baGoodsCategory, request.getParameterMap());
+        try{
+            //自定义追加查询条件
+            String query_createTime_begin = request.getParameter("createTime_begin");
+            String query_createTime_end = request.getParameter("createTime_end");
+            if(StringUtil.isNotEmpty(query_createTime_begin)){
+                cq.ge("createTime", new SimpleDateFormat("yyyy-MM-dd").parse(query_createTime_begin));
+            }
+            if(StringUtil.isNotEmpty(query_createTime_end)){
+                cq.le("createTime", new SimpleDateFormat("yyyy-MM-dd").parse(query_createTime_end));
+            }
+        }catch (Exception e) {
+            throw new BusinessException(e.getMessage());
+        }
+        cq.add();
+        this.baGoodsCategoryService.getDataGridReturn(cq, true);
+        TagUtil.datagrid(response, dataGrid);
+    }
+
+    /**
+     * 添加商品类目
+     *
+     * @param ids
+     * @return
+     */
+    @RequestMapping(params = "addGoodsCategory")
+    @ResponseBody
+    public AjaxJson doAdd(BaGoodsCategoryEntity baGoodsCategory, HttpServletRequest request) {
+        String message = null;
+        AjaxJson j = new AjaxJson();
+        message = "商品类目添加成功";
+        try{
+            baGoodsCategoryService.save(baGoodsCategory);
+            systemService.addLog(message, Globals.Log_Type_INSERT, Globals.Log_Leavel_INFO);
+        }catch(Exception e){
+            e.printStackTrace();
+            message = "商品类目添加失败";
             throw new BusinessException(e.getMessage());
         }
         j.setMsg(message);
