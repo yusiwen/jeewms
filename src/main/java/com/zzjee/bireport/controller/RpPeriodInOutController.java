@@ -85,7 +85,7 @@ public class RpPeriodInOutController extends BaseController {
                 if (!StringUtil.isNotEmpty(query_datePeriod_end)) {
                     query_datePeriod_end = "2099-01-01";
                 }
-                List<Map<String, Object>> forJdbc= wmUtil.genrp2(query_datePeriod_begin, query_datePeriod_end, ResourceUtil.getSessionUserName().getUserName());
+                wmUtil.genrp(query_datePeriod_begin, query_datePeriod_end, ResourceUtil.getSessionUserName().getUserName());
             } catch (Exception e) {
                 e.printStackTrace();
             }
