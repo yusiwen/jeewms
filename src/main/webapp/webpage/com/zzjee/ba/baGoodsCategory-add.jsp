@@ -5,6 +5,54 @@
  <head>
   <title>商品类目</title>
   <t:base type="jquery,easyui,tools,DatePicker"></t:base>
+  <style type="text/css">
+  	.combo_self{height: 22px !important;width: 150px !important;}
+  	.layout-header .btn {
+	    margin:0;
+	   float: none !important;
+	}
+	.btn-default {
+	    height: 35px;
+	    line-height: 35px;
+	    font-size:14px;
+	}
+  </style>
+  
+  <script type="text/javascript">
+	$(function(){
+		$(".combo").removeClass("combo").addClass("combo combo_self");
+		$(".combo").each(function(){
+			$(this).parent().css("line-height","0px");
+		});   
+	});
+  		
+  		 /**树形列表数据转换**/
+  function convertTreeData(rows, textField) {
+      for(var i = 0; i < rows.length; i++) {
+          var row = rows[i];
+          row.text = row[textField];
+          if(row.children) {
+          	row.state = "open";
+              convertTreeData(row.children, textField);
+          }
+      }
+  }
+  /**树形列表加入子元素**/
+  function joinTreeChildren(arr1, arr2) {
+      for(var i = 0; i < arr1.length; i++) {
+          var row1 = arr1[i];
+          for(var j = 0; j < arr2.length; j++) {
+              if(row1.id == arr2[j].id) {
+                  var children = arr2[j].children;
+                  if(children) {
+                      row1.children = children;
+                  }
+                  
+              }
+          }
+      }
+  }
+  </script>
   <script type="text/javascript">
   //编写自定义JS代码
   </script>
@@ -72,10 +120,34 @@
 						</label>
 					</td>
 					<td class="value">
-					     	 <input id="pid" name="pid" type="text" style="width: 150px" class="inputxt" 
-					     	  
-					     	  ignore="ignore"
-					     	  />
+							<input id="pid" name="pid" type="text" style="width: 150px" class="inputxt easyui-combotree" 
+							
+							ignore="ignore"
+							data-options="panelHeight:'220',
+				                    url: 'baGoodsCategoryController.do?datagrid&field=id,categoryName',  
+				                    loadFilter: function(data) {
+				                    	var rows = data.rows || data;
+				                    	var win = frameElement.api.opener;
+				                    	var listRows = win.getDataGrid().treegrid('getData');
+				                    	joinTreeChildren(rows, listRows);
+				                    	convertTreeData(rows, 'categoryName');
+				                    	return rows; 
+				                    },
+				                    onLoadSuccess: function() {
+				                    	var win = frameElement.api.opener;
+				                    	var currRow = win.getDataGrid().treegrid('getSelected');
+				                    	if(!'${baGoodsCategoryPage.id}') {
+				                    		//增加时，选择当前父菜单
+				                    		if(currRow) {
+				                    			$('#pid').combotree('setValue', currRow.id);
+				                    		}
+				                    	}else {
+				                    		//编辑时，选择当前父菜单
+				                    		if(currRow) {
+				                    			$('#pid').combotree('setValue', currRow.pid);
+				                    		}
+				                    	}
+				                    }">
 							<span class="Validform_checktip"></span>
 							<label class="Validform_label" style="display: none;">父级目录</label>
 						</td>

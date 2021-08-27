@@ -1,28 +1,27 @@
 package com.zzjee.ba.entity;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
 import java.lang.String;
 import java.lang.Double;
 import java.lang.Integer;
 import java.math.BigDecimal;
+import javax.persistence.*;
 import javax.xml.soap.Text;
 import java.sql.Blob;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import java.util.List;
+
+import com.zzjee.ba.vo.BaGoodsCategoryVoo;
 import org.hibernate.annotations.GenericGenerator;
-import javax.persistence.SequenceGenerator;
 import org.jeecgframework.poi.excel.annotation.Excel;
+import org.jeecgframework.web.system.pojo.base.TSDepart;
 
 /**
  * @Title: Entity
  * @Description: 商品类目
  * @author onlineGenerator
- * @date 2021-08-20 10:29:34
+ * @date 2021-08-25 17:16:36
  * @version V1.0
  *
  */
@@ -31,46 +30,54 @@ import org.jeecgframework.poi.excel.annotation.Excel;
 @SuppressWarnings("serial")
 public class BaGoodsCategoryEntity implements java.io.Serializable {
 	/**id*/
-	@Excel(name="类目id")
-	private Integer id;
+	private java.lang.Integer id;
 	/**创建人名称*/
-	private String createName;
+	private java.lang.String createName;
 	/**创建人登录名称*/
-	private String createBy;
+	private java.lang.String createBy;
 	/**创建日期*/
-	private Date createTime;
+	private java.util.Date createTime;
 	/**更新人名称*/
-	private String updateName;
+	private java.lang.String updateName;
 	/**更新人登录名称*/
-	private String updateBy;
+	private java.lang.String updateBy;
 	/**更新日期*/
-	private Date updateTime;
+	private java.util.Date updateTime;
 	/**所属部门*/
-	private String sysOrgCode;
+	private java.lang.String sysOrgCode;
 	/**类目编码*/
 	@Excel(name="类目编码")
-	private String categoryCode;
+	private java.lang.String categoryCode;
 	/**类目名称*/
 	@Excel(name="类目名称")
-	private String categoryName;
+	private java.lang.String categoryName;
 	/**类目级别*/
 	@Excel(name="类目级别")
-	private Integer categoryLevel;
+	private java.lang.Integer categoryLevel;
 	/**父级目录*/
 	@Excel(name="父级目录")
-	private Integer pid;
+	private java.lang.Integer pid;
 	/**是否为顶级目录*/
 	@Excel(name="是否为顶级目录")
-	private String topNode;
+	private java.lang.String topNode;
 
+	private List<BaGoodsCategoryEntity> baGoodsCategory;
+
+	public List<BaGoodsCategoryEntity> getBaGoodsCategory() {
+		return baGoodsCategory;
+	}
+
+	public void setBaGoodsCategory(List<BaGoodsCategoryEntity> baGoodsCategory) {
+		this.baGoodsCategory = baGoodsCategory;
+	}
 	/**
 	 *方法: 取得java.lang.Integer
 	 *@return: java.lang.Integer  id
 	 */
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name ="ID",nullable=false,length=10)
-	public Integer getId(){
+	@Column(name ="ID",length=10)
+	public java.lang.Integer getId(){
 		return this.id;
 	}
 
@@ -78,7 +85,7 @@ public class BaGoodsCategoryEntity implements java.io.Serializable {
 	 *方法: 设置java.lang.Integer
 	 *@param: java.lang.Integer  id
 	 */
-	public void setId(Integer id){
+	public void setId(java.lang.Integer id){
 		this.id = id;
 	}
 	/**
@@ -86,7 +93,7 @@ public class BaGoodsCategoryEntity implements java.io.Serializable {
 	 *@return: java.lang.String  创建人名称
 	 */
 	@Column(name ="CREATE_NAME",nullable=true,length=50)
-	public String getCreateName(){
+	public java.lang.String getCreateName(){
 		return this.createName;
 	}
 
@@ -94,7 +101,7 @@ public class BaGoodsCategoryEntity implements java.io.Serializable {
 	 *方法: 设置java.lang.String
 	 *@param: java.lang.String  创建人名称
 	 */
-	public void setCreateName(String createName){
+	public void setCreateName(java.lang.String createName){
 		this.createName = createName;
 	}
 	/**
@@ -102,7 +109,7 @@ public class BaGoodsCategoryEntity implements java.io.Serializable {
 	 *@return: java.lang.String  创建人登录名称
 	 */
 	@Column(name ="CREATE_BY",nullable=true,length=50)
-	public String getCreateBy(){
+	public java.lang.String getCreateBy(){
 		return this.createBy;
 	}
 
@@ -110,7 +117,7 @@ public class BaGoodsCategoryEntity implements java.io.Serializable {
 	 *方法: 设置java.lang.String
 	 *@param: java.lang.String  创建人登录名称
 	 */
-	public void setCreateBy(String createBy){
+	public void setCreateBy(java.lang.String createBy){
 		this.createBy = createBy;
 	}
 	/**
@@ -118,7 +125,7 @@ public class BaGoodsCategoryEntity implements java.io.Serializable {
 	 *@return: java.util.Date  创建日期
 	 */
 	@Column(name ="CREATE_TIME",nullable=true)
-	public Date getCreateTime(){
+	public java.util.Date getCreateTime(){
 		return this.createTime;
 	}
 
@@ -126,7 +133,7 @@ public class BaGoodsCategoryEntity implements java.io.Serializable {
 	 *方法: 设置java.util.Date
 	 *@param: java.util.Date  创建日期
 	 */
-	public void setCreateTime(Date createTime){
+	public void setCreateTime(java.util.Date createTime){
 		this.createTime = createTime;
 	}
 	/**
@@ -134,7 +141,7 @@ public class BaGoodsCategoryEntity implements java.io.Serializable {
 	 *@return: java.lang.String  更新人名称
 	 */
 	@Column(name ="UPDATE_NAME",nullable=true,length=50)
-	public String getUpdateName(){
+	public java.lang.String getUpdateName(){
 		return this.updateName;
 	}
 
@@ -142,7 +149,7 @@ public class BaGoodsCategoryEntity implements java.io.Serializable {
 	 *方法: 设置java.lang.String
 	 *@param: java.lang.String  更新人名称
 	 */
-	public void setUpdateName(String updateName){
+	public void setUpdateName(java.lang.String updateName){
 		this.updateName = updateName;
 	}
 	/**
@@ -150,7 +157,7 @@ public class BaGoodsCategoryEntity implements java.io.Serializable {
 	 *@return: java.lang.String  更新人登录名称
 	 */
 	@Column(name ="UPDATE_BY",nullable=true,length=50)
-	public String getUpdateBy(){
+	public java.lang.String getUpdateBy(){
 		return this.updateBy;
 	}
 
@@ -158,7 +165,7 @@ public class BaGoodsCategoryEntity implements java.io.Serializable {
 	 *方法: 设置java.lang.String
 	 *@param: java.lang.String  更新人登录名称
 	 */
-	public void setUpdateBy(String updateBy){
+	public void setUpdateBy(java.lang.String updateBy){
 		this.updateBy = updateBy;
 	}
 	/**
@@ -166,7 +173,7 @@ public class BaGoodsCategoryEntity implements java.io.Serializable {
 	 *@return: java.util.Date  更新日期
 	 */
 	@Column(name ="UPDATE_TIME",nullable=true)
-	public Date getUpdateTime(){
+	public java.util.Date getUpdateTime(){
 		return this.updateTime;
 	}
 
@@ -174,7 +181,7 @@ public class BaGoodsCategoryEntity implements java.io.Serializable {
 	 *方法: 设置java.util.Date
 	 *@param: java.util.Date  更新日期
 	 */
-	public void setUpdateTime(Date updateTime){
+	public void setUpdateTime(java.util.Date updateTime){
 		this.updateTime = updateTime;
 	}
 	/**
@@ -182,7 +189,7 @@ public class BaGoodsCategoryEntity implements java.io.Serializable {
 	 *@return: java.lang.String  所属部门
 	 */
 	@Column(name ="SYS_ORG_CODE",nullable=true,length=50)
-	public String getSysOrgCode(){
+	public java.lang.String getSysOrgCode(){
 		return this.sysOrgCode;
 	}
 
@@ -190,7 +197,7 @@ public class BaGoodsCategoryEntity implements java.io.Serializable {
 	 *方法: 设置java.lang.String
 	 *@param: java.lang.String  所属部门
 	 */
-	public void setSysOrgCode(String sysOrgCode){
+	public void setSysOrgCode(java.lang.String sysOrgCode){
 		this.sysOrgCode = sysOrgCode;
 	}
 	/**
@@ -198,7 +205,7 @@ public class BaGoodsCategoryEntity implements java.io.Serializable {
 	 *@return: java.lang.String  类目编码
 	 */
 	@Column(name ="CATEGORY_CODE",nullable=true,length=50)
-	public String getCategoryCode(){
+	public java.lang.String getCategoryCode(){
 		return this.categoryCode;
 	}
 
@@ -206,7 +213,7 @@ public class BaGoodsCategoryEntity implements java.io.Serializable {
 	 *方法: 设置java.lang.String
 	 *@param: java.lang.String  类目编码
 	 */
-	public void setCategoryCode(String categoryCode){
+	public void setCategoryCode(java.lang.String categoryCode){
 		this.categoryCode = categoryCode;
 	}
 	/**
@@ -214,7 +221,7 @@ public class BaGoodsCategoryEntity implements java.io.Serializable {
 	 *@return: java.lang.String  类目名称
 	 */
 	@Column(name ="CATEGORY_NAME",nullable=true,length=50)
-	public String getCategoryName(){
+	public java.lang.String getCategoryName(){
 		return this.categoryName;
 	}
 
@@ -222,7 +229,7 @@ public class BaGoodsCategoryEntity implements java.io.Serializable {
 	 *方法: 设置java.lang.String
 	 *@param: java.lang.String  类目名称
 	 */
-	public void setCategoryName(String categoryName){
+	public void setCategoryName(java.lang.String categoryName){
 		this.categoryName = categoryName;
 	}
 	/**
@@ -230,7 +237,7 @@ public class BaGoodsCategoryEntity implements java.io.Serializable {
 	 *@return: java.lang.Integer  类目级别
 	 */
 	@Column(name ="CATEGORY_LEVEL",nullable=true,length=10)
-	public Integer getCategoryLevel(){
+	public java.lang.Integer getCategoryLevel(){
 		return this.categoryLevel;
 	}
 
@@ -238,7 +245,7 @@ public class BaGoodsCategoryEntity implements java.io.Serializable {
 	 *方法: 设置java.lang.Integer
 	 *@param: java.lang.Integer  类目级别
 	 */
-	public void setCategoryLevel(Integer categoryLevel){
+	public void setCategoryLevel(java.lang.Integer categoryLevel){
 		this.categoryLevel = categoryLevel;
 	}
 	/**
@@ -246,7 +253,7 @@ public class BaGoodsCategoryEntity implements java.io.Serializable {
 	 *@return: java.lang.Integer  父级目录
 	 */
 	@Column(name ="PID",nullable=true,length=10)
-	public Integer getPid(){
+	public java.lang.Integer getPid(){
 		return this.pid;
 	}
 
@@ -254,7 +261,7 @@ public class BaGoodsCategoryEntity implements java.io.Serializable {
 	 *方法: 设置java.lang.Integer
 	 *@param: java.lang.Integer  父级目录
 	 */
-	public void setPid(Integer pid){
+	public void setPid(java.lang.Integer pid){
 		this.pid = pid;
 	}
 	/**
@@ -262,7 +269,7 @@ public class BaGoodsCategoryEntity implements java.io.Serializable {
 	 *@return: java.lang.String  是否为顶级目录
 	 */
 	@Column(name ="TOP_NODE",nullable=true,length=10)
-	public String getTopNode(){
+	public java.lang.String getTopNode(){
 		return this.topNode;
 	}
 
@@ -270,7 +277,7 @@ public class BaGoodsCategoryEntity implements java.io.Serializable {
 	 *方法: 设置java.lang.String
 	 *@param: java.lang.String  是否为顶级目录
 	 */
-	public void setTopNode(String topNode){
+	public void setTopNode(java.lang.String topNode){
 		this.topNode = topNode;
 	}
 }

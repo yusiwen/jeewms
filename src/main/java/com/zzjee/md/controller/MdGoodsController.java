@@ -342,8 +342,7 @@ public class MdGoodsController extends BaseController {
 	@RequestMapping(params = "goAdd")
 	public ModelAndView goAdd(MdGoodsEntity mdGoods, HttpServletRequest req) {
 		if (StringUtil.isNotEmpty(mdGoods.getId())) {
-			mdGoods = mdGoodsService.getEntity(MdGoodsEntity.class,
-					mdGoods.getId());
+			mdGoods = mdGoodsService.getEntity(MdGoodsEntity.class,mdGoods.getId());
 			req.setAttribute("mdGoodsPage", mdGoods);
 		}
 		return new ModelAndView("com/zzjee/md/mdGoods-add");

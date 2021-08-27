@@ -1,5 +1,6 @@
 <%@ page language="java" import="java.util.*" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/context/mytags.jsp"%>
+<t:base type="jquery,easyui,tools,autocomplete"></t:base>
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -86,6 +87,7 @@ function counttiji(){
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
 						<label class="Validform_label" style="display: none">产品属性</label>
 			          </div>
+
 			          		          <div class="col-xs-3 text-center">
 			          	<b  style="color:red">价格</b>
 			          </div>
@@ -152,7 +154,16 @@ function counttiji(){
 									<label class="Validform_label" style="display: none">商品品牌</label>
 								</div>
 						</div>
-
+					  <div class="row show-grid">
+						  <div class="col-xs-3 text-center">
+							  <b  style="color:red">商品类目</b>
+						  </div>
+						  <div class="col-xs-3">
+							  <t:comboTree name="categoryCode"  id="categoryCode" url="baGoodsCategoryController.do?getComboTreeData" width="400" multiple="false"></t:comboTree>
+							  <span class="Validform_checktip" style="float:left;height:0px;"></span>
+							  <label class="Validform_label" style="display: none">商品类目</label>
+						  </div>
+					  </div>
 							<div class="row show-grid">
 
 
@@ -184,7 +195,6 @@ function counttiji(){
 					  </div>
 
 					  <div class="row show-grid">
-
 
 						  <div class="col-xs-3 text-center">
 							  <b   >日文名称</b>

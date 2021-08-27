@@ -1,4 +1,5 @@
 package com.zzjee.ba.controller;
+import com.jeecg.demo.dao.JeecgMinidaoDao;
 import com.zzjee.ba.entity.BaGoodsCategoryEntity;
 import com.zzjee.ba.service.BaGoodsCategoryServiceI;
 import java.util.ArrayList;
@@ -7,11 +8,11 @@ import java.text.SimpleDateFormat;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.zzjee.ba.vo.BaGoodsCategoryVo;
+import com.zzjee.ba.vo.BaGoodsCategoryVoo;
 import org.apache.log4j.Logger;
-import org.jeecgframework.core.common.service.CommonService;
+import org.jeecgframework.core.common.model.json.ComboTree;
+import org.jeecgframework.tag.vo.easyui.ComboTreeModel;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpMethod;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -72,7 +73,7 @@ import org.springframework.web.util.UriComponentsBuilder;
  * @Title: Controller
  * @Description: 商品类目
  * @author onlineGenerator
- * @date 2021-08-20 10:29:34
+ * @date 2021-08-25 17:16:36
  * @version V1.0
  *
  */
@@ -91,8 +92,7 @@ public class BaGoodsCategoryController extends BaseController {
 	@Autowired
 	private Validator validator;
 	@Autowired
-	private CommonService commonService;
-
+	private JeecgMinidaoDao jeecgMinidaoDao;
 
 
 	/**
@@ -106,17 +106,130 @@ public class BaGoodsCategoryController extends BaseController {
 	}
 
 	/**
+	 * 父级DEMO下拉菜单
+	 */
+	@RequestMapping(params = "getComboTreeData")
+	@ResponseBody
+	public List<ComboTree> getComboTreeData(HttpServletRequest request, ComboTree comboTree) {
+		System.out.println("======================getComboTreeData comboTree:==================="+comboTree);
+		List<BaGoodsCategoryVoo> balist=new ArrayList<BaGoodsCategoryVoo>();
+		balist = jeecgMinidaoDao.getAllBaGoodsCategorys();
+		/*for (int i = 0; i < demoList.size(); i++) {
+			BaGoodsCategoryVoo cat = new BaGoodsCategoryVoo();
+			String id=String.valueOf(demoList.get(i).get("id"));
+			String categoryName=String.valueOf(demoList.get(i).get("categoryName"));
+//			System.out.println(id+"   "+categoryName);
+			cat.setId(id);
+			cat.setCategoryName(categoryName);
+			if (demoList.get(i).get("pid")!=null) {
+				String pid=String.valueOf(demoList.get(i).get("pid"));
+				cat.setPid(pid);
+			}
+			System.out.println(cat.toString());
+			balist.add(cat);
+		}*/
+		for (int i = 0; i <balist.size(); i++) {
+			String id = balist.get(i).getId();
+			List<BaGoodsCategoryVoo> allBaGoodsCategorys = jeecgMinidaoDao.getAllBaGoodsCategorys(id);
+			for (int j = 0; j <allBaGoodsCategorys.size() ; j++) {
+				String id1 = allBaGoodsCategorys.get(j).getId();
+				List<BaGoodsCategoryVoo> allBaGoodsCategorys1 = jeecgMinidaoDao.getAllBaGoodsCategorys(id1);
+				for (int k = 0; k <allBaGoodsCategorys.size() ; k++) {
+					String id2 = allBaGoodsCategorys.get(j).getId();
+					List<BaGoodsCategoryVoo> allBaGoodsCategorys2 = jeecgMinidaoDao.getAllBaGoodsCategorys(id2);
+					allBaGoodsCategorys.get(k).setBaGoodsCategory(allBaGoodsCategorys2);
+				}
+				allBaGoodsCategorys.get(j).setBaGoodsCategory(allBaGoodsCategorys1);
+			}
+			balist.get(i).setBaGoodsCategory(allBaGoodsCategorys);
+		}
+//
+//		List<ComboTree> comboTrees = new ArrayList<ComboTree>();
+		ComboTreeModel comboTreeModel = new ComboTreeModel("id", "categoryName", "baGoodsCategory");
+		System.out.println("======================getComboTreeData demoList:==================="+balist.size());
+		List<ComboTree> comboTrees = systemService.ComboTree(balist, comboTreeModel, null, true);
+		return comboTrees;
+	}
+
+	/**
+	 * 加载ztree
+	 *
+	 * @param response
+	 * @param request
+	 * @return
+	 */
+	/*@RequestMapping(params = "getTreeData", method = {RequestMethod.GET, RequestMethod.POST})
+	@ResponseBody
+	public AjaxJson getTreeData(BaGoodsCategoryEntity baGoodsCategory1, HttpServletResponse response, HttpServletRequest request) {
+		AjaxJson j = new AjaxJson();
+		try {
+//			List<TSDepart> depatrList = new ArrayList<TSDepart>();
+			StringBuffer hql = new StringBuffer(" from BaGoodsCategoryEntity t");
+			//hql.append(" and (parent.id is null or parent.id='')");
+			List<BaGoodsCategoryEntity> catList = this.systemService.findHql(hql.toString());
+			List<Map<String, Object>> dataList = new ArrayList<Map<String, Object>>();
+			Map<String, Object> map = null;
+			for (BaGoodsCategoryEntity baGoodsCategory : catList) {
+				String sqls = null;
+				Object[] paramss = null;
+				map = new HashMap<String, Object>();
+				map.put("id", baGoodsCategory.getId());
+				map.put("name", baGoodsCategory.getCategoryName());
+				if (baGoodsCategory.getPid() != 0) {
+					map.put("pId", baGoodsCategory.getPid());
+					map.put("open", false);
+				} else {
+					map.put("pId", "1");
+					map.put("open", false);
+				}
+				sqls = "select count(1) from ba_goods_category t where t.pid = ?";
+				paramss = new Object[]{baGoodsCategory.getId()};
+				long counts = this.systemService.getCountForJdbcParam(sqls, paramss);
+				if (counts > 0) {
+					dataList.add(map);
+				} else {
+					TSDepart de = this.systemService.get(TSDepart.class, baGoodsCategory.getId());
+					if (de != null) {
+						map.put("id", de.getId());
+						map.put("name", de.getDepartname());
+						if (baGoodsCategory.getPid() != 0) {
+							map.put("pId", baGoodsCategory.getPid());
+							map.put("open", false);
+						} else {
+							map.put("pId", "1");
+							map.put("open", false);
+						}
+						dataList.add(map);
+					} else {
+						map.put("open", false);
+						dataList.add(map);
+					}
+				}
+			}
+			j.setObj(dataList);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return j;
+	}*/
+	/**
 	 * easyui AJAX请求数据
 	 *
 	 * @param request
 	 * @param response
 	 * @param dataGrid
-	 * @param user
+//	 * @param user
 	 */
 
 	@RequestMapping(params = "datagrid")
 	public void datagrid(BaGoodsCategoryEntity baGoodsCategory,HttpServletRequest request, HttpServletResponse response, DataGrid dataGrid) {
 		CriteriaQuery cq = new CriteriaQuery(BaGoodsCategoryEntity.class, dataGrid);
+		if(baGoodsCategory.getId()==null){
+			cq.isNull("pid");
+		}else{
+			cq.eq("pid", baGoodsCategory.getId());
+			baGoodsCategory.setId(null);
+		}
 		//查询条件组装器
 		org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq, baGoodsCategory, request.getParameterMap());
 		try{
@@ -134,7 +247,7 @@ public class BaGoodsCategoryController extends BaseController {
 		}
 		cq.add();
 		this.baGoodsCategoryService.getDataGridReturn(cq, true);
-		TagUtil.datagrid(response, dataGrid);
+		TagUtil.treegrid(response, dataGrid);
 	}
 
 	/**
@@ -193,7 +306,7 @@ public class BaGoodsCategoryController extends BaseController {
 	/**
 	 * 添加商品类目
 	 *
-	 * @param ids
+//	 * @param ids
 	 * @return
 	 */
 	@RequestMapping(params = "doAdd")
@@ -203,6 +316,9 @@ public class BaGoodsCategoryController extends BaseController {
 		AjaxJson j = new AjaxJson();
 		message = "商品类目添加成功";
 		try{
+			if(baGoodsCategory.getPid()==null){
+				baGoodsCategory.setPid(null);
+			}
 			baGoodsCategoryService.save(baGoodsCategory);
 			systemService.addLog(message, Globals.Log_Type_INSERT, Globals.Log_Leavel_INFO);
 		}catch(Exception e){
@@ -217,7 +333,7 @@ public class BaGoodsCategoryController extends BaseController {
 	/**
 	 * 更新商品类目
 	 *
-	 * @param ids
+//	 * @param ids
 	 * @return
 	 */
 	@RequestMapping(params = "doUpdate")
@@ -229,6 +345,9 @@ public class BaGoodsCategoryController extends BaseController {
 		BaGoodsCategoryEntity t = baGoodsCategoryService.get(BaGoodsCategoryEntity.class, baGoodsCategory.getId());
 		try {
 			MyBeanUtils.copyBeanNotNull2Bean(baGoodsCategory, t);
+			if(t.getPid()==null){
+				t.setPid(null);
+			}
 			baGoodsCategoryService.saveOrUpdate(t);
 			systemService.addLog(message, Globals.Log_Type_UPDATE, Globals.Log_Leavel_INFO);
 		} catch (Exception e) {
@@ -383,7 +502,7 @@ public class BaGoodsCategoryController extends BaseController {
 			return new ResponseEntity(HttpStatus.NO_CONTENT);
 		}
 		//按照Restful风格约定，创建指向新任务的url, 也可以直接返回id或对象.
-		int id = baGoodsCategory.getId();
+		Integer id = baGoodsCategory.getId();
 		URI uri = uriBuilder.path("/rest/baGoodsCategoryController/" + id).build().toUri();
 		HttpHeaders headers = new HttpHeaders();
 		headers.setLocation(uri);
@@ -416,62 +535,4 @@ public class BaGoodsCategoryController extends BaseController {
 	public void delete(@PathVariable("id") String id) {
 		baGoodsCategoryService.deleteEntityById(BaGoodsCategoryEntity.class, id);
 	}
-
-	@RequestMapping(params = "getGoodsTreeList")
-	@ResponseBody
-	public AjaxJson getGoodsTreeList(){
-
-		List<BaGoodsCategoryVo> treeList = new ArrayList<>();
-		List<BaGoodsCategoryEntity> dataList = systemService.findHql("from BaGoodsCategoryEntity order by id");
-
-		for (BaGoodsCategoryEntity baGoodsCategoryEntity : dataList) {
-
-			BaGoodsCategoryVo baGoodsCategoryVo = new BaGoodsCategoryVo();
-			baGoodsCategoryVo.setLabel(baGoodsCategoryEntity.getCategoryName());
-			baGoodsCategoryVo.setValue(baGoodsCategoryEntity.getId());
-			baGoodsCategoryVo.setPid(baGoodsCategoryEntity.getPid());
-			if (baGoodsCategoryVo.getPid() == null){
-				System.out.println();
-			}
-			if (baGoodsCategoryVo.getPid() == 0) {
-				treeList.add(baGoodsCategoryVo);
-			}else {
-				BaGoodsCategoryVo parent = findParent(treeList,baGoodsCategoryVo.getPid());
-				if(parent!=null){
-					if(parent.getChildren()==null){
-						parent.setChildren(new ArrayList<>());
-					}
-					parent.getChildren().add(baGoodsCategoryVo);
-				} else {
-					treeList.add(baGoodsCategoryVo);
-				}
-			}
-		}
-		AjaxJson ajaxJson = new AjaxJson();
-		ajaxJson.setSuccess(true);
-		ajaxJson.setMsg("查询成功");
-		ajaxJson.setObj(treeList);
-
-
-		return ajaxJson;
-
-	}
-
-	private BaGoodsCategoryVo findParent(List<BaGoodsCategoryVo> treeList, Integer pid) {
-		BaGoodsCategoryVo find = null;
-		for(BaGoodsCategoryVo baGoodsCategoryVo:treeList){
-			if(baGoodsCategoryVo.getValue().equals(pid)){
-				find = baGoodsCategoryVo;
-				break;
-			} else if(baGoodsCategoryVo.getChildren()!=null) {
-				find = findParent(baGoodsCategoryVo.getChildren(),pid);
-				if(find!=null){
-					break;
-				}
-			}
-		}
-		return find;
-	}
-
-
 }
