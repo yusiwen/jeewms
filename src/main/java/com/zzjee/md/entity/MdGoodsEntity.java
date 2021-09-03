@@ -153,6 +153,7 @@ public class MdGoodsEntity implements java.io.Serializable {
 //	@Excel(name="类目id")
 	private Integer categoryId;
 
+	@Excel(name="类目编码")
 	private String categoryCode;
 
 	@Column(name ="category_code",nullable=false,length=50)

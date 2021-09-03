@@ -1,6 +1,8 @@
 package com.zzjee.ba.controller;
+import com.alibaba.fastjson.JSON;
 import com.jeecg.demo.dao.JeecgMinidaoDao;
 import com.zzjee.ba.entity.BaGoodsCategoryEntity;
+import com.zzjee.ba.entity.BaGoodsTypeEntity;
 import com.zzjee.ba.service.BaGoodsCategoryServiceI;
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +13,9 @@ import javax.servlet.http.HttpServletResponse;
 import com.zzjee.ba.vo.BaGoodsCategoryVoo;
 import org.apache.log4j.Logger;
 import org.jeecgframework.core.common.model.json.ComboTree;
+import org.jeecgframework.core.common.model.json.TreeGrid;
 import org.jeecgframework.tag.vo.easyui.ComboTreeModel;
+import org.jeecgframework.tag.vo.easyui.TreeGridModel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -110,10 +114,45 @@ public class BaGoodsCategoryController extends BaseController {
 	 */
 	@RequestMapping(params = "getComboTreeData")
 	@ResponseBody
-	public List<ComboTree> getComboTreeData(HttpServletRequest request, ComboTree comboTree) {
-		System.out.println("======================getComboTreeData comboTree:==================="+comboTree);
+	public List<ComboTree> getComboTreeData(HttpServletRequest request, ComboTree comboTree1) {
+		System.out.println("======================getComboTreeData comboTree:==================="+comboTree1);
 		List<BaGoodsCategoryVoo> balist=new ArrayList<BaGoodsCategoryVoo>();
 		balist = jeecgMinidaoDao.getAllBaGoodsCategorys();
+
+		List<ComboTree> comboTrees = new ArrayList<ComboTree>();
+//		ComboTreeModel comboTreeModel = new ComboTreeModel("id", "categoryName", "baGoodsCategory");
+//		comboTrees = systemService.ComboTree(balist, comboTreeModel, balist,true);
+//		return comboTrees;
+
+		if (balist.size() > 0) {
+			for (BaGoodsCategoryVoo baGoodsCategoryVoo : balist) {
+				ComboTree comboTree = new ComboTree();
+				comboTree.setId(baGoodsCategoryVoo.getId());
+				comboTree.setText(baGoodsCategoryVoo.getCategoryName());
+				if (baGoodsCategoryVoo.getCategoryLevel() <=3) {
+					comboTree.setState("closed");
+				}
+				if (StringUtil.isEmpty(baGoodsCategoryVoo.getPid())){
+					comboTrees.add(comboTree);
+				}else {
+					ComboTree parent = findParent(comboTrees,baGoodsCategoryVoo.getPid());
+					if(parent!=null){
+						if(parent.getChildren()==null){
+							parent.setChildren(new ArrayList<>());
+						}
+						parent.getChildren().add(comboTree);
+					}
+					else {
+						comboTrees.add(comboTree);
+					}
+				}
+			}
+		}
+		return comboTrees;
+
+
+
+
 		/*for (int i = 0; i < demoList.size(); i++) {
 			BaGoodsCategoryVoo cat = new BaGoodsCategoryVoo();
 			String id=String.valueOf(demoList.get(i).get("id"));
@@ -128,27 +167,44 @@ public class BaGoodsCategoryController extends BaseController {
 			System.out.println(cat.toString());
 			balist.add(cat);
 		}*/
-		for (int i = 0; i <balist.size(); i++) {
-			String id = balist.get(i).getId();
-			List<BaGoodsCategoryVoo> allBaGoodsCategorys = jeecgMinidaoDao.getAllBaGoodsCategorys(id);
-			for (int j = 0; j <allBaGoodsCategorys.size() ; j++) {
-				String id1 = allBaGoodsCategorys.get(j).getId();
-				List<BaGoodsCategoryVoo> allBaGoodsCategorys1 = jeecgMinidaoDao.getAllBaGoodsCategorys(id1);
-				for (int k = 0; k <allBaGoodsCategorys.size() ; k++) {
-					String id2 = allBaGoodsCategorys.get(j).getId();
-					List<BaGoodsCategoryVoo> allBaGoodsCategorys2 = jeecgMinidaoDao.getAllBaGoodsCategorys(id2);
-					allBaGoodsCategorys.get(k).setBaGoodsCategory(allBaGoodsCategorys2);
+//		for (int i = 0; i <balist.size(); i++) {
+//			String id = balist.get(i).getId();
+//			List<BaGoodsCategoryVoo> allBaGoodsCategorys = jeecgMinidaoDao.getAllBaGoodsCategorys(id);
+//			for (int j = 0; j <allBaGoodsCategorys.size() ; j++) {
+//				String id1 = allBaGoodsCategorys.get(j).getId();
+//				List<BaGoodsCategoryVoo> allBaGoodsCategorys1 = jeecgMinidaoDao.getAllBaGoodsCategorys(id1);
+//				for (int k = 0; k <allBaGoodsCategorys.size() ; k++) {
+//					String id2 = allBaGoodsCategorys.get(j).getId();
+//					List<BaGoodsCategoryVoo> allBaGoodsCategorys2 = jeecgMinidaoDao.getAllBaGoodsCategorys(id2);
+//					allBaGoodsCategorys.get(k).setBaGoodsCategory(allBaGoodsCategorys2);
+//				}
+//				allBaGoodsCategorys.get(j).setBaGoodsCategory(allBaGoodsCategorys1);
+//			}
+//			balist.get(i).setBaGoodsCategory(allBaGoodsCategorys);
+//		}
+////
+////		List<ComboTree> comboTrees = new ArrayList<ComboTree>();
+//		ComboTreeModel comboTreeModel = new ComboTreeModel("id", "categoryName", "baGoodsCategory");
+//		System.out.println("======================getComboTreeData demoList:==================="+balist.size());
+//		List<ComboTree> comboTrees = systemService.ComboTree(balist, comboTreeModel, null, true);
+//		return comboTrees;
+	}
+
+	private ComboTree findParent(List<ComboTree> comboTrees, String pid) {
+		ComboTree find = null;
+		for(ComboTree comboTree:comboTrees){
+			if(comboTree.getId().equals(pid)){
+				find = comboTree;
+				break;
+			} else if(comboTree.getChildren()!=null) {
+				find = findParent(comboTree.getChildren(),pid);
+				if(find!=null){
+					break;
 				}
-				allBaGoodsCategorys.get(j).setBaGoodsCategory(allBaGoodsCategorys1);
 			}
-			balist.get(i).setBaGoodsCategory(allBaGoodsCategorys);
 		}
-//
-//		List<ComboTree> comboTrees = new ArrayList<ComboTree>();
-		ComboTreeModel comboTreeModel = new ComboTreeModel("id", "categoryName", "baGoodsCategory");
-		System.out.println("======================getComboTreeData demoList:==================="+balist.size());
-		List<ComboTree> comboTrees = systemService.ComboTree(balist, comboTreeModel, null, true);
-		return comboTrees;
+		return find;
+
 	}
 
 	/**

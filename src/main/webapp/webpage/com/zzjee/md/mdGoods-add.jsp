@@ -155,15 +155,15 @@ function counttiji(){
 								</div>
 						</div>
 					  <div class="row show-grid">
-						  <div class="col-xs-3 text-center">
-							  <b  style="color:red">商品类目</b>
-						  </div>
-						  <div class="col-xs-3">
-							  <t:comboTree name="categoryCode"  id="categoryCode" url="baGoodsCategoryController.do?getComboTreeData" width="400" multiple="false"></t:comboTree>
-							  <span class="Validform_checktip" style="float:left;height:0px;"></span>
-							  <label class="Validform_label" style="display: none">商品类目</label>
-						  </div>
+					  <div class="col-xs-3 text-center">
+						  <b  style="color:red">商品类目</b>
 					  </div>
+					  <div class="col-xs-3">
+						  <t:comboTree name="categoryCode"  id="categoryCode" url="baGoodsCategoryController.do?getComboTreeData" width="400" multiple="false"></t:comboTree>
+						  <span class="Validform_checktip" style="float:left;height:0px;"></span>
+						  <label class="Validform_label" style="display: none">商品类目</label>
+					  </div>
+				  </div>
 							<div class="row show-grid">
 
 
@@ -419,4 +419,14 @@ function counttiji(){
 </script>
  </body>
 <script src = "webpage/com/zzjee/md/mdGoods.js"></script>
+<style>
+	.combo {
+		border-color: #ddd;
+		background-color: #fff;
+		border-radius: 3px;
+		padding: 4px 0 4px 5px;
+		height: 30px !important;
+		width: 490px !important;
+	}
+</style>
 </html>

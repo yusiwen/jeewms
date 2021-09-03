@@ -17,6 +17,7 @@ import com.zzjee.wm.entity.WmOmQmIEntity;
 import com.zzjee.wm.page.WmOmNoticeImpnewPage;
 import com.zzjee.wm.page.WmTmsNoticeHPage;
 import com.zzjee.wmutil.dsc.dscUtil;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.jeecgframework.core.common.controller.BaseController;
 import org.jeecgframework.core.common.exception.BusinessException;
@@ -238,15 +239,15 @@ public class MdGoodsController extends BaseController {
 					// TODO: handle exception
 				}
 				//查询当前商品类型的商品数量
-				Map<String, Object> countMap = systemService.findOneForJdbc("select right(shp_bian_ma,7) shp_bian_ma  from md_goods where chp_shu_xing=? and suo_shu_ke_hu  = ? and shp_bian_ma like ? ORDER BY shp_bian_ma desc LIMIT 1",mdGoods.getChpShuXing(),mdGoods.getSuoShuKeHu(),mdGoods.getSuoShuKeHu()+mdGoods.getChpShuXing()+"%");
+				Map<String, Object> countMap = systemService.findOneForJdbc("select right(shp_bian_ma,7) shp_bian_ma  from md_goods where category_code =? and suo_shu_ke_hu  = ? and shp_bian_ma like ? ORDER BY shp_bian_ma desc LIMIT 1",mdGoods.getCategoryCode(),mdGoods.getSuoShuKeHu(),mdGoods.getSuoShuKeHu()+mdGoods.getCategoryCode()+"%");
 				if (countMap == null) {
-					mdGoods.setShpBianMa(mdGoods.getSuoShuKeHu()+mdGoods.getChpShuXing()+String.format("%07d", 1));
+					mdGoods.setShpBianMa(mdGoods.getSuoShuKeHu()+mdGoods.getCategoryCode()+String.format("%07d", 1));
 				}else {
 					Object goodsCode = countMap.get("shp_bian_ma");
 					if (goodsCode != null) {
-						mdGoods.setShpBianMa(mdGoods.getSuoShuKeHu()+mdGoods.getChpShuXing()+String.format("%07d",Integer.parseInt(((String) goodsCode))+1));
+						mdGoods.setShpBianMa(mdGoods.getSuoShuKeHu()+mdGoods.getCategoryCode()+String.format("%07d",Integer.parseInt(((String) goodsCode))+1));
 					}else {
-						mdGoods.setShpBianMa(mdGoods.getSuoShuKeHu()+mdGoods.getChpShuXing()+String.format("%07d", 1));
+						mdGoods.setShpBianMa(mdGoods.getSuoShuKeHu()+mdGoods.getCategoryCode()+String.format("%07d", 1));
 					}
 				}
 				mdGoodsService.save(mdGoods);
@@ -453,15 +454,20 @@ public class MdGoodsController extends BaseController {
 //								j.setMsg("产品属性错误："+mdGoods.getChpShuXing());
 //								return j;
 //							}
-							Map<String, Object> countMap = systemService.findOneForJdbc("select right(shp_bian_ma,7) shp_bian_ma  from md_goods where chp_shu_xing=? and suo_shu_ke_hu  = ? and shp_bian_ma like ? ORDER BY shp_bian_ma desc LIMIT 1",mdGoods.getChpShuXing(),mdGoods.getSuoShuKeHu(),mdGoods.getSuoShuKeHu()+mdGoods.getChpShuXing()+"%");
+							if (StringUtils.isEmpty(mdGoods.getCategoryCode())) {
+								j.setSuccess(false);
+								j.setMsg("类目编码为空：");
+								return j;
+							}
+							Map<String, Object> countMap = systemService.findOneForJdbc("select right(shp_bian_ma,7) shp_bian_ma  from md_goods where category_code =? and suo_shu_ke_hu  = ? and shp_bian_ma like ? ORDER BY shp_bian_ma desc LIMIT 1",mdGoods.getCategoryCode(),mdGoods.getSuoShuKeHu(),mdGoods.getSuoShuKeHu()+mdGoods.getCategoryCode()+"%");
 							if (countMap == null) {
-								mdGoods.setShpBianMa(mdGoods.getSuoShuKeHu()+mdGoods.getChpShuXing()+String.format("%07d", 1));
+								mdGoods.setShpBianMa(mdGoods.getSuoShuKeHu()+mdGoods.getCategoryCode()+String.format("%07d", 1));
 							}else {
 								Object goodsCode = countMap.get("shp_bian_ma");
 								if (goodsCode != null) {
-									mdGoods.setShpBianMa(mdGoods.getSuoShuKeHu()+mdGoods.getChpShuXing()+String.format("%07d",Integer.parseInt(((String) goodsCode))+1));
+									mdGoods.setShpBianMa(mdGoods.getSuoShuKeHu()+mdGoods.getCategoryCode()+String.format("%07d",Integer.parseInt(((String) goodsCode))+1));
 								}else {
-									mdGoods.setShpBianMa(mdGoods.getSuoShuKeHu()+mdGoods.getChpShuXing()+String.format("%07d", 1));
+									mdGoods.setShpBianMa(mdGoods.getSuoShuKeHu()+mdGoods.getCategoryCode()+String.format("%07d", 1));
 								}
 							}
 

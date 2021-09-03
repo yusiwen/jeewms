@@ -1254,14 +1254,14 @@ public class WmImNoticeHController extends BaseController {
 			cs52.setBorderRight(CellStyle.BORDER_NONE);
 			cs52.setBorderTop(CellStyle.BORDER_NONE);
 			cs52.setBorderBottom(CellStyle.BORDER_NONE);
-			cs52.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+			cs52.setVerticalAlignment(HSSFCellStyle.VERTICAL_TOP);
 
 			cs52.setWrapText(true);
 			cs52.setRotation((short)255);
 
 			int page = 0;
 			int cerconNo = 1;
-			String tsql = "SELECT wq.pro_data,wq.goods_unit,wq.rec_deg, mg.goods_code, mg.goods_id,mg.shp_ming_cheng,"
+			String tsql = "SELECT wq.pro_data,wq.goods_unit,wq.rec_deg, mg.shp_gui_ge ,mg.goods_code, mg.goods_id,mg.shp_ming_cheng,"
 					+ "cast(sum(wq.qm_ok_quat) as signed) as goods_count,truncate(sum(wq.tin_tj),2) tin_tj ,truncate(sum(wq.tin_zhl),2) as tin_zhl,count(*) as tuopan   "
 					+ "FROM wm_in_qm_i wq,mv_goods mg where wq.im_notice_id = ? and  wq.goods_id = mg.goods_code group by wq.im_notice_id, mg.goods_code,wq.pro_data";
 			List<Map<String, Object>> result = systemService
@@ -1385,7 +1385,7 @@ public class WmImNoticeHController extends BaseController {
 				sheet.addMergedRegion(c72);
 
 				Cell cell73 = row.createCell(10);
-				cell73.setCellValue("① 财务联 ② 客户联 ③司机联 ④回单联   ");
+				cell73.setCellValue("① 财务联  ② 客户联  ③司机联  ④回单联");
 				cell73.setCellStyle(cs52);
 
 
@@ -1393,16 +1393,16 @@ public class WmImNoticeHController extends BaseController {
 				sheet.addMergedRegion(c73);
 
 				Row rowColumnName = sheet.createRow((short) page*20+8); // 列名
-				String[] columnNames = { "序号", "商品编码", "商品名称", "生产日期", "货温","单位", "数量", "毛重KG","体积cm³","备注" };
+				String[] columnNames = { "序号", "商品编码", "商品名称", "生产日期", "生产批号","单位", "数量", "毛重KG","规格","备注" };
 				if(ResourceUtil.getConfigByName("systuopan").equals("yes")){
-					String[]   columnNamest = { "序号", "商品编码", "商品名称", "生产日期", "货温","单位", "数量", "毛重KG","托盘数","备注" };
+					String[]   columnNamest = { "序号", "商品编码", "商品名称", "生产日期", "生产批号","单位", "数量", "毛重KG","规格","备注" };
 					columnNames = columnNamest;
 				}
 				try{
 					if("hr".equals(ResourceUtil.getConfigByName("wm.ckd"))){
-						String[] columnNames1 = { "序号", "商品编码", "商品名称", "生产日期", "货温","单位", "数量", "毛重KG","体积cm³","备注" };
+						String[] columnNames1 = { "序号", "商品编码", "商品名称", "生产日期", "生产批号","单位", "数量", "毛重KG","规格","备注" };
 						if(ResourceUtil.getConfigByName("systuopan").equals("yes")){
-							String[]   columnNamest1 = { "序号", "商品编码", "商品名称", "生产日期", "货温","单位", "数量", "毛重KG","托盘数","备注" };
+							String[]   columnNamest1 = { "序号", "商品编码", "商品名称", "生产日期", "生产批号","单位", "数量", "毛重KG","规格","备注" };
 							columnNames1 = columnNamest1;
 						}
 						columnNames = columnNames1;
@@ -1456,8 +1456,9 @@ public class WmImNoticeHController extends BaseController {
 							Cell cell5 = rowColumnValue.createCell(4);// 温度
 
 							cell5.setCellStyle(cs5);
-							cell5.setCellValue(result.get(i)
-									.get("rec_deg").toString());
+							cell5.setCellValue("");
+//							cell5.setCellValue(result.get(i)
+//									.get("rec_deg").toString());
 						} catch (Exception e) {
 							// TODO: handle exception
 						}
@@ -1498,14 +1499,15 @@ public class WmImNoticeHController extends BaseController {
 
 							Cell cell9 = rowColumnValue.createCell(8);// 体积
 
+							cell9.setCellValue(result.get(i).get("shp_gui_ge").toString());
 							cell9.setCellStyle(cs5);
-							if(ResourceUtil.getConfigByName("systuopan").equals("yes")){
-								cell9.setCellValue(result.get(i).get("tuopan")
-										.toString());
-							}else{
-								cell9.setCellValue(result.get(i).get("tin_tj")
-										.toString());
-							}
+//							if(ResourceUtil.getConfigByName("systuopan").equals("yes")){
+//								cell9.setCellValue(result.get(i).get("tuopan")
+//										.toString());
+//							}else{
+//								cell9.setCellValue(result.get(i).get("tin_tj")
+//										.toString());
+//							}
 
 
 						} catch (Exception e) {
@@ -1554,7 +1556,7 @@ public class WmImNoticeHController extends BaseController {
 				Row rowColumnInfo = sheet.createRow((short) 1 + cellsNum); // 列名
 				rowColumnInfo.setHeight((short) 250);
 				rowColumnInfo.createCell(0).setCellValue(
-						"验收人员：                               送货人员：                                客户/委托人：");
+						"制单：                               仓管：                                主管：                                叉车：");
 				CellRangeAddress c15 = new CellRangeAddress(1 + cellsNum,
 						1 + cellsNum, 0, 9);
 				sheet.addMergedRegion(c15);
@@ -1856,7 +1858,7 @@ public class WmImNoticeHController extends BaseController {
 			sheet.addMergedRegion(c72);
 
 			Cell cell73 = row.createCell(10);
-			cell73.setCellValue("① 财务联 ② 客户联 ③司机联 ④回单联   ");
+			cell73.setCellValue("① 财务联 ② 客户联 ③司机联 ④回单联  ");
 			cell73.setCellStyle(cs52);
 
 
@@ -1864,16 +1866,16 @@ public class WmImNoticeHController extends BaseController {
 			sheet.addMergedRegion(c73);
 
 			Row rowColumnName = sheet.createRow((short) page*20+8); // 列名
-			String[] columnNames = { "序号", "商品编码", "商品名称", "生产日期", "货温","单位", "数量", "毛重KG","体积cm³","备注" };
+			String[] columnNames = { "序号", "商品编码", "商品名称", "生产日期", "生产批号","单位", "数量", "毛重KG","体积cm³","备注" };
                    if(ResourceUtil.getConfigByName("systuopan").equals("yes")){
-					String[]   columnNamest = { "序号", "商品编码", "商品名称", "生产日期", "货温","单位", "数量", "毛重KG","托盘数","备注" };
+					String[]   columnNamest = { "序号", "商品编码", "商品名称", "生产日期", "生产批号","单位", "数量", "毛重KG","体积cm³","备注" };
 					   columnNames = columnNamest;
 				   }
 		   try{
 			   if("hr".equals(ResourceUtil.getConfigByName("wm.ckd"))){
-				   String[] columnNames1 = { "序号", "商品编码", "商品名称", "生产日期", "货温","单位", "数量", "毛重KG","体积cm³","备注" };
+				   String[] columnNames1 = { "序号", "商品编码", "商品名称", "生产日期", "生产批号","单位", "数量", "毛重KG","体积cm³","备注" };
 				   if(ResourceUtil.getConfigByName("systuopan").equals("yes")){
-					   String[]   columnNamest1 = { "序号", "商品编码", "商品名称", "生产日期", "货温","单位", "数量", "毛重KG","托盘数","备注" };
+					   String[]   columnNamest1 = { "序号", "商品编码", "商品名称", "生产日期", "生产批号","单位", "数量", "毛重KG","体积","备注" };
 					   columnNames1 = columnNamest1;
 				   }
 				   columnNames = columnNames1;
@@ -1927,11 +1929,12 @@ public class WmImNoticeHController extends BaseController {
 							Cell cell5 = rowColumnValue.createCell(4);// 温度
 
 							cell5.setCellStyle(cs5);
-							cell5.setCellValue(result.get(i)
-									.get("rec_deg").toString());
-											} catch (Exception e) {
-												// TODO: handle exception
-											}
+//							cell5.setCellValue(result.get(i)
+//									.get("rec_deg").toString());
+						 cell5.setCellValue("");
+					 } catch (Exception e) {
+					 	// TODO: handle exception
+					 }
 
 					 try {
 							Cell cell6 = rowColumnValue.createCell(5);// 单位
@@ -1970,13 +1973,15 @@ public class WmImNoticeHController extends BaseController {
 							Cell cell9 = rowColumnValue.createCell(8);// 体积
 
 							cell9.setCellStyle(cs5);
-							if(ResourceUtil.getConfigByName("systuopan").equals("yes")){
-								cell9.setCellValue(result.get(i).get("tuopan")
-										.toString());
-							}else{
-								cell9.setCellValue(result.get(i).get("tin_tj")
-										.toString());
-							}
+							cell9.setCellValue(result.get(i).get("tin_tj")
+									.toString());
+//							if(ResourceUtil.getConfigByName("systuopan").equals("yes")){
+//								cell9.setCellValue(result.get(i).get("tuopan")
+//										.toString());
+//							}else{
+//								cell9.setCellValue(result.get(i).get("tin_tj")
+//										.toString());
+//							}
 
 
 						} catch (Exception e) {
@@ -2025,7 +2030,7 @@ public class WmImNoticeHController extends BaseController {
 			Row rowColumnInfo = sheet.createRow((short) 1 + cellsNum); // 列名
 			rowColumnInfo.setHeight((short) 250);
 			rowColumnInfo.createCell(0).setCellValue(
-					"验收人员：                               送货人员：                                客户/委托人：");
+					"仓管：                               制单：                                仓库主管：                              叉车司机");
 			CellRangeAddress c15 = new CellRangeAddress(1 + cellsNum,
 					1 + cellsNum, 0, 9);
 			sheet.addMergedRegion(c15);

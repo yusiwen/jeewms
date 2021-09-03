@@ -176,14 +176,14 @@
 					  </div>
 
 					  <div class="col-xs-1 text-center">
-						  <b>三方客户名称：</b>
+						  <b>客户名称：</b>
 					  </div>
 					  <div class="col-xs-2">
 						  <input id="ocusName" name="ocusName" type="text" class="form-control"
 								 ignore="checked"  value='${wmOmNoticeHPage.ocusName}'
 								 class="form-control" />
 						  <span class="Validform_checktip" style="float:left;height:0px;"></span>
-						  <label class="Validform_label" style="display: none">三方客户名称</label>
+						  <label class="Validform_label" style="display: none">客户名称</label>
 					  </div>
 						  <div class="col-xs-1 text-center">
 							  <b>收货人：</b>

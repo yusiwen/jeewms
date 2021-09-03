@@ -157,6 +157,16 @@
 									<span class="Validform_checktip" style="float:left;height:0px;"></span>
 									<label class="Validform_label" style="display: none">商品品牌</label>
 								</div>
+								<div class="row show-grid">
+									<div class="col-xs-3 text-center">
+										<b  style="color:red">商品类目</b>
+									</div>
+									<div class="col-xs-3">
+										<t:comboTree name="categoryCode" value="${mdGoodsPage.categoryCode}" id="categoryCode" url="baGoodsCategoryController.do?getComboTreeData" width="400" multiple="false"></t:comboTree>
+										<span class="Validform_checktip" style="float:left;height:0px;"></span>
+										<label class="Validform_label" style="display: none">商品类目</label>
+									</div>
+								</div>
 						</div>
 							<div class="row show-grid">
 			          <div class="col-xs-3 text-center">
@@ -406,4 +416,30 @@
 </script>
  </body>
 <script src = "webpage/com/zzjee/md/mdGoods.js"></script>
+<style>
+	.combo {
+		border-color: #ddd;
+		background-color: #fff;
+		border-radius: 3px;
+		padding: 4px 0 4px 5px;
+		height: 30px !important;
+		width: 31px !important;
+	}
+	input[type="text"] {
+		background-color: #fff;
+		border: 1px solid #D7D7D7;
+		border-radius: 3PX;
+		/* height: 14PX; */
+		padding: 7px 0 7px 5px;
+		line-height: 14PX;
+		font-size: 12px;
+		display: inline-block;
+	}
+
+	element.style {
+		width: 132px;
+		height: 30px;
+		line-height: 14px;
+	}
+</style>
 </html>

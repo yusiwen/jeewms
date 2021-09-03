@@ -15,6 +15,17 @@ public class BaGoodsCategoryVoo {
 
     private String pid;
 
+    public int getCategoryLevel() {
+        return categoryLevel;
+    }
+
+    public BaGoodsCategoryVoo setCategoryLevel(int categoryLevel) {
+        this.categoryLevel = categoryLevel;
+        return this;
+    }
+
+    private int categoryLevel;
+
     private List<BaGoodsCategoryVoo> baGoodsCategory;
 
     public String getCategoryName() {

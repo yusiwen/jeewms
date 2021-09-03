@@ -61,8 +61,10 @@ public class BaGoodsCategoryEntity implements java.io.Serializable {
 	@Excel(name="是否为顶级目录")
 	private java.lang.String topNode;
 
+
 	private List<BaGoodsCategoryEntity> baGoodsCategory;
 
+	@Transient
 	public List<BaGoodsCategoryEntity> getBaGoodsCategory() {
 		return baGoodsCategory;
 	}

@@ -34,7 +34,7 @@ public interface JeecgMinidaoDao {
  	@Sql("select ID,NAME,PID from t_s_region order by name_en")
     List<Map<String, String>> getAllRegions();
 
-	@Sql("select ID,category_name as categoryName,PID from ba_goods_category where pid is null")
+	@Sql("select ID,category_name as categoryName,PID,category_level categoryLevel from ba_goods_category ")
 	List<BaGoodsCategoryVoo> getAllBaGoodsCategorys();
 
 	@Arguments("pid")

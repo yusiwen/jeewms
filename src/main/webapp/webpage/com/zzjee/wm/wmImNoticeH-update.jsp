@@ -202,7 +202,7 @@
 						   ignore="ignore" value='${wmImNoticeHPage.supCode}'
 					/>
 					<span class="Validform_checktip" style="float:left;height:0px;"></span>
-					<label class="Validform_label" style="display: none">生产厂家/label>
+					<label class="Validform_label" style="display: none">生产厂商/label>
 				</div>
 					<div class="col-xs-1 text-center">
 						<b>预约库区：</b>
