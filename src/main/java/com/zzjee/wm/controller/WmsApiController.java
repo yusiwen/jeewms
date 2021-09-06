@@ -120,6 +120,9 @@ public class WmsApiController {
         if(StringUtil.isNotEmpty(wmUtil.getCusCode())){
             cq.eq("suoShuKeHu", wmUtil.getCusCode());
         }
+        if(StringUtil.isNotEmpty(mdGoods.getShpBianMakh())){
+            cq.eq("shpBianMakh", mdGoods.getShpBianMakh());
+        }
 
 
 //		if(mdGoods.getZhuangTai()==null){
@@ -369,6 +372,7 @@ public class WmsApiController {
 //		    MdBinEntity mdBin1 = systemService.findUniqueByProperty(MdBinEntity.class, "kuWeiBianMa", mdBin.getKuWeiBianMa());
             if(mdb ==null ){
                 mdBinService.save(mdBin);
+                j.setObj(mdBin);
                 systemService.addLog(message, Globals.Log_Type_INSERT, Globals.Log_Leavel_INFO);
             }else{
                 message = "库位编码或者库位条码已经存在";

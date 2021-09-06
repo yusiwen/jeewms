@@ -2281,7 +2281,8 @@ Double sum =0.00;
 			for (WmImNoticeIEntity wmImNoticeIEntity : wmImNoticeIList) {
 				if(!StringUtil.isEmpty(wmImNoticeIEntity.getGoodsCode())){
 				try {
-				    MvGoodsEntity mvgoods = systemService.findUniqueByProperty(MvGoodsEntity.class,"goodsName",wmImNoticeIEntity.getGoodsCode());
+				    MvGoodsEntity mvgoods = systemService.findUniqueByProperty(MvGoodsEntity.class,"goodsId"
+							,wmImNoticeIEntity.getGoodsCode().split("-")[0]);
 //					String date[]=wmImNoticeIEntity.getGoodsCode().split("-");
 
 					long hiti = 0;

@@ -792,14 +792,14 @@ public class WmOmNoticeHController extends BaseController {
 
 	@RequestMapping(params = "docheck")
 	@ResponseBody
-	public AjaxJson docheck(HttpServletRequest request) {
+	public AjaxJson docheck(HttpServletRequest request,String goodscode,String goodsqua) {
 		String message = null;
 		AjaxJson j = new AjaxJson();
 		message = "成功";
 		try {
 
 			String goods = null;
-			String goodsid = request.getParameter("goodscode").toString();
+			String goodsid = request.getParameter("goodscode");
 			if(!StringUtil.isEmpty(goodsid)){
 				if(goodsid.endsWith("l")){
 					goods = goodsid.substring(0,goodsid.length() - 1);
@@ -942,7 +942,7 @@ public class WmOmNoticeHController extends BaseController {
 					try {
 
 
-						MvGoodsEntity mvgoods = systemService.findUniqueByProperty(MvGoodsEntity.class,"goodsName",wmomNoticeIEntity.getGoodsId());
+						MvGoodsEntity mvgoods = systemService.findUniqueByProperty(MvGoodsEntity.class,"goodsId",wmomNoticeIEntity.getGoodsId().split("-")[0]);
 
 //					String date[]=wmImNoticeIEntity.getGoodsCode().split("-");
 //						wmImNoticeIEntity.setGoodsCode(mvgoods.getGoodsCode());
@@ -1430,13 +1430,13 @@ public class WmOmNoticeHController extends BaseController {
 			//set print grid lines or not
 //			sheet.setPrintGridlines(true);
 			sheet.setColumnWidth(0, 9 * 256);
-			sheet.setColumnWidth(1, 9 * 256);
+			sheet.setColumnWidth(1, 20 * 256);
 			sheet.setColumnWidth(2, 9 * 256);
 			sheet.setColumnWidth(3, 5 * 256);
 			sheet.setColumnWidth(4, 5 * 256);
-			sheet.setColumnWidth(5, 8 * 256);
-			sheet.setColumnWidth(6, 10 * 256);
-			sheet.setColumnWidth(7, 10 * 256);
+			sheet.setColumnWidth(5, 22 * 256);
+			sheet.setColumnWidth(6, 11 * 256);
+			sheet.setColumnWidth(7, 12 * 256);
 			sheet.setColumnWidth(8, 5 * 256);
 			sheet.setColumnWidth(9, 5 * 256);
 			sheet.setColumnWidth(10, 3 * 256);
@@ -1620,7 +1620,7 @@ public class WmOmNoticeHController extends BaseController {
 				cellTitle41.setCellValue("参考单号："+wmOmNoticeH.getImCusCode());
 				cellTitle41.setCellStyle(cs1);
 				Cell cellTitle42 = row4.createCell(3);
-				cellTitle42.setCellValue("客户名称："+wmOmNoticeH.getOcusName());
+				cellTitle42.setCellValue("客户名称："+wmOmNoticeH.getOcusName() == null ?"":wmOmNoticeH.getOcusName());
 				cellTitle42.setCellStyle(cs1);
 				Cell cellTitle43 = row4.createCell(6);
 				cellTitle43.setCellValue("送货日期："+DateUtils.date2Str(wmOmNoticeH.getDelvData(), DateUtils.date_sdf));
@@ -1899,6 +1899,7 @@ public class WmOmNoticeHController extends BaseController {
 //						}
 
 						try{
+							cell9.setCellValue("成品区");
 							if("hr".equals(ResourceUtil.getConfigByName("wm.ckd"))) {
 //									cell9.setCellValue(wmUtil.getstock(result.get(i).get("goods_id").toString()));
 							}
@@ -2014,7 +2015,7 @@ public class WmOmNoticeHController extends BaseController {
 				Row rowColumnInfo2 = sheet.createRow((short) 4 + cellsNum); // 列名
 				rowColumnInfo2.setHeight((short) 250);
 				rowColumnInfo2.createCell(0).setCellValue(
-						"  仓库地址："+ResourceUtil.getConfigByName("comaddr")+"                                           配送热线：                                	");
+						"  拣货员：                       复核员：                        司机:      	");
 				CellRangeAddress c152 = new CellRangeAddress(4 + cellsNum,
 						4 + cellsNum, 0, 9);
 				sheet.addMergedRegion(c152);
