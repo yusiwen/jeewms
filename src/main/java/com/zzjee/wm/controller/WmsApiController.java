@@ -13,6 +13,7 @@ import com.zzjee.md.entity.MvGoodsEntity;
 import com.zzjee.md.service.MdBinServiceI;
 import com.zzjee.md.service.MdCusServiceI;
 import com.zzjee.md.service.MdGoodsServiceI;
+import com.zzjee.md.service.MdSupServiceI;
 import com.zzjee.wm.entity.WmImNoticeHEntity;
 import com.zzjee.wm.entity.WmImNoticeIEntity;
 import com.zzjee.wm.entity.WmOmNoticeHEntity;
@@ -88,6 +89,8 @@ public class WmsApiController {
     private BaGoodsTypeServiceI baGoodsTypeService;
     @Autowired
     private BaGoodsCategoryServiceI baGoodsCategoryService;
+    @Autowired
+    private MdSupServiceI mdSupServiceI;
 
     @RequestMapping(params = "getToken")
     @ResponseBody
@@ -797,7 +800,7 @@ public class WmsApiController {
     /**
      * 添加产品属性
      *
-     * @param ids
+     * @param baGoodsType
      * @return
      */
     @RequestMapping(params = "addGoodsType")
@@ -852,7 +855,7 @@ public class WmsApiController {
     /**
      * 添加商品类目
      *
-     * @param ids
+     * @param baGoodsCategory
      * @return
      */
     @RequestMapping(params = "addGoodsCategory")
@@ -873,4 +876,86 @@ public class WmsApiController {
         return j;
     }
 
+    /**
+     * 供应商信息查询
+     * @param mdSup
+     * @param request
+     * @param response
+     * @param dataGrid
+     * @return
+     */
+    @RequestMapping(params = "supList")
+    @ResponseBody
+    public ResponseMessage<DataGridReturn> datagrid(MdSupEntity mdSup, HttpServletRequest request,HttpServletResponse response, DataGrid dataGrid) {
+        CriteriaQuery cq = new CriteriaQuery(MdSupEntity.class, dataGrid);
+        // 查询条件组装器
+        org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq,
+                mdSup, request.getParameterMap());
+        try {
+            // 自定义追加查询条件
+        } catch (Exception e) {
+            throw new BusinessException(e.getMessage());
+        }
+        cq.add();
+        return Result.success(this.mdSupServiceI.getDataGridReturn(cq, true));
+    }
+    /**
+     * 添加供应商信息
+     *
+     * @param mdSup
+     * @return
+     */
+    @RequestMapping(params = "supDoAdd")
+    @ResponseBody
+    public AjaxJson doAdd(MdSupEntity mdSup, HttpServletRequest request) {
+        String message = null;
+        AjaxJson j = new AjaxJson();
+        message = "供应商添加成功";
+        try {
+            MdSupEntity mdSup1 = systemService.findUniqueByProperty(
+                    MdSupEntity.class, "gysBianMa", mdSup.getGysBianMa());
+            if (mdSup1 == null) {
+                mdSupServiceI.save(mdSup);
+                systemService.addLog(message, Globals.Log_Type_INSERT,
+                        Globals.Log_Leavel_INFO);
+            } else {
+                j.setSuccess(false);
+                message = "供应商编码已经存在";
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            message = "供应商添加失败";
+            throw new BusinessException(e.getMessage());
+        }
+        j.setMsg(message);
+        return j;
+    }
+
+    /**
+     * 更新供应商信息
+     *
+     * @param mdSup
+     * @return
+     */
+    @RequestMapping(params = "supDoUpdate")
+    @ResponseBody
+    public AjaxJson doUpdate(MdSupEntity mdSup, HttpServletRequest request) {
+        String message = null;
+        AjaxJson j = new AjaxJson();
+        message = "供应商更新成功";
+        MdSupEntity t = mdSupServiceI.get(MdSupEntity.class, mdSup.getId());
+        try {
+            MyBeanUtils.copyBeanNotNull2Bean(mdSup, t);
+            mdSupServiceI.saveOrUpdate(t);
+            systemService.addLog(message, Globals.Log_Type_UPDATE,
+                    Globals.Log_Leavel_INFO);
+        } catch (Exception e) {
+            e.printStackTrace();
+            message = "供应商更新失败";
+            throw new BusinessException(e.getMessage());
+        }
+        j.setMsg(message);
+        return j;
+    }
 }
