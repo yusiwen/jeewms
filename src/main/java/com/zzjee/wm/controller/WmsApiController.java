@@ -32,10 +32,7 @@ import org.jeecgframework.core.common.model.json.AjaxJson;
 import org.jeecgframework.core.common.model.json.DataGrid;
 import org.jeecgframework.core.common.model.json.DataGridReturn;
 import org.jeecgframework.core.constant.Globals;
-import org.jeecgframework.core.util.ExceptionUtil;
-import org.jeecgframework.core.util.MyBeanUtils;
-import org.jeecgframework.core.util.ResourceUtil;
-import org.jeecgframework.core.util.StringUtil;
+import org.jeecgframework.core.util.*;
 import org.jeecgframework.jwt.util.JwtUtils;
 import org.jeecgframework.jwt.util.ResponseMessage;
 import org.jeecgframework.jwt.util.Result;
@@ -416,6 +413,7 @@ public class WmsApiController {
             wmPlatIo.setPlatSta(Constants.wm_sta1);
             wmPlatIo.setPlatBeizhu("司机:" + wmImNoticeH.getImCarDri() + "电话:"
                     + wmImNoticeH.getImCarMobile());
+            wmPlatIo.setCreateDate(DateUtils.getDate());
             systemService.save(wmPlatIo);
 
             Map<String, Object> map = new HashMap<String, Object>();
@@ -589,6 +587,7 @@ public class WmsApiController {
             wmPlatIo.setPlatSta(Constants.wm_sta1);
             wmPlatIo.setPlatBeizhu("司机:" + wmOmNoticeH.getReMember() + "电话:"
                     + wmOmNoticeH.getReMobile());
+            wmPlatIo.setCreateDate(DateUtils.getDate());
             systemService.save(wmPlatIo);
             wmOmNoticeH.setOmNoticeId(noticeid);
             wmOmNoticeH.setOmSta(Constants.wm_sta1);
