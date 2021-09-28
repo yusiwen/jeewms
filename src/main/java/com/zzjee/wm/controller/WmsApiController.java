@@ -405,6 +405,7 @@ public class WmsApiController {
 
             String noticeid =  wmUtil.getNextNoticeid(wmImNoticeH.getOrderTypeCode()) ;
             wmImNoticeH.setNoticeId(noticeid);
+            wmImNoticeH.setCreateDate(DateUtils.getDate());
             WmPlatIoEntity wmPlatIo = new WmPlatIoEntity();
             wmPlatIo.setCarno(wmImNoticeH.getImCarNo());
             wmPlatIo.setDocId(wmImNoticeH.getNoticeId());
@@ -591,6 +592,7 @@ public class WmsApiController {
             systemService.save(wmPlatIo);
             wmOmNoticeH.setOmNoticeId(noticeid);
             wmOmNoticeH.setOmSta(Constants.wm_sta1);
+            wmOmNoticeH.setCreateDate(DateUtils.getDate());
             if(wmOmNoticeH.getCusCode()==null){
                 if(StringUtil.isNotEmpty(wmUtil.getCusCode())){
                     wmOmNoticeH.setCusCode(wmUtil.getCusCode());
