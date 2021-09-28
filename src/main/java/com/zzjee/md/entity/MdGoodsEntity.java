@@ -40,9 +40,9 @@ public class MdGoodsEntity implements java.io.Serializable {
 	/**所属公司*/
 	private java.lang.String sysCompanyCode;
 	/**所属客户*/
-	@Excel(name="所属客户")
+	@Excel(name="供应商编码")
 	private java.lang.String suoShuKeHu;
-	@Excel(name="客户名称")
+	@Excel(name="供应商名称")
 	private java.lang.String cusName;
 	@Excel(name="配送点")
 	private java.lang.String peisongdian;

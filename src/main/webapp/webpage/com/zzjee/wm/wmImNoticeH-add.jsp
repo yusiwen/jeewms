@@ -1,5 +1,7 @@
 <%@ page language="java" import="java.util.*" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/context/mytags.jsp"%>
+
+
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head>
@@ -173,7 +175,7 @@
 							<div class="row show-grid">
 
 			          <div class="col-xs-1 text-center">
-			          	<b>供应商：</b>
+			          	<b>货主：</b>
 			          </div>
 			          <div class="col-xs-2">
 								<t:dictSelect  readonly="${wmImNoticeHPage.readonly}"   field="cusCode" type="list"   extendJson="  {class:'form-control',datatype:'*',style:'width:230px'}"
@@ -234,7 +236,7 @@
 						<label class="Validform_label" style="display: none">运输公司</label>
 			          </div>
 																<div class="col-xs-1 text-center">
-																	<b>生产厂商：</b>
+																	<b>供应商：</b>
 																</div>
 								<t:dictSelect     field="supCode" type="list"   extendJson="  {class:'form-control',style:'width:230px'}"
 											     dictTable="md_sup" dictField="GYS_BIAN_MA" dictText="ZHONG_WEN_QCH"   hasLabel="false"  title="供应商"></t:dictSelect>
@@ -280,8 +282,18 @@
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
 						<label class="Validform_label" style="display: none">订单类型</label>
 			          </div>
+								<div class="col-xs-1 text-center">
+									<b>仓库：</b>
+								</div>
+								<div class="col-xs-2">
+									<t:dictSelect   field="storeCode" type="list"   extendJson="  {class:'form-control',datatype:'*',style:'width:230px'}"
+													dictTable="ba_store" dictField="store_code" dictText="store_name"></t:dictSelect>
+									<span class="Validform_checktip" style="float:left;height:0px;"></span>
+									<label class="Validform_label" style="display: none">仓库</label>
+									<%-- 						<t:autocomplete    searchField="cusName"   name="cusCode" entityName="MvCusEntity" ></t:autocomplete> --%>
+								</div>
 
-
+							</div>
 			          <%--<div class="col-xs-1 text-center">--%>
 			          	<%--<b>月台：</b>--%>
 			          <%--</div>--%>

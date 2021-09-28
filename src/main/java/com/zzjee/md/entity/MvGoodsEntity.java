@@ -81,6 +81,19 @@ public class MvGoodsEntity implements java.io.Serializable {
 	private java.lang.String gaoZhXiang;
 	@Excel(name="产品属性")
 	private java.lang.String chpShuXing;
+	@Excel(name="价格")
+	private java.lang.String gaoDanPin;
+
+	@Column(name ="gao_dan_pin",nullable=true,length=100)
+	public String getGaoDanPin() {
+		return gaoDanPin;
+	}
+
+	public MvGoodsEntity setGaoDanPin(String gaoDanPin) {
+		this.gaoDanPin = gaoDanPin;
+		return this;
+	}
+
 	@Id
 	@GeneratedValue(generator = "paymentableGenerator")
 	@GenericGenerator(name = "paymentableGenerator", strategy = "uuid")

@@ -17,8 +17,8 @@
     <t:dgCol title="生产日期"  field="goodsProData" formatter="yyyy-MM-dd"  query="true" queryMode="single"  width="80"></t:dgCol>
     <t:dgCol title="批次"  field="goodsBatch"   query="true" queryMode="single"  width="80"></t:dgCol>
     <t:dgCol title="盘点数量"  field="sttQua"    queryMode="group"  width="80"></t:dgCol>
-    <t:dgCol title="客户名称"  field="cusName"   query="true" queryMode="single"  width="120"></t:dgCol>
-    <t:dgCol title="客户"  field="cusCode"   query="true" queryMode="single"  width="120"></t:dgCol>
+    <t:dgCol title="货主名称"  field="cusName"   query="true" queryMode="single"  width="120"></t:dgCol>
+    <t:dgCol title="货主"  field="cusCode"   query="true" queryMode="single"  width="120"></t:dgCol>
     <t:dgCol title="盘点状态"  field="sttSta"   query="true"     width="120"></t:dgCol>
    <t:dgCol title="创建人名称"  field="createName"     queryMode="group"  width="80"></t:dgCol>
     <t:dgCol title="创建人登录名称"  field="createBy"  hidden="true"  queryMode="group"  width="120"></t:dgCol>

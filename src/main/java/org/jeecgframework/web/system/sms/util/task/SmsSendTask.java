@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import com.sap.tc.logging.interfaces.IFileLog;
 import org.jeecgframework.core.util.DateUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -302,7 +303,7 @@ public class SmsSendTask {
 					wmToMoveGoodsEntity.setRunSta("库存不足");
 					systemService.saveOrUpdate(wmToMoveGoodsEntity);
 					continue;
-				};
+				}
 				MdBinEntity mdbin = systemService.findUniqueByProperty(MdBinEntity.class, "kuWeiBianMa", wmToMoveGoodsEntity.getBinTo());
 				if(mdbin==null){
 					wmToMoveGoodsEntity.setMoveSta("储位不存在");
@@ -332,7 +333,7 @@ public class SmsSendTask {
 				}
 				MvGoodsEntity mvgoods = new MvGoodsEntity();
 				mvgoods = systemService.findUniqueByProperty(
-						MvGoodsEntity.class, "goodsCode",
+						MvGoodsEntity.class, "goodsId",
 						wmToMoveGoodsEntity.getGoodsId());
 				wmToDownGoods.setGoodsName(mvgoods.getGoodsName());
 				if(StringUtil.isEmpty(wmToMoveGoodsEntity.getBaseGoodscount())){
@@ -384,6 +385,7 @@ public class SmsSendTask {
 				systemService.saveOrUpdate(wmToMoveGoodsEntity);
 			}
 		} catch (Exception e) {
+			e.printStackTrace();
 			// TODO: handle exception
 		}
 		this.rundowntask();//下架任务
@@ -475,12 +477,12 @@ public class SmsSendTask {
 
 							}
 						} catch (Exception e) {
-
+							e.printStackTrace();
 						}
 
 						try {
 							mvgoods = systemService.findUniqueByProperty(
-									MvGoodsEntity.class, "goodsCode",
+									MvGoodsEntity.class, "goodsId",
 									goods);
 							wmOmQmIEntity.setGoodsId(mvgoods.getGoodsId());
 							wmOmQmIEntity.setBarCode(mvgoods.getShpTiaoMa());
@@ -533,7 +535,7 @@ public class SmsSendTask {
 								resultt = systemService
 										.findForJdbc(tsql, mvgoods.getGoodsId(), wmOmQmIEntity.getCusCode());
 							} catch (Exception e) {
-
+e.printStackTrace();
 							}
 							if (resultt != null && resultt.size() > 0) {
 								String goodprodata = null;
@@ -541,7 +543,7 @@ public class SmsSendTask {
 									goodprodata = resultt.get(0).get("goods_pro_data").toString();
 
 								} catch (Exception e) {
-
+e.printStackTrace();
 								}
 								String hiti = "0";
 								try {
@@ -664,8 +666,9 @@ public class SmsSendTask {
 								try {
 									double bin_qua = Double.valueOf(result.get(i)
 											.get("goods_qua").toString());
+									System.out.println("****************bin_qua"+bin_qua+"****************omcountwq"+omcountwq);
 									if (bin_qua > 0 && omcountwq > 0) {
-										if (omcountwq > bin_qua) {
+										if (omcountwq >= bin_qua) {
 											wmOmQmIEntity.setBinId(result.get(i)
 													.get("ku_wei_bian_ma").toString());
 											wmOmQmIEntity.setTinId(result.get(i)
@@ -676,10 +679,15 @@ public class SmsSendTask {
 													.setBaseGoodscount(result.get(i)
 															.get("goods_qua")
 															.toString());
-											wmOmQmIEntity.setProData(result.get(i)
-													.get("goods_pro_data").toString());
-											wmOmQmIEntity.setCusName(result.get(i)
-													.get("zhong_wen_qch").toString());
+											if (result.get(i).get("goods_pro_data") != null) {
+												wmOmQmIEntity.setProData(result.get(i).get("goods_pro_data").toString());
+											}
+
+											if (result.get(i)
+													.get("zhong_wen_qch") != null) {
+												wmOmQmIEntity.setCusName(result.get(i)
+														.get("zhong_wen_qch").toString());
+											}
 											wmOmQmIEntity.setGoodsName(result.get(i)
 													.get("shp_ming_cheng").toString());
 											omcountwq = omcountwq - bin_qua;
@@ -733,8 +741,12 @@ public class SmsSendTask {
 													.get("base_unit").toString());
 											wmOmQmIEntity.setBaseGoodscount(Double
 													.toString(omcountwq));
-											wmOmQmIEntity.setProData(result.get(i)
-													.get("goods_pro_data").toString());
+											if (result.get(i)
+													.get("goods_pro_data") != null) {
+												wmOmQmIEntity.setProData(result.get(i)
+														.get("goods_pro_data").toString());
+											}
+
 											wmOmQmIEntity.setCusName(result.get(i)
 													.get("zhong_wen_qch").toString());
 											wmOmQmIEntity.setGoodsName(result.get(i)
@@ -789,6 +801,7 @@ public class SmsSendTask {
 										}
 									}
 								}catch (Exception e){
+									e.printStackTrace();
 
 								}
 								//catch  jieshu

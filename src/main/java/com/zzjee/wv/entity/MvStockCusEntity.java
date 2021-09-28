@@ -18,12 +18,12 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.SequenceGenerator;
 import org.jeecgframework.poi.excel.annotation.Excel;
 
-/**   
+/**
  * @Title: Entity
  * @Description: 客户库存
  * @author erzhongxmu
  * @date 2017-09-17 21:45:28
- * @version V1.0   
+ * @version V1.0
  *
  */
 @Entity
@@ -56,10 +56,10 @@ public class MvStockCusEntity implements java.io.Serializable {
 //	@Excel(name="托盘")
 	private java.lang.String binId;
 	/**客户*/
-	@Excel(name="客户")
+	@Excel(name="供应商编码")
 	private java.lang.String cusCode;
 	/**客户名称*/
-	@Excel(name="客户名称")
+	@Excel(name="供应商名称")
 	private java.lang.String zhongWenQch;
 	/**商品编码*/
 	@Excel(name="商品编码")
@@ -86,12 +86,12 @@ public class MvStockCusEntity implements java.io.Serializable {
 	@Excel(name="库位类型")
 	private java.lang.String kuWeiLeiXing;
 	/**取货次序*/
-	 
+
 	private java.lang.String quHuoCiXu;
 	/**上架次序*/
-	 
+
 	private java.lang.String shangJiaCiXu;
-	
+
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  id
@@ -290,9 +290,9 @@ public class MvStockCusEntity implements java.io.Serializable {
 	public void setGoodsId(java.lang.String goodsId){
 		this.goodsId = goodsId;
 	}
-	
-	
-	
+
+
+
 	@Column(name ="shp_bian_makh",nullable=true,length=32)
 	public java.lang.String getShpBianmakh(){
 		return this.shpBianmakh;
@@ -305,8 +305,8 @@ public class MvStockCusEntity implements java.io.Serializable {
 	public void setShpBianmakh(java.lang.String shpBianmakh){
 		this.shpBianmakh = shpBianmakh;
 	}
-	
-	
+
+
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  商品名称
@@ -427,7 +427,7 @@ public class MvStockCusEntity implements java.io.Serializable {
 	public void setKuWeiLeiXing(java.lang.String kuWeiLeiXing) {
 		this.kuWeiLeiXing = kuWeiLeiXing;
 	}
-	
-	
-	
+
+
+
 }

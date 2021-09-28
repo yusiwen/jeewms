@@ -33,6 +33,7 @@ import org.jeecgframework.poi.excel.entity.ExportParams;
 import org.jeecgframework.poi.excel.entity.ImportParams;
 import org.jeecgframework.poi.excel.entity.vo.NormalExcelConstants;
 import org.jeecgframework.tag.core.easyui.TagUtil;
+import org.jeecgframework.web.system.pojo.base.TSBaseUser;
 import org.jeecgframework.web.system.service.SystemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -498,6 +499,12 @@ public class WmToUpGoodsController extends BaseController {
 
 			wmToUpGoods.setGoodsName(wmInQmIEntity.getGoodsName());
 			wmToUpGoods.setCreateDate(DateUtils.getDate());
+
+			TSBaseUser user = systemService.findUniqueByProperty(TSBaseUser.class,"userName",wmToUpGoods.getCreateBy());
+			if (user != null ) {
+				wmToUpGoods.setCreateName(user.getRealName());
+			}
+
 			wmToUpGoodsService.save(wmToUpGoods);
 		} catch (Exception e) {
 			e.printStackTrace();

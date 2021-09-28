@@ -379,9 +379,8 @@ public class wmUtil {
 					+ "   and ws.ku_wei_bian_ma = ? "
 					+ "   and ws.bin_id =  ? "
 					+ "   and ws.goods_id =  ? "
-					+ "   and ws.goods_pro_data =  ? "
 					+ "   group by ws.ku_wei_bian_ma,ws.bin_id,ws.goods_id,mb.qu_huo_ci_xu, ws.goods_pro_data order by ws.goods_pro_data , ws.goods_qua ,mb.qu_huo_ci_xu,ws.create_date desc";
-			List<Map<String, Object>> result=  systemService.findForJdbc(tsql, binid,tinid,goods,prodate);
+			List<Map<String, Object>> result=  systemService.findForJdbc(tsql, binid,tinid,goods);
 			if(result.size() > 0) {
 				if(Double.parseDouble(result.get(0).get("goods_qua").toString())>=Double.parseDouble(basecount)){
 					flag = true;
@@ -475,10 +474,9 @@ public class wmUtil {
 					+ "   and ws.ku_wei_bian_ma = ? "
 					+ "   and ws.bin_id =  ? "
 					+ "   and ws.goods_id =  ? "
-					+ "   and ws.goods_pro_data =  ? "
-					+ "   group by ws.ku_wei_bian_ma,ws.bin_id,ws.goods_id,mb.qu_huo_ci_xu, ws.goods_pro_data order by ws.goods_pro_data , ws.goods_qua ,mb.qu_huo_ci_xu,ws.create_date desc";
+					+ "   group by ws.ku_wei_bian_ma,ws.bin_id,ws.goods_id,mb.qu_huo_ci_xu order by ws.goods_pro_data , ws.goods_qua ,mb.qu_huo_ci_xu,ws.create_date desc";
 
-			List<Map<String, Object>> result = systemService.findForJdbc(tsql, binid, tinid, goods, prodate);
+			List<Map<String, Object>> result = systemService.findForJdbc(tsql, binid, tinid, goods);
 			if (result.size() > 0) {
 				if (Double.parseDouble(result.get(0).get("goods_qua").toString()) >= Double.parseDouble(basecount)) {
 					flag = true;
@@ -567,11 +565,10 @@ e.printStackTrace();
 					+ "   and ws.ku_wei_bian_ma = ? "
 					+ "   and ws.bin_id =  ? "
 					+ "   and ws.goods_id =  ? "
-					+ "   and ws.goods_pro_data =  ? "
 					+ "   and ws.cus_code = ?   "
 					+ "   group by ws.ku_wei_bian_ma,ws.bin_id,ws.goods_id,mb.qu_huo_ci_xu, ws.goods_pro_data order by ws.goods_pro_data , ws.goods_qua ,mb.qu_huo_ci_xu,ws.create_date desc";
 
-			List<Map<String, Object>> result = systemService.findForJdbc(tsql, binid, tinid, goods, prodate,cuscode);
+			List<Map<String, Object>> result = systemService.findForJdbc(tsql, binid, tinid, goods,cuscode);
 			if (result.size() > 0) {
 				if (Double.parseDouble(result.get(0).get("goods_qua").toString()) >= Double.parseDouble(basecount)) {
 					flag = true;

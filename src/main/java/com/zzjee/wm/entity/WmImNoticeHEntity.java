@@ -61,7 +61,7 @@ public class WmImNoticeHEntity implements java.io.Serializable {
 
     private java.lang.String sysCompanyCode;
     /**客户编码*/
-    @Excel(name="客户编码")
+    @Excel(name="供应商编码")
     private java.lang.String cusCode;
     /**预计到货时间*/
     @Excel(name="预计到货时间",format = "yyyy-MM-dd")
@@ -108,6 +108,19 @@ public class WmImNoticeHEntity implements java.io.Serializable {
     private java.lang.String piClass;
 
     private java.lang.String piMaster;
+
+    @Column(name ="store_code",length=50)
+    public String getStoreCode() {
+        return storeCode;
+    }
+
+    public WmImNoticeHEntity setStoreCode(String storeCode) {
+        this.storeCode = storeCode;
+        return this;
+    }
+
+    private String storeCode;
+
     /**
      *方法: 取得java.lang.String
      *@return: java.lang.String  主键

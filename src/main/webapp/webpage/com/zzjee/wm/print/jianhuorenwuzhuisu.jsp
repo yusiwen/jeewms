@@ -182,6 +182,10 @@ function downloadqrcode() {
 			<td colspan=1 style='mso-ignore:colspan'></td>
 		</tr>
 		<tr height=40 style='mso-height-source:userset;height:30.0pt'>
+			<td colspan=9 height=40 class=xl68 width=242 style='height:30.0pt;width:182pt'>仓库：${storeName}</td>
+			<td ></td>
+		</tr>
+		<tr height=40 style='mso-height-source:userset;height:30.0pt'>
 			<td colspan=5 height=40 class=xl68 width=242 style='height:30.0pt;width:182pt'>货主：${cusname}</td>
 			<td colspan=4 height=40 class=xl68 width=242 style='height:30.0pt;width:182pt'>客户：${ocusname}</td>
 			<td></td>

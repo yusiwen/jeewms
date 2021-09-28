@@ -144,6 +144,10 @@
 			<td colspan=4 class=xl68 width=337 style='width:252pt'>备注：${wmImNoticeHPage.imBeizhu}</td>
 			<td colspan=4 >进货单号：${wmImNoticeHPage.noticeId}</td>
 		</tr>
+		<tr height=25 style='mso-height-source:userset;height:25.0pt'>
+			<td colspan=8 class=xl68 width=337 style='width:252pt'>仓库：${storeName}</td>
+		</tr>
+
 
 
 		<tr height=33 style='mso-height-source:userset;height:25.05pt'>

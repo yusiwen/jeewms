@@ -15,6 +15,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 
+import com.zzjee.ba.entity.BaStoreEntity;
 import com.zzjee.md.entity.MdGoodsEntity;
 import com.zzjee.tms.entity.TmsMdCheliangEntity;
 import com.zzjee.tms.entity.TmsYwDingdanEntity;
@@ -23,6 +24,7 @@ import com.zzjee.wm.entity.*;
 import com.zzjee.wm.page.*;
 import com.zzjee.wmutil.dsc.dscUtil;
 import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.apache.poi.hssf.usermodel.HSSFCellStyle;
 import org.apache.poi.hssf.usermodel.HSSFClientAnchor;
@@ -222,6 +224,13 @@ public class WmOmNoticeHController extends BaseController {
 			request.setAttribute("noticeid", wmOmNoticeHEntity.getOmNoticeId());
 		}
 
+		BaStoreEntity baStoreEntity = systemService.findUniqueByProperty(BaStoreEntity.class,"storeCode",wmOmNoticeHEntity.getStoreCode());
+		if (baStoreEntity != null && StringUtils.isNotEmpty(baStoreEntity.getStoreName())) {
+			request.setAttribute("storeName", baStoreEntity.getStoreName());
+		}else {
+			request.setAttribute("storeName", "");
+		}
+
 		try{
 			MdCusEntity mdcus = systemService.findUniqueByProperty(MdCusEntity.class,"keHuBianMa",wmOmNoticeHEntity.getCusCode());
 			MdCusOtherEntity mdcusother = systemService.findUniqueByProperty(MdCusOtherEntity.class,"keHuBianMa",wmOmNoticeHEntity.getOcusCode());
@@ -325,8 +334,12 @@ public class WmOmNoticeHController extends BaseController {
 	@RequestMapping(params = "doPrintOutStorage")
 	public ModelAndView doPrintOutStorage(String id,HttpServletRequest request) {
 		WmOmNoticeHEntity wmOmNoticeHEntity = wmOmNoticeHService.getEntity(WmOmNoticeHEntity.class, id);
+		List<Map<String,Object>> list = new ArrayList<>();
+		list = wmOmNoticeHService.findForJdbc("select id,goods_id ,goods_name ,base_goodscount,goods_unit from wm_to_down_goods where order_id = ? ",wmOmNoticeHEntity.getOmNoticeId());
+		if (list.size() == 0 ) {
+			list = systemService.findForJdbc("select id,goods_id ,goods_name ,base_goodscount,goods_unit from wm_om_qm_i where om_notice_id = ? ",wmOmNoticeHEntity.getOmNoticeId());
+		}
 
-		List<Map<String,Object>> list = wmOmNoticeHService.findForJdbc("select id,goods_id ,goods_name ,base_goodscount,goods_unit from wm_to_down_goods where order_id = ? ",wmOmNoticeHEntity.getOmNoticeId());
 		if (list != null && list.size() > 0) {
 			List<WmToDownGoodsEntity> resultList = new ArrayList<>();
 			for (Map<String, Object> map : list) {
@@ -360,6 +373,13 @@ public class WmOmNoticeHController extends BaseController {
 			request.setAttribute("noticeid", wmOmNoticeHEntity.getImCusCode());
 		}else{
 			request.setAttribute("noticeid", wmOmNoticeHEntity.getOmNoticeId());
+		}
+
+		BaStoreEntity baStoreEntity = systemService.findUniqueByProperty(BaStoreEntity.class,"storeCode",wmOmNoticeHEntity.getStoreCode());
+		if (baStoreEntity != null && StringUtils.isNotEmpty(baStoreEntity.getStoreName())) {
+			request.setAttribute("storeName", baStoreEntity.getStoreName());
+		}else {
+			request.setAttribute("storeName", "");
 		}
 
 		try{
@@ -941,8 +961,12 @@ public class WmOmNoticeHController extends BaseController {
 				if(!StringUtil.isEmpty(wmomNoticeIEntity.getGoodsId())){
 					try {
 
+						String goodsId = wmomNoticeIEntity.getGoodsId().split("-")[0];
+						if(goodsId.endsWith("l")){
+							goodsId = goodsId.substring(0,goodsId.lastIndexOf("l"));
+						}
 
-						MvGoodsEntity mvgoods = systemService.findUniqueByProperty(MvGoodsEntity.class,"goodsId",wmomNoticeIEntity.getGoodsId().split("-")[0]);
+						MvGoodsEntity mvgoods = systemService.findUniqueByProperty(MvGoodsEntity.class,"goodsId",goodsId);
 
 //					String date[]=wmImNoticeIEntity.getGoodsCode().split("-");
 //						wmImNoticeIEntity.setGoodsCode(mvgoods.getGoodsCode());
@@ -1548,9 +1572,9 @@ public class WmOmNoticeHController extends BaseController {
 //			String tsql = "SELECT wq.pro_data,wq.base_unit,wq.rec_deg, mg.goods_code, mg.goods_id,mg.shp_ming_cheng,cast(sum(wq.base_goodscount) as signed) as goods_count,cast(sum(wq.tin_tj) as signed) tin_tj ,cast(sum(wq.tin_zhl)  as signed) tin_zhl "
 //					+" FROM wm_om_qm_i wq,mv_goods mg where wq.om_notice_id = ? "
 //					+" and  wq.goods_id = mg.goods_code group by wq.om_notice_id, mg.goods_code,wq.pro_data";
-			String tsql = "SELECT wq.goods_pro_data as pro_data,wq.base_unit, mg.goods_code,mg.shp_gui_ge, mg.goods_id,mg.shp_ming_cheng,cast(sum(wq.base_goodscount) as signed) as goods_count,mg.chl_shl,cast(mg.ti_ji_cm/mg.chl_shl as signed) tin_tj ,(mg.zhl_kg/mg.chl_shl ) as tin_zhl  "
+			String tsql = "SELECT wq.goods_pro_data as pro_data,wq.base_goodscount,wq.base_unit,mg.gao_dan_pin, mg.goods_code,mg.shp_gui_ge, mg.goods_id,mg.shp_ming_cheng,cast(sum(wq.base_goodscount) as signed) as goods_count,mg.chl_shl,cast(mg.ti_ji_cm/mg.chl_shl as signed) tin_tj ,(mg.zhl_kg/mg.chl_shl ) as tin_zhl  "
 					+" FROM wm_to_down_goods wq,mv_goods mg where wq.order_id =  ? "
-					+" and  wq.goods_id = mg.goods_code group by wq.order_id, mg.goods_code,wq.goods_pro_data";
+					+" and  wq.goods_id = mg.goods_id group by wq.order_id, mg.goods_code,wq.goods_pro_data";
 
 			List<Map<String, Object>> result = systemService
 					.findForJdbc(tsql, wmOmNoticeH.getOmNoticeId());
@@ -1558,9 +1582,9 @@ public class WmOmNoticeHController extends BaseController {
 
 			int size = result.size();
 			if(size<1){
-				tsql = "SELECT wq.pro_data,wq.base_unit, mg.goods_code,mg.shp_gui_ge, mg.goods_id,mg.shp_ming_cheng,cast(sum(wq.base_goodscount) as signed) as goods_count,mg.chl_shl,cast(mg.ti_ji_cm/mg.chl_shl as signed) tin_tj , (mg.zhl_kg/mg.chl_shl)  as   tin_zhl "
+				tsql = "SELECT wq.pro_data,wq.base_unit,wq.base_goodscount, mg.goods_code,mg.shp_gui_ge,mg.gao_dan_pin, mg.goods_id,mg.shp_ming_cheng,cast(sum(wq.base_goodscount) as signed) as goods_count,mg.chl_shl,cast(mg.ti_ji_cm/mg.chl_shl as signed) tin_tj , (mg.zhl_kg/mg.chl_shl)  as   tin_zhl "
 						+" FROM wm_om_qm_i wq,mv_goods mg where wq.om_notice_id = ? "
-						+" and  wq.goods_id = mg.goods_code group by wq.om_notice_id, mg.goods_code,wq.pro_data";
+						+" and  wq.goods_id = mg.goods_id group by wq.om_notice_id, mg.goods_code,wq.pro_data";
 				result = systemService
 						.findForJdbc(tsql, wmOmNoticeH.getOmNoticeId());
 				size = result.size();
@@ -1591,14 +1615,22 @@ public class WmOmNoticeHController extends BaseController {
 				cellTitle.setCellValue("配送单");
 				cellTitle.setCellStyle(cs);
 
+				BaStoreEntity baStoreEntity = systemService.findUniqueByProperty(BaStoreEntity.class,"storeCode",wmOmNoticeH.getStoreCode());
 
 				Row row2 = sheet.createRow((short) page*20+1); // 第二行标题
 				//row2.setHeight((short) 700);
-				Cell cellTitle2 = row2.createCell(0);
+				Cell cellTitle20 = row2.createCell(0);
+				if (baStoreEntity != null) {
+					cellTitle20.setCellValue("仓库："+(StringUtils.isEmpty(baStoreEntity.getStoreName())?"":baStoreEntity.getStoreName()));
+				}else {
+					cellTitle20.setCellValue("仓库：");
+				}
+				cellTitle20.setCellStyle(cs1);
+				Cell cellTitle2 = row2.createCell(3);
 				cellTitle2.setCellValue("销售部门：");
 				cellTitle2.setCellStyle(cs1);
-				Cell cellTitle21 = row2.createCell(3);
-				cellTitle21.setCellValue("送货方式：仓库自提");
+				Cell cellTitle21 = row2.createCell(6);
+				cellTitle21.setCellValue("送货方式："+ (StringUtils.isEmpty(wmOmNoticeH.getDelvMethod())?"":wmOmNoticeH.getDelvMethod()));
 				cellTitle21.setCellStyle(cs1);
 
 				Row row3 = sheet.createRow((short) page*20+2); // 第二行标题
@@ -1613,6 +1645,7 @@ public class WmOmNoticeHController extends BaseController {
 				cellTitle33.setCellValue("销售日期：");
 				cellTitle33.setCellStyle(cs1);
 
+
 				MdCusEntity md = systemService.findUniqueByProperty(MdCusEntity.class, "keHuBianMa", wmOmNoticeH.getCusCode());
 				Row row4 = sheet.createRow((short) page*20+3); // 第二行标题
 				//row4.setHeight((short) 700);
@@ -1623,7 +1656,7 @@ public class WmOmNoticeHController extends BaseController {
 				cellTitle42.setCellValue("客户名称："+wmOmNoticeH.getOcusName() == null ?"":wmOmNoticeH.getOcusName());
 				cellTitle42.setCellStyle(cs1);
 				Cell cellTitle43 = row4.createCell(6);
-				cellTitle43.setCellValue("送货日期："+DateUtils.date2Str(wmOmNoticeH.getDelvData(), DateUtils.date_sdf));
+				cellTitle43.setCellValue("送货日期："+wmOmNoticeH.getDelvData() == null?"":DateUtils.date2Str(wmOmNoticeH.getDelvData(), DateUtils.date_sdf));
 				cellTitle43.setCellStyle(cs1);
 				//MdCusOtherEntity cusOther = systemService.findUniqueByProperty(MdCusOtherEntity.class,"keHuBianMa",wmOmNoticeH.getOcusCode());
 
@@ -1643,7 +1676,7 @@ public class WmOmNoticeHController extends BaseController {
 				Row row6 = sheet.createRow((short) page*20+5); // 第二行标题
 				//row6.setHeight((short) 700);
 				Cell cellTitle61 = row6.createCell(0);
-				cellTitle61.setCellValue("送货地址："+wmOmNoticeH.getDelvAddr());
+				cellTitle61.setCellValue("送货地址："+wmOmNoticeH.getDelvAddr() == null ?"":wmOmNoticeH.getDelvAddr());
 				cellTitle61.setCellStyle(cs1);
 
 				Row row7 = sheet.createRow((short) page*20+6); // 第二行标题
@@ -1766,7 +1799,7 @@ public class WmOmNoticeHController extends BaseController {
 
 				Row rowColumnName = sheet.createRow((short) page*20+7); // 列名
 				String[] columnNames = { "序号", "商品编码", "商品名称", "生产日期", "品质","箱数", "拆零数", "毛重/KG","体积/cm³","备注" };
-				String[] columnNames2 = { "物料", "物料名称", "型号", "批次", "规格","数量", "重量", "体积","库区","备注" };
+				String[] columnNames2 = { "物料", "物料名称", "单价", "批次", "规格","数量", "重量", "体积","库区","备注" };
 				try{
 					if("hr".equals(ResourceUtil.getConfigByName("wm.ckd"))){
 //						String[]  columnNames1 = { "序号", "商品编码", "商品名称", "生产日期", "品质","箱数", "拆零数", "毛重/KG","库存","备注" };
@@ -1810,8 +1843,7 @@ public class WmOmNoticeHController extends BaseController {
 						cell2.setCellStyle(cs5);
 
 						Cell cell3 = rowColumnValue.createCell(2);
-//						cell3.setCellValue(result.get(i).get("shp_ming_cheng")
-//								.toString());
+						cell3.setCellValue(result.get(i).get("gao_dan_pin").toString());
 //						cell3.setCellValue("0");
 						cell3.setCellStyle(cs5);
 						try {
@@ -1821,8 +1853,7 @@ public class WmOmNoticeHController extends BaseController {
 
 //								cell4.setCellValue(result.get(i).get("pro_data")
 //									.toString());
-							cell4.setCellValue("无");
-
+							cell4.setCellValue("");
 							cell4.setCellStyle(cs5r);
 						} catch (Exception e) {
 							// TODO: handle exception
@@ -1842,13 +1873,12 @@ public class WmOmNoticeHController extends BaseController {
 
 						try {
 
-							long  xs = (long) Math.floor(Double.parseDouble(result.get(i).get("goods_count")
-									.toString()) / Double.parseDouble(result.get(i).get("chl_shl")
+							long  xs = (long) Math.floor(Double.parseDouble(result.get(i).get("base_goodscount")
 									.toString()));
 							sumxs = sumxs  + xs;
 							Cell cell6 = rowColumnValue.createCell(5);// 单位
 //							cell6.setCellValue(xs);
-							cell6.setCellValue(sumxs);
+							cell6.setCellValue(xs);
 							cell6.setCellStyle(cs5);
 
 						} catch (Exception e) {
@@ -1862,11 +1892,11 @@ public class WmOmNoticeHController extends BaseController {
 //									.toString());
 //							sum = sum + bs;
 							double zhl = Double.parseDouble(result.get(i).get("tin_zhl")
-									.toString()) * Double.parseDouble(result.get(i).get("goods_count").toString());
+									.toString());
 							sumzl = sumzl + zhl;
 							Cell cell7 = rowColumnValue.createCell(6);// 数量
 //							cell7.setCellValue(bs);
-							cell7.setCellValue(sumzl);
+							cell7.setCellValue(zhl);
 							cell7.setCellStyle(cs5);
 						} catch (Exception e) {
 							// TODO: handle exception
@@ -1927,14 +1957,15 @@ public class WmOmNoticeHController extends BaseController {
 						cell5.setCellStyle(cs5);
 						Cell cell6 = rowColumnValue.createCell(6);// 备注
 						cell6.setCellValue(Double.toString(sumzl));
+//						cell6.setCellValue("");
 						cell5.setCellStyle(cs5);
-						Cell cell7 = rowColumnValue.createCell(7);// 重量合计
+						Cell cell7 = rowColumnValue.createCell(7);//
 						cell7.setCellValue("");
 						cell7.setCellStyle(cs5);
-						Cell cell8 = rowColumnValue.createCell(8);// 重量合计
+						Cell cell8 = rowColumnValue.createCell(8);//
 						cell8.setCellValue("");
 						cell8.setCellStyle(cs5);
-						Cell cell9 = rowColumnValue.createCell(9);// 重量合计
+						Cell cell9 = rowColumnValue.createCell(9);//
 						cell9.setCellValue("");
 						cell9.setCellStyle(cs5);
 //				cell6.setCellStyle(cs5);
@@ -2064,18 +2095,18 @@ public class WmOmNoticeHController extends BaseController {
 				id);//获取抬头
 
 
-		printHeader.setHeader01(ResourceUtil.getConfigByName("comname")+"出库单");
+		printHeader.setHeader01("配送单");
 
 		printHeader.setHeader02("公司地址："+ResourceUtil.getConfigByName("comaddr") );
 
 		printHeader.setHeader03("电话："+ ResourceUtil.getConfigByName("comtel"));
 
-		printHeader.setHeader04("出库日期： " +DateUtils.date2Str(wmOmNoticeH.getDelvData(), DateUtils.date_sdf) );
+		printHeader.setHeader04("送货日期： " +(wmOmNoticeH.getDelvData() == null ?"":DateUtils.date2Str(wmOmNoticeH.getDelvData(), DateUtils.date_sdf)));
 
 
 		printHeader.setHeader05("出库单号： " +wmOmNoticeH.getOmNoticeId());
 
-		printHeader.setHeader06("客户单号： " +wmOmNoticeH.getImCusCode());
+		printHeader.setHeader06("参考单号： " +wmOmNoticeH.getImCusCode());
 
 
 		printHeader.setHeader07("车号： " +wmOmNoticeH.getReCarno());
@@ -2084,18 +2115,32 @@ public class WmOmNoticeHController extends BaseController {
 
 		printHeader.setHeader08("客户名称： " +wmOmNoticeH.getCusCode()+md.getZhongWenQch());
 
-		printHeader.setHeader09("收货人： "+wmOmNoticeH.getDelvMember()+"   电话:"+wmOmNoticeH.getDelvMobile() );
+		printHeader.setHeader09("联系人： "+wmOmNoticeH.getDelvMember());
 
-		printHeader.setHeader10("收货地址： " +wmOmNoticeH.getDelvAddr());
+		printHeader.setHeader10("送货地址： " +wmOmNoticeH.getDelvAddr());
 
 		printHeader.setHeader11("打印时间： "+DateUtils.date2Str(DateUtils.getDate(), DateUtils.datetimeFormat)  );
-		printHeader.setHeader14("备注： " +wmOmNoticeH.getOmBeizhu());
+		printHeader.setHeader14("销售部门： " );
+		printHeader.setHeader15("送货方式： "+(StringUtils.isEmpty(wmOmNoticeH.getDelvMethod())?"":wmOmNoticeH.getDelvMethod()) );
+		printHeader.setHeader16("备注： " +wmOmNoticeH.getOmBeizhu());
+		printHeader.setHeader17("销售员： ");
+		printHeader.setHeader18("销售员电话： ");
+		printHeader.setHeader19("销售日期： ");
+		printHeader.setHeader20("客户电话： "+wmOmNoticeH.getDelvMobile());
+
+		BaStoreEntity baStoreEntity = systemService.findUniqueByProperty(BaStoreEntity.class,"storeCode",wmOmNoticeH.getStoreCode());
+		if (baStoreEntity != null){
+			printHeader.setHeader21("仓库： " +(StringUtils.isEmpty(baStoreEntity.getStoreName())?"":baStoreEntity.getStoreName()));
+		}else {
+			printHeader.setHeader21("仓库： ");
+		}
+
 
 		List<PrintItem> listitem = new ArrayList<>();
 
-		String tsql = "SELECT wq.goods_pro_data as pro_data,wq.base_unit, mg.goods_code, mg.goods_id,mg.shp_ming_cheng,cast(sum(wq.base_goodscount) as signed) as goods_count,mg.chl_shl,cast(mg.ti_ji_cm/mg.chl_shl as signed) tin_tj ,(mg.zhl_kg/mg.chl_shl ) as tin_zhl  "
+		String tsql = "SELECT wq.goods_pro_data as pro_data,wq.base_goodscount,wq.base_unit,mg.gao_dan_pin, mg.goods_code,mg.shp_gui_ge, mg.goods_id,mg.shp_ming_cheng,cast(sum(wq.base_goodscount) as signed) as goods_count,mg.chl_shl,cast(mg.ti_ji_cm/mg.chl_shl as signed) tin_tj ,(mg.zhl_kg/mg.chl_shl ) as tin_zhl  "
 				+" FROM wm_to_down_goods wq,mv_goods mg where wq.id in  (?) "
-				+" and  wq.goods_id = mg.goods_code group by wq.order_id, mg.goods_code,wq.goods_pro_data";
+				+" and  wq.goods_id = mg.goods_id group by wq.order_id, mg.goods_code,wq.goods_pro_data";
 
 		List<Map<String, Object>> result = systemService
 				.findForJdbc(tsql, itemId);
@@ -2103,9 +2148,9 @@ public class WmOmNoticeHController extends BaseController {
 
 		int size = result.size();
 		if(size<1){
-			tsql = "SELECT wq.pro_data,wq.base_unit, mg.goods_code, mg.goods_id,mg.shp_ming_cheng,cast(sum(wq.base_goodscount) as signed) as goods_count,mg.chl_shl,cast(mg.ti_ji_cm/mg.chl_shl as signed) tin_tj , (mg.zhl_kg/mg.chl_shl)  as   tin_zhl "
+			tsql = "SELECT wq.pro_data,wq.base_unit,wq.base_goodscount,mg.shp_gui_ge,mg.gao_dan_pin, mg.goods_code, mg.goods_id,mg.shp_ming_cheng,cast(sum(wq.base_goodscount) as signed) as goods_count,mg.chl_shl,cast(mg.ti_ji_cm/mg.chl_shl as signed) tin_tj , (mg.zhl_kg/mg.chl_shl)  as   tin_zhl "
 					+" FROM wm_om_qm_i wq,mv_goods mg where wq.om_notice_id = ? "
-					+" and  wq.goods_id = mg.goods_code group by wq.om_notice_id, mg.goods_code,wq.pro_data";
+					+" and  wq.goods_id = mg.goods_id group by wq.om_notice_id, mg.goods_code,wq.pro_data";
 			result = systemService
 					.findForJdbc(tsql, wmOmNoticeH.getOmNoticeId());
 			size = result.size();
@@ -2135,8 +2180,7 @@ public class WmOmNoticeHController extends BaseController {
 
 			try {
 
-				long  xs = (long) Math.floor(Double.parseDouble(result.get(i).get("goods_count")
-						.toString()) / Double.parseDouble(result.get(i).get("chl_shl")
+				long  xs = (long) Math.floor(Double.parseDouble(result.get(i).get("base_goodscount")
 						.toString()));
 				sumxs = sumxs  + xs;
 				printItem.setItem05(Long.toString(xs));
@@ -2159,7 +2203,7 @@ public class WmOmNoticeHController extends BaseController {
 				double zhl = Double.parseDouble(result.get(i).get("tin_zhl")
 						.toString()) * Double.parseDouble(result.get(i).get("goods_count").toString());
 				sumzl = sumzl + zhl;
-				printItem.setItem07(Double.toString(zhl));
+				printItem.setItem07("");
 
 			} catch (Exception e) {
 				// TODO: handle exception
@@ -2179,7 +2223,14 @@ public class WmOmNoticeHController extends BaseController {
 			}catch (Exception e){
 				logger.error(ExceptionUtil.getExceptionMessage(e));
 			}
-
+			printItem.setItem10(result.get(i).get("shp_gui_ge")
+					.toString());
+			try{
+				printItem.setItem11(result.get(i).get("gao_dan_pin")
+						.toString());
+			}catch (Exception e){
+				logger.error(ExceptionUtil.getExceptionMessage(e));
+			}
 
 			listitem.add(printItem);
 		}
@@ -2233,7 +2284,7 @@ public class WmOmNoticeHController extends BaseController {
 
 		String tsql = "SELECT wq.goods_pro_data as pro_data,wq.base_unit, mg.goods_code, mg.goods_id,mg.shp_ming_cheng,cast(sum(wq.base_goodscount) as signed) as goods_count,mg.chl_shl,cast(mg.ti_ji_cm/mg.chl_shl as signed) tin_tj ,(mg.zhl_kg/mg.chl_shl ) as tin_zhl  "
 				+" FROM wm_to_down_goods wq,mv_goods mg where wq.order_id =  ? "
-				+" and  wq.goods_id = mg.goods_code group by wq.order_id, mg.goods_code,wq.goods_pro_data";
+				+" and  wq.goods_id = mg.goods_id group by wq.order_id, mg.goods_code,wq.goods_pro_data";
 
 		List<Map<String, Object>> result = systemService
 				.findForJdbc(tsql, wmOmNoticeH.getOmNoticeId());
@@ -2243,7 +2294,7 @@ public class WmOmNoticeHController extends BaseController {
 		if(size<1){
 			tsql = "SELECT wq.pro_data,wq.base_unit, mg.goods_code, mg.goods_id,mg.shp_ming_cheng,cast(sum(wq.base_goodscount) as signed) as goods_count,mg.chl_shl,cast(mg.ti_ji_cm/mg.chl_shl as signed) tin_tj , (mg.zhl_kg/mg.chl_shl)  as   tin_zhl "
 					+" FROM wm_om_qm_i wq,mv_goods mg where wq.om_notice_id = ? "
-					+" and  wq.goods_id = mg.goods_code group by wq.om_notice_id, mg.goods_code,wq.pro_data";
+					+" and  wq.goods_id = mg.goods_id group by wq.om_notice_id, mg.goods_code,wq.pro_data";
 			result = systemService
 					.findForJdbc(tsql, wmOmNoticeH.getOmNoticeId());
 			size = result.size();
@@ -2533,12 +2584,12 @@ public class WmOmNoticeHController extends BaseController {
 				}
 				if(roles.equals("CUS")){
 					cq.eq("cusCode", user.getUserName());
-
 				}
 			}
 
 			//自定义追加查询条件
 		}catch (Exception e) {
+			e.printStackTrace();
 			throw new BusinessException(e.getMessage());
 		}
 		cq.add();

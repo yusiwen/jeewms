@@ -123,13 +123,13 @@
 			<div class="row form-wrapper">
 				<div class="row show-grid">
 					<div class="col-xs-1 text-center">
-						<b>供应商：</b>
+						<b>货主：</b>
 					</div>
 					<div class="col-xs-2">
 						<t:dictSelect readonly="${wmImNoticeHPage.readonly}"  field="cusCode" type="list" extendJson="{class:'form-control',style:'width:230px'}"
 									  dictTable="mv_cus" dictField="cus_code" dictText="cus_name"   defaultVal="${wmImNoticeHPage.cusCode}" hasLabel="false"  title="货主"></t:dictSelect>
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
-						<label class="Validform_label" style="display: none">客户编码</label>
+						<label class="Validform_label" style="display: none">货主编码</label>
 					</div>
 
 
@@ -202,7 +202,7 @@
 						   ignore="ignore" value='${wmImNoticeHPage.supCode}'
 					/>
 					<span class="Validform_checktip" style="float:left;height:0px;"></span>
-					<label class="Validform_label" style="display: none">生产厂商/label>
+					<label class="Validform_label" style="display: none">供应商/label>
 				</div>
 					<div class="col-xs-1 text-center">
 						<b>预约库区：</b>
@@ -233,6 +233,16 @@
 									  dictTable="ba_order_type" dictField="order_type_code" dictText="order_type_name"  defaultVal="${wmImNoticeHPage.orderTypeCode}" hasLabel="false"  title="订单类型"></t:dictSelect>
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
 						<label class="Validform_label" style="display: none">订单类型</label>
+					</div>
+					<div class="col-xs-1 text-center">
+						<b>仓库：</b>
+					</div>
+					<div class="col-xs-2">
+						<t:dictSelect   field="storeCode" type="list"   extendJson="  {class:'form-control',datatype:'*',style:'width:230px'}"
+										dictTable="ba_store" dictField="store_code" dictText="store_name" defaultVal="${wmImNoticeHPage.storeCode}"></t:dictSelect>
+						<span class="Validform_checktip" style="float:left;height:0px;"></span>
+						<label class="Validform_label" style="display: none">仓库</label>
+						<%-- 						<t:autocomplete    searchField="cusName"   name="cusCode" entityName="MvCusEntity" ></t:autocomplete> --%>
 					</div>
 
 

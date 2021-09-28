@@ -37,6 +37,8 @@ import org.jeecgframework.poi.excel.entity.ExportParams;
 import org.jeecgframework.poi.excel.entity.ImportParams;
 import org.jeecgframework.poi.excel.entity.vo.NormalExcelConstants;
 import org.jeecgframework.tag.core.easyui.TagUtil;
+import org.jeecgframework.web.system.pojo.base.TSBaseUser;
+import org.jeecgframework.web.system.pojo.base.TSUser;
 import org.jeecgframework.web.system.service.SystemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -1060,6 +1062,11 @@ for (WmInQmIEntity wmInQmIEntity : wmInQmIso) {
 						}
 					}catch (Exception e){
 					}
+				}
+				//查询create_name
+				TSBaseUser user = systemService.findUniqueByProperty(TSBaseUser.class,"userName",wmInQmI.getCreateBy());
+				if (user != null ) {
+					wmInQmI.setCreateName(user.getRealName());
 				}
 				String id = wmInQmIService.save(wmInQmI).toString();
 				if("on".equals(ResourceUtil.getConfigByName("onestepup"))&&StringUtil.isNotEmpty(wmInQmI.getBinId())){

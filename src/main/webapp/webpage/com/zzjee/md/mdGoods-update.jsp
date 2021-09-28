@@ -64,7 +64,7 @@
 			      <div class="row form-wrapper">
 							<div class="row show-grid">
 			          <div class="col-xs-3 text-center">
-			          	<b  style="color:red">所属供应商</b>
+			          	<b  style="color:red">所属货主</b>
 			          </div>
 			          <div class="col-xs-3">
 								<t:dictSelect readonly="readonly" field="suoShuKeHu" type="list" extendJson="{class:'form-control'}"

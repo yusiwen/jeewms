@@ -19,7 +19,7 @@
    <t:dgCol title="所属公司"  field="sysCompanyCode"  hidden="true"  queryMode="single"  width="120"></t:dgCol>
 
    <t:dgCol title="出货单号"  field="omNoticeId" query="true"    queryMode="single"  width="120"></t:dgCol>
-   <t:dgCol title="供应商编码"  field="cusCode" query="true"     queryMode="single"  dictionary="mv_cus,cus_code,cus_name" width="120"></t:dgCol>
+   <t:dgCol title="货主编码"  field="cusCode" query="true"     queryMode="single"  dictionary="mv_cus,cus_code,cus_name" width="120"></t:dgCol>
    <t:dgCol title="客户订单号"  field="imCusCode"   query="true" queryMode="single"  width="100"></t:dgCol>
    <t:dgCol title="备注"  field="omBeizhu" query="true"   queryMode="single"  width="120"></t:dgCol>
 

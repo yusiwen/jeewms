@@ -2,6 +2,7 @@ package com.zzjee.wm.controller;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -612,8 +613,10 @@ public class WmSttInGoodsController extends BaseController {
 		//保存
 		try{
 			WmSttInGoodsEntity t = systemService.get(WmSttInGoodsEntity.class,wmSttInGoods.getId());
+
 			MyBeanUtils.copyBeanNotNull2Bean(wmSttInGoods,t);
 			t.setSttSta(Constants.wm_sta4);
+			t.setUpdateDate(new Date());
 			wmSttInGoodsService.saveOrUpdate(t);
 			D0.setOK(true);
 		} catch (Exception e) {

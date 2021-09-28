@@ -20,34 +20,34 @@ import javax.persistence.SequenceGenerator;
 import org.jeecgframework.poi.excel.annotation.Excel;
 import org.jeecgframework.poi.excel.annotation.ExcelCollection;
 
-/**   
+/**
  * @Title: Entity
  * @Description: 出货通知抬头
  * @author erzhongxmu
  * @date 2017-09-11 15:24:58
- * @version V1.0   
+ * @version V1.0
  *
  */
 public class WmOmNoticeHPage implements java.io.Serializable {
 	/**主键*/
 	private java.lang.String id;
 	/**创建人名称*/
-   
+
 	private java.lang.String createName;
 	/**创建人登录名称*/
-   
+
 	private java.lang.String createBy;
 	/**创建日期*/
-    
+
 	private java.util.Date createDate;
 	/**更新人名称*/
-    
+
 	private java.lang.String updateName;
 	/**更新人登录名称*/
-    
+
 	private java.lang.String updateBy;
 	/**更新日期*/
-     
+
 	private java.util.Date updateDate;
 	/**所属部门*/
 	private java.lang.String readonly;
@@ -56,44 +56,79 @@ public class WmOmNoticeHPage implements java.io.Serializable {
 	private java.lang.String wherecon;
 	private java.lang.String sysOrgCode;
 	/**所属公司*/
- 
+
 	private java.lang.String sysCompanyCode;
 	/**客户*/
+	@Excel(name="供应商编码")
 	private java.lang.String cusCode;
 	/**要求交货时间*/
+	@Excel(name="要求交货时间",format = "yyyy-MM-dd")
 	private java.util.Date delvData;
 	/**收货人*/
+	@Excel(name="收货人")
 	private java.lang.String delvMember;
 	/**收货人电话*/
+	@Excel(name="收货人电话")
 	private java.lang.String delvMobile;
 	/**收货人地址*/
+	@Excel(name="收货人地址")
 	private java.lang.String delvAddr;
 	/**承运人*/
+	@Excel(name="承运人")
 	private java.lang.String reMember;
 	/**承运人电话*/
+	@Excel(name="承运人电话")
 	private java.lang.String reMobile;
 	/**承运人车号*/
+	@Excel(name="承运人车号")
 	private java.lang.String reCarno;
 	/**发货月台*/
 	private java.lang.String omPlatNo;
 	/**备注*/
+	@Excel(name="备注")
 	private java.lang.String omBeizhu;
 	/**状态*/
 	private java.lang.String omSta;
 	/**出货单号*/
+	@Excel(name="出货单号",width = 30)
 	private java.lang.String omNoticeId;
 	/**附件*/
- 
+
 	private java.lang.String fuJian;
-
+	@Excel(name="客户编号")
 	private java.lang.String ocusCode;
-
+	@Excel(name="客户名称")
 	private java.lang.String ocusName;
+	@Excel(name="客户订单号")
 	private java.lang.String imCusCode;
 	private java.lang.String printStatus;
 	private java.lang.String piClass;
 
 	private java.lang.String piMaster;
+	@Excel(name = "送货方式")
+	private String delvMethod;
+
+	private String storeCode;
+
+	public String getDelvMethod() {
+		return delvMethod;
+	}
+
+	public WmOmNoticeHPage setDelvMethod(String delvMethod) {
+		this.delvMethod = delvMethod;
+		return this;
+	}
+
+	public String getStoreCode() {
+		return storeCode;
+	}
+
+	public WmOmNoticeHPage setStoreCode(String storeCode) {
+		this.storeCode = storeCode;
+		return this;
+	}
+
+
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  主键
@@ -500,6 +535,7 @@ public class WmOmNoticeHPage implements java.io.Serializable {
 	}
 
 	/**保存-出货通知项目*/
+	@ExcelCollection(name = "出货通知项目")
 	private List<WmOmNoticeIEntity> wmOmNoticeIList = new ArrayList<WmOmNoticeIEntity>();
 		public List<WmOmNoticeIEntity> getWmOmNoticeIList() {
 		return wmOmNoticeIList;

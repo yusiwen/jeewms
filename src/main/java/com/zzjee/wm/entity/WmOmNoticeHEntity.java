@@ -59,7 +59,7 @@ public class WmOmNoticeHEntity implements java.io.Serializable {
 
 	private java.lang.String sysCompanyCode;
 	/**客户*/
-    @Excel(name="客户")
+    @Excel(name="供应商编码")
 	private java.lang.String cusCode;
 	/**客户订单号*/
 	@Excel(name="客户订单号")
@@ -100,10 +100,10 @@ public class WmOmNoticeHEntity implements java.io.Serializable {
 	/**附件*/
 
 	private java.lang.String fuJian;
-	@Excel(name="三方客户编号")
+	@Excel(name="客户编号")
 
 	private java.lang.String ocusCode;
-	@Excel(name="三方客户名称")
+	@Excel(name="客户名称")
 	private java.lang.String ocusName;
 
 	private java.lang.String printStatus;
@@ -111,6 +111,31 @@ public class WmOmNoticeHEntity implements java.io.Serializable {
 	private java.lang.String piClass;
 
 	private java.lang.String piMaster;
+	@Excel(name = "送货方式")
+	private String delvMethod;
+
+	private String storeCode;
+
+
+	@Column(name ="store_code",nullable=true,length=50)
+	public String getStoreCode() {
+		return storeCode;
+	}
+
+	public WmOmNoticeHEntity setStoreCode(String storeCode) {
+		this.storeCode = storeCode;
+		return this;
+	}
+
+	@Column(name ="delv_method",nullable=true,length=32)
+	public String getDelvMethod() {
+		return delvMethod;
+	}
+
+	public WmOmNoticeHEntity setDelvMethod(String delvMethod) {
+		this.delvMethod = delvMethod;
+		return this;
+	}
 
 	/**
 	 *方法: 取得java.lang.String

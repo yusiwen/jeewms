@@ -117,8 +117,8 @@ public class WmsApiController {
         org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq,
                 mdGoods, request.getParameterMap());
 
-        if(StringUtil.isNotEmpty(wmUtil.getCusCode())){
-            cq.eq("suoShuKeHu", wmUtil.getCusCode());
+        if(StringUtil.isNotEmpty(mdGoods.getSuoShuKeHu())){
+            cq.eq("suoShuKeHu", mdGoods.getSuoShuKeHu());
         }
         if(StringUtil.isNotEmpty(mdGoods.getShpBianMakh())){
             cq.eq("shpBianMakh", mdGoods.getShpBianMakh());

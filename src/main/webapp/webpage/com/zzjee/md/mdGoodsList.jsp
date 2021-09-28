@@ -16,7 +16,7 @@
     <t:dgCol title="所属公司"  field="sysCompanyCode"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
       <t:dgCol title="操作" field="opt" width="100"></t:dgCol>
 
-      <t:dgCol title="所属供应商"  field="suoShuKeHu"   query="true" queryMode="single" dictionary="mv_cus,cus_code,cus_name"  width="120"></t:dgCol>
+      <t:dgCol title="所属货主"  field="suoShuKeHu"   query="true" queryMode="single" dictionary="mv_cus,cus_code,cus_name"  width="120"></t:dgCol>
     <t:dgCol title="商品名称"  field="shpMingCheng"   query="true" queryMode="single"  width="160"></t:dgCol>
     <t:dgCol title="英文名称"  field="ywMingCheng"   query="true" queryMode="single"  width="160"></t:dgCol>
     <t:dgCol title="日文名称"  field="rwMingCheng"   query="true" queryMode="single"  width="160"></t:dgCol>

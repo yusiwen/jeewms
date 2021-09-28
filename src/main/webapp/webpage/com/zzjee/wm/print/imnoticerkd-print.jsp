@@ -125,14 +125,14 @@
 			<td colspan=6 height=18 width=585 style='height:13.2pt;width:438pt'><span style="font-size: 18pt">${printHeader.header01}</span></td>
 		</tr>
 		<tr height=40 style='mso-height-source:userset;height:30.0pt'>
-			<td colspan=6 class=xl68 width=168 style='width:126pt'>${printHeader.header02}</td>
+			<td colspan=6 class=xl68 width=168 style='width:126pt'></td>
 <%--			<td  rowspan="3" class=xl69>--%>
 <%--				<img src="rest/wmBaseController/showOrDownqrcodeByurl?qrvalue=${wmImNoticeHPage.noticeId}" style="width:80px;height:80px;vertical-align:right">--%>
 <%--			</td>--%>
 		</tr>
 		<tr height=40 style='mso-height-source:userset;height:30.0pt'>
-			<td colspan=3 height=40 class=xl68 style='height:30.0pt'>${printHeader.header04}222</td>
-			<td colspan=3 height=40 class=xl68 style='height:30.0pt'>${printHeader.header05}111</td>
+			<td colspan=3 height=40 class=xl68 style='height:30.0pt'>${printHeader.header04}</td>
+			<td colspan=3 height=40 class=xl68 style='height:30.0pt'>${printHeader.header05}</td>
 		</tr>
 		<tr height=40 style='mso-height-source:userset;height:30.0pt'>
 			<td colspan=3 height=40 class=xl68 width=242 style='height:30.0pt;width:182pt'>${printHeader.header08}</td>
@@ -140,7 +140,7 @@
 		</tr>
 		<tr height=40 style='mso-height-source:userset;height:30.0pt;'>
 			<td colspan=3 class=xl68 width=337 style='width:252pt'>${printHeader.header14}</td>
-			<td colspan=3 class=xl68>${printHeader.header06}</td>
+			<td colspan=3 class=xl68>${printHeader.header16}</td>
 		</tr>
 
 
@@ -193,7 +193,7 @@
 		<tr height=40 style='height:25.0pt'>
 			<td height=20 class=xl66 colspan=6 style='height:15.0pt;mso-ignore:colspan;text-align: justify'>主管：<span
 					style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  </span>制单人： <span
+  </span>制单人：${printHeader.header15} <span
 					style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   </span>仓管签字（盖章）:<span
 					style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
