@@ -61,7 +61,7 @@ public class WmImNoticeHEntity implements java.io.Serializable {
 
     private java.lang.String sysCompanyCode;
     /**客户编码*/
-    @Excel(name="供应商编码")
+    @Excel(name="客户编码")
     private java.lang.String cusCode;
     /**预计到货时间*/
     @Excel(name="预计到货时间",format = "yyyy-MM-dd")
@@ -100,10 +100,11 @@ public class WmImNoticeHEntity implements java.io.Serializable {
 
     private java.lang.String fuJian;
     /**附件*/
-
+    @Excel(name="供应商编码")
     private java.lang.String supCode;
     /**附件*/
 
+    @Excel(name="供应商名称")
     private java.lang.String supName;
     private java.lang.String piClass;
 

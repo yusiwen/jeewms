@@ -59,7 +59,7 @@ public class WmOmNoticeHEntity implements java.io.Serializable {
 
 	private java.lang.String sysCompanyCode;
 	/**客户*/
-    @Excel(name="供应商编码")
+    @Excel(name="客户编码")
 	private java.lang.String cusCode;
 	/**客户订单号*/
 	@Excel(name="客户订单号")
