@@ -5,7 +5,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>供应商</title>
+  <title>编辑</title>
   <meta name="description" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link rel="stylesheet" href="online/template/ledefault/css/vendor.css">
@@ -61,24 +61,24 @@
 						<label class="Validform_label" style="display: none">企业属性</label>
 			          </div>
 			          <div class="col-xs-3 text-center">
-			          	<b  style="color:red">供应商编码</b>
+			          	<b  style="color:red">编码</b>
 			          </div>
 			          <div class="col-xs-3">
 								<input id="keHuBianMa" name="keHuBianMa" type="text" class="form-control"
 									ignore="checked" readonly="readonly"
 								   datatype="*" value='${mdCusPage.keHuBianMa}' />
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
-						<label class="Validform_label" style="display: none">供应商编码</label>
+						<label class="Validform_label" style="display: none">编码</label>
 			          </div>
 			            <div class="col-xs-3 text-center">
-			          	<b  style="color:red">供应商属性</b>
+			          	<b  style="color:red">属性</b>
 			          </div>
 			          <div class="col-xs-3">
 <t:dictSelect field="keHuShuXing" type="list" extendJson="{class:'form-control'}"
 					defaultVal="${mdCusPage.keHuShuXing}"			dictTable="ba_keHuShuXing" dictField="kehushuxing_code" dictText="kehushuxing_name" hasLabel="false"  title="客户属性"></t:dictSelect>
 
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
-						<label class="Validform_label" style="display: none">供应商属性</label>
+						<label class="Validform_label" style="display: none">属性</label>
 			          </div>
 
 			          		          <div class="col-xs-3 text-center">
