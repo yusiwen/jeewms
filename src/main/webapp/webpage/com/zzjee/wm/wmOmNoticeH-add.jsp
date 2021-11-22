@@ -191,17 +191,16 @@
 					  </div>
 					  <div class="col-xs-5">
 
-<%--						  <t:autocomplete   entityName="MvCusOtherEntity" searchField="cusName" name="ocusCode"></t:autocomplete>--%>
+						  <t:autocomplete   entityName="MvCusOtherEntity" searchField="cusName" name="ocusName"></t:autocomplete>
 
 
-						  <t:dictSelect id="ocusCodeid" field="ocusCode" type="list" extendJson="{class:'form-control',style:'width:230px'}"
-										 	 	  dictTable="mv_cus_other" dictField="cus_code" dictText="cus_name"  hasLabel="false"  title="客户编码"></t:dictSelect>
-						  <span class="Validform_checktip" style="float:left;height:0px;"></span>
-						  <label class="Validform_label" style="display: none">客户</label>
+<%--						  <t:dictSelect id="ocusCodeid" field="ocusCode" type="list" extendJson="{class:'form-control',style:'width:230px'}"--%>
+<%--										 	 	  dictTable="mv_cus_other" dictField="cus_code" dictText="cus_name"  hasLabel="false"  title="客户编码"></t:dictSelect>--%>
+<%--						  <span class="Validform_checktip" style="float:left;height:0px;"></span>--%>
+<%--						  <label class="Validform_label" style="display: none">客户</label>--%>
 					  </div>
 
-
-					  <%--<div class="col-xs-1 text-center">--%>
+				  <%--<div class="col-xs-1 text-center">--%>
 						  <%--<b>三方客户名称：</b>--%>
 					  <%--</div>--%>
 					  <%--<div class="col-xs-2">--%>
@@ -211,15 +210,6 @@
 						  <%--<span class="Validform_checktip" style="float:left;height:0px;"></span>--%>
 						  <%--<label class="Validform_label" style="display: none">三方客户名称</label>--%>
 					  <%--</div>--%>
-
-
-
-
-
-
-
-
-
 
 			          <div class="col-xs-1 text-center">
 			          	<b>收货人：</b>
