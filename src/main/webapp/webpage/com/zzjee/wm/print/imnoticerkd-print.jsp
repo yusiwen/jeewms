@@ -73,26 +73,20 @@
 		.xl65
 		{mso-style-parent:style0;
 			color:black;
-			font-size:16pt;
+			font-size:22pt;
 			text-align:center;
 			border:1.0pt solid black;}
 		.xl66
 		{mso-style-parent:style0;
 			color:black;
-			font-size:16pt;}
-		.xl67
-		{mso-style-parent:style0;
-			color:black;
-			font-size:18pt;
-			text-align:center;}
+			font-size:22pt;}
+
 		.xl68
 		{mso-style-parent:style0;
 			color:black;
-			font-size:16pt;
+			font-size:25pt;
 			white-space:normal;}
-		.xl69
-		{mso-style-parent:style0;
-			text-align:center;}
+
 
 	</style>
 
@@ -122,7 +116,7 @@
 			<td colspan=6 height=18 width=585 style='height:13.2pt;width:438pt'></td>
 		</tr>
 		<tr height=18 style='height:13.2pt'>
-			<td colspan=6 height=18 width=585 style='height:13.2pt;width:438pt'><span style="font-size: 18pt">${printHeader.header01}</span></td>
+			<td colspan=6 height=18 width=585 style='height:13.2pt;width:438pt'><span style="font-size: 25pt">${printHeader.header01}</span></td>
 		</tr>
 <%--		<tr height=40 style='mso-height-source:userset;height:30.0pt'>--%>
 <%--			<td colspan=6 class=xl68 width=168 style='width:126pt'></td>--%>
