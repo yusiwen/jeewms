@@ -124,12 +124,12 @@
 		<tr height=18 style='height:13.2pt'>
 			<td colspan=6 height=18 width=585 style='height:13.2pt;width:438pt'><span style="font-size: 18pt">${printHeader.header01}</span></td>
 		</tr>
-		<tr height=40 style='mso-height-source:userset;height:30.0pt'>
-			<td colspan=6 class=xl68 width=168 style='width:126pt'></td>
-<%--			<td  rowspan="3" class=xl69>--%>
-<%--				<img src="rest/wmBaseController/showOrDownqrcodeByurl?qrvalue=${wmImNoticeHPage.noticeId}" style="width:80px;height:80px;vertical-align:right">--%>
-<%--			</td>--%>
-		</tr>
+<%--		<tr height=40 style='mso-height-source:userset;height:30.0pt'>--%>
+<%--			<td colspan=6 class=xl68 width=168 style='width:126pt'></td>--%>
+<%--&lt;%&ndash;			<td  rowspan="3" class=xl69>&ndash;%&gt;--%>
+<%--&lt;%&ndash;				<img src="rest/wmBaseController/showOrDownqrcodeByurl?qrvalue=${wmImNoticeHPage.noticeId}" style="width:80px;height:80px;vertical-align:right">&ndash;%&gt;--%>
+<%--&lt;%&ndash;			</td>&ndash;%&gt;--%>
+<%--		</tr>--%>
 		<tr height=40 style='mso-height-source:userset;height:30.0pt'>
 			<td colspan=3 height=40 class=xl68 style='height:30.0pt'>${printHeader.header04}</td>
 			<td colspan=3 height=40 class=xl68 style='height:30.0pt'>${printHeader.header05}</td>
@@ -144,7 +144,7 @@
 		</tr>
 
 
-		<tr height=40 style='mso-height-source:userset;height:25.05pt'>
+		<tr  style='mso-height-source:userset;height:18.05pt'>
 			<td class=xl65 style='border:1.0pt solid black;text-align: center'>序号</td>
 
 			<td class=xl65 style='border:1.0pt solid black;text-align: center'>商品编码</td>
@@ -168,7 +168,7 @@
 		<c:if test="${fn:length(listitem)  > 0 }">
 			<c:forEach items="${listitem}" var="poVal" varStatus="stuts">
 
-				<tr height=40 style='mso-height-source:userset;height:50px'>
+				<tr height=30 style='mso-height-source:userset;height:30px'>
 					<td class=xl65 style='border:1.0pt solid black;text-align: center'>${poVal.item20 }　</td>
 <%--						<td height=33 class=xl65 style='height:25.05pt;border:1.0pt solid black;text-align: center'>${poVal.goodsCode }</td>--%>
 					<td class=xl65 style='border:1.0pt solid black;text-align: center;word-break:break-all;'><span style='word-break:break-all;width: auto;font-size: 14pt'>${poVal.item01 }</span></td>

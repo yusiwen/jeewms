@@ -149,7 +149,7 @@
 		</tr>
 
 
-		<tr height=33 style='mso-height-source:userset;height:25.05pt'>
+		<tr  style='mso-height-source:userset;height:18.05pt'>
 <%--			<td class=xl65 style='border:1.0pt solid black;text-align: center'>序号</td>--%>
 
 <%--			<td class=xl65 style='border:1.0pt solid black;text-align: center'>商品编码</td>--%>
@@ -182,7 +182,7 @@
 		<c:if test="${fn:length(listitem)  > 0 }">
 			<c:forEach items="${listitem}" var="poVal" varStatus="stuts">
 
-				<tr height=33 style='mso-height-source:userset;height:50px'>
+				<tr  style='mso-height-source:userset;height:30px'>
 					<td class=xl65 style='border:1.0pt solid black;text-align: center'>${poVal.item01 }　</td>
 						<%--<td height=33 class=xl65 style='height:25.05pt;border:1.0pt solid black;text-align: center'>${poVal.goodsCode }</td>--%>
 					<td class=xl65 style='border:1.0pt solid black;text-align: center;word-break:break-all;'>${poVal.item02 }</td>
