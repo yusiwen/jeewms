@@ -100,9 +100,8 @@
  collapse;table-layout:fixed;width:800pt;margin-left: 30px;margin-top: -30px'>
 		<col width=45 style='mso-width-source:userset;mso-width-alt:3612;width:45pt'>
 
-			<%--<col width=84 style='mso-width-source:userset;mso-width-alt:2986;width:63pt'>--%>
-		<col width=100 style='mso-width-source:userset;mso-width-alt:4010;width:100pt'>
-		<col width=145 style='mso-width-source:userset;mso-width-alt:1592;width:134pt'>
+		<col width=100 style='mso-width-source:userset;mso-width-alt:4010;width:130pt'>
+		<col width=145 style='mso-width-source:userset;mso-width-alt:1592;width:150pt'>
 		<col width=100  style='mso-width-source:userset;mso-width-alt:2986;
  width:80pt'>
 		<col width=67 style='mso-width-source:userset;mso-width-alt:2389;width:50pt'>
@@ -125,30 +124,33 @@
 <%--&lt;%&ndash;			</td>&ndash;%&gt;--%>
 <%--		</tr>--%>
 		<tr height=40 style='mso-height-source:userset;height:30.0pt'>
-			<td colspan=3 height=40 class=xl68 style='height:30.0pt'><span style="font-size: 22pt">${printHeader.header04}</span></span></td>
-			<td colspan=3 height=40 class=xl68 style='height:30.0pt'><span style="font-size: 22pt">${printHeader.header05}</span></td>
+<%--			<td colspan=3 height=40 class=xl68 style='height:30.0pt'><span style="font-size: 22pt">${printHeader.header04}</span></td>--%>
+			<td colspan=3 height=40 class=xl68 style='height:30.0pt'><span style="font-size: 20pt">${printHeader.header05}</span></td>
+	       <td colspan=3 class=xl68><span style="font-size: 22pt">${printHeader.header16}</span></td>
+
 		</tr>
 		<tr height=40 style='mso-height-source:userset;height:30.0pt'>
-			<td colspan=3 height=40 class=xl68 width=242 style='height:30.0pt;width:182pt'><span style="font-size: 22pt">${printHeader.header08}</span></td>
-			<td colspan=3 height=40 class=xl68 width=242 style='height:30.0pt;width:182pt'><span style="font-size: 22pt">${printHeader.header09}</span></td>
+			<td colspan=3 height=40 class=xl68 width=242 style='height:30.0pt;width:182pt'><span style="font-size: 20pt">${printHeader.header09}</span></td>
+			<td colspan=3 class=xl68 width=337 style='width:252pt'><span style="font-size: 20pt">${printHeader.header14}</span></td>
+
 		</tr>
 		<tr height=40 style='mso-height-source:userset;height:30.0pt;'>
-			<td colspan=3 class=xl68 width=337 style='width:252pt'><span style="font-size: 22pt">${printHeader.header14}</span></td>
-			<td colspan=3 class=xl68><span style="font-size: 22pt">${printHeader.header16}</span></td>
+			<td colspan=3 height=40 class=xl68 width=242 style='height:30.0pt;width:182pt'><span style="font-size: 20pt">${printHeader.header08}</span></td>
+
 		</tr>
 
 
 		<tr  style='mso-height-source:userset;height:18.05pt'>
-			<td class=xl65 style='border:1.0pt solid black;text-align: center'><span style="font-size: 22pt">序号</span></td>
+			<td class=xl65 style='border:1.0pt solid black;text-align: center'><span style="font-size: 20pt">序号</span></td>
 
-			<td class=xl65 style='border:1.0pt solid black;text-align: center'><span style="font-size: 22pt">商品编码</span></td>
+			<td class=xl65 style='border:1.0pt solid black;text-align: center'><span style="font-size: 20pt">商品编码</span></td>
 				<%--<td class=xl65 style='border:1.0pt solid black;text-align: center'>商品编码</td>--%>
-			<td class=xl65 style='height:25.05pt;border:1.0pt solid black;text-align: center'><span style="font-size: 22pt">商品</span></td>
-			<td class=xl65 style='border:1.0pt solid black;text-align: center'><span style="font-size: 22pt">生产日期</span></td>
+			<td class=xl65 style='height:25.05pt;border:1.0pt solid black;text-align: center'><span style="font-size: 20pt">商品</span></td>
+			<td class=xl65 style='border:1.0pt solid black;text-align: center'><span style="font-size: 20pt">生产日期</span></td>
 
 <%--			<td class=xl65 style='border:1.0pt solid black;text-align: center'>收货温度</td>--%>
-			<td class=xl65 style='border:1.0pt solid black;text-align: center'><span style="font-size: 22pt">单位</span></td>
-			<td class=xl65 style='border:1.0pt solid black;text-align: center'><span style="font-size: 22pt">数量</span></td>
+			<td class=xl65 style='border:1.0pt solid black;text-align: center'><span style="font-size: 20pt">单位</span></td>
+			<td class=xl65 style='border:1.0pt solid black;text-align: center'><span style="font-size: 20pt">数量</span></td>
 
 <%--			<td class=xl65 style='border:1.0pt solid black;text-align: center'>重量</td>--%>
 <%--			<td class=xl65 style='border:1.0pt solid black;text-align: center'>容积</td>--%>
@@ -163,16 +165,16 @@
 			<c:forEach items="${listitem}" var="poVal" varStatus="stuts">
 
 				<tr height=30 style='mso-height-source:userset;height:30px'>
-					<td class=xl65 style='border:1.0pt solid black;text-align: center'><span style="font-size: 18pt">${poVal.item20 }　</td>
+					<td class=xl65 style='border:1.0pt solid black;text-align: center'><span style="font-size: 16pt">${poVal.item20 }　</td>
 <%--						<td height=33 class=xl65 style='height:25.05pt;border:1.0pt solid black;text-align: center'>${poVal.goodsCode }</td>--%>
 					<td class=xl65 style='border:1.0pt solid black;text-align: center;word-break:break-all;'><span style='word-break:break-all;width: auto;font-size: 18pt'>${poVal.item01 }</span></td>
-					<td class=xl65 style='border:1.0pt solid black;text-align: center'><span style="font-size: 18pt">${poVal.item02 }</span></td>
+					<td class=xl65 style='border:1.0pt solid black;text-align: center'><span style="font-size: 16pt">${poVal.item02 }</span></td>
 
-					<td class=xl65 style='border:1.0pt solid black;text-align: center'><span style="font-size: 18pt">${poVal.item03 }</span></td>
+					<td class=xl65 style='border:1.0pt solid black;text-align: center'><span style="font-size: 16pt">${poVal.item03 }</span></td>
 <%--					<td class=xl65 style='border:1.0pt solid black;text-align: center'>${poVal.item04 }</td>--%>
-					<td class=xl65 style='border:1.0pt solid black;text-align: center'><span style="font-size: 18pt">${poVal.item05 }</span></td>
+					<td class=xl65 style='border:1.0pt solid black;text-align: center'><span style="font-size: 16pt">${poVal.item05 }</span></td>
 
-					<td class=xl65 style='border:1.0pt solid black;text-align: center'><span style="font-size: 18pt">${poVal.item06 }</span></td>
+					<td class=xl65 style='border:1.0pt solid black;text-align: center'><span style="font-size: 16pt">${poVal.item06 }</span></td>
 <%--					<td class=xl65 style='border:1.0pt solid black;text-align: center'>${poVal.item07 }</td>--%>
 
 <%--					<td class=xl65 style='border:1.0pt solid black;text-align: center'>${poVal.item08 }</td>--%>
@@ -185,11 +187,11 @@
 			</c:forEach>
 		</c:if>
 		<tr height=40 style='height:25.0pt'>
-			<td height=20 class=xl66 colspan=6 style='height:15.0pt;mso-ignore:colspan;text-align: justify'><span style="font-size: 18pt">主管：</span><span
+			<td height=20 class=xl66 colspan=6 style='height:15.0pt;mso-ignore:colspan;text-align: justify'><span style="font-size: 16pt">主管：</span><span
 					style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  </span><span style="font-size: 18pt">制单人：${printHeader.header15} </span><span style="font-size: 18pt">仓管签字（盖章）:</span><span
+  </span><span style="font-size: 16pt">制单人：${printHeader.header15} </span><span style="font-size: 16pt">仓管签字（盖章）:</span><span
 					style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  </span><span style="font-size: 18pt">合计数量:${printHeader.header12}</span>
+  </span><span style="font-size: 16pt">合计数量:${printHeader.header12}</span>
 
 		</tr>
 
