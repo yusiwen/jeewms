@@ -20,16 +20,14 @@ public class JeecgOneGUI {
 	public static void main(String[] args) {
 //		CodeWindow  codeWindow = new CodeWindow();
 //		codeWindow.pack();
-		Map<String, Object> result = new HashMap<String, Object>();
-		try {
+ 		try {
 			SapRFC saprfc = SapRFC.getInstance();
 			saprfc.prepare("ZZKMES_FM_PP112");
 			saprfc.execCall();
 //            saprfc.getParamTableList()
-			JCoTable tab = saprfc.getParamTableList("IT_OUT");
+			JCoTable tab = saprfc.getParamTableList("ES_OUTPUT");
 			System.out.print("rows:" + tab.getNumRows());
-			result.put("IT_OUT", tab);
-		} catch (Exception e) {
+ 		} catch (Exception e) {
 			System.out.print(e.getMessage());
 		}
 
