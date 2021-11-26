@@ -189,7 +189,7 @@
 		<tr height=40 style='height:25.0pt'>
 			<td height=20 class=xl66 colspan=6 style='height:15.0pt;mso-ignore:colspan;text-align: justify'><span style="font-size: 16pt">主管：</span><span
 					style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  </span><span style="font-size: 16pt">制单人：${printHeader.header15} </span><span style="font-size: 16pt">仓管签字（盖章）:</span><span
+  </span><span style="font-size: 16pt">制单人：${printHeader.header15} </span><span style="font-size: 16pt">&nbsp;&nbsp;&nbsp;&nbsp;仓管签字（盖章）:</span><span
 					style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   </span><span style="font-size: 16pt">合计数量:${printHeader.header12}</span>
 
