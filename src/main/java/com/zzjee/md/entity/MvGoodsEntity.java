@@ -83,7 +83,8 @@ public class MvGoodsEntity implements java.io.Serializable {
 	private java.lang.String chpShuXing;
 	@Excel(name="价格")
 	private java.lang.String gaoDanPin;
-
+	@Excel(name="SKU")
+	private java.lang.String sku;
 	@Column(name ="gao_dan_pin",nullable=true,length=100)
 	public String getGaoDanPin() {
 		return gaoDanPin;
@@ -440,5 +441,14 @@ public class MvGoodsEntity implements java.io.Serializable {
 	 */
 	public void setChpShuXing(java.lang.String chpShuXing){
 		this.chpShuXing = chpShuXing;
+	}
+
+	@Column(name ="sku",nullable=true,length=32)
+	public String getSku() {
+		return sku;
+	}
+
+	public void setSku(String sku) {
+		this.sku = sku;
 	}
 }

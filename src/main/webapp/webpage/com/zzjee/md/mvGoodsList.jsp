@@ -6,6 +6,7 @@
   <t:datagrid singleSelect="true" name="mvGoodsList" checkbox="true" pagination="true" fitColumns="false" title="商品视图" actionUrl="mvGoodsController.do?datagrid" idField="goodsCode" fit="true" queryMode="group">
     <t:dgCol title="货主"  field="cusCode"     queryMode="single"  width="50"></t:dgCol>
     <t:dgCol title="商品"  field="goodsCode"     queryMode="single"  width="80"></t:dgCol>
+    <t:dgCol title="sku"  field="sku"     queryMode="single"  width="80"></t:dgCol>
     <t:dgCol title="商品名"  field="goodsName"   query="true" queryMode="single"  width="280"></t:dgCol>
     <t:dgCol title="单位"  field="shlDanWei"    queryMode="group"  width="50"></t:dgCol>
     <t:dgCol title="温层"  field="cfWenCeng"     queryMode="group"  width="50"></t:dgCol>
