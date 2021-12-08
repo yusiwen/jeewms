@@ -2095,38 +2095,38 @@ public class WmOmNoticeHController extends BaseController {
 				id);//获取抬头
 
 
-		printHeader.setHeader01("配送单");
+		printHeader.setHeader01("桥路易购签收单");
 
-		printHeader.setHeader02("公司地址："+ResourceUtil.getConfigByName("comaddr") );
+		printHeader.setHeader02("司机电话：");
 
-		printHeader.setHeader03("电话："+ ResourceUtil.getConfigByName("comtel"));
+		printHeader.setHeader03("车牌号：");
 
-		printHeader.setHeader04("送货日期： " +(wmOmNoticeH.getDelvData() == null ?"":DateUtils.date2Str(wmOmNoticeH.getDelvData(), DateUtils.date_sdf)));
+		printHeader.setHeader04("司机： " );
 
 
 		printHeader.setHeader05("出库单号： " +wmOmNoticeH.getOmNoticeId());
 
-		printHeader.setHeader06("参考单号： " +wmOmNoticeH.getImCusCode());
+		printHeader.setHeader06("订单号： " +wmOmNoticeH.getImCusCode());
 
 
-		printHeader.setHeader07("车号： " +wmOmNoticeH.getReCarno());
+		printHeader.setHeader07("快递单号： " );
 
 		MdCusEntity md = systemService.findUniqueByProperty(MdCusEntity.class, "keHuBianMa", wmOmNoticeH.getCusCode());
 
 		printHeader.setHeader08("客户名称： " +wmOmNoticeH.getCusCode()+md.getZhongWenQch());
 
-		printHeader.setHeader09("联系人： "+wmOmNoticeH.getDelvMember());
+		printHeader.setHeader09("收件人： "+wmOmNoticeH.getDelvMember());
 
-		printHeader.setHeader10("送货地址： " +wmOmNoticeH.getDelvAddr());
+		printHeader.setHeader10("发货地址： " );
 
-		printHeader.setHeader11("打印时间： "+DateUtils.date2Str(DateUtils.getDate(), DateUtils.datetimeFormat)  );
-		printHeader.setHeader14("销售部门： " );
-		printHeader.setHeader15("送货方式： "+(StringUtils.isEmpty(wmOmNoticeH.getDelvMethod())?"":wmOmNoticeH.getDelvMethod()) );
+		printHeader.setHeader11("送货日期： " +(wmOmNoticeH.getDelvData() == null ?"":DateUtils.date2Str(wmOmNoticeH.getDelvData(), DateUtils.date_sdf)));
+		printHeader.setHeader14("收货地址： " +wmOmNoticeH.getDelvAddr());
+		printHeader.setHeader15("发货方式： "+(StringUtils.isEmpty(wmOmNoticeH.getDelvMethod())?"":wmOmNoticeH.getDelvMethod()) );
 		printHeader.setHeader16("备注： " +wmOmNoticeH.getOmBeizhu());
-		printHeader.setHeader17("销售员： ");
-		printHeader.setHeader18("销售员电话： ");
-		printHeader.setHeader19("销售日期： ");
-		printHeader.setHeader20("客户电话： "+wmOmNoticeH.getDelvMobile());
+		printHeader.setHeader17("收货单位： ");
+		printHeader.setHeader18("运输方式： "+(StringUtils.isEmpty(wmOmNoticeH.getDelvMethod())?"":wmOmNoticeH.getDelvMethod()) );
+		printHeader.setHeader19("揽件人电话： ");
+		printHeader.setHeader20("收件人电话： "+wmOmNoticeH.getDelvMobile());
 
 		BaStoreEntity baStoreEntity = systemService.findUniqueByProperty(BaStoreEntity.class,"storeCode",wmOmNoticeH.getStoreCode());
 		if (baStoreEntity != null){
@@ -2138,7 +2138,7 @@ public class WmOmNoticeHController extends BaseController {
 
 		List<PrintItem> listitem = new ArrayList<>();
 
-		String tsql = "SELECT wq.goods_pro_data as pro_data,wq.base_goodscount,wq.base_unit,mg.gao_dan_pin, mg.goods_code,mg.shp_gui_ge, mg.goods_id,mg.shp_ming_cheng,cast(sum(wq.base_goodscount) as signed) as goods_count,mg.chl_shl,cast(mg.ti_ji_cm/mg.chl_shl as signed) tin_tj ,(mg.zhl_kg/mg.chl_shl ) as tin_zhl  "
+		String tsql = "SELECT wq.goods_pro_data as pro_data,mg.sku,wq.base_goodscount,wq.base_unit,mg.gao_dan_pin, mg.goods_code,mg.shp_gui_ge, mg.goods_id,mg.shp_ming_cheng,cast(sum(wq.base_goodscount) as signed) as goods_count,mg.chl_shl,cast(mg.ti_ji_cm/mg.chl_shl as signed) tin_tj ,(mg.zhl_kg/mg.chl_shl ) as tin_zhl  "
 				+" FROM wm_to_down_goods wq,mv_goods mg where wq.id in  (?) "
 				+" and  wq.goods_id = mg.goods_id group by wq.order_id, mg.goods_code,wq.goods_pro_data";
 
@@ -2148,7 +2148,7 @@ public class WmOmNoticeHController extends BaseController {
 
 		int size = result.size();
 		if(size<1){
-			tsql = "SELECT wq.pro_data,wq.base_unit,wq.base_goodscount,mg.shp_gui_ge,mg.gao_dan_pin, mg.goods_code, mg.goods_id,mg.shp_ming_cheng,cast(sum(wq.base_goodscount) as signed) as goods_count,mg.chl_shl,cast(mg.ti_ji_cm/mg.chl_shl as signed) tin_tj , (mg.zhl_kg/mg.chl_shl)  as   tin_zhl "
+			tsql = "SELECT wq.pro_data,mg.sku,wq.base_unit,wq.base_goodscount,mg.shp_gui_ge,mg.gao_dan_pin, mg.goods_code, mg.goods_id,mg.shp_ming_cheng,cast(sum(wq.base_goodscount) as signed) as goods_count,mg.chl_shl,cast(mg.ti_ji_cm/mg.chl_shl as signed) tin_tj , (mg.zhl_kg/mg.chl_shl)  as   tin_zhl "
 					+" FROM wm_om_qm_i wq,mv_goods mg where wq.om_notice_id = ? "
 					+" and  wq.goods_id = mg.goods_id group by wq.om_notice_id, mg.goods_code,wq.pro_data";
 			result = systemService
@@ -2226,12 +2226,12 @@ public class WmOmNoticeHController extends BaseController {
 			printItem.setItem10(result.get(i).get("shp_gui_ge")
 					.toString());
 			try{
-				printItem.setItem11(result.get(i).get("gao_dan_pin")
-						.toString());
+				printItem.setItem11(result.get(i).get("gao_dan_pin") == null ?"":result.get(i).get("gao_dan_pin").toString());
 			}catch (Exception e){
 				logger.error(ExceptionUtil.getExceptionMessage(e));
 			}
-
+			printItem.setItem12(result.get(i).get("sku") == null ?"":result.get(i).get("sku").toString());
+			printItem.setItem13(result.get(i).get("base_unit") == null ?"":result.get(i).get("base_unit").toString());
 			listitem.add(printItem);
 		}
 
