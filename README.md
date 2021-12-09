@@ -1,6 +1,6 @@
 
 QQ交流群：335607153  有任何问题可以加群交流 
- **智能制造产品JEEMES即将开源**  [https://gitee.com/erzhongxmu/jeemes] 欢迎大家STAR
+ **智能制造产品JEEMES即将开源**  (https://gitee.com/erzhongxmu/jeemes) 欢迎大家STAR
  
 测试系统地址 http://47.113.229.131:9080/wms  用户名：test  密码：123456 本地启动的用户名：admin 密码：llg123
 android app也已经开源，近期更新会比较频繁 app开源地址  https://gitee.com/erzhongxmu/jeewmsapp
