@@ -38,7 +38,7 @@
    <t:dgDelOpt title="删除" operationCode="omnodel" url="wmOmNoticeHController.do?doDel&id={id}"  urlclass="ace_button" exp="omSta#ne#已完成" urlfont="fa-trash-o"/>
       <%--<t:dgFunOpt title="通知单" funname="print(id)"  urlclass="ace_button"  urlfont="	fa-print" exp="omSta#ne#已删除"/>--%>
    <t:dgFunOpt title="拣货单" funname="doprint(id)"  urlclass="ace_button"   exp="omSta#ne#已删除"   />
-   <t:dgFunOpt title="追溯单" funname="doprintzhuisu(id)"  urlclass="ace_button"   exp="omSta#ne#已删除"   />
+<%--   <t:dgFunOpt title="追溯单" funname="doprintzhuisu(id)"  urlclass="ace_button"   exp="omSta#ne#已删除"   />--%>
 
    <%--<t:dgFunOpt title="回写" funname="dopost(id)"  urlclass="ace_button"   exp="omSta#eq#已完成"   />--%>
 
