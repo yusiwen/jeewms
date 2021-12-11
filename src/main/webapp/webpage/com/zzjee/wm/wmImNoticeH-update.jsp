@@ -256,11 +256,10 @@
 					<div class="col-xs-1 text-center">
 						<b>附件 ：</b>
 					</div>
-					<div class="col-xs-2">
+					<div class="col-xs-2" style="line-height: 20px" >
 						<t:webUploader auto="true" pathValues="${wmImNoticeHPage.fuJian}" name="fuJian" duplicate="true" fileNumLimit="3"></t:webUploader>
 
-						<span class="Validform_checktip" style="float:left;height:0px;"></span>
-						<label class="Validform_label" style="display: none">附件</label>
+
 					</div>
 					<%--<div class="col-xs-1 text-center">--%>
 						<%--<b>月台：</b>--%>
