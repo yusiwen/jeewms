@@ -147,7 +147,7 @@
 			          	<b>货主：</b>
 			          </div>
 			          <div class="col-xs-2">
-								<t:dictSelect  field="cusCode" type="list" extendJson="{class:'form-control',datatype:'*',style:'width:230px'}"
+								<t:dictSelect  field="cusCode" type="list" extendJson="{class:'form-control',datatype:'*',style:'width:220px'}"
 									defaultVal="${wmOmNoticeHPage.cusCode}" 	 	readonly="${wmOmNoticeHPage.readonly}" 	  dictTable="mv_cus" dictField="cus_code" dictText="cus_name"  hasLabel="false"  title="货主编码"></t:dictSelect>
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
 						<label class="Validform_label" style="display: none">货主编码</label>
@@ -169,7 +169,7 @@
 			          	<b>订单类型：</b>
 			          </div>
 			          <div class="col-xs-2">
-								<t:dictSelect field="orderTypeCode" type="list" extendJson="{class:'form-control',style:'width:150px'}"
+								<t:dictSelect field="orderTypeCode" type="list" extendJson="{class:'form-control',style:'width:220px'}"
 								dictTable="ba_order_type" dictField="order_type_code" dictText="order_type_name"  defaultVal="${wmOmNoticeHPage.orderTypeCode}" hasLabel="false"  title="订单类型"></t:dictSelect>
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
 						<label class="Validform_label" style="display: none">订单类型</label>
@@ -291,7 +291,7 @@
 								</div>
 								<div class="col-xs-2">
 
-									<t:dictSelect field="delvMethod" type="list" extendJson="{class:'form-control',style:'width:150px'}"
+									<t:dictSelect field="delvMethod" type="list" extendJson="{class:'form-control',style:'width:220px'}"
 												  typeGroupCode="tms_thfs"  defaultVal="${wmOmNoticeHPage.delvMethod}" title="送货方式"></t:dictSelect>
 									<span class="Validform_checktip" style="float:left;height:0px;"></span>
 									<label class="Validform_label" style="display: none">送货方式</label>
@@ -304,7 +304,7 @@
 			          	<b>发货月台：</b>
 			          </div>
 			          <div class="col-xs-2">
-								<t:dictSelect field="omPlatNo" type="list" extendJson="{class:'form-control',style:'width:150px'}"
+								<t:dictSelect field="omPlatNo" type="list" extendJson="{class:'form-control',style:'width:220px'}"
 								dictTable="ba_platform" dictField="platform_code" dictText="platform_name" hasLabel="false"  title="月台"></t:dictSelect>
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
 						<label class="Validform_label" style="display: none">月台</label>
@@ -324,7 +324,7 @@
 									<b>仓库：</b>
 								</div>
 								<div class="col-xs-2">
-									<t:dictSelect id="storeCode" field="storeCode" type="list" extendJson="{class:'form-control',style:'width:230px'}"
+									<t:dictSelect id="storeCode" field="storeCode" type="list" extendJson="{class:'form-control',style:'width:220px'}"
 												  dictTable="ba_store" dictField="store_code" dictText="store_name"  hasLabel="false"  title="仓库"></t:dictSelect>
 									<span class="Validform_checktip" style="float:left;height:0px;"></span>
 									<label class="Validform_label" style="display: none">仓库</label>

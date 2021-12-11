@@ -185,7 +185,7 @@
                     </div>
                     <div class="col-xs-2">
                         <t:dictSelect readonly="${wmImNoticeHPage.readonly}" field="cusCode" type="list"
-                                      extendJson="  {class:'form-control',datatype:'*',style:'width:230px'}"
+                                      extendJson="  {class:'form-control',datatype:'*',style:'width:220px'}"
                                       defaultVal="${wmImNoticeHPage.cusCode}" dictTable="mv_cus" dictField="cus_code"
                                       dictText="cus_name" hasLabel="false" title="货主"></t:dictSelect>
                         <span class="Validform_checktip" style="float:left;height:0px;"></span>
@@ -260,7 +260,7 @@
                     </div>
                     <div class="col-xs-2">
                         <t:dictSelect field="areaCode" type="list"
-                                      extendJson="  {class:'form-control',datatype:'*',style:'width:230px'}"
+                                      extendJson="  {class:'form-control',datatype:'*',style:'width:220px'}"
                                       defaultVal="存货区" typeGroupCode="area_type" hasLabel="false"
                                       title="预约库区"></t:dictSelect>
                         <span class="Validform_checktip" style="float:left;height:0px;"></span>
@@ -294,7 +294,7 @@
                     </div>
                     <div class="col-xs-2">
                         <t:dictSelect field="storeCode" type="list"
-                                      extendJson="  {class:'form-control',datatype:'*',style:'width:230px'}"
+                                      extendJson="  {class:'form-control',datatype:'*',style:'width:220px'}"
                                       dictTable="ba_store" dictField="store_code" dictText="store_name"></t:dictSelect>
                         <span class="Validform_checktip" style="float:left;height:0px;"></span>
                     </div>
@@ -310,7 +310,7 @@
 				</div>
 				<div class="col-xs-2">
 					<t:dictSelect field="orderTypeCode" type="list"
-								  extendJson="{class:'form-control',style:'width:150px'}"
+								  extendJson="{class:'form-control',datatype:'*',style:'width:220px'}"
 								  dictTable="ba_order_type" dictField="order_type_code" dictText="order_type_name"
 								  defaultVal="${wmImNoticeHPage.orderTypeCode}" hasLabel="false"
 								  title="订单类型"></t:dictSelect>

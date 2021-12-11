@@ -2,8 +2,8 @@
 <%@include file="/context/mytags.jsp"%>
 <t:base type="jquery,easyui,tools,DatePicker"></t:base>
 <div class="easyui-layout" fit="true">
-  <div region="center" style="padding:0px;border:0px">
-  <t:datagrid name="mdSupList" checkbox="true" pagination="true" fitColumns="true" title="供应商" actionUrl="mdSupController.do?datagrid" idField="id" fit="false" queryMode="group">
+<div region="center" style="padding:0px;border:0px">
+  <t:datagrid name="mdSupList" singleSelect="true" checkbox="true" pagination="true" fitColumns="true" title="供应商" actionUrl="mdSupController.do?datagrid" idField="id" fit="true" queryMode="group">
     <t:dgCol title="主键"  field="id"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
     <t:dgCol title="创建人"  field="createName"   hidden="true"    queryMode="group"  width="50"></t:dgCol>
     <t:dgCol title="创建人登录名称"  field="createBy"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
@@ -13,10 +13,10 @@
     <t:dgCol title="审核日期"  field="updateDate"  hidden="true"  formatter="yyyy-MM-dd"  queryMode="group"  width="120"></t:dgCol>
     <t:dgCol title="所属部门"  field="sysOrgCode"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
     <t:dgCol title="所属公司"  field="sysCompanyCode"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
-    <t:dgCol title="中文全称"  field="zhongWenQch"   query="true" queryMode="single"  width="180"></t:dgCol>
-    <t:dgCol title="助记码"  field="zhuJiMa"  hidden="true" query="true" queryMode="single"  width="120"></t:dgCol>
-    <t:dgCol title="供应商简称"  field="gysJianCheng"  hidden="true" query="true" queryMode="single"  width="120"></t:dgCol>
-    <t:dgCol title="供应商编码"  field="gysBianMa"   query="true" queryMode="single"  width="120"></t:dgCol>
+    <t:dgCol title="中文全称"  field="zhongWenQch"   query="true" queryMode="single"  width="380"></t:dgCol>
+    <t:dgCol title="助记码"  field="zhuJiMa"  hidden="true"   queryMode="single"  width="120"></t:dgCol>
+    <t:dgCol title="供应商简称"  field="gysJianCheng"  hidden="true"   queryMode="single"  width="120"></t:dgCol>
+    <t:dgCol title="供应商编码"  field="gysBianMa"   query="true" queryMode="single"  width="220"></t:dgCol>
     <t:dgCol title="供应商英文名称"  field="gysYingWen"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
     <t:dgCol title="曾用企业代码"  field="zengYongQi"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
     <t:dgCol title="曾用企业名称"  field="zengYongQiYe"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
@@ -66,11 +66,11 @@
 <%--   <t:dgToolBar title="导出" icon="icon-putout" funname="ExportXls"></t:dgToolBar>--%>
 <%--   <t:dgToolBar title="模板下载" icon="icon-putout" funname="ExportXlsByT"></t:dgToolBar>--%>
   </t:datagrid>
-    <div name="searchColums1" style="float: left; padding-left: 0px;padding-top: 5px;">
-      <%--<input type="text" name="batchbin" style="width: 100px; height: 30px;">--%>
-      日期：<input type="text" name="batchdate"    class="form-control" onClick="WdatePicker()" style="width: 100px; height: 30px;">
+<%--    <div name="searchColums1" style="float: left; padding-left: 0px;padding-top: 5px;">--%>
+<%--      &lt;%&ndash;<input type="text" name="batchbin" style="width: 100px; height: 30px;">&ndash;%&gt;--%>
+<%--      日期：<input type="text" name="batchdate"    class="form-control" onClick="WdatePicker()" style="width: 100px; height: 30px;">--%>
 
-    </div>
+<%--    </div>--%>
   </div>
  </div>
  <script src = "webpage/com/zzjee/md/mdSupList.js"></script>
