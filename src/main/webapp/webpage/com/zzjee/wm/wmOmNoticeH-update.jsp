@@ -111,8 +111,8 @@
 			<div class="tab-wrapper">
 			    <!-- tab -->
 			    <ul class="nav nav-tabs">
-			      <li role="presentation" class="active"><a href="javascript:void(0);">出货通知</a></li>
-			      ${wmOmNoticeHPage.omNoticeId}
+			      <li role="presentation" class="active"><a href="javascript:void(0);">出货通知( ${wmOmNoticeHPage.omNoticeId})</a></li>
+
 			    </ul>
 			    <!-- tab内容 -->
 			    <div class="con-wrapper" style="display: block;">
@@ -255,7 +255,7 @@
 
 
 			          <div class="col-xs-1 text-center">
-			          	<b>发货运单号或车号：</b>
+			          	<b>运单号或车号：</b>
 			          </div>
 			          <div class="col-xs-2">
 								<input id="reCarno" name="reCarno" type="text" class="form-control"
@@ -269,10 +269,8 @@
 						  <div class="col-xs-2">
 
 							  <t:dictSelect field="delvMethod" type="list" extendJson="{class:'form-control',style:'width:150px'}"
-											typeGroupCode="dev_method"  defaultVal="${wmOmNoticeHPage.delvMethod}" hasLabel="false"  title="订单类型"></t:dictSelect>
+											typeGroupCode="tms_thfs"  defaultVal="${wmOmNoticeHPage.delvMethod}" hasLabel="false"  title="送货方式"></t:dictSelect>
 
-							  <%--						  <input id="reCarno" name="reCarno" type="text" class="form-control"--%>
-							  <%--									/>--%>
 							  <span class="Validform_checktip" style="float:left;height:0px;"></span>
 							  <label class="Validform_label" style="display: none">送货方式</label>
 						  </div>

@@ -115,8 +115,8 @@
 	<div class="tab-wrapper">
 		<!-- tab -->
 		<ul class="nav nav-tabs">
-			<li role="presentation" class="active"><a href="javascript:void(0);"> 预约通知</a></li>
-			<b style="margin-top: 10px">${wmImNoticeHPage.noticeId}</b>
+			<li role="presentation" class="active"><a href="javascript:void(0);"> 预约通知(${wmImNoticeHPage.noticeId})</a></li>
+<%--			<b style="margin-top: 10px"></b>--%>
 		</ul>
 		<!-- tab内容 -->
 		<div class="con-wrapper" style="display: block;">
@@ -201,8 +201,17 @@
 					<input id="supCode" name="supCode" type="text" class="form-control"
 						   ignore="ignore" value='${wmImNoticeHPage.supCode}'
 					/>
+				</div>
+
+				<div class="col-xs-1 text-center">
+					<b>供应商名称：</b>
+				</div>
+				<div class="col-xs-2">
+					<input id="supName" name="supName" type="text" class="form-control"
+						   ignore="ignore" value='${wmImNoticeHPage.supName}'
+					/>
 					<span class="Validform_checktip" style="float:left;height:0px;"></span>
-					<label class="Validform_label" style="display: none">供应商/label>
+					<label class="Validform_label" style="display: none">司机电话</label>
 				</div>
 					<div class="col-xs-1 text-center">
 						<b>预约库区：</b>
@@ -214,17 +223,6 @@
 						<label class="Validform_label" style="display: none">预约库区</label>
 						<%-- 						<t:autocomplete    searchField="cusName"   name="cusCode" entityName="MvCusEntity" ></t:autocomplete> --%>
 					</div>
-				<div class="col-xs-1 text-center">
-					<b>供应商名称：</b>
-				</div>
-				<div class="col-xs-2">
-					<input id="supName" name="supName" type="text" class="form-control"
-						   ignore="ignore" value='${wmImNoticeHPage.supName}'
-					/>
-					<span class="Validform_checktip" style="float:left;height:0px;"></span>
-					<label class="Validform_label" style="display: none">司机电话</label>
-				</div>
-
 					<div class="col-xs-1 text-center">
 						<b>订单类型：</b>
 					</div>
@@ -244,8 +242,26 @@
 						<label class="Validform_label" style="display: none">仓库</label>
 						<%-- 						<t:autocomplete    searchField="cusName"   name="cusCode" entityName="MvCusEntity" ></t:autocomplete> --%>
 					</div>
+					<div class="col-xs-1 text-center">
+						<b>备注：</b>
+					</div>
+					<div class="col-xs-2">
+						<input id="imBeizhu" name="imBeizhu" type="text" class="form-control"
+							   ignore="ignore"
+							   value='${wmImNoticeHPage.imBeizhu}' />
+						<span class="Validform_checktip" style="float:left;height:0px;"></span>
+						<label class="Validform_label" style="display: none">备注</label>
+					</div>
 
+					<div class="col-xs-1 text-center">
+						<b>附件 ：</b>
+					</div>
+					<div class="col-xs-2">
+						<t:webUploader auto="true" pathValues="${wmImNoticeHPage.fuJian}" name="fuJian" duplicate="true" fileNumLimit="3"></t:webUploader>
 
+						<span class="Validform_checktip" style="float:left;height:0px;"></span>
+						<label class="Validform_label" style="display: none">附件</label>
+					</div>
 					<%--<div class="col-xs-1 text-center">--%>
 						<%--<b>月台：</b>--%>
 					<%--</div>--%>
@@ -258,30 +274,12 @@
 				</div>
 
 
-				<div class="row show-grid">
-					<div class="col-xs-1 text-center">
-						<b>备注：</b>
-					</div>
-					<div class="col-xs-5">
-						<input id="imBeizhu" name="imBeizhu" type="text" class="form-control"
-							   ignore="ignore"
-							   value='${wmImNoticeHPage.imBeizhu}' />
-						<span class="Validform_checktip" style="float:left;height:0px;"></span>
-						<label class="Validform_label" style="display: none">备注</label>
-					</div>
+<%--				<div class="row show-grid">--%>
+<%--					--%>
 
 
-					<div class="col-xs-1 text-center">
-						<b>附件 ：</b>
-					</div>
-					<div class="col-xs-5">
-						<t:webUploader auto="true" pathValues="${wmImNoticeHPage.fuJian}" name="fuJian" duplicate="true" fileNumLimit="3"></t:webUploader>
 
-						<span class="Validform_checktip" style="float:left;height:0px;"></span>
-						<label class="Validform_label" style="display: none">附件</label>
-					</div>
-
-				</div>
+<%--				</div>--%>
 			</div>
 		</div>
 

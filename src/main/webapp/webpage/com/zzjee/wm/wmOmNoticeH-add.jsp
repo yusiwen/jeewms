@@ -181,7 +181,7 @@
 									<input id="imCusCode" name="imCusCode" type="text" class="form-control"
 										   required="required"   ignore="ignore" datatype="*"  validType="wm_om_notice_h,im_cus_code,id"
 										    />
-									<span class="Validform_checktip"> 不能重复</span>
+<%--									<span class="Validform_checktip"> 不能重复</span>--%>
  								</div>
  							</div>
 					  <div class="row show-grid">
@@ -274,16 +274,16 @@
 
 
 			          <div class="col-xs-1 text-center">
-			          	<b>发货运单号或车号：</b>
+			          	<b>运单号或车号：</b>
 			          </div>
 			          <div class="col-xs-2">
 
-						  <t:autocomplete   entityName="TmsMdCheliangEntity" searchField="chepaihao" name="reCarno"></t:autocomplete>
+						  <t:autocomplete    entityName="TmsMdCheliangEntity" searchField="chepaihao" name="reCarno"></t:autocomplete>
 
 <%--						  <input id="reCarno" name="reCarno" type="text" class="form-control"--%>
 <%--									/>--%>
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
-						<label class="Validform_label" style="display: none">发货运单号或车号</label>
+						<label class="Validform_label" style="display: none">运单号或车号</label>
 			          </div>
 
 								<div class="col-xs-1 text-center">
@@ -292,7 +292,7 @@
 								<div class="col-xs-2">
 
 									<t:dictSelect field="delvMethod" type="list" extendJson="{class:'form-control',style:'width:150px'}"
-												  typeGroupCode="dev_method"  defaultVal="${wmOmNoticeHPage.delvMethod}" title="订单类型"></t:dictSelect>
+												  typeGroupCode="tms_thfs"  defaultVal="${wmOmNoticeHPage.delvMethod}" title="送货方式"></t:dictSelect>
 									<span class="Validform_checktip" style="float:left;height:0px;"></span>
 									<label class="Validform_label" style="display: none">送货方式</label>
 								</div>
