@@ -7,19 +7,19 @@
  	        <button id="addBtn_WmOmNoticeI" type="button" class="btn btn-default">添加</button>
 <!-- 	        <button id="delBtn_WmOmNoticeI" type="button" class="btn btn-default">删除</button> -->
 	        <button id="sum_WmOmNoticeI" type="button" class="btn btn-default">合计和检查</button>
-	        <script type="text/javascript"> 
-			$('#addBtn_WmOmNoticeI').bind('click', function(){   
+	        <script type="text/javascript">
+			$('#addBtn_WmOmNoticeI').bind('click', function(){
 		 		 var tr =  $("#add_wmOmNoticeI_table_template tr").clone();
 			 	 $("#add_wmOmNoticeI_table").append(tr);
 			 	 resetTrNum('add_wmOmNoticeI_table');
 			 	 return false;
-		    });  
-			$('#delBtn_WmOmNoticeI').bind('click', function(){   
-		       $("#add_wmOmNoticeI_table").find("input:checked").parent().parent().remove();   
+		    });
+			$('#delBtn_WmOmNoticeI').bind('click', function(){
+		       $("#add_wmOmNoticeI_table").find("input:checked").parent().parent().remove();
 		        resetTrNum('add_wmOmNoticeI_table');
 		        return false;
 		    });
-			$('#sum_WmOmNoticeI').bind('click', function(){   
+			$('#sum_WmOmNoticeI').bind('click', function(){
 				trList = $("#add_wmOmNoticeI_table").children("tr");
 
 				 var heji = 0;
@@ -28,7 +28,7 @@
 				 for (var i=0;i<trList.length;i++) {
 				        var tdArr = trList.eq(i).find("td");
 				        var goods_code
-				        var strs= new Array(); //定义一数组 
+				        var strs= new Array(); //定义一数组
 				        try{
 				        	strs= tdArr.eq(1).find('input').val().split('-');//    合计
 						    goods_code = strs[0];
@@ -36,8 +36,8 @@
 				        	goods_code = tdArr.eq(1).find('input').val();
 				        }
 				      if(goods_code!=""){
-				    	  
-				      
+
+
 				        var dh1 = tdArr.eq(2).find('input').val();//    合计
 						var url = "wmOmNoticeHController.do?docheck&goodscode="+goods_code+"&goodsqua="+dh1;
 						$.ajax({
@@ -50,17 +50,17 @@
 							success : function(data) {
 								 var d = $.parseJSON(data);
 								if (d.success) {
-   
-								}else{		
+
+								}else{
 									msghe = msghe +"/" + d.msg;
-								}	
+								}
 							}
 						});
 				        dh = dh1;
 			             heji = heji*1 + dh*1;
 				      }
 				    }
-				 
+
 				 alert(msghe+"    合计:"+heji);
 
 			    });
@@ -74,7 +74,7 @@
 		</script>
 	      </div>
 	    </div>
-<div style="margin: 0 15px; background-color: white;">    
+<div style="margin: 0 15px; background-color: white;">
 	    <!-- Table -->
       <table id="wmOmNoticeI_table" class="table table-bordered table-hover" style="margin-bottom: 0;">
 		<thead>
@@ -107,29 +107,26 @@
 			  <%--</th>--%>
 	      </tr>
 	    </thead>
-        
-	<tbody id="add_wmOmNoticeI_table">	
+
+	<tbody id="add_wmOmNoticeI_table">
 	<c:if test="${fn:length(wmOmNoticeIList)  <= 0 }">
 			<tr>
 				<th scope="row"><div name="xh"></div></th>
 				<td><input style="width:20px;" type="checkbox" name="ck"/></td>
 				  <td>
-							  			  	<input id="wmOmNoticeIList[0].goodsId"  name="wmOmNoticeIList[0].goodsId" maxlength="32" 
+							  			  	<input id="wmOmNoticeIList[0].goodsId"  name="wmOmNoticeIList[0].goodsId" maxlength="32"
 									ignore="ignore"  onclick="popClickone('wmOmNoticeIList[0].goodsId','goodsName','mvGoodsController.do?list')"
 							  		type="text"    style="width:420px;text-align: left" >
-
-
-
 					  <label class="Validform_label" style="display: none;">出货商品</label>
 					</td>
 				  <td>
-					  	<input name="wmOmNoticeIList[0].goodsQua" maxlength="32" 
+					  	<input name="wmOmNoticeIList[0].goodsQua" maxlength="32"
 					  		type="text" class="form-control"  style="width:120px;" >
 					  <label class="Validform_label" style="display: none;">出货数量</label>
 					</td>
 									  <td>
-							<t:dictSelect field="wmOmNoticeIList[0].planSta" type="radio" extendJson="{class:'form-control',style:'width:150px'}"  
-										typeGroupCode="sf_yn" defaultVal="${wmOmNoticeHPage.planSta}" hasLabel="false"  title="下架任务是否已生成"></t:dictSelect>     
+							<t:dictSelect field="wmOmNoticeIList[0].planSta" type="radio" extendJson="{class:'form-control',style:'width:150px'}"
+										typeGroupCode="sf_yn" defaultVal="${wmOmNoticeHPage.planSta}" hasLabel="false"  title="下架任务是否已生成"></t:dictSelect>
 					  <label class="Validform_label" style="display: none;">下架任务是否已生成</label>
 					</td>
 
@@ -150,9 +147,9 @@
 					<%--<label class="Validform_label" style="display: none;">生产日期</label>--%>
 				<%--</td>--%>
    			</tr>
-   			
 
-   			
+
+
 	</c:if>
 	<c:if test="${fn:length(wmOmNoticeIList)  > 0 }">
 		<c:forEach items="${wmOmNoticeIList}" var="poVal" varStatus="stuts">
@@ -172,7 +169,7 @@
 					<input name="wmOmNoticeIList[${stuts.index }].goodsBatch" type="hidden" value="${poVal.goodsBatch }"/>
 					<input name="wmOmNoticeIList[${stuts.index }].goodsUnit" type="hidden" value="${poVal.goodsUnit }"/>
 					<input name="wmOmNoticeIList[${stuts.index }].goodsQuaok" type="hidden" value="${poVal.goodsQuaok }"/>
-					
+
 					<input name="wmOmNoticeIList[${stuts.index }].cusCode" type="hidden" value="${poVal.cusCode }"/>
 					<input name="wmOmNoticeIList[${stuts.index }].waveId" type="hidden" value="${poVal.waveId }"/>
 					<input name="wmOmNoticeIList[${stuts.index }].omSta" type="hidden" value="${poVal.omSta }"/>
@@ -184,7 +181,7 @@
 					<%--
 wmOmNoticeIList[${stuts.index }].goodsId<input name="wmOmNoticeIList[${stuts.index }].planSta" type="hidden" value="${poVal.planSta }"/> --%>
 
-					
+
 				   <td align="left">
 
 
@@ -195,7 +192,7 @@ wmOmNoticeIList[${stuts.index }].goodsId<input name="wmOmNoticeIList[${stuts.ind
 <%-- 					  		type="text" class="form-control"  style="width:120px;"  value="${poVal.goodsId }"> --%>
 					  		<%--<t:dictSelect field="wmOmNoticeIList[${stuts.index }].goodsId" type="list" extendJson="{class:'form-control',style:'width:350px'}"--%>
 														<%--dictTable="mv_goods" dictField="goods_code" dictText="goods_name" defaultVal="${poVal.goodsId }" hasLabel="false"  title="商品编码"></t:dictSelect>--%>
-					  		
+
 					  <label class="Validform_label" style="display: none;">出货商品</label>
 				   </td>
 				   <td align="left">
@@ -204,8 +201,8 @@ wmOmNoticeIList[${stuts.index }].goodsId<input name="wmOmNoticeIList[${stuts.ind
 					  <label class="Validform_label" style="display: none;">出货数量</label>
 				   </td>
 				   <td>
-							<t:dictSelect field="wmOmNoticeIList[${stuts.index }].planSta" type="radio" extendJson="{class:'form-control',style:'width:150px'}"  
-										typeGroupCode="sf_yn" defaultVal="${poVal.planSta}" hasLabel="false"  title="下架任务是否已生成"></t:dictSelect>     
+							<t:dictSelect field="wmOmNoticeIList[${stuts.index }].planSta" type="radio" extendJson="{class:'form-control',style:'width:150px'}"
+										typeGroupCode="sf_yn" defaultVal="${poVal.planSta}" hasLabel="false"  title="下架任务是否已生成"></t:dictSelect>
 					  <label class="Validform_label" style="display: none;">下架任务是否已生成</label>
 					</td>
 				<%--<td align="left">--%>
@@ -235,7 +232,7 @@ wmOmNoticeIList[${stuts.index }].goodsId<input name="wmOmNoticeIList[${stuts.ind
 <!-- 				   </td> -->
    			</tr>
 		</c:forEach>
-	</c:if>	
+	</c:if>
 	</tbody>
 </table>
 </div>
