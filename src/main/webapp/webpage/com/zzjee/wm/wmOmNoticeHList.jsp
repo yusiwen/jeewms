@@ -43,8 +43,8 @@
    <%--<t:dgFunOpt title="回写" funname="dopost(id)"  urlclass="ace_button"   exp="omSta#eq#已完成"   />--%>
 
    <t:dgFunOpt title="导出出库单" funname="printckd(id)"  urlclass="ace_button"  urlfont="fa-print" exp="omSta#ne#已删除"/>
-   <t:dgFunOpt title="打印出库单" funname="printoutstorage(id)"  urlclass="ace_button"  urlfont="fa-print" exp="omSta#ne#已删除"/>
-<%--   <t:dgFunOpt title="打印出库单" funname="printckdpage(id)"  urlclass="ace_button"  urlfont="fa-print" exp="omSta#ne#已删除"/>--%>
+<%--   <t:dgFunOpt title="打印出库单" funname="printoutstorage(id)"  urlclass="ace_button"  urlfont="fa-print" exp="omSta#ne#已删除"/>--%>
+   <t:dgFunOpt title="打印出库单" funname="printckdpage(id)"  urlclass="ace_button"  urlfont="fa-print" exp="omSta#ne#已删除"/>
     <%--<t:dgFunOpt title="装箱单" funname="printckd(id)"  urlclass="ace_button"  urlfont="	fa-print" exp="omSta#ne#已删除"/>--%>
    <t:dgToolBar title="录入" icon="icon-add" url="wmOmNoticeHController.do?goAdd&orderTypeCode=11" funname="add" width="100%" height="100%"></t:dgToolBar>
    <t:dgToolBar title="编辑" icon="icon-edit"  operationCode="omnoedit" url="wmOmNoticeHController.do?goUpdate" funname="update" width="100%" height="100%"></t:dgToolBar>

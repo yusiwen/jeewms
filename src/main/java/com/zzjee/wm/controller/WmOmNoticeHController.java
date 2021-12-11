@@ -1415,11 +1415,493 @@ public class WmOmNoticeHController extends BaseController {
 		}
 	}
 
-
-
 	@RequestMapping(params = "doPrintckd")
 	@ResponseBody
 	public void doPrintckd(WmOmNoticeHEntity wmOmNoticeH,
+						   HttpServletRequest request, HttpServletResponse response) {
+		OutputStream fileOut = null;
+		BufferedImage bufferImg = null;
+//		String codedFileName = null;
+		wmOmNoticeH = systemService.getEntity(WmOmNoticeHEntity.class,
+				wmOmNoticeH.getId());//获取抬头
+
+
+		// 先把读进来的图片放到一个ByteArrayOutputStream中，以便产生ByteArray
+		try {
+//			StringBuffer sber = new StringBuffer();
+
+			ByteArrayOutputStream byteArrayOut = new ByteArrayOutputStream();
+//			bufferImg = ImageIO.read(BarcodeUtil.generateToStream(wmImNoticeH
+//					.getNoticeId()));
+			bufferImg = QRcodeUtil.createImage(wmOmNoticeH
+					.getOmNoticeId());
+
+			// 进行转码，使其支持中文文件名
+//			codedFileName = java.net.URLEncoder.encode("中文", "UTF-8");
+			response.setHeader("content-disposition", "attachment;filename="
+					+ wmOmNoticeH.getOmNoticeId() + ".xls");
+			ImageIO.write(bufferImg, "jpg", byteArrayOut);
+
+			HSSFWorkbook wb = new HSSFWorkbook();
+			HSSFSheet sheet = wb.createSheet("出库单");
+			sheet.setMargin(HSSFSheet.TopMargin,0.1);// 页边距（上）
+			sheet.setMargin(HSSFSheet.BottomMargin,1.5);// 页边距（下）
+			sheet.setMargin(HSSFSheet.LeftMargin,0.3);// 页边距（左）
+			sheet.setMargin(HSSFSheet.RightMargin,0.0);// 页边距（右
+//			sheet.setDisplayGridlines(true);
+			//set print grid lines or not
+//			sheet.setPrintGridlines(true);
+			sheet.setColumnWidth(0, 5 * 256);
+			sheet.setColumnWidth(1, 15 * 256);
+			sheet.setColumnWidth(2, 25 * 256);
+			sheet.setColumnWidth(3, 11 * 256);
+			sheet.setColumnWidth(4, 5 * 256);
+			sheet.setColumnWidth(5, 5 * 256);
+			sheet.setColumnWidth(6, 7 * 256);
+			sheet.setColumnWidth(7, 7 * 256);
+			sheet.setColumnWidth(8, 9 * 256);
+			sheet.setColumnWidth(9, 7 * 256);
+			sheet.setColumnWidth(10, 3 * 256);
+			// sheet.setColumnWidth(6, 8 * 256);
+			// sheet.setColumnWidth(7, 8 * 256);
+			// sheet.setColumnWidth(8, 8 * 256);
+
+			// 创建两种单元格格式
+			CellStyle cs = wb.createCellStyle();
+			CellStyle cs1 = wb.createCellStyle();
+			CellStyle cs2 = wb.createCellStyle();
+			CellStyle cs3 = wb.createCellStyle();
+			CellStyle cs4 = wb.createCellStyle();
+			CellStyle cs5 = wb.createCellStyle();
+			CellStyle cs5r = wb.createCellStyle();
+
+			CellStyle cs51 = wb.createCellStyle();
+			CellStyle cs52 = wb.createCellStyle();
+			// 创建两种字体
+			Font f = wb.createFont();
+			Font f2 = wb.createFont();
+			Font f5 = wb.createFont();
+			// 创建第一种字体样式（用于列名）
+			f.setFontHeightInPoints((short) 16);
+			f.setColor(IndexedColors.BLACK.getIndex());
+			f.setBoldweight(Font.BOLDWEIGHT_BOLD);
+
+			// 创建第二种字体样式（用于值）
+			f2.setFontHeightInPoints((short) 10);
+			f2.setColor(IndexedColors.BLACK.getIndex());
+
+
+			f5.setFontHeightInPoints((short) 8);
+			f5.setColor(IndexedColors.BLACK.getIndex());
+
+			// 设置第一种单元格的样式（用于列名）
+			cs.setFont(f);
+			cs.setBorderLeft(CellStyle.BORDER_NONE);
+			cs.setBorderRight(CellStyle.BORDER_NONE);
+			cs.setBorderTop(CellStyle.BORDER_NONE);
+			cs.setBorderBottom(CellStyle.BORDER_NONE);
+			cs.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+
+			cs1.setFont(f2);
+			cs1.setBorderLeft(CellStyle.BORDER_NONE);
+			cs1.setBorderRight(CellStyle.BORDER_NONE);
+			cs1.setBorderTop(CellStyle.BORDER_NONE);
+			cs1.setBorderBottom(CellStyle.BORDER_NONE);
+			cs1.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+
+			cs1.setWrapText(true);
+			// 设置第二种单元格的样式（用于值）
+			cs2.setFont(f2);
+			cs2.setBorderLeft(CellStyle.BORDER_NONE);
+			cs2.setBorderRight(CellStyle.BORDER_NONE);
+			cs2.setBorderTop(CellStyle.BORDER_NONE);
+			cs2.setBorderBottom(CellStyle.BORDER_NONE);
+			cs2.setWrapText(true);
+
+			// cs2.setAlignment(CellStyle.BORDER_NONE);
+
+			cs3.setFont(f2);
+			cs3.setBorderLeft(CellStyle.BORDER_MEDIUM);
+			cs3.setBorderRight(CellStyle.BORDER_MEDIUM);
+			cs3.setBorderTop(CellStyle.BORDER_MEDIUM);
+			cs3.setBorderBottom(CellStyle.BORDER_MEDIUM);
+			// cs3.setAlignment(CellStyle.BORDER_HAIR);
+			cs4.setFont(f2);
+			cs4.setBorderTop(CellStyle.BORDER_MEDIUM);
+			cs4.setBorderBottom(CellStyle.BORDER_MEDIUM);
+
+			cs5.setFont(f2);
+			cs5.setBorderLeft(CellStyle.BORDER_THIN);
+			cs5.setBorderRight(CellStyle.BORDER_THIN);
+			cs5.setBorderTop(CellStyle.BORDER_THIN);
+			cs5.setBorderBottom(CellStyle.BORDER_THIN);
+			cs5.setWrapText(true);
+
+
+			cs5r.setFont(f2);
+			cs5r.setBorderLeft(CellStyle.BORDER_THIN);
+			cs5r.setBorderRight(CellStyle.BORDER_THIN);
+			cs5r.setBorderTop(CellStyle.BORDER_THIN);
+			cs5r.setBorderBottom(CellStyle.BORDER_THIN);
+			cs5r.setWrapText(true);
+			cs5r.setAlignment(CellStyle.ALIGN_RIGHT);
+			cs51.setFont(f2);
+			cs51.setBorderLeft(CellStyle.BORDER_THIN);
+			cs51.setBorderRight(CellStyle.BORDER_THIN);
+			cs51.setBorderTop(CellStyle.BORDER_THIN);
+			cs51.setBorderBottom(CellStyle.BORDER_THIN);
+			cs51.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+
+			cs51.setWrapText(true);
+
+			cs52.setFont(f5);
+			cs52.setBorderLeft(CellStyle.BORDER_NONE);
+			cs52.setBorderRight(CellStyle.BORDER_NONE);
+			cs52.setBorderTop(CellStyle.BORDER_NONE);
+			cs52.setBorderBottom(CellStyle.BORDER_NONE);
+			cs52.setAlignment(HSSFCellStyle.ALIGN_CENTER);
+
+			cs52.setWrapText(true);
+			cs52.setRotation((short)255);
+
+			int page = 0;
+			int cerconNo = 1;
+//			String tsql = "SELECT wq.pro_data,wq.base_unit,wq.rec_deg, mg.goods_code, mg.goods_id,mg.shp_ming_cheng,cast(sum(wq.base_goodscount) as signed) as goods_count,cast(sum(wq.tin_tj) as signed) tin_tj ,cast(sum(wq.tin_zhl)  as signed) tin_zhl "
+//					+" FROM wm_om_qm_i wq,mv_goods mg where wq.om_notice_id = ? "
+//					+" and  wq.goods_id = mg.goods_code group by wq.om_notice_id, mg.goods_code,wq.pro_data";
+			String tsql = "SELECT wq.goods_pro_data as pro_data,wq.base_unit, mg.goods_code, mg.goods_id,mg.shp_ming_cheng,cast(sum(wq.base_goodscount) as signed) as goods_count,mg.chl_shl,cast(mg.ti_ji_cm/mg.chl_shl as signed) tin_tj ,(mg.zhl_kg/mg.chl_shl ) as tin_zhl  "
+					+" FROM wm_to_down_goods wq,mv_goods mg where wq.order_id =  ? "
+					+" and  wq.goods_id = mg.goods_code group by wq.order_id, mg.goods_code,wq.goods_pro_data";
+
+			List<Map<String, Object>> result = systemService
+					.findForJdbc(tsql, wmOmNoticeH.getOmNoticeId());
+
+
+			int size = result.size();
+			if(size<1){
+				tsql = "SELECT wq.pro_data,wq.base_unit, mg.goods_code, mg.goods_id,mg.shp_ming_cheng,cast(sum(wq.base_goodscount) as signed) as goods_count,mg.chl_shl,cast(mg.ti_ji_cm/mg.chl_shl as signed) tin_tj , (mg.zhl_kg/mg.chl_shl)  as   tin_zhl "
+						+" FROM wm_om_qm_i wq,mv_goods mg where wq.om_notice_id = ? "
+						+" and  wq.goods_id = mg.goods_code group by wq.om_notice_id, mg.goods_code,wq.pro_data";
+				result = systemService
+						.findForJdbc(tsql, wmOmNoticeH.getOmNoticeId());
+				size = result.size();
+			}
+			int pagesize = 10;
+			int pagecount = size%pagesize==0?size/pagesize:size/pagesize+1;
+			double sum = 0;
+			double sumxs = 0;
+			double sumzl = 0;
+			do {
+
+				// 画图的顶级管理器，一个sheet只能获取一个（一定要注意这点）
+				HSSFPatriarch patriarch = sheet.createDrawingPatriarch();
+				// anchor主要用于设置图片的属性
+				HSSFClientAnchor anchor = new HSSFClientAnchor(0, 0, 0, 0,
+						(short) 8, page*20+1, (short) 10, page*20+5);
+				anchor.setAnchorType(2);
+				// 插入图片
+				patriarch
+						.createPicture(anchor, wb.addPicture(
+								byteArrayOut.toByteArray(),
+								HSSFWorkbook.PICTURE_TYPE_JPEG));
+
+				// 创建第一行
+				Row row = sheet.createRow((short) page*20+0); // 第一行空白
+
+
+				Row row1 = sheet.createRow((short) page*20+1); // 第二行标题
+				row1.setHeight((short) 700);
+				Cell cellTitle = row1.createCell(0);
+				cellTitle.setCellValue(ResourceUtil.getConfigByName("comname")+"出库单");
+				cellTitle.setCellStyle(cs);
+
+				Row rowHead1 = sheet.createRow((short) page*20+2); // 头部第一行
+				Cell cellHead1 = rowHead1.createCell(0);
+				cellHead1.setCellValue("公司地址："+ResourceUtil.getConfigByName("comaddr") );
+				cellHead1.setCellStyle(cs1);
+
+				Row rowHead2 = sheet.createRow((short) page*20+3); // 头部第二行
+				Cell cellHead2 = rowHead2.createCell(0);
+				cellHead2.setCellValue("电话："+ ResourceUtil.getConfigByName("comtel"));
+				cellHead2.setCellStyle(cs1);
+
+
+				Row rowHead4 = sheet.createRow((short) page*20+4); // 头部第二行
+				Cell cellHead4 = rowHead4.createCell(0);
+				cellHead4.setCellValue("出库日期： " +DateUtils.date2Str(wmOmNoticeH.getDelvData(), DateUtils.date_sdf) );
+				cellHead4.setCellStyle(cs2);
+
+				Cell cellHead42 = rowHead4.createCell(3);
+				cellHead42.setCellValue("出库单号： " +wmOmNoticeH.getOmNoticeId());
+				cellHead42.setCellStyle(cs2);
+
+				Row rowHead5 = sheet.createRow((short) page*20+5); // 头部第二行
+				Cell cellHead5 = rowHead5.createCell(0);
+				cellHead5.setCellValue("客户单号： " );
+				cellHead5.setCellStyle(cs2);
+
+				Cell cellHead52 = rowHead5.createCell(3);
+				cellHead52.setCellValue("车号： " +wmOmNoticeH.getReCarno());
+				cellHead52.setCellStyle(cs2);
+
+				Row rowHead6 = sheet.createRow((short) page*20+6); // 头部第二行
+				Cell cellHead6 = rowHead6.createCell(0);
+				MdCusEntity md = systemService.findUniqueByProperty(MdCusEntity.class, "keHuBianMa", wmOmNoticeH.getCusCode());
+
+				cellHead6.setCellValue("客户名称： " +wmOmNoticeH.getCusCode()+md.getZhongWenQch());
+				cellHead6.setCellStyle(cs2);
+
+				Cell cellHead62 = rowHead6.createCell(3);
+				cellHead62.setCellValue("收货人： "+wmOmNoticeH.getDelvMember()+"   电话:"+wmOmNoticeH.getDelvMobile() );
+				cellHead62.setCellStyle(cs2);
+
+				Row rowHead7 = sheet.createRow((short) page*20+7); // 头部第二行
+				Cell cellHead7 = rowHead7.createCell(0);
+				cellHead7.setCellValue("收货地址： " +wmOmNoticeH.getDelvAddr());
+				cellHead7.setCellStyle(cs2);
+
+				Cell cellHead72 = rowHead7.createCell(5);
+				cellHead72.setCellValue("打印时间： "+DateUtils.date2Str(DateUtils.getDate(), DateUtils.datetimeFormat) +"   第"+(page+1)+"页");
+				cellHead72.setCellStyle(cs2);
+
+
+				// 合并单元格
+				CellRangeAddress c = new CellRangeAddress(page*20+0, page*20+0, 0, 9); // 第一行空白
+				CellRangeAddress c1 = new CellRangeAddress(page*20+1, page*20+1, 0, 8);// 第二行标题
+				CellRangeAddress c2 = new CellRangeAddress(page*20+2, page*20+2, 0, 9);// 第三行地址
+				CellRangeAddress c3 = new CellRangeAddress(page*20+3, page*20+3, 0, 9);// 第四行电话
+
+				CellRangeAddress c4 = new CellRangeAddress(page*20+4, page*20+4, 0, 2);// 第5行 到货日期
+				CellRangeAddress c42 = new CellRangeAddress(page*20+4, page*20+4, 3, 9);// 第5行预约单号
+				CellRangeAddress c5 = new CellRangeAddress(page*20+5, page*20+5, 0, 2);// 第6行客户采购单号
+				CellRangeAddress c52 = new CellRangeAddress(page*20+5, page*20+5, 3, 9);// 第6行月台
+				CellRangeAddress c6 = new CellRangeAddress(page*20+6, page*20+6, 0, 2);// 第7行客户名称
+				CellRangeAddress c62 = new CellRangeAddress(page*20+6, page*20+6, 3, 9);// 第7行车号
+				CellRangeAddress c7 = new CellRangeAddress(page*20+7, page*20+7, 0, 4);//第7行客户电话
+				CellRangeAddress c72 = new CellRangeAddress(page*20+7, page*20+7, 5, 9);//第7行打印时间
+				sheet.addMergedRegion(c);
+				sheet.addMergedRegion(c1);
+				sheet.addMergedRegion(c2);
+				sheet.addMergedRegion(c3);
+				sheet.addMergedRegion(c4);
+				sheet.addMergedRegion(c5);
+				sheet.addMergedRegion(c6);
+				sheet.addMergedRegion(c7);
+				sheet.addMergedRegion(c42);
+				sheet.addMergedRegion(c52);
+				sheet.addMergedRegion(c62);
+				sheet.addMergedRegion(c72);
+
+				Cell cell73 = row.createCell(10);
+				cell73.setCellValue("① 财务联 ② 客户联 ③司机联 ④回单联                                   ");
+				cell73.setCellStyle(cs52);
+
+
+				CellRangeAddress c73 = new CellRangeAddress(page*20, page*20+19, 10, 10);//第7行打印时间
+				sheet.addMergedRegion(c73);
+
+				Row rowColumnName = sheet.createRow((short) page*20+8); // 列名
+				String[] columnNames = { "序号", "商品编码", "商品名称", "生产日期", "品质","箱数", "拆零数", "毛重/KG","体积/cm³","备注" };
+				try{
+					if("hr".equals(ResourceUtil.getConfigByName("wm.ckd"))){
+//						String[]  columnNames1 = { "序号", "商品编码", "商品名称", "生产日期", "品质","箱数", "拆零数", "毛重/KG","库存","备注" };
+						String[]  columnNames1 = { "序号", "商品编码", "商品名称", "生产日期", "品质","箱数", "拆零数", "毛重/KG","库存","备注" };
+
+						columnNames = columnNames1;
+					}
+				}catch ( Exception e){
+					logger.error(ExceptionUtil.getExceptionMessage(e));
+				}
+
+
+				for (int i = 0; i < columnNames.length; i++) {
+					Cell cell = rowColumnName.createCell(i);
+					cell.setCellValue(columnNames[i]);
+					cell.setCellStyle(cs3);
+				}
+
+
+				int cellsNum = page*20+8;
+				int oversize = 0;
+				if(size==pagesize&&page==pagecount-1){
+					oversize = 1;
+				}
+				for (int i = page*pagesize; i < (page+1)*pagesize+oversize; i++) {
+					if(i< size){
+
+						cellsNum++;
+						Row rowColumnValue = sheet.createRow((short) cellsNum); // 列名
+						rowColumnValue.setHeight((short) 250);
+
+						Cell cell1 = rowColumnValue.createCell(0);
+						cell1.setCellValue(cerconNo);
+						cell1.setCellStyle(cs51);
+						Cell cell2 = rowColumnValue.createCell(1);
+						cell2.setCellValue(result.get(i).get("goods_id")
+								.toString());
+						cell2.setCellStyle(cs5);
+
+						Cell cell3 = rowColumnValue.createCell(2);
+						cell3.setCellValue(result.get(i).get("shp_ming_cheng")
+								.toString());
+						cell3.setCellStyle(cs5);
+						try {
+							Cell cell4 = rowColumnValue.createCell(3);// 生产日期
+
+
+
+							cell4.setCellValue(result.get(i).get("pro_data")
+									.toString());
+
+
+							cell4.setCellStyle(cs5r);
+						} catch (Exception e) {
+							// TODO: handle exception
+							logger.error(ExceptionUtil.getExceptionMessage(e));
+						}
+
+						try {
+							Cell cell5 = rowColumnValue.createCell(4);// 品质
+							cell5.setCellValue("");
+							cell5.setCellStyle(cs5);
+						} catch (Exception e) {
+							// TODO: handle exception
+							logger.error(ExceptionUtil.getExceptionMessage(e));
+						}
+
+						try {
+
+							long  xs = (long) Math.floor(Double.parseDouble(result.get(i).get("goods_count")
+									.toString()) / Double.parseDouble(result.get(i).get("chl_shl")
+									.toString()));
+							sumxs = sumxs  + xs;
+							Cell cell6 = rowColumnValue.createCell(5);// 单位
+							cell6.setCellValue(xs);
+							cell6.setCellStyle(cs5);
+						} catch (Exception e) {
+							// TODO: handle exception
+							logger.error(ExceptionUtil.getExceptionMessage(e));
+						}
+
+						try {
+							double bs =						  Double.parseDouble(result.get(i).get("goods_count")
+									.toString()) % Double.parseDouble(result.get(i).get("chl_shl")
+									.toString());
+							sum = sum + bs;
+							Cell cell7 = rowColumnValue.createCell(6);// 数量
+							cell7.setCellValue(bs);
+							cell7.setCellStyle(cs5);
+						} catch (Exception e) {
+							// TODO: handle exception
+							logger.error(ExceptionUtil.getExceptionMessage(e));
+						}
+						Cell cell8 = rowColumnValue.createCell(7);// 毛重
+						try {
+
+							double zhl = Double.parseDouble(result.get(i).get("tin_zhl")
+									.toString()) * Double.parseDouble(result.get(i).get("goods_count").toString());
+							sumzl = sumzl + zhl;
+							cell8.setCellValue(zhl);
+
+						} catch (Exception e) {
+							// TODO: handle exception
+							logger.error(ExceptionUtil.getExceptionMessage(e));
+						}
+						cell8.setCellStyle(cs5);
+						Cell cell9 = rowColumnValue.createCell(8);// 体积
+//						try {
+//							double tij = Double.parseDouble(result.get(i).get("tin_tj")
+//									.toString()) * Double.parseDouble(result.get(i).get("goods_count").toString());
+//
+//
+//							cell9.setCellValue(tij);
+//
+//						} catch (Exception e) {
+//							// TODO: handle exception
+//						}
+
+						try{
+							if("hr".equals(ResourceUtil.getConfigByName("wm.ckd"))) {
+								cell9.setCellValue(wmUtil.getstock(result.get(i).get("goods_id").toString()));
+							}
+						}catch (Exception e){
+							logger.error(ExceptionUtil.getExceptionMessage(e));
+						}
+
+
+						cell9.setCellStyle(cs5);
+
+						Cell cell10 = rowColumnValue.createCell(9);// 备注
+
+
+						cell10.setCellStyle(cs5);
+
+						cerconNo++;
+					}
+					if(i== size){
+
+						cellsNum++;
+						Row rowColumnValue = sheet.createRow((short) cellsNum); // 列名
+						rowColumnValue.setHeight((short) 250);
+						Cell cell5 = rowColumnValue.createCell(5);// 备注
+						cell5.setCellValue(Double.toString(sumxs));
+						Cell cell6 = rowColumnValue.createCell(6);// 备注
+						cell6.setCellValue(Double.toString(sum));
+						Cell cell7 = rowColumnValue.createCell(7);// 重量合计
+						cell7.setCellValue(Double.toString(sumzl));
+//				cell6.setCellStyle(cs5);
+						Cell cell0 = rowColumnValue.createCell(0);// 合计
+						cell0.setCellValue("合计：");
+//				cell0.setCellStyle(cs5);
+						CellRangeAddress c15 = new CellRangeAddress( cellsNum,
+								cellsNum, 0, 4);
+						sheet.addMergedRegion(c15);
+						cerconNo++;
+
+					}
+
+
+				}
+				Row rowColumnInfo = sheet.createRow((short) 1 + cellsNum); // 列名
+				rowColumnInfo.setHeight((short) 250);
+				rowColumnInfo.createCell(0).setCellValue(
+						"  发货人员：                               配送司机：                               收货人员：	");
+				CellRangeAddress c15 = new CellRangeAddress(1 + cellsNum,
+						1 + cellsNum, 0, 9);
+				sheet.addMergedRegion(c15);
+
+				Row rowColumnInfo2 = sheet.createRow((short) 2 + cellsNum); // 列名
+				rowColumnInfo2.setHeight((short) 250);
+				rowColumnInfo2.createCell(0).setCellValue(
+						"  发货时间：                               收货时间：                               收货单位盖章：	");
+				CellRangeAddress c152 = new CellRangeAddress(2 + cellsNum,
+						2 + cellsNum, 0, 9);
+				sheet.addMergedRegion(c152);
+				page++;
+			} while (page<pagecount);
+			fileOut = response.getOutputStream();
+			HSSFPrintSetup printSetup = sheet.getPrintSetup();
+			printSetup.setPaperSize(HSSFPrintSetup.A5_PAPERSIZE);
+
+			wb.write(fileOut);
+		} catch (Exception e) {
+			e.printStackTrace();
+			logger.error(ExceptionUtil.getExceptionMessage(e));
+		} finally {
+			if (fileOut != null) {
+				try {
+					fileOut.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+					logger.error(ExceptionUtil.getExceptionMessage(e));
+				}
+			}
+		}
+	}
+
+	@RequestMapping(params = "doPrintckdsxlq")
+	@ResponseBody
+	public void doPrintckdsxlq(WmOmNoticeHEntity wmOmNoticeH,
 						   HttpServletRequest request, HttpServletResponse response) {
 		OutputStream fileOut = null;
 		BufferedImage bufferImg = null;
