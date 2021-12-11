@@ -2307,6 +2307,15 @@ public class WmImNoticeHController extends BaseController {
                 }
             }
             //
+            //获取供应商
+            if(StringUtil.isNotEmpty(wmImNoticeH.getSupName())){
+                try{
+                    MdSupEntity mdSupEntity = systemService.findUniqueByProperty(MdSupEntity.class,"zhongWenQch",wmImNoticeH.getSupName());
+                    wmImNoticeH.setSupCode(mdSupEntity.getGysBianMa());
+                }catch (Exception e){
+                }
+            }
+            //
             List<WmImNoticeIEntity> wmImNoticeIListnew = new ArrayList<WmImNoticeIEntity>();
             for (WmImNoticeIEntity wmImNoticeIEntity : wmImNoticeIList) {
                 if(!StringUtil.isEmpty(wmImNoticeIEntity.getGoodsCode())){

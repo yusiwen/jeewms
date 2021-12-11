@@ -168,6 +168,7 @@
 
     <input type="hidden" id="btn_sub" class="btn_sub"/>
     <input type="hidden" id="cuscodeh" name="cuscodeh"/>
+    								<input type="hidden"  id="supCode" name="supCode" type="text" class="form-control"/>
 
     <div class="tab-wrapper">
         <!-- tab -->
@@ -244,10 +245,15 @@
                         <b>供应商：</b>
                     </div>
 					<div class="col-xs-2">
+                        <input id="supName" name="supName" type="text" class="form-control"
+                               ignore="ignore"
+                               onclick="popClickone('supName','zhongWenQch','mdSupController.do?listsel')"
+                        />
 
-					<t:dictSelect field="supCode" type="list" extendJson="  {class:'form-control',style:'width:230px'}"
-                                  dictTable="md_sup" dictField="GYS_BIAN_MA" dictText="ZHONG_WEN_QCH" hasLabel="false"
-                                  title="供应商"></t:dictSelect>
+
+<%--					<t:dictSelect field="supCode" type="list" extendJson="  {class:'form-control',style:'width:230px'}"--%>
+<%--                                  dictTable="md_sup" dictField="GYS_BIAN_MA" dictText="ZHONG_WEN_QCH" hasLabel="false"--%>
+<%--                                  title="供应商"></t:dictSelect>--%>
 					</div>
                     <div class="col-xs-1 text-center">
                         <b>预约库区：</b>
@@ -276,7 +282,6 @@
                     <%--			          	<b>供应商名称：</b>--%>
                     <%--			          </div>--%>
                     <%--			          <div class="col-xs-2">--%>
-                    <%--								<input id="supName" name="supName" type="text" class="form-control"--%>
                     <%--									ignore="ignore"--%>
                     <%--								   />--%>
                     <%--						<span class="Validform_checktip" style="float:left;height:0px;"></span>--%>

@@ -78,17 +78,21 @@ public class MdSupController extends BaseController {
 
 	/**
 	 * 供应商列表 页面跳转
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "list")
 	public ModelAndView list(HttpServletRequest request) {
 		return new ModelAndView("com/zzjee/md/mdSupList");
 	}
+	@RequestMapping(params = "listsel")
+	public ModelAndView listsel(HttpServletRequest request) {
+		return new ModelAndView("com/zzjee/md/mdSupselList");
+	}
 
 	/**
 	 * easyui AJAX请求数据
-	 * 
+	 *
 	 * @param request
 	 * @param response
 	 * @param dataGrid
@@ -114,7 +118,7 @@ public class MdSupController extends BaseController {
 
 	/**
 	 * 删除供应商
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "doDel")
@@ -139,7 +143,7 @@ public class MdSupController extends BaseController {
 
 	/**
 	 * 批量删除供应商
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "doBatchDel")
@@ -167,7 +171,7 @@ public class MdSupController extends BaseController {
 
 	/**
 	 * 添加供应商
-	 * 
+	 *
 	 * @param ids
 	 * @return
 	 */
@@ -221,7 +225,7 @@ public class MdSupController extends BaseController {
 	}
 	/**
 	 * 更新供应商
-	 * 
+	 *
 	 * @param ids
 	 * @return
 	 */
@@ -248,7 +252,7 @@ public class MdSupController extends BaseController {
 
 	/**
 	 * 供应商新增页面跳转
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "goAdd")
@@ -262,7 +266,7 @@ public class MdSupController extends BaseController {
 
 	/**
 	 * 供应商编辑页面跳转
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "goUpdate")
@@ -276,7 +280,7 @@ public class MdSupController extends BaseController {
 
 	/**
 	 * 导入功能跳转
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "upload")
@@ -287,7 +291,7 @@ public class MdSupController extends BaseController {
 
 	/**
 	 * 导出excel
-	 * 
+	 *
 	 * @param request
 	 * @param response
 	 */
@@ -310,7 +314,7 @@ public class MdSupController extends BaseController {
 
 	/**
 	 * 导出excel 使模板
-	 * 
+	 *
 	 * @param request
 	 * @param response
 	 */

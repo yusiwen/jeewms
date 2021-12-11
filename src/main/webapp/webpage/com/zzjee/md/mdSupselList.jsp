@@ -3,7 +3,7 @@
 <t:base type="jquery,easyui,tools,DatePicker"></t:base>
 <div class="easyui-layout" fit="true">
   <div region="center" style="padding:0px;border:0px">
-  <t:datagrid name="mdSupList" checkbox="true" pagination="true" fitColumns="false" title="供应商" actionUrl="mdSupController.do?datagrid" idField="id" fit="false" queryMode="group">
+  <t:datagrid name="mdSupList" checkbox="true" pagination="true" fitColumns="true" title="供应商" actionUrl="mdSupController.do?datagrid" idField="id" fit="false" queryMode="group">
     <t:dgCol title="主键"  field="id"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
     <t:dgCol title="创建人"  field="createName"   hidden="true"    queryMode="group"  width="50"></t:dgCol>
     <t:dgCol title="创建人登录名称"  field="createBy"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
@@ -21,7 +21,7 @@
     <t:dgCol title="曾用企业代码"  field="zengYongQi"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
     <t:dgCol title="曾用企业名称"  field="zengYongQiYe"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
     <t:dgCol title="停用"  field="gysZhuangTai"  hidden="true"  queryMode="group" dictionary="sf_yn" width="120"></t:dgCol>
-    <t:dgCol title="企业属性"  field="xingYeFenLei"    queryMode="group" dictionary="ba_com_type,com_type_code,com_type_name"  width="120"></t:dgCol>
+<%--    <t:dgCol title="企业属性"  field="xingYeFenLei"    queryMode="group" dictionary="ba_com_type,com_type_code,com_type_name"  width="120"></t:dgCol>--%>
     <t:dgCol title="供应商等级"  field="gysDengJi"  hidden="true"  queryMode="group" dictionary="ba_com_deg,com_deg_code,com_deg_name"  width="120"></t:dgCol>
     <t:dgCol title="所属行业"  field="suoShuXingYe"  hidden="true"  queryMode="group" dictionary="ba_classfl,classfl_code,classfl_name"  width="120"></t:dgCol>
     <t:dgCol title="首签日期"  field="shouQianRiQi" formatter="yyyy-MM-dd" hidden="true"  queryMode="group"  width="120"></t:dgCol>
@@ -32,13 +32,13 @@
     <t:dgCol title="归属省份代码"  field="guiShuSheng"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
     <t:dgCol title="归属市代码"  field="guiShuShiDai"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
     <t:dgCol title="归属县区代码"  field="guiShu"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
-    <t:dgCol title="地址"  field="diZhi"    queryMode="group"  width="200"></t:dgCol>
+<%--    <t:dgCol title="地址"  field="diZhi"    queryMode="group"  width="200"></t:dgCol>--%>
     <t:dgCol title="邮政编码"  field="youZhengBianMa"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
-    <t:dgCol title="主联系人"  field="zhuLianXiRen"    queryMode="group"  width="70"></t:dgCol>
-    <t:dgCol title="电话"  field="dianHua"    queryMode="group"  width="70"></t:dgCol>
-    <t:dgCol title="手机"  field="shouJi"    queryMode="group"  width="70"></t:dgCol>
+<%--    <t:dgCol title="主联系人"  field="zhuLianXiRen"    queryMode="group"  width="70"></t:dgCol>--%>
+<%--    <t:dgCol title="电话"  field="dianHua"    queryMode="group"  width="70"></t:dgCol>--%>
+<%--    <t:dgCol title="手机"  field="shouJi"    queryMode="group"  width="70"></t:dgCol>--%>
     <t:dgCol title="传真"  field="chuanZhen"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
-    <t:dgCol title="Email地址"  field="emaildiZhi"    queryMode="group"  width="70"></t:dgCol>
+<%--    <t:dgCol title="Email地址"  field="emaildiZhi"    queryMode="group"  width="70"></t:dgCol>--%>
     <t:dgCol title="网页地址"  field="wangYeDiZhi"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
     <t:dgCol title="法人代表"  field="faRenDaiBiao"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
     <t:dgCol title="法人身份证号"  field="faRenShenFen"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
@@ -53,18 +53,18 @@
     <t:dgCol title="批准机关"  field="piZhunJiGuan"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
     <t:dgCol title="批准文号"  field="piZhunWenHao"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
     <t:dgCol title="注册日期"  field="zhuCeRiQi" formatter="yyyy-MM-dd" hidden="true"  queryMode="group"  width="120"></t:dgCol>
-    <t:dgCol title="备注"  field="beiZhu"    queryMode="group"  width="120"></t:dgCol>
-    <t:dgCol title="操作" field="opt" width="100"></t:dgCol>
-    <t:dgDelOpt title="删除" url="mdSupController.do?doDel&id={id}" urlclass="ace_button"  urlfont="fa-trash-o"/>
-   <t:dgToolBar title="录入" icon="icon-add" url="mdSupController.do?goAdd" funname="add"></t:dgToolBar>
-   <t:dgToolBar title="审核" icon="icon-edit" url="mdSupController.do?goUpdate" funname="update"></t:dgToolBar>
+<%--    <t:dgCol title="备注"  field="beiZhu"    queryMode="group"  width="120"></t:dgCol>--%>
+<%--    <t:dgCol title="操作" field="opt" width="100"></t:dgCol>--%>
+<%--    <t:dgDelOpt title="删除" url="mdSupController.do?doDel&id={id}" urlclass="ace_button"  urlfont="fa-trash-o"/>--%>
+<%--   <t:dgToolBar title="录入" icon="icon-add" url="mdSupController.do?goAdd" funname="add"></t:dgToolBar>--%>
+<%--   <t:dgToolBar title="审核" icon="icon-edit" url="mdSupController.do?goUpdate" funname="update"></t:dgToolBar>--%>
 <%--    <t:dgToolBar title="批量删除"  icon="icon-remove" url="mdSupController.do?doBatchDel" funname="deleteALLSelect"></t:dgToolBar> --%>
-   <t:dgToolBar title="查看" icon="icon-search" url="mdSupController.do?goUpdate" funname="detail"></t:dgToolBar>
-    <t:dgToolBar operationCode="uasimpcus" title="第三方系统导入" icon="icon-put" funname="otherimp"></t:dgToolBar>
+<%--   <t:dgToolBar title="查看" icon="icon-search" url="mdSupController.do?goUpdate" funname="detail"></t:dgToolBar>--%>
+<%--    <t:dgToolBar operationCode="uasimpcus" title="第三方系统导入" icon="icon-put" funname="otherimp"></t:dgToolBar>--%>
 
-    <t:dgToolBar title="导入" icon="icon-put" funname="ImportXls"></t:dgToolBar>
-   <t:dgToolBar title="导出" icon="icon-putout" funname="ExportXls"></t:dgToolBar>
-   <t:dgToolBar title="模板下载" icon="icon-putout" funname="ExportXlsByT"></t:dgToolBar>
+<%--    <t:dgToolBar title="导入" icon="icon-put" funname="ImportXls"></t:dgToolBar>--%>
+<%--   <t:dgToolBar title="导出" icon="icon-putout" funname="ExportXls"></t:dgToolBar>--%>
+<%--   <t:dgToolBar title="模板下载" icon="icon-putout" funname="ExportXlsByT"></t:dgToolBar>--%>
   </t:datagrid>
     <div name="searchColums1" style="float: left; padding-left: 0px;padding-top: 5px;">
       <%--<input type="text" name="batchbin" style="width: 100px; height: 30px;">--%>
