@@ -183,7 +183,7 @@
 			<c:forEach items="${listitem}" var="poVal" varStatus="stuts">
 
 				<tr  style='mso-height-source:userset;height:30px'>
-					<td class=xl65 style='border:1.0pt solid black;text-align: center'><span style="font-size: 18pt">${poVal.item01 }</span>　</td>
+					<td class=xl65 style='border:1.0pt solid black;text-align: center;word-break:break-all;'><span style="font-size: 18pt">${poVal.item01 }</span>　</td>
 						<%--<td height=33 class=xl65 style='height:25.05pt;border:1.0pt solid black;text-align: center'>${poVal.goodsCode }</td>--%>
 					<td class=xl65 style='border:1.0pt solid black;text-align: center;word-break:break-all;'><span style="font-size: 18pt">${poVal.item02 }</span></td>
 					<td class=xl65 style='border:1.0pt solid black;text-align: center'><span style="font-size: 18pt">${poVal.item11}</span></td>
