@@ -416,17 +416,21 @@ public class RpPeriodInOutEntity implements java.io.Serializable {
 	}
 
 
-	@Column(name ="SUP_CODE",nullable=true,length=32)
-	public java.lang.String getSupCode() {
+	@Column(name ="sup_code",nullable=true,length=32)
+	public String getSupCode() {
 		return supCode;
 	}
 
-	public void setSupCode(java.lang.String supCode) {
+	public void setSupCode(String supCode) {
 		this.supCode = supCode;
 	}
-	@Column(name ="SUP_NAME",nullable=true,length=32)
-	public java.lang.String getSupName() {
+
+	@Column(name ="sup_name",nullable=true,length=32)
+	public String getSupName() {
 		return supName;
 	}
 
+	public void setSupName(String supName) {
+		this.supName = supName;
+	}
 }
