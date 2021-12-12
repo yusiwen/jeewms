@@ -18,12 +18,12 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.SequenceGenerator;
 import org.jeecgframework.poi.excel.annotation.Excel;
 
-/**   
+/**
  * @Title: Entity
  * @Description: 期间出货统计
  * @author onlineGenerator
  * @date 2019-01-17 12:55:46
- * @version V1.0   
+ * @version V1.0
  *
  */
 @Entity
@@ -83,7 +83,12 @@ public class RpPeriodInOutEntity implements java.io.Serializable {
 	/**现库存*/
 	@Excel(name="现库存")
 	private String goodsNow;
-	
+	@Excel(name="供应商编码")
+	private java.lang.String supCode;
+	/**附件*/
+
+	@Excel(name="供应商名称")
+	private java.lang.String supName;
 	/**
 	 *方法: 取得java.lang.Integer
 	 *@return: java.lang.Integer  主键
@@ -409,4 +414,19 @@ public class RpPeriodInOutEntity implements java.io.Serializable {
 	public void setGoodsNow(String goodsNow){
 		this.goodsNow = goodsNow;
 	}
+
+
+	@Column(name ="SUP_CODE",nullable=true,length=32)
+	public java.lang.String getSupCode() {
+		return supCode;
+	}
+
+	public void setSupCode(java.lang.String supCode) {
+		this.supCode = supCode;
+	}
+	@Column(name ="SUP_NAME",nullable=true,length=32)
+	public java.lang.String getSupName() {
+		return supName;
+	}
+
 }

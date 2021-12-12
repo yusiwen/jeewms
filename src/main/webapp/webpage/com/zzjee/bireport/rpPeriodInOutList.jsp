@@ -27,6 +27,12 @@
     <t:dgCol title="期末数量"  field="goodsQm"    queryMode="single"  width="120"></t:dgCol>
 
     <t:dgCol title="现库存"  field="goodsNow"    queryMode="single"  width="120"></t:dgCol>
+
+
+    <t:dgCol title="供应商编号"  field="supCode"   query="true" queryMode="single"  width="100"></t:dgCol>
+
+    <t:dgCol title="供应商名称"  field="supName"   query="true" queryMode="single"  width="120"></t:dgCol>
+
    <%--<t:dgCol title="操作" field="opt" width="100"></t:dgCol>--%>
    <%--<t:dgDelOpt title="删除" url="rpPeriodInOutController.do?doDel&id={id}" urlclass="ace_button"  urlfont="fa-trash-o"/>--%>
    <%--<t:dgToolBar title="录入" icon="icon-add" url="rpPeriodInOutController.do?goAdd" funname="add"></t:dgToolBar>--%>
