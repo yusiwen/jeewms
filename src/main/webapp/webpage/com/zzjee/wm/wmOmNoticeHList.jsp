@@ -9,7 +9,9 @@
    <t:dgCol title="打印状态"  field="printStatus"   query="true" queryMode="single"  width="60"></t:dgCol>
 
    <t:dgCol title="操作" field="opt" width="220"></t:dgCol>
-   <t:dgCol title="创建人名称"  field="createName"     queryMode="single"  width="80"></t:dgCol>
+   <t:dgCol title="制单人"  field="createName"     queryMode="single"  width="50"></t:dgCol>
+   <t:dgCol title="拣货人"  field="jhUser"     queryMode="single"  width="50"></t:dgCol>
+   <t:dgCol title="复核人"  field="fhUser"     queryMode="single"  width="50"></t:dgCol>
    <t:dgCol title="创建人登录名称"  field="createBy"  hidden="true"  queryMode="single"  width="120"></t:dgCol>
    <t:dgCol title="创建日期"  field="createDate" formatter="yyyy-MM-dd"    queryMode="single"  width="80"></t:dgCol>
    <t:dgCol title="更新人名称"  field="updateName"  hidden="true"  queryMode="single"  width="120"></t:dgCol>

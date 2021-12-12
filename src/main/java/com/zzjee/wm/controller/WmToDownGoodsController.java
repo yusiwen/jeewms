@@ -294,6 +294,13 @@ public class WmToDownGoodsController extends BaseController {
 		try {
 			t.setDownSta(Constants.wm_sta5);//直接修改状态
 			wmToDownGoodsService.saveOrUpdate(t);
+			try{
+				String orderId = t.getOrderId();
+				String type = "fh";
+				String username = ResourceUtil.getSessionUserName().getRealName();
+				updateUser(orderId,type,username);
+			}catch (Exception e){
+			}
 			systemService.addLog(message, Globals.Log_Type_UPDATE,
 					Globals.Log_Leavel_INFO);
 		} catch (Exception e) {
@@ -325,6 +332,13 @@ public class WmToDownGoodsController extends BaseController {
 					try {
 						MyBeanUtils.copyBeanNotNull2Bean(jeecgDemo, t);
 						systemService.saveOrUpdate(t);
+						try{
+							String orderId = t.getOrderId();
+							String type = "fh";
+							String username = ResourceUtil.getSessionUserName().getRealName();
+							updateUser(orderId,type,username);
+						}catch (Exception e){
+						}
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
@@ -354,6 +368,15 @@ public class WmToDownGoodsController extends BaseController {
 						MyBeanUtils.copyBeanNotNull2Bean(jeecgDemo, t);
 						t.setDownSta(Constants.wm_sta5);
 						systemService.saveOrUpdate(t);
+
+						try{
+							String orderId = t.getOrderId();
+							String type = "fh";
+							String username = ResourceUtil.getSessionUserName().getRealName();
+							updateUser(orderId,type,username);
+						}catch (Exception e){
+						}
+
 						systemService.addLog(message, Globals.Log_Type_UPDATE, Globals.Log_Leavel_INFO);
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -759,6 +782,16 @@ public class WmToDownGoodsController extends BaseController {
 				}
 
 
+
+				try{
+					String orderId = wmOmQmIEntity.getOmNoticeId();
+					String type = "jh";
+					String username = wmToDownGoods.getCreateBy();
+					updateUser(orderId,type,username);
+				}catch (Exception e){
+				}
+
+
 				wmToDownGoodsService.save(wmToDownGoods);
 				D0.setOK(true);
 			}else{
@@ -791,7 +824,19 @@ public class WmToDownGoodsController extends BaseController {
 			MyBeanUtils.copyBeanNotNull2Bean(wmToDownGoods, t);
 			t.setDownSta(Constants.wm_sta5);
 			t.setUpdateDate(now());
+
+
+
 			wmToDownGoodsService.saveOrUpdate(t);
+
+			try{
+				String orderId = t.getOrderId();
+				String type = "fh";
+				String username = wmToDownGoods.getUpdateBy();
+				updateUser(orderId,type,username);
+			}catch (Exception e){
+			}
+
 			D0.setOK(true);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -801,7 +846,21 @@ public class WmToDownGoodsController extends BaseController {
 		// 按Restful约定，返回204状态码, 无内容. 也可以返回200状态码.
 		return new ResponseEntity(D0, HttpStatus.OK);
 	}
+	void  updateUser(String orderId,String type,String userName){
+		try{
+			WmOmNoticeHEntity wmOmNoticeHEntity = systemService.findUniqueByProperty(WmOmNoticeHEntity.class,"omNoticeId",orderId);
+			if ("jh".equals(type)){
+				wmOmNoticeHEntity.setJhUser(userName);
+			}
+			if ("fh".equals(type)){
+				wmOmNoticeHEntity.setFhUser(userName);
+			}
+			systemService.updateEntitie(wmOmNoticeHEntity);
+		}catch (Exception e){
 
+		}
+
+	}
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable("id") String id) {

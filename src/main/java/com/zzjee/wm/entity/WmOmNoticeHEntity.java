@@ -115,7 +115,10 @@ public class WmOmNoticeHEntity implements java.io.Serializable {
 	private String delvMethod;
 
 	private String storeCode;
-
+	@Excel(name = "拣货人")
+	private String jhUser;
+	@Excel(name = "复核人")
+	private String fhUser;
 
 	@Column(name ="store_code",nullable=true,length=50)
 	public String getStoreCode() {
@@ -619,5 +622,24 @@ public class WmOmNoticeHEntity implements java.io.Serializable {
 
 	public void setPiMaster(String piMaster) {
 		this.piMaster = piMaster;
+	}
+
+
+	@Column(name ="jh_user",nullable=true,length=32)
+	public String getJhUser() {
+		return jhUser;
+	}
+
+	public void setJhUser(String jhUser) {
+		this.jhUser = jhUser;
+	}
+
+	@Column(name ="fh_user",nullable=true,length=32)
+	public String getFhUser() {
+		return fhUser;
+	}
+
+	public void setFhUser(String fhUser) {
+		this.fhUser = fhUser;
 	}
 }

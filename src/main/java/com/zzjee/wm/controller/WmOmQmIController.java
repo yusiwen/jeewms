@@ -414,6 +414,13 @@ public class WmOmQmIController extends BaseController {
 				systemService.save(wmToDownGoods);
 				wmOmQmI.setBinSta("H");
 				systemService.saveOrUpdate(wmOmQmI);
+				try{
+					String orderId = wmOmQmI.getOmNoticeId();
+					String type = "jh";
+					String username = ResourceUtil.getSessionUserName().getRealName();
+					updateUser(orderId,type,username);
+				}catch (Exception e){
+				}
 				systemService.addLog(message, Globals.Log_Type_DEL,
 						Globals.Log_Leavel_INFO);
 			} else {
@@ -431,6 +438,8 @@ public class WmOmQmIController extends BaseController {
 		j.setMsg(message);
 		return j;
 	}
+
+
 
 
 	@RequestMapping(params = "dotodown")
@@ -464,6 +473,13 @@ public class WmOmQmIController extends BaseController {
 				systemService.save(wmToDownGoods);
 				wmOmQmI.setBinSta("Y");
 				systemService.saveOrUpdate(wmOmQmI);
+                try{
+					String orderId = wmOmQmI.getOmNoticeId();
+					String type = "jh";
+					String username = ResourceUtil.getSessionUserName().getRealName();
+					updateUser(orderId,type,username);
+				}catch (Exception e){
+				}
 				systemService.addLog(message, Globals.Log_Type_DEL,
 						Globals.Log_Leavel_INFO);
 			} else {
@@ -797,6 +813,23 @@ public class WmOmQmIController extends BaseController {
 
 		//按Restful约定，返回204状态码, 无内容. 也可以返回200状态码.
 		return new ResponseEntity(HttpStatus.NO_CONTENT);
+	}
+
+
+	void  updateUser(String orderId,String type,String userName){
+		try{
+			WmOmNoticeHEntity wmOmNoticeHEntity = systemService.findUniqueByProperty(WmOmNoticeHEntity.class,"omNoticeId",orderId);
+			if ("jh".equals(type)){
+				wmOmNoticeHEntity.setJhUser(userName);
+			}
+			if ("fh".equals(type)){
+				wmOmNoticeHEntity.setFhUser(userName);
+			}
+			systemService.updateEntitie(wmOmNoticeHEntity);
+		}catch (Exception e){
+
+		}
+
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
