@@ -138,9 +138,9 @@
 			<td colspan=3 class=xl68 width=168 style='width:126pt'><span style="font-size: 22pt">${printHeader.header19}</span></td>
 		</tr>
 		<tr height=40 style='mso-height-source:userset;height:30.0pt'>
-			<td colspan=3 height=40 class=xl68 style='height:30.0pt'><span style="font-size: 22pt">${printHeader.header06}</span></td>
-			<td colspan=3 height=40 class=xl68 style='height:30.0pt'><span style="font-size: 22pt">${printHeader.header05}</span></td>
-			<td colspan=3 height=40 class=xl68 style='height:30.0pt'><span style="font-size: 22pt">${printHeader.header21}</span></td>
+			<td colspan=4 height=40 class=xl68 style='height:30.0pt'><span style="font-size: 22pt">${printHeader.header06}</span></td>
+			<td colspan=5 height=40 class=xl68 style='height:30.0pt'><span style="font-size: 22pt">${printHeader.header05}</span></td>
+<%--			<td colspan=3 height=40 class=xl68 style='height:30.0pt'><span style="font-size: 22pt">${printHeader.header21}</span></td>--%>
 		</tr>
 		<tr height=40 style='mso-height-source:userset;height:30.0pt'>
 			<td colspan=3 class=xl68 style='width:252pt'><span style="font-size: 22pt">${printHeader.header10}</span></td>
