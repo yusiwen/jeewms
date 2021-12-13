@@ -122,30 +122,32 @@
 		</tr>
 		<tr height=18 style='height:13.2pt'>
 
-			<td colspan=9 height=18 width=585 style='height:13.2pt;width:438pt;text-align: center'><span style="font-size: 25pt">出库单</span></td>
-		</tr>
-		<tr height=40 style='mso-height-source:userset;height:30.0pt'>
-			<td colspan=3 class=xl68 width=168 >${printHeader.header14}</td>
-			<td colspan=3 height=40 class=168 style='height:30.0pt'><span style="font-size: 22pt">${printHeader.header15} </span></td>
-			<td colspan=2 height=40 class=xl67 style='height:30.0pt'><span style="font-size: 22pt">${printHeader.header04} </span></td>
+			<td colspan=8 height=18 width=585 style='height:13.2pt;width:438pt;text-align: center'><span style="font-size: 25pt">出库单</span></td>
 			<td  rowspan="3" class=xl69>
 				<img src="images/icon_sx.jpeg" style="width:80px;height:80px;vertical-align:right">
 			</td>
 		</tr>
-		<tr height=40 style='mso-height-source:userset;height:30.0pt'>
-			<td colspan=3 height=40 class=xl67 style='height:30.0pt'><span style="font-size: 22pt">${printHeader.header17}</span> </td>
-			<td colspan=3 class=xl68 width=168 style='width:126pt'><span style="font-size: 22pt">${printHeader.header18}</span></td>
-			<td colspan=3 class=xl68 width=168 style='width:126pt'><span style="font-size: 22pt">${printHeader.header19}</span></td>
+		<tr height=10 style='mso-height-source:userset;height:10.0pt'>
+
+			<td colspan=3 class=xl68 width=168 ><span style="font-size: 20pt">${printHeader.header14}</span></td>
+			<td colspan=3 height=40 class=168 style='height:30.0pt'><span style="font-size: 20pt">${printHeader.header15} </span></td>
+			<td colspan=2 height=40 class=xl67 style='height:30.0pt'><span style="font-size: 20pt"> </span></td>
+
 		</tr>
+<%--		<tr height=40 style='mso-height-source:userset;height:30.0pt'>--%>
+<%--			<td colspan=3 height=40 class=xl67 style='height:30.0pt'><span style="font-size: 22pt">${printHeader.header17}</span> </td>--%>
+<%--			<td colspan=3 class=xl68 width=168 style='width:126pt'><span style="font-size: 22pt">${printHeader.header18}</span></td>--%>
+<%--			<td colspan=3 class=xl68 width=168 style='width:126pt'><span style="font-size: 22pt">${printHeader.header19}</span></td>--%>
+<%--		</tr>--%>
 		<tr height=40 style='mso-height-source:userset;height:30.0pt'>
-			<td colspan=4 height=40 class=xl68 style='height:30.0pt'><span style="font-size: 22pt">${printHeader.header06}</span></td>
-			<td colspan=5 height=40 class=xl68 style='height:30.0pt'><span style="font-size: 22pt">${printHeader.header05}</span></td>
+			<td colspan=4 height=40 class=xl68 style='height:30.0pt'><span style="font-size: 20pt">${printHeader.header06}</span></td>
+			<td colspan=5 height=40 class=xl68 style='height:30.0pt'><span style="font-size: 20pt">${printHeader.header05}</span></td>
 <%--			<td colspan=3 height=40 class=xl68 style='height:30.0pt'><span style="font-size: 22pt">${printHeader.header21}</span></td>--%>
 		</tr>
 		<tr height=40 style='mso-height-source:userset;height:30.0pt'>
-			<td colspan=3 class=xl68 style='width:252pt'><span style="font-size: 22pt">${printHeader.header10}</span></td>
-			<td colspan=3 class=xl68 style='width:252pt'><span style="font-size: 22pt">${printHeader.header20}</span></td>
-			<td colspan=3 class=xl68 style='width:252pt'><span style="font-size: 22pt">${printHeader.header09}</span></td>
+			<td colspan=4 class=xl68 style='width:252pt'><span style="font-size: 20pt">${printHeader.header10}</span></td>
+<%--			<td colspan=3 class=xl68 style='width:252pt'><span style="font-size: 20pt">${printHeader.header20}</span></td>--%>
+			<td colspan=5 class=xl68 style='width:252pt'><span style="font-size: 20pt">${printHeader.header09}</span></td>
 		</tr>
 
 
