@@ -2958,6 +2958,7 @@ public class WmImNoticeHController extends BaseController {
         try {
             String noticeid =  wmUtil.getNextNoticeid(wmImNoticeH.getOrderTypeCode()) ;
             wmImNoticeHPage.setNoticeId(noticeid);
+            wmImNoticeHPage.setImSta("初始化");
             MyBeanUtils.copyBeanNotNull2Bean(wmImNoticeHPage,wmImNoticeH);
         } catch (Exception e) {
             logger.info(e.getMessage());
@@ -2971,7 +2972,7 @@ public class WmImNoticeHController extends BaseController {
             }catch ( Exception e){
 
             }
-
+            t.setBinPre("I");
             wmOmNoticeIListnew.add(t);
         }
         wmImNoticeHService.addMain(wmImNoticeH, wmOmNoticeIListnew);

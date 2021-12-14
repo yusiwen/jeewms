@@ -33,6 +33,8 @@
    <t:dgCol title="单据状态"  field="imSta"   query="true" queryMode="single"  width="50"></t:dgCol>
    <t:dgConfOpt title="删除" url="wmImNoticeHController.do?doDel&id={id}"  urlclass="ace_button" message="确定要删除此收货通知" urlfont="fa-trash-o" exp="imSta#eq#计划中"/>
    <%--<t:dgFunOpt title="预约通知" funname="print(id)"  urlclass="ace_button"  urlfont="	fa-print" exp="imSta#ne#已删除"/>--%>
+   <t:dgFunOpt title="审核" funname="appor(id)"  urlclass="ace_button"     exp="imSta#eq#初始化"/>
+
    <t:dgFunOpt title="通知单" funname="doprint(id)"  urlclass="ace_button"   exp="imSta#ne#已删除"   />
 
    <t:dgFunOpt title="验收单" funname="printysd(id)"  urlclass="ace_button"  urlfont="	fa-print" exp="imSta#ne#已删除"/>
@@ -40,7 +42,6 @@
    <t:dgFunOpt title="打印入库" funname="printrkdpage(id)"  urlclass="ace_button"  urlfont="	fa-print" exp="imSta#ne#已删除"/>
    <t:dgFunOpt title="货品ID" funname="printhpid(id)"  urlclass="ace_button"  urlfont="	fa-print" exp="imSta#ne#已删除"/>
    <t:dgFunOpt title="完成" funname="closeor(id)"  urlclass="ace_button"     exp="imSta#ne#已完成"/>
-   <t:dgFunOpt title="审核" funname="appor(id)"  urlclass="ace_button"     exp="imSta#eq#初始化"/>
 <%--   <t:dgFunOpt title="回写" funname="dopost(id)"  urlclass="ace_button"     exp="imSta#eq#已完成"/>--%>
 <%--       <t:dgToolBar title="test" icon="icon-add" funname="addorder()" width="100%" height="100%"></t:dgToolBar> --%>
 
