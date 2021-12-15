@@ -435,11 +435,11 @@ public class WmsApiController {
 
                 }
             }
-            if(roles.equals("CUS")){
+//            if(roles.equals("CUS")){
                 wmImNoticeH.setImSta(Constants.wm_sta0);
-            }else{
-                wmImNoticeH.setImSta(Constants.wm_sta1);
-            }
+//            }else{
+//                wmImNoticeH.setImSta(Constants.wm_sta1);
+//            }
             if(wmImNoticeH.getCusCode()==null){
                 if(roles.equals("CUS")){
                     wmImNoticeH.setCusCode(user.getUserName());
@@ -475,6 +475,7 @@ public class WmsApiController {
                     } catch (Exception e) {
                         // TODO: handle exception
                     }
+                    wmImNoticeIEntity.setBinPre("I");
                     wmImNoticeIListnew.add(wmImNoticeIEntity);
                 }
             }
