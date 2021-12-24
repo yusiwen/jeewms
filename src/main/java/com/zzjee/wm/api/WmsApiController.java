@@ -53,7 +53,7 @@ import java.util.Map;
  * @description
  */
 @RestController
-@RequestMapping("/wmsApiController")
+@RequestMapping("/ApiController")
 public class WmsApiController {
 
     /**
