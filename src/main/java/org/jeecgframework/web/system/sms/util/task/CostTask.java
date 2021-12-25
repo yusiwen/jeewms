@@ -31,11 +31,11 @@ import com.zzjee.wm.entity.WmToMoveGoodsEntity;
 import com.zzjee.wm.entity.WmToUpGoodsEntity;
 
 /**
- * 
+ *
  * @ClassName:SmsSendTask 所有信息的发送定时任务类
  * @Description: TODO
  * @date 2014-11-13 下午5:06:34
- * 
+ *
  */
 @Service("costTask")
 public class CostTask {
@@ -112,7 +112,7 @@ public class CostTask {
 		String beizhu = null;
 		String costcode = null;
 		String countunit = null;
-
+//10
 		tsql = "select  mg.cf_wen_ceng,wi.tin_id,mg.jf_shp_lei,   wi.cus_code,    wi.im_notice_id,    wi.goods_id,    wi.rec_deg,(sum(wi.qm_ok_quat)/ mg.chl_shl) as qmcount,(mg.zhl_kg  ) as zhl_kg,    (sum(wi.qm_ok_quat) * mg.zhl_kg   ) as grcount "
 				+" from    wm_in_qm_i wi,    mv_goods mg where  wi.goods_id = mg.goods_code and wi.qm_ok_quat > 0  and to_days(wi.create_date) = to_days(?) "
 				+" group by wi.im_notice_id ,wi.cus_code,wi.tin_id,  wi.goods_id , wi.rec_deg";
@@ -171,6 +171,7 @@ public class CostTask {
 
 			cuscode  = resulthq.get(i).get("cus_code").toString();
 			//计算操作费和越库费用
+//			1010
 			tsql = " select  cost_code,  cost_jg,  cost_sl,  cost_zk,  cost_bhs ,  cost_hs   "
 					+ "from wm_cus_cost_h wch , wm_cus_cost_i wci where wch.id = wci.cus_cost_id and wci.cost_code = ? and wch.cus_code = ? and "
 					+ "(to_days(wch.begin_date) <= to_days(?)  and to_days(wch.end_date) >= to_days(?)) limit 1";
@@ -219,7 +220,7 @@ public class CostTask {
 
 		org.jeecgframework.core.util.LogUtil
 				.info("===================3卸货费成功===================");
-
+//20
 		tsql = "select  mg.cf_wen_ceng,wi.tin_id,mg.jf_shp_lei,   wi.cus_code,    wi.im_notice_id,    wi.goods_id,    wi.rec_deg,(sum(wi.qm_ok_quat)/ mg.chl_shl)  as qmcount,(mg.zhl_kg  ) as zhl_kg,    (sum(wi.qm_ok_quat) * mg.zhl_kg   ) as grcount "
 				+" from    wm_in_qm_i wi,    mv_goods mg where  wi.goods_id = mg.goods_code and wi.qm_ok_quat > 0  and to_days(wi.create_date) = to_days(?) "
 				+" group by wi.im_notice_id ,wi.cus_code,wi.tin_id";
@@ -251,7 +252,7 @@ public class CostTask {
 
 
 			cuscode  = resulthq.get(i).get("cus_code").toString();
-
+//2010
 			tsql = " select  cost_code  ,  cost_jg  ,  cost_sl  ,  cost_zk  ,  cost_bhs ,  cost_hs   "
 					+ "from wm_cus_cost_h wch , wm_cus_cost_i wci where wch.id = wci.cus_cost_id and wci.cost_code = ? and wch.cus_code = ? and "
 					+ "(to_days(wch.begin_date) <= to_days(?)  and to_days(wch.end_date) >= to_days(?)) limit 1";
@@ -300,7 +301,7 @@ public class CostTask {
 
 		org.jeecgframework.core.util.LogUtil
 				.info("===================4过磅费成功===================");
-
+//30
 		tsql = 	"select   wi.cus_code, wi.tin_id,   wi.im_notice_id,    wi.goods_id,"
 				+" ((select count(*)  from wm_im_notice_i where im_notice_id = wi.im_notice_id) )  as  goodscount,"
 				+" (sum(wi.qm_ok_quat) / mg.chl_shl) as qmcount "
@@ -345,7 +346,7 @@ public class CostTask {
 			costSl = costSlo.toString();
 
 			cuscode  = resulthq.get(i).get("cus_code").toString();
-
+//3010
 			tsql = " select  cost_code  ,  cost_jg  ,  cost_sl  ,  cost_zk  ,  cost_bhs ,  cost_hs   "
 					+ "from wm_cus_cost_h wch , wm_cus_cost_i wci where wch.id = wci.cus_cost_id and wci.cost_code = ? and wch.cus_code = ? and "
 					+ "(to_days(wch.begin_date) <= to_days(?)  and to_days(wch.end_date) >= to_days(?)) limit 1";
@@ -391,7 +392,7 @@ public class CostTask {
 			WmDayCost.setDayCostHsj(df.format(dayCostHsj));
 			systemService.save(WmDayCost);
 		}//计算进货分拣费
-
+//40
 		org.jeecgframework.core.util.LogUtil
 				.info("===================5进货分拣成功===================");
 		tsql = 						"select     wi.cus_code,    wi.order_id,    wi.goods_id,(select count(*)  from wm_om_notice_i where om_notice_id = wi.order_id) as  goodscount,"
@@ -436,7 +437,7 @@ public class CostTask {
 			costSl = costSlo.toString();
 
 			cuscode  = resulthq.get(i).get("cus_code").toString();
-
+//4010
 			tsql = " select  cost_code  ,  cost_jg  ,  cost_sl  ,  cost_zk  ,  cost_bhs ,  cost_hs   "
 					+ "from wm_cus_cost_h wch , wm_cus_cost_i wci where wch.id = wci.cus_cost_id and wci.cost_code = ? and wch.cus_code = ? and "
 					+ "(to_days(wch.begin_date) <= to_days(?)  and to_days(wch.end_date) >= to_days(?)) limit 1";
@@ -485,7 +486,7 @@ public class CostTask {
 
 		org.jeecgframework.core.util.LogUtil
 				.info("===================6出货分拣成功===================");
-
+//50
 		tsql = 		"select  wi.bin_id_from, mg.jf_shp_lei, wi.cus_code, wi.order_id, wi.goods_id, (sum(wi.base_goodscount)/ mg.chl_shl) as qmcount,"
 				+"  (sum(wi.base_goodscount) * mg.zhl_kg_zx / mg.chl_shl) as grcount ,cast((mg.mp_dan_ceng * mg.mp_ceng_gao * mg.chl_shl) as signed) as hiti"
 				+" from wm_to_down_goods wi,  mv_goods mg  "
@@ -566,7 +567,7 @@ public class CostTask {
 			costSl = costSlo.toString();
 
 			cuscode  = resulthq.get(i).get("cus_code").toString();
-
+//5010
 			tsql = " select  cost_code  ,  cost_jg,  cost_sl  ,  cost_zk  ,  cost_bhs ,  cost_hs   "
 					+ "from wm_cus_cost_h wch , wm_cus_cost_i wci where wch.id = wci.cus_cost_id and wci.cost_code = ? and wch.cus_code = ? and "
 					+ "(to_days(wch.begin_date) <= to_days(?)  and to_days(wch.end_date) >= to_days(?)) limit 1";
@@ -616,6 +617,7 @@ public class CostTask {
 				.info("===================7出装车费成功===================");
 
 		//复冻处置费
+//		60
 		tsql = "select  mg.cf_wen_ceng,     wi.cus_code,    wi.im_notice_id,    wi.goods_id,ceil(mg.jizhun_wendu) as jizhun_wendu,  ceil(wi.rec_deg) as rec_deg,sum(wi.qm_ok_quat) as qmcount,(mg.zhl_kg) as zhl_kg,    (sum(wi.qm_ok_quat) * mg.zhl_kg   ) as grcount "
 				+" from    wm_in_qm_i wi,    mv_goods mg where  wi.goods_id = mg.goods_code and wi.qm_ok_quat > 0  and to_days(wi.create_date) = to_days(?) "
 				+" group by wi.im_notice_id ,wi.cus_code,   wi.goods_id , wi.rec_deg";
@@ -642,6 +644,7 @@ public class CostTask {
 			cuscode  = resulthq.get(i).get("cus_code").toString();
 			cfwenceng = resulthq.get(i).get("cf_wen_ceng").toString();
 			//
+//			6010
 			tsql = " select  cost_code  ,  cost_jg  ,  cost_sl  ,  cost_zk  ,  cost_bhs ,  cost_hs   "
 					+ "from wm_cus_cost_h wch , wm_cus_cost_i wci where wch.id = wci.cus_cost_id and wci.cost_code = ? and wch.cus_code = ? and "
 					+ "(to_days(wch.begin_date) <= to_days(?)  and to_days(wch.end_date) >= to_days(?)) limit 1";
@@ -705,6 +708,8 @@ public class CostTask {
 		}//复冻处置费/吨
 		org.jeecgframework.core.util.LogUtil
 				.info("===================8复冻处置费成功===================");
+
+//		70
 		tsql = "select  mg.cf_wen_ceng,   wi.cus_code,    wi.im_notice_id,    wi.tin_id,    wi.rec_deg,sum(wi.qm_ok_quat) as qmcount,(mg.zhl_kg  ) as zhl_kg,    (sum(wi.qm_ok_quat) * mg.zhl_kg   ) as grcount "
 				+" from    wm_in_qm_i wi,    mv_goods mg where  wi.goods_id = mg.goods_code and wi.qm_ok_quat > 0  and to_days(wi.create_date) = to_days(?) "
 				+" group by wi.cus_code , wi.im_notice_id, wi.tin_id ";
@@ -729,7 +734,7 @@ public class CostTask {
 			cfwenceng = null;
 			beizhu = null;
 			cuscode  = resulthq.get(i).get("cus_code").toString();
-
+//            7010
 			tsql = " select  cost_code  ,  cost_jg  ,  cost_sl  ,  cost_zk  ,  cost_bhs ,  cost_hs   "
 					+ "from wm_cus_cost_h wch , wm_cus_cost_i wci where wch.id = wci.cus_cost_id and wci.cost_code = ? and wch.cus_code = ? and "
 					+ "(to_days(wch.begin_date) <= to_days(?)  and to_days(wch.end_date) >= to_days(?)) limit 1";
@@ -776,11 +781,7 @@ public class CostTask {
 
 		org.jeecgframework.core.util.LogUtil
 				.info("===================9服务费成功===================");
-//		SELECT  mdp.cus_code, mdp.ku_wei_bian_ma, mdp.bin_id, mdp.goods_id,sum(base_goodscount) as count
-//		FROM  mv_down_and_up mdp where	    (mdp.leixing = 'S' and to_days(mdp.create_date) <= to_days('2017-09-16'))
-//	        or (mdp.leixing = 'H' and to_days(mdp.create_date) < to_days('2017-09-16'))
-//	group by mdp.cus_code, mdp.ku_wei_bian_ma , mdp.bin_id , mdp.goods_id
-//	having sum(base_goodscount)  > 0 order by cus_code,  create_date;
+//		80
 		if(ResourceUtil.getConfigByName("ckjf").equals("1")){
 			tsql = 		"SELECT  mdp.cus_code, mdp.ku_wei_bian_ma, mdp.bin_id, mdp.goods_id,mdp.jf_shp_lei, ((select zhl_kg from mv_goods where goods_code = mdp.goods_id) / (select chl_shl from mv_goods where goods_code = mdp.goods_id) / 1000) as zhl_kgm, " +
 					"(sum(base_goodscount) * (select zhl_kg from mv_goods where goods_code = mdp.goods_id) / (select chl_shl from mv_goods where goods_code = mdp.goods_id) /1000) as count," +
@@ -788,8 +789,6 @@ public class CostTask {
 					+" FROM  mv_down_and_up mdp where  (mdp.leixing = 'S' and to_days(mdp.create_date) <= to_days(?))"
 					+" or (mdp.order_id <> 'ZY' and mdp.leixing = 'H' and to_days(mdp.create_date) < to_days(?))"
 					+" or (mdp.order_id = 'ZY' and mdp.leixing = 'H' and to_days(mdp.create_date) <= to_days(?))"
-//				+" group by mdp.cus_code,mdp.ku_wei_bian_ma, mdp.bin_id, mdp.goods_id, mdp.jf_shp_lei "
-
 					+" group by mdp.cus_code,   mdp.goods_id, mdp.jf_shp_lei "
 					+" having sum(base_goodscount)  > 0 order by mdp.cus_code, mdp.goods_id, mdp.create_date";
 		}else{
@@ -800,8 +799,6 @@ public class CostTask {
 					+" or (mdp.order_id <> 'ZY' and mdp.leixing = 'H' and to_days(mdp.create_date) < to_days(?))"
 					+" or (mdp.order_id = 'ZY' and mdp.leixing = 'H' and to_days(mdp.create_date) <= to_days(?))"
 				+" group by mdp.cus_code,mdp.ku_wei_bian_ma, mdp.bin_id, mdp.goods_id, mdp.jf_shp_lei "
-
-//					+" group by mdp.cus_code,   mdp.goods_id, mdp.jf_shp_lei "
 					+" having sum(base_goodscount)  > 0 order by mdp.cus_code, mdp.goods_id, mdp.create_date";
 		}
 
@@ -947,6 +944,7 @@ public class CostTask {
 					jfunit = "箱";
 				}
 			}
+//			8010
 			tsql = " select  cost_code  ,  cost_jg  ,  cost_sl  ,  cost_zk  ,  cost_bhs ,  cost_hs   "
 					+ "from wm_cus_cost_h wch , wm_cus_cost_i wci where wch.id = wci.cus_cost_id and wci.cost_code = ? and wch.cus_code = ? and "
 					+ "(to_days(wch.begin_date) <= to_days(?)  and to_days(wch.end_date) >= to_days(?)) limit 1";
@@ -1006,6 +1004,7 @@ public class CostTask {
 			Map.Entry entry = (Map.Entry) iter.next();
 			Object key = entry.getKey();
 			Object val = entry.getValue();
+//			8020
 			tsql = " select  cost_code  ,  cost_jg  ,  cost_sl  ,  cost_zk  ,  cost_bhs ,  cost_hs   "
 					+ "from wm_cus_cost_h wch , wm_cus_cost_i wci where wch.id = wci.cus_cost_id and wci.cost_code = ? and wch.cus_code = ? and "
 					+ "(to_days(wch.begin_date) <= to_days(?)  and to_days(wch.end_date) >= to_days(?)) limit 1";
@@ -1067,6 +1066,7 @@ public class CostTask {
 			Map.Entry entrysku = (Map.Entry) itersku.next();
 			Object keysku = entrysku.getKey();
 			Object valsku = entrysku.getValue();
+//			8030
 			tsql = " select  cost_code  ,  cost_jg  ,  cost_sl  ,  cost_zk  ,  cost_bhs ,  cost_hs   "
 					+ "from wm_cus_cost_h wch , wm_cus_cost_i wci where wch.id = wci.cus_cost_id and wci.cost_code = ? and wch.cus_code = ? and "
 					+ "(to_days(wch.begin_date) <= to_days(?)  and to_days(wch.end_date) >= to_days(?)) limit 1";
@@ -1130,6 +1130,7 @@ public class CostTask {
 			Map.Entry entry = (Map.Entry) iterc.next();
 			Object key = entry.getKey();
 			Object val = entry.getValue();
+//			8040
 			tsql = " select  cost_code  ,  cost_jg  ,  cost_sl  ,  cost_zk  ,  cost_bhs ,  cost_hs   "
 					+ "from wm_cus_cost_h wch , wm_cus_cost_i wci where wch.id = wci.cus_cost_id and wci.cost_code = ? and wch.cus_code = ? and "
 					+ "(to_days(wch.begin_date) <= to_days(?)  and to_days(wch.end_date) >= to_days(?)) limit 1";
@@ -1190,6 +1191,7 @@ public class CostTask {
 			Map.Entry entrycsku = (Map.Entry) itercsku.next();
 			Object keysku = entrycsku.getKey();
 			Object valsku = entrycsku.getValue();
+//			8050
 			tsql = " select  cost_code  ,  cost_jg  ,  cost_sl  ,  cost_zk  ,  cost_bhs ,  cost_hs   "
 					+ "from wm_cus_cost_h wch , wm_cus_cost_i wci where wch.id = wci.cus_cost_id and wci.cost_code = ? and wch.cus_code = ? and "
 					+ "(to_days(wch.begin_date) <= to_days(?)  and to_days(wch.end_date) >= to_days(?)) limit 1";
