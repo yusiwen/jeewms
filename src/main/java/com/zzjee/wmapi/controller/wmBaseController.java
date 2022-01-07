@@ -50,238 +50,241 @@ import java.util.Map;
 import java.util.Set;
 
 /**
+ * @author erzhongxmu
+ * @version V1.0
  * @Title: wmBaseControllerController
  * @Description: wmBaseController
- * @author erzhongxmu
  * @date 2018-05-30 20:21:50
- * @version V1.0
- *
  */
 @Controller
 @RequestMapping("/wmBaseController")
 public class wmBaseController extends BaseController {
-	/**
-	 * Logger for this class
-	 */
-	private static final Logger logger = Logger.getLogger(wmBaseController.class);
+    /**
+     * Logger for this class
+     */
+    private static final Logger logger = Logger.getLogger(wmBaseController.class);
 
-//	@Autowired
+    //	@Autowired
 //	private WvGiServiceI wvGiService;
-	@Autowired
-	private SystemService systemService;
-	@Autowired
-	private SmsSendTask smsSendTask;
-	@Autowired
-	private CostTask costTask;
+    @Autowired
+    private SystemService systemService;
+    @Autowired
+    private SmsSendTask smsSendTask;
+    @Autowired
+    private CostTask costTask;
 //	@Autowired
 //	private Validator validator;
-	/**
-	 * 获取图片流/获取文件用于下载
-	 * @param response
-	 * @param request
-	 * @throws Exception
-	 * http://localhost:8080/zzjee/wmOmNoticeHController/showOrDownbarcodeByurl.do?&qrvalue=1111223333  调用
-	 */
 
-	@RequestMapping(value="showOrDownbarcodeByurl",method = RequestMethod.GET)
-	public void getbarcodeImgByurl(HttpServletResponse response, HttpServletRequest request) throws Exception{
-		request.setCharacterEncoding("UTF-8");
-		String flag=request.getParameter("down");//是否下载否则展示图片
+    /**
+     * 获取图片流/获取文件用于下载
+     *
+     * @param response
+     * @param request
+     * @throws Exception http://localhost:8080/zzjee/wmOmNoticeHController/showOrDownbarcodeByurl.do?&qrvalue=1111223333  调用
+     */
 
-		String qrvalue = request.getParameter("qrvalue");
-		String dbpath = qrvalue+".jpg";
-		String localPath=ResourceUtil.getConfigByName("webUploadpath");
+    @RequestMapping(value = "showOrDownbarcodeByurl", method = RequestMethod.GET)
+    public void getbarcodeImgByurl(HttpServletResponse response, HttpServletRequest request) throws Exception {
+        request.setCharacterEncoding("UTF-8");
+        String flag = request.getParameter("down");//是否下载否则展示图片
 
-		try{
-			String imgurl = localPath+File.separator+dbpath;
+        String qrvalue = request.getParameter("qrvalue");
+        String dbpath = qrvalue + ".jpg";
+        String localPath = ResourceUtil.getConfigByName("webUploadpath");
+
+        try {
+            String imgurl = localPath + File.separator + dbpath;
 //			QRcodeUtil.encode(qrvalue,imgurl);
-			BarcodeUtil.generateFile(qrvalue,imgurl);
-		}catch (Exception e){
+            BarcodeUtil.generateFile(qrvalue, imgurl);
+        } catch (Exception e) {
 
-		}
-		if("1".equals(flag)){
-			response.setContentType("application/x-msdownload;charset=utf-8");
-			String fileName=dbpath.substring(dbpath.lastIndexOf(File.separator)+1);
+        }
+        if ("1".equals(flag)) {
+            response.setContentType("application/x-msdownload;charset=utf-8");
+            String fileName = dbpath.substring(dbpath.lastIndexOf(File.separator) + 1);
 
-			String userAgent = request.getHeader("user-agent").toLowerCase();
-			if (userAgent.contains("msie") || userAgent.contains("like gecko") ) {
-				fileName = URLEncoder.encode(fileName, "UTF-8");
-			}else {
-				fileName = new String(fileName.getBytes("UTF-8"), "iso-8859-1");
-			}
-			response.setHeader("Content-disposition", "attachment; filename="+ fileName);
+            String userAgent = request.getHeader("user-agent").toLowerCase();
+            if (userAgent.contains("msie") || userAgent.contains("like gecko")) {
+                fileName = URLEncoder.encode(fileName, "UTF-8");
+            } else {
+                fileName = new String(fileName.getBytes("UTF-8"), "iso-8859-1");
+            }
+            response.setHeader("Content-disposition", "attachment; filename=" + fileName);
 
-		}else{
-			response.setContentType("image/jpeg;charset=utf-8");
-		}
+        } else {
+            response.setContentType("image/jpeg;charset=utf-8");
+        }
 
-		InputStream inputStream = null;
-		OutputStream outputStream=null;
-		try {
-			String imgurl = localPath+File.separator+dbpath;
-			inputStream = new BufferedInputStream(new FileInputStream(imgurl));
-			outputStream = response.getOutputStream();
-			byte[] buf = new byte[1024];
-			int len;
-			while ((len = inputStream.read(buf)) > 0) {
-				outputStream.write(buf, 0, len);
-			}
-			response.flushBuffer();
-		} catch (Exception e) {
-			logger.error(ExceptionUtil.getExceptionMessage(e));
-		}finally{
-			if(inputStream!=null){
-				inputStream.close();
-			}
-			if(outputStream!=null){
-				outputStream.close();
-			}
-		}
-	}
-
-
-	/**
-	 * 获取图片流/获取文件用于下载
-	 * @param response
-	 * @param request
-	 * @throws Exception
-	 * http://localhost:8080/zzjee/wmOmNoticeHController/showOrDownqrcodeByurl.do?&qrvalue=1111223333  调用
-	 */
-
-	@RequestMapping(value="showOrDownqrcodeByurl",method = RequestMethod.GET)
-	public void getQrImgByurl(HttpServletResponse response, HttpServletRequest request) throws Exception{
-		request.setCharacterEncoding("UTF-8");
-		String flag=request.getParameter("down");//是否下载否则展示图片
-
-		String qrvalue = request.getParameter("qrvalue");
-		String dbpath = qrvalue+".jpg";
-		String localPath=ResourceUtil.getConfigByName("webUploadpath");
-
-		try{
-			String imgurl = localPath+File.separator+dbpath;
-			QRcodeUtil.encode(qrvalue,imgurl);
-		}catch (Exception e){
-
-		}
-		if("1".equals(flag)){
-			response.setContentType("application/x-msdownload;charset=utf-8");
-			String fileName=dbpath.substring(dbpath.lastIndexOf(File.separator)+1);
-
-			String userAgent = request.getHeader("user-agent").toLowerCase();
-			if (userAgent.contains("msie") || userAgent.contains("like gecko") ) {
-				fileName = URLEncoder.encode(fileName, "UTF-8");
-			}else {
-				fileName = new String(fileName.getBytes("UTF-8"), "iso-8859-1");
-			}
-			response.setHeader("Content-disposition", "attachment; filename="+ fileName);
-
-		}else{
-			response.setContentType("image/jpeg;charset=utf-8");
-		}
-
-		InputStream inputStream = null;
-		OutputStream outputStream=null;
-		try {
-			String imgurl = localPath+File.separator+dbpath;
-			inputStream = new BufferedInputStream(new FileInputStream(imgurl));
-			outputStream = response.getOutputStream();
-			byte[] buf = new byte[1024];
-			int len;
-			while ((len = inputStream.read(buf)) > 0) {
-				outputStream.write(buf, 0, len);
-			}
-			response.flushBuffer();
-		} catch (Exception e) {
-			logger.error(ExceptionUtil.getExceptionMessage(e));
-		}finally{
-			if(inputStream!=null){
-				inputStream.close();
-			}
-			if(outputStream!=null){
-				outputStream.close();
-			}
-		}
-	}
-	@RequestMapping(value="geterpim",method = RequestMethod.GET)
-	@ResponseBody
-	public ResponseEntity<?>  listim( @RequestParam(value="username", required=false) String username,
-									@RequestParam(value="all", required=false)String all,
-
-									@RequestParam(value="searchstr", required=false)String searchstr,
-									@RequestParam(value="searchstr2", required=false)String searchstr2,
-									@RequestParam(value="searchstrin1", required=false)String searchstrin1,
-									@RequestParam(value="searchstrin2", required=false)String searchstrin2,
-									@RequestParam(value="searchstrin3", required=false)String searchstrin3) {
+        InputStream inputStream = null;
+        OutputStream outputStream = null;
+        try {
+            String imgurl = localPath + File.separator + dbpath;
+            inputStream = new BufferedInputStream(new FileInputStream(imgurl));
+            outputStream = response.getOutputStream();
+            byte[] buf = new byte[1024];
+            int len;
+            while ((len = inputStream.read(buf)) > 0) {
+                outputStream.write(buf, 0, len);
+            }
+            response.flushBuffer();
+        } catch (Exception e) {
+            logger.error(ExceptionUtil.getExceptionMessage(e));
+        } finally {
+            if (inputStream != null) {
+                inputStream.close();
+            }
+            if (outputStream != null) {
+                outputStream.close();
+            }
+        }
+    }
 
 
-		ResultDO D0 = new  ResultDO();
+    /**
+     * 获取图片流/获取文件用于下载
+     *
+     * @param response
+     * @param request
+     * @throws Exception http://localhost:8080/zzjee/wmOmNoticeHController/showOrDownqrcodeByurl.do?&qrvalue=1111223333  调用
+     */
 
-		String hql = " from WmToUpGoodsErpEntity where 1 = 1  ";
-		D0.setOK(true);
+    @RequestMapping(value = "showOrDownqrcodeByurl", method = RequestMethod.GET)
+    public void getQrImgByurl(HttpServletResponse response, HttpServletRequest request) throws Exception {
+        request.setCharacterEncoding("UTF-8");
+        String flag = request.getParameter("down");//是否下载否则展示图片
 
-		List<WmToUpGoodsErpEntity> listerp = systemService.findHql(hql);
-		D0.setOK(true);
+        String qrvalue = request.getParameter("qrvalue");
+        String dbpath = qrvalue + ".jpg";
+        String localPath = ResourceUtil.getConfigByName("webUploadpath");
+
+        try {
+            String imgurl = localPath + File.separator + dbpath;
+            QRcodeUtil.encode(qrvalue, imgurl);
+        } catch (Exception e) {
+
+        }
+        if ("1".equals(flag)) {
+            response.setContentType("application/x-msdownload;charset=utf-8");
+            String fileName = dbpath.substring(dbpath.lastIndexOf(File.separator) + 1);
+
+            String userAgent = request.getHeader("user-agent").toLowerCase();
+            if (userAgent.contains("msie") || userAgent.contains("like gecko")) {
+                fileName = URLEncoder.encode(fileName, "UTF-8");
+            } else {
+                fileName = new String(fileName.getBytes("UTF-8"), "iso-8859-1");
+            }
+            response.setHeader("Content-disposition", "attachment; filename=" + fileName);
+
+        } else {
+            response.setContentType("image/jpeg;charset=utf-8");
+        }
+
+        InputStream inputStream = null;
+        OutputStream outputStream = null;
+        try {
+            String imgurl = localPath + File.separator + dbpath;
+            inputStream = new BufferedInputStream(new FileInputStream(imgurl));
+            outputStream = response.getOutputStream();
+            byte[] buf = new byte[1024];
+            int len;
+            while ((len = inputStream.read(buf)) > 0) {
+                outputStream.write(buf, 0, len);
+            }
+            response.flushBuffer();
+        } catch (Exception e) {
+            logger.error(ExceptionUtil.getExceptionMessage(e));
+        } finally {
+            if (inputStream != null) {
+                inputStream.close();
+            }
+            if (outputStream != null) {
+                outputStream.close();
+            }
+        }
+    }
+
+    @RequestMapping(value = "geterpim", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<?> listim(@RequestParam(value = "username", required = false) String username,
+                                    @RequestParam(value = "all", required = false) String all,
+
+                                    @RequestParam(value = "searchstr", required = false) String searchstr,
+                                    @RequestParam(value = "searchstr2", required = false) String searchstr2,
+                                    @RequestParam(value = "searchstrin1", required = false) String searchstrin1,
+                                    @RequestParam(value = "searchstrin2", required = false) String searchstrin2,
+                                    @RequestParam(value = "searchstrin3", required = false) String searchstrin3) {
 
 
-		D0.setObj(listerp);
-		return new ResponseEntity(D0, HttpStatus.OK);
-	}
+        ResultDO D0 = new ResultDO();
 
-	@RequestMapping(value="geterpom",method = RequestMethod.GET)
-	@ResponseBody
-	public ResponseEntity<?>  listom( @RequestParam(value="username", required=false) String username,
-									@RequestParam(value="all", required=false)String all,
+        String hql = " from WmToUpGoodsErpEntity where 1 = 1  ";
+        D0.setOK(true);
 
-									@RequestParam(value="searchstr", required=false)String searchstr,
-									@RequestParam(value="searchstr2", required=false)String searchstr2,
-									@RequestParam(value="searchstrin1", required=false)String searchstrin1,
-									@RequestParam(value="searchstrin2", required=false)String searchstrin2,
-									@RequestParam(value="searchstrin3", required=false)String searchstrin3) {
+        List<WmToUpGoodsErpEntity> listerp = systemService.findHql(hql);
+        D0.setOK(true);
 
 
-		ResultDO D0 = new  ResultDO();
+        D0.setObj(listerp);
+        return new ResponseEntity(D0, HttpStatus.OK);
+    }
 
-		String hql = " from WmToDownGoodsErpEntity where 1 = 1  ";
-		D0.setOK(true);
+    @RequestMapping(value = "geterpom", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<?> listom(@RequestParam(value = "username", required = false) String username,
+                                    @RequestParam(value = "all", required = false) String all,
 
-		List<WmToDownGoodsErpEntity> listerp = systemService.findHql(hql);
-		D0.setOK(true);
-
-
-		D0.setObj(listerp);
-		return new ResponseEntity(D0, HttpStatus.OK);
-	}
-	@RequestMapping(value="runtask",method = RequestMethod.GET)
-	@ResponseBody
-	public ResponseEntity<?>  runtask( @RequestParam(value="username", required=false) String username,
-									  @RequestParam(value="all", required=false)String all,
-
-									  @RequestParam(value="searchstr", required=false)String searchstr,
-									  @RequestParam(value="searchstr2", required=false)String searchstr2,
-									  @RequestParam(value="searchstrin1", required=false)String searchstrin1,
-									  @RequestParam(value="searchstrin2", required=false)String searchstrin2,
-									  @RequestParam(value="searchstrin3", required=false)String searchstrin3) {
+                                    @RequestParam(value = "searchstr", required = false) String searchstr,
+                                    @RequestParam(value = "searchstr2", required = false) String searchstr2,
+                                    @RequestParam(value = "searchstrin1", required = false) String searchstrin1,
+                                    @RequestParam(value = "searchstrin2", required = false) String searchstrin2,
+                                    @RequestParam(value = "searchstrin3", required = false) String searchstrin3) {
 
 
-		ResultDO D0 = new  ResultDO();
-		smsSendTask.run();
-		return new ResponseEntity(D0, HttpStatus.OK);
-	}
-	//结转库存
-	@RequestMapping(value="runtaskone",method = RequestMethod.GET)
-	@ResponseBody
-	public ResponseEntity<?>  runtaskone( @RequestParam(value="username", required=false) String username,
-									   @RequestParam(value="all", required=false)String all,
+        ResultDO D0 = new ResultDO();
 
-									   @RequestParam(value="searchstr", required=false)String searchstr,
-									   @RequestParam(value="searchstr2", required=false)String searchstr2,
-									   @RequestParam(value="searchstrin1", required=false)String searchstrin1,
-									   @RequestParam(value="searchstrin2", required=false)String searchstrin2,
-									   @RequestParam(value="searchstrin3", required=false)String searchstrin3) {
+        String hql = " from WmToDownGoodsErpEntity where 1 = 1  ";
+        D0.setOK(true);
+
+        List<WmToDownGoodsErpEntity> listerp = systemService.findHql(hql);
+        D0.setOK(true);
 
 
-		ResultDO D0 = new  ResultDO();
-		costTask.run();
-		return new ResponseEntity(D0, HttpStatus.OK);
-	}
+        D0.setObj(listerp);
+        return new ResponseEntity(D0, HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "runtask", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<?> runtask(@RequestParam(value = "username", required = false) String username,
+                                     @RequestParam(value = "all", required = false) String all,
+
+                                     @RequestParam(value = "searchstr", required = false) String searchstr,
+                                     @RequestParam(value = "searchstr2", required = false) String searchstr2,
+                                     @RequestParam(value = "searchstrin1", required = false) String searchstrin1,
+                                     @RequestParam(value = "searchstrin2", required = false) String searchstrin2,
+                                     @RequestParam(value = "searchstrin3", required = false) String searchstrin3) {
+
+
+        ResultDO D0 = new ResultDO();
+        smsSendTask.run();
+        return new ResponseEntity(D0, HttpStatus.OK);
+    }
+
+    //结转库存
+    @RequestMapping(value = "runtaskone", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<?> runtaskone(@RequestParam(value = "username", required = false) String username,
+                                        @RequestParam(value = "all", required = false) String all,
+
+                                        @RequestParam(value = "searchstr", required = false) String searchstr,
+                                        @RequestParam(value = "searchstr2", required = false) String searchstr2,
+                                        @RequestParam(value = "searchstrin1", required = false) String searchstrin1,
+                                        @RequestParam(value = "searchstrin2", required = false) String searchstrin2,
+                                        @RequestParam(value = "searchstrin3", required = false) String searchstrin3) {
+
+
+        ResultDO D0 = new ResultDO();
+        costTask.run();
+        return new ResponseEntity(D0, HttpStatus.OK);
+    }
 }
