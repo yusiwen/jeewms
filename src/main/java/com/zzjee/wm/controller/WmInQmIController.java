@@ -292,7 +292,7 @@ public class WmInQmIController extends BaseController {
             System.out.println(wmInQmIEntity.getBinId() + "444444");
 
             if (!wmUtil.checkbin(wmInQmIEntity.getBinId())) {
-                throw new RuntimeException("储位不存在！");
+                throw new RuntimeException("储位不存在或已停用！");
             }
             System.out.println(wmInQmIEntity.getBinId() + "555555");
 
@@ -465,7 +465,7 @@ public class WmInQmIController extends BaseController {
         if (StringUtil.isNotEmpty(wmInQmI.getBinId())) {
             if (!wmUtil.checkbin(wmInQmI.getBinId())) {
                 j.setSuccess(false);
-                message = wmInQmI.getBinId() + "储位不存在";
+                message = wmInQmI.getBinId() + "储位不存在或已停用";
                 return j;
             }
         }
