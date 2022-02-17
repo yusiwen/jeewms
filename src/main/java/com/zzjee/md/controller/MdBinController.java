@@ -131,15 +131,15 @@ public class MdBinController extends BaseController {
 		mdBin = systemService.getEntity(MdBinEntity.class, mdBin.getId());
 		message = "仓位停用成功";
 		try{
-//			mdBin.setTingYong("Y");
-//			mdBinService.saveOrUpdate(mdBin);
+			mdBin.setTingYong("Y");
+			mdBinService.saveOrUpdate(mdBin);
 			if(wmUtil.checkishavestock("bin",mdBin.getKuWeiBianMa())){
-				message = "仓位存在库存";
+				message = "仓位停用成功，但是存在库存";
 				j.setSuccess(false);
 				j.setMsg(message);
 				return j;
 			}
-			mdBinService.delete(mdBin);
+//			mdBinService.delete(mdBin);
 
 			systemService.addLog(message, Globals.Log_Type_DEL, Globals.Log_Leavel_INFO);
 		}catch(Exception e){
@@ -300,14 +300,14 @@ public class MdBinController extends BaseController {
 				MdBinEntity mdBin = systemService.getEntity(MdBinEntity.class,
 				id
 				);
-//				mdBin.setTingYong("Y");
+				mdBin.setTingYong("Y");
 				if(wmUtil.checkishavestock("bin",mdBin.getKuWeiBianMa())){
-					message = "仓位存在库存";
-					j.setSuccess(false);
-					j.setMsg(message);
-					return j;
+					message = "仓位停用成功，但是存在库存";
+//					j.setSuccess(false);
+//					j.setMsg(message);
+//					return j;
 				}
-				mdBinService.delete(mdBin);
+				mdBinService.updateEntitie(mdBin);
 				systemService.addLog(message, Globals.Log_Type_DEL, Globals.Log_Leavel_INFO);
 			}
 		}catch(Exception e){
