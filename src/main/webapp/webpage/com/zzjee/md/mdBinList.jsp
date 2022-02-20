@@ -13,7 +13,7 @@
     <t:dgCol title="更新日期"  field="updateDate" formatter="yyyy-MM-dd" hidden="true"  queryMode="group"  width="120"></t:dgCol>
     <t:dgCol title="所属部门"  field="sysOrgCode"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
     <t:dgCol title="所属公司"  field="sysCompanyCode"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
-    <t:dgCol title="库存地点"  field="kuWeiMingCheng"    queryMode="group"  width="120"></t:dgCol>
+<%--    <t:dgCol title="库存地点"  field="kuWeiMingCheng"    queryMode="group"  width="120"></t:dgCol>--%>
     <t:dgCol title="仓库"  field="binStore" query="true"   queryMode="single" dictionary="ba_store,store_code,store_name"  width="90"></t:dgCol>
     <t:dgCol title="库位编码"  field="kuWeiBianMa"   query="true" queryMode="single"  width="120"></t:dgCol>
     <t:dgCol title="库位条码"  field="kuWeiTiaoMa"   query="true" queryMode="single"                         width="120"></t:dgCol>
@@ -51,10 +51,10 @@
     <t:dgCol title="操作" field="opt" width="100"></t:dgCol>
    <t:dgDelOpt title="停用" url="mdBinController.do?doDel&id={id}" urlclass="ace_button"  urlfont="fa-trash-o"  exp="tingYong#ne#Y"/>
    <t:dgDelOpt title="同步WCS" url="mdBinController.do?doHad&id={id}" urlclass="ace_button"  urlfont="fa-trash-o"  exp="tingYong#ne#Y"/>
-   <t:dgToolBar title="录入" icon="icon-add" url="mdBinController.do?goAdd" funname="add"></t:dgToolBar>
-   <t:dgToolBar title="编辑" icon="icon-edit" url="mdBinController.do?goUpdate" funname="update"></t:dgToolBar>
+   <t:dgToolBar title="录入" height="700" icon="icon-add" url="mdBinController.do?goAdd" funname="add"></t:dgToolBar>
+   <t:dgToolBar title="编辑"   height="700"  icon="icon-edit" url="mdBinController.do?goUpdate" funname="update"></t:dgToolBar>
    <t:dgToolBar title="批量停用"  icon="icon-remove" url="mdBinController.do?doBatchDel" operationCode="deleteALLSelect" funname="deleteALLSelect"></t:dgToolBar>
-   <t:dgToolBar title="查看" icon="icon-search" url="mdBinController.do?goUpdate" funname="detail"></t:dgToolBar>
+   <t:dgToolBar title="查看"  height="700"  icon="icon-search" url="mdBinController.do?goUpdate" funname="detail"></t:dgToolBar>
    <t:dgToolBar title="导入" icon="icon-put" funname="ImportXls"></t:dgToolBar>
    <t:dgToolBar title="导出" icon="icon-putout" funname="ExportXls"></t:dgToolBar>
    <t:dgToolBar title="模板下载" icon="icon-putout" funname="ExportXlsByT"></t:dgToolBar>

@@ -39,8 +39,10 @@ public class MdBinEntity implements java.io.Serializable {
 	private java.lang.String sysOrgCode;
 	/**所属公司*/
 	private java.lang.String sysCompanyCode;
-	@Excel(name="库存地点")
+//	@Excel(name="库存地点")
 	private java.lang.String kuWeiMingCheng;
+	@Excel(name="仓库")
+	private java.lang.String binStore;
 	/**库位编码*/
 	@Excel(name="库位编码")
 	private java.lang.String kuWeiBianMa;
@@ -113,8 +115,7 @@ public class MdBinEntity implements java.io.Serializable {
 	@Excel(name="动线")
 	private java.lang.String mingXi3;
 	/**仓库*/
-	@Excel(name="仓库")
-	private java.lang.String binStore;
+
 	/**仓库*/
 	@Excel(name="电子标签ID")
 	private java.lang.String lorabqId;
