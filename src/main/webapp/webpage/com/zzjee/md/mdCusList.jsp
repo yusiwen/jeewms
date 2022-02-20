@@ -61,7 +61,7 @@
    <t:dgToolBar title="录入" height="600" icon="icon-add" url="mdCusController.do?goAdd" funname="add"></t:dgToolBar>
    <t:dgToolBar title="编辑" height="600"  icon="icon-edit" operationCode="mdcusedit" url="mdCusController.do?goUpdate" funname="update"></t:dgToolBar>
 <%--    <t:dgToolBar title="批量删除"  icon="icon-remove" url="mdCusController.do?doBatchDel" funname="deleteALLSelect"></t:dgToolBar> --%>
-   <t:dgToolBar title="查看" icon="icon-search" url="mdCusController.do?goUpdate" funname="detail"></t:dgToolBar>
+   <t:dgToolBar title="查看" height="600" icon="icon-search" url="mdCusController.do?goUpdate" funname="detail"></t:dgToolBar>
    <t:dgToolBar title="导入" icon="icon-put" funname="ImportXls"></t:dgToolBar>
    <t:dgToolBar title="导出" icon="icon-putout" funname="ExportXls"></t:dgToolBar>
 <%--   <t:dgToolBar title="模板下载" icon="icon-putout" funname="ExportXlsByT"></t:dgToolBar>--%>
