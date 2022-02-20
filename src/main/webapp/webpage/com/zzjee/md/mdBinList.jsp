@@ -49,11 +49,11 @@
     <t:dgCol title="z坐标"  field="znode"    query="true" queryMode="single"    width="120"></t:dgCol>
 
     <t:dgCol title="操作" field="opt" width="100"></t:dgCol>
-   <t:dgDelOpt title="停用" url="mdBinController.do?doDel&id={id}" urlclass="ace_button"  urlfont="fa-trash-o"  exp="tingYong#ne#Y"/>
+   <t:dgDelOpt title="删除" url="mdBinController.do?doDel&id={id}" urlclass="ace_button"  urlfont="fa-trash-o"  exp="tingYong#ne#Y"/>
    <t:dgDelOpt title="同步WCS" url="mdBinController.do?doHad&id={id}" urlclass="ace_button"  urlfont="fa-trash-o"  exp="tingYong#ne#Y"/>
    <t:dgToolBar title="录入" height="700" icon="icon-add" url="mdBinController.do?goAdd" funname="add"></t:dgToolBar>
    <t:dgToolBar title="编辑"   height="700"  icon="icon-edit" url="mdBinController.do?goUpdate" funname="update"></t:dgToolBar>
-   <t:dgToolBar title="批量停用"  icon="icon-remove" url="mdBinController.do?doBatchDel" operationCode="deleteALLSelect" funname="deleteALLSelect"></t:dgToolBar>
+   <t:dgToolBar title="批量删除"    url="mdBinController.do?doBatchDel" operationCode="deleteALLSelect" funname="deleteALLSelect"></t:dgToolBar>
    <t:dgToolBar title="查看"  height="700"  icon="icon-search" url="mdBinController.do?goUpdate" funname="detail"></t:dgToolBar>
    <t:dgToolBar title="导入" icon="icon-put" funname="ImportXls"></t:dgToolBar>
    <t:dgToolBar title="导出" icon="icon-putout" funname="ExportXls"></t:dgToolBar>
