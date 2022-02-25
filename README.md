@@ -44,7 +44,8 @@ android app也已经开源，近期更新会比较频繁 app开源地址  https:
     2，按照mvn方式导入
     3，数据库还原：
         安装完数据库执行下 GRANT ALL PRIVILEGES ON *.* TO 'root'@'%'IDENTIFIED BY '你的密码' WITH GRANT OPTION;
-                          FLUSH PRIVILEGES;
+                          FLUSH PRIVILEGES;  关闭only_full_group_by规则
+      
 
         步骤 1：还原数据库，2，修改 dbconfig.properties
         3.1 sql导入方式建议 登录MYSQL服务器上用source命令还原
