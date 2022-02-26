@@ -38,7 +38,7 @@
 <%--    <t:dgCol title="操作" field="opt" width="100"></t:dgCol> --%>
    <t:dgDelOpt title="删除" url="wmToMoveGoodsController.do?doDel&id={id}" urlclass="ace_button"  exp="moveSta#ne#已完成"  urlfont="fa-trash-o"/>
 <%--    <t:dgToolBar title="录入" icon="icon-add" url="wmToMoveGoodsController.do?goAdd" funname="add"></t:dgToolBar> --%>
-   <t:dgToolBar title="编辑" icon="icon-edit" url="wmToMoveGoodsController.do?goUpdate" funname="update" ></t:dgToolBar>
+   <t:dgToolBar title="编辑"  height="480" width="1020" icon="icon-edit" url="wmToMoveGoodsController.do?goUpdate" funname="update" ></t:dgToolBar>
       <%--<t:dgToolBar title="质押" icon="icon-edit" url="wmToMoveGoodsController.do?goUpdate" funname="update" ></t:dgToolBar>--%>
 
 
