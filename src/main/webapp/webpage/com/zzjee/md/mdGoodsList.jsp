@@ -72,12 +72,10 @@
     <t:dgToolBar title="导出" icon="icon-putout" funname="ExportXls"></t:dgToolBar>
    <t:dgToolBar title="模板下载" icon="icon-putout" funname="ExportXlsByT"></t:dgToolBar>
   </t:datagrid>
-
       <div name="searchColums1" style="float: left; padding-left: 0px;padding-top: 5px;">
           <%--<input type="text" name="batchbin" style="width: 100px; height: 30px;">--%>
           日期：<input type="text" name="batchdate"    class="form-control" onClick="WdatePicker()" style="width: 100px; height: 30px;">
           商品编码：<input type="text" name="othercode"    class="form-control"  style="width: 100px; height: 30px;">
-
       </div>
   </div>
  </div>
