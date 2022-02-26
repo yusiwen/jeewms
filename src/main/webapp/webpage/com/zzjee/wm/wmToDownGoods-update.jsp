@@ -12,10 +12,10 @@
   <link rel="stylesheet" href="online/template/ledefault/css/bootstrap-theme.css">
   <link rel="stylesheet" href="online/template/ledefault/css/bootstrap.css">
   <link rel="stylesheet" href="online/template/ledefault/css/app.css">
-  
+
   <link rel="stylesheet" href="plug-in/Validform/css/metrole/style.css" type="text/css"/>
   <link rel="stylesheet" href="plug-in/Validform/css/metrole/tablefrom.css" type="text/css"/>
-  
+
   <script type="text/javascript" src="plug-in/jquery/jquery-1.8.3.js"></script>
   <script type="text/javascript" src="plug-in/tools/dataformat.js"></script>
   <script type="text/javascript" src="plug-in/easyui/jquery.easyui.min.1.3.2.js"></script>
@@ -46,7 +46,7 @@
 		<input id="updateBy" name="updateBy" type="hidden" value="${wmToDownGoodsPage.updateBy }"/>
 		<input id="updateDate" name="updateDate" type="hidden" value="${wmToDownGoodsPage.updateDate }"/>
 		<input id="updateName" name="updateName" type="hidden" value="${wmToDownGoodsPage.updateName }"/>
-			
+
 			<div class="tab-wrapper">
 			    <!-- tab -->
 			    <ul class="nav nav-tabs">
@@ -62,13 +62,11 @@
 						  <div class="col-xs-3">
 							  <input id="createDate" name="createDate" onClick="WdatePicker()" type="text" class="form-control"
 									 ignore="ignore"
-									 value='${wmToUpGoodsPage.createDate}' />
+									 value='${wmToDownGoodsPage.createDate}' />
 							  <span class="Validform_checktip" style="float:left;height:0px;"></span>
 							  <label class="Validform_label" style="display: none">创建日期</label>
 						  </div>
-					  </div>
 
-							<div class="row show-grid">
 			          <div class="col-xs-3 text-center">
 			          	<b>商品编码：</b>
 			          </div>
@@ -80,8 +78,8 @@
 						<label class="Validform_label" style="display: none">商品编码</label>
 			          </div>
 						</div>
-			          
-			        
+
+
 							<div class="row show-grid">
 			          <div class="col-xs-3 text-center">
 			          	<b>数量：</b>
@@ -94,8 +92,8 @@
 						<label class="Validform_label" style="display: none">数量</label>
 			          </div>
 						</div>
-			          
-			        
+
+
 							<div class="row show-grid">
 			          <div class="col-xs-3 text-center">
 			          	<b>确认数量：</b>
@@ -118,7 +116,7 @@
 						<label class="Validform_label" style="display: none">单位</label>
 			          </div>
 						</div>
-			          
+
 			        		<div class="row show-grid">
 			          <div class="col-xs-3 text-center">
 			          	<b>基本单位数量：</b>
@@ -152,10 +150,7 @@
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
 						<label class="Validform_label" style="display: none">原始单据编码</label>
 			          </div>
-						</div>
-			          
-			        
-							<div class="row show-grid">
+
 			          <div class="col-xs-3 text-center">
 			          	<b>原始单据类型：</b>
 			          </div>
@@ -167,26 +162,23 @@
 						<label class="Validform_label" style="display: none">原始单据类型</label>
 			          </div>
 						</div>
-			          
-			        
-				
-			          
-			        
+
+
+
+
+
 							<div class="row show-grid">
 			          <div class="col-xs-3 text-center">
 			          	<b>生产日期：</b>
 			          </div>
 			          <div class="col-xs-3">
-								<input id="goodsProData" name="goodsProData" type="text" 
+								<input id="goodsProData" name="goodsProData" type="text"
 									ignore="ignore"
 								style="background: url('plug-in/ace/images/datetime.png') no-repeat scroll right center transparent;"  class="form-control" onClick="WdatePicker()" value='${wmToDownGoodsPage.goodsProData}' />
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
 						<label class="Validform_label" style="display: none">生产日期</label>
 			          </div>
-						</div>
-			          
-			        
-							<div class="row show-grid">
+
 			          <div class="col-xs-3 text-center">
 			          	<b>源托盘码：</b>
 			          </div>
@@ -198,8 +190,8 @@
 						<label class="Validform_label" style="display: none">源托盘码</label>
 			          </div>
 						</div>
-			          
-			        
+
+
 							<div class="row show-grid">
 			          <div class="col-xs-3 text-center">
 			          	<b>库位编码：</b>
@@ -211,10 +203,7 @@
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
 						<label class="Validform_label" style="display: none">库位编码</label>
 			          </div>
-						</div>
-			          
-			        
-							<div class="row show-grid">
+
 			          <div class="col-xs-3 text-center">
 			          	<b>作业类型：</b>
 			          </div>
@@ -226,8 +215,8 @@
 						<label class="Validform_label" style="display: none">作业类型</label>
 			          </div>
 						</div>
-			          
-			        
+
+
 							<div class="row show-grid">
 			          <div class="col-xs-3 text-center">
 			          	<b>货主：</b>
@@ -239,10 +228,7 @@
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
 						<label class="Validform_label" style="display: none">货主</label>
 			          </div>
-						</div>
-			          
-			        
-							<div class="row show-grid">
+
 			          <div class="col-xs-3 text-center">
 			          	<b>目标托盘：</b>
 			          </div>
@@ -254,8 +240,8 @@
 						<label class="Validform_label" style="display: none">目标托盘</label>
 			          </div>
 						</div>
-			          
-			        
+
+
 							<div class="row show-grid">
 			          <div class="col-xs-3 text-center">
 			          	<b>状态：</b>
@@ -268,10 +254,10 @@
 						<label class="Validform_label" style="display: none">状态</label>
 			          </div>
 						</div>
-			          
-			        
 
-			       
+
+
+
 			          <div class="row" id = "sub_tr" style="display: none;">
 				        <div class="col-xs-12 layout-header">
 				          <div class="col-xs-6"></div>
@@ -280,7 +266,7 @@
 				      </div>
 			     </div>
 			   </div>
-			   
+
 			   <div class="con-wrapper" id="con-wrapper2" style="display: block;"></div>
 			 </div>
   </t:formvalid>
@@ -291,7 +277,7 @@
 	if(location.href.indexOf("load=detail")!=-1){
 		$(".jeecgDetail").hide();
 	}
-	
+
 	if(location.href.indexOf("mode=read")!=-1){
 		//查看模式控件禁用
 		$("#formobj").find(":input").attr("disabled","disabled");
@@ -304,11 +290,11 @@
 
   var neibuClickFlag = false;
   function neibuClick() {
-	  neibuClickFlag = true; 
+	  neibuClickFlag = true;
 	  $('#btn_sub').trigger('click');
   }
 
 </script>
  </body>
-<script src = "webpage/com/zzjee/wm/wmToDownGoods.js"></script>		
+<script src = "webpage/com/zzjee/wm/wmToDownGoods.js"></script>
 </html>
