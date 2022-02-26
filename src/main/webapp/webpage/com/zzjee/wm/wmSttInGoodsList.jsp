@@ -30,7 +30,7 @@
    <t:dgDelOpt title="删除" url="wmSttInGoodsController.do?doDel&id={id}" urlclass="ace_button" exp="sttSta#eq#计划中"  urlfont="fa-trash-o"/>
 <%--    <t:dgFunOpt title="差异过账" funname="dorun(id)"  urlclass="ace_button"  exp="sttSta#eq#已完成"  /> --%>
 <%--    <t:dgToolBar title="录入" icon="icon-add" url="wmSttInGoodsController.do?goAdd" funname="add"></t:dgToolBar> --%>
-   <t:dgToolBar title="编辑" icon="icon-edit" url="wmSttInGoodsController.do?goUpdate" funname="update"></t:dgToolBar>
+   <t:dgToolBar title="编辑" height="400" icon="icon-edit" url="wmSttInGoodsController.do?goUpdate" funname="update"></t:dgToolBar>
 <%--    <t:dgToolBar title="批量删除"  icon="icon-remove" url="wmSttInGoodsController.do?doBatchDel" funname="deleteALLSelect"></t:dgToolBar> --%>
    <t:dgToolBar title="查看" icon="icon-search" url="wmSttInGoodsController.do?goUpdate" funname="detail"></t:dgToolBar>
 <%--    <t:dgToolBar title="导入" icon="icon-put" funname="ImportXls"></t:dgToolBar> --%>
