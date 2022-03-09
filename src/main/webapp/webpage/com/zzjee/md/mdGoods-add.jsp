@@ -98,21 +98,21 @@ function counttiji(){
 									<span class="Validform_checktip" style="float:left;height:0px;"></span>
 						<label class="Validform_label" style="display: none">价格</label>
 			          </div>
-<%--						</div>--%>
+						</div>
 
 
-<%--							<div class="row show-grid">--%>
+							<div class="row show-grid">
 
-<%--							         <div class="col-xs-3 text-center">--%>
-<%--			          	<b  style="color:red">商品编码</b>--%>
-<%--			          </div>--%>
-<%--			          <div class="col-xs-3">--%>
-<%--								<input id="shpBianMa" name="shpBianMa" type="text" class="form-control"--%>
-<%--									ignore="checked"--%>
-<%--									   datatype="*" required="required" />--%>
-<%--						<span class="Validform_checktip" style="float:left;height:0px;"></span>--%>
-<%--						<label class="Validform_label" style="display: none">商品编码</label>--%>
-<%--			          </div>--%>
+							         <div class="col-xs-3 text-center">
+			          	<b  style="color:red">商品编码</b>
+			          </div>
+			          <div class="col-xs-3">
+								<input id="shpBianMa" name="shpBianMa" type="text" class="form-control"
+									ignore="checked"
+									   datatype="*" required="required" />
+						<span class="Validform_checktip" style="float:left;height:0px;"></span>
+						<label class="Validform_label" style="display: none">商品编码</label>
+			          </div>
 			          	         <div class="col-xs-3 text-center">
 			          	<b   >客户商品编码</b>
 			          </div>
@@ -153,6 +153,18 @@ function counttiji(){
 									<span class="Validform_checktip" style="float:left;height:0px;"></span>
 									<label class="Validform_label" style="display: none">商品品牌</label>
 								</div>
+
+								<div class="col-xs-3 text-center">
+									<b  >SKU</b>
+								</div>
+								<div class="col-xs-3">
+									<input id="sku" name="sku" type="text" class="form-control"
+										   ignore="ignore"
+									/>
+									<span class="Validform_checktip" style="float:left;height:0px;"></span>
+									<label class="Validform_label" style="display: none">sku</label>
+								</div>
+
 						</div>
 					  <div class="row show-grid">
 					  <div class="col-xs-3 text-center">

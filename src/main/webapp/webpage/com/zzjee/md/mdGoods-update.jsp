@@ -157,6 +157,18 @@
 									<span class="Validform_checktip" style="float:left;height:0px;"></span>
 									<label class="Validform_label" style="display: none">商品品牌</label>
 								</div>
+
+								<div class="col-xs-3 text-center">
+									<b  >SKU</b>
+								</div>
+								<div class="col-xs-3">
+									<input id="sku" name="sku" type="text"  value='${mdGoodsPage.sku}' class="form-control"
+										   ignore="ignore"
+									/>
+									<span class="Validform_checktip" style="float:left;height:0px;"></span>
+									<label class="Validform_label" style="display: none">sku</label>
+								</div>
+
 								<div class="row show-grid">
 									<div class="col-xs-3 text-center">
 										<b  style="color:red">商品类目</b>

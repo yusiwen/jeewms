@@ -214,30 +214,22 @@ public class MdGoodsController extends BaseController {
 		AjaxJson j = new AjaxJson();
 		message = "商品信息添加成功";
 		try {
-			MdGoodsEntity mdGoods1 = systemService.findUniqueByProperty(
-					MdGoodsEntity.class, "shpBianMa", mdGoods.getShpBianMa());
-
-			if(mdGoods1 ==null ){
-				if(StringUtil.isEmpty(mdGoods.getChlKongZhi()) ){
-					mdGoods.setChlKongZhi("N");
-				}
-				if("N".equals(mdGoods.getChlKongZhi() )){
-					mdGoods.setChlShl("1");
-					mdGoods.setJshDanWei(mdGoods.getShlDanWei());
-
-				}
-
-				try {
-					if(StringUtil.isEmpty(mdGoods.getZhlKgm())){
-						if(!StringUtil.isEmpty(mdGoods.getBzhiQi())){
-							int bzhiq = Integer.parseInt(mdGoods.getBzhiQi());
-							mdGoods.setZhlKgm(Integer.toString(bzhiq));
-						}
-
+			if(StringUtil.isEmpty(mdGoods.getChlKongZhi()) ){
+				mdGoods.setChlKongZhi("N");
+				mdGoods.setChlShl("1");
+				mdGoods.setJshDanWei(mdGoods.getShlDanWei());
+			}
+			try {
+				if(StringUtil.isEmpty(mdGoods.getZhlKgm())){
+					if(!StringUtil.isEmpty(mdGoods.getBzhiQi())){
+						int bzhiq = Integer.parseInt(mdGoods.getBzhiQi());
+						mdGoods.setZhlKgm(Integer.toString(bzhiq));
 					}
-				} catch (Exception e) {
-					// TODO: handle exception
 				}
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			if(StringUtil.isEmpty(mdGoods.getShpBianMa())){
 				//查询当前商品类型的商品数量
 				Map<String, Object> countMap = systemService.findOneForJdbc("select right(shp_bian_ma,7) shp_bian_ma  from md_goods where category_code =? and suo_shu_ke_hu  = ? and shp_bian_ma like ? ORDER BY shp_bian_ma desc LIMIT 1",mdGoods.getCategoryCode(),mdGoods.getSuoShuKeHu(),mdGoods.getSuoShuKeHu()+mdGoods.getCategoryCode()+"%");
 				if (countMap == null) {
@@ -254,10 +246,18 @@ public class MdGoodsController extends BaseController {
 				systemService.addLog(message, Globals.Log_Type_INSERT,
 						Globals.Log_Leavel_INFO);
 			}else{
-				message = "商品编码或者条码已经存在";
-				j.setSuccess(false);
-			}
+				MdGoodsEntity mdGoods1 = systemService.findUniqueByProperty(
+						MdGoodsEntity.class, "shpBianMa", mdGoods.getShpBianMa());
+				if(mdGoods1 != null){
+					message = "商品编码已经存在";
+					j.setSuccess(false);
+				}else{
+					mdGoodsService.save(mdGoods);
+					systemService.addLog(message, Globals.Log_Type_INSERT,
+							Globals.Log_Leavel_INFO);
+				}
 
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			message = "商品信息添加失败";
@@ -447,29 +447,25 @@ public class MdGoodsController extends BaseController {
 							MdGoodsEntity.class, "shpBianMa", mdGoods.getShpBianMa());
 					if(mdGoods1 ==null ){
 						try {
-							//查询当前商品类型的商品数量
-//							Map<String, Object> map = systemService.findOneForJdbc("select ifnull(count(1),0) num  from ba_goods_type where goods_type_code = ? order by create_date desc limit 1",mdGoods.getChpShuXing());
-//							if ((Long)map.get("num") <= 0L) {
-//								j.setSuccess(false);
-//								j.setMsg("产品属性错误："+mdGoods.getChpShuXing());
-//								return j;
-//							}
-							if (StringUtils.isEmpty(mdGoods.getCategoryCode())) {
-								j.setSuccess(false);
-								j.setMsg("类目编码为空：");
-								return j;
-							}
-							Map<String, Object> countMap = systemService.findOneForJdbc("select right(shp_bian_ma,7) shp_bian_ma  from md_goods where category_code =? and suo_shu_ke_hu  = ? and shp_bian_ma like ? ORDER BY shp_bian_ma desc LIMIT 1",mdGoods.getCategoryCode(),mdGoods.getSuoShuKeHu(),mdGoods.getSuoShuKeHu()+mdGoods.getCategoryCode()+"%");
-							if (countMap == null) {
-								mdGoods.setShpBianMa(mdGoods.getSuoShuKeHu()+mdGoods.getCategoryCode()+String.format("%07d", 1));
-							}else {
-								Object goodsCode = countMap.get("shp_bian_ma");
-								if (goodsCode != null) {
-									mdGoods.setShpBianMa(mdGoods.getSuoShuKeHu()+mdGoods.getCategoryCode()+String.format("%07d",Integer.parseInt(((String) goodsCode))+1));
-								}else {
+							if(StringUtil.isEmpty(mdGoods.getShpBianMa())){//商品编码为空则自动编码
+								if (StringUtils.isEmpty(mdGoods.getCategoryCode())) {
+									j.setSuccess(false);
+									j.setMsg("类目编码为空：");
+									return j;
+								}
+								Map<String, Object> countMap = systemService.findOneForJdbc("select right(shp_bian_ma,7) shp_bian_ma  from md_goods where category_code =? and suo_shu_ke_hu  = ? and shp_bian_ma like ? ORDER BY shp_bian_ma desc LIMIT 1",mdGoods.getCategoryCode(),mdGoods.getSuoShuKeHu(),mdGoods.getSuoShuKeHu()+mdGoods.getCategoryCode()+"%");
+								if (countMap == null) {
 									mdGoods.setShpBianMa(mdGoods.getSuoShuKeHu()+mdGoods.getCategoryCode()+String.format("%07d", 1));
+								}else {
+									Object goodsCode = countMap.get("shp_bian_ma");
+									if (goodsCode != null) {
+										mdGoods.setShpBianMa(mdGoods.getSuoShuKeHu()+mdGoods.getCategoryCode()+String.format("%07d",Integer.parseInt(((String) goodsCode))+1));
+									}else {
+										mdGoods.setShpBianMa(mdGoods.getSuoShuKeHu()+mdGoods.getCategoryCode()+String.format("%07d", 1));
+									}
 								}
 							}
+
 
 							if(StringUtil.isEmpty(mdGoods.getZhlKgm())){
 								if(!StringUtil.isEmpty(mdGoods.getBzhiQi())){
@@ -487,8 +483,6 @@ public class MdGoodsController extends BaseController {
 								mdGoods.setJshDanWei(mdGoods.getShlDanWei());
 
 							}
-
-
 
 						} catch (Exception e) {
 							// TODO: handle exception
