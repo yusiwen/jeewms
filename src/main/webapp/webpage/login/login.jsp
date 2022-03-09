@@ -102,19 +102,19 @@
                       <div class="space-4"></div>
 
                 </div>
-                <%--<div class="toolbar clearfix">--%>
-                  <%--<div style="float: right">--%>
-                    <%--<a href="#"  class="forgot-password-link">--%>
-                    	  <%--语言--%>
-                      <%--<i class="ace-icon fa fa-arrow-right"></i>--%>
-                      <%--<t:dictSelect id="langCode" field="langCode" typeGroupCode="lang" hasLabel="false" extendJson="{style:'padding:2px; width:80px;'}" defaultVal="zh-cn"></t:dictSelect>--%>
-                    <%--</a>--%>
-                  <%--</div>--%>
-                <%--</div>--%>
+                <div class="toolbar clearfix">
+                  <div style="float: right">
+                    <a href="#"  class="forgot-password-link">
+                    	  语言
+                      <i class="ace-icon fa fa-arrow-right"></i>
+                      <t:dictSelect id="langCode" field="langCode" typeGroupCode="lang" hasLabel="false" extendJson="{style:'padding:2px; width:80px;'}" defaultVal="zh-cn"></t:dictSelect>
+                    </a>
+                  </div>
+                </div>
                 </form>
               </div>
             </div>
-            <%--<div class="center"><h4 class="blue" id="id-company-text">&copy; 本系统未在任何平台出售源码，版权归厦门市灵鹿谷科技有限公司所有，如果需要服务请联系13850081872</h4></div>--%>
+            <div class="center"><h4 class="blue" id="id-company-text">&copy; 本系统未在任何平台出售源码，版权归jeewms所有，如果需要服务请联系13850081872</h4></div>
             <div class="navbar-fixed-top align-right">
               <br />
               &nbsp;
@@ -273,10 +273,10 @@
     });
   }
   //登录提示消息显示
-  function showErrorMsg(msg){	
+  function showErrorMsg(msg){
     $("#errMsgContiner").show();
-    $("#showErrMsg").html(msg);    
-    window.setTimeout(optErrMsg,3000); 
+    $("#showErrMsg").html(msg);
+    window.setTimeout(optErrMsg,3000);
   }
   /**
    * 刷新验证码
@@ -341,7 +341,7 @@ function reloadRandCodeImage() {
           });
   		$("#on_off").attr("checked", true);
   		$("#on_off").val("1");
-  	} 
+  	}
   	else
   	{
   		$("#on_off").attr("checked", false);
