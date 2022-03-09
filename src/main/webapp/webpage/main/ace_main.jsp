@@ -370,7 +370,7 @@
 						</div>
 
 						<div>
-							<input type="checkbox" checked="checked" class="ace ace-checkbox-2" id="ace-settings-sidebar" />
+							<input type="checkbox"   class="ace ace-checkbox-2" id="ace-settings-sidebar" />
 							<label class="lbl" for="ace-settings-sidebar"> 固定滑动条</label>
 						</div>
 
