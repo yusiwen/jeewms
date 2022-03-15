@@ -27,7 +27,7 @@
 					<span>
 							${poVal.goodsName }
 					</span>
-				<div id="printContent" style="page-break-after:always">
+				<div id="printContent" style="margin-top: 10px;page-break-after:always">
 					<img src="rest/wmBaseController/showOrDownbarcodeByurl?qrvalue=${poVal.barCode }" alt="${poVal.barCode }" style="height:40px;vertical-align:middle;">
 				</div>
 			</div>
