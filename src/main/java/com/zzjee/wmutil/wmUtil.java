@@ -411,7 +411,7 @@ public class wmUtil {
 		SystemService systemService =ApplicationContextUtil.getContext().getBean(SystemService.class);
 
 		List<WvStockEntity> list = systemService.findHql(hql,checkvalue);
-        if(list!=null&&list.size()>0){
+        if(list!=null&&list.size()>0&&list.get(0).getGoodsQua()>0.01){//判断库存不为0
 			ishavestock = true;
 		}
     	return  ishavestock;
