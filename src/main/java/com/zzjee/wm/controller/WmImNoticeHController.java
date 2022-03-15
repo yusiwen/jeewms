@@ -123,7 +123,40 @@ public class WmImNoticeHController extends BaseController {
     public ModelAndView tbatchlist(HttpServletRequest request) {
         return new ModelAndView("com/zzjee/wm/wmintqmbatchList");
     }
+    @RequestMapping(params = "doPrintgoods")
+    public ModelAndView doPrintgoods(String id,HttpServletRequest request) {
+        WmImNoticeHEntity wmImNoticeHEntity = wmImNoticeHService.getEntity(WmImNoticeHEntity.class, id);
 
+        Object id0 = wmImNoticeHEntity.getNoticeId();
+
+
+        List<WmImNoticeIEntity> wmImNoticeIEntitynewList = new ArrayList<>();
+        String hql0 = "from WmImNoticeIEntity where  iM_NOTICE_ID = ? ";
+        try {
+            List<WmImNoticeIEntity> wmImNoticeIEntityList = systemService
+                    .findHql(hql0, id0);
+            for (WmImNoticeIEntity wmImNoticeIEntity : wmImNoticeIEntityList) {
+                try{
+                    MdGoodsEntity mvgoods = systemService.findUniqueByProperty(
+                            MdGoodsEntity.class, "shpBianMa", wmImNoticeIEntity.getGoodsCode());
+                    if (mvgoods != null) {
+                        wmImNoticeIEntity.setBzhiQi(mvgoods.getBzhiQi());
+                        wmImNoticeIEntity.setShpGuiGe(mvgoods.getShpGuiGe());
+                        wmImNoticeIEntity.setGoodsName(mvgoods.getShpMingCheng());
+                        wmImNoticeIEntity.setBarCode(mvgoods.getShpTiaoMa());
+                    }
+                }catch (Exception e){
+
+                }
+                wmImNoticeIEntitynewList.add(wmImNoticeIEntity);
+            }
+            request.setAttribute("wmImNoticeIList", wmImNoticeIEntitynewList);
+
+        }catch (Exception e){
+
+        }
+        return new ModelAndView("com/zzjee/wm/print/imnotice-printgoods");
+    }
     @RequestMapping(params = "doPrintpage")
     public ModelAndView doPrint(String id,HttpServletRequest request) {
         WmImNoticeHEntity wmImNoticeHEntity = wmImNoticeHService.getEntity(WmImNoticeHEntity.class, id);
