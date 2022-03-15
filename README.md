@@ -1,8 +1,8 @@
 
 QQ交流群：335607153  有任何问题可以加群交流 
- **智能制造产品JEEMES即将开源**  (https://gitee.com/erzhongxmu/jeemes) 欢迎大家STAR
+ **智能制造产品JEEMES已经开源**  (https://gitee.com/erzhongxmu/jeemes) 欢迎大家STAR
  
-测试系统地址 http://47.113.229.131:9080/wms  用户名：test  密码：123456 本地启动的用户名：admin 密码：llg123
+测试系统地址 http://47.113.229.131:9080/wms  用户名：test2  密码：123456 本地启动的用户名：admin 密码：llg123
 android app也已经开源，近期更新会比较频繁 app开源地址  https://gitee.com/erzhongxmu/jeewmsapp
 大家看到了，star一下，谢谢，本团队会持续更新，一直开源！
 欢迎喜欢的朋友一起来优化功能。
@@ -14,13 +14,10 @@ android app也已经开源，近期更新会比较频繁 app开源地址  https:
     此产品。针对有特殊信息化需求的企业，提供高性价比的实施服务。
 
     产品特点：
-    1、适用范围：第三方物流仓储企业，自营仓储等。
+    1、适用范围：第三方物流仓储企业，冷链仓库，自营仓储等。
     2、技术特点：基于JAVA的WEB后台，基于ANDROID开发的PDA系统。
     3、功能特点：涵盖订单管理系统（OMS），仓储管理系统（WMS），计费管理系统（BMS），现场作业系统（RF），第三方接口模块
     4、接口支持：已经对接：SAP ECC，SAP HANA 数据库，用友U8，百胜E3，UAS。
-    5、对接自主研发ERP管理系统（暂未开源）
-    6、增加进销存模块
-    7、增加BOM
 
 二、业务介绍：    
 
@@ -44,11 +41,14 @@ android app也已经开源，近期更新会比较频繁 app开源地址  https:
     2，按照mvn方式导入
     3，数据库还原：
         安装完数据库执行下 GRANT ALL PRIVILEGES ON *.* TO 'root'@'%'IDENTIFIED BY '你的密码' WITH GRANT OPTION;
-                          FLUSH PRIVILEGES;  关闭only_full_group_by规则
+                          FLUSH PRIVILEGES;  
+        关闭only_full_group_by规则
       
 
-        步骤 1：还原数据库，2，修改 dbconfig.properties
-        3.1 sql导入方式建议 登录MYSQL服务器上用source命令还原
+        步骤 
+        1：还原数据库，
+        2:修改 dbconfig.properties
+        3: sql导入方式建议 登录MYSQL服务器上用source命令还原,或用Mysqlworkbench importing
     4，IDEA：mvn tomcat7:run   输入用户名和密码：admin llg123
     5、主要技术
         开发语言：JAVA。
@@ -57,16 +57,8 @@ android app也已经开源，近期更新会比较频繁 app开源地址  https:
 	
 四、技术支持：
 
-    演示环境：http://47.113.229.131:9080/wms     用户： test   密码：123456
+    演示环境：http://47.113.229.131:9080/wms     用户： test2   密码：123456
     QQ群：335607153    
-五、修改日志：
-    
-    1，测试环境已恢复
-    2，增加域名
-
-	
-
-
    
 六、开源及商务合作说明：
 
