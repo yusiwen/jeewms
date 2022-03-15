@@ -111,7 +111,7 @@
 		<repository>
 			<id>jeecg</id>
 			<name>jeecg Repository</name>
-			<url>http://maven.jeecg.org/nexus/content/repositories/jeecg</url>
+			<url>https://maven.jeecg.org/nexus/content/repositories/jeecg</url>
 			<snapshots>
 				<enabled>false</enabled>
 			</snapshots>
@@ -119,19 +119,12 @@
 		<repository>
 			<id>jeecg-snapshots</id>
 			<name>jeecg-snapshots Repository</name>
-			<url>http://maven.jeecg.org/nexus/content/repositories/snapshots</url>
+			<url>https://maven.jeecg.org/nexus/content/repositories/snapshots</url>
 			<snapshots>
 				<enabled>true</enabled>
 			</snapshots>
 		</repository>
-		<repository>
-			<id>thirdparty</id>
-			<name>3rd party</name>
-			<url>http://120.78.150.43:8082/nexus/content/repositories/thirdparty</url>
-			<snapshots>
-				<enabled>false</enabled>
-			</snapshots>
-		</repository>
+
 	</repositories>
 
 	<dependencies>
