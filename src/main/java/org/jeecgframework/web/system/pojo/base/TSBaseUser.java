@@ -28,9 +28,9 @@ public class TSBaseUser extends IdEntity implements java.io.Serializable {
 	private Short activitiSync;//是否同步工作流引擎
 	/*@Excel(name = "状态")*/
 	private Short status;// 状态1：在线,2：离线,0：禁用
-	
+
 	private Short deleteFlag;// 状态: 0:不删除  1：删除
-	
+
 	private byte[] signature;// 签名文件
 
 	@Excel(name = "组织机构编码(多个组织机构编码用逗号分隔，非必填)")
@@ -90,8 +90,8 @@ public class TSBaseUser extends IdEntity implements java.io.Serializable {
 	public void setActivitiSync(Short activitiSync) {
 		this.activitiSync = activitiSync;
 	}
-	
-	
+
+
 	@Column(name = "password", length = 100)
 	public String getPassword() {
 		return this.password;
@@ -149,7 +149,7 @@ public class TSBaseUser extends IdEntity implements java.io.Serializable {
 	public void setDeleteFlag(Short deleteFlag) {
 		this.deleteFlag = deleteFlag;
 	}
-	
+
 	@Column(name = "delete_flag")
 	public Short getDeleteFlag() {
 		return deleteFlag;
