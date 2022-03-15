@@ -33,18 +33,15 @@ android app也已经开源，近期更新会比较频繁 app开源地址  https:
   
     1，开发环境：
        开发工具：
-		IDEA（强烈建议用IDEA，也可以Eclipse）；ANDROID STUDIO
+		IDEA（版本不限）；AS
 		JDK1.8
 		Maven
-		Mysql5.6以上（linux 注意设置大小写不敏感）
+		Mysql5.6以上（注意设置大小写不敏感，关闭only_full_group_by规则），mysql8.0不行
 		运行环境：CENTOS6.5以上或windows server 2008、tomcat7以上，JDK1.8， MYSQL5.7
     2，按照mvn方式导入
     3，数据库还原：
         安装完数据库执行下 GRANT ALL PRIVILEGES ON *.* TO 'root'@'%'IDENTIFIED BY '你的密码' WITH GRANT OPTION;
-                          FLUSH PRIVILEGES;  
-        关闭only_full_group_by规则
-      
-
+                          FLUSH PRIVILEGES;     
         步骤 
         1：还原数据库，
         2:修改 dbconfig.properties
@@ -60,7 +57,7 @@ android app也已经开源，近期更新会比较频繁 app开源地址  https:
     演示环境：http://47.113.229.131:9080/wms     用户： test2   密码：123456
     QQ群：335607153    
    
-六、开源及商务合作说明：
+五、开源及商务合作说明：
 
     1、开源说明：本项目完全遵循GPL V3协议。
         如果你喜欢我们的产品, 可以放心从我们的开源版开始使用, 在产品商业化的支持下同时我们会尽最大的努力维护开源版的稳定。
