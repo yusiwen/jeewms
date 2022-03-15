@@ -58,7 +58,7 @@
     <t:dgDelOpt title="删除" url="mdSupController.do?doDel&id={id}" urlclass="ace_button"  urlfont="fa-trash-o"/>
    <t:dgToolBar title="录入" icon="icon-add" url="mdSupController.do?goAdd" funname="add"></t:dgToolBar>
    <t:dgToolBar title="编辑" icon="icon-edit" url="mdSupController.do?goUpdate" funname="update"></t:dgToolBar>
-<%--    <t:dgToolBar title="批量删除"  icon="icon-remove" url="mdSupController.do?doBatchDel" funname="deleteALLSelect"></t:dgToolBar> --%>
+    <t:dgToolBar title="批量删除"  icon="icon-remove" url="mdSupController.do?doBatchDel" funname="deleteALLSelect"></t:dgToolBar>
    <t:dgToolBar title="查看" icon="icon-search" url="mdSupController.do?goUpdate" funname="detail"></t:dgToolBar>
     <t:dgToolBar operationCode="uasimpcus" title="第三方系统导入" icon="icon-put" funname="otherimp"></t:dgToolBar>
 

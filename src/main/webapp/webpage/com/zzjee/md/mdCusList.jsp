@@ -57,10 +57,10 @@
     <t:dgCol title="注册日期"  field="zhuCeRiQi" formatter="yyyy-MM-dd" hidden="true"  queryMode="group"  width="120"></t:dgCol>
     <t:dgCol title="备注"  field="beiZhu"    queryMode="group"  width="120"></t:dgCol>
     <t:dgCol title="操作" field="opt" width="100"></t:dgCol>
-    <t:dgDelOpt title="删除" operationCode="mdcusdel" url="mdCusController.do?doDel&id={id}" urlclass="ace_button"  urlfont="fa-trash-o"/>
+    <t:dgDelOpt title="删除"   url="mdCusController.do?doDel&id={id}" urlclass="ace_button"  urlfont="fa-trash-o"/>
    <t:dgToolBar title="录入" height="600" icon="icon-add" url="mdCusController.do?goAdd" funname="add"></t:dgToolBar>
-   <t:dgToolBar title="编辑" height="600"  icon="icon-edit" operationCode="mdcusedit" url="mdCusController.do?goUpdate" funname="update"></t:dgToolBar>
-<%--    <t:dgToolBar title="批量删除"  icon="icon-remove" url="mdCusController.do?doBatchDel" funname="deleteALLSelect"></t:dgToolBar> --%>
+   <t:dgToolBar title="编辑" height="600"  icon="icon-edit"  url="mdCusController.do?goUpdate" funname="update"></t:dgToolBar>
+    <t:dgToolBar title="批量删除"  icon="icon-remove" url="mdCusController.do?doBatchDel" funname="deleteALLSelect"></t:dgToolBar>
    <t:dgToolBar title="查看" height="600" icon="icon-search" url="mdCusController.do?goUpdate" funname="detail"></t:dgToolBar>
    <t:dgToolBar title="导入" icon="icon-put" funname="ImportXls"></t:dgToolBar>
    <t:dgToolBar title="导出" icon="icon-putout" funname="ExportXls"></t:dgToolBar>

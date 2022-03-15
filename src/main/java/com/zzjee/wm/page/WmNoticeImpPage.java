@@ -9,12 +9,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-/**   
+/**
  * @Title: Entity
  * @Description: 导入
  * @author erzhongxmu
  * @date 2017-09-11 15:08:34
- * @version V1.0   
+ * @version V1.0
  *
  */
 public class WmNoticeImpPage implements java.io.Serializable {
@@ -68,10 +68,10 @@ public class WmNoticeImpPage implements java.io.Serializable {
 	/**进货通知单号*/
     @Excel(name="通知单号")
 	private String noticeId;
-	@Excel(name="合作伙伴编号")
+	@Excel(name="供应商编码")
 	private String supCode;
 	/**附件*/
-	@Excel(name="合作伙伴名称")
+	@Excel(name="供应商名称")
 	private String supName;
 	@Excel(name="其他系统ID")
 	private java.lang.String otherId;
