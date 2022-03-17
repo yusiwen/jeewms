@@ -36,7 +36,9 @@ android app也已经开源，近期更新会比较频繁 app开源地址  https:
 		IDEA（版本不限）；AS
 		JDK1.8
 		Maven
-		Mysql5.6以上（注意设置大小写不敏感，关闭only_full_group_by规则），mysql8.0不行
+		Mysql5.6以上（注意设置大小写不敏感，关闭only_full_group_by规则  
+               # 设置sql_mode，去掉了ONLY_FULL_GROUP_BY
+               sql_mode='STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION'），mysql8.0不行
 		运行环境：CENTOS6.5以上或windows server 2008、tomcat7以上，JDK1.8， MYSQL5.7
     2，按照mvn方式导入
     3，数据库还原：
