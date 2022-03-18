@@ -9,6 +9,7 @@ import com.zzjee.wm.entity.WmImNoticeHEntity;
 import com.zzjee.wm.entity.WmImNoticeIEntity;
 import com.zzjee.wm.entity.WmInQmIEntity;
 
+import org.jeecgframework.web.system.sms.util.Constants;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -120,22 +121,9 @@ public class WmImNoticeHServiceImpl extends CommonServiceImpl implements WmImNot
 				}else{
 					wmImNoticeI.setBinPre("N");
 					wmImNoticeI.setGoodsQmCount("0");
-					TSUser user = ResourceUtil.getSessionUserName();
-					String roles = "";
-					if (user != null) {
-						List<TSRoleUser> rUsers = this.findByProperty(TSRoleUser.class, "TSUser.id", user.getId());
-						for (TSRoleUser ru : rUsers) {
-							TSRole role = ru.getTSRole();
-							roles += role.getRoleCode() + ",";
-						}
-						if (roles.length() > 0) {
-							roles = roles.substring(0, roles.length() - 1);
-						}
-						if(roles.equals("CUS")){
-							wmImNoticeI.setBinPre("I");
-						}
-					}
-
+                   if(wmImNoticeH.getImSta().equals(Constants.wm_sta0)){
+					   wmImNoticeI.setBinPre("I");
+				   }
 					wmImNoticeI.setImNoticeId(wmImNoticeH.getNoticeId());
 					wmImNoticeI.setImBeizhu(wmImNoticeH.getImBeizhu());
 					wmImNoticeI.setImCusCode(wmImNoticeH.getImCusCode());

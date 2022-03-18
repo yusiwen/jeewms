@@ -2353,15 +2353,12 @@ public class WmImNoticeHController extends BaseController {
             for (WmImNoticeIEntity wmImNoticeIEntity : wmImNoticeIList) {
                 if(!StringUtil.isEmpty(wmImNoticeIEntity.getGoodsCode())){
                     try {
-
-
                         String goodsId = wmImNoticeIEntity.getGoodsCode().split("-")[0];
                         if(goodsId.endsWith("l")){
                             goodsId = goodsId.substring(0,goodsId.lastIndexOf("l"));
                         }
                         MvGoodsEntity mvgoods = systemService.findUniqueByProperty(MvGoodsEntity.class,"goodsId",goodsId);
 //					String date[]=wmImNoticeIEntity.getGoodsCode().split("-");
-
                         long hiti = 0;
                         try {
                             if(StringUtil.isEmpty(wmImNoticeIEntity.getBinPlan())){
@@ -2370,7 +2367,6 @@ public class WmImNoticeHController extends BaseController {
                             }
                         } catch (Exception e) {
                         }
-
                         wmImNoticeIEntity.setGoodsCode(mvgoods.getGoodsCode());
                         wmImNoticeIEntity.setGoodsName(mvgoods.getShpMingCheng());
                     } catch (Exception e) {
