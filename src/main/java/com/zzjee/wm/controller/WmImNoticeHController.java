@@ -3008,14 +3008,6 @@ public class WmImNoticeHController extends BaseController {
         D0.setOK(true);
         return new ResponseEntity(D0, HttpStatus.OK);
 
-        // 按照Restful风格约定，创建指向新任务的url, 也可以直接返回id或对象.
-//		String id = wmImNoticeHPage.getId();
-//		URI uri = uriBuilder.path("/rest/wmImNoticeHController/" + id).build()
-//				.toUri();
-//		HttpHeaders headers = new HttpHeaders();
-//		headers.setLocation(uri);
-//
-//		return new ResponseEntity(headers, HttpStatus.CREATED);
     }
 
     @RequestMapping(value = "/{id}", method = RequestMethod.PUT, consumes = MediaType.APPLICATION_JSON_VALUE)
