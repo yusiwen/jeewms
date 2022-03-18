@@ -262,7 +262,6 @@ public class WmsApiController {
     /**
      * 添加客户
      *
-     * @param ids
      * @return
      */
     @RequestMapping(params = "cusDoAdd")
@@ -293,7 +292,6 @@ public class WmsApiController {
     /**
      * 更新客户
      *
-     * @param ids
      * @return
      */
     @RequestMapping(params = "cusDoUpdate")
@@ -397,45 +395,9 @@ public class WmsApiController {
             String noticeid =  wmUtil.getNextNoticeid(wmImNoticeH.getOrderTypeCode()) ;
             wmImNoticeH.setNoticeId(noticeid);
             wmImNoticeH.setCreateDate(DateUtils.getDate());
-            WmPlatIoEntity wmPlatIo = new WmPlatIoEntity();
-            wmPlatIo.setCarno(wmImNoticeH.getImCarNo());
-            wmPlatIo.setDocId(wmImNoticeH.getNoticeId());
-            wmPlatIo.setPlanIndata(wmImNoticeH.getImData());
-            wmPlatIo.setPlatId(wmImNoticeH.getPlatformCode());
-            wmPlatIo.setPlatSta(Constants.wm_sta1);
-            wmPlatIo.setPlatBeizhu("司机:" + wmImNoticeH.getImCarDri() + "电话:"
-                    + wmImNoticeH.getImCarMobile());
-            wmPlatIo.setCreateDate(DateUtils.getDate());
-            systemService.save(wmPlatIo);
-
             Map<String, Object> map = new HashMap<String, Object>();
             map.put("id", wmImNoticeH.getNoticeId());
-            TSUser user = ResourceUtil.getSessionUserName();
-            String roles = "";
-            if (user != null) {
-                List<TSRoleUser> rUsers = systemService.findByProperty(TSRoleUser.class, "TSUser.id", user.getId());
-                for (TSRoleUser ru : rUsers) {
-                    TSRole role = ru.getTSRole();
-                    roles += role.getRoleCode() + ",";
-                }
-                if (roles.length() > 0) {
-                    roles = roles.substring(0, roles.length() - 1);
-                }
-                if(roles.equals("CUS")){
-                    wmImNoticeH.setCusCode(user.getUserName());
-
-                }
-            }
-//            if(roles.equals("CUS")){
-                wmImNoticeH.setImSta(Constants.wm_sta0);
-//            }else{
-//                wmImNoticeH.setImSta(Constants.wm_sta1);
-//            }
-            if(wmImNoticeH.getCusCode()==null){
-                if(roles.equals("CUS")){
-                    wmImNoticeH.setCusCode(user.getUserName());
-                }
-            }
+            wmImNoticeH.setImSta(Constants.wm_sta0);
             //获取供应商
             if(StringUtil.isNotEmpty(wmImNoticeH.getSupCode())){
                 try{
