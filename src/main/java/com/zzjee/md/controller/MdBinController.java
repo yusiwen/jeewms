@@ -131,16 +131,17 @@ public class MdBinController extends BaseController {
 		mdBin = systemService.getEntity(MdBinEntity.class, mdBin.getId());
 		message = "仓位停用成功";
 		try{
-			mdBin.setTingYong("Y");
-			mdBinService.saveOrUpdate(mdBin);
+
 			if(wmUtil.checkishavestock("bin",mdBin.getKuWeiBianMa())){
 				message = "仓位停用成功，但是存在库存";
 				j.setSuccess(false);
 				j.setMsg(message);
+				mdBin.setTingYong("Y");
+				mdBinService.saveOrUpdate(mdBin);
 				return j;
+			}else{
+				mdBinService.delete(mdBin);
 			}
-//			mdBinService.delete(mdBin);
-
 			systemService.addLog(message, Globals.Log_Type_DEL, Globals.Log_Leavel_INFO);
 		}catch(Exception e){
 			e.printStackTrace();
@@ -303,11 +304,13 @@ public class MdBinController extends BaseController {
 				mdBin.setTingYong("Y");
 				if(wmUtil.checkishavestock("bin",mdBin.getKuWeiBianMa())){
 					message = "仓位停用成功，但是存在库存";
+					mdBinService.updateEntitie(mdBin);
 //					j.setSuccess(false);
 //					j.setMsg(message);
 //					return j;
+				}else{
+					mdBinService.delete(mdBin);
 				}
-				mdBinService.updateEntitie(mdBin);
 				systemService.addLog(message, Globals.Log_Type_DEL, Globals.Log_Leavel_INFO);
 			}
 		}catch(Exception e){
@@ -479,7 +482,7 @@ public class MdBinController extends BaseController {
 					MdBinEntity mdb = null;
 					List<MdBinEntity> mdblist =	systemService.findByProperty(MdBinEntity.class, "kuWeiBianMa", mdBin.getKuWeiBianMa());
 					for (MdBinEntity t:mdblist){
-						if(t.getBinStore().equals(mdBin.getBinStore())){
+						if(t.getKuWeiBianMa().equals(mdBin.getKuWeiBianMa())){
 							mdb = t;
 						}
 					}
