@@ -3249,6 +3249,7 @@ public class WmOmNoticeHController extends BaseController {
 					}catch (Exception e){
 
 					}
+					wmNoticeImpPage.setCusCode(t.getCusCode());//货主
 					wmNoticeImpPage.setGoodsName(t.getGoodsName());//商品名称
 					wmNoticeImpPage.setGoodsQua(t.getGoodsQua());//数量
 					wmNoticeImpPage.setGoodsUnit(t.getGoodsUnit());//单位
