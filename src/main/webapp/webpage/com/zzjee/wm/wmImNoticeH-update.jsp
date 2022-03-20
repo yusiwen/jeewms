@@ -217,7 +217,7 @@
 						<b>预约库区：</b>
 					</div>
 					<div class="col-xs-2">
-						<t:dictSelect   field="areaCode" type="list"   extendJson="  {class:'form-control',datatype:'*',style:'width:220px'}"
+						<t:dictSelect   field="areaCode" type="list"   extendJson="  {class:'form-control',style:'width:220px'}"
 										defaultVal="${wmImNoticeHPage.areaCode}" typeGroupCode="area_type"    hasLabel="false"  title="预约库区"></t:dictSelect>
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
 						<label class="Validform_label" style="display: none">预约库区</label>
@@ -236,7 +236,7 @@
 						<b>仓库：</b>
 					</div>
 					<div class="col-xs-2">
-						<t:dictSelect   field="storeCode" type="list"   extendJson="  {class:'form-control',datatype:'*',style:'width:220px'}"
+						<t:dictSelect   field="storeCode" type="list"   extendJson="  {class:'form-control',style:'width:220px'}"
 										dictTable="ba_store" dictField="store_code" dictText="store_name" defaultVal="${wmImNoticeHPage.storeCode}"></t:dictSelect>
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
 						<label class="Validform_label" style="display: none">仓库</label>
