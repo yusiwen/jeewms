@@ -9,6 +9,7 @@ import com.zzjee.wm.entity.WmImNoticeHEntity;
 import com.zzjee.wm.entity.WmImNoticeIEntity;
 import com.zzjee.wm.entity.WmInQmIEntity;
 
+import org.jeecgframework.core.util.*;
 import org.jeecgframework.web.system.sms.util.Constants;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -17,11 +18,6 @@ import java.util.List;
 
 import org.jeecgframework.core.common.exception.BusinessException;
 import org.jeecgframework.core.common.service.impl.CommonServiceImpl;
-import org.jeecgframework.core.util.DateUtils;
-import org.jeecgframework.core.util.MyBeanUtils;
-import org.jeecgframework.core.util.ResourceUtil;
-import org.jeecgframework.core.util.StringUtil;
-import org.jeecgframework.core.util.oConvertUtils;
 import org.jeecgframework.web.system.pojo.base.TSRole;
 import org.jeecgframework.web.system.pojo.base.TSRoleUser;
 import org.jeecgframework.web.system.pojo.base.TSUser;
@@ -46,6 +42,9 @@ public class WmImNoticeHServiceImpl extends CommonServiceImpl implements WmImNot
     public void addMain(WmImNoticeHEntity wmImNoticeH,
                         List<WmImNoticeIEntity> wmImNoticeIList){
 			//保存主信息
+				if(StringUtil.isEmpty(wmImNoticeH.getOrderTypeCode())){
+					wmImNoticeH.setOrderTypeCode("01");
+				}
 			this.save(wmImNoticeH);
 
 			/**保存-进货通知明细*/
@@ -121,12 +120,20 @@ public class WmImNoticeHServiceImpl extends CommonServiceImpl implements WmImNot
 				}else{
 					wmImNoticeI.setBinPre("N");
 					wmImNoticeI.setGoodsQmCount("0");
-                   if(wmImNoticeH.getImSta().equals(Constants.wm_sta0)){
-					   wmImNoticeI.setBinPre("I");
-				   }
+					try{
+						if(wmImNoticeH.getImSta().equals(Constants.wm_sta0)){
+							wmImNoticeI.setBinPre("I");
+						}
+					}catch (Exception e){
+
+					}
+
 					wmImNoticeI.setImNoticeId(wmImNoticeH.getNoticeId());
 					wmImNoticeI.setImBeizhu(wmImNoticeH.getImBeizhu());
 					wmImNoticeI.setImCusCode(wmImNoticeH.getImCusCode());
+					if(StringUtil.isEmpty(wmImNoticeI.getOtherId())){
+						wmImNoticeI.setOtherId(UUIDGenerator.generate().toString());
+					}
 					this.save(wmImNoticeI);
 				}
 

@@ -2822,6 +2822,22 @@ public class WmImNoticeHController extends BaseController {
         AjaxJson j = new AjaxJson();
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
         Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
+
+        TSUser user = ResourceUtil.getSessionUserName();
+        String roles = "";
+        if (user != null) {
+            List<TSRoleUser> rUsers = systemService.findByProperty(TSRoleUser.class, "TSUser.id", user.getId());
+            for (TSRoleUser ru : rUsers) {
+                TSRole role = ru.getTSRole();
+                roles += role.getRoleCode() + ",";
+            }
+            if (roles.length() > 0) {
+                roles = roles.substring(0, roles.length() - 1);
+            }
+
+        }
+
+
         for (Map.Entry<String, MultipartFile> entity : fileMap.entrySet()) {
             MultipartFile file = entity.getValue();// 获取上传文件对象
             ImportParams params = new ImportParams();
@@ -2880,13 +2896,18 @@ public class WmImNoticeHController extends BaseController {
                             }catch (Exception e){
 
                             }
-
                             wmi.setOtherId(page.getOtherId());
                             wmImNoticeIListnew.add(wmi);
                         }
                     }
 
                     WmImNoticeHEntity wmImNoticeH  = new WmImNoticeHEntity();
+
+                    if(roles.equals("CUS")){
+                        wmImNoticeH.setImSta(Constants.wm_sta0);
+                    }else{
+                        wmImNoticeH.setImSta(Constants.wm_sta1);
+                    }
                     wmImNoticeH.setOrderTypeCode(pageheader.getOrderTypeCode());
                     String noticeid = wmUtil.getNextNoticeid(wmImNoticeH.getOrderTypeCode());
                     wmImNoticeH.setCusCode(pageheader.getCusCode());
