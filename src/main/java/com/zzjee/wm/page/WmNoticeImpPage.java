@@ -66,14 +66,14 @@ public class WmNoticeImpPage implements java.io.Serializable {
 	@Excel(name="收货地址")
 	private String delvAddr;
 	/**进货通知单号*/
-    @Excel(name="通知单号")
+//    @Excel(name="通知单号")
 	private String noticeId;
 	@Excel(name="供应商编码")
 	private String supCode;
 	/**附件*/
 	@Excel(name="供应商名称")
 	private String supName;
-	@Excel(name="其他系统ID")
+	@Excel(name="行项目标识ID")
 	private java.lang.String otherId;
 	@Excel(name="商品")
 	private java.lang.String goodsId;
