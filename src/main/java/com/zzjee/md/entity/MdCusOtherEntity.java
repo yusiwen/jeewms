@@ -11,12 +11,12 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 import org.jeecgframework.poi.excel.annotation.Excel;
 
-/**   
+/**
  * @Title: Entity
  * @Description: 第三方客户
  * @author erzhongxmu
  * @date 2018-09-01 21:06:14
- * @version V1.0   
+ * @version V1.0
  *
  */
 @Entity
@@ -26,28 +26,28 @@ public class MdCusOtherEntity implements java.io.Serializable {
 	/**主键*/
 	private String id;
 	/**创建人名称*/
-	@Excel(name="创建人名称")
+//	@Excel(name="创建人名称")
 	private String createName;
 	/**创建人登录名称*/
-	@Excel(name="创建人登录名称")
+//	@Excel(name="创建人登录名称")
 	private String createBy;
 	/**创建日期*/
-	@Excel(name="创建日期",format = "yyyy-MM-dd")
+//	@Excel(name="创建日期",format = "yyyy-MM-dd")
 	private Date createDate;
 	/**更新人名称*/
-	@Excel(name="更新人名称")
+//	@Excel(name="更新人名称")
 	private String updateName;
 	/**更新人登录名称*/
-	@Excel(name="更新人登录名称")
+//	@Excel(name="更新人登录名称")
 	private String updateBy;
 	/**更新日期*/
-	@Excel(name="更新日期",format = "yyyy-MM-dd")
+//	@Excel(name="更新日期",format = "yyyy-MM-dd")
 	private Date updateDate;
 	/**所属部门*/
-	@Excel(name="所属部门")
+//	@Excel(name="所属部门")
 	private String sysOrgCode;
 	/**所属公司*/
-	@Excel(name="所属公司")
+//	@Excel(name="所属公司")
 	private String sysCompanyCode;
 	/**所属客户*/
 	@Excel(name="所属客户")
@@ -181,7 +181,7 @@ public class MdCusOtherEntity implements java.io.Serializable {
 	/**电话1*/
 	@Excel(name="电话1")
 	private String dianHua1;
-	
+
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  主键
