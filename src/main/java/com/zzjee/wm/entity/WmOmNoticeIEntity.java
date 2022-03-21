@@ -13,6 +13,8 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
+
+import com.zzjee.md.entity.MdGoodsEntity;
 import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.SequenceGenerator;
 import org.jeecgframework.poi.excel.annotation.Excel;
@@ -125,6 +127,9 @@ public class WmOmNoticeIEntity implements java.io.Serializable {
 	private java.lang.String chpShuXing;
 	@Excel(name="商品条码")
 	private java.lang.String barCode;
+
+	@Excel(name="sku")
+	private String sku;
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  主键
@@ -695,5 +700,15 @@ public class WmOmNoticeIEntity implements java.io.Serializable {
 	 */
 	public void setBarCode(java.lang.String barCode){
 		this.barCode = barCode;
+	}
+
+
+	@Column(name ="sku",nullable=true,length=32)
+	public String getSku() {
+		return sku;
+	}
+
+	public void setSku(String sku) {
+		this.sku = sku;
 	}
 }

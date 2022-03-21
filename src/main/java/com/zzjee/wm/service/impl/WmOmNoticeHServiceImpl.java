@@ -57,6 +57,7 @@ public class WmOmNoticeHServiceImpl extends CommonServiceImpl implements WmOmNot
 					if(mvgoods!=null){
 						huowu=huowu+mvgoods.getGoodsName();
 						wmOmNoticeI.setGoodsName(mvgoods.getGoodsName());
+						wmOmNoticeI.setSku(mvgoods.getSku());//SKU
 						wmOmNoticeI.setChpShuXing(mvgoods.getChpShuXing());//产品属性
 						wmOmNoticeI.setBarCode(mvgoods.getShpTiaoMa());//商品条码
 						try{
@@ -150,6 +151,7 @@ public class WmOmNoticeHServiceImpl extends CommonServiceImpl implements WmOmNot
 				if(mvgoods!=null){
 					huowu=huowu+";"+mvgoods.getGoodsName()+","+wmOmNoticeI.getBaseGoodscount();
 					wmOmNoticeI.setGoodsName(mvgoods.getGoodsName());
+
 					try{
 						wmOmNoticeI.setBaseUnit(mvgoods.getBaseunit());
 						wmOmNoticeI.setGoodsUnit(mvgoods.getShlDanWei());

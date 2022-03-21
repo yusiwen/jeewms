@@ -20,6 +20,7 @@
       <t:dgCol title="客户订单号"  field="imCusCode"  query="true"       queryMode="single"  width="120"></t:dgCol>
       <t:dgCol title="备注"  field="omBeizhu"   query="true"       queryMode="single"  width="120"></t:dgCol>
       <t:dgCol title="商品名称"  field="goodsName"   query="true"       queryMode="single"  width="120"></t:dgCol>
+      <t:dgCol title="SKU"  field="sku"   query="true"       queryMode="single"  width="120"></t:dgCol>
       <t:dgCol title="出货数量"  field="goodsQua"   extendParams="editor:'text'"  queryMode="single"  width="80"></t:dgCol>
       <t:dgCol title="出货单位"  field="goodsUnit"    queryMode="single"  width="80"></t:dgCol>
       <t:dgCol title="生产日期"  field="goodsProData"  formatter="yyyy-MM-dd"  extendParams="editor:'text'"   queryMode="single"  width="120"></t:dgCol>
@@ -29,7 +30,7 @@
 
       <t:dgCol title="下架计划生成状态"  field="planSta"     extendParams="editor:'text'" queryMode="single"  width="80"></t:dgCol>
 
-  
+
 <%--     <t:dgToolBar operationCode="add" title="录入" icon="icon-add"  funname="addRow"></t:dgToolBar> --%>
 	<t:dgToolBar operationCode="edit" title="选择修改" icon="icon-edit"  funname="editRow"></t:dgToolBar>
 	<t:dgToolBar operationCode="save" title="修改保存" icon="icon-save" url="wmOmNoticeHController.do?saveOmnotice" funname="saveData"></t:dgToolBar>
@@ -108,5 +109,5 @@
 
 
 	}
- 
+
  </script>
