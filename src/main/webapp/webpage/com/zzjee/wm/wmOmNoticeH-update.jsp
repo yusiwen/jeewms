@@ -497,12 +497,12 @@
 							typeGroupCode="sf_yn"  hasLabel="false"  title="下架任务是否已生成"></t:dictSelect>
 			  <label class="Validform_label" style="display: none;">下架任务是否已生成</label>
 		  </td>
-		  <%--<td align="left">--%>
-			  <%--<input name="wmOmNoticeIList[#index#].binOm" maxlength="32"--%>
-					 <%--ignore="ignore"--%>
-					 <%--type="text" class="form-control"  style="width:120px;" >--%>
-			  <%--<label class="Validform_label" style="display: none;">出货储位</label>--%>
-		  <%--</td>--%>
+		  <td align="left">
+			  <input name="wmOmNoticeIList[#index#].sku" maxlength="32" readonly="readonly"
+					 ignore="ignore"
+					 type="text" class="form-control"  style="width:120px;" >
+			  <label class="Validform_label" style="display: none;">sku</label>
+		  </td>
 
 		  <%--<td align="left">--%>
 			  <%--<input name="wmOmNoticeIList[#index#].binId" maxlength="32"--%>

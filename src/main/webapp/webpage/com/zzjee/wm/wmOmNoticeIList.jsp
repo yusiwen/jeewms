@@ -132,7 +132,7 @@
 
 				<td>
 					<input name="wmOmNoticeIList[0].sku" maxlength="32"
-						   type="text" class="form-control"  style="width:120px;" >
+						   type="text" class="form-control"  style="width:120px;"  readonly="readonly">
 					<label class="Validform_label" style="display: none;">SKU</label>
 				</td>
 
@@ -206,7 +206,7 @@ wmOmNoticeIList[${stuts.index }].goodsId<input name="wmOmNoticeIList[${stuts.ind
 					  <label class="Validform_label" style="display: none;">下架任务是否已生成</label>
 					</td>
 				<td align="left">
-					<input name="wmOmNoticeIList[${stuts.index }].sku" maxlength="32"
+					<input name="wmOmNoticeIList[${stuts.index }].sku" maxlength="32" readonly="readonly"
 						   type="text" class="form-control"  style="width:120px;"  value="${poVal.sku }">
 					<label class="Validform_label" style="display: none;">SKU</label>
 				</td>
