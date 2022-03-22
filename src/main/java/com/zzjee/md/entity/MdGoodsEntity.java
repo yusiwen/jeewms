@@ -952,9 +952,8 @@ public class MdGoodsEntity implements java.io.Serializable {
 		return minStock;
 	}
 
-	public MdGoodsEntity setMinStock(String minStock) {
+	public void setMinStock(String minStock) {
 		this.minStock = minStock;
-		return this;
 	}
 
 	@Column(name ="sku",nullable=true,length=32)
@@ -962,8 +961,7 @@ public class MdGoodsEntity implements java.io.Serializable {
 		return sku;
 	}
 
-	public MdGoodsEntity setSku(String sku) {
+	public void setSku(String sku) {
 		this.sku = sku;
-		return this;
 	}
 }
