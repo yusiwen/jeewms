@@ -3190,7 +3190,7 @@ public class WmOmNoticeHController extends BaseController {
 					String noticeid = wmUtil.getNextomNoticeId(wmOmNoticeH.getOrderTypeCode());
 					wmOmNoticeH.setOmNoticeId(noticeid);
 					wmOmNoticeH.setOmBeizhu(pageheader.getImBeizhu());
-					wmOmNoticeH.setOcusCode(pageheader.getSupCode());
+					wmOmNoticeH.setOcusCode(pageheader.getOcusCode());
 					wmOmNoticeH.setDelvAddr(pageheader.getDelvAddr());
 					MdCusOtherEntity mdcusother = systemService.findUniqueByProperty(MdCusOtherEntity.class, "keHuBianMa", wmOmNoticeH.getOcusCode());
 					if (mdcusother != null) {
@@ -3253,6 +3253,8 @@ public class WmOmNoticeHController extends BaseController {
 					wmNoticeImpPage.setGoodsName(t.getGoodsName());//商品名称
 					wmNoticeImpPage.setGoodsQua(t.getGoodsQua());//数量
 					wmNoticeImpPage.setGoodsUnit(t.getGoodsUnit());//单位
+					wmNoticeImpPage.setOcusCode(t.getOcusCode());//三方客户编码
+					wmNoticeImpPage.setOcusName(t.getOcusName());//三方客户名字
 					list.add(wmNoticeImpPage);
 					listheader.add(wmNoticeImpPage);
 				}
@@ -3326,7 +3328,7 @@ public class WmOmNoticeHController extends BaseController {
 					String noticeid = wmUtil.getNextomNoticeId(wmOmNoticeH.getOrderTypeCode());
 					wmOmNoticeH.setOmNoticeId(noticeid);
 					wmOmNoticeH.setOmBeizhu(pageheader.getImBeizhu());
-					wmOmNoticeH.setOcusCode(pageheader.getSupCode());
+					wmOmNoticeH.setOcusCode(pageheader.getOcusCode());
 					wmOmNoticeH.setDelvAddr(pageheader.getDelvAddr());
 					MdCusOtherEntity mdcusother = systemService.findUniqueByProperty(MdCusOtherEntity.class, "keHuBianMa", wmOmNoticeH.getOcusCode());
 					if (mdcusother != null) {

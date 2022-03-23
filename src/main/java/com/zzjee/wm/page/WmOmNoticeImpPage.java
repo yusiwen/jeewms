@@ -5,12 +5,12 @@ import org.jeecgframework.poi.excel.annotation.Excel;
 
 import java.util.Date;
 
-/**   
+/**
  * @Title: Entity
  * @Description: 导入
  * @author erzhongxmu
  * @date 2017-09-11 15:08:34
- * @version V1.0   
+ * @version V1.0
  *
  */
 public class WmOmNoticeImpPage implements java.io.Serializable {
@@ -45,7 +45,7 @@ public class WmOmNoticeImpPage implements java.io.Serializable {
 
 	private String sysCompanyCode;
 	/**客户编码*/
-	@Excel(name="客户编码")
+	@Excel(name="货主编码")
 	private String cusCode;
 	/**预计到货时间*/
 
@@ -64,10 +64,11 @@ public class WmOmNoticeImpPage implements java.io.Serializable {
 
 	private String noticeId;
 
-	private String supCode;
-	/**附件*/
+	@Excel(name="客户编号")
+	private java.lang.String ocusCode;
+	@Excel(name="客户名称")
+	private java.lang.String ocusName;
 
-	private String supName;
 
 	private String otherId;
 	@Excel(name="商品编号")
@@ -346,22 +347,21 @@ public class WmOmNoticeImpPage implements java.io.Serializable {
 		this.wherecon = wherecon;
 	}
 
-	public String getSupCode() {
-		return supCode;
+	public String getOcusCode() {
+		return ocusCode;
 	}
 
-	public void setSupCode(String supCode) {
-		this.supCode = supCode;
+	public void setOcusCode(String ocusCode) {
+		this.ocusCode = ocusCode;
 	}
 
-	public String getSupName() {
-		return supName;
+	public String getOcusName() {
+		return ocusName;
 	}
 
-	public void setSupName(String supName) {
-		this.supName = supName;
+	public void setOcusName(String ocusName) {
+		this.ocusName = ocusName;
 	}
-
 
 	public String getOtherId() {
 		return otherId;

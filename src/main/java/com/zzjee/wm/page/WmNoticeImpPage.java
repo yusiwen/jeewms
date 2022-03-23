@@ -68,11 +68,11 @@ public class WmNoticeImpPage implements java.io.Serializable {
 	/**进货通知单号*/
 //    @Excel(name="通知单号")
 	private String noticeId;
-	@Excel(name="供应商编码")
-	private String supCode;
-	/**附件*/
-	@Excel(name="供应商名称")
-	private String supName;
+	@Excel(name="客户编号")
+	private java.lang.String ocusCode;
+	@Excel(name="客户名称")
+	private java.lang.String ocusName;
+
 	@Excel(name="行项目标识ID")
 	private java.lang.String otherId;
 	@Excel(name="商品")
@@ -353,22 +353,22 @@ public class WmNoticeImpPage implements java.io.Serializable {
 		this.wherecon = wherecon;
 	}
 
-	public String getSupCode() {
-		return supCode;
+
+	public String getOcusCode() {
+		return ocusCode;
 	}
 
-	public void setSupCode(String supCode) {
-		this.supCode = supCode;
+	public void setOcusCode(String ocusCode) {
+		this.ocusCode = ocusCode;
 	}
 
-	public String getSupName() {
-		return supName;
+	public String getOcusName() {
+		return ocusName;
 	}
 
-	public void setSupName(String supName) {
-		this.supName = supName;
+	public void setOcusName(String ocusName) {
+		this.ocusName = ocusName;
 	}
-
 
 	public String getOtherId() {
 		return otherId;
