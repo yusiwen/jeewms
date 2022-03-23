@@ -2915,7 +2915,7 @@ public class WmImNoticeHController extends BaseController {
                     wmImNoticeH.setImData(pageheader.getImData());
                     wmImNoticeH.setPlatformCode(pageheader.getCusCode());
                     wmImNoticeH.setImBeizhu(pageheader.getImBeizhu() );
-                    wmImNoticeH.setSupCode(pageheader.getSupCode() );
+                    wmImNoticeH.setSupCode(pageheader.getOcusCode() );
                     MdSupEntity mdsup  = systemService.findUniqueByProperty(MdSupEntity.class,"gysBianMa",wmImNoticeH.getSupCode());
                     if(mdsup!=null){
                         wmImNoticeH.setSupName(mdsup.getZhongWenQch());
