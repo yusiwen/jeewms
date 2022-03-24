@@ -64,9 +64,9 @@ public class WmOmNoticeImpPage implements java.io.Serializable {
 
 	private String noticeId;
 
-	@Excel(name="客户编号")
+	@Excel(name="合作伙伴编号")
 	private java.lang.String ocusCode;
-	@Excel(name="客户名称")
+	@Excel(name="合作伙伴名称")
 	private java.lang.String ocusName;
 
 

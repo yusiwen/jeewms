@@ -84,10 +84,10 @@ public class WmOmNoticeImpnewPage implements java.io.Serializable {
 	/**进货通知单号*/
 //    @Excel(name="通知单号")
 	private String noticeId;
-	@Excel(name="客户编号")
+	@Excel(name="合作伙伴编号")
 
 	private java.lang.String ocusCode;
-	@Excel(name="客户名称")
+	@Excel(name="合作伙伴名称")
 	private java.lang.String ocusName;
 
 //	@Excel(name="其他系统ID")

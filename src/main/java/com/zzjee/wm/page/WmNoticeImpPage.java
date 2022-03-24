@@ -49,7 +49,7 @@ public class WmNoticeImpPage implements java.io.Serializable {
 
 	private String sysCompanyCode;
 	/**客户编码*/
-    @Excel(name="客户编码")
+    @Excel(name="货主编码")
 	private String cusCode;
 	/**预计到货时间*/
     @Excel(name="预计到货时间",format = "yyyy-MM-dd")
@@ -68,9 +68,9 @@ public class WmNoticeImpPage implements java.io.Serializable {
 	/**进货通知单号*/
 //    @Excel(name="通知单号")
 	private String noticeId;
-	@Excel(name="客户编号")
+	@Excel(name="合作伙伴编号")
 	private java.lang.String ocusCode;
-	@Excel(name="客户名称")
+	@Excel(name="合作伙伴编号名称")
 	private java.lang.String ocusName;
 
 	@Excel(name="行项目标识ID")
