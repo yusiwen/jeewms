@@ -2874,10 +2874,10 @@ public class WmImNoticeHController extends BaseController {
                 }
 
                 for(WmNoticeImpPage pageheader: listheader){
-                    List<WmImNoticeHEntity>  wmimh = systemService.findByProperty(WmImNoticeHEntity.class, "imCusCode", pageheader.getImCusCode());
-                    if(wmimh!=null&&wmimh.size()>0){
-                        continue;
-                    }
+//                    List<WmImNoticeHEntity>  wmimh = systemService.findByProperty(WmImNoticeHEntity.class, "imCusCode", pageheader.getImCusCode());
+//                    if(wmimh!=null&&wmimh.size()>0){
+//                        continue;
+//                    }
                     List<WmImNoticeIEntity> wmImNoticeIListnew = new ArrayList<WmImNoticeIEntity>();
                     for (WmNoticeImpPage page : list) {
                         if(pageheader.getImCusCode().equals(page.getImCusCode())){
