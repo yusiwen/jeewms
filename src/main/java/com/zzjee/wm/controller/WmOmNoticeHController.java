@@ -3145,10 +3145,10 @@ public class WmOmNoticeHController extends BaseController {
 					}
 				}
 				for(WmOmNoticeImpnewPage pageheader: listheader) {
-					List<WmOmNoticeHEntity>  wmomh = systemService.findByProperty(WmOmNoticeHEntity.class, "imCusCode", pageheader.getImCusCode());
-					if(wmomh!=null&&wmomh.size()>0){
-						continue;
-					}
+//					List<WmOmNoticeHEntity>  wmomh = systemService.findByProperty(WmOmNoticeHEntity.class, "imCusCode", pageheader.getImCusCode());
+//					if(wmomh!=null&&wmomh.size()>0){
+//						continue;
+//					}
 
 					List<WmOmNoticeIEntity> wmomNoticeIListnew = new ArrayList<WmOmNoticeIEntity>();
 					for (WmOmNoticeImpnewPage page : list) {
@@ -3286,10 +3286,10 @@ public class WmOmNoticeHController extends BaseController {
 					}
 				}
 				for(WmNoticeImpPage pageheader: listheader) {
-					List<WmOmNoticeHEntity>  wmomh = systemService.findByProperty(WmOmNoticeHEntity.class, "imCusCode", pageheader.getImCusCode());
-					if(wmomh!=null&&wmomh.size()>0){
-						continue;
-					}
+//					List<WmOmNoticeHEntity>  wmomh = systemService.findByProperty(WmOmNoticeHEntity.class, "imCusCode", pageheader.getImCusCode());
+//					if(wmomh!=null&&wmomh.size()>0){
+//						continue;
+//					}
 
 					List<WmOmNoticeIEntity> wmomNoticeIListnew = new ArrayList<WmOmNoticeIEntity>();
 					for (WmNoticeImpPage page : list) {
