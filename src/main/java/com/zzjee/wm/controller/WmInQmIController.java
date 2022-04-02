@@ -486,6 +486,13 @@ public class WmInQmIController extends BaseController {
             try {
                 WmImNoticeIEntity wmImNoticeIEntity = systemService.get(WmImNoticeIEntity.class, wmInQmI.getImNoticeItem());
                 if (wmImNoticeIEntity != null) {
+
+                    if(!wmUtil.checkys(wmImNoticeIEntity.getGoodsCode(),wmInQmI.getProData())){
+                        j.setSuccess(false);
+                        message = "超过允收期";
+                        return j;
+                    }
+
                     if ("n".equals(ResourceUtil.getConfigByName("chaoshou"))) {
                         Long weiq = Long.parseLong(wmImNoticeIEntity
                                 .getGoodsCount())
@@ -999,7 +1006,11 @@ public class WmInQmIController extends BaseController {
                 } catch (Exception e) {
 
                 }
-
+               if(!wmUtil.checkys(wmImNoticeIEntity.getGoodsCode(),wmInQmI.getProData())){
+                   D0.setErrorMsg("超过允收期");
+                   D0.setOK(false);
+                   return new ResponseEntity(D0, HttpStatus.OK);
+               }
                 if ("n".equals(ResourceUtil.getConfigByName("chaoshou"))) {
                     Double weiq = Double.parseDouble(wmImNoticeIEntity
                             .getGoodsCount())
