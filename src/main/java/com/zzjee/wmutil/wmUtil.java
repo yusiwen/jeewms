@@ -43,7 +43,7 @@ public class wmUtil {
 		return list;
 	}
 
-	public static void  genrp(String datafrom,String datato,String username){
+	public synchronized static void  genrp(String datafrom,String datato,String username){
 		SystemService systemService =ApplicationContextUtil.getContext().getBean(SystemService.class);
 
 		 String tsql = "call update_rp_period_in_out("+"'"+datafrom+"',"+"'"+datato+"',"+"'"+username+"'"+")";
@@ -54,7 +54,7 @@ public class wmUtil {
 		}
 	}
 
-	public static void  genrp2(String datafrom, String datato, String username){
+	public synchronized static void  genrp2(String datafrom, String datato, String username){
 		SystemService systemService =ApplicationContextUtil.getContext().getBean(SystemService.class);
 
 		String tsql = "i";
@@ -65,7 +65,7 @@ public class wmUtil {
 		}
 	}
 
-	public  static  String getNextNoticeid(String orderType){
+	public synchronized  static  String getNextNoticeid(String orderType){
 		String noticeid=null;
 		SystemService systemService =ApplicationContextUtil.getContext().getBean(SystemService.class);
 
@@ -124,7 +124,7 @@ public class wmUtil {
 		return  noticeid;
 	}
 
-	public static String getNextomNoticeIdtms(String orderType){
+	public  synchronized static String getNextomNoticeIdtms(String orderType){
 		SystemService systemService =ApplicationContextUtil.getContext().getBean(SystemService.class);
 		Map<String, Object> countMap = systemService
 				.findOneForJdbc("SELECT cast(right(ifnull((om_notice_id),0),4)+1 as SIGNED) as count FROM tms_om_notice_h  t where  TO_DAYS(t.create_date) = TO_DAYS(NOW()) order by create_date desc limit 1");
@@ -162,7 +162,7 @@ public class wmUtil {
 		}
 		return  noticeid;
 	}
-	public static String getNextomNoticeId(String orderType){
+	public synchronized static String getNextomNoticeId(String orderType){
 		SystemService systemService =ApplicationContextUtil.getContext().getBean(SystemService.class);
 		Map<String, Object> countMap = systemService
 				.findOneForJdbc("SELECT cast(right(ifnull((om_notice_id),0),4)+1 as SIGNED) as count FROM wm_om_notice_h  t where  TO_DAYS(t.create_date) = TO_DAYS(NOW()) order by create_date desc limit 1");

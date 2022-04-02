@@ -2817,7 +2817,7 @@ public class WmImNoticeHController extends BaseController {
      */
     @RequestMapping(params = "importExcel", method = RequestMethod.POST)
     @ResponseBody
-    public AjaxJson importExcel(HttpServletRequest request,
+    public  AjaxJson importExcel(HttpServletRequest request,
                                 HttpServletResponse response) {
         AjaxJson j = new AjaxJson();
         MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
@@ -2921,6 +2921,7 @@ public class WmImNoticeHController extends BaseController {
                         wmImNoticeH.setSupName(mdsup.getZhongWenQch());
                     }
                     wmImNoticeH.setImCusCode(pageheader.getImCusCode());
+
                     wmImNoticeHService.addMain(wmImNoticeH, wmImNoticeIListnew);
                 }
                 j.setMsg("文件导入成功！");
