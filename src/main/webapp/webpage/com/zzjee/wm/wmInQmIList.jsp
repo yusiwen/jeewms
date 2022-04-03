@@ -26,7 +26,7 @@
    <t:dgCol title="到货数量"  field="imQuat"    queryMode="single"  width="80"></t:dgCol>
     <t:dgCol title="数量"  field="qmOkQuat"    queryMode="single"  width="80"></t:dgCol>
     <t:dgCol title="备注"  field="itemText"    queryMode="single"  width="50"></t:dgCol>
-    <t:dgCol title="温度"  field="recDeg"  hidden="true" queryMode="single"  width="120"></t:dgCol>
+    <t:dgCol title="温度"  field="recDeg"    queryMode="single"  width="120"></t:dgCol>
     <t:dgCol title="生产日期"  field="proData" formatter="yyyy-MM-dd"   queryMode="group"  width="120"></t:dgCol>
     <t:dgCol title="托盘"  field="tinId"  query="true"  queryMode="single"  width="80"></t:dgCol>
     <t:dgCol title="单位"  field="goodsUnit"    queryMode="single"  width="50"></t:dgCol>
