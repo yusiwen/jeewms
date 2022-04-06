@@ -26,7 +26,7 @@ public class WmInQmIServiceImpl extends CommonServiceImpl implements WmInQmIServ
  	}
  	
  	@Override
-    public Serializable save(WmInQmIEntity entity) throws Exception{
+    public synchronized Serializable save(WmInQmIEntity entity) throws Exception{
  		Serializable t = super.save(entity);
  		//执行新增操作增强业务
  		this.doAddBus(entity);

@@ -26,7 +26,7 @@ public class WmToDownGoodsServiceImpl extends CommonServiceImpl implements WmToD
  	}
  	
  	@Override
-    public Serializable save(WmToDownGoodsEntity entity) throws Exception{
+    public synchronized Serializable save(WmToDownGoodsEntity entity) throws Exception{
  		Serializable t = super.save(entity);
  		//执行新增操作增强业务
  		this.doAddBus(entity);

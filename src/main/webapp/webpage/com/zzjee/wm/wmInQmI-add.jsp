@@ -73,7 +73,7 @@ window.onload = function() {
 </head>
 
  <body>
- <t:formvalid formid="formobj" dialog="true" usePlugin="password" layout="table" action="wmInQmIController.do?doAdd" tiptype="1" >
+ <t:formvalid formid="formobj" dialog="true" usePlugin="password" layout="table" action="wmInQmIController.do?doAdd" tiptype="2" >
 	<%--<t:formvalid formid="formobj" dialog="true" usePlugin="password"   layout="div" >--%>
 			<input type="hidden" id="btn_sub" class="btn_sub"/>
 			<input type="hidden" id="id" name="id"/>

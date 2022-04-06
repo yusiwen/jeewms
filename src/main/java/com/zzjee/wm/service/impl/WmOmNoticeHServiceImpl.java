@@ -38,7 +38,7 @@ public class WmOmNoticeHServiceImpl extends CommonServiceImpl implements WmOmNot
  	}
 
 	@Override
-    public void addMain(WmOmNoticeHEntity wmOmNoticeH,
+    public synchronized void addMain(WmOmNoticeHEntity wmOmNoticeH,
                         List<WmOmNoticeIEntity> wmOmNoticeIList){
 			//保存主信息
 			this.save(wmOmNoticeH);

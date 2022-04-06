@@ -18,7 +18,7 @@ public interface WmOmNoticeHServiceI extends CommonService{
 	 * 添加一对多
 	 * 
 	 */
-	public void addMain(WmOmNoticeHEntity wmOmNoticeH,
+	public  void addMain(WmOmNoticeHEntity wmOmNoticeH,
 	        List<WmOmNoticeIEntity> wmOmNoticeIList) ;
 	public void addMaintms(WmTmsNoticeHEntity wmOmNoticeH,
 						List<WmTmsNoticeIEntity> wmOmNoticeIList) ;

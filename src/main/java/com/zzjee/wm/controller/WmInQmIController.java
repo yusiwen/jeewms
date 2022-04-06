@@ -454,11 +454,13 @@ public class WmInQmIController extends BaseController {
             if (Double.parseDouble(wmInQmI.getQmOkQuat()) <= 0) {
                 j.setSuccess(false);
                 message = "数量不能为0";
+                j.setMsg(message);
                 return j;
             }
         } catch (Exception e) {
             j.setSuccess(false);
             message = "数量 错误";
+            j.setMsg(message);
             return j;
             // TODO: handle exception
         }
@@ -466,6 +468,7 @@ public class WmInQmIController extends BaseController {
             if (!wmUtil.checkbin(wmInQmI.getBinId())) {
                 j.setSuccess(false);
                 message = wmInQmI.getBinId() + "储位不存在或已停用";
+                j.setMsg(message);
                 return j;
             }
         }
@@ -481,11 +484,19 @@ public class WmInQmIController extends BaseController {
                 }
             }
             //托盘占用判断
-
+            if(!wmUtil.checkys(wmInQmI.getGoodsId(),wmInQmI.getProData())){
+                j.setSuccess(false);
+                message = "超过允收期";
+                j.setMsg(message);
+                return j;
+            }
             String flagchsh = "y";
             try {
                 WmImNoticeIEntity wmImNoticeIEntity = systemService.get(WmImNoticeIEntity.class, wmInQmI.getImNoticeItem());
                 if (wmImNoticeIEntity != null) {
+
+
+
                     if ("n".equals(ResourceUtil.getConfigByName("chaoshou"))) {
                         Long weiq = Long.parseLong(wmImNoticeIEntity
                                 .getGoodsCount())
@@ -504,6 +515,8 @@ public class WmInQmIController extends BaseController {
             if ("n".equals(flagchsh)) {
                 j.setSuccess(false);
                 message = "不允许超收";
+                j.setMsg(message);
+                return j;
             }
 
 
@@ -540,10 +553,14 @@ public class WmInQmIController extends BaseController {
             } else {
                 j.setSuccess(false);
                 message = "收货通知不存在";
+                j.setMsg(message);
+                return j;
             }
             if (!flag.equals("X")) {
                 j.setSuccess(false);
                 message = "收货通知下此商品不存在或已经全部收货";
+                j.setMsg(message);
+                return j;
             }
             if (flag.equals("X")) {
                 MvGoodsEntity mvgoods = systemService.findUniqueByProperty(
@@ -599,6 +616,15 @@ public class WmInQmIController extends BaseController {
                     wminqm.setImNoticeItem(jeecgDemo.getId());
                     wminqm.setGoodsId(jeecgDemo.getGoodsCode());
                     wminqm.setProData(DateUtils.date2Str(jeecgDemo.getGoodsPrdData(), DateUtils.date_sdf));
+
+
+                    if(!wmUtil.checkys(wminqm.getGoodsId(),wminqm.getProData())){
+                        j.setSuccess(false);
+                        message = "超过允收期";
+                        j.setMsg(message);
+                        return j;
+                    }
+
                     wminqm.setImNoticeId(jeecgDemo.getImNoticeId());
                     wminqm.setGoodsName(jeecgDemo.getGoodsName());
                     wminqm.setBinId(jeecgDemo.getBinPlan());
@@ -999,7 +1025,11 @@ public class WmInQmIController extends BaseController {
                 } catch (Exception e) {
 
                 }
-
+               if(!wmUtil.checkys(wmImNoticeIEntity.getGoodsCode(),wmInQmI.getProData())){
+                   D0.setErrorMsg("超过允收期");
+                   D0.setOK(false);
+                   return new ResponseEntity(D0, HttpStatus.OK);
+               }
                 if ("n".equals(ResourceUtil.getConfigByName("chaoshou"))) {
                     Double weiq = Double.parseDouble(wmImNoticeIEntity
                             .getGoodsCount())

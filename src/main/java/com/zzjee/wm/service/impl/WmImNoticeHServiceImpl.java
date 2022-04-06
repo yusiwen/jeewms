@@ -39,7 +39,7 @@ public class WmImNoticeHServiceImpl extends CommonServiceImpl implements WmImNot
  	}
 
 	@Override
-    public void addMain(WmImNoticeHEntity wmImNoticeH,
+    public synchronized void addMain(WmImNoticeHEntity wmImNoticeH,
                         List<WmImNoticeIEntity> wmImNoticeIList){
 			//保存主信息
 				if(StringUtil.isEmpty(wmImNoticeH.getOrderTypeCode())){
