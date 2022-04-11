@@ -112,7 +112,7 @@ public class wmUtil {
         SystemService systemService = ApplicationContextUtil.getContext().getBean(SystemService.class);
 
         Map<String, Object> countMap = systemService
-                .findOneForJdbc("SELECT cast(right(ifnull((notice_id),0),4)+1  as SIGNED) as count FROM wm_im_notice_h  t where  TO_DAYS(t.create_date) = TO_DAYS(NOW()) order by create_date, notice_id desc limit 1");
+                .findOneForJdbc("SELECT cast(right(ifnull((notice_id),0),4)+1  as SIGNED) as count FROM wm_im_notice_h  t where  TO_DAYS(t.create_date) = TO_DAYS(NOW()) order by create_date desc, RIGHT(IFNULL((notice_id), 0), 4)  desc limit 1");
         int newcount = 1;
 
         try {
@@ -168,7 +168,7 @@ public class wmUtil {
     public synchronized static String getNextomNoticeIdtms(String orderType) {
         SystemService systemService = ApplicationContextUtil.getContext().getBean(SystemService.class);
         Map<String, Object> countMap = systemService
-                .findOneForJdbc("SELECT cast(right(ifnull((om_notice_id),0),4)+1 as SIGNED) as count FROM tms_om_notice_h  t where  TO_DAYS(t.create_date) = TO_DAYS(NOW()) order by create_date, om_notice_id desc limit 1");
+                .findOneForJdbc("SELECT cast(right(ifnull((om_notice_id),0),4)+1 as SIGNED) as count FROM tms_om_notice_h  t where  TO_DAYS(t.create_date) = TO_DAYS(NOW()) order by create_date desc, right(ifnull((om_notice_id),0),4) desc limit 1");
         String noticeid = null;
         int newcount = 1;
 
@@ -207,7 +207,7 @@ public class wmUtil {
     public synchronized static String getNextomNoticeId(String orderType) {
         SystemService systemService = ApplicationContextUtil.getContext().getBean(SystemService.class);
         Map<String, Object> countMap = systemService
-                .findOneForJdbc("SELECT cast(right(ifnull((om_notice_id),0),4)+1 as SIGNED) as count FROM wm_om_notice_h  t where  TO_DAYS(t.create_date) = TO_DAYS(NOW()) order by create_date, om_notice_id desc limit 1");
+                .findOneForJdbc("SELECT cast(right(ifnull((om_notice_id),0),4)+1 as SIGNED) as count FROM wm_om_notice_h  t where  TO_DAYS(t.create_date) = TO_DAYS(NOW()) order by create_date desc, right(ifnull((om_notice_id),0),4) desc limit 1");
         String noticeid = null;
         int newcount = 1;
 
