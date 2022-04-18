@@ -49,7 +49,8 @@ import io.swagger.annotations.ApiParam;
  */
 @Controller
 @RequestMapping("/wmom")
-public class wmomController {
+public class
+wmomController {
 	private static final Logger logger = Logger.getLogger(wmomController.class);
 //	@Autowired
 //	private UserService userService;
