@@ -726,7 +726,7 @@ public class WmToDownGoodsController extends BaseController {
 	//下架
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public ResponseEntity<?> create(@RequestParam String wmToDownGoodsstr,
+	public synchronized ResponseEntity<?> create(@RequestParam String wmToDownGoodsstr,
 			UriComponentsBuilder uriBuilder) {
 		ResultDO D0 = new  ResultDO();
 		WmToDownGoodsEntity wmToDownGoods  = (WmToDownGoodsEntity)JSONHelper.json2Object(wmToDownGoodsstr,WmToDownGoodsEntity.class);
@@ -812,7 +812,7 @@ public class WmToDownGoodsController extends BaseController {
 	//装车复核
 	@RequestMapping(value = "/change", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public ResponseEntity<?> update(@RequestParam String wmToDownGoodsstr,
+	public  ResponseEntity<?> update(@RequestParam String wmToDownGoodsstr,
 									UriComponentsBuilder uriBuilder) {
 		// 调用JSR303 Bean Validator进行校验，如果出错返回含400错误码及json格式的错误信息.
 		ResultDO D0 = new  ResultDO();

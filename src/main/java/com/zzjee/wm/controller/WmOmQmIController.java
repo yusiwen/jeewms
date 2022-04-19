@@ -385,7 +385,7 @@ public class WmOmQmIController extends BaseController {
 
 	@RequestMapping(params = "dotowavedown")
 	@ResponseBody
-	public AjaxJson dotowavedown(HttpServletRequest request) {
+	public synchronized AjaxJson dotowavedown(HttpServletRequest request) {
 		String message = null;
 		AjaxJson j = new AjaxJson();
 		message = "下架成功";
@@ -444,7 +444,7 @@ public class WmOmQmIController extends BaseController {
 
 	@RequestMapping(params = "dotodown")
 	@ResponseBody
-	public AjaxJson dotodown(HttpServletRequest request) {
+	public synchronized AjaxJson dotodown(HttpServletRequest request) {
 		String message = null;
 		AjaxJson j = new AjaxJson();
 		message = "下架成功";
