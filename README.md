@@ -71,7 +71,7 @@ android app也已经开源，近期更新会比较频繁 app开源地址  https:
 ![微信群](https://images.gitee.com/uploads/images/2021/0513/111753_11c28c2a_544004.jpeg "LTWLLMX_HYFTX8VAPZC~QF4.jpg")
 ![主页](https://images.gitee.com/uploads/images/2018/1014/235739_2c29bbbf_544004.png "wmshome.png")
 ![仓位使用率](https://images.gitee.com/uploads/images/2018/1015/000747_4eafc335_544004.png "cwsyl.png")
-![仓位图](https://images.gitee.com/uploads/images/2018/1015/000802_e438ced8_544004.png "cwt.png")
+![仓位图]![输入图片说明](%E4%BB%93%E4%BD%8D%E5%9B%BE.png)
 ![输入图片说明](https://images.gitee.com/uploads/images/2018/1015/000813_bab8d35c_544004.png "ccsl.png")
 ![效期预警](https://images.gitee.com/uploads/images/2018/1015/000823_c5a982fe_544004.png "xqyj.png")
 
