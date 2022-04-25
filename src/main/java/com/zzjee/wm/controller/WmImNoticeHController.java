@@ -1393,7 +1393,19 @@ public class WmImNoticeHController extends BaseController {
                 cellHead6.setCellStyle(cs2);
 
                 Cell cellHead62 = rowHead6.createCell(3);
-                cellHead62.setCellValue("供应商/车号： "+wmImNoticeH.getImCarNo() );
+                String gys="";
+                if(!StringUtil.isEmpty(wmImNoticeH.getSupCode())){
+                    gys = wmImNoticeH.getSupCode()+wmImNoticeH.getSupName();
+                }
+                if(!StringUtil.isEmpty(wmImNoticeH.getImCarNo())){
+                    if(!StringUtil.isEmpty(gys)){
+                        gys = wmImNoticeH.getSupCode();
+                    }else{
+                        gys =gys+"/"+ wmImNoticeH.getSupCode();
+                    }
+
+                }
+                cellHead62.setCellValue("供应商/车号： "+  gys );
                 cellHead62.setCellStyle(cs2);
 
                 Row rowHead7 = sheet.createRow((short) page*20+7); // 头部第二行
