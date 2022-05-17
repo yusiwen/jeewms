@@ -148,6 +148,7 @@ public class WvDayCostSumController extends BaseController {
 					+ sdayCostBhs + ",shuie:" + sdayCostSe + ",hansj:"
 					+ sdayCostHsj + "");
 		} catch (Exception e) {
+			e.printStackTrace();
 			// TODO: handle exception
 		}
 
