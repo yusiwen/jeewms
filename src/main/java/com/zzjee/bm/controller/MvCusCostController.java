@@ -95,7 +95,6 @@ public class MvCusCostController extends BaseController {
     @Autowired
     private Validator validator;
 
-
     /**
      * mv_cus_cost列表 页面跳转
      *
