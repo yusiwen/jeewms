@@ -49,7 +49,7 @@ import org.springframework.web.servlet.view.RedirectView;
 /**
  * 登陆初始化控制器
  * @author admin
- * 
+ *
  */
 //@Scope("prototype")
 @Controller
@@ -61,7 +61,7 @@ public class LoginController extends BaseController{
 
 	@Autowired
 	private MutiLangServiceI mutiLangService;
-	
+
 	@Autowired
 	public void setSystemService(SystemService systemService) {
 		this.systemService = systemService;
@@ -81,7 +81,7 @@ public class LoginController extends BaseController{
 
 	/**
 	 * 检查用户名称
-	 * 
+	 *
 	 * @param user
 	 * @param req
 	 * @return
@@ -140,11 +140,11 @@ public class LoginController extends BaseController{
 		}
 		return j;
 	}
-	
-	
+
+
 	/**
 	 * 变更在线用户组织
-	 * 
+	 *
 	 * @param user
 	 * @param req
 	 * @return
@@ -196,8 +196,8 @@ public class LoginController extends BaseController{
 			checkuser(user,req);
 		}
 
-        
-        
+
+
         // 添加登陆日志
         systemService.addLog(message, Globals.Log_Type_LOGIN, Globals.Log_Leavel_INFO);
     }
@@ -205,7 +205,7 @@ public class LoginController extends BaseController{
 
     /**
 	 * 用户登录
-	 * 
+	 *
 	 * @param request
 	 * @return
 	 */
@@ -222,13 +222,13 @@ public class LoginController extends BaseController{
 			if (roles.length() > 0) {
 				roles = roles.substring(0, roles.length() - 1);
 			}
-			
+
             modelMap.put("roleName", roles.length()>3?roles.substring(0,3)+"...":roles);
             modelMap.put("userName", user.getUserName().length()>5?user.getUserName().substring(0, 5)+"...":user.getUserName());
 
             modelMap.put("currentOrgName", ClientManager.getInstance().getClient().getUser().getCurrentDepart().getDepartname());
 
-			
+
 			SysThemesEnum sysTheme = SysThemesUtil.getSysTheme(request);
 			if("ace".equals(sysTheme.getStyle())||"diy".equals(sysTheme.getStyle())||"acele".equals(sysTheme.getStyle())||"hplus".equals(sysTheme.getStyle())){
 				request.setAttribute("menuMap", getFunctionMap(user));
@@ -252,7 +252,7 @@ public class LoginController extends BaseController{
 
 	/**
 	 * 退出系统
-	 * 
+	 *
 	 * @param request
 	 * @return
 	 */
@@ -275,7 +275,7 @@ public class LoginController extends BaseController{
 
 	/**
 	 * 菜单跳转
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "left")
@@ -296,7 +296,7 @@ public class LoginController extends BaseController{
 
 	/**
 	 * 获取权限的map
-	 * 
+	 *
 	 * @param user
 	 * @return
 	 */
@@ -338,7 +338,7 @@ public class LoginController extends BaseController{
 
 	/**
 	 * 获取用户菜单列表
-	 * 
+	 *
 	 * @param user
 	 * @return
 	 */
@@ -349,24 +349,7 @@ public class LoginController extends BaseController{
 		if (client.getFunctions() == null || client.getFunctions().size() == 0) {
 
 			Map<String, TSFunction> loginActionlist = new HashMap<String, TSFunction>();
-
-			 /*String hql="from TSFunction t where t.id in  (select d.TSFunction.id from TSRoleFunction d where d.TSRole.id in(select t.TSRole.id from TSRoleUser t where t.TSUser.id ='"+
-	           user.getId()+"' ))";
-	           String hql2="from TSFunction t where t.id in  ( select b.tsRole.id from TSRoleOrg b where b.tsDepart.id in(select a.tsDepart.id from TSUserOrg a where a.tsUser.id='"+
-	           user.getId()+"'))";
-	           List<TSFunction> list = systemService.findHql(hql);
-	           log.info("role functions:  "+list.size());
-	           for(TSFunction function:list){
-	              loginActionlist.put(function.getId(),function);
-	           }
-	           List<TSFunction> list2 = systemService.findHql(hql2);
-	           log.info("org functions: "+list2.size());
-	           for(TSFunction function:list2){
-	              loginActionlist.put(function.getId(),function);
-	           }*/
-
 	           StringBuilder hqlsb1=new StringBuilder("select distinct f from TSFunction f,TSRoleFunction rf,TSRoleUser ru  ").append("where ru.TSRole.id=rf.TSRole.id and rf.TSFunction.id=f.id and ru.TSUser.id=? ");
-
 	           StringBuilder hqlsb2=new StringBuilder("select distinct c from TSFunction c,TSRoleFunction rf,TSRoleOrg b,TSUserOrg a ")
 	           							.append("where a.tsDepart.id=b.tsDepart.id and b.tsRole.id=rf.TSRole.id and rf.TSFunction.id=c.id and a.tsUser.id=?");
 	           List<TSFunction> list1 = systemService.findHql(hqlsb1.toString(),user.getId());
@@ -378,8 +361,6 @@ public class LoginController extends BaseController{
 		              loginActionlist.put(function.getId(),function);
 		       }
             client.setFunctions(loginActionlist);
-
-            //清空变量，降低内存使用
             list2.clear();
             list1.clear();
 
@@ -408,7 +389,7 @@ public class LoginController extends BaseController{
 
     /**
 	 * 首页跳转
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "home")
@@ -424,10 +405,10 @@ public class LoginController extends BaseController{
 
 		return new ModelAndView("main/home");
 	}
-	
+
 	  /**
 	 * ACE首页跳转
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "acehome")
@@ -450,20 +431,12 @@ public class LoginController extends BaseController{
 	 */
 	@RequestMapping(params = "hplushome")
 	public ModelAndView hplushome(HttpServletRequest request) {
-
 		SysThemesEnum sysTheme = SysThemesUtil.getSysTheme(request);
-		//ACE ACE2 DIY时需要在home.jsp头部引入依赖的js及css文件
-		/*if("ace".equals(sysTheme.getStyle())||"diy".equals(sysTheme.getStyle())||"acele".equals(sysTheme.getStyle())){
-			request.setAttribute("show", "1");
-		} else {//default及shortcut不需要引入依赖文件，所有需要屏蔽
-			request.setAttribute("show", "0");
-		}*/
-
 		return new ModelAndView("main/hplushome");
 	}
 	/**
 	 * 无权限页面提示跳转
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "noAuth")
@@ -511,7 +484,7 @@ public class LoginController extends BaseController{
 		request.setAttribute("menuMap", getFunctionMap(user));
 		return new ModelAndView("main/shortcut_top");
 	}
-	
+
 	/**
 	 * @Title: top
 	 * @author:gaofeng
@@ -580,7 +553,7 @@ public class LoginController extends BaseController{
                     floor += " <li><img class='imag1' src='plug-in/login/images/cysl.png' /> "
                             + " <img class='imag2' src='plug-in/login/images/cysl_up.png' style='display: none;' />" + " </li> ";
                 }else if(lang_context.contains("消息推送")){
-                	
+
                 	String s = "<div style='width:67px;position: absolute;top:39px;text-align:center;color:#909090;font-size:13px;'>消息推送</div>";
                     floor += " <li style='position: relative;'>"+s+"<img class='imag1' src='plug-in/login/images/msg.png' /> "
                             + " <img class='imag2' src='plug-in/login/images/msg_up.png' style='display: none;' /></li> ";
