@@ -41,6 +41,7 @@ public class JeecgFormDemoController extends BaseController {
 
     @Autowired
     private SystemService systemService;
+
     @Autowired
     private JeecgMinidaoDao jeecgMinidaoDao;
 
