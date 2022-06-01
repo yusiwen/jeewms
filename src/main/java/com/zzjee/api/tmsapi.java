@@ -26,14 +26,6 @@ public class tmsapi {
 
     @Autowired
     private Validator validator;
-
-
-    /**
-     * 访问地址：http://localhost:8080/jeecg/rest/user/{id}
-     * @param doctype
-     * @return
-     */
-
     @RequestMapping(value = "/getdoc/{doctype}", method = RequestMethod.GET)
     @ResponseBody
 //    @ApiOperation(value="根据doctype获取单据",notes="根据doctype获取单据",httpMethod="GET",produces="application/json")
@@ -68,21 +60,10 @@ public class tmsapi {
     @ApiOperation(value="创建上下架")
     public ResponseEntity<?>  createlt( @RequestParam(required=false ,value="doctype")  String doctype,@RequestParam(value="docid", required=false) String docid, @RequestParam(value="tSapLtttstr", required=false) String  tSapLtttstr,
                                      UriComponentsBuilder uriBuilder) {
-
         ResultDO D0 = new ResultDO();
         String msg = null;
-
-
-                    D0.setErrorMsg("保存成功");
-                    D0.setOK(true);
-
-
-
-
-
-
-//        org.jeecgframework.core.util.LogUtil.info("==================="+doctype+"返回消息==================="+msg);
-
+        D0.setErrorMsg("保存成功");
+        D0.setOK(true);
         return new ResponseEntity(D0, HttpStatus.OK);
     }
 

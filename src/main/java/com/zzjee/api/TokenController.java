@@ -81,17 +81,12 @@ public class TokenController {
 
 		TSUser user = userService.checkUserExits(username, password);
 		if (user == null) {
-			// 提示用户名或密码错误
 			logger.info("获取TOKEN,户账号密码错误[{}]" + username);
 			D0.setOK(false);
 			D0.setErrorMsg("用户账号密码错误!");
-//			return new ResponseEntity("用户账号密码错误!", HttpStatus.NOT_FOUND);
 		}else{
-			// 生成一个token，保存用户登录状态
 			String token = user.getMobilePhone();
 			try{
-//				List<Map<String, Object>> res = systemService.findForJdbc("select app_version,down_url from t_app_version");
-//				for (Map<String, Object> map : res) {
 					D0.setErrorCode("V2.0");
 					D0.setErrorMsg("http");
 //				}
@@ -102,7 +97,6 @@ public class TokenController {
 			D0.setObj(token);
 			D0.setOK(true);
 		}
-
 
 		// 生成一个token，保存用户登录状态
 		return new ResponseEntity(D0, HttpStatus.OK);
@@ -120,73 +114,24 @@ public class TokenController {
 		if (StringUtils.isEmpty(username)) {
 			D0.setErrorMsg("用户账号不能为空!");
 			D0.setOK(false);
-//			return new ResponseEntity("用户账号不能为空!", HttpStatus.FORBIDDEN);
+			return new ResponseEntity("用户账号不能为空!", HttpStatus.OK);
 		}
 		// 验证
 		if (StringUtils.isEmpty(username)) {
 			D0.setErrorMsg("用户密码不能为空!");
 			D0.setOK(false);
-//			return new ResponseEntity("用户密码不能为空!", HttpStatus.FORBIDDEN);
+			return new ResponseEntity("用户密码不能为空!", HttpStatus.OK);
 		}
-//		Assert.notNull(username, "username can not be empty");
-//		Assert.notNull(password, "password can not be empty");
-
 		TSUser user = userService.checkUserExits(username, password);
 		if (user == null) {
-			// 提示用户名或密码错误
 			D0.setErrorMsg("用户账号密码错误!");
 			D0.setOK(false);
 			logger.info("获取TOKEN,账号密码错误[{}]" + username);
-//			return new ResponseEntity("用户账号密码错误!", HttpStatus.FORBIDDEN);
 		}else{
-////			Map<String, TSFunction> loginActionlist = new HashMap<String, TSFunction>();
-//			StringBuilder hqlsb1 = new StringBuilder("select distinct f from TSFunction f,TSRoleFunction rf,TSRoleUser ru  ").append("where ru.TSRole.id=rf.TSRole.id and rf.TSFunction.id=f.id and ru.TSUser.id=? ");
-//			//-------author: zhoujf---start---date:20160923----for:组织机构角色赋权不起作用问题
-//			StringBuilder hqlsb2 = new StringBuilder("select distinct c from TSFunction c,TSRoleFunction rf,TSRoleOrg b,TSUserOrg a ")
-//					.append("where a.tsDepart.id=b.tsDepart.id and b.tsRole.id=rf.TSRole.id and rf.TSFunction.id=c.id and a.tsUser.id=?");
-//			//-------author: zhoujf---end---date:20160923----for:组织机构角色赋权不起作用问题
-//			//update-begin-Author:LiShaoQing Date:20171023 for:TASK #2383【功能】权限组集成，用户登录权限过滤--------
-////			StringBuilder hqlsb3 = new StringBuilder("select distinct c from TSFunction c,TSFunctionGroupRelEntity g,TSFunctionGroupUserEntity u")
-////					.append(" where g.tsFunctionGroup.id=u.groupId and c.id=g.tsFunction.id and u.userId=?");
-////			//TODO hql执行效率慢 为耗时最多地方
-//			//-------author: zhangliang---start---date:20170725----for:TASK #2116 【性能问题】优化登录逻辑
-////			SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-////		log.info("================================开始时间:"+sdf.format(new Date())+"==============================");
-////			long start = System.currentTimeMillis();
-//			List<MenuEntity> listreturn = new ArrayList<MenuEntity>();
-//			List<TSFunction> list1 = systemService.findHql(hqlsb1.toString(), user.getId());
-//			List<TSFunction> list2 = systemService.findHql(hqlsb2.toString(), user.getId());
-////			List<TSFunction> list3 = systemService.findHql(hqlsb3.toString(), user.getUserName());
-////			long end = System.currentTimeMillis();
-////		log.info("================================结束时间:"+sdf.format(new Date())+"==============================");
-////		log.info("================================耗时:"+(end-start)+"ms==============================");
-//			//-------author: zhangliang---end---date:20170725----for:TASK #2116 【性能问题】优化登录逻辑
-//			for (TSFunction function : list1) {
-//				MenuEntity  fh5 = new MenuEntity();
-//				fh5.setMenuImg(function.getTSIcon().getIconPath());
-//				fh5.setMenuText(function.getFunctionName());
-//				fh5.setMenuSrc(function.getFunctionUrl());
-//				listreturn.add(fh5);
-//			}
-//			for (TSFunction function : list2) {
-//				MenuEntity  fh5 = new MenuEntity();
-//				fh5.setMenuImg(function.getTSIcon().getIconPath());
-//				fh5.setMenuText(function.getFunctionName());
-//				fh5.setMenuSrc(function.getFunctionUrl());
-//				listreturn.add(fh5);
-//			}
-////			for (TSFunction function : list3) {
-////				MenuEntity  fh5 = new MenuEntity();
-////				fh5.setMenuImg(function.getTSIcon().getIconPath());
-////				fh5.setMenuText(function.getFunctionName());
-////				fh5.setMenuSrc(function.getFunctionUrl());
-////				listreturn.add(fh5);
-////			}
 
 			D0.setObj(user);
 			D0.setOK(true);
 		}
-		// 生成一个token，保存用户登录状态
 		return new ResponseEntity(D0, HttpStatus.OK);
 	}
 	@ApiOperation(value = "wxauthv3")
@@ -339,20 +284,7 @@ public class TokenController {
 	@ApiOperation(value="根据username获取用户信息",notes="根据username获取用户信息",httpMethod="GET",produces="application/json")
 	public ResponseMessage<?> getuser(@ApiParam(required=true,name="username",value="username")@PathVariable("username") String username,
 									  @ApiParam(required=false,name="password",value="password")@RequestParam String password) {
-//		TSUser task = systemService.findUniqueByProperty(TSUser.class,"userName",username);
-//		if (task == null) {
-//			FxjOtherLoginEntity fxjOtherLoginEntity = userService.findUniqueByProperty(FxjOtherLoginEntity.class, "otherid", username);
-//			if (fxjOtherLoginEntity != null) {
-//				task = systemService.findUniqueByProperty(TSUser.class,"userName",fxjOtherLoginEntity.getUsername());
-//			}
-//		}
-//		if (task == null) {
-////			task = systemService.findUniqueByProperty(TSUser.class,"userName",ResourceUtil.getConfigByName("mini.user"));
-//			return org.jeecgframework.jwt.util.Result.error("获取用户信息失败");
-//		}
-
 		TSUser task = userService.checkUserExits(username, password);
-
 		if(!StringUtil.isEmpty(task.getDepartid())){
 			TSDepart tsDepart = systemService.get(TSDepart.class,task.getDepartid());
 			if(tsDepart!=null){

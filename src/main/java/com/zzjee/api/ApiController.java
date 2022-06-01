@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @description
  */
 @RestController
-@RequestMapping("/apitest")
+@RequestMapping("/pdaapi")
 public class ApiController {
 
 
