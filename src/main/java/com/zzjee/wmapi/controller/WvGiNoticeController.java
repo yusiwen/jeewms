@@ -339,7 +339,10 @@ public class WvGiNoticeController extends BaseController {
     //下架任务  PDA接口
     @RequestMapping(value = "/search", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<?> lists(@RequestParam(value = "username", required = false) String username, @RequestParam(value = "searchstr", required = false) String searchstr, @RequestParam(value = "searchstr2", required = false) String searchstr2, @RequestParam(value = "searchstr3", required = false) String searchstr3) {
+    public ResponseEntity<?> lists(@RequestParam(value = "username", required = false) String username,
+                                   @RequestParam(value = "searchstr", required = false) String searchstr,
+                                   @RequestParam(value = "searchstr2", required = false) String searchstr2,
+                                   @RequestParam(value = "searchstr3", required = false) String searchstr3) {
 //		return listWvGis;
 
 

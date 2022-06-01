@@ -328,10 +328,9 @@ public class WvNoticeController extends BaseController {
     //PDA接口
     @RequestMapping(method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<?> list(@RequestParam(value = "username", required = false) String username, @RequestParam(value = "searchstr", required = false) String searchstr, @RequestParam(value = "searchstr2", required = false) String searchstr2) {
-//		return listWvGis;
-
-
+    public ResponseEntity<?> list(@RequestParam(value = "username", required = false) String username,
+                                  @RequestParam(value = "searchstr", required = false) String searchstr,
+                                  @RequestParam(value = "searchstr2", required = false) String searchstr2) {
         ResultDO D0 = new ResultDO();
         String hql = " from WvNoticeEntity where 1 = 1 ";
         D0.setOK(true);
@@ -359,21 +358,16 @@ public class WvNoticeController extends BaseController {
                     } else {
                         insearch = "goodsCode = '" + s + "'";
                     }
-
                 }
                 hql = hql + "  and  (" + insearch + ")";
 
             }
-//			hql=hql+"  and goodsCode  in (:alist)";
         }
-
         List<WvNoticeEntity> listWvNotices = wvNoticeService.findHql(hql);
         D0.setOK(true);
-
         List<WvNoticeEntity> result = new ArrayList<WvNoticeEntity>();
         int i = 0;
         for (WvNoticeEntity t : listWvNotices) {
-
             i++;
             if (i > 100) {
                 break;
@@ -403,7 +397,6 @@ public class WvNoticeController extends BaseController {
         if (!failures.isEmpty()) {
             return new ResponseEntity(BeanValidators.extractPropertyAndMessage(failures), HttpStatus.BAD_REQUEST);
         }
-
         //保存
         try {
             wvNoticeService.save(wvNotice);
@@ -416,7 +409,6 @@ public class WvNoticeController extends BaseController {
         URI uri = uriBuilder.path("/rest/wvNoticeController/" + id).build().toUri();
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(uri);
-
         return new ResponseEntity(headers, HttpStatus.CREATED);
     }
 
@@ -427,7 +419,6 @@ public class WvNoticeController extends BaseController {
         if (!failures.isEmpty()) {
             return new ResponseEntity(BeanValidators.extractPropertyAndMessage(failures), HttpStatus.BAD_REQUEST);
         }
-
         //保存
         try {
             wvNoticeService.saveOrUpdate(wvNotice);
