@@ -1,14 +1,16 @@
 package com.zzjee.api;
 
+import com.zzjee.md.controller.MdGoodsController;
 import com.zzjee.md.entity.MdCusEntity;
 import com.zzjee.md.entity.MdGoodsEntity;
 import com.zzjee.md.entity.MvGoodsEntity;
-import com.zzjee.wm.controller.WmInQmIController;
-import com.zzjee.wm.controller.WmToDownGoodsController;
-import com.zzjee.wm.controller.WmToUpGoodsController;
+import com.zzjee.wave.controller.WaveToDownController;
+import com.zzjee.wave.controller.WaveToFjController;
+import com.zzjee.wm.controller.*;
 import com.zzjee.wm.entity.WmImNoticeHEntity;
 import com.zzjee.wm.entity.WmImNoticeIEntity;
 import com.zzjee.wm.entity.WmInQmIEntity;
+import com.zzjee.wmapi.controller.WvGiController;
 import com.zzjee.wmapi.controller.WvGiNoticeController;
 import com.zzjee.wmapi.controller.WvNoticeController;
 import com.zzjee.wmapi.entity.WvNoticeEntity;
@@ -52,6 +54,20 @@ public class ApiController {
     private WvGiNoticeController wvGiNoticeController;
     @Autowired
     private WmToDownGoodsController wmToDownGoodsController;
+    @Autowired
+    private WvGiController wvGiController;
+    @Autowired
+    private WaveToDownController waveToDownController;
+    @Autowired
+    private WaveToFjController waveToFjController;
+    @Autowired
+    private WvStockController wvStockController;
+    @Autowired
+    private WmToMoveGoodsController wmToMoveGoodsController;
+    @Autowired
+    private WmSttInGoodsController wmSttInGoodsController;
+    @Autowired
+    private MdGoodsController mdGoodsController;
     //收货相关接口begin
     //收货列表
     @RequestMapping(value = "/wvNoticeController/list", method = RequestMethod.GET)
@@ -110,24 +126,63 @@ public class ApiController {
     //下架相关接口end
 
     //装车复核列表
-    public static final String wvGiController = "/rest/wvGiController";
+     @RequestMapping(value = "/wvGiController/list",method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<?> list4(@RequestParam(value = "username", required = false) String username,
+                                  @RequestParam(value = "searchstr", required = false) String searchstr,
+                                  @RequestParam(value = "searchstr2", required = false) String searchstr2) {
+        return wvGiController.list(username,searchstr,searchstr2);
+    }
     //装车复核保存
-    public static final String wmToDownGoodsControllerc = "/rest/wmToDownGoodsController/change";
-
+    @RequestMapping(value = "/wmToDownGoodsController/change", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public  ResponseEntity<?> update4(@RequestParam String wmToDownGoodsstr,
+                                     UriComponentsBuilder uriBuilder) {
+        return wmToDownGoodsController.update(wmToDownGoodsstr,uriBuilder);
+    }
 
     //波次下架列表
-    public static final String waveToDownList = "/rest/waveToDownController/list/todown";
+    @RequestMapping(value = "/waveToDownController/list/todown",  method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<?> list5(@RequestParam(value="username", required=false) String username,
+                                  @RequestParam(value="searchstr", required=false)String searchstr,
+                                  @RequestParam(value="searchstr2", required=false)String searchstr2,
+                                  @RequestParam(value="searchstr3", required=false)String searchstr3) {
+     return    waveToDownController.list(username,searchstr,searchstr2,searchstr3);
+    }
     //波次下架保存
-    public static final String waveToDownSave = "/rest/waveToDownController";
+    @RequestMapping(value = "/waveToDownController/save",method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity<?> create5(@RequestParam String waveToDownstr ,UriComponentsBuilder uriBuilder) {
+        return waveToDownController.create(waveToDownstr,uriBuilder);
+    }
 
     //波次分拣列表
-    public static final String waveToFjList = "/rest/waveToFjController/list/tofj";
+
+    @RequestMapping(value = "/waveToFjController/list/tofj",  method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<?> list(@RequestParam(value="username", required=false) String username,
+                                  @RequestParam(value="searchstr", required=false)String searchstr,
+                                  @RequestParam(value="searchstr2", required=false)String searchstr2,
+                                  @RequestParam(value="searchstr3", required=false)String searchstr3,
+                                  @RequestParam(value="searchstr4", required=false)String searchstr4,//二次容器
+                                  @RequestParam(value="searchstr5", required=false)String searchstr5){
+        return waveToFjController.list(username,searchstr,searchstr2,searchstr3,searchstr4,searchstr5);
+    }
     //波次分拣保存
-    public static final String waveToFjSave = "/rest/waveToFjController";
-
+    @RequestMapping(value = "/waveToFjController/save", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity<?> create(@RequestParam String waveToFjstr , UriComponentsBuilder uriBuilder) {
+        return waveToFjController.create(waveToFjstr,uriBuilder);
+    }
     //库存列表
-    public static final String StockController = "/rest/wvStockController";
-
+    @RequestMapping(value = "/wvStockController/list",method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<?> list(@RequestParam(value = "username", required = false) String username,
+                                  @RequestParam(value = "searchstr", required = false) String searchstr,
+                                  @RequestParam(value = "searchstr2", required = false) String searchstr2) {
+        return wvStockController.list(username,searchstr,searchstr2);
+    }
     //移储列表
     public static final String ToMoveGoodsController = "/rest/wmToMoveGoodsController";
     //移储保存
