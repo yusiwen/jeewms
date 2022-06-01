@@ -450,7 +450,9 @@ public class WmToMoveGoodsController extends BaseController {
 
 	@RequestMapping(method = RequestMethod.GET)
 	@ResponseBody
-	public ResponseEntity<?>  list( @RequestParam(value="username", required=false) String username, @RequestParam(value="searchstr", required=false)String searchstr, @RequestParam(value="searchstr2", required=false)String searchstr2) {
+	public ResponseEntity<?>  list( @RequestParam(value="username", required=false) String username,
+									@RequestParam(value="searchstr", required=false)String searchstr,
+									@RequestParam(value="searchstr2", required=false)String searchstr2) {
 //		return listWvGis;
 
 

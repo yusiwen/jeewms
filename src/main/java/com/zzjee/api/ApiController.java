@@ -161,7 +161,7 @@ public class ApiController {
 
     @RequestMapping(value = "/waveToFjController/list/tofj",  method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<?> list(@RequestParam(value="username", required=false) String username,
+    public ResponseEntity<?> list6(@RequestParam(value="username", required=false) String username,
                                   @RequestParam(value="searchstr", required=false)String searchstr,
                                   @RequestParam(value="searchstr2", required=false)String searchstr2,
                                   @RequestParam(value="searchstr3", required=false)String searchstr3,
@@ -172,32 +172,76 @@ public class ApiController {
     //波次分拣保存
     @RequestMapping(value = "/waveToFjController/save", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<?> create(@RequestParam String waveToFjstr , UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<?> create6(@RequestParam String waveToFjstr , UriComponentsBuilder uriBuilder) {
         return waveToFjController.create(waveToFjstr,uriBuilder);
     }
     //库存列表
     @RequestMapping(value = "/wvStockController/list",method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<?> list(@RequestParam(value = "username", required = false) String username,
+    public ResponseEntity<?> list7(@RequestParam(value = "username", required = false) String username,
                                   @RequestParam(value = "searchstr", required = false) String searchstr,
                                   @RequestParam(value = "searchstr2", required = false) String searchstr2) {
         return wvStockController.list(username,searchstr,searchstr2);
     }
     //移储列表
     public static final String ToMoveGoodsController = "/rest/wmToMoveGoodsController";
+    @RequestMapping(value = "/wmToMoveGoodsController/list",method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<?>  list8( @RequestParam(value="username", required=false) String username,
+                                    @RequestParam(value="searchstr", required=false)String searchstr,
+                                    @RequestParam(value="searchstr2", required=false)String searchstr2) {
+        return wmToMoveGoodsController.list(username,searchstr,searchstr2);
+    }
     //移储保存
-    public static final String wmToMoveGoodsControllerc = "/rest/wmToMoveGoodsController/change";
 
+    @RequestMapping(value = "/wmToMoveGoodsController/save", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity<?> update8(@RequestParam String wmToMoveGoodsstr,
+                                    UriComponentsBuilder uriBuilder) {
+        return wmToMoveGoodsController.update(wmToMoveGoodsstr,uriBuilder);
+    }
     //盘点列表
-    public static final String SttInGoodsController = "/rest/wmSttInGoodsController";
+     //PDA接口
+    @RequestMapping(value = "/wmSttInGoodsController/list",method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<?>  list9( @RequestParam(value="username", required=false) String username,
+                                    @RequestParam(value="searchstr", required=false)String searchstr,
+                                    @RequestParam(value="searchstr2", required=false)String searchstr2) {
+        return wmSttInGoodsController.list(username,searchstr,searchstr2);
+    }
     //盘点保存
-    public static final String wmSttInGoodsControllerc = "/rest/wmSttInGoodsController/change";
-
+    @RequestMapping(value = "/wmSttInGoodsController/save", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity<?> update9(@RequestParam String wmSttInGoodsstr,
+                                    UriComponentsBuilder uriBuilder) {
+        return wmSttInGoodsController.update(wmSttInGoodsstr,uriBuilder);
+    }
     //商品列表
     public static final String GoodsController = "/rest/mdGoodsController";
+    @RequestMapping(value = "/mdGoodsController/list",method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<?>  list10( @RequestParam(value="username", required=false) String username,
+                                    @RequestParam(value="all", required=false)String all,
+                                    @RequestParam(value="searchstr", required=false)String searchstr,
+                                    @RequestParam(value="searchstr2", required=false)String searchstr2,
+                                    @RequestParam(value="searchstrin1", required=false)String searchstrin1,
+                                    @RequestParam(value="searchstrin2", required=false)String searchstrin2,
+                                    @RequestParam(value="searchstrin3", required=false)String searchstrin3) {
+        return mdGoodsController.list(username,all,searchstr,searchstr2,searchstrin1,searchstrin2,searchstrin3);
+    }
     //商品信息保存
     public static final String mdGoodsControllerc = "/rest/mdGoodsController/change";
+    @RequestMapping(value = "/mdGoodsController/save", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity<?> update10(@RequestParam String mdGoodsstr,
+                                    UriComponentsBuilder uriBuilder) {
+        return mdGoodsController.update(mdGoodsstr,uriBuilder);
+    }
     //商品下单
-    public static final String mdGoodsControllercorder = "/rest/mdGoodsController/order";
-
-}
+    @RequestMapping(value = "/mdGoodsController/order", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity<?> xiadan(@RequestParam String mdGoodsstr,
+                                    UriComponentsBuilder uriBuilder) {
+        return mdGoodsController.xiadan(mdGoodsstr,uriBuilder);
+    }
+    }
