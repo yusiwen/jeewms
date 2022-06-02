@@ -18,7 +18,8 @@ import com.zzjee.wmapi.entity.WvNoticeEntity;
 import com.zzjee.wmutil.wmUtil;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.models.HttpMethod;
-import org.apache.commons.lang.StringUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.log4j.Logger;
 import org.jeecgframework.core.beanvalidator.BeanValidators;
 import org.jeecgframework.core.common.model.json.AjaxJson;
 import org.jeecgframework.core.util.DateUtils;
@@ -28,6 +29,8 @@ import org.jeecgframework.core.util.StringUtil;
 import org.jeecgframework.jwt.util.ResponseMessage;
 import org.jeecgframework.jwt.util.Result;
 import org.jeecgframework.web.system.pojo.base.TSBaseUser;
+import org.jeecgframework.web.system.pojo.base.TSUser;
+import org.jeecgframework.web.system.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -49,6 +52,8 @@ import java.util.Set;
 @RestController
 @RequestMapping("/pdaapi")
 public class ApiController {
+    @Autowired
+    private UserService userService;
     @Autowired
     private WvNoticeController wvNoticeController;
     @Autowired
@@ -75,6 +80,7 @@ public class ApiController {
     private MdGoodsController mdGoodsController;
     @Autowired
     private wmomController wmomController;
+    private static final Logger logger = Logger.getLogger(ApiController.class);
 
     //收货相关接口begin
     //收货列表
@@ -275,5 +281,35 @@ public class ApiController {
                                         @RequestBody wmientity wmientityin,
                                         HttpServletRequest request) {
         return wmomController.rfid_save(username, wmientityin, request);
+    }
+    @RequestMapping(value = "/login", method = RequestMethod.POST)
+    @ResponseBody
+    public ResultApi<?> login(@RequestBody TSBaseUser tsBaseUser, HttpServletRequest request) {
+        logger.info("获取TOKEN[{}]" + tsBaseUser.getUserName());
+        ResultDO D0 = new  ResultDO();
+
+        // 验证
+        if (org.apache.commons.lang3.StringUtils.isEmpty(tsBaseUser.getUserName())) {
+
+            return ResultApi.error("用户账号不能为空!");
+        }
+        // 验证
+        if (StringUtils.isEmpty(tsBaseUser.getUserName())) {
+
+            return ResultApi.error("用户密码不能为空!");
+
+//            return new ResponseEntity("用户密码不能为空!", HttpStatus.OK);
+        }
+        TSUser user = userService.checkUserExits(tsBaseUser.getUserName(), tsBaseUser.getPassword());
+        if (user == null) {
+            D0.setErrorMsg("用户账号密码错误!");
+            D0.setOK(false);
+            return ResultApi.error("获取TOKEN,账号密码错误[{}]!");
+
+         }else{
+
+
+        }
+        return ResultApi.OK(user);
     }
 }

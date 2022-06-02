@@ -19,10 +19,7 @@ import org.jeecgframework.core.util.ResourceUtil;
 import org.jeecgframework.core.util.StringUtil;
 import org.jeecgframework.jwt.util.ResponseMessage;
 import org.jeecgframework.jwt.util.Result;
-import org.jeecgframework.web.system.pojo.base.TSDepart;
-import org.jeecgframework.web.system.pojo.base.TSFunction;
-import org.jeecgframework.web.system.pojo.base.TSUser;
-import org.jeecgframework.web.system.pojo.base.TSUserOrg;
+import org.jeecgframework.web.system.pojo.base.*;
 import org.jeecgframework.web.system.service.SystemService;
 import org.jeecgframework.web.system.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,11 +27,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.util.Assert;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import com.zzjee.conf.entity.FxjOtherLoginEntity;
 import com.zzjee.conf.entity.WxConfigEntity;
@@ -106,27 +99,27 @@ public class TokenController {
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	@ResponseBody
-	public ResponseEntity<?> login(@RequestParam String username, @RequestParam String password) {
-		logger.info("获取TOKEN[{}]" + username);
+	public ResponseEntity<?> login(@RequestBody TSBaseUser tsBaseUser, HttpServletRequest request) {
+		logger.info("获取TOKEN[{}]" + tsBaseUser.getUserName());
 		ResultDO D0 = new  ResultDO();
 
 		// 验证
-		if (StringUtils.isEmpty(username)) {
+		if (StringUtils.isEmpty(tsBaseUser.getUserName())) {
 			D0.setErrorMsg("用户账号不能为空!");
 			D0.setOK(false);
 			return new ResponseEntity("用户账号不能为空!", HttpStatus.OK);
 		}
 		// 验证
-		if (StringUtils.isEmpty(username)) {
+		if (StringUtils.isEmpty(tsBaseUser.getUserName())) {
 			D0.setErrorMsg("用户密码不能为空!");
 			D0.setOK(false);
 			return new ResponseEntity("用户密码不能为空!", HttpStatus.OK);
 		}
-		TSUser user = userService.checkUserExits(username, password);
+		TSUser user = userService.checkUserExits(tsBaseUser.getUserName(), tsBaseUser.getPassword());
 		if (user == null) {
 			D0.setErrorMsg("用户账号密码错误!");
 			D0.setOK(false);
-			logger.info("获取TOKEN,账号密码错误[{}]" + username);
+			logger.info("获取TOKEN,账号密码错误[{}]" + tsBaseUser.getUserName());
 		}else{
 
 			D0.setObj(user);
