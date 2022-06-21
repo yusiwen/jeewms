@@ -70,8 +70,8 @@ public class MdGoodsEntity implements java.io.Serializable {
 	/**产品属性*/
 	@Excel(name="产品属性")
 	private java.lang.String chpShuXing;
-	/**存放温层*/
-	@Excel(name="存放温层")
+	/**产品大类*/
+	@Excel(name="产品大类")
 	private java.lang.String cfWenCeng;
 	/**拆零控制*/
 	@Excel(name="拆零控制")
@@ -469,7 +469,7 @@ public class MdGoodsEntity implements java.io.Serializable {
 	}
 	/**
 	 *方法: 取得java.lang.String
-	 *@return: java.lang.String  存放温层
+	 *@return: java.lang.String  产品大类
 	 */
 	@Column(name ="CF_WEN_CENG",nullable=true,length=32)
 	public java.lang.String getCfWenCeng(){
@@ -478,7 +478,7 @@ public class MdGoodsEntity implements java.io.Serializable {
 
 	/**
 	 *方法: 设置java.lang.String
-	 *@param: java.lang.String  存放温层
+	 *@param: java.lang.String  产品大类
 	 */
 	public void setCfWenCeng(java.lang.String cfWenCeng){
 		this.cfWenCeng = cfWenCeng;

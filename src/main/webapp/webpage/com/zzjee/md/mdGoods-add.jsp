@@ -70,13 +70,13 @@ function counttiji(){
 						<label class="Validform_label" style="display: none">所属供应商</label>
 			          </div>
 			          			          <div class="col-xs-3 text-center">
-			          	<b  style="color:red">存放温层</b>
+			          	<b  style="color:red">产品大类</b>
 			          </div>
 			          <div class="col-xs-3">
 								<t:dictSelect field="cfWenCeng" type="list" extendJson="{class:'form-control';datatype:'*'}"
-								dictTable="ba_deg_type" dictField="deg_type_code" dictText="deg_type_name" hasLabel="false"  title="存放温层"></t:dictSelect>
+								dictTable="ba_deg_type" dictField="deg_type_code" dictText="deg_type_name" hasLabel="false"  title="产品大类"></t:dictSelect>
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
-						<label class="Validform_label" style="display: none">存放温层</label>
+						<label class="Validform_label" style="display: none">产品大类</label>
 			          </div>
 			          		          			          <div class="col-xs-3 text-center">
 			          	<b  style="color:red">产品属性</b>

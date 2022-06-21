@@ -29979,13 +29979,13 @@ LABL 0 Arial,8,N</a:FontList>
 </o:Column>
 <o:Column Id="o1925">
 <a:ObjectID>144DCB45-7B82-4A15-BC29-063052BB811F</a:ObjectID>
-<a:Name>存放温层</a:Name>
+<a:Name>产品大类</a:Name>
 <a:Code>cf_wen_ceng</a:Code>
 <a:CreationDate>1534327358</a:CreationDate>
 <a:Creator>Administrator</a:Creator>
 <a:ModificationDate>1534485247</a:ModificationDate>
 <a:Modifier>Administrator</a:Modifier>
-<a:Comment>存放温层</a:Comment>
+<a:Comment>产品大类</a:Comment>
 <a:DataType>varchar(32)</a:DataType>
 <a:Length>32</a:Length>
 <a:ExtendedAttributesText>{F4F16ECD-F2F1-4006-AF6F-638D5C65F35E},MYSQL50,56={9C949EAB-FF87-446D-938C-8F03A4ABDC8E},National,4=true
@@ -40466,9 +40466,9 @@ set @newid = new.im_notice_item;
 set @id = new.id;
 set @tj = new.tin_tj;
 set @goodid = new.goods_id;
-update wm_im_notice_i 
-set 
-    goods_qm_count = (select 
+update wm_im_notice_i
+set
+    goods_qm_count = (select
             sum(qm_ok_quat)
         from
             wm_in_qm_i
@@ -40476,20 +40476,20 @@ set
             im_notice_item = @newid)
 where
     id = @newid;
-update wm_im_notice_i 
-set 
+update wm_im_notice_i
+set
     bin_pre = &#39;Y&#39;
 where
     id = @newid
-and 
-    goods_count = (select 
+and
+    goods_count = (select
             sum(qm_ok_quat)
         from
             wm_in_qm_i
         where
             im_notice_item = @newid);
 
-update wm_im_notice_h 
+update wm_im_notice_h
 set  im_sta = &#39;操作中&#39;
 where notice_id = @notice_id ;
 end</a:Text>
@@ -40510,9 +40510,9 @@ end</a:Text>
    on [%QUALIFIER%]%TABLE% for each row
 begin
 set @newid = old.im_notice_item;
-update wm_im_notice_i 
-set 
-    goods_qm_count = (select 
+update wm_im_notice_i
+set
+    goods_qm_count = (select
             sum(qm_ok_quat)
         from
             wm_in_qm_i
@@ -40541,9 +40541,9 @@ end</a:Text>
    on [%QUALIFIER%]%TABLE% for each row
 begin
 set @newid = new.im_notice_item;
-update wm_im_notice_i 
-set 
-    goods_qm_count = (select 
+update wm_im_notice_i
+set
+    goods_qm_count = (select
             sum(qm_ok_quat)
         from
             wm_in_qm_i
@@ -40791,8 +40791,8 @@ end</a:Text>
    on [%QUALIFIER%]%TABLE% for each row
 begin
 set @newid = new.wm_notice_id;
-update wm_om_notice_h 
-set 
+update wm_om_notice_h
+set
     om_sta =  &#39;已完成&#39;
 where
     om_notice_id = @newid;
@@ -40814,8 +40814,8 @@ end</a:Text>
    on [%QUALIFIER%]%TABLE% for each row
 begin
 set @newid =  (SELECT m_notice_id FROM deleted);
-update wm_om_notice_h 
-set 
+update wm_om_notice_h
+set
     om_sta =  &#39;复核完成&#39;
 where
     om_notice_id = @newid;
@@ -46708,9 +46708,9 @@ order by
 <a:ModificationDate>1534734858</a:ModificationDate>
 <a:Modifier>Administrator</a:Modifier>
 <a:Comment>退款明细</a:Comment>
-<a:View.SQLQuery>select cus_code,cus_name,cost_name,sum(cost_sl) cost_sl,cost_unit,sum(day_cost_yj) cost_yj,sum(day_cost_yj)- sum(day_cost_hsj) as cost_tz,sum(day_cost_hsj) cost_hsj 
-from wm_day_cost 
-where cost_js IS NULL 
+<a:View.SQLQuery>select cus_code,cus_name,cost_name,sum(cost_sl) cost_sl,cost_unit,sum(day_cost_yj) cost_yj,sum(day_cost_yj)- sum(day_cost_hsj) as cost_tz,sum(day_cost_hsj) cost_hsj
+from wm_day_cost
+where cost_js IS NULL
 group by cus_name,cost_code </a:View.SQLQuery>
 <a:TaggedSQLQuery>select
    [{E047F9AF-864F-4F79-B730-F02F062AC6B2}=cus_code],
@@ -46724,7 +46724,7 @@ group by cus_name,cost_code </a:View.SQLQuery>
 from
    [{DAC5E5CF-AF45-414B-A34E-5D65F32BE211}=wm_day_cost]
 where
-   [{08CDB8F3-6510-4515-B26C-B5CDECA626E4}=cost_js] IS NULL 
+   [{08CDB8F3-6510-4515-B26C-B5CDECA626E4}=cost_js] IS NULL
 group by
    [{5D45CF4E-8420-4FCC-9C7B-A40B85CE472D}=cus_name],
    [{36FE8B9B-CA5D-441D-9E01-60D6489E7E80}=cost_code]
@@ -46840,9 +46840,9 @@ group by
 <a:ModificationDate>1534734717</a:ModificationDate>
 <a:Modifier>Administrator</a:Modifier>
 <a:Comment>账单合计</a:Comment>
-<a:View.SQLQuery>select cus_code,cus_name,date_format(pay_date,&#39;%Y-%m-%d&#39;) pay_date,cost_name,sum(cost_sl) cost_sl,cost_unit,sum(day_cost_yj) cost_yj,sum(day_cost_yj)- sum(day_cost_hsj) as cost_tz,sum(day_cost_hsj) cost_hsj 
-from wm_day_cost 
-where cost_js = &#39;Y&#39; 
+<a:View.SQLQuery>select cus_code,cus_name,date_format(pay_date,&#39;%Y-%m-%d&#39;) pay_date,cost_name,sum(cost_sl) cost_sl,cost_unit,sum(day_cost_yj) cost_yj,sum(day_cost_yj)- sum(day_cost_hsj) as cost_tz,sum(day_cost_hsj) cost_hsj
+from wm_day_cost
+where cost_js = &#39;Y&#39;
 group by cus_name,cost_code,date_format(pay_date,&#39;%Y-%m-%d&#39;) </a:View.SQLQuery>
 <a:TaggedSQLQuery>select
    [{E047F9AF-864F-4F79-B730-F02F062AC6B2}=cus_code],
@@ -47387,13 +47387,13 @@ group by
 </o:ViewColumn>
 <o:ViewColumn Id="o3042">
 <a:ObjectID>FB4DB7FC-2BAF-4450-B127-1598B48461AC</a:ObjectID>
-<a:Name>存放温层</a:Name>
+<a:Name>产品大类</a:Name>
 <a:Code>cf_wen_ceng</a:Code>
 <a:CreationDate>1534485236</a:CreationDate>
 <a:Creator>Administrator</a:Creator>
 <a:ModificationDate>1534487196</a:ModificationDate>
 <a:Modifier>Administrator</a:Modifier>
-<a:Comment>存放温层</a:Comment>
+<a:Comment>产品大类</a:Comment>
 <a:DataType>varchar(32)</a:DataType>
 <a:Length>32</a:Length>
 <c:ViewColumn.Columns>
@@ -48006,12 +48006,12 @@ from
 <a:Comment>出库通知抬头</a:Comment>
 <a:View.SQLQuery>select b.id,a.notice_id,a.create_name,a.create_by,a.create_date,a.sys_org_code,a.sys_company_code,a.cus_code,a.im_data,
 a.order_type_code,a.platform_code,b.goods_code,b.goods_count,b.goods_unit,c.goods_name,c.shp_ming_cheng
-from wm_im_notice_h a join wm_im_notice_i b on b.im_notice_id = a.notice_id 
+from wm_im_notice_h a join wm_im_notice_i b on b.im_notice_id = a.notice_id
          join mv_goods c on c.goods_code = b.goods_code
 order by a.create_date desc </a:View.SQLQuery>
 <a:TaggedSQLQuery>select b.[{73C6FD89-D54B-4B4A-B9ED-D6B95A32D03F}=id],a.[{D0C95A31-AFCB-4E09-9B4F-65CF54A6CDB7}=notice_id],a.[{B7D2D761-3EB2-4F3A-B4CF-0469CE0B31FF}=create_name],a.[{92B9C9D0-419A-4B46-9009-1D510750FE6E}=create_by],a.[{463CE476-9A49-4DBA-8D43-62BB4B9DB954}=create_date],a.[{7CAD7544-230B-4790-A099-954BCD95EC61}=sys_org_code],a.[{EF9B30C2-C41C-493B-A40B-F030936C1138}=sys_company_code],a.[{D6ABC47F-968B-4A40-9410-36905186CC3E}=cus_code],a.[{FFEAC3F0-B9A0-46B8-8EF7-EBAEC25977D6}=im_data],
 a.[{013BC318-7353-4BB7-83A5-C6496532BA7A}=order_type_code],a.[{4229B883-1532-4859-9E54-5A36C9BF4DA5}=platform_code],b.[{A5E9B6BA-34CC-4CCD-8122-D0787F2A66D9}=goods_code],b.[{FA15ACD1-450D-448D-A6B4-003793E51745}=goods_count],b.[{2EF066F9-EEA8-4AFE-BCBA-02FBDAA875E9}=goods_unit],c.[{C7CAA6ED-5674-4989-B18C-A25ECD0C42D1}=goods_name],c.[{3D6BE548-26AE-43C4-864B-ED4BEA5F4CB2}=shp_ming_cheng]
-from [{2C20030A-5C76-49A7-AC26-815471D9D03E}=wm_im_notice_h] a join [{C14DB079-2883-45DF-9343-545381C79D0E}=wm_im_notice_i] b on b.[{6FBE6525-FFF9-4643-A563-DEE30E077BFF}=im_notice_id] = a.[{D0C95A31-AFCB-4E09-9B4F-65CF54A6CDB7}=notice_id] 
+from [{2C20030A-5C76-49A7-AC26-815471D9D03E}=wm_im_notice_h] a join [{C14DB079-2883-45DF-9343-545381C79D0E}=wm_im_notice_i] b on b.[{6FBE6525-FFF9-4643-A563-DEE30E077BFF}=im_notice_id] = a.[{D0C95A31-AFCB-4E09-9B4F-65CF54A6CDB7}=notice_id]
          join [{6CA38903-57EA-45F0-B1FF-DDA44A168C2C}=mv_goods] c on c.[{AEE21123-07B9-4631-8BF2-B40A0F1BD6B7}=goods_code] = b.[{A5E9B6BA-34CC-4CCD-8122-D0787F2A66D9}=goods_code]
 order by a.[{463CE476-9A49-4DBA-8D43-62BB4B9DB954}=create_date] DESC</a:TaggedSQLQuery>
 <c:Columns>
@@ -48269,13 +48269,13 @@ order by a.[{463CE476-9A49-4DBA-8D43-62BB4B9DB954}=create_date] DESC</a:TaggedSQ
 <a:View.SQLQuery>select b.id,a.om_notice_id,a.create_name,a.create_by,a.create_date,a.sys_org_code,a.sys_company_code,a.cus_code,a.delv_data,
 a.order_type_code,a.om_plat_no,b.goods_id,b.goods_qua,b.goods_unit,c.goods_name,c.shp_ming_cheng,a.delv_addr,
 a.delv_member,a.delv_mobile,a.re_carno,a.re_member,a.re_mobile
-from wm_om_notice_h a join wm_om_notice_i b on b.om_notice_id = a.om_notice_id 
+from wm_om_notice_h a join wm_om_notice_i b on b.om_notice_id = a.om_notice_id
          join mv_goods c on c.goods_code = b.goods_id
 order by a.create_date desc </a:View.SQLQuery>
 <a:TaggedSQLQuery>select b.[{3AF3C783-8284-4B66-B0CB-C66E09DFA319}=id],a.[{6185A0F5-62CE-4786-A607-22D4F9BADC9C}=om_notice_id],a.[{50E4CDFE-7AA2-4C9D-AA42-A30E9D30AE59}=create_name],a.[{0FF3D86A-A39C-4A56-AE9E-D283F72914C8}=create_by],a.[{A2BEE14A-7DF3-4CCA-A429-C00A962EA9A7}=create_date],a.[{FC59DE24-097F-4EE5-988C-20940F0F182E}=sys_org_code],a.[{110DA6BA-FCEB-4765-9648-6827C2964A51}=sys_company_code],a.[{7614E5BC-DE69-4198-AA8D-4F3FA5CF7D27}=cus_code],a.[{FB135888-A782-430B-A156-A6FF94F79EDC}=delv_data],
 a.[{A0149FEE-2C31-4E60-ADC0-E3CF5BC25F98}=order_type_code],a.[{7C924ED1-1BD7-4AFE-A8DE-1F98726BE6C3}=om_plat_no],b.[{AFE4E56D-A5D3-431F-93A8-B175ACB20E62}=goods_id],b.[{4E453F04-0EE6-4CE5-A654-538AB86AFCF0}=goods_qua],b.[{AA039510-5E02-4587-81BA-50688E35A34B}=goods_unit],c.[{C7CAA6ED-5674-4989-B18C-A25ECD0C42D1}=goods_name],c.[{3D6BE548-26AE-43C4-864B-ED4BEA5F4CB2}=shp_ming_cheng],a.[{CE0A8470-3454-4125-8437-0E42A39A2919}=delv_addr],
 a.[{5F2E336D-CE01-4DDF-A5DE-A00076A49BC3}=delv_member],a.[{3A3B3556-742F-4E26-B4CF-06F25BDC57D3}=delv_mobile],a.[{DC2DDE6C-06E8-4826-834A-D3D27D4AA820}=re_carno],a.[{5ECB466E-1840-41CF-9449-71BB9C299780}=re_member],a.[{0F656049-3175-4C73-A637-4FE194CBCD30}=re_mobile]
-from [{41E0DEEC-7DC3-4F66-BA65-D049F3240AE0}=wm_om_notice_h] a join [{32060537-C123-4A61-BB8D-4FDCF51ADE75}=wm_om_notice_i] b on b.[{8497859A-8D71-4B1E-AE2E-03B5B3A9034E}=om_notice_id] = a.[{6185A0F5-62CE-4786-A607-22D4F9BADC9C}=om_notice_id] 
+from [{41E0DEEC-7DC3-4F66-BA65-D049F3240AE0}=wm_om_notice_h] a join [{32060537-C123-4A61-BB8D-4FDCF51ADE75}=wm_om_notice_i] b on b.[{8497859A-8D71-4B1E-AE2E-03B5B3A9034E}=om_notice_id] = a.[{6185A0F5-62CE-4786-A607-22D4F9BADC9C}=om_notice_id]
          join [{6CA38903-57EA-45F0-B1FF-DDA44A168C2C}=mv_goods] c on c.[{AEE21123-07B9-4631-8BF2-B40A0F1BD6B7}=goods_code] = b.[{AFE4E56D-A5D3-431F-93A8-B175ACB20E62}=goods_id]
 order by a.[{A2BEE14A-7DF3-4CCA-A429-C00A962EA9A7}=create_date] DESC</a:TaggedSQLQuery>
 <c:Columns>
@@ -52758,15 +52758,15 @@ where
 <a:ModificationDate>1534735105</a:ModificationDate>
 <a:Modifier>Administrator</a:Modifier>
 <a:Comment>验收明细</a:Comment>
-<a:View.SQLQuery>select &#39;RK&#39; ftype,im_notice_id noticeId,cus_code custCode,goods_id goodsId,shp_ming_cheng goodsName,shl_dan_wei goodsUnit,qm_ok_quat quantity,date_format(create_date,&#39;%Y-%m-%d&#39;)  cDate 
+<a:View.SQLQuery>select &#39;RK&#39; ftype,im_notice_id noticeId,cus_code custCode,goods_id goodsId,shp_ming_cheng goodsName,shl_dan_wei goodsUnit,qm_ok_quat quantity,date_format(create_date,&#39;%Y-%m-%d&#39;)  cDate
 from wv_gr
 union all
-select &#39;CK&#39; ftype,order_id noticeId,cus_code custCode,goods_id goodsId,goods_name goodsName,shl_dan_wei goodsUnit,goods_qua quantity,date_format(create_date,&#39;%Y-%m-%d&#39;) 
+select &#39;CK&#39; ftype,order_id noticeId,cus_code custCode,goods_id goodsId,goods_name goodsName,shl_dan_wei goodsUnit,goods_qua quantity,date_format(create_date,&#39;%Y-%m-%d&#39;)
 from wv_gi </a:View.SQLQuery>
-<a:TaggedSQLQuery>select &#39;RK&#39; ftype,[{EEEEEE58-76B4-4E3C-8DAA-637993742ED0}=im_notice_id] noticeId,[{5F56A871-FA1F-44D7-A85D-93DD593A43E2}=cus_code] custCode,[{C818484C-E169-4F28-8B91-95093076E908}=goods_id] goodsId,[{EC09F563-7A9C-4B0B-90CC-C850A58A9AC2}=shp_ming_cheng] goodsName,[{E9488603-7763-4090-9EEB-0C4CD800751C}=shl_dan_wei] goodsUnit,[{570E81A3-043B-449E-90CE-38290CB3EF8E}=qm_ok_quat] quantity,date_format(create_date,&#39;%Y-%m-%d&#39;)  cDate 
+<a:TaggedSQLQuery>select &#39;RK&#39; ftype,[{EEEEEE58-76B4-4E3C-8DAA-637993742ED0}=im_notice_id] noticeId,[{5F56A871-FA1F-44D7-A85D-93DD593A43E2}=cus_code] custCode,[{C818484C-E169-4F28-8B91-95093076E908}=goods_id] goodsId,[{EC09F563-7A9C-4B0B-90CC-C850A58A9AC2}=shp_ming_cheng] goodsName,[{E9488603-7763-4090-9EEB-0C4CD800751C}=shl_dan_wei] goodsUnit,[{570E81A3-043B-449E-90CE-38290CB3EF8E}=qm_ok_quat] quantity,date_format(create_date,&#39;%Y-%m-%d&#39;)  cDate
 from [{3D8CDE97-F11C-46CE-860C-622F1A4A2E64}=wv_gr]
 union all
-select &#39;CK&#39; ftype,[{545B458A-B564-4AC1-8B98-B4429188BFF2}=order_id] noticeId,[{028081D7-07C7-4FBF-8C0A-64DD4D8BC0EA}=cus_code] custCode,[{E96E50D7-8E7D-4835-9CEA-17D8C154D642}=goods_id] goodsId,[{0DDA1270-6F80-4BFF-BBC8-F324C62F0B47}=goods_name] goodsName,[{A7FCACFC-F3F1-446A-B3B9-2C634070ED3B}=shl_dan_wei] goodsUnit,[{8507941D-B313-4D4E-AEE3-C7EAB4EBBFAB}=goods_qua] quantity,date_format(create_date,&#39;%Y-%m-%d&#39;) 
+select &#39;CK&#39; ftype,[{545B458A-B564-4AC1-8B98-B4429188BFF2}=order_id] noticeId,[{028081D7-07C7-4FBF-8C0A-64DD4D8BC0EA}=cus_code] custCode,[{E96E50D7-8E7D-4835-9CEA-17D8C154D642}=goods_id] goodsId,[{0DDA1270-6F80-4BFF-BBC8-F324C62F0B47}=goods_name] goodsName,[{A7FCACFC-F3F1-446A-B3B9-2C634070ED3B}=shl_dan_wei] goodsUnit,[{8507941D-B313-4D4E-AEE3-C7EAB4EBBFAB}=goods_qua] quantity,date_format(create_date,&#39;%Y-%m-%d&#39;)
 from [{503D50DD-AFF0-4B01-8079-FB615B38AADD}=wv_gi]</a:TaggedSQLQuery>
 <c:Columns>
 <o:ViewColumn Id="o3355">
@@ -52900,14 +52900,14 @@ from wv_gr
 group by cus_code,goods_id,date_format(create_date,&#39;%Y-%m-%d&#39;)
 union all
 select &#39;CK&#39; ftype,cus_code custCode,goods_id goodsId,goods_name goodsName,shl_dan_wei goodsUnit,sum(goods_qua) quantity,date_format(create_date,&#39;%Y-%m-%d&#39;) cDate
-from wv_gi 
+from wv_gi
 group by cus_code,goods_id,date_format(create_date,&#39;%Y-%m-%d&#39;) </a:View.SQLQuery>
 <a:TaggedSQLQuery>select &#39;RK&#39; ftype,[{5F56A871-FA1F-44D7-A85D-93DD593A43E2}=cus_code] custCode,[{C818484C-E169-4F28-8B91-95093076E908}=goods_id] goodsId,[{EC09F563-7A9C-4B0B-90CC-C850A58A9AC2}=shp_ming_cheng] goodsName,[{E9488603-7763-4090-9EEB-0C4CD800751C}=shl_dan_wei] goodsUnit,sum(qm_ok_quat) quantity,date_format(create_date,&#39;%Y-%m-%d&#39;) cDate
 from [{3D8CDE97-F11C-46CE-860C-622F1A4A2E64}=wv_gr]
 group by [{5F56A871-FA1F-44D7-A85D-93DD593A43E2}=cus_code],[{C818484C-E169-4F28-8B91-95093076E908}=goods_id],date_format(create_date,&#39;%Y-%m-%d&#39;)
 union all
 select &#39;CK&#39; ftype,[{028081D7-07C7-4FBF-8C0A-64DD4D8BC0EA}=cus_code] custCode,[{E96E50D7-8E7D-4835-9CEA-17D8C154D642}=goods_id] goodsId,[{0DDA1270-6F80-4BFF-BBC8-F324C62F0B47}=goods_name] goodsName,[{A7FCACFC-F3F1-446A-B3B9-2C634070ED3B}=shl_dan_wei] goodsUnit,sum(goods_qua) quantity,date_format(create_date,&#39;%Y-%m-%d&#39;) cDate
-from [{503D50DD-AFF0-4B01-8079-FB615B38AADD}=wv_gi] 
+from [{503D50DD-AFF0-4B01-8079-FB615B38AADD}=wv_gi]
 group by [{028081D7-07C7-4FBF-8C0A-64DD4D8BC0EA}=cus_code],[{E96E50D7-8E7D-4835-9CEA-17D8C154D642}=goods_id],date_format(create_date,&#39;%Y-%m-%d&#39;)</a:TaggedSQLQuery>
 <c:Columns>
 <o:ViewColumn Id="o3363">
@@ -55098,13 +55098,13 @@ order by
 <a:ModificationDate>1536628662</a:ModificationDate>
 <a:Modifier>Administrator</a:Modifier>
 <a:Comment>上架明细</a:Comment>
-<a:View.SQLQuery>CREATE 
-    ALGORITHM = UNDEFINED 
-    DEFINER = `root`@`localhost` 
+<a:View.SQLQuery>CREATE
+    ALGORITHM = UNDEFINED
+    DEFINER = `root`@`localhost`
     SQL SECURITY DEFINER
 VIEW `rp_wm_to_up_goods` AS
 
-select 
+select
 wg.id,
         `wg`.`create_date` AS `create_date`,
         `wg`.`create_name` AS `create_name`,
@@ -55379,13 +55379,13 @@ order by
 <a:ModificationDate>1536628762</a:ModificationDate>
 <a:Modifier>Administrator</a:Modifier>
 <a:Comment>下架明细</a:Comment>
-<a:View.SQLQuery>CREATE 
-    ALGORITHM = UNDEFINED 
-    DEFINER = `root`@`localhost` 
+<a:View.SQLQuery>CREATE
+    ALGORITHM = UNDEFINED
+    DEFINER = `root`@`localhost`
     SQL SECURITY DEFINER
 VIEW `rp_wm_to_down_goods` AS
 
-select 
+select
 wg.id,
         `wg`.`create_date` AS `create_date`,
         `wg`.`create_name` AS `create_name`,
@@ -55398,7 +55398,7 @@ wg.id,
         `mc`.`zhong_wen_qch` AS `zhong_wen_qch`,
         `mg`.`goods_id` AS `goods_code`,
 
- 
+
         `mg`.`goods_name` AS `shp_ming_cheng`,
         `wg`.`goods_pro_data` AS `goods_pro_data`,
         `mg`.`bzhi_qi` AS `bzhi_qi`,
@@ -55668,13 +55668,13 @@ order by
 <a:Creator>Administrator</a:Creator>
 <a:ModificationDate>1536628823</a:ModificationDate>
 <a:Modifier>Administrator</a:Modifier>
-<a:View.SQLQuery>CREATE 
-    ALGORITHM = UNDEFINED 
-    DEFINER = `root`@`localhost` 
+<a:View.SQLQuery>CREATE
+    ALGORITHM = UNDEFINED
+    DEFINER = `root`@`localhost`
     SQL SECURITY DEFINER
 VIEW `rp_wm_his_stock_ku` AS
 
-SELECT 
+SELECT
 wh.id,
     wh.his_date,
     wh.cus_code,
@@ -55692,13 +55692,13 @@ FROM
     md_cus  as mc,
     md_goods as mg
 where  wh.cus_code = mc.ke_hu_bian_ma   and wh.goods_id = mg.shp_bian_ma</a:View.SQLQuery>
-<a:TaggedSQLQuery>CREATE 
-    ALGORITHM = UNDEFINED 
-    DEFINER = `root`@`localhost` 
+<a:TaggedSQLQuery>CREATE
+    ALGORITHM = UNDEFINED
+    DEFINER = `root`@`localhost`
     SQL SECURITY DEFINER
 VIEW `rp_wm_his_stock_ku` AS
 
-select 
+select
 wh.[{AC116E1A-9C4A-4D75-9023-E9F0EAC7E9D1}=id],
     wh.[{50DD7EB5-8B38-47F3-8613-EB418D864181}=his_date],
     wh.[{7F8EF002-9D79-43BF-9B40-76E17945E63C}=cus_code],
@@ -55906,13 +55906,13 @@ where  wh.[{7F8EF002-9D79-43BF-9B40-76E17945E63C}=cus_code] = mc.[{404613F8-B57E
 <a:Creator>Administrator</a:Creator>
 <a:ModificationDate>1536628873</a:ModificationDate>
 <a:Modifier>Administrator</a:Modifier>
-<a:View.SQLQuery>CREATE 
-    ALGORITHM = UNDEFINED 
-    DEFINER = `root`@`localhost` 
+<a:View.SQLQuery>CREATE
+    ALGORITHM = UNDEFINED
+    DEFINER = `root`@`localhost`
     SQL SECURITY DEFINER
 VIEW `rp_wm_in_qm` AS
 
- select 
+ select
 wg.id,
         `wg`.`create_date` AS `create_date`,
         `wg`.`create_name` AS `create_name`,
@@ -56272,12 +56272,12 @@ having
 <a:ModificationDate>1536717401</a:ModificationDate>
 <a:Modifier>Administrator</a:Modifier>
 <a:Comment>rp_wm_down_and_qm</a:Comment>
-<a:View.SQLQuery>CREATE 
-    ALGORITHM = UNDEFINED 
-    DEFINER = `root`@`localhost` 
+<a:View.SQLQuery>CREATE
+    ALGORITHM = UNDEFINED
+    DEFINER = `root`@`localhost`
     SQL SECURITY DEFINER
 VIEW `rp_wm_down_and_qm` AS
-    select 
+    select
         `t`.`om_notice_id` AS `om_notice_id`,
         `h`.`IM_CUS_CODE` AS `im_cus_code`,
         `h`.`ocus_code` AS `ocus_code`,
@@ -56288,7 +56288,7 @@ VIEW `rp_wm_down_and_qm` AS
         `t`.`base_goodscount` AS `base_goodscount`,
         `t`.`goods_unit` AS `goods_unit`,
         `t`.`plan_sta` AS `plan_sta`,
-        (select 
+        (select
                 sum(`om`.`base_goodscount`)
             from
                 `wm_om_qm_i` `om`
