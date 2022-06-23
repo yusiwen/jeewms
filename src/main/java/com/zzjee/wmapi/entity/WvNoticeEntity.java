@@ -51,34 +51,34 @@ public class WvNoticeEntity implements java.io.Serializable {
 	@Excel(name="商品编码")
 	private String goodsCode;
 	/**shpMingCheng*/
-	@Excel(name="shpMingCheng")
+	@Excel(name="商品名称")
 	private String shpMingCheng;
 	/**shpTiaoMa*/
-	@Excel(name="shpTiaoMa")
+	@Excel(name="商品条码")
 	private String shpTiaoMa;
 	/**cfWenCeng*/
-	@Excel(name="cfWenCeng")
+	@Excel(name="存放温层")
 	private String cfWenCeng;
 	/**mpDanCeng*/
-	@Excel(name="mpDanCeng")
+	@Excel(name="一层数量")
 	private String mpDanCeng;
 	/**mpCengGao*/
-	@Excel(name="mpCengGao")
+	@Excel(name="可堆高层数")
 	private String mpCengGao;
 	/**tiJiCm*/
-	@Excel(name="tiJiCm")
+	@Excel(name="单个体积")
 	private String tiJiCm;
 	/**数量*/
 	@Excel(name="数量")
 	private String goodsCount;
 	/**goodsQmCount*/
-	@Excel(name="goodsQmCount")
+	@Excel(name="检验数量")
 	private String goodsQmCount;
 	/**grCount*/
-	@Excel(name="grCount")
+	@Excel(name="未清数量")
 	private Double grCount;
 	/**shlDanWei*/
-	@Excel(name="shlDanWei")
+	@Excel(name="单位")
 	private String shlDanWei;
 	/**体积*/
 	@Excel(name="体积")
@@ -87,13 +87,13 @@ public class WvNoticeEntity implements java.io.Serializable {
 	@Excel(name="重量")
 	private String goodsWeight;
 	/**lastgrdate*/
-	@Excel(name="lastgrdate",format = "yyyy-MM-dd")
+	@Excel(name="最后收货日期",format = "yyyy-MM-dd")
 	private Date lastgrdate;
 	/**preprodate*/
-	@Excel(name="preprodate")
+	@Excel(name="生产日期")
 	private String preprodate;
 	/**recDeg*/
-	@Excel(name="recDeg")
+	@Excel(name="收货温度")
 	private String recDeg;
 
 	/**
