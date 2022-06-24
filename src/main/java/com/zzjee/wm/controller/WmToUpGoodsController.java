@@ -487,12 +487,8 @@ public class WmToUpGoodsController extends BaseController {
 			if (user != null ) {
 				wmToUpGoods.setCreateName(user.getRealName());
 			}
-
 			wmInQmIController.toup(wmToUpGoods.getWmToUpId(),wmToUpGoods.getKuWeiBianMa(),wmToUpGoods.getCreateBy(),user.getRealName());
 //			wmToUpGoodsService.save(wmToUpGoods);
-
-
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			D0.setOK(false);
