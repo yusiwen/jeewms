@@ -1059,14 +1059,14 @@ public class WmInQmIController extends BaseController {
             } else {
                 try {
                     MvGoodsEntity mvgoods = systemService.findUniqueByProperty(
-                            MvGoodsEntity.class, "goodsCode", wmInQmI.getGoodsId());
+                            MvGoodsEntity.class, "goodsCode", wmImNoticeIEntity.getGoodsCode());
                     if (mvgoods != null) {
                         wmInQmI.setGoodsName(mvgoods.getGoodsName());
                         if (StringUtil.isNotEmpty(wmInQmI.getItemText())) {
                             MdGoodsEntity mdGoodsEntity = systemService.findUniqueByProperty(
                                     MdGoodsEntity.class, "shpBianMa", mvgoods.getGoodsId());
                             if (mdGoodsEntity != null) {
-                                mdGoodsEntity.setShpTiaoMa(wmInQmI.getItemText());
+                                mdGoodsEntity.setShpTiaoMa(wmInQmI.getItemText());//更新商品条码
                                 systemService.updateEntitie(mdGoodsEntity);
                             }
                         }
