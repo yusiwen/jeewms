@@ -65,6 +65,8 @@ import com.zzjee.md.entity.MvGoodsEntity;
 import com.zzjee.wm.service.WmInQmIServiceI;
 import com.zzjee.wmutil.wmUtil;
 
+import static com.xiaoleilu.hutool.date.DateTime.now;
+
 /**
  * @author erzhongxmu
  * @version V1.0
@@ -230,7 +232,7 @@ public class WmInQmIController extends BaseController {
         message = "上架成功";
         try {
             System.out.println(request.getParameter("id"));
-            boolean isup = toup(request.getParameter("id"));
+            boolean isup = toup(request.getParameter("id"),"","","");
             if (!isup) {
                 j.setSuccess(false);
                 message = "上架失败";
@@ -251,7 +253,7 @@ public class WmInQmIController extends BaseController {
     }
 
 
-    private boolean toup(String id) {
+    public boolean toup(String id,String kuweiBianMa,String username,String realname) {
 //		List<WmToUpGoodsEntity> wmToUpGoodsList = new ArrayList<WmToUpGoodsEntity>();
         String hql0 = "from WmInQmIEntity where binSta = 'N' and  id = ?";
         List<WmInQmIEntity> WmInQmIEntityList = systemService.findHql(hql0,
@@ -273,6 +275,13 @@ public class WmInQmIController extends BaseController {
             System.out.println(wmInQmIEntity.getId() + "33333");
 
             WmToUpGoodsEntity wmToUpGoodsEntity = new WmToUpGoodsEntity();
+            if(!StringUtil.isEmpty(username)){
+                wmToUpGoodsEntity.setCreateBy(username);
+            }
+            if(!StringUtil.isEmpty(realname)){
+                wmToUpGoodsEntity.setCreateName(realname);
+            }
+            wmToUpGoodsEntity.setCreateDate(now());
             wmToUpGoodsEntity.setGoodsId(wmInQmIEntity.getGoodsId());
             wmToUpGoodsEntity.setGoodsProData(wmInQmIEntity.getProData());
             wmToUpGoodsEntity.setGoodsBatch(wmInQmIEntity.getGoodsBatch());
@@ -281,7 +290,12 @@ public class WmInQmIController extends BaseController {
             wmToUpGoodsEntity.setOrderIdI(wmInQmIEntity.getId());
             wmToUpGoodsEntity.setOrderId(wmInQmIEntity.getImNoticeId());
             wmToUpGoodsEntity.setBinId(wmInQmIEntity.getTinId());
-            wmToUpGoodsEntity.setKuWeiBianMa(wmInQmIEntity.getBinId());
+            if(!StringUtil.isEmpty(kuweiBianMa)){
+                wmToUpGoodsEntity.setKuWeiBianMa(kuweiBianMa);
+            }else{
+                wmToUpGoodsEntity.setKuWeiBianMa(wmInQmIEntity.getBinId());
+            }
+
             wmToUpGoodsEntity.setCusCode(wmInQmIEntity.getCusCode());
             wmToUpGoodsEntity.setGoodsName(wmInQmIEntity.getGoodsName());
             wmToUpGoodsEntity.setActTypeCode("01");
@@ -291,7 +305,7 @@ public class WmInQmIController extends BaseController {
 //			Map<String, Object> binMap = systemService.findOneForJdbc(sql);
             System.out.println(wmInQmIEntity.getBinId() + "444444");
 
-            if (!wmUtil.checkbin(wmInQmIEntity.getBinId())) {
+            if (!wmUtil.checkbin(wmToUpGoodsEntity.getKuWeiBianMa())) {
                 throw new RuntimeException("储位不存在或已停用！");
             }
             System.out.println(wmInQmIEntity.getBinId() + "555555");
@@ -586,7 +600,7 @@ public class WmInQmIController extends BaseController {
 //				wmInQmI.setBinId(wmInQmI.getImNoticeId());
                 String id = wmInQmIService.save(wmInQmI).toString();
                 if ("on".equals(ResourceUtil.getConfigByName("webonestepup")) && StringUtil.isNotEmpty(wmInQmI.getBinId())) {
-                    toup(id);
+                    toup(id,"","","");
                 }
                 systemService.addLog("批量收货" + wmInQmI.getGoodsId(), Globals.Log_Type_INSERT,
                         Globals.Log_Leavel_INFO);
@@ -1091,7 +1105,7 @@ public class WmInQmIController extends BaseController {
                 }
                 String id = wmInQmIService.save(wmInQmI).toString();
                 if ("on".equals(ResourceUtil.getConfigByName("onestepup")) && StringUtil.isNotEmpty(wmInQmI.getBinId())) {
-                    toup(id);
+                    toup(id,"","","");
                 }
                 D0.setOK(true);
             }

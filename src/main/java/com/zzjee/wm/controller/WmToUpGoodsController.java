@@ -82,7 +82,8 @@ public class WmToUpGoodsController extends BaseController {
 	private SystemService systemService;
 	@Autowired
 	private Validator validator;
-
+    @Autowired
+	private WmInQmIController wmInQmIController;
 
 
 	/**
@@ -452,7 +453,6 @@ public class WmToUpGoodsController extends BaseController {
 		if (!failures.isEmpty()) {
 			return new ResponseEntity(BeanValidators.extractPropertyAndMessage(failures), HttpStatus.BAD_REQUEST);
 		}
-
 		if(StringUtil.isEmpty(wmToUpGoods.getKuWeiBianMa())){
             D0.setOK(false);
             D0.setErrorMsg("储位不能为空");
@@ -463,8 +463,6 @@ public class WmToUpGoodsController extends BaseController {
                 D0.setErrorMsg("储位不存在");
                 return new ResponseEntity(D0, HttpStatus.OK);            }
         }
-
-
 		//保存
 		try{
 			D0.setOK(true);
@@ -483,34 +481,22 @@ public class WmToUpGoodsController extends BaseController {
 
 				return new ResponseEntity(D0, HttpStatus.OK);
 			}
-			if(StringUtil.isNotEmpty(wmToUpGoods.getOrderIdI())){
-				List<WmToUpGoodsEntity> wmToUpGoodsEntity = systemService.findByProperty(WmToUpGoodsEntity.class,"orderIdI",wmToUpGoods.getWmToUpId());
-				if(wmToUpGoodsEntity!=null&&wmToUpGoodsEntity.size()>0){
-					D0.setOK(false);
-                    D0.setErrorMsg("已经上架，不能重复上架");
-                    return new ResponseEntity(D0, HttpStatus.OK);
-				}
-			}else{
-				D0.setOK(false);
-				D0.setErrorMsg("验收记录为空，不能上架");
-
-				return new ResponseEntity(D0, HttpStatus.OK);
-			}
-
-			wmToUpGoods.setGoodsName(wmInQmIEntity.getGoodsName());
-			wmToUpGoods.setCreateDate(DateUtils.getDate());
-
+//			wmToUpGoods.setGoodsName(wmInQmIEntity.getGoodsName());
+//			wmToUpGoods.setCreateDate(DateUtils.getDate());
 			TSBaseUser user = systemService.findUniqueByProperty(TSBaseUser.class,"userName",wmToUpGoods.getCreateBy());
 			if (user != null ) {
 				wmToUpGoods.setCreateName(user.getRealName());
 			}
 
-			wmToUpGoodsService.save(wmToUpGoods);
+			wmInQmIController.toup(wmToUpGoods.getWmToUpId(),wmToUpGoods.getKuWeiBianMa(),wmToUpGoods.getCreateBy(),user.getRealName());
+//			wmToUpGoodsService.save(wmToUpGoods);
+
+
+
 		} catch (Exception e) {
 			e.printStackTrace();
 			D0.setOK(false);
 		}
-
 		return new ResponseEntity(D0, HttpStatus.OK);
 	}
 
