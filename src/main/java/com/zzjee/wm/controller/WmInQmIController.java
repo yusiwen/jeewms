@@ -1147,4 +1147,63 @@ public class WmInQmIController extends BaseController {
     public void delete(@PathVariable("id") String id) {
         wmInQmIService.deleteEntityById(WmInQmIEntity.class, id);
     }
+
+
+    @RequestMapping(value = "/save",method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity<?> save(@RequestParam String wmToUpGoodsstr, UriComponentsBuilder uriBuilder) {
+        ResultDO D0 = new  ResultDO();
+        WmToUpGoodsEntity wmToUpGoods = (WmToUpGoodsEntity) JSONHelper.json2Object(wmToUpGoodsstr,WmToUpGoodsEntity.class);
+        //调用JSR303 Bean Validator进行校验，如果出错返回含400错误码及json格式的错误信息.
+        Set<ConstraintViolation<WmToUpGoodsEntity>> failures = validator.validate(wmToUpGoods);
+        if (!failures.isEmpty()) {
+            return new ResponseEntity(BeanValidators.extractPropertyAndMessage(failures), HttpStatus.BAD_REQUEST);
+        }
+
+        if(StringUtil.isEmpty(wmToUpGoods.getKuWeiBianMa())){
+            D0.setOK(false);
+            D0.setErrorMsg("储位不能为空");
+            return new ResponseEntity(D0, HttpStatus.OK);
+        }else{
+            if (!wmUtil.checkbin(wmToUpGoods.getKuWeiBianMa())) {
+                D0.setOK(false);
+                D0.setErrorMsg("储位不存在");
+                return new ResponseEntity(D0, HttpStatus.OK);            }
+        }
+
+
+        //保存
+        try{
+            D0.setOK(true);
+            WmInQmIEntity wmInQmIEntity = systemService.get(WmInQmIEntity.class,wmToUpGoods.getWmToUpId());
+            if(wmInQmIEntity!=null){
+                if("Y".equals(wmInQmIEntity.getBinSta())){
+                    D0.setOK(false);
+                    D0.setErrorMsg("已经上架，不能重复上架");
+                    return new ResponseEntity(D0, HttpStatus.OK);
+                }
+                wmInQmIEntity.setBinSta("Y");
+                systemService.updateEntitie(wmInQmIEntity);
+            }else{
+                D0.setOK(false);
+                D0.setErrorMsg("验收任务已经删除，不能上架");
+
+                return new ResponseEntity(D0, HttpStatus.OK);
+            }
+
+
+
+            TSBaseUser user = systemService.findUniqueByProperty(TSBaseUser.class,"userName",wmToUpGoods.getCreateBy());
+            if (user != null ) {
+                wmToUpGoods.setCreateName(user.getRealName());
+            }
+            toup(wmToUpGoods.getWmToUpId(),wmToUpGoods.getKuWeiBianMa(),wmToUpGoods.getCreateBy(),wmToUpGoods.getCreateName());
+        } catch (Exception e) {
+            e.printStackTrace();
+            D0.setOK(false);
+        }
+
+        return new ResponseEntity(D0, HttpStatus.OK);
+    }
+
 }

@@ -115,7 +115,7 @@ public class ApiController {
     @RequestMapping(value = "/wmToUpGoodsController/save", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<?> create2(@RequestParam String wmToUpGoodsstr, UriComponentsBuilder uriBuilder) {
-        return wmToUpGoodsController.create(wmToUpGoodsstr, uriBuilder);
+        return wmInQmIController.save(wmToUpGoodsstr, uriBuilder);
     }
     //上架相关接口end
 
