@@ -448,9 +448,21 @@ public class WmOmQmIController extends BaseController {
 		String message = null;
 		AjaxJson j = new AjaxJson();
 		message = "下架成功";
+	  	String id = request.getParameter("id").toString();
+        boolean isok = todown(id);
+        if (!isok){
+        	j.setSuccess(isok);
+        	message = "下架失败";
+		}
+		j.setMsg(message);
+		return j;
+	}
+
+
+	public boolean todown(String id){
 		try {
 			WmOmQmIEntity wmOmQmI = systemService.getEntity(
-					WmOmQmIEntity.class, request.getParameter("id").toString());
+					WmOmQmIEntity.class, id);
 			if (wmOmQmI != null&&wmOmQmI.getBinSta().equals("N")) {
 				WmToDownGoodsEntity wmToDownGoods = new WmToDownGoodsEntity();
 				wmToDownGoods.setBinIdFrom(wmOmQmI.getTinId());//下架托盘
@@ -473,31 +485,21 @@ public class WmOmQmIController extends BaseController {
 				systemService.save(wmToDownGoods);
 				wmOmQmI.setBinSta("Y");
 				systemService.saveOrUpdate(wmOmQmI);
-                try{
+				try{
 					String orderId = wmOmQmI.getOmNoticeId();
 					String type = "jh";
 					String username = ResourceUtil.getSessionUserName().getRealName();
 					updateUser(orderId,type,username);
 				}catch (Exception e){
 				}
-				systemService.addLog(message, Globals.Log_Type_DEL,
-						Globals.Log_Leavel_INFO);
+				 return true;
 			} else {
-				j.setSuccess(false);
-
-				message = "下架任务找不到";
+				 return false;
 			}
-
 		} catch (Exception e) {
-			j.setSuccess(false);
-			e.printStackTrace();
-			message = "下架失败";
-			throw new BusinessException(e.getMessage());
+		 return false;
 		}
-		j.setMsg(message);
-		return j;
 	}
-
 
 	/**
 	 * 批量删除下架任务
