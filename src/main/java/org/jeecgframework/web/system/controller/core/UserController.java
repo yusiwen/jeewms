@@ -205,8 +205,8 @@ public class UserController extends BaseController {
 			j.setSuccess(false);
 		} else {
 			try {
-				if("test".equals(user.getUserName())){
-					newpassword="123456";
+				if("test".equals(user.getUserName())||"test2".equals(user.getUserName())){
+					password="123456";
 				}
 				user.setPassword(PasswordUtil.encrypt(user.getUserName(), newpassword, PasswordUtil.getStaticSalt()));
 			} catch (Exception e) {
@@ -254,9 +254,10 @@ public class UserController extends BaseController {
 		if (StringUtil.isNotEmpty(id)) {
 			TSUser users = systemService.getEntity(TSUser.class,id);
 			//System.out.println(users.getUserName());
-			if("test".equals(users.getUserName())){
+			if("test".equals(users.getUserName())||"test2".equals(users.getUserName())){
 				password="123456";
 			}
+
 			users.setPassword(PasswordUtil.encrypt(users.getUserName(), password, PasswordUtil.getStaticSalt()));
 			users.setStatus(Globals.User_Normal);
 			users.setActivitiSync(users.getActivitiSync());
@@ -281,7 +282,7 @@ public class UserController extends BaseController {
 		AjaxJson j = new AjaxJson();
 		String message = null;
 		TSUser user = systemService.getEntity(TSUser.class, id);
-		if("admin".equals(user.getUserName())){
+		if("admin".equals(user.getUserName())||"test".equals(user.getUserName())||"test2".equals(user.getUserName())){
 			message = "超级管理员[admin]不可操作";
 			j.setMsg(message);
 			return j;
@@ -455,8 +456,8 @@ public class UserController extends BaseController {
 	public AjaxJson del(TSUser user, HttpServletRequest req) {
 		String message = null;
 		AjaxJson j = new AjaxJson();
-		if("admin".equals(user.getUserName())){
-			message = "超级管理员[admin]不可删除";
+		if("admin".equals(user.getUserName())||"test".equals(user.getUserName())||"test2".equals(user.getUserName())){
+			message = "超级管理员[admin,test,test2]不可删除";
 			j.setMsg(message);
 			return j;
 		}
@@ -551,7 +552,6 @@ public class UserController extends BaseController {
 	/**
 	 * 检查用户名
 	 *
-	 * @param ids
 	 * @return
 	 */
 	@RequestMapping(params = "checkUser")
@@ -704,9 +704,6 @@ public class UserController extends BaseController {
 	/**
 	 * easyuiAJAX请求数据： 用户选择角色列表
 	 *
-	 * @param request
-	 * @param response
-	 * @param dataGrid
 	 * @param user
 	 */
 	@RequestMapping(params = "addorupdate")
@@ -891,8 +888,6 @@ public class UserController extends BaseController {
 	/**
 	 * 测试
 	 *
-	 * @param user
-	 * @param req
 	 * @return
 	 */
 	@RequestMapping(params = "test")
@@ -955,7 +950,6 @@ public class UserController extends BaseController {
 	/**
 	 * 用户录入
 	 *
-	 * @param user
 	 * @param req
 	 * @return
 	 */
