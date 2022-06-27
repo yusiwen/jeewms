@@ -69,8 +69,6 @@ public class TokenController {
 			D0.setOK(false);
 			D0.setErrorMsg("用户密码不能为空!");
 		}
-		Assert.notNull(username, "username can not be empty");
-		Assert.notNull(password, "password can not be empty");
 
 		TSUser user = userService.checkUserExits(username, password);
 		if (user == null) {
