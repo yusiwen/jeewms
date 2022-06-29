@@ -195,6 +195,7 @@ public class ApiController {
     @RequestMapping(value = "/waveToFjController/save", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<?> create6(@RequestParam String waveToFjstr, UriComponentsBuilder uriBuilder) {
+        //需传入ID和二次容器号
         return waveToFjController.create(waveToFjstr, uriBuilder);
     }
 
