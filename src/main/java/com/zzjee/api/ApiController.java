@@ -158,7 +158,7 @@ public class ApiController {
         return wmToDownGoodsController.update(wmToDownGoodsstr, uriBuilder);
     }
 
-    // TODO: 2022/6/25 接口文档 
+    // TODO: 2022/6/25 接口文档
     //波次下架列表
     @RequestMapping(value = "/waveToDownController/list/todown", method = RequestMethod.GET)
     @ResponseBody
@@ -173,6 +173,8 @@ public class ApiController {
     @RequestMapping(value = "/waveToDownController/save", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<?> create5(@RequestParam String waveToDownstr, UriComponentsBuilder uriBuilder) {
+//        waveToDown.getWaveId(),waveToDown.getGoodsId(),waveToDown.getProData(),waveToDown.getTinId(),waveToDown.getBinId()
+//         需要传入波次号，商品编码，生产日期，托盘号 储位号
         return waveToDownController.create(waveToDownstr, uriBuilder);
     }
 
