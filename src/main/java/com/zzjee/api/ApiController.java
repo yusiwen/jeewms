@@ -292,17 +292,13 @@ public class ApiController {
     public ResultApi<?> login(@RequestBody TSBaseUser tsBaseUser, HttpServletRequest request) {
         logger.info("获取TOKEN[{}]" + tsBaseUser.getUserName());
         ResultDO D0 = new  ResultDO();
-
         // 验证
         if (org.apache.commons.lang3.StringUtils.isEmpty(tsBaseUser.getUserName())) {
-
             return ResultApi.error("用户账号不能为空!");
         }
         // 验证
         if (StringUtils.isEmpty(tsBaseUser.getUserName())) {
-
             return ResultApi.error("用户密码不能为空!");
-
 //            return new ResponseEntity("用户密码不能为空!", HttpStatus.OK);
         }
         TSUser user = userService.checkUserExits(tsBaseUser.getUserName(), tsBaseUser.getPassword());
@@ -310,11 +306,7 @@ public class ApiController {
             D0.setErrorMsg("用户账号密码错误!");
             D0.setOK(false);
             return ResultApi.error("获取TOKEN,账号密码错误[{}]!");
-
-         }else{
-
-
-        }
+         }
         return ResultApi.OK(user);
     }
 }
