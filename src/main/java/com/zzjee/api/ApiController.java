@@ -299,7 +299,6 @@ public class ApiController {
         // 验证
         if (StringUtils.isEmpty(tsBaseUser.getUserName())) {
             return ResultApi.error("用户密码不能为空!");
-//            return new ResponseEntity("用户密码不能为空!", HttpStatus.OK);
         }
         TSUser user = userService.checkUserExits(tsBaseUser.getUserName(), tsBaseUser.getPassword());
         if (user == null) {
