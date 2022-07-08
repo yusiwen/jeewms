@@ -936,6 +936,10 @@ public class WmOmNoticeHController extends BaseController {
 		List<WmOmNoticeIEntity> wmOmNoticeIList =  wmOmNoticeHPage.getWmOmNoticeIList();
 		AjaxJson j = new AjaxJson();
 		String message = "添加成功";
+		if(org.springframework.util.CollectionUtils.isEmpty(wmOmNoticeIList)){
+			message = "出货通知明细不能为空";
+			throw new BusinessException(message);
+		}
 		try{
 			String noticeid = wmUtil.getNextomNoticeId(wmOmNoticeH.getOrderTypeCode());
 			WmPlatIoEntity wmPlatIo = new WmPlatIoEntity();
