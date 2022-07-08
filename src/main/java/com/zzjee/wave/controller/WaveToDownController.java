@@ -118,10 +118,10 @@ public class WaveToDownController extends BaseController {
 	public ModelAndView doPrint(String waveid,HttpServletRequest request) {
 		String hql = "from WmOmQmIEntity where waveId = ? ";
 		List<WmOmQmIEntity> wavelist = systemService.findHql(hql,waveid);
-		for(WmOmQmIEntity t: wavelist ){
-			t.setFirstRq("已打印");
-			systemService.updateEntitie(t);
-		}
+//		for(WmOmQmIEntity t: wavelist ){
+//			t.setFirstRq("已打印");
+//			systemService.updateEntitie(t);
+//		}
 		request.setAttribute("kprq",DateUtils.date2Str(DateUtils.date_sdf));
 		request.setAttribute("comname", ResourceUtil.getConfigByName("comname"));
 		request.setAttribute("waveid",waveid);
