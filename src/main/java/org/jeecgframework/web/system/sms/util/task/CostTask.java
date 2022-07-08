@@ -195,6 +195,7 @@ public class CostTask {
 			ori = resulthq.get(i).get("im_notice_id").toString()+"/"+resulthq.get(i).get("goods_id").toString();
 
 			WmDayCostEntity WmDayCost = new WmDayCostEntity();
+			WmDayCost.setCostJs("N");
 			WmDayCost.setCreateBy("system");
 			WmDayCost.setCreateDate(DateUtils.getDate());
 			WmDayCost.setCostCode(costcode);
@@ -276,6 +277,7 @@ public class CostTask {
 			ori = resulthq.get(i).get("im_notice_id").toString()+"/"+resulthq.get(i).get("goods_id").toString();
 
 			WmDayCostEntity WmDayCost = new WmDayCostEntity();
+			WmDayCost.setCostJs("N");
 			WmDayCost.setCreateBy("system");
 			WmDayCost.setCreateDate(DateUtils.getDate());
 			WmDayCost.setCostCode(costcode);
@@ -370,6 +372,7 @@ public class CostTask {
 			ori = resulthq.get(i).get("im_notice_id").toString()+"/"+resulthq.get(i).get("goods_id").toString();
 
 			WmDayCostEntity WmDayCost = new WmDayCostEntity();
+			WmDayCost.setCostJs("N");
 			WmDayCost.setCreateBy("system");
 			WmDayCost.setCreateDate(DateUtils.getDate());
 			WmDayCost.setCostCode(costcode);
@@ -461,6 +464,7 @@ public class CostTask {
 			ori = resulthq.get(i).get("order_id").toString()+"/"+resulthq.get(i).get("goods_id").toString();
 
 			WmDayCostEntity WmDayCost = new WmDayCostEntity();
+			WmDayCost.setCostJs("N");
 			WmDayCost.setCreateBy("system");
 			WmDayCost.setCreateDate(DateUtils.getDate());
 			WmDayCost.setCostCode(costcode);
@@ -591,6 +595,7 @@ public class CostTask {
 			ori = resulthq.get(i).get("order_id").toString()+"/"+resulthq.get(i).get("goods_id").toString();
 
 			WmDayCostEntity WmDayCost = new WmDayCostEntity();
+			WmDayCost.setCostJs("N");
 			WmDayCost.setCreateBy("system");
 			WmDayCost.setCreateDate(DateUtils.getDate());
 			WmDayCost.setCostCode(costcode);
@@ -684,6 +689,7 @@ public class CostTask {
 			ori = resulthq.get(i).get("im_notice_id").toString()+"/"+resulthq.get(i).get("goods_id").toString();
 			costSl = resulthq.get(i).get("grcount").toString();
 			WmDayCostEntity WmDayCost = new WmDayCostEntity();
+			WmDayCost.setCostJs("N");
 			WmDayCost.setCreateBy("system");
 			WmDayCost.setCreateDate(DateUtils.getDate());
 			WmDayCost.setCostCode(costcode);
@@ -756,6 +762,7 @@ public class CostTask {
 			ori = resulthq.get(i).get("im_notice_id").toString()+"/"+ resulthq.get(i).get("tin_id").toString();
 			costSl = "1";
 			WmDayCostEntity WmDayCost = new WmDayCostEntity();
+			WmDayCost.setCostJs("N");
 			WmDayCost.setCreateBy("system");
 			WmDayCost.setCreateDate(DateUtils.getDate());
 			WmDayCost.setCostCode(costcode);
@@ -976,6 +983,7 @@ public class CostTask {
 			ori = resulthq.get(i).get("cus_code").toString()+"/"+ t.getCostDate();
 //					costSl = "1";
 			WmDayCostEntity WmDayCost = new WmDayCostEntity();
+			WmDayCost.setCostJs("N");
 			WmDayCost.setCreateBy("system");
 			WmDayCost.setCreateDate(DateUtils.getDate());
 			WmDayCost.setCostCode(costcode);
@@ -1038,6 +1046,7 @@ public class CostTask {
 			}
 			ori = cuscode+"/"+ t.getCostDate();
 			WmDayCostEntity WmDayCost = new WmDayCostEntity();
+			WmDayCost.setCostJs("N");
 			WmDayCost.setCreateBy("system");
 			WmDayCost.setCreateDate(DateUtils.getDate());
 			WmDayCost.setCostCode(costcode);
@@ -1163,6 +1172,7 @@ public class CostTask {
 			}
 			ori = cuscode+"/"+ t.getCostDate();
 			WmDayCostEntity WmDayCost = new WmDayCostEntity();
+			WmDayCost.setCostJs("N");
 			WmDayCost.setCreateBy("system");
 			WmDayCost.setCreateDate(DateUtils.getDate());
 			WmDayCost.setCostCode(costcode);
