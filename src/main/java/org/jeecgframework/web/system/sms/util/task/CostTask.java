@@ -338,11 +338,11 @@ public class CostTask {
 			if(goodscount>10){
 				costcode = "602";// 10以上
 				costSlo = Double.parseDouble(resulthq.get(i).get("qmcount").toString());
-				countunit = "箱";
+				countunit = "个";
 			}else{
 				costcode = "601";// 10以上
 				costSlo = Double.parseDouble(resulthq.get(i).get("qmcount").toString());
-				countunit = "箱";
+				countunit = "个";
 			}
 
 			costSl = costSlo.toString();
