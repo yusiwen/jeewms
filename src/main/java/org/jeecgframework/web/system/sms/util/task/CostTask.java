@@ -247,10 +247,7 @@ public class CostTask {
             costcode = "70";// 过磅费/
             costSlo = 1.00;
             countunit = "托";
-
             costSl = costSlo.toString();
-
-
             cuscode = resulthq.get(i).get("cus_code").toString();
 //2010
             tsql = " select  cost_code  ,  cost_jg  ,  cost_sl  ,  cost_zk  ,  cost_bhs ,  cost_hs   "
@@ -299,7 +296,6 @@ public class CostTask {
             WmDayCost.setDayCostHsj(df.format(dayCostHsj));
             systemService.save(WmDayCost);
         }//计算过磅费/托
-
         org.jeecgframework.core.util.LogUtil
                 .info("===================4过磅费成功===================");
 //30
@@ -331,9 +327,7 @@ public class CostTask {
             cuscode = null;
             cfwenceng = null;
             beizhu = null;
-
             goodscount = Double.parseDouble(resulthq.get(i).get("goodscount").toString());
-
             if (goodscount > 10) {
                 costcode = "602";// 10以上
                 costSlo = Double.parseDouble(resulthq.get(i).get("qmcount").toString());
@@ -343,21 +337,15 @@ public class CostTask {
                 costSlo = Double.parseDouble(resulthq.get(i).get("qmcount").toString());
                 countunit = "个";
             }
-
             costSl = costSlo.toString();
-
             cuscode = resulthq.get(i).get("cus_code").toString();
 //3010
             tsql = " select  cost_code  ,  cost_jg  ,  cost_sl  ,  cost_zk  ,  cost_bhs ,  cost_hs   "
                     + "from wm_cus_cost_h wch , wm_cus_cost_i wci where wch.id = wci.cus_cost_id and wci.cost_code = ? and wch.cus_code = ? and "
                     + "(to_days(wch.begin_date) <= to_days(?)  and to_days(wch.end_date) >= to_days(?)) limit 1";
-
-
             List<Map<String, Object>> resultjg = systemService
                     .findForJdbc(tsql, costcode, cuscode, t.getCostDate(), t.getCostDate());
             if (resultjg.size() > 0) {
-
-
                 cost_jg = Double.parseDouble((String) resultjg.get(0).get("cost_jg"));
                 cost_sl = Double.parseDouble((String) resultjg.get(0).get("cost_sl"));
                 cost_bhs = Double.parseDouble((String) resultjg.get(0).get("cost_bhs"));
@@ -369,7 +357,6 @@ public class CostTask {
                 cost_hs = 0.00;
             }
             ori = resulthq.get(i).get("im_notice_id").toString() + "/" + resulthq.get(i).get("goods_id").toString();
-
             WmDayCostEntity WmDayCost = new WmDayCostEntity();
             WmDayCost.setCostJs("N");
             WmDayCost.setCreateBy("system");
@@ -435,21 +422,15 @@ public class CostTask {
                 costSlo = Double.parseDouble(resulthq.get(i).get("qmcount").toString());
                 countunit = "箱";
             }
-
             costSl = costSlo.toString();
-
             cuscode = resulthq.get(i).get("cus_code").toString();
 //4010
             tsql = " select  cost_code  ,  cost_jg  ,  cost_sl  ,  cost_zk  ,  cost_bhs ,  cost_hs   "
                     + "from wm_cus_cost_h wch , wm_cus_cost_i wci where wch.id = wci.cus_cost_id and wci.cost_code = ? and wch.cus_code = ? and "
                     + "(to_days(wch.begin_date) <= to_days(?)  and to_days(wch.end_date) >= to_days(?)) limit 1";
-
-
             List<Map<String, Object>> resultjg = systemService
                     .findForJdbc(tsql, costcode, cuscode, t.getCostDate(), t.getCostDate());
             if (resultjg.size() > 0) {
-
-
                 cost_jg = Double.parseDouble((String) resultjg.get(0).get("cost_jg"));
                 cost_sl = Double.parseDouble((String) resultjg.get(0).get("cost_sl"));
                 cost_bhs = Double.parseDouble((String) resultjg.get(0).get("cost_bhs"));
@@ -461,7 +442,6 @@ public class CostTask {
                 cost_hs = 0.00;
             }
             ori = resulthq.get(i).get("order_id").toString() + "/" + resulthq.get(i).get("goods_id").toString();
-
             WmDayCostEntity WmDayCost = new WmDayCostEntity();
             WmDayCost.setCostJs("N");
             WmDayCost.setCreateBy("system");
