@@ -1,0 +1,3 @@
+ALTER TABLE `wms`.`wm_in_qm_i`
+ADD COLUMN `base_in_goodscount` VARCHAR(45) NULL AFTER `IM_CUS_CODE`,
+ADD COLUMN `base_out_goodscount` VARCHAR(45) NULL AFTER `base_in_goodscount`;
