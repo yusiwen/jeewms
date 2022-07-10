@@ -1006,6 +1006,40 @@ public class WmInQmIController extends BaseController {
         return new ResponseEntity(task, HttpStatus.OK);
     }
 
+
+    @RequestMapping(value = "/update/qty", method = RequestMethod.POST)
+    @ResponseBody
+    public ResponseEntity<?> updateqty(@RequestParam(value = "username", required = false) String username,
+                                       @RequestParam(value = "id", required = false) String id,
+                                  @RequestParam(value = "qty1", required = false) String qty1,
+                                  @RequestParam(value = "qty2", required = false) String qty2) {
+//		return listWvGis;
+
+
+        ResultDO D0 = new ResultDO();
+        WmInQmIEntity wmInQmIEntity = systemService.get(WmInQmIEntity.class,id);
+        if(StringUtil.isNotEmpty(qty1)){
+            wmInQmIEntity.setBaseInGoodscount(qty1);
+        }
+        if(StringUtil.isNotEmpty(qty2)){
+            wmInQmIEntity.setBaseOutGoodscount(qty2);
+        }
+        if(StringUtil.isNotEmpty(qty1)&&StringUtil.isNotEmpty(qty2)){
+            try{
+                double basegoods = Double.parseDouble(qty1) -Double.parseDouble(qty2);
+                wmInQmIEntity.setBaseGoodscount(Double.toString(basegoods));
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+        }
+        systemService.updateEntitie(wmInQmIEntity);
+        D0.setOK(true);
+        D0.setObj("操作成功");
+        return new ResponseEntity(D0, HttpStatus.OK);
+
+    }
+
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<?> create(@RequestParam String wmInQmIstr,

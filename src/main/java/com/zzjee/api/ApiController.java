@@ -99,6 +99,19 @@ public class ApiController {
                                      UriComponentsBuilder uriBuilder) {
         return wmInQmIController.create(wmInQmIstr, uriBuilder);
     }
+
+
+    //收货相关接口begin
+    //收货列表
+    @RequestMapping(value = "/update/qty", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<?> update1(@RequestParam(value = "username", required = false) String username,
+                                     @RequestParam(value = "id", required = false) String id,
+                                   @RequestParam(value = "searchstr", required = false) String searchstr,
+                                   @RequestParam(value = "searchstr2", required = false) String searchstr2) {
+        return wmInQmIController.updateqty(username, id,searchstr, searchstr2);
+    }
+
     //收货相关接口end
 
     //上架相关接口begin
