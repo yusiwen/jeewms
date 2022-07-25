@@ -291,6 +291,13 @@ public class ApiController {
         return mdGoodsController.xiadan(mdGoodsstr, uriBuilder);
     }
 
+    @RequestMapping(value = "/weightsave/{username}", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseMessage<?> list10(@PathVariable("username") String username,
+                                    @RequestParam(value = "searchstr", required = false) String searchstr ) {
+        return wmomController.weight_save(username, searchstr);
+    }
+
     @RequestMapping(value = "/rfidsave/{username}", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     @ApiOperation(value = "RFID保存", produces = "application/json", httpMethod = "POST")

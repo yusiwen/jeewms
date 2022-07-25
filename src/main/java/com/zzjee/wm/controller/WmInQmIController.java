@@ -1,6 +1,7 @@
 package com.zzjee.wm.controller;
 
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -12,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 
+import com.zzjee.rfid.entity.RfidBuseEntity;
+import com.zzjee.rfid.service.RfidBuseServiceI;
 import com.zzjee.wm.entity.*;
 import com.zzjee.wm.page.confrowpage;
 import com.zzjee.wm.page.wminqmpage;
@@ -24,6 +27,7 @@ import org.jeecgframework.core.common.exception.BusinessException;
 import org.jeecgframework.core.common.hibernate.qbc.CriteriaQuery;
 import org.jeecgframework.core.common.model.json.AjaxJson;
 import org.jeecgframework.core.common.model.json.DataGrid;
+import org.jeecgframework.core.common.model.json.TreeGrid;
 import org.jeecgframework.core.constant.Globals;
 import org.jeecgframework.core.util.DateUtils;
 import org.jeecgframework.core.util.ExceptionUtil;
@@ -38,6 +42,7 @@ import org.jeecgframework.poi.excel.entity.ImportParams;
 import org.jeecgframework.poi.excel.entity.vo.NormalExcelConstants;
 import org.jeecgframework.tag.core.easyui.TagUtil;
 import org.jeecgframework.web.system.pojo.base.TSBaseUser;
+import org.jeecgframework.web.system.pojo.base.TSType;
 import org.jeecgframework.web.system.pojo.base.TSUser;
 import org.jeecgframework.web.system.service.SystemService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -89,7 +94,8 @@ public class WmInQmIController extends BaseController {
     private SystemService systemService;
     @Autowired
     private Validator validator;
-
+    @Autowired
+    private RfidBuseServiceI rfidBuseService;
 
     /**
      * 批量收货列表 页面跳转
@@ -818,6 +824,28 @@ public class WmInQmIController extends BaseController {
         wmInQmI.setQmOkQuat(Long.toString(quat));
         wmInQmI.setTinId(wmUtil.gettuopanma());
 
+        if (ResourceUtil.getConfigByName("sys.weight").equals("on")) {
+            String rfidcontent = "";
+            try{
+                CriteriaQuery cq;
+                cq = new CriteriaQuery(RfidBuseEntity.class);
+                cq.eq("rfidType", "weight");
+                cq.ge("createDate", new SimpleDateFormat("yyyy-MM-dd").parse(DateUtils.getDate("yyyy-MM-dd")));
+                cq.add();
+
+                List<RfidBuseEntity> listByCriteriaQuery = rfidBuseService.getListByCriteriaQuery(cq, false);
+                RfidBuseEntity  rfidBuseEntity = listByCriteriaQuery.get(listByCriteriaQuery.size()-1);
+                rfidcontent = rfidBuseEntity.getRfidBusecont();
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+
+            wmInQmI.setBaseInGoodscount(rfidcontent);
+        }
+
+
+
+
         req.setAttribute("wmInQmIPage", wmInQmI);
 
         return new ModelAndView("com/zzjee/wm/wmInQmI-add");
@@ -833,6 +861,32 @@ public class WmInQmIController extends BaseController {
         if (StringUtil.isNotEmpty(wmInQmI.getId())) {
             wmInQmI = wmInQmIService.getEntity(WmInQmIEntity.class,
                     wmInQmI.getId());
+
+            if (ResourceUtil.getConfigByName("sys.weight").equals("on")&&StringUtil.isEmpty(wmInQmI.getBaseOutGoodscount())) {
+                String rfidcontent = "";
+                try{
+                    CriteriaQuery cq;
+                    cq = new CriteriaQuery(RfidBuseEntity.class);
+                    cq.eq("rfidType", "weight");
+                    cq.ge("createDate", new SimpleDateFormat("yyyy-MM-dd").parse(DateUtils.getDate("yyyy-MM-dd")));
+                    cq.add();
+
+                    List<RfidBuseEntity> listByCriteriaQuery = rfidBuseService.getListByCriteriaQuery(cq, false);
+                    RfidBuseEntity  rfidBuseEntity = listByCriteriaQuery.get(listByCriteriaQuery.size()-1);
+                    rfidcontent = rfidBuseEntity.getRfidBusecont();
+                }catch (Exception e){
+                    e.printStackTrace();
+                }
+                wmInQmI.setBaseOutGoodscount(rfidcontent);
+                if(StringUtil.isNotEmpty(wmInQmI.getBaseInGoodscount())&&StringUtil.isNotEmpty(wmInQmI.getBaseOutGoodscount())){
+                    Double basecount = Double.parseDouble(wmInQmI.getBaseOutGoodscount()) -  Double.parseDouble(wmInQmI.getBaseInGoodscount());
+                    String basecountStr  = String.format("%.2f", basecount);
+//                    wmInQmI.setImQuat(basecountStr);
+                    wmInQmI.setQmOkQuat(basecountStr);
+                    wmInQmI.setBaseGoodscount(basecountStr);
+                    wmInQmI.setTinZhl(basecountStr);
+                }
+            }
             req.setAttribute("wmInQmIPage", wmInQmI);
         }
         return new ModelAndView("com/zzjee/wm/wmInQmI-update");
