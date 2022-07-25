@@ -53,8 +53,10 @@ public class WmCusCostIEntity implements java.io.Serializable {
 	/**费用名称*/
 	@Excel(name="免费天数")
 	private java.lang.String freeDay;
-	@Excel(name="免费天数2")
+//	@Excel(name="免费天数2")
 	private java.lang.String freeDay2;
+	@Excel(name="数据SQL")
+	private java.lang.String dataSql;
 	/**价格RMB*/
     @Excel(name="价格RMB")
 	private java.lang.String costJg;
@@ -380,5 +382,14 @@ public class WmCusCostIEntity implements java.io.Serializable {
 
 	public void setFreeDay2(String freeDay2) {
 		this.freeDay2 = freeDay2;
+	}
+
+	@Column(name ="data_sql",nullable=true,length=36)
+	public String getDataSql() {
+		return dataSql;
+	}
+
+	public void setDataSql(String dataSql) {
+		this.dataSql = dataSql;
 	}
 }

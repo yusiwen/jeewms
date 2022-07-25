@@ -44,7 +44,7 @@
 				  免费天数
 			  </th>
 			  <th>
-				  免费天数2
+				  数据SQL
 			  </th>
 					  <th>
 							价格RMB
@@ -90,9 +90,9 @@
 					<label class="Validform_label" style="display: none;">免费天数</label>
 				</td>
 				<td>
-					<input name="wmCusCostIList[0].freeDay2" maxlength="32"
+					<input name="wmCusCostIList[0].dataSql" maxlength="32"
 						   type="text" class="form-control"  style="width:120px;"  datatype="*">
-					<label class="Validform_label" style="display: none;">免费天数2</label>
+					<label class="Validform_label" style="display: none;">数据SQL</label>
 				</td>
 				  <td>
 					  	<input name="wmCusCostIList[0].costJg" maxlength="32"
@@ -147,9 +147,9 @@
 					<label class="Validform_label" style="display: none;">免费天数</label>
 				</td>
 				<td align="left">
-					<input name="wmCusCostIList[${stuts.index }].freeDay2" maxlength="32"
-						   type="text" class="form-control"  style="width:120px;"  datatype="*" value="${poVal.freeDay2 }">
-					<label class="Validform_label" style="display: none;">免费天数2</label>
+					<input name="wmCusCostIList[${stuts.index }].dataSql" maxlength="32"
+						   type="text" class="form-control"  style="width:120px;"  datatype="*" value="${poVal.dataSql }">
+					<label class="Validform_label" style="display: none;">数据SQL</label>
 				</td>
 				   <td align="left">
 					  	<input name="wmCusCostIList[${stuts.index }].costJg" maxlength="32"

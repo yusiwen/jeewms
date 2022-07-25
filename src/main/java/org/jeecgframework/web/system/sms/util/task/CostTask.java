@@ -63,6 +63,40 @@ public class CostTask {
         org.jeecgframework.core.util.LogUtil.info("总耗时" + times + "毫秒");
     }
 
+    public void costcountv2(String datestr, String chongsuan, WmDayCostConfEntity t){
+        String tsql = "select COST_SF  from wm_day_cost_conf   where to_days(cost_date) = to_days(?)";
+        if (chongsuan.equals("N")) {//非重算
+            List<Map<String, Object>> resultconf = systemService.findForJdbc(tsql, datestr);
+            if (resultconf.size() > 0) {
+                return;
+            } else {
+                Date costdate = DateUtils.str2Date(datestr, DateUtils.date_sdf);
+                t.setCostDate(costdate);
+                t.setCostSf("Y");
+                t.setCreateBy("system");
+                t.setCreateDate(costdate);
+                systemService.save(t);
+            }
+        }
+        tsql = "call update_wm_his_stock('" + datestr + "')";
+        try {
+            systemService.executeSql(tsql);
+        } catch (Exception e) {
+            // TODO: handle exception
+        }
+        org.jeecgframework.core.util.LogUtil
+                .info("===================1库存更新成功===================");
+
+        //先删除
+        tsql = "delete  from wm_day_cost   where cost_sta ='已生成' and  to_days(cost_data) = to_days(?)";
+
+        systemService.executeSql(tsql, t.getCostDate());
+        org.jeecgframework.core.util.LogUtil
+                .info("===================V2数据删除成功===================");
+
+
+    }
+
     public void costcount(String datestr, String chongsuan, WmDayCostConfEntity t) {
 //		WmDayCostConfEntity t = new WmDayCostConfEntity();
         String tsql = "select COST_SF  from wm_day_cost_conf   where to_days(cost_date) = to_days(?)";

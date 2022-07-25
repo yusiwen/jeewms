@@ -333,10 +333,10 @@
 						<label class="Validform_label" style="display: none;">免费天数</label>
 					</td>
 					<td align="left">
-						<input name="wmCusCostIList[#index#].freeDay2" maxlength="32"
+						<input name="wmCusCostIList[#index#].dataSql" maxlength="32"
 							   ignore="checked"
 							   type="text" class="form-control"  style="width:120px;"  datatype="*">
-						<label class="Validform_label" style="display: none;">免费天数2</label>
+						<label class="Validform_label" style="display: none;">数据SQL</label>
 					</td>
 						  <td align="left">
 							  	<input name="wmCusCostIList[#index#].costSl" maxlength="32"
