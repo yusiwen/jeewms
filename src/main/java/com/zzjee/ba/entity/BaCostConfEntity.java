@@ -317,7 +317,7 @@ public class BaCostConfEntity implements java.io.Serializable {
 		this.costHs = costHs;
 	}
 
-	@Column(name ="free_day",nullable=true,length=36)
+	@Column(name ="free_day",nullable=true,length=3660)
 	public String getFreeDay() {
 		return freeDay;
 	}
@@ -326,7 +326,7 @@ public class BaCostConfEntity implements java.io.Serializable {
 		this.freeDay = freeDay;
 	}
 
-	@Column(name ="free_day2",nullable=true,length=36)
+	@Column(name ="free_day2",nullable=true,length=3660)
 	public String getFreeDay2() {
 		return freeDay2;
 	}
@@ -335,7 +335,7 @@ public class BaCostConfEntity implements java.io.Serializable {
 		this.freeDay2 = freeDay2;
 	}
 
-	@Column(name ="data_sql",nullable=true,length=36)
+	@Column(name ="data_sql",nullable=true,length=3660)
 	public String getDataSql() {
 		return dataSql;
 	}

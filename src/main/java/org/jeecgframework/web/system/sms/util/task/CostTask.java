@@ -120,9 +120,12 @@ public class CostTask {
                     for (WmCusCostIEntity wmCusCostIEntity : wmCusCostIEntityList) {
                         //执行计算 SQL 返回order_id goods_id  goods_count count_unit
                         String dataSql = wmCusCostIEntity.getDataSql();
+                        if (StringUtil.isEmpty(dataSql)){
+                            continue;
+                        }
                         dataSql = StringUtils.replace(dataSql, "{cusCode}", cusCode);
                         List<Map<String, Object>> resulthq = systemService
-                                .findForJdbc(dataSql, t.getCostDate());
+                                .findForJdbc(dataSql);
                         //计算费用
                         for (int i = 0; i < resulthq.size(); i++) {
                             try{
