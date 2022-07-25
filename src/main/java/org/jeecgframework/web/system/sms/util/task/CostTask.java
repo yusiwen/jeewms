@@ -118,7 +118,7 @@ public class CostTask {
                         e.printStackTrace();
                     }
                     for (WmCusCostIEntity wmCusCostIEntity : wmCusCostIEntityList) {
-                        //执行计算
+                        //执行计算 SQL 返回order_id goods_id  goods_count count_unit
                         String dataSql = wmCusCostIEntity.getDataSql();
                         dataSql = StringUtils.replace(dataSql, "{cusCode}", cusCode);
                         List<Map<String, Object>> resulthq = systemService
