@@ -175,21 +175,12 @@ public class CostTask {
                             }catch (Exception e){
                                 e.printStackTrace();
                             }
-
-
                         }
-
-
                     }
-
-
                 }catch(Exception e){
                 }
             }
         }
-
-
-
     }
 
     public void costcount(String datestr, String chongsuan, WmDayCostConfEntity t) {
