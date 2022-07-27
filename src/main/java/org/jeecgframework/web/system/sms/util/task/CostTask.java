@@ -124,6 +124,7 @@ public class CostTask {
                             continue;
                         }
                         dataSql = StringUtils.replace(dataSql, "{cusCode}", cusCode);
+                        dataSql = StringUtils.replace(dataSql, "{date}", datestr);
                         List<Map<String, Object>> resulthq = systemService
                                 .findForJdbc(dataSql);
                         //计算费用
