@@ -40,9 +40,9 @@
 					  <th>
 							费用名称
 					  </th>
-			  <th>
-				  免费天数
-			  </th>
+<%--			  <th>--%>
+<%--				  免费天数--%>
+<%--			  </th>--%>
 			  <th>
 				  数据SQL
 			  </th>
@@ -84,11 +84,11 @@
 										dictTable="ba_cost" dictField="cost_code" dictText="cost_name" defaultVal="${wmCusCostIPage.costCode}" hasLabel="false"  title="费用名称"></t:dictSelect>
 					  <label class="Validform_label" style="display: none;">费用名称</label>
 					</td>
-				<td>
-					<input name="wmCusCostIList[0].freeDay" maxlength="32"
-						   type="text" class="form-control"  style="width:120px;"  datatype="*">
-					<label class="Validform_label" style="display: none;">免费天数</label>
-				</td>
+<%--				<td>--%>
+<%--					<input name="wmCusCostIList[0].freeDay" maxlength="32"--%>
+<%--						   type="text" class="form-control"  style="width:120px;"  datatype="*">--%>
+<%--					<label class="Validform_label" style="display: none;">免费天数</label>--%>
+<%--				</td>--%>
 				<td>
 					<input name="wmCusCostIList[0].dataSql" maxlength="32"
 						   type="text" class="form-control"  style="width:120px;"  datatype="*">
@@ -141,11 +141,11 @@
 										dictTable="ba_cost" dictField="cost_code" dictText="cost_name" defaultVal="${poVal.costCode }" hasLabel="false"  title="费用名称"></t:dictSelect>
 					  <label class="Validform_label" style="display: none;">费用名称</label>
 				   </td>
-				<td align="left">
-					<input name="wmCusCostIList[${stuts.index }].freeDay" maxlength="32"
-						   type="text" class="form-control"  style="width:120px;"  datatype="*" value="${poVal.freeDay }">
-					<label class="Validform_label" style="display: none;">免费天数</label>
-				</td>
+<%--				<td align="left">--%>
+<%--					<input name="wmCusCostIList[${stuts.index }].freeDay" maxlength="32"--%>
+<%--						   type="text" class="form-control"  style="width:120px;"  datatype="*" value="${poVal.freeDay }">--%>
+<%--					<label class="Validform_label" style="display: none;">免费天数</label>--%>
+<%--				</td>--%>
 				<td align="left">
 					<input name="wmCusCostIList[${stuts.index }].dataSql" maxlength="32"
 						   type="text" class="form-control"  style="width:120px;"  datatype="*" value="${poVal.dataSql }">

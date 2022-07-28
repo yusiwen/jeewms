@@ -326,12 +326,12 @@
 							  		type="text" class="form-control"  style="width:120px;"  datatype="*">
 							  <label class="Validform_label" style="display: none;">价格RMB</label>
 						  </td>
-					<td align="left">
-						<input name="wmCusCostIList[#index#].freeDay" maxlength="32"
-							   ignore="checked"
-							   type="text" class="form-control"  style="width:120px;"  datatype="*">
-						<label class="Validform_label" style="display: none;">免费天数</label>
-					</td>
+<%--					<td align="left">--%>
+<%--						<input name="wmCusCostIList[#index#].freeDay" maxlength="32"--%>
+<%--							   ignore="checked"--%>
+<%--							   type="text" class="form-control"  style="width:120px;"  datatype="*">--%>
+<%--						<label class="Validform_label" style="display: none;">免费天数</label>--%>
+<%--					</td>--%>
 					<td align="left">
 						<input name="wmCusCostIList[#index#].dataSql" maxlength="32"
 							   ignore="checked"

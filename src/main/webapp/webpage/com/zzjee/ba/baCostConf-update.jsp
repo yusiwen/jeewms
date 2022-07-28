@@ -64,31 +64,31 @@
 
 
 
-					  <div class="row show-grid">
-						  <div class="col-xs-3 text-center">
-							  <b>免费天数：</b>
-						  </div>
-						  <div class="col-xs-3">
-							  <input id="freeDay" name="freeDay" type="text" class="form-control"
-									 ignore="ignore"
-									 value='${baCostConfPage.freeDay}' />
-							  <span class="Validform_checktip" style="float:left;height:0px;"></span>
-							  <label class="Validform_label" style="display: none">免费天数</label>
-						  </div>
-					  </div>
+<%--					  <div class="row show-grid">--%>
+<%--						  <div class="col-xs-3 text-center">--%>
+<%--							  <b>免费天数：</b>--%>
+<%--						  </div>--%>
+<%--						  <div class="col-xs-3">--%>
+<%--							  <input id="freeDay" name="freeDay" type="text" class="form-control"--%>
+<%--									 ignore="ignore"--%>
+<%--									 value='${baCostConfPage.freeDay}' />--%>
+<%--							  <span class="Validform_checktip" style="float:left;height:0px;"></span>--%>
+<%--							  <label class="Validform_label" style="display: none">免费天数</label>--%>
+<%--						  </div>--%>
+<%--					  </div>--%>
 
-					  <div class="row show-grid">
-						  <div class="col-xs-3 text-center">
-							  <b>免费天数2：</b>
-						  </div>
-						  <div class="col-xs-3">
-							  <input id="freeDay2" name="freeDay2" type="text" class="form-control"
-									 ignore="ignore"
-									 value='${baCostConfPage.freeDay2}' />
-							  <span class="Validform_checktip" style="float:left;height:0px;"></span>
-							  <label class="Validform_label" style="display: none">免费天数2</label>
-						  </div>
-					  </div>
+<%--					  <div class="row show-grid">--%>
+<%--						  <div class="col-xs-3 text-center">--%>
+<%--							  <b>免费天数2：</b>--%>
+<%--						  </div>--%>
+<%--						  <div class="col-xs-3">--%>
+<%--							  <input id="freeDay2" name="freeDay2" type="text" class="form-control"--%>
+<%--									 ignore="ignore"--%>
+<%--									 value='${baCostConfPage.freeDay2}' />--%>
+<%--							  <span class="Validform_checktip" style="float:left;height:0px;"></span>--%>
+<%--							  <label class="Validform_label" style="display: none">免费天数2</label>--%>
+<%--						  </div>--%>
+<%--					  </div>--%>
 					  <div class="row show-grid">
 						  <div class="col-xs-3 text-center">
 							  <b>数据SQL：</b>
