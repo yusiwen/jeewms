@@ -1115,9 +1115,18 @@ public class WmInQmIController extends BaseController {
             WmImNoticeIEntity wmImNoticeIEntity = systemService.get(WmImNoticeIEntity.class, wmInQmI.getImNoticeItem());
             if (wmImNoticeIEntity != null) {
                 wmInQmI.setGoodsId(wmImNoticeIEntity.getGoodsCode());
+                wmInQmI.setImNoticeId(wmImNoticeIEntity.getImNoticeId());
+                wmInQmI.setGoodsUnit(wmImNoticeIEntity.getGoodsUnit());
+                wmInQmI.setBaseUnit(wmImNoticeIEntity.getBaseUnit());
+                wmInQmI.setGoodsBatch(wmInQmI.getProData());
+                wmInQmI.setBaseGoodscount(wmInQmI.getQmOkQuat());
+                wmInQmI.setBaseQmcount(wmInQmI.getQmOkQuat());
+                wmInQmI.setImQuat(wmImNoticeIEntity.getGoodsCount());
                 try {
-                    WmImNoticeHEntity wmImNoticeHEntity = systemService.findUniqueByProperty(WmImNoticeHEntity.class, "noticeId", wmInQmI.getImNoticeId());
+                    WmImNoticeHEntity wmImNoticeHEntity = systemService.findUniqueByProperty(WmImNoticeHEntity.class, "noticeId", wmImNoticeIEntity.getImNoticeId());
                     wmInQmI.setCusCode(wmImNoticeHEntity.getCusCode());
+                    wmInQmI.setImCusCode(wmImNoticeHEntity.getImCusCode());
+
                     if (StringUtil.isNotEmpty(wmInQmI.getCusCode())) {
 
                         MdCusEntity mdcus = systemService.findUniqueByProperty(MdCusEntity.class, "keHuBianMa", wmInQmI.getCusCode());
@@ -1172,6 +1181,20 @@ public class WmInQmIController extends BaseController {
                                 systemService.updateEntitie(mdGoodsEntity);
                             }
                         }
+
+                        try {
+                            wmInQmI.setTinTj(String.valueOf(Double.parseDouble(mvgoods
+                                    .getTiJiCm())
+                                    * Double.parseDouble(wmInQmI.getQmOkQuat())));
+                            wmInQmI.setTinZhl(String.valueOf(Double.parseDouble(mvgoods
+                                    .getZhlKg())
+                                    * Double.parseDouble(wmInQmI.getQmOkQuat())));
+                        } catch (Exception e) {
+                            // TODO: handle exception
+                        }
+
+                        wmInQmI.setGoodsUnit(mvgoods.getShlDanWei());
+
                     }
                 } catch (Exception e) {
                 }
