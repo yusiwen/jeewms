@@ -5,6 +5,10 @@ import com.zzjee.md.entity.MdCusEntity;
 import com.zzjee.md.entity.MdGoodsEntity;
 import com.zzjee.md.entity.MvGoodsEntity;
 import com.zzjee.rfid.entity.RfidBuseEntity;
+import com.zzjee.uniapp.entity.WmsAppFunctionEntity;
+import com.zzjee.uniapp.entity.WmsAppRoleEntity;
+import com.zzjee.uniapp.entity.WmsAppUserEntity;
+import com.zzjee.uniapp.service.WmsAppUserServiceI;
 import com.zzjee.wave.controller.WaveToDownController;
 import com.zzjee.wave.controller.WaveToFjController;
 import com.zzjee.wm.controller.*;
@@ -21,6 +25,7 @@ import io.swagger.models.HttpMethod;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.log4j.Logger;
 import org.jeecgframework.core.beanvalidator.BeanValidators;
+import org.jeecgframework.core.common.hibernate.qbc.CriteriaQuery;
 import org.jeecgframework.core.common.model.json.AjaxJson;
 import org.jeecgframework.core.util.DateUtils;
 import org.jeecgframework.core.util.JSONHelper;
@@ -28,6 +33,7 @@ import org.jeecgframework.core.util.ResourceUtil;
 import org.jeecgframework.core.util.StringUtil;
 import org.jeecgframework.jwt.util.ResponseMessage;
 import org.jeecgframework.jwt.util.Result;
+import org.jeecgframework.p3.core.author.LoginUser;
 import org.jeecgframework.web.system.pojo.base.TSBaseUser;
 import org.jeecgframework.web.system.pojo.base.TSUser;
 import org.jeecgframework.web.system.service.UserService;
@@ -35,6 +41,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
@@ -81,7 +88,8 @@ public class ApiController {
     @Autowired
     private wmomController wmomController;
     private static final Logger logger = Logger.getLogger(ApiController.class);
-
+    @Autowired
+    private WmsAppUserServiceI wmsAppUserService;
     //收货相关接口begin
     //收货列表
     @RequestMapping(value = "/wvNoticeController/list", method = RequestMethod.GET)
@@ -328,4 +336,54 @@ public class ApiController {
          }
         return ResultApi.OK(user);
     }
+    /**
+     * 通过id查询
+     *
+     * @return
+     */
+//
+//    @RequestMapping(value = "/appfunctionList", method = RequestMethod.GET)
+//
+//    public ResponseMessage<?> appfunctionList(@PathVariable("username") String username,
+//                                             HttpServletRequest request) {
+
+
+//
+//        //根据用户名，获取APP用户
+//        CriteriaQuery queryuser = new CriteriaQuery(WmsAppUserEntity.class);
+//        queryuser.eq("appuser_code",username);
+//        List<WmsAppUserEntity> listByCriteriaQuery = wmsAppUserService.getListByCriteriaQuery(queryuser, false);
+//         if(CollectionUtils.isEmpty(listByCriteriaQuery)){
+//            return Result.error("未找到APP用户信息！");
+//        }
+//        //获取用户角色Id
+//        String roleId =listByCriteriaQuery.get(0).getApproleId();
+//        System.err.println(roleId);
+//        //根据用户角色Id，获取APP角色集合
+//        CriteriaQuery queryrole = new CriteriaQuery(WmsAppRoleEntity.class);
+//
+//
+//        queryrole.in("id",roleId.split(","));
+//        List<WmsAppRoleEntity> mesAppRole = mesAppRoleService.list(wrapper);
+//        if(mesAppRole==null){
+//            return Result.error("未找到APP角色信息！");
+//        }
+//        String funidstr = "";
+//        for (WmsAppRole role : mesAppRole) {
+//            //拼接获取的APP模块id
+//            funidstr = funidstr + ","+role.getAppmodelId();
+//            System.err.println(funidstr);
+//        }
+//        //根据APP模块id，获取APP功能模块集合
+//        QueryWrapper<WmsAppFunction> funcwrapper = new QueryWrapper<>();
+//        funcwrapper.lambda().in(WmsAppFunction::getId,funidstr.split(",")).eq(WmsAppFunction::getIfBind,"0").orderByAsc(WmsAppFunction::getAppmodelSort);
+//        List<WmsAppFunctionEntity> mesAppFunctions = mesAppFunctionService.list(funcwrapper);
+//        if(mesAppFunctions==null){
+//            return Result.error("未找到APP功能模块信息");
+//        }
+//        return Result.success(mesAppFunctions);
+//    }
+
+
+
 }
