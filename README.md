@@ -2,7 +2,7 @@
 QQ交流群：335607153  有任何问题可以加群交流 
  **智能制造产品JEEMES已经开源**  (https://gitee.com/erzhongxmu/jeemes) 欢迎大家STAR
  
-测试系统地址 http://47.113.229.131:9080/wms  用户名：test2  密码：123456 本地启动的用户名：admin 密码：llg123
+测试系统地址 http://47.113.229.131:9080/wms  用户名：test  密码：123456 本地启动的用户名：admin 密码：llg123
 android app也已经开源，近期更新会比较频繁 app开源地址  https://gitee.com/erzhongxmu/jeewmsapp和https://gitee.com/erzhongxmu/jeewmsapp-uni（正在测试完善）
 大家看到了，star一下，谢谢，本团队会持续更新，一直开源！
 欢迎喜欢的朋友一起来优化功能。
@@ -28,6 +28,7 @@ android app也已经开源，近期更新会比较频繁 app开源地址  https:
         客户下单流程，收货流程，上架流程，移货作业、拣货流程：批量拣货，按单拣货、盘点流程、计费流程。
     3、硬件对接
         对接自主研发基于LORA物联网技术的电子货架标签模块，满足快速退货分拣，波次拣货，生产线电子流程卡。
+    4、计费管理：通过在线SQL，动态完成费用的计算，满足3PL仓费用复杂多变的需求。
 
 三、安装说明：
   
