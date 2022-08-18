@@ -8,6 +8,8 @@ import com.zzjee.rfid.entity.RfidBuseEntity;
 import com.zzjee.uniapp.entity.WmsAppFunctionEntity;
 import com.zzjee.uniapp.entity.WmsAppRoleEntity;
 import com.zzjee.uniapp.entity.WmsAppUserEntity;
+import com.zzjee.uniapp.service.WmsAppFunctionServiceI;
+import com.zzjee.uniapp.service.WmsAppRoleServiceI;
 import com.zzjee.uniapp.service.WmsAppUserServiceI;
 import com.zzjee.wave.controller.WaveToDownController;
 import com.zzjee.wave.controller.WaveToFjController;
@@ -90,6 +92,11 @@ public class ApiController {
     private static final Logger logger = Logger.getLogger(ApiController.class);
     @Autowired
     private WmsAppUserServiceI wmsAppUserService;
+
+    @Autowired
+    private WmsAppRoleServiceI wmsAppRoleService;
+    @Autowired
+    private WmsAppFunctionServiceI wmsAppFunctionService;
     //收货相关接口begin
     //收货列表
     @RequestMapping(value = "/wvNoticeController/list", method = RequestMethod.GET)
@@ -341,48 +348,42 @@ public class ApiController {
      *
      * @return
      */
-//
-//    @RequestMapping(value = "/appfunctionList", method = RequestMethod.GET)
-//
-//    public ResponseMessage<?> appfunctionList(@PathVariable("username") String username,
-//                                             HttpServletRequest request) {
 
-
-//
-//        //根据用户名，获取APP用户
-//        CriteriaQuery queryuser = new CriteriaQuery(WmsAppUserEntity.class);
-//        queryuser.eq("appuser_code",username);
-//        List<WmsAppUserEntity> listByCriteriaQuery = wmsAppUserService.getListByCriteriaQuery(queryuser, false);
-//         if(CollectionUtils.isEmpty(listByCriteriaQuery)){
-//            return Result.error("未找到APP用户信息！");
-//        }
-//        //获取用户角色Id
-//        String roleId =listByCriteriaQuery.get(0).getApproleId();
-//        System.err.println(roleId);
-//        //根据用户角色Id，获取APP角色集合
-//        CriteriaQuery queryrole = new CriteriaQuery(WmsAppRoleEntity.class);
-//
-//
-//        queryrole.in("id",roleId.split(","));
-//        List<WmsAppRoleEntity> mesAppRole = mesAppRoleService.list(wrapper);
-//        if(mesAppRole==null){
-//            return Result.error("未找到APP角色信息！");
-//        }
-//        String funidstr = "";
-//        for (WmsAppRole role : mesAppRole) {
-//            //拼接获取的APP模块id
-//            funidstr = funidstr + ","+role.getAppmodelId();
-//            System.err.println(funidstr);
-//        }
-//        //根据APP模块id，获取APP功能模块集合
-//        QueryWrapper<WmsAppFunction> funcwrapper = new QueryWrapper<>();
-//        funcwrapper.lambda().in(WmsAppFunction::getId,funidstr.split(",")).eq(WmsAppFunction::getIfBind,"0").orderByAsc(WmsAppFunction::getAppmodelSort);
-//        List<WmsAppFunctionEntity> mesAppFunctions = mesAppFunctionService.list(funcwrapper);
-//        if(mesAppFunctions==null){
-//            return Result.error("未找到APP功能模块信息");
-//        }
-//        return Result.success(mesAppFunctions);
-//    }
+    @RequestMapping(value = "/appfunctionList", method = RequestMethod.GET)
+    public ResponseMessage<?> appfunctionList(@PathVariable("username") String username,
+                                             HttpServletRequest request) {
+        //根据用户名，获取APP用户
+        CriteriaQuery queryuser = new CriteriaQuery(WmsAppUserEntity.class);
+        queryuser.eq("appuser_code",username);
+        List<WmsAppUserEntity> listByCriteriaQuery = wmsAppUserService.getListByCriteriaQuery(queryuser, false);
+         if(CollectionUtils.isEmpty(listByCriteriaQuery)){
+            return Result.error("未找到APP用户信息！");
+        }
+        //获取用户角色Id
+        String roleId =listByCriteriaQuery.get(0).getApproleId();
+        System.err.println(roleId);
+        //根据用户角色Id，获取APP角色集合
+        CriteriaQuery queryrole = new CriteriaQuery(WmsAppRoleEntity.class);
+        queryrole.in("id",roleId.split(","));
+        List<WmsAppRoleEntity> mesAppRole = wmsAppRoleService.getListByCriteriaQuery(queryrole,false);
+        if(mesAppRole==null){
+            return Result.error("未找到APP角色信息！");
+        }
+        String funidstr = "";
+        for (WmsAppRoleEntity role : mesAppRole) {
+            //拼接获取的APP模块id
+            funidstr = funidstr + ","+role.getAppmodelId();
+            System.err.println(funidstr);
+        }
+        //根据APP模块id，获取APP功能模块集合
+        CriteriaQuery funcwrapper = new CriteriaQuery(WmsAppFunctionEntity.class);
+        funcwrapper.in("id",funidstr.split(",")) ;
+        List<WmsAppFunctionEntity> mesAppFunctions = wmsAppFunctionService.getListByCriteriaQuery(funcwrapper,false);
+        if(mesAppFunctions==null){
+            return Result.error("未找到APP功能模块信息");
+        }
+        return Result.success(mesAppFunctions);
+    }
 
 
 
