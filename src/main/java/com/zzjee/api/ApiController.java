@@ -360,11 +360,11 @@ public class ApiController {
             return Result.error("未找到APP用户信息！");
         }
         //获取用户角色Id
-        String roleId =listByCriteriaQuery.get(0).getApproleId();
+        String roleId =listByCriteriaQuery.get(0).getApproleCode();
         System.err.println(roleId);
         //根据用户角色Id，获取APP角色集合
         CriteriaQuery queryrole = new CriteriaQuery(WmsAppRoleEntity.class);
-        queryrole.in("id",roleId.split(","));
+        queryrole.in("approleCode",roleId.split(","));
         List<WmsAppRoleEntity> mesAppRole = wmsAppRoleService.getListByCriteriaQuery(queryrole,false);
         if(mesAppRole==null){
             return Result.error("未找到APP角色信息！");
@@ -372,12 +372,12 @@ public class ApiController {
         String funidstr = "";
         for (WmsAppRoleEntity role : mesAppRole) {
             //拼接获取的APP模块id
-            funidstr = funidstr + ","+role.getAppmodelId();
+            funidstr = funidstr + ","+role.getAppmodelCode();
             System.err.println(funidstr);
         }
         //根据APP模块id，获取APP功能模块集合
         CriteriaQuery funcwrapper = new CriteriaQuery(WmsAppFunctionEntity.class);
-        funcwrapper.in("id",funidstr.split(",")) ;
+        funcwrapper.in("appmodelCode",funidstr.split(",")) ;
         List<WmsAppFunctionEntity> mesAppFunctions = wmsAppFunctionService.getListByCriteriaQuery(funcwrapper,false);
         if(mesAppFunctions==null){
             return Result.error("未找到APP功能模块信息");
