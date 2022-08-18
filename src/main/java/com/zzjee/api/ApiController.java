@@ -354,7 +354,7 @@ public class ApiController {
                                              HttpServletRequest request) {
         //根据用户名，获取APP用户
         CriteriaQuery queryuser = new CriteriaQuery(WmsAppUserEntity.class);
-        queryuser.eq("appuser_code",username);
+        queryuser.eq("appuserCode",username);
         List<WmsAppUserEntity> listByCriteriaQuery = wmsAppUserService.getListByCriteriaQuery(queryuser, false);
          if(CollectionUtils.isEmpty(listByCriteriaQuery)){
             return Result.error("未找到APP用户信息！");
