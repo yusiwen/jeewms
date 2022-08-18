@@ -350,6 +350,7 @@ public class ApiController {
      */
 
     @RequestMapping(value = "/appfunctionList/{username}", method = RequestMethod.GET)
+    @ResponseBody
     public ResponseMessage<?> appfunctionList(@PathVariable("username") String username,
                                              HttpServletRequest request) {
         //根据用户名，获取APP用户
