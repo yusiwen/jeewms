@@ -457,6 +457,7 @@ public class WaveToFjController extends BaseController {
 			if (wmOmQmI != null&&wmOmQmI.getBinSta().equals("H")) {
 				wmOmQmI.setBinSta("Y");
 				wmOmQmI.setSecondRq(waveToFj.getSecondRq());
+				wmOmQmI.setUpdateBy(waveToFj.getCreateBy());//分拣人
 				systemService.saveOrUpdate(wmOmQmI);
 				String hql = "From WmOmQmIEntity where omNoticeId = ? and  binSta = ?";
 				List<WmOmQmIEntity> listom = systemService.findHql(hql,wmOmQmI.getOmNoticeId(),"H");
@@ -467,6 +468,7 @@ public class WaveToFjController extends BaseController {
 				}
 				WmOmNoticeHEntity wmom = systemService.findUniqueByProperty(WmOmNoticeHEntity.class, "omNoticeId", omnoticeid);
 				wmom.setOmSta("操作中");
+
 				systemService.updateEntitie(wmom);
 				D0.setOK(true);
 			}
