@@ -1,5 +1,7 @@
 package com.zzjee.api;
 
+import com.zzjee.BI.BiBinController;
+import com.zzjee.BI.biEntity;
 import com.zzjee.md.controller.MdGoodsController;
 import com.zzjee.md.entity.MdCusEntity;
 import com.zzjee.md.entity.MdGoodsEntity;
@@ -97,6 +99,9 @@ public class ApiController {
     private WmsAppRoleServiceI wmsAppRoleService;
     @Autowired
     private WmsAppFunctionServiceI wmsAppFunctionService;
+
+    @Autowired
+    private BiBinController biBinController;
     //收货相关接口begin
     //收货列表
     @RequestMapping(value = "/wvNoticeController/list", method = RequestMethod.GET)
@@ -385,5 +390,15 @@ public class ApiController {
         }
         return Result.success(mesAppFunctions);
     }
+    //商品列表
 
+    @RequestMapping(value = "/bi/list", method = RequestMethod.GET)
+    @ResponseBody
+    public ResponseEntity<?> bilist(@RequestParam(value = "username", required = false) String username) {
+        biEntity biEntity = biBinController.getBi(username);
+        ResultDO D0 = new  ResultDO();
+        D0.setOK(false);
+        D0.setObj(biEntity);
+        return new ResponseEntity(D0, HttpStatus.OK);
+    }
 }
