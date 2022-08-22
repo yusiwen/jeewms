@@ -548,10 +548,10 @@ public class WmToMoveGoodsController extends BaseController {
 
 			}
 			t.setUpdateDate(now());
-			if(!wmUtil.checkstcok( t.getBinFrom(),t.getTinFrom(),t.getGoodsId(),t.getGoodsProData(),t.getBaseGoodscount())) {
-				D0.setOK(false);
-				D0.setErrorMsg("库存不足");
-			}else{
+//			if(!wmUtil.checkstcok( t.getBinFrom(),t.getTinFrom(),t.getGoodsId(),t.getGoodsProData(),t.getBaseGoodscount())) {
+//				D0.setOK(false);
+//				D0.setErrorMsg("库存不足");
+//			}else{
 
 				String movesta = "已完成";
 				try{
@@ -563,7 +563,7 @@ public class WmToMoveGoodsController extends BaseController {
 				t.setMoveSta(movesta);
 				wmToMoveGoodsService.saveOrUpdate(t);
 				D0.setOK(true);
-			}
+//			}
 
 
 		} catch (Exception e) {
