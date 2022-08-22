@@ -1293,8 +1293,8 @@ public class WmInQmIController extends BaseController {
                     D0.setErrorMsg("已经上架，不能重复上架");
                     return new ResponseEntity(D0, HttpStatus.OK);
                 }
-                wmInQmIEntity.setBinSta("Y");
-                systemService.updateEntitie(wmInQmIEntity);
+//                wmInQmIEntity.setBinSta("Y");
+//                systemService.updateEntitie(wmInQmIEntity);
             }else{
                 D0.setOK(false);
                 D0.setErrorMsg("验收任务已经删除，不能上架");
