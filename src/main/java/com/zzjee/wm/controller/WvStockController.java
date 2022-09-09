@@ -824,7 +824,8 @@ public class WvStockController extends BaseController {
     @ResponseBody
     public ResponseEntity<?> list(@RequestParam(value = "username", required = false) String username,
                                   @RequestParam(value = "searchstr", required = false) String searchstr,
-                                  @RequestParam(value = "searchstr2", required = false) String searchstr2) {
+                                  @RequestParam(value = "searchstr2", required = false) String searchstr2,
+                                  @RequestParam(value = "searchstr2", required = false) String searchstr3) {
 //		return listWvGis;
 
 
@@ -833,6 +834,9 @@ public class WvStockController extends BaseController {
         D0.setOK(true);
         if (!StringUtil.isEmpty(searchstr)) {
             hql = hql + "  and kuWeiBianMa like '%" + searchstr + "%'";
+        }
+        if (!StringUtil.isEmpty(searchstr3)) {
+            hql = hql + "  and binId like '%" + searchstr3 + "%'";
         }
         if (!StringUtil.isEmpty(searchstr2)) {
             try {
