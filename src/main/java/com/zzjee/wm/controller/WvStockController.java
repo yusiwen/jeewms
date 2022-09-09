@@ -568,7 +568,11 @@ public class WvStockController extends BaseController {
 
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<?>  doSttpda(@RequestParam String id ,@RequestParam String binto ,@RequestParam String tinto , UriComponentsBuilder uriBuilder) {
+    public ResponseEntity<?>  doSttpda(@RequestParam (value = "id", required = false) String id ,
+                                       @RequestParam(value = "binto", required = false) String binto ,
+                                       @RequestParam(value = "tinto", required = false) String tinto ,
+                                       @RequestParam(value = "goodsqua", required = false) String goodsqua,
+                                       UriComponentsBuilder uriBuilder) {
         String message = null;
         ResultDO D0 = new  ResultDO();
         message = "生成转移单成功";
@@ -603,9 +607,9 @@ public class WvStockController extends BaseController {
             wmtomove.setGoodsId(t.getGoodsId());
             wmtomove.setGoodsName(t.getShpMingCheng());
             wmtomove.setGoodsProData(t.getGoodsProData());
-            wmtomove.setGoodsQua(t.getGoodsQua().toString());
+            wmtomove.setGoodsQua(goodsqua);
             wmtomove.setGoodsUnit(t.getGoodsUnit());
-            wmtomove.setBaseGoodscount(t.getGoodsQua().toString());
+            wmtomove.setBaseGoodscount(goodsqua);
             wmtomove.setBaseUnit(t.getGoodsUnit());
             wmtomove.setMoveSta("已完成");
             wmtomove.setRunSta("计划中");
