@@ -310,11 +310,13 @@ public class ApiController {
     @RequestMapping(value = "/wvStockController/pdazysave", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<?> update11(@RequestParam(value = "id", required = false) String id ,
+
+                                      @RequestParam (value = "username", required = false) String username ,
                                       @RequestParam(value = "binto", required = false) String binto ,
                                       @RequestParam(value = "tinto", required = false) String tinto ,
                                       @RequestParam(value = "goodsqua", required = false) String goodsqua ,
                                      UriComponentsBuilder uriBuilder) {
-        return wvStockController.doSttpda(id,binto,tinto, goodsqua,uriBuilder);
+        return wvStockController.doSttpda(id,username,binto,tinto, goodsqua,uriBuilder);
     }
     //商品下单
     @RequestMapping(value = "/mdGoodsController/order", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)

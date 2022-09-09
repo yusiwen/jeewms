@@ -20,6 +20,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.zzjee.wmutil.wmUtil;
 import org.apache.log4j.Logger;
 import org.apache.log4j.MDC;
+import org.jeecgframework.web.system.pojo.base.TSBaseUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -79,6 +80,8 @@ import java.net.URI;
 
 import org.springframework.http.MediaType;
 import org.springframework.web.util.UriComponentsBuilder;
+
+import static com.xiaoleilu.hutool.date.DateTime.now;
 
 /**
  * @author erzhongxmu
@@ -569,6 +572,7 @@ public class WvStockController extends BaseController {
     @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
     public ResponseEntity<?>  doSttpda(@RequestParam (value = "id", required = false) String id ,
+                                       @RequestParam (value = "username", required = false) String username ,
                                        @RequestParam(value = "binto", required = false) String binto ,
                                        @RequestParam(value = "tinto", required = false) String tinto ,
                                        @RequestParam(value = "goodsqua", required = false) String goodsqua,
@@ -579,6 +583,13 @@ public class WvStockController extends BaseController {
         WvStockEntity t = wvStockService.get(WvStockEntity.class, id);
         try {
             WmToMoveGoodsEntity wmtomove = new WmToMoveGoodsEntity();
+            wmtomove.setCreateBy(username);
+            //查询create_name
+            TSBaseUser user = systemService.findUniqueByProperty(TSBaseUser.class, "userName", wmtomove.getCreateBy());
+            if (user != null) {
+                wmtomove.setCreateName(user.getRealName());
+            }
+            wmtomove.setCreateDate(now());
             wmtomove.setOrderTypeCode("TPZY");
             wmtomove.setBinFrom(t.getKuWeiBianMa());
             wmtomove.setBinTo(t.getKuWeiBianMa());
