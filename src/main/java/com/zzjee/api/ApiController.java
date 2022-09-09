@@ -308,9 +308,11 @@ public class ApiController {
 
     //PDA自主移储保存
 
-    @RequestMapping(value = "/wmToMoveGoodsController/save", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/wvStockController/pdazysave", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<?> update11(@RequestParam String id ,@RequestParam String binto ,@RequestParam String tinto ,
+    public ResponseEntity<?> update11(@RequestParam(value = "id", required = false) String id ,
+                                      @RequestParam(value = "binto", required = false) String binto ,
+                                      @RequestParam(value = "tinto", required = false) String tinto ,
                                      UriComponentsBuilder uriBuilder) {
         return wvStockController.doSttpda(id,binto,tinto, uriBuilder);
     }
