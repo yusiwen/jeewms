@@ -566,6 +566,66 @@ public class WvStockController extends BaseController {
         return j;
     }
 
+    @RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public ResponseEntity<?>  doSttpda(@RequestParam String id ,@RequestParam String binto ,@RequestParam String tinto , UriComponentsBuilder uriBuilder) {
+        String message = null;
+        ResultDO D0 = new  ResultDO();
+        message = "生成转移单成功";
+        WvStockEntity t = wvStockService.get(WvStockEntity.class, id);
+        try {
+            WmToMoveGoodsEntity wmtomove = new WmToMoveGoodsEntity();
+            wmtomove.setOrderTypeCode("TPZY");
+            wmtomove.setBinFrom(t.getKuWeiBianMa());
+            wmtomove.setBinTo(t.getKuWeiBianMa());
+            if(StringUtil.isNotEmpty(binto)){
+                wmtomove.setBinTo(binto);
+            }
+            wmtomove.setTinFrom(t.getBinId());
+            wmtomove.setTinId(t.getBinId());
+            if(StringUtil.isNotEmpty(tinto)){
+                wmtomove.setTinId(tinto);
+            }
+            wmtomove.setCusCode(t.getCusCode());
+            wmtomove.setCusName(t.getZhongWenQch());
+            wmtomove.setToCusCode(t.getCusCode());
+            wmtomove.setToCusName(t.getZhongWenQch());
+
+            try {
+                MdCusEntity mdcus = systemService.findUniqueByProperty(MdCusEntity.class, "keHuBianMa", t.getCusCode());
+                wmtomove.setCusName(mdcus.getZhongWenQch());
+                wmtomove.setToCusName(mdcus.getZhongWenQch());
+
+            } catch (Exception e) {
+
+            }
+
+            wmtomove.setGoodsId(t.getGoodsId());
+            wmtomove.setGoodsName(t.getShpMingCheng());
+            wmtomove.setGoodsProData(t.getGoodsProData());
+            wmtomove.setGoodsQua(t.getGoodsQua().toString());
+            wmtomove.setGoodsUnit(t.getGoodsUnit());
+            wmtomove.setBaseGoodscount(t.getGoodsQua().toString());
+            wmtomove.setBaseUnit(t.getGoodsUnit());
+            wmtomove.setMoveSta("已完成");
+            wmtomove.setRunSta("计划中");
+
+            systemService.save(wmtomove);
+            systemService.addLog(message, Globals.Log_Type_UPDATE,
+                    Globals.Log_Leavel_INFO);
+        } catch (Exception e) {
+            e.printStackTrace();
+            message = "生成转移单失败";
+            D0.setOK(false);
+            D0.setErrorMsg(message);
+            return new ResponseEntity(D0, HttpStatus.OK);
+        }
+        D0.setOK(true);
+        D0.setErrorMsg(message);
+
+        return new ResponseEntity(D0, HttpStatus.OK);
+    }
+
     @RequestMapping(params = "dostttpzy")
     @ResponseBody
     public AjaxJson doStttpzy(WvStockEntity wvStock, HttpServletRequest request) {

@@ -241,7 +241,7 @@ public class ApiController {
     public ResponseEntity<?> list7(@RequestParam(value = "username", required = false) String username,
                                    @RequestParam(value = "searchstr", required = false) String searchstr,
                                    @RequestParam(value = "searchstr2", required = false) String searchstr2,
-                                   @RequestParam(value = "searchstr2", required = false) String searchstr3) {
+                                   @RequestParam(value = "searchstr3", required = false) String searchstr3) {
         return wvStockController.list(username, searchstr, searchstr2,searchstr3);
     }
 
@@ -306,13 +306,13 @@ public class ApiController {
         return mdGoodsController.update(mdGoodsstr, uriBuilder);
     }
 
-    //PDA移储保存
+    //PDA自主移储保存
 
     @RequestMapping(value = "/wmToMoveGoodsController/save", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseBody
-    public ResponseEntity<?> update11(@RequestParam String wmToMoveGoodsstr,
+    public ResponseEntity<?> update11(@RequestParam String id ,@RequestParam String binto ,@RequestParam String tinto ,
                                      UriComponentsBuilder uriBuilder) {
-        return wmToMoveGoodsController.update(wmToMoveGoodsstr, uriBuilder);
+        return wvStockController.doSttpda(id,binto,tinto, uriBuilder);
     }
     //商品下单
     @RequestMapping(value = "/mdGoodsController/order", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
