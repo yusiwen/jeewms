@@ -30,7 +30,8 @@
    <t:dgToolBar title="查看" icon="icon-search" url="wmsPlcController.do?goUpdate" funname="detail"></t:dgToolBar>
    <t:dgToolBar title="导入" icon="icon-put" funname="ImportXls"></t:dgToolBar>
    <t:dgToolBar title="导出" icon="icon-putout" funname="ExportXls"></t:dgToolBar>
-   <t:dgToolBar title="模板下载" icon="icon-putout" funname="ExportXlsByT"></t:dgToolBar>
+      <t:dgToolBar title="批量执行"    funname="batchupbin"></t:dgToolBar>
+
   </t:datagrid>
   </div>
  </div>
@@ -38,7 +39,36 @@
  <script type="text/javascript">
  $(document).ready(function(){
  });
+ function  batchupbin() {
+     var rows = $('#wmsPlcList').datagrid('getSelections');
+     if(rows.length > 0){
 
+
+
+         var ids = [];
+         for (var i = 0; i < rows.length; i++) {
+             ids.push(rows[i].id);
+         }
+             var url = "wmsPlcController.do?dotoup&ids="+ids.join(',');
+             $.ajax({
+                 async : false,
+                 cache : false,
+                 type : 'POST',
+                 url : url,// 请求的action路径
+                 error : function() {// 请求失败处理函数
+                 },
+                 success : function(data) {
+                     var d = $.parseJSON(data);
+                     if (d.success) {
+
+                     }
+                 }
+             });
+
+         tip("执行成功");
+         $('#wmsPlcList').datagrid('reload',{});
+     }
+ }
 
 
 //导入

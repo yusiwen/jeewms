@@ -1,4 +1,7 @@
 package com.zzjee.plc.controller;
+import HslCommunication.Core.Types.OperateResult;
+import HslCommunication.Profinet.Siemens.SiemensPLCS;
+import HslCommunication.Profinet.Siemens.SiemensS7Net;
 import com.zzjee.plc.entity.WmsPlcEntity;
 import com.zzjee.plc.service.WmsPlcServiceI;
 import java.util.ArrayList;
@@ -65,12 +68,12 @@ import java.net.URI;
 import org.springframework.http.MediaType;
 import org.springframework.web.util.UriComponentsBuilder;
 
-/**   
- * @Title: Controller  
+/**
+ * @Title: Controller
  * @Description: PLC指令
  * @author onlineGenerator
  * @date 2022-09-12 18:33:25
- * @version V1.0   
+ * @version V1.0
  *
  */
 @Controller
@@ -87,12 +90,12 @@ public class WmsPlcController extends BaseController {
 	private SystemService systemService;
 	@Autowired
 	private Validator validator;
-	
+
 
 
 	/**
 	 * PLC指令列表 页面跳转
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "list")
@@ -102,11 +105,10 @@ public class WmsPlcController extends BaseController {
 
 	/**
 	 * easyui AJAX请求数据
-	 * 
+	 *
 	 * @param request
 	 * @param response
 	 * @param dataGrid
-	 * @param user
 	 */
 
 	@RequestMapping(params = "datagrid")
@@ -123,10 +125,10 @@ public class WmsPlcController extends BaseController {
 		this.wmsPlcService.getDataGridReturn(cq, true);
 		TagUtil.datagrid(response, dataGrid);
 	}
-	
+
 	/**
 	 * 删除PLC指令
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "doDel")
@@ -147,10 +149,64 @@ public class WmsPlcController extends BaseController {
 		j.setMsg(message);
 		return j;
 	}
-	
+
 	/**
 	 * 批量删除PLC指令
-	 * 
+	 *
+	 * @return
+	 */
+	@RequestMapping(params = "dotoup")
+	@ResponseBody
+	public AjaxJson dotoup(String ids,HttpServletRequest request){
+		String message = null;
+		AjaxJson j = new AjaxJson();
+		message = "PLC指令执行成功";
+		try{
+			for(String id:ids.split(",")){
+				WmsPlcEntity wmsPlc = systemService.getEntity(WmsPlcEntity.class,
+						id
+				);
+				SiemensPLCS siemensPLCS = SiemensPLCS.S200Smart;
+				SiemensS7Net siemensS7Net = null;
+ 				siemensS7Net = new SiemensS7Net(siemensPLCS);
+				siemensS7Net.setIpAddress(wmsPlc.getPlcIp());
+				siemensS7Net.setPort(Integer.parseInt(wmsPlc.getPlcPort()) );
+				OperateResult connect = siemensS7Net.ConnectServer();
+				if(connect.IsSuccess){
+					System.out.println("connect success");
+				}else{
+					System.out.println("connect error");
+				}
+				String[] coms = wmsPlc.getComCons().split(";");
+				for (String com : coms) {
+					String[] split = com.split(",");
+					String defaultAddress = split[1];
+					if(split[0].equals("boolean")){
+						if(split[2].equals("false")){
+							siemensS7Net.Write(defaultAddress,false);
+						}else{
+							siemensS7Net.Write(defaultAddress,true);
+						}
+					}
+					else if(split[0].equals("float")){
+						siemensS7Net.Write(defaultAddress,Float.parseFloat(split[2]));
+					}
+				}
+
+                //执行完指令等待时间
+				Thread.sleep(Long.parseLong(wmsPlc.getComTime()));
+ 			}
+		}catch(Exception e){
+			e.printStackTrace();
+			message = "PLC指令执行失败";
+			throw new BusinessException(e.getMessage());
+		}
+		j.setMsg(message);
+		return j;
+	}
+	/**
+	 * 批量删除PLC指令
+	 *
 	 * @return
 	 */
 	 @RequestMapping(params = "doBatchDel")
@@ -161,7 +217,7 @@ public class WmsPlcController extends BaseController {
 		message = "PLC指令删除成功";
 		try{
 			for(String id:ids.split(",")){
-				WmsPlcEntity wmsPlc = systemService.getEntity(WmsPlcEntity.class, 
+				WmsPlcEntity wmsPlc = systemService.getEntity(WmsPlcEntity.class,
 				id
 				);
 				wmsPlcService.delete(wmsPlc);
@@ -179,8 +235,7 @@ public class WmsPlcController extends BaseController {
 
 	/**
 	 * 添加PLC指令
-	 * 
-	 * @param ids
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "doAdd")
@@ -200,11 +255,10 @@ public class WmsPlcController extends BaseController {
 		j.setMsg(message);
 		return j;
 	}
-	
+
 	/**
 	 * 更新PLC指令
-	 * 
-	 * @param ids
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "doUpdate")
@@ -226,11 +280,11 @@ public class WmsPlcController extends BaseController {
 		j.setMsg(message);
 		return j;
 	}
-	
+
 
 	/**
 	 * PLC指令新增页面跳转
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "goAdd")
@@ -243,7 +297,7 @@ public class WmsPlcController extends BaseController {
 	}
 	/**
 	 * PLC指令编辑页面跳转
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "goUpdate")
@@ -254,10 +308,10 @@ public class WmsPlcController extends BaseController {
 		}
 		return new ModelAndView("com/zzjee/plc/wmsPlc-update");
 	}
-	
+
 	/**
 	 * 导入功能跳转
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "upload")
@@ -265,10 +319,10 @@ public class WmsPlcController extends BaseController {
 		req.setAttribute("controller_name","wmsPlcController");
 		return new ModelAndView("common/upload/pub_excel_upload");
 	}
-	
+
 	/**
 	 * 导出excel
-	 * 
+	 *
 	 * @param request
 	 * @param response
 	 */
@@ -287,7 +341,7 @@ public class WmsPlcController extends BaseController {
 	}
 	/**
 	 * 导出excel 使模板
-	 * 
+	 *
 	 * @param request
 	 * @param response
 	 */
@@ -301,13 +355,13 @@ public class WmsPlcController extends BaseController {
     	modelMap.put(NormalExcelConstants.DATA_LIST,new ArrayList());
     	return NormalExcelConstants.JEECG_EXCEL_VIEW;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@RequestMapping(params = "importExcel", method = RequestMethod.POST)
 	@ResponseBody
 	public AjaxJson importExcel(HttpServletRequest request, HttpServletResponse response) {
 		AjaxJson j = new AjaxJson();
-		
+
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 		Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
 		for (Map.Entry<String, MultipartFile> entity : fileMap.entrySet()) {
@@ -335,14 +389,14 @@ public class WmsPlcController extends BaseController {
 		}
 		return j;
 	}
-	
+
 	@RequestMapping(method = RequestMethod.GET)
 	@ResponseBody
 	public List<WmsPlcEntity> list() {
 		List<WmsPlcEntity> listWmsPlcs=wmsPlcService.getList(WmsPlcEntity.class);
 		return listWmsPlcs;
 	}
-	
+
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	@ResponseBody
 	public ResponseEntity<?> get(@PathVariable("id") String id) {
