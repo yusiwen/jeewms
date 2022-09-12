@@ -18,7 +18,7 @@
     <t:dgCol title="PLC端口"  field="plcPort"   query="true" queryMode="single"  width="120"></t:dgCol>
     <t:dgCol title="PLC型号"  field="plcType"   query="true" queryMode="single"  width="120"></t:dgCol>
     <t:dgCol title="指令备注"  field="comRemark"   query="true" queryMode="single"  width="120"></t:dgCol>
-    <t:dgCol title="执行时间"  field="comTime"    queryMode="single"  width="120"></t:dgCol>
+    <t:dgCol title="执行时间(毫秒)"  field="comTime"    queryMode="single"  width="120"></t:dgCol>
     <t:dgCol title="执行顺序"  field="comSeq"    queryMode="single"  width="120"></t:dgCol>
     <t:dgCol title="指令集"  field="comCons"    queryMode="single"  width="120"></t:dgCol>
     <t:dgCol title="备用1"  field="remark1"    queryMode="single"  width="120"></t:dgCol>
