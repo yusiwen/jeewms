@@ -163,6 +163,8 @@ public class WmsPlcController extends BaseController {
 		message = "PLC指令执行成功";
 		try{
 			for(String id:ids.split(",")){
+				long start = System.currentTimeMillis();
+
 				WmsPlcEntity wmsPlc = systemService.getEntity(WmsPlcEntity.class,
 						id
 				);
@@ -179,6 +181,8 @@ public class WmsPlcController extends BaseController {
 				}
 				String[] coms = wmsPlc.getComCons().split(";");
 				for (String com : coms) {
+					Thread.sleep(500);
+
 					String[] split = com.split(",");
 					String defaultAddress = split[1];
 					if(split[0].equals("boolean")){
@@ -195,6 +199,11 @@ public class WmsPlcController extends BaseController {
 
                 //执行完指令等待时间
 				Thread.sleep(Long.parseLong(wmsPlc.getComTime()));
+
+
+				long end = System.currentTimeMillis();
+				long times = end - start;
+				org.jeecgframework.core.util.LogUtil.info(wmsPlc.getComRemark()+"总耗时" + times + "毫秒"+wmsPlc.getComCons());
  			}
 		}catch(Exception e){
 			e.printStackTrace();
