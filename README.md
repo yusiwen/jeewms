@@ -3,7 +3,7 @@ JEEWMSQQ交流群：335607153  有任何问题可以加群交流
  **智能制造产品JEEMES已经开源**  (https://gitee.com/erzhongxmu/jeemes) 欢迎大家STAR
  
 测试系统地址 http://47.113.229.131:9080/wms  用户名：test  密码：123456 本地启动的用户名：admin 密码：llg123
-android app也已经开源，近期更新会比较频繁 app开源地址  https://gitee.com/erzhongxmu/jeewmsapp和https://gitee.com/erzhongxmu/jeewmsapp-uni（正在测试完善）
+android app也已经开源，近期更新会比较频繁 app开源地址   https://gitee.com/erzhongxmu/JeeWMSapp-uni
 大家看到了，star一下，谢谢，本团队会持续更新，一直开源！
 欢迎喜欢的朋友一起来优化功能。
 开源不易，如果大家需要购买华为云可以通过我们的专属链接，优惠多多 [华为云服务器优惠购买](https://account.huaweicloud.com/obmgr/invitation/invitation.html?bpName=0000000100000002F529029E50A53299E1C24B9DC20691B285756AA52DA030F9E7013E8FF7E22C3EFF074BF9586E43C07842F8F96D38EC45878383D1D406B2F7341FC7D6635CED56&inviteCode=0000000100000002FC491B524CF3FDCE52F12DFD3BB98C8AB2DD5D05BA2CCD464D69E4293D91369A&bindType=1&isDefault=1)
