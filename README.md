@@ -1,21 +1,21 @@
 
-JEEWMSQQ交流群：335607153  有任何问题可以加群交流 
+JEEWMSQQ交流群：335607153  有任何问题可以加群交流  基于JEECG-BOOT开发的前后端分离版本于20221111日发布，届时欢迎大家多多提意见
  **智能制造产品JEEMES已经开源**  (https://gitee.com/erzhongxmu/jeemes) 欢迎大家STAR
  
 测试系统地址 http://47.113.229.131:9080/wms  用户名：test  密码：123456 本地启动的用户名：admin 密码：llg123
 android app也已经开源，近期更新会比较频繁 app开源地址   https://gitee.com/erzhongxmu/JeeWMSapp-uni
 大家看到了，star一下，谢谢，本团队会持续更新，一直开源！
-欢迎喜欢的朋友一起来优化功能。
+
 开源不易，如果大家需要购买华为云可以通过我们的专属链接，优惠多多 [华为云服务器优惠购买](https://account.huaweicloud.com/obmgr/invitation/invitation.html?bpName=0000000100000002F529029E50A53299E1C24B9DC20691B285756AA52DA030F9E7013E8FF7E22C3EFF074BF9586E43C07842F8F96D38EC45878383D1D406B2F7341FC7D6635CED56&inviteCode=0000000100000002FC491B524CF3FDCE52F12DFD3BB98C8AB2DD5D05BA2CCD464D69E4293D91369A&bindType=1&isDefault=1)
 
 一、项目简介：
      
-    jeewms在经过多家公司上线运行后，为了降低物流仓储企业的信息化成本，决定全面开源
+    JeeWMS在经过多家公司上线运行后，为了降低物流仓储企业的信息化成本，决定全面开源
     此产品。针对有特殊信息化需求的企业，提供高性价比的实施服务。
 
     产品特点：
     1、适用范围：第三方物流仓储企业，冷链仓库，自营仓储等。
-    2、技术特点：基于JAVA的WEB后台，基于ANDROID开发的PDA系统。
+    2、技术特点：基于JAVA的WEB后台，基于UNIAPP开发的PDA系统。
     3、功能特点：涵盖订单管理系统（OMS），仓储管理系统（WMS），计费管理系统（BMS），现场作业系统（RF），第三方接口模块
     4、接口支持：已经对接：SAP ECC，SAP HANA 数据库，用友U8，百胜E3，UAS。
 
