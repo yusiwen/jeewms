@@ -67,24 +67,26 @@
 				</div>
                   <h4 class="header blue lighter bigger">
                     <i class="ace-icon fa fa-coffee green"></i>
-                	    用户登录
+                      <t:mutiLang langKey="login.info"/>
+
+
                   </h4>
                   <div class="space-6"></div>
                       <label class="block clearfix">
 								<span class="block input-icon input-icon-right">
-									<input type="text"  name="userName" class="form-control" placeholder="请输入用户名"  id="userName" value="admin"/>
+									<input type="text"  name="userName" class="form-control"   id="userName" value="admin"/>
 									<i class="ace-icon fa fa-user"></i>
 								</span>
                       </label>
                       <label class="block clearfix">
 								<span class="block input-icon input-icon-right">
-									<input type="password" name="password" class="form-control" placeholder="请输入密码" id="password" value="llg123"/>
+									<input type="password" name="password" class="form-control"  id="password" value="llg123"/>
 									<i class="ace-icon fa fa-lock"></i>
 								</span>
                       </label>
                       <label class="block clearfix">
                         <div class="input-group">
-                          <input type="text" style="width:150px" name="randCode" class="form-control" placeholder="请输入验证码"  id="randCode"/>
+                          <input type="text" style="width:150px" name="randCode" class="form-control"    id="randCode"/>
                           <span class="input-group-addon" style="padding: 0px;"><img id="randCodeImage" src="randCodeImage"  /></span>
                         </div>
                       </label>
@@ -92,11 +94,17 @@
                       <div class="clearfix">
                         <label class="inline">
                           <input type="checkbox" class="ace" id="on_off"  name="remember" value="yes"/>
-                          <span class="lbl">记住用户名</span>
+                          <span class="lbl">
+                                                    <t:mutiLang langKey="login.saveusername"/>
+
+                          </span>
                         </label>
                         <button type="button" id="but_login"  onclick="checkUser()" class="width-35 pull-right btn btn-sm btn-primary">
                           <i class="ace-icon fa fa-key"></i>
-                          <span class="bigger-110" >登录</span>
+                          <span class="bigger-110" >
+                                                    <t:mutiLang langKey="login.login"/>
+
+                          </span>
                         </button>
                       </div>
                       <div class="space-4"></div>
