@@ -227,6 +227,7 @@ public class WmsPlcController extends BaseController {
 			comCons = StringUtils.replace(comCons,"{query02}",query02);
 			String[] coms = comCons.split(";");
 			for (String com : coms) {
+				System.out.println("指令："+com);
 				try	{
 					Thread.sleep(500);
 				}catch (Exception e){
