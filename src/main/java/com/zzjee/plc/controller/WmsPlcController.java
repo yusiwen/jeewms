@@ -244,14 +244,25 @@ public class WmsPlcController extends BaseController {
 				}
 				else if(split[0].equals("float")){
 					Float runfloat =  Float.parseFloat(split[2]) * stepNumrun;
+					System.out.println("runfloat："+Math.abs(runfloat));
+					siemensS7Net.Write(defaultAddress,runfloat);
+				}
+				else if(split[0].equals("-float")){
+					Float runfloat =  Float.parseFloat(split[2]) * stepNumrun;
 					System.out.println("runfloat："+runfloat);
 					siemensS7Net.Write(defaultAddress,runfloat);
 				}
 				else if(split[0].equals("int")){
 					Float runfloat =  Float.parseFloat(split[2]) * stepNumrun;
+					Float abs = Math.abs(runfloat);
+					int runint = abs.intValue();
+					System.out.println("runint："+runint);
+					siemensS7Net.Write(defaultAddress,runint);
+				}
+				else if(split[0].equals("-int")){
+					Float runfloat =  Float.parseFloat(split[2]) * stepNumrun;
 					int runint = runfloat.intValue();
 					System.out.println("runint："+runint);
-
 					siemensS7Net.Write(defaultAddress,runint);
 				}
 			}
