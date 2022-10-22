@@ -408,9 +408,9 @@ public class MdBinController extends BaseController {
         xstepNum =  Integer.toString(xStep);
         ystepNum =  Integer.toString(yStep);
            if(y0.equals("1")){
-               wmsPlcController.run("","run",xstepNum);
+               wmsPlcController.run("","runx",xstepNum);
            }else{
-               wmsPlcController.run("","run",ystepNum);
+               wmsPlcController.run("","runy",ystepNum);
            }
 
 
@@ -420,9 +420,9 @@ public class MdBinController extends BaseController {
         }
 
         if(y0.equals("1")){
-            wmsPlcController.run("","run",ystepNum);
+            wmsPlcController.run("","runy",ystepNum);
         }else{
-            wmsPlcController.run("","run",xstepNum);
+            wmsPlcController.run("","runx",xstepNum);
         }
 
     }
