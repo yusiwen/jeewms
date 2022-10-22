@@ -22,7 +22,7 @@ import org.jeecgframework.poi.excel.annotation.Excel;
  * @Title: Entity
  * @Description: PLC指令
  * @author onlineGenerator
- * @date 2022-09-12 18:33:25
+ * @date 2022-10-22 10:15:15
  * @version V1.0
  *
  */
@@ -30,7 +30,7 @@ import org.jeecgframework.poi.excel.annotation.Excel;
 @Table(name = "wms_plc", schema = "")
 @SuppressWarnings("serial")
 public class WmsPlcEntity implements java.io.Serializable {
-	/**主键*/
+	/**id*/
 	private String id;
 	/**创建人名称*/
 	private String createName;
@@ -74,10 +74,25 @@ public class WmsPlcEntity implements java.io.Serializable {
 	/**备用1*/
 	@Excel(name="备用1")
 	private String remark1;
+	/**指令编号*/
+	@Excel(name="指令编号")
+	private String comNo;
+	/**单步参数1*/
+	@Excel(name="单步参数1")
+	private String query01;
+	/**单步参数2*/
+	@Excel(name="单步参数2")
+	private String query02;
+	/**单步时间*/
+	@Excel(name="单步时间")
+	private String setpTime;
+	/**步数*/
+	@Excel(name="步数")
+	private String setpNum;
 
 	/**
 	 *方法: 取得java.lang.String
-	 *@return: java.lang.String  主键
+	 *@return: java.lang.String  id
 	 */
 	@Id
 	@GeneratedValue(generator = "paymentableGenerator")
@@ -89,7 +104,7 @@ public class WmsPlcEntity implements java.io.Serializable {
 
 	/**
 	 *方法: 设置java.lang.String
-	 *@param: java.lang.String  主键
+	 *@param: java.lang.String  id
 	 */
 	public void setId(String id){
 		this.id = id;
@@ -130,7 +145,7 @@ public class WmsPlcEntity implements java.io.Serializable {
 	 *方法: 取得java.util.Date
 	 *@return: java.util.Date  创建日期
 	 */
-	@Column(name ="CREATE_DATE",nullable=true,length=20)
+	@Column(name ="CREATE_DATE",nullable=true)
 	public Date getCreateDate(){
 		return this.createDate;
 	}
@@ -178,7 +193,7 @@ public class WmsPlcEntity implements java.io.Serializable {
 	 *方法: 取得java.util.Date
 	 *@return: java.util.Date  更新日期
 	 */
-	@Column(name ="UPDATE_DATE",nullable=true,length=20)
+	@Column(name ="UPDATE_DATE",nullable=true)
 	public Date getUpdateDate(){
 		return this.updateDate;
 	}
@@ -338,7 +353,7 @@ public class WmsPlcEntity implements java.io.Serializable {
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  指令集
 	 */
-	@Column(name ="COM_CONS",nullable=true,length=32)
+	@Column(name ="COM_CONS",nullable=true)
 	public String getComCons(){
 		return this.comCons;
 	}
@@ -365,5 +380,85 @@ public class WmsPlcEntity implements java.io.Serializable {
 	 */
 	public void setRemark1(String remark1){
 		this.remark1 = remark1;
+	}
+	/**
+	 *方法: 取得java.lang.String
+	 *@return: java.lang.String  指令编号
+	 */
+	@Column(name ="COM_NO",nullable=true,length=32)
+	public String getComNo(){
+		return this.comNo;
+	}
+
+	/**
+	 *方法: 设置java.lang.String
+	 *@param: java.lang.String  指令编号
+	 */
+	public void setComNo(String comNo){
+		this.comNo = comNo;
+	}
+	/**
+	 *方法: 取得java.lang.String
+	 *@return: java.lang.String  单步参数1
+	 */
+	@Column(name ="QUERY01",nullable=true,length=32)
+	public String getQuery01(){
+		return this.query01;
+	}
+
+	/**
+	 *方法: 设置java.lang.String
+	 *@param: java.lang.String  单步参数1
+	 */
+	public void setQuery01(String query01){
+		this.query01 = query01;
+	}
+	/**
+	 *方法: 取得java.lang.String
+	 *@return: java.lang.String  单步参数2
+	 */
+	@Column(name ="QUERY02",nullable=true,length=32)
+	public String getQuery02(){
+		return this.query02;
+	}
+
+	/**
+	 *方法: 设置java.lang.String
+	 *@param: java.lang.String  单步参数2
+	 */
+	public void setQuery02(String query02){
+		this.query02 = query02;
+	}
+	/**
+	 *方法: 取得java.lang.String
+	 *@return: java.lang.String  单步时间
+	 */
+	@Column(name ="SETP_TIME",nullable=true,length=32)
+	public String getSetpTime(){
+		return this.setpTime;
+	}
+
+	/**
+	 *方法: 设置java.lang.String
+	 *@param: java.lang.String  单步时间
+	 */
+	public void setSetpTime(String setpTime){
+		this.setpTime = setpTime;
+	}
+	/**
+	 *方法: 取得java.lang.String
+	 *@return: java.lang.String  步数
+	 */
+	@Column(name ="SETP_NUM",nullable=true,length=32)
+	public String getSetpNum(){
+		return this.setpNum;
+	}
+
+	/**
+	 *方法: 设置java.lang.String
+	 *@param: java.lang.String  步数
+	 */
+	public void setSetpNum(String setpNum){
+		this.setpNum = setpNum;
 	}
 }

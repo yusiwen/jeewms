@@ -10,10 +10,13 @@ import java.text.SimpleDateFormat;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.zzjee.wm.entity.WmToMoveGoodsEntity;
 import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.util.CollectionUtils;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
@@ -163,48 +166,8 @@ public class WmsPlcController extends BaseController {
 		message = "PLC指令执行成功";
 		try{
 			for(String id:ids.split(",")){
-				long start = System.currentTimeMillis();
-
-				WmsPlcEntity wmsPlc = systemService.getEntity(WmsPlcEntity.class,
-						id
-				);
-				SiemensPLCS siemensPLCS = SiemensPLCS.S200Smart;
-				SiemensS7Net siemensS7Net = null;
- 				siemensS7Net = new SiemensS7Net(siemensPLCS);
-				siemensS7Net.setIpAddress(wmsPlc.getPlcIp());
-				siemensS7Net.setPort(Integer.parseInt(wmsPlc.getPlcPort()) );
-				OperateResult connect = siemensS7Net.ConnectServer();
-				if(connect.IsSuccess){
-					System.out.println("connect success");
-				}else{
-					System.out.println("connect error");
-				}
-				String[] coms = wmsPlc.getComCons().split(";");
-				for (String com : coms) {
-					Thread.sleep(500);
-
-					String[] split = com.split(",");
-					String defaultAddress = split[1];
-					if(split[0].equals("boolean")){
-						if(split[2].equals("false")){
-							siemensS7Net.Write(defaultAddress,false);
-						}else{
-							siemensS7Net.Write(defaultAddress,true);
-						}
-					}
-					else if(split[0].equals("float")){
-						siemensS7Net.Write(defaultAddress,Float.parseFloat(split[2]));
-					}
-				}
-
-                //执行完指令等待时间
-				Thread.sleep(Long.parseLong(wmsPlc.getComTime()));
-
-
-				long end = System.currentTimeMillis();
-				long times = end - start;
-				org.jeecgframework.core.util.LogUtil.info(wmsPlc.getComRemark()+"总耗时" + times + "毫秒"+wmsPlc.getComCons());
- 			}
+				run(id,"","");
+		 }
 		}catch(Exception e){
 			e.printStackTrace();
 			message = "PLC指令执行失败";
@@ -212,6 +175,91 @@ public class WmsPlcController extends BaseController {
 		}
 		j.setMsg(message);
 		return j;
+	}
+
+
+	public  void run(String id,String comNo,String stepNum){
+
+		if(stepNum.equals("0")){
+			return;
+		}
+		WmsPlcEntity wmsPlc  = null ;
+		if(StringUtil.isNotEmpty(id)){
+			wmsPlc = systemService.getEntity(WmsPlcEntity.class,id);
+		}
+		if(StringUtil.isNotEmpty(comNo)){
+
+			String hql = "";
+			List<WmsPlcEntity> wmsPlcEntityList = new ArrayList<WmsPlcEntity>();
+			hql = "from WmsPlcEntity t where  t.comNo =  ? ";
+			wmsPlcEntityList = systemService.findHql(hql,comNo);
+			if(!CollectionUtils.isEmpty(wmsPlcEntityList)){
+				wmsPlc = wmsPlcEntityList.get(0);
+			}
+ 		}
+		if(wmsPlc  != null){
+			long start = System.currentTimeMillis();
+
+			SiemensPLCS siemensPLCS = SiemensPLCS.S200Smart;
+			SiemensS7Net siemensS7Net = null;
+			siemensS7Net = new SiemensS7Net(siemensPLCS);
+			siemensS7Net.setIpAddress(wmsPlc.getPlcIp());
+			siemensS7Net.setPort(Integer.parseInt(wmsPlc.getPlcPort()) );
+			OperateResult connect = siemensS7Net.ConnectServer();
+			if(connect.IsSuccess){
+				System.out.println("connect success");
+			}else{
+				System.out.println("connect error");
+			}
+			String comCons = wmsPlc.getComCons();
+			String query01 = wmsPlc.getQuery01();
+			String query02 = wmsPlc.getQuery02();
+			Float stepNumrun  = Float.valueOf("1");
+			if(StringUtil.isNotEmpty(stepNum)){
+				stepNumrun  =Float.parseFloat(stepNum);
+			}else{
+				stepNumrun  =Float.parseFloat(wmsPlc.getSetpNum());
+			}
+			Float stepTime =  Float.parseFloat(wmsPlc.getSetpTime());
+			comCons = StringUtils.replace(comCons,"{query01}",query01);
+			comCons = StringUtils.replace(comCons,"{query02}",query02);
+			String[] coms = wmsPlc.getComCons().split(";");
+			for (String com : coms) {
+				try	{
+					Thread.sleep(500);
+				}catch (Exception e){
+					e.printStackTrace();
+				}
+				String[] split = com.split(",");
+				String defaultAddress = split[1];
+				if(split[0].equals("boolean")){
+					if(split[2].equals("false")){
+						siemensS7Net.Write(defaultAddress,false);
+					}else{
+						siemensS7Net.Write(defaultAddress,true);
+					}
+				}
+				else if(split[0].equals("float")){
+					Float runfloat =  Float.parseFloat(split[2]) * stepNumrun;
+					siemensS7Net.Write(defaultAddress,runfloat);
+				}
+			}
+			//执行完指令等待时间
+			try{
+				Float sleeptime =  Math.abs(stepNumrun * stepTime) ;
+				Thread.sleep(sleeptime.longValue());
+			}catch (Exception e){
+				e.printStackTrace();
+			}
+
+			long end = System.currentTimeMillis();
+			long times = end - start;
+			org.jeecgframework.core.util.LogUtil.info(wmsPlc.getComRemark()+"总耗时" + times + "毫秒"+wmsPlc.getComCons());
+
+		}
+
+
+
 	}
 	/**
 	 * 批量删除PLC指令
