@@ -180,6 +180,8 @@ public class WmsPlcController extends BaseController {
 
 	public  void run(String id,String comNo,String stepNum){
 
+
+		System.out.println("id:"+id+";comNo:"+comNo+";stepNum:"+stepNum);
 		if(stepNum.equals("0")){
 			return;
 		}
@@ -254,7 +256,7 @@ public class WmsPlcController extends BaseController {
 
 			long end = System.currentTimeMillis();
 			long times = end - start;
-			org.jeecgframework.core.util.LogUtil.info(wmsPlc.getComRemark()+"总耗时" + times + "毫秒"+wmsPlc.getComCons());
+			org.jeecgframework.core.util.LogUtil.info(wmsPlc.getComRemark()+"总耗时" + times + "毫秒"+comCons);
 
 		}
 

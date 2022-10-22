@@ -422,20 +422,28 @@ public class MdBinController extends BaseController {
         xstepNum =  Integer.toString(xStep);
         ystepNum =  Integer.toString(yStep);
            if(y0.equals("01")){
+               System.out.println("1,runx:"+xstepNum);
                wmsPlcController.run("","runx",xstepNum);
            }else{
+               System.out.println("2,runy:"+ystepNum);
+
                wmsPlcController.run("","runy",ystepNum);
            }
 
 
         if(xStep>0 && yStep>0){
             hxstepNum = "1";
+            System.out.println("3,change:"+hxstepNum);
+
             wmsPlcController.run("","change",hxstepNum);
         }
 
         if(y0.equals("01")){
+            System.out.println("4,runy:"+ystepNum);
             wmsPlcController.run("","runy",ystepNum);
         }else{
+            System.out.println("5,runx:"+xstepNum);
+
             wmsPlcController.run("","runx",xstepNum);
         }
 
