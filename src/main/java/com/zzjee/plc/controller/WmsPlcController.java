@@ -246,6 +246,11 @@ public class WmsPlcController extends BaseController {
 					Float runfloat =  Float.parseFloat(split[2]) * stepNumrun;
 					siemensS7Net.Write(defaultAddress,runfloat);
 				}
+				else if(split[0].equals("int")){
+					Float runfloat =  Float.parseFloat(split[2]) * stepNumrun;
+					int runint = runfloat.intValue();
+					siemensS7Net.Write(defaultAddress,runint);
+				}
 			}
 			//执行完指令等待时间
 			try{
