@@ -223,7 +223,7 @@ public class WmsPlcController extends BaseController {
 			Float stepTime =  Float.parseFloat(wmsPlc.getSetpTime());
 			comCons = StringUtils.replace(comCons,"{query01}",query01);
 			comCons = StringUtils.replace(comCons,"{query02}",query02);
-			String[] coms = wmsPlc.getComCons().split(";");
+			String[] coms = comCons.split(";");
 			for (String com : coms) {
 				try	{
 					Thread.sleep(500);
