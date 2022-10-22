@@ -356,7 +356,21 @@ public class MdBinController extends BaseController {
                     jsonParts.put("des", resultt.get(i).get("des"));
                     jsonParts.put("tincount", resultt.get(i).get("tincount"));
                     try {
+                        if ("fanxiang".equals(type)) {
+                            try {
+                                int hangshuint = Integer.parseInt(hangshu);
+                                int xnode = Integer.parseInt(resultt.get(i).get("xnode").toString());
 
+                                jsonParts.put("xnode", hangshuint + 1 - xnode);
+                            } catch (Exception e) {
+
+                            }
+
+
+                        } else {
+                            jsonParts.put("xnode", resultt.get(i).get("xnode"));
+
+                        }
 
                         jsonParts.put("xnode", resultt.get(i).get("xnode"));
                         jsonParts.put("ynode", resultt.get(i).get("ynode"));
@@ -407,7 +421,7 @@ public class MdBinController extends BaseController {
         String hxstepNum = "1";
         xstepNum =  Integer.toString(xStep);
         ystepNum =  Integer.toString(yStep);
-           if(y0.equals("1")){
+           if(y0.equals("01")){
                wmsPlcController.run("","runx",xstepNum);
            }else{
                wmsPlcController.run("","runy",ystepNum);
@@ -419,7 +433,7 @@ public class MdBinController extends BaseController {
             wmsPlcController.run("","change",hxstepNum);
         }
 
-        if(y0.equals("1")){
+        if(y0.equals("01")){
             wmsPlcController.run("","runy",ystepNum);
         }else{
             wmsPlcController.run("","runx",xstepNum);

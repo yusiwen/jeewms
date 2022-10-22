@@ -31,7 +31,7 @@
             </span>
             <span style="vertical-align:middle;display:-moz-inline-box;display:inline-block;width: 90px;text-align:right;">
           <button onclick="chaxun('zhengxiang')">查询</button>  </span>
-          <button onclick="chaxun('fanxiang')">调度</button>  </span>
+          <button onclick="chaxun('diaodu')">调度</button>  </span>
         </div>
 
 
