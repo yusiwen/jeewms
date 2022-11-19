@@ -3,13 +3,27 @@
 <t:base type="jquery,easyui,tools,DatePicker"></t:base>
 <div class="easyui-layout" fit="true">
     <div style="padding:0px;border:0px">
-<%--        <div style="margin-left:100px"> 桃红色标识此储位有货，淡绿色标识此储位为空</div>--%>
-        <div name="searchColums" style="float: left; padding-left: 0px;padding-top: 5px;">
-            <span style="vertical-align:middle;display:-moz-inline-box;display:inline-block;width: 50px;text-align:right;"
-                  title="仓库">仓库: </span>
-            <input type="text" name="cangku" value="agv"  style="width: 50px; height: 30px;">
+        <div style="float: left; padding-left: 0px;padding-top: 5px;">
+             <span style="vertical-align:middle;display:-moz-inline-box;display:inline-block;width: 55px;text-align:left;"
+                   title="仓库">仓库: </span>
+            <input type="text" name="cangku" value="agv"  style="width: 55px; height: 30px;">
+            </span>
+            <span  style="vertical-align:middle;display:-moz-inline-box;display:inline-block;width: 55px;text-align:right;"
+                                                  title="层数">层数: </span>
+            <input type="text" name="cengshu" value="01" style="width: 55px; height: 30px;">
             </span>
             <span style="vertical-align:middle;display:-moz-inline-box;display:inline-block;width: 55px;text-align:right;"
+                  title="行数">行数: </span>
+            <input type="text" name="hangshu" value="03" style="width: 55px; height: 30px;">
+            </span>
+            <span style="vertical-align:middle;display:-moz-inline-box;display:inline-block;width: 55px;text-align:right;"
+                  title="列数">列数: </span>
+            <input type="text" name="lieshu"  value="03"  style="width: 55px; height: 30px;">
+            </span>
+        </div>
+        <div name="searchColums" style="float: left; padding-left: 0px;padding-top: 5px;">
+
+            <span style="vertical-align:middle;display:-moz-inline-box;display:inline-block;width: 55px;text-align:left;"
                   title="开始">开始: </span>
             <input type="text" id = "chuweiid" name="chuwei" style="width: 55px; height: 30px;">
             </span>
@@ -17,35 +31,31 @@
                   title="结束">结束: </span>
             <input type="text" id = "desid" name="des" style="width: 55px; height: 30px;">
             </span>
-            <span  style="vertical-align:middle;display:-moz-inline-box;display:inline-block;width: 30px;text-align:right;"
-                  title="层数">层数: </span>
-            <input type="text" name="cengshu" value="01" style="width: 20px; height: 30px;">
-            </span>
-            <span style="vertical-align:middle;display:-moz-inline-box;display:inline-block;width: 30px;text-align:right;"
-                  title="行数">行数: </span>
-            <input type="text" name="hangshu" value="03" style="width: 20px; height: 30px;">
-            </span>
-            <span style="vertical-align:middle;display:-moz-inline-box;display:inline-block;width: 30px;text-align:right;"
-                  title="列数">列数: </span>
-            <input type="text" name="lieshu"  value="03"  style="width: 20px; height: 30px;">
-            </span>
+
             <span style="vertical-align:middle;display:-moz-inline-box;display:inline-block;width: 75px;text-align:right;"
                   title="开始指令">开始指令: </span>
-            <input type="text" name="startcom" value="no" style="width: 70px; height: 30px;">
+             <t:dictSelect id="startcom" field="startcom" type="list" extendJson="{class:'form-control'}"
+                          dictTable="wms_plc" dictField="com_no" dictText="com_remark" hasLabel="false"   ></t:dictSelect>
+
             </span>
             <span style="vertical-align:middle;display:-moz-inline-box;display:inline-block;width: 75px;text-align:right;"
                   title="中间指令">中间指令: </span>
-            <input type="text" name="midcom" value="no" style="width: 70px; height: 30px;">
+            <t:dictSelect id="midcom" field="midcom" type="list" extendJson="{class:'form-control'}"
+                          dictTable="wms_plc" dictField="com_no" dictText="com_remark" hasLabel="false"    ></t:dictSelect>
             </span>
             <span style="vertical-align:middle;display:-moz-inline-box;display:inline-block;width: 75px;text-align:right;"
                   title="结束指令">结束指令: </span>
-            <input type="text" name="endcom"  value="no"  style="width: 70px; height: 30px;">
-            </span>
+            <t:dictSelect id="endcom" field="endcom" type="list" extendJson="{class:'form-control'}"
+                          dictTable="wms_plc" dictField="com_no" dictText="com_remark" hasLabel="false"   ></t:dictSelect>
+
+             </span>
 
 
 <%--            <span style="vertical-align:middle;display:-moz-inline-box;display:inline-block;width: 90px;text-align:right;">--%>
           <button onclick="chaxun('zhengxiang')">加载储位</button>  </span>
           <button onclick="chaxun('diaodu')">调度</button>  </span>
+
+
         </div>
 
 
@@ -147,9 +157,30 @@
         var lieshu = $('input[name="lieshu"]').attr("value") * 1;
         var cengshu = $('input[name="cengshu"]').attr("value");
         des = $('input[name="des"]').attr("value");
-        startcom = $('input[name="startcom"]').attr("value");
-        midcom = $('input[name="midcom"]').attr("value");
-        endcom = $('input[name="endcom"]').attr("value");
+        startcom = 'no';
+        midcom = 'no';
+        endcom = 'no';
+        var countstartcom=$("#startcom option").length;
+        var countmidcom=$("#midcom option").length;
+        var countendcom=$("#endcom option").length;
+        for(var i=0;i<countstartcom;i++) {
+            if ($("#startcom").get(0).options[i].selected) {
+                startcom = $("#startcom").get(0).options[i].value;
+            }
+        }
+        for(var i=0;i<countmidcom;i++) {
+
+            if ($("#midcom").get(0).options[i].selected) {
+                midcom = $("#midcom").get(0).options[i].value;
+            }
+        }
+            for(var i=0;i<countendcom;i++) {
+
+                if ($("#endcom").get(0).options[i].selected) {
+                    endcom = $("#endcom").get(0).options[i].value;
+                }
+            }
+
         //加载消息
         var url = "mdBinController.do?getbinallagv&binstore=" +
             cangku +

@@ -424,7 +424,7 @@ public class MdBinController extends BaseController {
         String hxstepNum = "1";
         xstepNum =  Integer.toString(xStep);
         ystepNum =  Integer.toString(yStep);
-        if(!"no".equals(startcom)){
+        if(!"no".equals(startcom)&&StringUtil.isNotEmpty(startcom)){
             hxstepNum = "1";
             System.out.println("startcom,startcom:"+startcom);
             wmsPlcController.run("",startcom,hxstepNum);
@@ -447,7 +447,7 @@ public class MdBinController extends BaseController {
 //
 //            wmsPlcController.run("","change",hxstepNum);
 //        }
-        if(!"no".equals(midcom)){
+        if(!"no".equals(midcom)&&StringUtil.isNotEmpty(midcom)){
             hxstepNum = "1";
             System.out.println("midcom,midcom:"+midcom);
             wmsPlcController.run("",midcom,hxstepNum);
@@ -461,7 +461,7 @@ public class MdBinController extends BaseController {
 
             wmsPlcController.run("","runx",xstepNum);
         }
-        if(!"no".equals(endcom)){
+        if(!"no".equals(endcom)&&StringUtil.isNotEmpty(endcom)){
             hxstepNum = "1";
             System.out.println("endcom,endcom:"+endcom);
             wmsPlcController.run("",endcom,hxstepNum);
