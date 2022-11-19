@@ -5,32 +5,46 @@
     <div style="padding:0px;border:0px">
 <%--        <div style="margin-left:100px"> 桃红色标识此储位有货，淡绿色标识此储位为空</div>--%>
         <div name="searchColums" style="float: left; padding-left: 0px;padding-top: 5px;">
-            <span style="vertical-align:middle;display:-moz-inline-box;display:inline-block;width: 90px;text-align:right;"
+            <span style="vertical-align:middle;display:-moz-inline-box;display:inline-block;width: 50px;text-align:right;"
                   title="仓库">仓库: </span>
-            <input type="text" name="cangku" value="agv"  style="width: 100px; height: 30px;">
+            <input type="text" name="cangku" value="agv"  style="width: 50px; height: 30px;">
             </span>
-            <span style="vertical-align:middle;display:-moz-inline-box;display:inline-block;width: 90px;text-align:right;"
+            <span style="vertical-align:middle;display:-moz-inline-box;display:inline-block;width: 55px;text-align:right;"
                   title="开始">开始: </span>
-            <input type="text" id = "chuweiid" name="chuwei" style="width: 80px; height: 30px;">
+            <input type="text" id = "chuweiid" name="chuwei" style="width: 55px; height: 30px;">
             </span>
-            <span style="vertical-align:middle;display:-moz-inline-box;display:inline-block;width: 90px;text-align:right;"
+            <span style="vertical-align:middle;display:-moz-inline-box;display:inline-block;width: 55px;text-align:right;"
                   title="结束">结束: </span>
-            <input type="text" id = "desid" name="des" style="width: 80px; height: 30px;">
+            <input type="text" id = "desid" name="des" style="width: 55px; height: 30px;">
             </span>
-            <span style="vertical-align:middle;display:-moz-inline-box;display:inline-block;width: 90px;text-align:right;"
+            <span  style="vertical-align:middle;display:-moz-inline-box;display:inline-block;width: 30px;text-align:right;"
                   title="层数">层数: </span>
             <input type="text" name="cengshu" value="01" style="width: 20px; height: 30px;">
             </span>
-            <span style="vertical-align:middle;display:-moz-inline-box;display:inline-block;width: 90px;text-align:right;"
+            <span style="vertical-align:middle;display:-moz-inline-box;display:inline-block;width: 30px;text-align:right;"
                   title="行数">行数: </span>
             <input type="text" name="hangshu" value="03" style="width: 20px; height: 30px;">
             </span>
-            <span style="vertical-align:middle;display:-moz-inline-box;display:inline-block;width: 90px;text-align:right;"
+            <span style="vertical-align:middle;display:-moz-inline-box;display:inline-block;width: 30px;text-align:right;"
                   title="列数">列数: </span>
             <input type="text" name="lieshu"  value="03"  style="width: 20px; height: 30px;">
             </span>
-            <span style="vertical-align:middle;display:-moz-inline-box;display:inline-block;width: 90px;text-align:right;">
-          <button onclick="chaxun('zhengxiang')">查询</button>  </span>
+            <span style="vertical-align:middle;display:-moz-inline-box;display:inline-block;width: 75px;text-align:right;"
+                  title="开始指令">开始指令: </span>
+            <input type="text" name="startcom" value="no" style="width: 70px; height: 30px;">
+            </span>
+            <span style="vertical-align:middle;display:-moz-inline-box;display:inline-block;width: 75px;text-align:right;"
+                  title="中间指令">中间指令: </span>
+            <input type="text" name="midcom" value="no" style="width: 70px; height: 30px;">
+            </span>
+            <span style="vertical-align:middle;display:-moz-inline-box;display:inline-block;width: 75px;text-align:right;"
+                  title="结束指令">结束指令: </span>
+            <input type="text" name="endcom"  value="no"  style="width: 70px; height: 30px;">
+            </span>
+
+
+<%--            <span style="vertical-align:middle;display:-moz-inline-box;display:inline-block;width: 90px;text-align:right;">--%>
+          <button onclick="chaxun('zhengxiang')">加载储位</button>  </span>
           <button onclick="chaxun('diaodu')">调度</button>  </span>
         </div>
 
@@ -123,14 +137,30 @@
         var cangku;
         var chuwei;
         var des;
+        var startcom;
+        var midcom;
+        var endcom;
+
         cangku = $('input[name="cangku"]').attr("value");
         chuwei = $('input[name="chuwei"]').attr("value");
         var hangshu = $('input[name="hangshu"]').attr("value") * 1;
         var lieshu = $('input[name="lieshu"]').attr("value") * 1;
         var cengshu = $('input[name="cengshu"]').attr("value");
         des = $('input[name="des"]').attr("value");
+        startcom = $('input[name="startcom"]').attr("value");
+        midcom = $('input[name="midcom"]').attr("value");
+        endcom = $('input[name="endcom"]').attr("value");
         //加载消息
-        var url = "mdBinController.do?getbinallagv&binstore=" + cangku + "&binid=" + chuwei + "&des=" + des+ "&cengshu=" + cengshu+ "&hangshu=" + hangshu+ "&type=" + type;
+        var url = "mdBinController.do?getbinallagv&binstore=" +
+            cangku +
+            "&binid=" + chuwei +
+            "&des=" + des+
+            "&cengshu=" + cengshu+
+            "&hangshu=" + hangshu+
+            "&type=" + type+
+            "&startcom=" + startcom+
+            "&midcom=" + midcom+
+            "&endcom=" + endcom;
         $.ajax({
             url: url,
             type: "GET",
@@ -177,7 +207,7 @@
 
                         for (let i = 1; i < list.length; i++) {
                             messageContent += " <div class='all' href='javascript:void(0);' style='background:" +list[i].colour+"' id='" +list[i].binid+"' onclick='javascript:addtab(\"" + list[i].binid + "\")';return false;'>";
-                            messageContent += list[i].tincount+ " </div> ";
+                            messageContent += list[i].binid+ " </div> ";
                             // tincount = list[i].tincount + 0;
                             // if (tincount > 0) {
                             //     messageContent += " <a class='a01 all' href='javascript:void(0);'  onclick='javascript:addtab(\"" + list[i].des + "\")';return false;'>";

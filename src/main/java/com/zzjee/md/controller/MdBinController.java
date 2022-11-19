@@ -305,6 +305,9 @@ public class MdBinController extends BaseController {
         String type = req.getParameter("type");
         String binFrom = req.getParameter("binid");
         String binTo = req.getParameter("des");
+        String startcom = req.getParameter("startcom");
+        String midcom = req.getParameter("midcom");
+        String endcom = req.getParameter("endcom");
         if ("diaodu".equals(type)) {//调度需要方式指令
 //      异步发送指令
             if(StringUtil.isEmpty(binFrom)){
@@ -321,7 +324,7 @@ public class MdBinController extends BaseController {
                 executor.execute(new Runnable() {
                     @Override
                     public void run() {
-                        runagv(binFrom, binTo);
+                        runagv(binFrom, binTo,startcom,midcom,endcom);
                     }
                 });
             } catch (Exception e) {
@@ -403,7 +406,7 @@ public class MdBinController extends BaseController {
         return j;
     }
 
-    public void runagv(String binfrom, String binto) {
+    public void runagv(String binfrom, String binto, String startcom, String midcom, String endcom) {
 
 
         List<MdBinEntity> mdblistfrom = systemService.findByProperty(MdBinEntity.class, "kuWeiBianMa", binfrom);
@@ -421,6 +424,13 @@ public class MdBinController extends BaseController {
         String hxstepNum = "1";
         xstepNum =  Integer.toString(xStep);
         ystepNum =  Integer.toString(yStep);
+        if(!"no".equals(startcom)){
+            hxstepNum = "1";
+            System.out.println("startcom,startcom:"+startcom);
+            wmsPlcController.run("",startcom,hxstepNum);
+        }
+
+
            if(y0.equals("01")){
                System.out.println("1,runx:"+xstepNum);
                wmsPlcController.run("","runx",xstepNum);
@@ -431,11 +441,16 @@ public class MdBinController extends BaseController {
            }
 
 
-        if(xStep>0 && yStep>0){
+//        if(xStep>0 && yStep>0){
+//            hxstepNum = "1";
+//            System.out.println("3,change:"+hxstepNum);
+//
+//            wmsPlcController.run("","change",hxstepNum);
+//        }
+        if(!"no".equals(midcom)){
             hxstepNum = "1";
-            System.out.println("3,change:"+hxstepNum);
-
-            wmsPlcController.run("","change",hxstepNum);
+            System.out.println("midcom,midcom:"+midcom);
+            wmsPlcController.run("",midcom,hxstepNum);
         }
 
         if(y0.equals("01")){
@@ -446,7 +461,11 @@ public class MdBinController extends BaseController {
 
             wmsPlcController.run("","runx",xstepNum);
         }
-
+        if(!"no".equals(endcom)){
+            hxstepNum = "1";
+            System.out.println("endcom,endcom:"+endcom);
+            wmsPlcController.run("",endcom,hxstepNum);
+        }
     }
 
     /**
