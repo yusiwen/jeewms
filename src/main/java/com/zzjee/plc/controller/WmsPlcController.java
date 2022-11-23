@@ -212,6 +212,11 @@ public class WmsPlcController extends BaseController {
 				System.out.println("connect success");
 			}else{
 				System.out.println("connect error");
+				try{
+					siemensS7Net.ConnectClose();
+				}catch (Exception e){
+					e.printStackTrace();
+				}
 			}
 			String comCons = wmsPlc.getComCons();
 			String query01 = wmsPlc.getQuery01();
