@@ -310,12 +310,12 @@ public class MdBinController extends BaseController {
         String endcom = req.getParameter("endcom");
         if ("diaodu".equals(type)||"diaoduu".equals(type)) {//调度需要方式指令
 //      异步发送指令
-            if (StringUtil.isEmpty(binFrom)) {
+            if (StringUtil.isEmpty(binFrom)&&"diaodu".equals(type)) {
                 j.setMsg("开始储位为空");
                 j.setSuccess(false);
                 return j;
             }
-            if (StringUtil.isEmpty(binTo)) {
+            if (StringUtil.isEmpty(binTo)&&"diaodu".equals(type)) {
                 j.setMsg("结束储位为空");
                 j.setSuccess(false);
                 return j;
