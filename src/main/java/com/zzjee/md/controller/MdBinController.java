@@ -310,12 +310,12 @@ public class MdBinController extends BaseController {
         String endcom = req.getParameter("endcom");
         if ("diaodu".equals(type)) {//调度需要方式指令
 //      异步发送指令
-            if(StringUtil.isEmpty(binFrom)){
+            if (StringUtil.isEmpty(binFrom)) {
                 j.setMsg("开始储位为空");
                 j.setSuccess(false);
                 return j;
             }
-            if(StringUtil.isEmpty(binTo)){
+            if (StringUtil.isEmpty(binTo)) {
                 j.setMsg("结束储位为空");
                 j.setSuccess(false);
                 return j;
@@ -324,7 +324,8 @@ public class MdBinController extends BaseController {
                 executor.execute(new Runnable() {
                     @Override
                     public void run() {
-                        runagv(binFrom, binTo,startcom,midcom,endcom);
+
+                        runagv(binFrom, binTo, startcom, midcom, endcom, type);
                     }
                 });
             } catch (Exception e) {
@@ -406,39 +407,38 @@ public class MdBinController extends BaseController {
         return j;
     }
 
-    public void runagv(String binfrom, String binto, String startcom, String midcom, String endcom) {
+    public void runagv(String binfrom, String binto, String startcom, String midcom, String endcom, String type) {
+        if ("diaodu".equals(type)) {
+            List<MdBinEntity> mdblistfrom = systemService.findByProperty(MdBinEntity.class, "kuWeiBianMa", binfrom);
+            List<MdBinEntity> mdblistto = systemService.findByProperty(MdBinEntity.class, "kuWeiBianMa", binto);
+            MdBinEntity mdBinEntityfrom = mdblistfrom.get(0);
+            MdBinEntity mdBinEntityto = mdblistto.get(0);
+            String x0 = mdBinEntityfrom.getXnode();
+            String x1 = mdBinEntityto.getXnode();
+            int xStep = Integer.parseInt(x1) - Integer.parseInt(x0);
+            String y0 = mdBinEntityfrom.getYnode();
+            String y1 = mdBinEntityto.getYnode();
+            int yStep = Integer.parseInt(y1) - Integer.parseInt(y0);
+            String xstepNum = "1";
+            String ystepNum = "1";
+            String hxstepNum = "1";
+            xstepNum = Integer.toString(xStep);
+            ystepNum = Integer.toString(yStep);
+            if (!"no".equals(startcom) && StringUtil.isNotEmpty(startcom)) {
+                hxstepNum = "1";
+                System.out.println("startcom,startcom:" + startcom);
+                wmsPlcController.run("", startcom, hxstepNum);
+            }
 
 
-        List<MdBinEntity> mdblistfrom = systemService.findByProperty(MdBinEntity.class, "kuWeiBianMa", binfrom);
-        List<MdBinEntity> mdblistto = systemService.findByProperty(MdBinEntity.class, "kuWeiBianMa", binto);
-        MdBinEntity mdBinEntityfrom = mdblistfrom.get(0);
-        MdBinEntity mdBinEntityto = mdblistto.get(0);
-       String x0 = mdBinEntityfrom.getXnode();
-       String x1 = mdBinEntityto.getXnode();
-       int xStep =  Integer.parseInt(x1) - Integer.parseInt(x0) ;
-        String y0 = mdBinEntityfrom.getYnode();
-        String y1 = mdBinEntityto.getYnode();
-        int yStep =  Integer.parseInt(y1) - Integer.parseInt(y0) ;
-        String xstepNum = "1";
-        String ystepNum = "1";
-        String hxstepNum = "1";
-        xstepNum =  Integer.toString(xStep);
-        ystepNum =  Integer.toString(yStep);
-        if(!"no".equals(startcom)&&StringUtil.isNotEmpty(startcom)){
-            hxstepNum = "1";
-            System.out.println("startcom,startcom:"+startcom);
-            wmsPlcController.run("",startcom,hxstepNum);
-        }
+            if (y0.equals("01")) {
+                System.out.println("1,runx:" + xstepNum);
+                wmsPlcController.run("", "runx", xstepNum);
+            } else {
+                System.out.println("2,runy:" + ystepNum);
 
-
-           if(y0.equals("01")){
-               System.out.println("1,runx:"+xstepNum);
-               wmsPlcController.run("","runx",xstepNum);
-           }else{
-               System.out.println("2,runy:"+ystepNum);
-
-               wmsPlcController.run("","runy",ystepNum);
-           }
+                wmsPlcController.run("", "runy", ystepNum);
+            }
 
 
 //        if(xStep>0 && yStep>0){
@@ -447,24 +447,28 @@ public class MdBinController extends BaseController {
 //
 //            wmsPlcController.run("","change",hxstepNum);
 //        }
-        if(!"no".equals(midcom)&&StringUtil.isNotEmpty(midcom)){
-            hxstepNum = "1";
-            System.out.println("midcom,midcom:"+midcom);
-            wmsPlcController.run("",midcom,hxstepNum);
-        }
+            if (!"no".equals(midcom) && StringUtil.isNotEmpty(midcom)) {
+                hxstepNum = "1";
+                System.out.println("midcom,midcom:" + midcom);
+                wmsPlcController.run("", midcom, hxstepNum);
+            }
 
-        if(y0.equals("01")){
-            System.out.println("4,runy:"+ystepNum);
-            wmsPlcController.run("","runy",ystepNum);
-        }else{
-            System.out.println("5,runx:"+xstepNum);
+            if (y0.equals("01")) {
+                System.out.println("4,runy:" + ystepNum);
+                wmsPlcController.run("", "runy", ystepNum);
+            } else {
+                System.out.println("5,runx:" + xstepNum);
 
-            wmsPlcController.run("","runx",xstepNum);
-        }
-        if(!"no".equals(endcom)&&StringUtil.isNotEmpty(endcom)){
-            hxstepNum = "1";
-            System.out.println("endcom,endcom:"+endcom);
-            wmsPlcController.run("",endcom,hxstepNum);
+                wmsPlcController.run("", "runx", xstepNum);
+            }
+            if (!"no".equals(endcom) && StringUtil.isNotEmpty(endcom)) {
+                hxstepNum = "1";
+                System.out.println("endcom,endcom:" + endcom);
+                wmsPlcController.run("", endcom, hxstepNum);
+            }
+        } else {
+            wmsPlcController.runu();
+
         }
     }
 
