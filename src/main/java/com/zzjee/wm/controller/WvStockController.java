@@ -900,7 +900,7 @@ public class WvStockController extends BaseController {
     public ResponseEntity<?> list(@RequestParam(value = "username", required = false) String username,
                                   @RequestParam(value = "searchstr", required = false) String searchstr,
                                   @RequestParam(value = "searchstr2", required = false) String searchstr2,
-                                  @RequestParam(value = "searchstr2", required = false) String searchstr3) {
+                                  @RequestParam(value = "searchstr3", required = false) String searchstr3) {
 //		return listWvGis;
 
 
