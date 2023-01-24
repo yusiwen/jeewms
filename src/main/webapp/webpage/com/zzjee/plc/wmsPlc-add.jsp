@@ -1,206 +1,222 @@
 <%@ page language="java" import="java.util.*" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@include file="/context/mytags.jsp"%>
 <!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+<html>
+ <head>
   <title>PLC指令</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="online/template/ledefault/css/vendor.css">
-  <link rel="stylesheet" href="online/template/ledefault/css/bootstrap-theme.css">
-  <link rel="stylesheet" href="online/template/ledefault/css/bootstrap.css">
-  <link rel="stylesheet" href="online/template/ledefault/css/app.css">
-  
-  <link rel="stylesheet" href="plug-in/Validform/css/metrole/style.css" type="text/css"/>
-  <link rel="stylesheet" href="plug-in/Validform/css/metrole/tablefrom.css" type="text/css"/>
-  
-  <script type="text/javascript" src="plug-in/jquery/jquery-1.8.3.js"></script>
-  <script type="text/javascript" src="plug-in/tools/dataformat.js"></script>
-  <script type="text/javascript" src="plug-in/easyui/jquery.easyui.min.1.3.2.js"></script>
-  <script type="text/javascript" src="plug-in/easyui/locale/zh-cn.js"></script>
-  <script type="text/javascript" src="plug-in/tools/syUtil.js"></script>
-  <script type="text/javascript" src="plug-in/My97DatePicker/WdatePicker.js"></script>
-  <script type="text/javascript" src="plug-in/lhgDialog/lhgdialog.min.js"></script>
-  <script type="text/javascript" src="plug-in/tools/curdtools_zh-cn.js"></script>
-  <script type="text/javascript" src="plug-in/tools/easyuiextend.js"></script>
-  <script type="text/javascript" src="plug-in/Validform/js/Validform_v5.3.1_min_zh-cn.js"></script>
-  <script type="text/javascript" src="plug-in/Validform/js/Validform_Datatype_zh-cn.js"></script>
-  <script type="text/javascript" src="plug-in/Validform/js/datatype_zh-cn.js"></script>
-  <script type="text/javascript" src="plug-in/Validform/plugin/passwordStrength/passwordStrength-min.js"></script>
-  <script type="text/javascript"  charset="utf-8" src="plug-in/ueditor/ueditor.config.js"></script>
-  <script type="text/javascript"  charset="utf-8" src="plug-in/ueditor/ueditor.all.min.js"></script>
-								
-   <script type="text/javascript">
+  <t:base type="jquery,easyui,tools,DatePicker"></t:base>
+  <script type="text/javascript">
   //编写自定义JS代码
   </script>
-</head>
-
+ </head>
  <body>
-
-	<t:formvalid formid="formobj" dialog="true" usePlugin="password" layout="table" action="wmsPlcController.do?doAdd" tiptype="1" >
-			<input type="hidden" id="btn_sub" class="btn_sub"/>
-			<input type="hidden" id="id" name="id"/>
-			<div class="tab-wrapper">
-			    <!-- tab -->
-			    <ul class="nav nav-tabs">
-			      <li role="presentation" class="active"><a href="javascript:void(0);">PLC指令</a></li>
-			    </ul>
-			    <!-- tab内容 -->
-			    <div class="con-wrapper" id="con-wrapper1" style="display: block;">
-			      <div class="row form-wrapper">
-							<div class="row show-grid">
-			          <div class="col-xs-3 text-center">
-			          	<b>PLCIP：</b>
-			          </div>
-			          <div class="col-xs-3">
-								<input id="plcIp" name="plcIp" type="text" class="form-control" 
-									ignore="ignore"
-								 />
-						<span class="Validform_checktip" style="float:left;height:0px;"></span>
-						<label class="Validform_label" style="display: none">PLCIP</label>
-			          </div>
-						</div>
-			          
-			        
-							<div class="row show-grid">
-			          <div class="col-xs-3 text-center">
-			          	<b>PLC端口：</b>
-			          </div>
-			          <div class="col-xs-3">
-								<input id="plcPort" name="plcPort" type="text" class="form-control" 
-									ignore="ignore"
-								 />
-						<span class="Validform_checktip" style="float:left;height:0px;"></span>
-						<label class="Validform_label" style="display: none">PLC端口</label>
-			          </div>
-						</div>
-			          
-			        
-							<div class="row show-grid">
-			          <div class="col-xs-3 text-center">
-			          	<b>PLC型号：</b>
-			          </div>
-			          <div class="col-xs-3">
-								<input id="plcType" name="plcType" type="text" class="form-control" 
-									ignore="ignore"
-								 />
-						<span class="Validform_checktip" style="float:left;height:0px;"></span>
-						<label class="Validform_label" style="display: none">PLC型号</label>
-			          </div>
-						</div>
-			          
-			        
-							<div class="row show-grid">
-			          <div class="col-xs-3 text-center">
-			          	<b>指令备注：</b>
-			          </div>
-			          <div class="col-xs-3">
-								<input id="comRemark" name="comRemark" type="text" class="form-control" 
-									ignore="ignore"
-								 />
-						<span class="Validform_checktip" style="float:left;height:0px;"></span>
-						<label class="Validform_label" style="display: none">指令备注</label>
-			          </div>
-						</div>
-			          
-			        
-							<div class="row show-grid">
-			          <div class="col-xs-3 text-center">
-			          	<b>执行时间：</b>
-			          </div>
-			          <div class="col-xs-3">
-								<input id="comTime" name="comTime" type="text" class="form-control" 
-									ignore="ignore"
-								 />
-						<span class="Validform_checktip" style="float:left;height:0px;"></span>
-						<label class="Validform_label" style="display: none">执行时间</label>
-			          </div>
-						</div>
-			          
-			        
-							<div class="row show-grid">
-			          <div class="col-xs-3 text-center">
-			          	<b>执行顺序：</b>
-			          </div>
-			          <div class="col-xs-3">
-								<input id="comSeq" name="comSeq" type="text" class="form-control" 
-									ignore="ignore"
-								 />
-						<span class="Validform_checktip" style="float:left;height:0px;"></span>
-						<label class="Validform_label" style="display: none">执行顺序</label>
-			          </div>
-						</div>
-			          
-			        
-							<div class="row show-grid">
-			          <div class="col-xs-3 text-center">
-			          	<b>指令集：</b>
-			          </div>
-			          <div class="col-xs-3">
-						  	 	<textarea id="comCons" class="form-control" rows="6" 
-									ignore="ignore"
-						  	 	name="comCons"></textarea>
-						<span class="Validform_checktip" style="float:left;height:0px;"></span>
-						<label class="Validform_label" style="display: none">指令集</label>
-			          </div>
-						</div>
-			          
-			        
-							<div class="row show-grid">
-			          <div class="col-xs-3 text-center">
-			          	<b>备用1：</b>
-			          </div>
-			          <div class="col-xs-3">
-								<input id="remark1" name="remark1" type="text" class="form-control" 
-									ignore="ignore"
-								 />
-						<span class="Validform_checktip" style="float:left;height:0px;"></span>
-						<label class="Validform_label" style="display: none">备用1</label>
-			          </div>
-						</div>
-			          
-			        
-
-			       
-			          <div class="row" id = "sub_tr" style="display: none;">
-				        <div class="col-xs-12 layout-header">
-				          <div class="col-xs-6"></div>
-				          <div class="col-xs-6"><button type="button" onclick="neibuClick();" class="btn btn-default">提交</button></div>
-				        </div>
-				      </div>
-			     </div>
-			   </div>
-			   
-			   <div class="con-wrapper" id="con-wrapper2" style="display: block;"></div>
-			 </div>
-  </t:formvalid>
-
-<script type="text/javascript">
-   $(function(){
-    //查看模式情况下,删除和上传附件功能禁止使用
-	if(location.href.indexOf("load=detail")!=-1){
-		$(".jeecgDetail").hide();
-	}
-	
-	if(location.href.indexOf("mode=read")!=-1){
-		//查看模式控件禁用
-		$("#formobj").find(":input").attr("disabled","disabled");
-	}
-	if(location.href.indexOf("mode=onbutton")!=-1){
-		//其他模式显示提交按钮
-		$("#sub_tr").show();
-	}
-   });
-
-  var neibuClickFlag = false;
-  function neibuClick() {
-	  neibuClickFlag = true; 
-	  $('#btn_sub').trigger('click');
-  }
-
-</script>
+  <t:formvalid formid="formobj" dialog="true" usePlugin="password" layout="table" action="wmsPlcController.do?doAdd" >
+		<input id="id" name="id" type="hidden" value="${wmsPlcPage.id }"/>
+		<input id="createName" name="createName" type="hidden" value="${wmsPlcPage.createName }"/>
+		<input id="createBy" name="createBy" type="hidden" value="${wmsPlcPage.createBy }"/>
+		<input id="createDate" name="createDate" type="hidden" value="${wmsPlcPage.createDate }"/>
+		<input id="updateName" name="updateName" type="hidden" value="${wmsPlcPage.updateName }"/>
+		<input id="updateBy" name="updateBy" type="hidden" value="${wmsPlcPage.updateBy }"/>
+		<input id="updateDate" name="updateDate" type="hidden" value="${wmsPlcPage.updateDate }"/>
+		<input id="sysOrgCode" name="sysOrgCode" type="hidden" value="${wmsPlcPage.sysOrgCode }"/>
+		<input id="sysCompanyCode" name="sysCompanyCode" type="hidden" value="${wmsPlcPage.sysCompanyCode }"/>
+		<input id="bpmStatus" name="bpmStatus" type="hidden" value="${wmsPlcPage.bpmStatus }"/>
+		<table style="width: 600px;" cellpadding="0" cellspacing="1" class="formtable">
+				<tr>
+					<td align="right">
+						<label class="Validform_label">
+							PLCIP:
+						</label>
+					</td>
+					<td class="value">
+					     	 <input id="plcIp" name="plcIp" type="text" style="width: 150px" class="inputxt" 
+					     	  
+					     	  ignore="ignore"
+					     	  />
+							<span class="Validform_checktip"></span>
+							<label class="Validform_label" style="display: none;">PLCIP</label>
+						</td>
+				<tr>
+					<td align="right">
+						<label class="Validform_label">
+							PLC端口:
+						</label>
+					</td>
+					<td class="value">
+					     	 <input id="plcPort" name="plcPort" type="text" style="width: 150px" class="inputxt" 
+					     	  
+					     	  ignore="ignore"
+					     	  />
+							<span class="Validform_checktip"></span>
+							<label class="Validform_label" style="display: none;">PLC端口</label>
+						</td>
+					</tr>
+				<tr>
+					<td align="right">
+						<label class="Validform_label">
+							PLC型号:
+						</label>
+					</td>
+					<td class="value">
+					     	 <input id="plcType" name="plcType" type="text" style="width: 150px" class="inputxt" 
+					     	  
+					     	  ignore="ignore"
+					     	  />
+							<span class="Validform_checktip"></span>
+							<label class="Validform_label" style="display: none;">PLC型号</label>
+						</td>
+				<tr>
+					<td align="right">
+						<label class="Validform_label">
+							指令备注:
+						</label>
+					</td>
+					<td class="value">
+					     	 <input id="comRemark" name="comRemark" type="text" style="width: 150px" class="inputxt" 
+					     	  
+					     	  ignore="ignore"
+					     	  />
+							<span class="Validform_checktip"></span>
+							<label class="Validform_label" style="display: none;">指令备注</label>
+						</td>
+					</tr>
+				<tr>
+					<td align="right">
+						<label class="Validform_label">
+							执行时间:
+						</label>
+					</td>
+					<td class="value">
+					     	 <input id="comTime" name="comTime" type="text" style="width: 150px" class="inputxt" 
+					     	  
+					     	  ignore="ignore"
+					     	  />
+							<span class="Validform_checktip"></span>
+							<label class="Validform_label" style="display: none;">执行时间</label>
+						</td>
+				<tr>
+					<td align="right">
+						<label class="Validform_label">
+							执行顺序:
+						</label>
+					</td>
+					<td class="value">
+					     	 <input id="comSeq" name="comSeq" type="text" style="width: 150px" class="inputxt" 
+					     	  
+					     	  ignore="ignore"
+					     	  />
+							<span class="Validform_checktip"></span>
+							<label class="Validform_label" style="display: none;">执行顺序</label>
+						</td>
+					</tr>
+				<tr>
+					<td align="right">
+						<label class="Validform_label">
+							指令集:
+						</label>
+					</td>
+					<td class="value">
+						  	 <textarea style="width:600px;" class="inputxt" rows="6" id="comCons" name="comCons" 
+						  	 ignore="ignore"
+						  	 ></textarea>
+							<span class="Validform_checktip"></span>
+							<label class="Validform_label" style="display: none;">指令集</label>
+						</td>
+				<tr>
+					<td align="right">
+						<label class="Validform_label">
+							备用1:
+						</label>
+					</td>
+					<td class="value">
+					     	 <input id="remark1" name="remark1" type="text" style="width: 150px" class="inputxt" 
+					     	  
+					     	  ignore="ignore"
+					     	  />
+							<span class="Validform_checktip"></span>
+							<label class="Validform_label" style="display: none;">备用1</label>
+						</td>
+					</tr>
+				<tr>
+					<td align="right">
+						<label class="Validform_label">
+							指令编号:
+						</label>
+					</td>
+					<td class="value">
+					     	 <input id="comNo" name="comNo" type="text" style="width: 150px" class="inputxt" 
+					     	  
+					     	  ignore="ignore"
+					     	  />
+							<span class="Validform_checktip"></span>
+							<label class="Validform_label" style="display: none;">指令编号</label>
+						</td>
+				<tr>
+					<td align="right">
+						<label class="Validform_label">
+							单步参数1:
+						</label>
+					</td>
+					<td class="value">
+					     	 <input id="query01" name="query01" type="text" style="width: 150px" class="inputxt" 
+					     	  
+					     	  ignore="ignore"
+					     	  />
+							<span class="Validform_checktip"></span>
+							<label class="Validform_label" style="display: none;">单步参数1</label>
+						</td>
+					</tr>
+				<tr>
+					<td align="right">
+						<label class="Validform_label">
+							单步参数2:
+						</label>
+					</td>
+					<td class="value">
+					     	 <input id="query02" name="query02" type="text" style="width: 150px" class="inputxt" 
+					     	  
+					     	  ignore="ignore"
+					     	  />
+							<span class="Validform_checktip"></span>
+							<label class="Validform_label" style="display: none;">单步参数2</label>
+						</td>
+				<tr>
+					<td align="right">
+						<label class="Validform_label">
+							单步时间:
+						</label>
+					</td>
+					<td class="value">
+					     	 <input id="setpTime" name="setpTime" type="text" style="width: 150px" class="inputxt" 
+					     	  
+					     	  ignore="ignore"
+					     	  />
+							<span class="Validform_checktip"></span>
+							<label class="Validform_label" style="display: none;">单步时间</label>
+						</td>
+					</tr>
+				<tr>
+					<td align="right">
+						<label class="Validform_label">
+							步数:
+						</label>
+					</td>
+					<td class="value">
+					     	 <input id="setpNum" name="setpNum" type="text" style="width: 150px" class="inputxt" 
+					     	  
+					     	  ignore="ignore"
+					     	  />
+							<span class="Validform_checktip"></span>
+							<label class="Validform_label" style="display: none;">步数</label>
+						</td>
+				<td align="right">
+					<label class="Validform_label">
+					</label>
+				</td>
+				<td class="value">
+				</td>
+					</tr>
+			</table>
+		</t:formvalid>
  </body>
-<script src = "webpage/com/zzjee/plc/wmsPlc.js"></script>		
-</html>
+  <script src = "webpage/com/zzjee/plc/wmsPlc.js"></script>		
