@@ -62,6 +62,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import static com.xiaoleilu.hutool.date.DateTime.now;
+import static org.jeecgframework.web.system.sms.util.Constants.wm_sta6;
 
 /**
  * @Title: Controller
@@ -862,6 +863,7 @@ public class WmToDownGoodsController extends BaseController {
 			}
 			if ("fh".equals(type)){
 				wmOmNoticeHEntity.setFhUser(userName);
+				wmOmNoticeHEntity.setOmSta(wm_sta6);
 			}
 			systemService.updateEntitie(wmOmNoticeHEntity);
 		}catch (Exception e){
