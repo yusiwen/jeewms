@@ -7,7 +7,7 @@
     String lhgdialogTheme = SysThemesUtil.getLhgdialogTheme(sysTheme);
 %>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-cn">
 <head>
     <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
     <meta charset="utf-8"/>
