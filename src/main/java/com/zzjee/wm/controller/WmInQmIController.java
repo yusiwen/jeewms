@@ -465,7 +465,7 @@ public class WmInQmIController extends BaseController {
      */
     @RequestMapping(params = "doAdd")
     @ResponseBody
-    public AjaxJson doAdd(WmInQmIEntity wmInQmI, HttpServletRequest request) {
+    public AjaxJson doAdd(WmInQmIEntity wmInQmI) {
         String message = null;
         AjaxJson j = new AjaxJson();
         String flag = "N";
@@ -510,65 +510,18 @@ public class WmInQmIController extends BaseController {
                 j.setMsg(message);
                 return j;
             }
-            String flagchsh = "y";
-            try {
-                WmImNoticeIEntity wmImNoticeIEntity = systemService.get(WmImNoticeIEntity.class, wmInQmI.getImNoticeItem());
-                if (wmImNoticeIEntity != null) {
 
-
-
-                    if ("n".equals(ResourceUtil.getConfigByName("chaoshou"))) {
-                        Long weiq = Long.parseLong(wmImNoticeIEntity
-                                .getGoodsCount())
-                                - Long.parseLong(wmImNoticeIEntity
-                                .getGoodsQmCount());
-                        if (Long.parseLong(wmInQmI.getQmOkQuat()) > weiq) {
-                            flagchsh = "n";
-                        }
-                    }
-
-                }
-            } catch (Exception e) {
-
-            }
-
-            if ("n".equals(flagchsh)) {
-                j.setSuccess(false);
-                message = "不允许超收";
-                j.setMsg(message);
-                return j;
-            }
 
 
             WmImNoticeHEntity wmImNoticeHEntity = systemService
                     .findUniqueByProperty(WmImNoticeHEntity.class, "noticeId",
                             wmInQmI.getImNoticeId());
-            WmImNoticeIEntity wmimnotice = new WmImNoticeIEntity();
             if (wmImNoticeHEntity != null) {
+                wmInQmI.setCusCode(wmImNoticeHEntity.getCusCode());
+                wmInQmI.setImCusCode(wmImNoticeHEntity.getImCusCode());
+
                 flag = "X";
-                try {
-                    wmInQmI.setCusCode(wmImNoticeHEntity.getCusCode());
-                    String hql0 = "from WmImNoticeIEntity where 1 = 1 AND imNoticeId = ? ";
-                    List<WmImNoticeIEntity> wmImNoticeIEntityList = systemService
-                            .findHql(hql0, wmImNoticeHEntity.getNoticeId());// 获取行项目
-                    for (WmImNoticeIEntity wmImNoticeIEntity : wmImNoticeIEntityList) {
-                        if (wmImNoticeIEntity.getGoodsCode().equals(
-                                wmInQmI.getGoodsId())) {
-                            double weiq = Double.parseDouble(wmImNoticeIEntity
-                                    .getGoodsCount())
-                                    - Double.parseDouble(wmImNoticeIEntity
-                                    .getGoodsQmCount());
-                            if (Double.parseDouble(wmInQmI.getQmOkQuat()) <= weiq) {
-                                wmimnotice = wmImNoticeIEntity;
-                                flag = "X";
-                                break;
-                            }
-                        }
 
-                    }
-                } catch (Exception e) {
-
-                }
 
             } else {
                 j.setSuccess(false);
@@ -600,10 +553,37 @@ public class WmInQmIController extends BaseController {
 
                     wmInQmI.setGoodsUnit(mvgoods.getShlDanWei());
                 }
-                wmInQmI.setImNoticeItem(wmimnotice.getId());
-                wmInQmI.setImQuat(wmimnotice.getGoodsCount());
-                wmInQmI.setImCusCode(wmimnotice.getImCusCode());
-//				wmInQmI.setBinId(wmInQmI.getImNoticeId());
+
+                String flagchsh = "y";
+
+                WmImNoticeIEntity wmImNoticeIEntity = systemService.get(WmImNoticeIEntity.class, wmInQmI.getImNoticeItem());
+                if (wmImNoticeIEntity != null) {
+                    wmInQmI.setImQuat(wmImNoticeIEntity.getGoodsCount());
+                    if ("n".equals(ResourceUtil.getConfigByName("chaoshou"))) {
+                        Double weiq = Double.parseDouble(wmImNoticeIEntity
+                                .getGoodsCount())
+                                - Double.parseDouble(wmImNoticeIEntity
+                                .getGoodsQmCount());
+                        if (Double.parseDouble(wmInQmI.getQmOkQuat()) > weiq) {
+                            flagchsh = "n";
+                        }
+                    }
+
+                }
+
+
+                if ("n".equals(flagchsh)) {
+                    j.setSuccess(false);
+                    message = "不允许超收";
+                    j.setMsg(message);
+                    return j;
+                }
+
+                Double GoodsQmCount = 0.00;
+                GoodsQmCount = Double.parseDouble(wmImNoticeIEntity
+                        .getGoodsQmCount()) + Double.parseDouble(wmInQmI.getQmOkQuat());
+                wmImNoticeIEntity.setGoodsQmCount(GoodsQmCount.toString());
+                systemService.updateEntitie(wmImNoticeIEntity);
                 String id = wmInQmIService.save(wmInQmI).toString();
                 if ("on".equals(ResourceUtil.getConfigByName("webonestepup")) && StringUtil.isNotEmpty(wmInQmI.getBinId())) {
                     toup(id,"","","");
@@ -637,14 +617,6 @@ public class WmInQmIController extends BaseController {
                     wminqm.setGoodsId(jeecgDemo.getGoodsCode());
                     wminqm.setProData(DateUtils.date2Str(jeecgDemo.getGoodsPrdData(), DateUtils.date_sdf));
 
-
-                    if(!wmUtil.checkys(wminqm.getGoodsId(),wminqm.getProData())){
-                        j.setSuccess(false);
-                        message = "超过允收期";
-                        j.setMsg(message);
-                        return j;
-                    }
-
                     wminqm.setImNoticeId(jeecgDemo.getImNoticeId());
                     wminqm.setGoodsName(jeecgDemo.getGoodsName());
                     wminqm.setBinId(jeecgDemo.getBinPlan());
@@ -655,7 +627,7 @@ public class WmInQmIController extends BaseController {
                         wminqm.setGoodsBatch(wminqm.getProData());
                     }
                     wminqm.setBinSta("N");
-                    this.doAdd(wminqm, request);
+                    this.doAdd(wminqm);
 
                 }
             }
@@ -794,6 +766,7 @@ public class WmInQmIController extends BaseController {
                 req.getParameter("id").toString());
         wmInQmI.setImNoticeId(WmImNoticeI.getImNoticeId());
         wmInQmI.setGoodsId(WmImNoticeI.getGoodsCode());
+        wmInQmI.setImNoticeItem(WmImNoticeI.getId());
         Long quat = (long) 0;
         Long quat1 = (long) 0;
         try {
@@ -1109,8 +1082,6 @@ public class WmInQmIController extends BaseController {
                     HttpStatus.BAD_REQUEST);
         }
 
-        // 保存
-        String flag = "y";
         try {
             WmImNoticeIEntity wmImNoticeIEntity = systemService.get(WmImNoticeIEntity.class, wmInQmI.getImNoticeItem());
             if (wmImNoticeIEntity != null) {
@@ -1122,7 +1093,8 @@ public class WmInQmIController extends BaseController {
                 wmInQmI.setBaseGoodscount(wmInQmI.getQmOkQuat());
                 wmInQmI.setBaseQmcount(wmInQmI.getQmOkQuat());
                 wmInQmI.setImQuat(wmImNoticeIEntity.getGoodsCount());
-                try {
+                wmInQmI.setImNoticeItem(wmImNoticeIEntity.getId());
+                 try {
                     WmImNoticeHEntity wmImNoticeHEntity = systemService.findUniqueByProperty(WmImNoticeHEntity.class, "noticeId", wmImNoticeIEntity.getImNoticeId());
                     wmInQmI.setCusCode(wmImNoticeHEntity.getCusCode());
                     wmInQmI.setImCusCode(wmImNoticeHEntity.getImCusCode());
@@ -1138,66 +1110,13 @@ public class WmInQmIController extends BaseController {
                 } catch (Exception e) {
 
                 }
-               if(!wmUtil.checkys(wmImNoticeIEntity.getGoodsCode(),wmInQmI.getProData())){
-                   D0.setErrorMsg("超过允收期");
-                   D0.setOK(false);
-                   return new ResponseEntity(D0, HttpStatus.OK);
-               }
-                if ("n".equals(ResourceUtil.getConfigByName("chaoshou"))) {
-                    Double weiq = Double.parseDouble(wmImNoticeIEntity
-                            .getGoodsCount())
-                            - Double.parseDouble(wmImNoticeIEntity
-                            .getGoodsQmCount());
-                    if (Double.parseDouble(wmInQmI.getQmOkQuat()) > weiq) {
-                        flag = "n";
-                    }
-                }
+
+
             }
             wmInQmI.setCreateDate(DateUtils.getDate());
             wmInQmI.setBinSta("N");
-            if ("no".equals(ResourceUtil.getConfigByName("usetuopan"))) {
-                wmInQmI.setTinId(ResourceUtil.getConfigByName("tuopanma"));
-            } else {
-                if (StringUtils.isEmpty(wmInQmI.getTinId())) {
-                    D0.setErrorMsg("请填写托盘");
-                    D0.setOK(false);
-                    return new ResponseEntity(D0, HttpStatus.OK);
-                }
-            }
-            if (flag.equals("n")) {
-                D0.setErrorMsg("不允许超收");
-                D0.setOK(false);
-            } else {
-                try {
-                    MvGoodsEntity mvgoods = systemService.findUniqueByProperty(
-                            MvGoodsEntity.class, "goodsCode", wmImNoticeIEntity.getGoodsCode());
-                    if (mvgoods != null) {
-                        wmInQmI.setGoodsName(mvgoods.getGoodsName());
-                        if (StringUtil.isNotEmpty(wmInQmI.getItemText())) {
-                            MdGoodsEntity mdGoodsEntity = systemService.findUniqueByProperty(
-                                    MdGoodsEntity.class, "shpBianMa", mvgoods.getGoodsId());
-                            if (mdGoodsEntity != null) {
-                                mdGoodsEntity.setShpTiaoMa(wmInQmI.getItemText());//更新商品条码
-                                systemService.updateEntitie(mdGoodsEntity);
-                            }
-                        }
 
-                        try {
-                            wmInQmI.setTinTj(String.valueOf(Double.parseDouble(mvgoods
-                                    .getTiJiCm())
-                                    * Double.parseDouble(wmInQmI.getQmOkQuat())));
-                            wmInQmI.setTinZhl(String.valueOf(Double.parseDouble(mvgoods
-                                    .getZhlKg())
-                                    * Double.parseDouble(wmInQmI.getQmOkQuat())));
-                        } catch (Exception e) {
-                            // TODO: handle exception
-                        }
 
-                        wmInQmI.setGoodsUnit(mvgoods.getShlDanWei());
-
-                    }
-                } catch (Exception e) {
-                }
                 if (StringUtil.isNotEmpty(wmInQmI.getProData())) {//8位日期转yyyy-mm-dd
                     try {
                         if (StringUtil.getStringLen(wmInQmI.getProData()) == 8) {
@@ -1214,19 +1133,17 @@ public class WmInQmIController extends BaseController {
                 if (user != null) {
                     wmInQmI.setCreateName(user.getRealName());
                 }
-                String id = wmInQmIService.save(wmInQmI).toString();
-                if ("on".equals(ResourceUtil.getConfigByName("onestepup")) && StringUtil.isNotEmpty(wmInQmI.getBinId())) {
-                    toup(id,"","","");
-                }
-                D0.setOK(true);
-            }
+
+                AjaxJson ajaxJson = this.doAdd(wmInQmI);
+
+                D0.setOK(ajaxJson.isSuccess());
+            D0.setErrorMsg(ajaxJson.getMsg());
         } catch (Exception e) {
             D0.setOK(false);
             e.printStackTrace();
             return new ResponseEntity(HttpStatus.NO_CONTENT);
         }
-        // 按照Restful风格约定，创建指向新任务的url, 也可以直接返回id或对象.
-//		String id = wmInQmI.getId();
+
         return new ResponseEntity(D0, HttpStatus.OK);
     }
 

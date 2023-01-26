@@ -77,6 +77,7 @@ window.onload = function() {
 	<%--<t:formvalid formid="formobj" dialog="true" usePlugin="password"   layout="div" >--%>
 			<input type="hidden" id="btn_sub" class="btn_sub"/>
 			<input type="hidden" id="id" name="id"/>
+			<input type="hidden" id="imNoticeItem" name="imNoticeItem" value='${wmInQmIPage.imNoticeItem}'/>
 			<input type="hidden" id="binSta" name="binSta" value="N"/>
 
 			<div class="tab-wrapper">
