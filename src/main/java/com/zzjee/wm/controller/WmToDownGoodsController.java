@@ -825,7 +825,6 @@ public class WmToDownGoodsController extends BaseController {
 									UriComponentsBuilder uriBuilder) {
 		// 调用JSR303 Bean Validator进行校验，如果出错返回含400错误码及json格式的错误信息.
 		ResultDO D0 = new  ResultDO();
-
 		WmToDownGoodsEntity wmToDownGoods  = (WmToDownGoodsEntity)JSONHelper.json2Object(wmToDownGoodsstr,WmToDownGoodsEntity.class);
 		WmToDownGoodsEntity t = wmToDownGoodsService.get(WmToDownGoodsEntity.class,wmToDownGoods.getId());
 		// 保存
@@ -833,11 +832,7 @@ public class WmToDownGoodsController extends BaseController {
 			MyBeanUtils.copyBeanNotNull2Bean(wmToDownGoods, t);
 			t.setDownSta(Constants.wm_sta5);
 			t.setUpdateDate(now());
-
-
-
 			wmToDownGoodsService.saveOrUpdate(t);
-
 			try{
 				String orderId = t.getOrderId();
 				String type = "fh";
@@ -851,7 +846,6 @@ public class WmToDownGoodsController extends BaseController {
 			e.printStackTrace();
 			D0.setOK(false);
 		}
-
 		// 按Restful约定，返回204状态码, 无内容. 也可以返回200状态码.
 		return new ResponseEntity(D0, HttpStatus.OK);
 	}
