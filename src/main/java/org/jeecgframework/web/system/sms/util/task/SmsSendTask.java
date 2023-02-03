@@ -27,9 +27,9 @@ import com.zzjee.wm.entity.WmToUpGoodsEntity;
 
 /**
  *
- * @ClassName:SmsSendTask 所有信息的发送定时任务类
- * @Description: TODO
- * @author Comsys-skyCc cmzcheng@gmail.com
+ * @ClassName:SmsSendTask
+ * @Description: 生成下架任务
+ * @author
  * @date 2014-11-13 下午5:06:34
  *
  */
@@ -70,7 +70,7 @@ public class SmsSendTask {
 			// TODO: handle exception
 		}
 
-		try {//查找储位 设置批量收货基本数量
+		try {//收货推荐储位
 			List<WmInQmIEntity> WmInQmlist = new ArrayList<WmInQmIEntity>();
 			hql = null;
 			hql = "from WmInQmIEntity t where t.binSta= 'N' and (t.binId is null or t.binId = '' )  ";

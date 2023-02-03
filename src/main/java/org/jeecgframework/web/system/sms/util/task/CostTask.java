@@ -26,8 +26,8 @@ import com.zzjee.md.entity.MdGoodsEntity;
 import com.zzjee.md.entity.MvGoodsEntity;
 
 /**
- * @ClassName:SmsSendTask 所有信息的发送定时任务类
- * @Description: TODO
+ * @ClassName:SmsSendTask
+ * @Description: 根据计费配置，生成费用详情
  * @date 2014-11-13 下午5:06:34
  */
 @Service("costTask")
