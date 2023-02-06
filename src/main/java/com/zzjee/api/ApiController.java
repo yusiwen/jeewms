@@ -358,9 +358,7 @@ public class ApiController {
         }
         TSUser user = userService.checkUserExits(tsBaseUser.getUserName(), tsBaseUser.getPassword());
         if (user == null) {
-            D0.setErrorMsg("用户账号密码错误!");
-            D0.setOK(false);
-            return ResultApi.error("获取TOKEN,账号密码错误[{}]!");
+            return ResultApi.error("获取TOKEN,账号密码错误!");
         }
         return ResultApi.OK(user);
     }
