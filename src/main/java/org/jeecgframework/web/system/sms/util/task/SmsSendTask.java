@@ -24,6 +24,7 @@ import com.zzjee.wm.entity.WmOmQmIEntity;
 import com.zzjee.wm.entity.WmToDownGoodsEntity;
 import com.zzjee.wm.entity.WmToMoveGoodsEntity;
 import com.zzjee.wm.entity.WmToUpGoodsEntity;
+import org.springframework.util.CollectionUtils;
 
 /**
  *
@@ -88,16 +89,12 @@ public class SmsSendTask {
 							+ " ' and t.bin_sta = 'N' and  ( t.bin_id <> '' or t.bin_id <> null)  limit 1";
 					Map<String, Object> binMap  = systemService.findOneForJdbc(sql);
 					if(binMap==null){
-						if(wmInQmIEntity.getTinTj()==null){
-							wmInQmIEntity.setTinTj("0");
+						if(StringUtil.isEmpty(wmInQmIEntity.getTinTj())){
+							wmInQmIEntity.setTinTj("1");
 						}
 						String zuidatiji = null;
 						try {
-							if(StringUtil.isEmpty( wmInQmIEntity.getTinTj())){
-								zuidatiji = "1";
-							}else{
 								zuidatiji = wmInQmIEntity.getTinTj();
-							}
 						} catch (Exception e) {
 							zuidatiji = "1";
 						}
@@ -111,17 +108,14 @@ public class SmsSendTask {
 						}catch (Exception e){
 
 						}
-
 						String hqllastbin = "from WmInQmIEntity t where t.binSta= 'Y' and (t.binId is not null or t.binId <>  '' )  and imNoticeItem = ?  order by updateDate desc ";
-
 						List<WmInQmIEntity> WmInQmbinlist = systemService.findHql(hqllastbin,wmInQmIEntity.getImNoticeItem());
-
 						String lastbin = ""; //本单上一个储位
 						String lastbinfenzu = "";   //本单上一个储位分组
 						if(WmInQmbinlist!=null&&WmInQmbinlist.size()>0){
 							lastbin = WmInQmbinlist.get(0).getBinId();
 							List<MdBinEntity> mdblist =	systemService.findByProperty(MdBinEntity.class, "kuWeiBianMa", lastbin);
-                            if(mdblist!=null&&mdblist.size()>0){
+                            if(!CollectionUtils.isEmpty(mdblist) ){
 								lastbinfenzu = mdblist.get(0).getZuiDaMianJi();
 							}
 						}
