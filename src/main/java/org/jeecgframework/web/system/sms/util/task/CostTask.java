@@ -29,14 +29,10 @@ import java.util.Map;
  */
 @Service("costTask")
 public class CostTask {
-
-    @Autowired
-    private TSSmsServiceI tSSmsService;
     @Autowired
     private SystemService systemService;
     @Autowired
     private WmCusCostHServiceI wmCusCostHService;
-    /* @Scheduled(cron="0 0 01 * * ?") */
     public void run() {
         long start = System.currentTimeMillis();
         String run = ResourceUtil.getConfigByName("timerun");
