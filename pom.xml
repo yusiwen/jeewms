@@ -816,13 +816,13 @@
 		</dependency>
 
 		 <!--jeecg plugin-->
-		<dependency>
-			<groupId>org.p3framework</groupId>
-			<artifactId>jeecg-p3-core</artifactId>
-			<version>1.1.2</version>
-<!--			<scope>system</scope>-->
-<!--			<systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/jeecg-p3-core-1.1.2.jar</systemPath>-->
-		</dependency>
+<!--		<dependency>-->
+<!--			<groupId>org.p3framework</groupId>-->
+<!--			<artifactId>jeecg-p3-core</artifactId>-->
+<!--			<version>1.1.2</version>-->
+<!--&lt;!&ndash;			<scope>system</scope>&ndash;&gt;-->
+<!--&lt;!&ndash;			<systemPath>${project.basedir}/src/main/webapp/WEB-INF/lib/jeecg-p3-core-1.1.2.jar</systemPath>&ndash;&gt;-->
+<!--		</dependency>-->
 
 		<dependency>
 			<groupId>com.github.abel533</groupId>
