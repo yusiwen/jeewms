@@ -519,7 +519,12 @@ public class SmsSendTask {
 
                         tsql = tsql + "   and ws.goods_id = ? "
                                 + "   and ws.cus_code =  ? "
-                                + "   group by ws.ku_wei_bian_ma,ws.bin_id,ws.goods_id,mb.qu_huo_ci_xu, ws.goods_pro_data  having sum(ws.base_goodscount) > 0 order by ws.goods_pro_data , ws.goods_qua ,mb.qu_huo_ci_xu,ws.create_date desc ";
+                                + "   group by ws.ku_wei_bian_ma,ws.bin_id,ws.goods_id,mb.qu_huo_ci_xu, ws.goods_pro_data  having sum(ws.base_goodscount) > 0 "  ;
+                            if ("no".equals(ResourceUtil.getConfigByName("scrqon"))) {
+                                tsql = tsql + " order by mb.qu_huo_ci_xu, ws.goods_pro_data , ws.goods_qua ,ws.create_date desc ";
+                            }else{
+                                tsql = tsql + " order by ws.goods_pro_data , mb.qu_huo_ci_xu,  ws.goods_qua ,ws.create_date desc ";
+                            }
                         List<Map<String, Object>> resultt = new ArrayList<Map<String, Object>>();
                         System.out.print(tsql);
                         if (!"off".equals(ResourceUtil.getConfigByName("hiti"))) {
@@ -572,7 +577,13 @@ public class SmsSendTask {
                                     }
                                     tsqlz = tsqlz
                                             + "   and (ws.base_goodscount + 0) =  ? "
-                                            + "   group by ws.ku_wei_bian_ma,ws.bin_id,ws.goods_id,mb.qu_huo_ci_xu, ws.goods_pro_data having sum(ws.base_goodscount) > 0 order by ws.goods_pro_data , ws.goods_qua ,mb.qu_huo_ci_xu,ws.create_date desc";
+                                            + "   group by ws.ku_wei_bian_ma,ws.bin_id,ws.goods_id,mb.qu_huo_ci_xu, ws.goods_pro_data having sum(ws.base_goodscount) > 0 " ;
+                                    if ("no".equals(ResourceUtil.getConfigByName("scrqon"))) {
+                                        tsqlz = tsqlz + "order by mb.qu_huo_ci_xu,ws.goods_pro_data , ws.goods_qua ,ws.create_date desc";
+                                    }else{
+                                        tsqlz = tsqlz + "order by ws.goods_pro_data , ws.goods_qua ,mb.qu_huo_ci_xu,ws.create_date desc";
+                                    }
+
                                     List<Map<String, Object>> resultz = systemService
                                             .findForJdbc(tsqlz, mvgoods.getGoodsId(), wmOmQmIEntity.getCusCode(), hiti);
                                     System.out.print("****************tsqlz" + tsqlz);
