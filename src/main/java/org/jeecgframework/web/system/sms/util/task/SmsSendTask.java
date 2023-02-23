@@ -61,14 +61,15 @@ public class SmsSendTask {
             WmInNoticeIlist = systemService.findHql(hql, "Y");
             for (WmImNoticeIEntity wmImNoticeIEntity : WmInNoticeIlist) {
                 try{
-                    if (Double.parseDouble(wmImNoticeIEntity.getGoodsCount()) <= Double.parseDouble(wmImNoticeIEntity.getGoodsQmCount())) {
-                        wmImNoticeIEntity.setBinPre("Y");
-                        systemService.saveOrUpdate(wmImNoticeIEntity);
+                    if(StringUtil.isNotEmpty(wmImNoticeIEntity.getGoodsCount())&&StringUtil.isNotEmpty(wmImNoticeIEntity.getGoodsQmCount())){
+                        if (Double.parseDouble(wmImNoticeIEntity.getGoodsCount()) <= Double.parseDouble(wmImNoticeIEntity.getGoodsQmCount())) {
+                            wmImNoticeIEntity.setBinPre("Y");
+                            systemService.saveOrUpdate(wmImNoticeIEntity);
+                        }
                     }
                 }catch (Exception e){
                     e.printStackTrace();
                 }
-
             }
         } catch (Exception e) {
             // TODO: handle exception
