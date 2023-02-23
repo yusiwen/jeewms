@@ -60,10 +60,15 @@ public class SmsSendTask {
             hql = "from WmImNoticeIEntity t where t.binPre<>?  ";
             WmInNoticeIlist = systemService.findHql(hql, "Y");
             for (WmImNoticeIEntity wmImNoticeIEntity : WmInNoticeIlist) {
-                if (Double.parseDouble(wmImNoticeIEntity.getGoodsCount()) <= Double.parseDouble(wmImNoticeIEntity.getGoodsQmCount())) {
-                    wmImNoticeIEntity.setBinPre("Y");
-                    systemService.saveOrUpdate(wmImNoticeIEntity);
+                try{
+                    if (Double.parseDouble(wmImNoticeIEntity.getGoodsCount()) <= Double.parseDouble(wmImNoticeIEntity.getGoodsQmCount())) {
+                        wmImNoticeIEntity.setBinPre("Y");
+                        systemService.saveOrUpdate(wmImNoticeIEntity);
+                    }
+                }catch (Exception e){
+                    e.printStackTrace();
                 }
+
             }
         } catch (Exception e) {
             // TODO: handle exception
