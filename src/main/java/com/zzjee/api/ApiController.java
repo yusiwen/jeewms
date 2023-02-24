@@ -457,8 +457,30 @@ public class ApiController {
     public AjaxJson callback( HttpServletRequest request, HttpServletResponse response) {
 
         AjaxJson j = new AjaxJson();
-        String code=request.getParameter("code");
-        System.out.println(code+"************");
+        try{
+            String code=request.getParameter("code");
+            System.out.println(code+"************");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+
+        Map map = new HashMap();
+        Enumeration paramNames = request.getParameterNames();
+        while (paramNames.hasMoreElements()) {
+            String paramName = (String) paramNames.nextElement();
+
+            String[] paramValues = request.getParameterValues(paramName);
+            if (paramValues.length == 1) {
+                String paramValue = paramValues[0];
+                if (paramValue.length() != 0) {
+                    System.out.println("参数：" + paramName + "=" + paramValue);
+                    map.put(paramName, paramValue);
+                }
+            }
+        }
+
+
         return j;
     }
 }
