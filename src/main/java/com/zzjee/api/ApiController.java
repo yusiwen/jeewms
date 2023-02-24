@@ -52,6 +52,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolation;
 import java.util.*;
 
@@ -448,5 +449,16 @@ public class ApiController {
             }
         }
         return Result.success(noticeList);
+    }
+
+
+    @RequestMapping(value = "/callback", method = RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseBody
+    public AjaxJson callback( HttpServletRequest request, HttpServletResponse response) {
+
+        AjaxJson j = new AjaxJson();
+        String code=request.getParameter("code");
+        System.out.println(code+"************");
+        return j;
     }
 }
