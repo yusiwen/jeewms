@@ -457,14 +457,6 @@ public class ApiController {
     public AjaxJson callback( HttpServletRequest request, HttpServletResponse response) {
 
         AjaxJson j = new AjaxJson();
-        try{
-            String code=request.getParameter("code");
-            System.out.println(code+"************");
-        }catch (Exception e){
-            e.printStackTrace();
-        }
-
-
         Map map = new HashMap();
         Enumeration paramNames = request.getParameterNames();
         while (paramNames.hasMoreElements()) {
