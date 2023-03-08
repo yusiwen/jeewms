@@ -1,6 +1,8 @@
 package com.zzjee.plc.controller;
 
 import HslCommunication.Core.Types.OperateResult;
+import HslCommunication.Profinet.Omron.OmronCipNet;
+import HslCommunication.Profinet.Omron.OmronHostLinkOverTcp;
 import HslCommunication.Profinet.Siemens.SiemensPLCS;
 import HslCommunication.Profinet.Siemens.SiemensS7Net;
 import com.zzjee.plc.entity.WmsPlcEntity;
@@ -222,7 +224,6 @@ public class WmsPlcController extends BaseController {
         }
         if (wmsPlc != null) {
             long start = System.currentTimeMillis();
-
             SiemensPLCS siemensPLCS = SiemensPLCS.S200Smart;
             SiemensS7Net siemensS7Net = null;
             siemensS7Net = new SiemensS7Net(siemensPLCS);

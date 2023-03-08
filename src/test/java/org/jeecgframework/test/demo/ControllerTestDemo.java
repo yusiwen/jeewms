@@ -5,6 +5,9 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.setup.MockMvcBuilders.webAppContextSetup;
 
 
+import HslCommunication.Core.Types.OperateResult;
+import HslCommunication.Core.Types.OperateResultExOne;
+import HslCommunication.Profinet.Omron.OmronHostLinkOverTcp;
 import org.jeecgframework.AbstractUnitTest;
 import org.junit.Before;
 import org.junit.Test;
@@ -29,6 +32,13 @@ public class ControllerTestDemo  extends AbstractUnitTest{
 	//测试登录
 	@Test
 	public void testLogin() throws Exception {
+
+		OmronHostLinkOverTcp omronHostLinkOverTcp = new OmronHostLinkOverTcp();
+		omronHostLinkOverTcp.setIpAddress("172.17.140.51");
+		omronHostLinkOverTcp.setPort(9600);
+		OperateResult operateResult = omronHostLinkOverTcp.ConnectServer();
+		final OperateResultExOne<byte[]> d1111 = omronHostLinkOverTcp.Read("D1111", (short) 1);
+		omronHostLinkOverTcp.Write("D1111",1);
 //        yyUtil.getProduct();
 //		Map<String, Object> paramMap = new HashMap<String, Object>();
 //		paramMap.put("formDate","2017-01-01");
