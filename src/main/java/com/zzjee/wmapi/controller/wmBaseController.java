@@ -205,14 +205,7 @@ public class wmBaseController extends BaseController {
 
     @RequestMapping(value = "geterpim", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<?> listim(@RequestParam(value = "username", required = false) String username,
-                                    @RequestParam(value = "all", required = false) String all,
-
-                                    @RequestParam(value = "searchstr", required = false) String searchstr,
-                                    @RequestParam(value = "searchstr2", required = false) String searchstr2,
-                                    @RequestParam(value = "searchstrin1", required = false) String searchstrin1,
-                                    @RequestParam(value = "searchstrin2", required = false) String searchstrin2,
-                                    @RequestParam(value = "searchstrin3", required = false) String searchstrin3) {
+    public ResponseEntity<?> listim() {
 
 
         ResultDO D0 = new ResultDO();
@@ -230,14 +223,7 @@ public class wmBaseController extends BaseController {
 
     @RequestMapping(value = "geterpom", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<?> listom(@RequestParam(value = "username", required = false) String username,
-                                    @RequestParam(value = "all", required = false) String all,
-
-                                    @RequestParam(value = "searchstr", required = false) String searchstr,
-                                    @RequestParam(value = "searchstr2", required = false) String searchstr2,
-                                    @RequestParam(value = "searchstrin1", required = false) String searchstrin1,
-                                    @RequestParam(value = "searchstrin2", required = false) String searchstrin2,
-                                    @RequestParam(value = "searchstrin3", required = false) String searchstrin3) {
+    public ResponseEntity<?> listom() {
 
 
         ResultDO D0 = new ResultDO();
@@ -255,14 +241,7 @@ public class wmBaseController extends BaseController {
 
     @RequestMapping(value = "runtask", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<?> runtask(@RequestParam(value = "username", required = false) String username,
-                                     @RequestParam(value = "all", required = false) String all,
-
-                                     @RequestParam(value = "searchstr", required = false) String searchstr,
-                                     @RequestParam(value = "searchstr2", required = false) String searchstr2,
-                                     @RequestParam(value = "searchstrin1", required = false) String searchstrin1,
-                                     @RequestParam(value = "searchstrin2", required = false) String searchstrin2,
-                                     @RequestParam(value = "searchstrin3", required = false) String searchstrin3) {
+    public ResponseEntity<?> runtask() {
 
 
         ResultDO D0 = new ResultDO();
@@ -273,14 +252,7 @@ public class wmBaseController extends BaseController {
     //结转库存
     @RequestMapping(value = "runtaskone", method = RequestMethod.GET)
     @ResponseBody
-    public ResponseEntity<?> runtaskone(@RequestParam(value = "username", required = false) String username,
-                                        @RequestParam(value = "all", required = false) String all,
-
-                                        @RequestParam(value = "searchstr", required = false) String searchstr,
-                                        @RequestParam(value = "searchstr2", required = false) String searchstr2,
-                                        @RequestParam(value = "searchstrin1", required = false) String searchstrin1,
-                                        @RequestParam(value = "searchstrin2", required = false) String searchstrin2,
-                                        @RequestParam(value = "searchstrin3", required = false) String searchstrin3) {
+    public ResponseEntity<?> runtaskone() {
 
 
         ResultDO D0 = new ResultDO();
