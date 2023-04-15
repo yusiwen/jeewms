@@ -39,8 +39,7 @@ public class ControllerTestDemo  extends AbstractUnitTest{
 		OperateResult operateResult = omronHostLinkOverTcp.ConnectServer();
 		final OperateResultExOne<byte[]> d1111 = omronHostLinkOverTcp.Read("D1111", (short) 1);
 		omronHostLinkOverTcp.Write("D1111",1);
-//        yyUtil.getProduct();
-//		Map<String, Object> paramMap = new HashMap<String, Object>();
+ //		Map<String, Object> paramMap = new HashMap<String, Object>();
 //		paramMap.put("formDate","2017-01-01");
 //		paramMap.put("lastUpdateTime","2017-01-01");
 //		paramMap.put("pi_class","采购验收单");

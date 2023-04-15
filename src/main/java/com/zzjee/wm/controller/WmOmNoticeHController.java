@@ -86,7 +86,7 @@ import com.zzjee.wmutil.resResult;
 import com.zzjee.wmutil.sdresult;
 import com.zzjee.wmutil.wmIntUtil;
 import com.zzjee.wmutil.wmUtil;
-import com.zzjee.wmutil.yyUtil;
+
 
 import net.sf.json.JSONArray;
 
@@ -1021,15 +1021,7 @@ public class WmOmNoticeHController extends BaseController {
 		String message = null;
 		AjaxJson j = new AjaxJson();
 		message = "读取成功";
-		if ("U8".equals(ResourceUtil.getConfigByName("interfacetype"))){
-			if(StringUtil.isEmpty(formDate)){
-				formDate = "2011-01-01";
-			}
-			yyUtil.getqtck(formDate);//其他出库
-			yyUtil.getSdvl(formDate);//销售发货
-			yyUtil.getclck(formDate);//材料出库
 
-		}
 		if ("DSC".equals(ResourceUtil.getConfigByName("interfacetype"))){
 
 			dscUtil.updateorderFromDsc();

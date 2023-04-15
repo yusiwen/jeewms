@@ -46,16 +46,14 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.zzjee.api.ResultDO;
-import com.zzjee.md.entity.MdCusOtherEntity;
 import com.zzjee.md.entity.MdGoodsEntity;
 import com.zzjee.md.entity.MvGoodsEntity;
 import com.zzjee.md.service.MdGoodsServiceI;
 import com.zzjee.wm.entity.WmOmNoticeHEntity;
 import com.zzjee.wm.entity.WmOmNoticeIEntity;
 import com.zzjee.wm.service.WmOmNoticeHServiceI;
-import com.zzjee.wmutil.wmIntUtil;
 import com.zzjee.wmutil.wmUtil;
-import com.zzjee.wmutil.yyUtil;
+
 
 /**
  * @Title: Controller
@@ -280,18 +278,6 @@ public class MdGoodsController extends BaseController {
 		message = "商品信息读取成功";
 
 		try {
-
-			if ("U8".equals(ResourceUtil.getConfigByName("interfacetype"))){
-				yyUtil.getProduct(othercode);
-
-			}
-			if ("UAS".equals(ResourceUtil.getConfigByName("interfacetype"))){
-				if(StringUtil.isEmpty(formDate)){
-					formDate = "2011-01-01";
-				}
-				wmIntUtil.getproduct(formDate);
-
-			}
 			if ("DSC".equals(ResourceUtil.getConfigByName("interfacetype"))){
 
 				dscUtil.updateGoodsFromDsc();

@@ -9,8 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.zzjee.wmutil.dsc.dscUtil;
 import com.zzjee.wmutil.wmIntUtil;
-import com.zzjee.wmutil.yyUtil;
-import org.apache.log4j.Logger;
+ import org.apache.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -68,12 +67,12 @@ import java.net.URI;
 import org.springframework.http.MediaType;
 import org.springframework.web.util.UriComponentsBuilder;
 
-/**   
- * @Title: Controller  
+/**
+ * @Title: Controller
  * @Description: 第三方客户
  * @author erzhongxmu
  * @date 2018-09-01 21:06:14
- * @version V1.0   
+ * @version V1.0
  *
  */
 @Controller
@@ -90,12 +89,12 @@ public class MdCusOtherController extends BaseController {
 	private SystemService systemService;
 	@Autowired
 	private Validator validator;
-	
+
 
 
 	/**
 	 * 第三方客户列表 页面跳转
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "list")
@@ -105,7 +104,7 @@ public class MdCusOtherController extends BaseController {
 
 	/**
 	 * easyui AJAX请求数据
-	 * 
+	 *
 	 * @param request
 	 * @param response
 	 * @param dataGrid
@@ -126,10 +125,10 @@ public class MdCusOtherController extends BaseController {
 		this.mdCusOtherService.getDataGridReturn(cq, true);
 		TagUtil.datagrid(response, dataGrid);
 	}
-	
+
 	/**
 	 * 删除第三方客户
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "doDel")
@@ -150,10 +149,10 @@ public class MdCusOtherController extends BaseController {
 		j.setMsg(message);
 		return j;
 	}
-	
+
 	/**
 	 * 批量删除第三方客户
-	 * 
+	 *
 	 * @return
 	 */
 	 @RequestMapping(params = "doBatchDel")
@@ -164,7 +163,7 @@ public class MdCusOtherController extends BaseController {
 		message = "第三方客户删除成功";
 		try{
 			for(String id:ids.split(",")){
-				MdCusOtherEntity mdCusOther = systemService.getEntity(MdCusOtherEntity.class, 
+				MdCusOtherEntity mdCusOther = systemService.getEntity(MdCusOtherEntity.class,
 				id
 				);
 				mdCusOtherService.delete(mdCusOther);
@@ -182,7 +181,7 @@ public class MdCusOtherController extends BaseController {
 
 	/**
 	 * 添加第三方客户
-	 * 
+	 *
 	 * @param ids
 	 * @return
 	 */
@@ -244,7 +243,7 @@ public class MdCusOtherController extends BaseController {
 	}
 	/**
 	 * 更新第三方客户
-	 * 
+	 *
 	 * @param ids
 	 * @return
 	 */
@@ -267,11 +266,11 @@ public class MdCusOtherController extends BaseController {
 		j.setMsg(message);
 		return j;
 	}
-	
+
 
 	/**
 	 * 第三方客户新增页面跳转
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "goAdd")
@@ -284,7 +283,7 @@ public class MdCusOtherController extends BaseController {
 	}
 	/**
 	 * 第三方客户编辑页面跳转
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "goUpdate")
@@ -295,10 +294,10 @@ public class MdCusOtherController extends BaseController {
 		}
 		return new ModelAndView("com/zzjee/md/mdCusOther-update");
 	}
-	
+
 	/**
 	 * 导入功能跳转
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "upload")
@@ -306,10 +305,10 @@ public class MdCusOtherController extends BaseController {
 		req.setAttribute("controller_name","mdCusOtherController");
 		return new ModelAndView("common/upload/pub_excel_upload");
 	}
-	
+
 	/**
 	 * 导出excel
-	 * 
+	 *
 	 * @param request
 	 * @param response
 	 */
@@ -328,7 +327,7 @@ public class MdCusOtherController extends BaseController {
 	}
 	/**
 	 * 导出excel 使模板
-	 * 
+	 *
 	 * @param request
 	 * @param response
 	 */
@@ -342,13 +341,13 @@ public class MdCusOtherController extends BaseController {
     	modelMap.put(NormalExcelConstants.DATA_LIST,new ArrayList());
     	return NormalExcelConstants.JEECG_EXCEL_VIEW;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@RequestMapping(params = "importExcel", method = RequestMethod.POST)
 	@ResponseBody
 	public AjaxJson importExcel(HttpServletRequest request, HttpServletResponse response) {
 		AjaxJson j = new AjaxJson();
-		
+
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 		Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
 		for (Map.Entry<String, MultipartFile> entity : fileMap.entrySet()) {
@@ -376,14 +375,14 @@ public class MdCusOtherController extends BaseController {
 		}
 		return j;
 	}
-	
+
 	@RequestMapping(method = RequestMethod.GET)
 	@ResponseBody
 	public List<MdCusOtherEntity> list() {
 		List<MdCusOtherEntity> listMdCusOthers=mdCusOtherService.getList(MdCusOtherEntity.class);
 		return listMdCusOthers;
 	}
-	
+
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	@ResponseBody
 	public ResponseEntity<?> get(@PathVariable("id") String id) {

@@ -2417,14 +2417,7 @@ public class WmImNoticeHController extends BaseController {
         String message = null;
         AjaxJson j = new AjaxJson();
         message = "读取成功";
-        if ("U8".equals(ResourceUtil.getConfigByName("interfacetype"))){
-            if(StringUtil.isEmpty(formDate)){
-                formDate = "2011-01-01";
-            }
-            yyUtil.getPord(formDate);
-            yyUtil.getcprd(formDate);
-            yyUtil.getqtrd(formDate);
-        }
+
         if ("UAS".equals(ResourceUtil.getConfigByName("interfacetype"))){
             String masterbill[] = {"XKN_TEST","XKN_TEST"};
             for(int m =0;m<masterbill.length;m++) {
