@@ -38,38 +38,5 @@ public class JeecgOneGUI {
 		}else{
 			System.out.println("connect error");
 		}
-//		OperateResultExOne<Float> floatOperateResultExOne = siemensS7Net.ReadFloat(defaultAddress);
-//		if(floatOperateResultExOne.IsSuccess){
-//			System.out.println("read success");
-//			System.out.println(floatOperateResultExOne.Content);
-// 		}else{
-//			System.out.println(floatOperateResultExOne.Content);
-//		}
-//		defaultAddress = "M5.0";
-//		siemensS7Net.Write(defaultAddress,false);
-//		defaultAddress = "VD320";
-//		float speed = (float) 5.00;
-//		siemensS7Net.Write(defaultAddress,speed);
-//		defaultAddress = "VD300";
-//		float position = (float) -50.00;//方向
-//		siemensS7Net.Write(defaultAddress,position);
-//		defaultAddress = "M5.0";
-//		siemensS7Net.Write(defaultAddress,true);
-
-
-
-
-		defaultAddress = "M7.0";
-		siemensS7Net.Write(defaultAddress,false);
-		defaultAddress = "VD420";
-		float speed = (float) 5.00;
-		siemensS7Net.Write(defaultAddress,speed);
-		defaultAddress = "VD400";
-		float position = (float) 50.00;//换向
-		siemensS7Net.Write(defaultAddress,position);
-		defaultAddress = "M7.0";
-		siemensS7Net.Write(defaultAddress,true);
-
-
-	}
+ 	}
 }
