@@ -265,34 +265,7 @@ public class MdGoodsController extends BaseController {
 		return j;
 	}
 
-	/**
-	 * 更新商品信息
-	 *
-	 * @return
-	 */
-	@RequestMapping(params = "doGet")
-	@ResponseBody
-	public AjaxJson dogetfromother(String formDate,String othercode, HttpServletRequest request) {
-		String message = null;
-		AjaxJson j = new AjaxJson();
-		message = "商品信息读取成功";
 
-		try {
-			if ("DSC".equals(ResourceUtil.getConfigByName("interfacetype"))){
-
-				dscUtil.updateGoodsFromDsc();
-
-			}
-			systemService.addLog(message, Globals.Log_Type_UPDATE,
-					Globals.Log_Leavel_INFO);
-		} catch (Exception e) {
-			e.printStackTrace();
-			message = "商品信息读取失败";
-			throw new BusinessException(e.getMessage());
-		}
-		j.setMsg(message);
-		return j;
-	}
 
 	/**
 	 * 更新商品信息
@@ -526,14 +499,7 @@ public class MdGoodsController extends BaseController {
 		if(!StringUtil.isEmpty(searchstr)) {
 			hql=hql+"  and  (shpBianMa = '" + searchstr + "'";
             hql=hql+"  or   shpTiaoMa = '" + searchstr + "')";
-
         }
-//		if(!StringUtil.isEmpty(searchstr2)) {
-//			hql=hql+"  and (shpTiaoMa = '" + searchstr2 + "'";
-//            hql=hql+"  or shpBianMa = '" + searchstr2 + "')";
-//
-//        }
-
 		List<MdGoodsEntity> listMdGoodss = mdGoodsService.findHql(hql);
 		D0.setOK(true);
 		List<MdGoodsEntity> result = new ArrayList<MdGoodsEntity>();
@@ -545,9 +511,6 @@ public class MdGoodsController extends BaseController {
 							break;
 						}
 					}
-//					t.setShpYanSe(searchstrin1);
-//					t.setPpTuPian(searchstrin2);
-//					t.setJjZhongBi(searchstrin3);
 			result.add(t);
 		}
 
@@ -569,14 +532,6 @@ public class MdGoodsController extends BaseController {
 	@ResponseBody
 	public ResponseEntity<?> create(@RequestParam String mdGoodsstr,
 			UriComponentsBuilder uriBuilder) {
-		// 调用JSR303 Bean Validator进行校验，如果出错返回含400错误码及json格式的错误信息.
-//		Set<ConstraintViolation<MdGoodsEntity>> failures = validator
-//				.validate(mdGoods);
-//		if (!failures.isEmpty()) {
-//			return new ResponseEntity(
-//					BeanValidators.extractPropertyAndMessage(failures),
-//					HttpStatus.BAD_REQUEST);
-//		}
 		ResultDO D0 = new  ResultDO();
 		MdGoodsEntity mdGoods  = (MdGoodsEntity)JSONHelper.json2Object(mdGoodsstr,MdGoodsEntity.class);
 
