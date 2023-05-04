@@ -17,12 +17,9 @@ import javax.validation.Validator;
 
 import com.zzjee.ba.entity.BaStoreEntity;
 import com.zzjee.md.entity.MdGoodsEntity;
-import com.zzjee.tms.entity.TmsMdCheliangEntity;
 import com.zzjee.tms.entity.TmsYwDingdanEntity;
-import com.zzjee.wave.entity.WaveToDownEntity;
 import com.zzjee.wm.entity.*;
 import com.zzjee.wm.page.*;
-import com.zzjee.wmutil.dsc.dscUtil;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
@@ -75,20 +72,14 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.util.UriComponentsBuilder;
 
 import com.zzjee.api.ResultDO;
 import com.zzjee.md.entity.MdCusEntity;
 import com.zzjee.md.entity.MdCusOtherEntity;
 import com.zzjee.md.entity.MvGoodsEntity;
 import com.zzjee.wm.service.WmOmNoticeHServiceI;
-import com.zzjee.wmutil.resResult;
-import com.zzjee.wmutil.sdresult;
-import com.zzjee.wmutil.wmIntUtil;
 import com.zzjee.wmutil.wmUtil;
 
-
-import net.sf.json.JSONArray;
 
 import static com.xiaoleilu.hutool.date.DateTime.now;
 
@@ -1014,65 +1005,6 @@ public class WmOmNoticeHController extends BaseController {
 		j.setMsg(message);
 		return j;
 	}
-
-	@RequestMapping(params = "doGet")
-	@ResponseBody
-	public AjaxJson dogetfromother(String formDate, HttpServletRequest request) {
-		String message = null;
-		AjaxJson j = new AjaxJson();
-		message = "读取成功";
-
-		if ("DSC".equals(ResourceUtil.getConfigByName("interfacetype"))){
-
-			dscUtil.updateorderFromDsc();
-
-		}
-		j.setMsg(message);
-		return j;
-	}
-
-
-
-
-
-	@RequestMapping(params = "doPost")
-	@ResponseBody
-	public AjaxJson dopost(String id,HttpServletRequest request) {
-		String message = null;
-		AjaxJson j = new AjaxJson();
-		message = "读取成功";
-		WmOmNoticeHEntity wmOmNoticeHEntity = wmOmNoticeHService.getEntity(WmOmNoticeHEntity.class, id);
-		//获取参数
-		Object id0 = wmOmNoticeHEntity.getOmNoticeId();
-		//===================================================================================
-		//查询-产品
-		String hql0 = "from WmOmNoticeIEntity where 1 = 1 AND omNoticeId = ? ";
-		try{
-			List<WmOmNoticeIEntity> wmOmNoticeIEntityList = systemService
-					.findHql(hql0, id0);//获取行项目
-			List<Map<String,String>> list = new ArrayList<Map<String,String>>();
-			for(WmOmNoticeIEntity t:wmOmNoticeIEntityList){
-				Map<String,String> map = new HashMap<String,String>();
-//				[{"pd_pdno":1,"pd_outqty":"100","pi_class":"出货单","pi_id":50765226,"pi_inoutno":"JRS180800008"}]
-				map.put("pd_pdno",t.getOtherId());
-				map.put("pd_outqty",t.getGoodsQua());
-				map.put("pi_class",wmOmNoticeHEntity.getPiClass());
-				map.put("pi_id",wmOmNoticeHEntity.getOmPlatNo());
-				map.put("pi_inoutno",wmOmNoticeHEntity.getImCusCode());
-				list.add(map);
-			}
-			String jsonStr = JSONArray.fromObject(list).toString();
-			JSONArray ja = JSONArray.fromObject(jsonStr);
-			resResult resResult = wmIntUtil.postBill(ja.toString(),wmOmNoticeHEntity.getPiMaster());
-			j.setMsg(resResult.getDetailedMessage());
-		}catch (Exception e){
-			logger.error(ExceptionUtil.getExceptionMessage(e));
-		}
-
-		j.setMsg(message);
-		return j;
-	}
-
 
 
 

@@ -50,7 +50,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.zzjee.md.entity.MdSupEntity;
 import com.zzjee.md.service.MdSupServiceI;
-import com.zzjee.wmutil.wmIntUtil;
 
 /**
  * @Title: Controller
@@ -201,28 +200,7 @@ public class MdSupController extends BaseController {
 		j.setMsg(message);
 		return j;
 	}
-	@RequestMapping(params = "doGet")
-	@ResponseBody
-	public AjaxJson dogetfromother(String formDate, HttpServletRequest request) {
-		String message = null;
-		AjaxJson j = new AjaxJson();
-		message = "商品信息读取成功";
 
-		try {
-			if(StringUtil.isEmpty(formDate)){
-				formDate = "2011-01-01";
-			}
-			wmIntUtil.getSup(formDate);
-			systemService.addLog(message, Globals.Log_Type_UPDATE,
-					Globals.Log_Leavel_INFO);
-		} catch (Exception e) {
-			e.printStackTrace();
-			message = "商品信息读取失败";
-			throw new BusinessException(e.getMessage());
-		}
-		j.setMsg(message);
-		return j;
-	}
 	/**
 	 * 更新供应商
 	 *
