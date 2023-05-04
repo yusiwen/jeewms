@@ -202,33 +202,7 @@ public class MdCusOtherController extends BaseController {
 		j.setMsg(message);
 		return j;
 	}
-	@RequestMapping(params = "doGet")
-	@ResponseBody
-	public AjaxJson dogetfromother(String formDate, HttpServletRequest request) {
-		String message = null;
-		AjaxJson j = new AjaxJson();
-		message = "读取成功";
-		try {
-			if ("UAS".equals(ResourceUtil.getConfigByName("interfacetype"))){
-				if(StringUtil.isEmpty(formDate)){
-					formDate = "2011-01-01";
-				}
-				wmIntUtil.getCus(formDate);
-			}
-			if ("DSC".equals(ResourceUtil.getConfigByName("interfacetype"))){
-				dscUtil.updateCusFromDsc();
-			}
-			systemService.addLog(message, Globals.Log_Type_UPDATE,
-					Globals.Log_Leavel_INFO);
-		} catch (Exception e) {
-			e.printStackTrace();
-			message = "读取失败";
-			throw new BusinessException(e.getMessage());
-		}
-		j.setMsg(message);
-		return j;
-	}
-	/**
+ 	/**
 	 * 更新第三方客户
 	 *
 	 * @param ids
