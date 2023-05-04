@@ -3027,7 +3027,6 @@ public class WmOmNoticeHController extends BaseController {
 
 							}
 
-//                               wmi.setGoodsPrdData(billResult.getData().get(s).getDetail().get(k).getPdProdmadedate2User());
 							wmi.setOtherId(page.getOtherId());
 							wmi.setBinId(page.getBinId());
 							wmi.setBinOm(page.getBinOm());
@@ -3168,7 +3167,6 @@ public class WmOmNoticeHController extends BaseController {
 
 							}
 
-//                               wmi.setGoodsPrdData(billResult.getData().get(s).getDetail().get(k).getPdProdmadedate2User());
 							wmi.setOtherId(page.getOtherId());
 							wmi.setBinOm(page.getBinOm());
 							wmi.setBinId(page.getBinId());

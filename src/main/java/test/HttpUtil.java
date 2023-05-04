@@ -1,7 +1,6 @@
 package test;
 
 import com.alibaba.fastjson.JSONObject;
-import com.zzjee.wmutil.dsc.dscUtil;
 import org.jeecgframework.web.cgform.util.SignatureUtil;
 
 import java.io.BufferedReader;
@@ -20,7 +19,7 @@ public class HttpUtil {
 
 	/**
 	 * 发起https请求并获取结果
-	 * 
+	 *
 	 * @param requestUrl
 	 *            请求地址
 	 * @param requestMethod
@@ -93,7 +92,7 @@ public class HttpUtil {
 		}
 		return jsonObject;
 	}
-	
+
 	public static void main1(String args[]){
 		String key="26F72780372E84B6CFAED6F7B19139CC47B1912B6CAED753";
 		JSONObject jsonObject=new JSONObject();
@@ -107,15 +106,13 @@ public class HttpUtil {
 		JSONObject resp=HttpUtil.httpRequest("http://localhost:8080/jeecg/api/cgFormDataController.do?getFormInfo","POST","body="+body,sign);
 		System.out.println(resp.toJSONString());
 	}
-	
+
 	public static void main(String args[]){
 //		dscUtil.updateGoodsFromDsc();
 //		    String res = dscUtil.getOrderList("1","","");
 //		System.out.println(res);
 
-		String res = dscUtil.getOrderGoods("20");
 
-		System.out.println("order="+res);
 
 
 //		String key="26F72780372E84B6CFAED6F7B19139CC47B1912B6CAED753";
