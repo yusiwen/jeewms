@@ -2435,7 +2435,7 @@ public class WmOmNoticeHController extends BaseController {
 				id);//获取抬头
 
 
-		printHeader.setHeader01("桥路易购签收单");
+		printHeader.setHeader01("签收单");
 
 		printHeader.setHeader02("司机电话：");
 
