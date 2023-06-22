@@ -1,5 +1,5 @@
 
-JEEWMSQQ交流群：335607153  有任何问题可以加群交流  
+JEEWMSQQ交流群：335607153 1群已满  请加2群  313930553  有任何问题可以加群交流  
  **智能制造产品JEEMES已经开源**  (https://gitee.com/erzhongxmu/jeemes) 欢迎大家STAR
  
 测试系统地址 http://119.91.141.42:8080/jeewms  用户名：admin 密码：llg123 本地启动的用户名：admin 密码：llg123
