@@ -1738,14 +1738,14 @@ public class WmOmNoticeHController extends BaseController {
             ByteArrayOutputStream byteArrayOut = new ByteArrayOutputStream();
 //			bufferImg = ImageIO.read(BarcodeUtil.generateToStream(wmImNoticeH
 //					.getNoticeId()));
-            ClassPathResource classPathResource = new ClassPathResource("icon_sx.jpeg");
-            bufferImg = ImageIO.read(classPathResource.getInputStream());
+//            ClassPathResource classPathResource = new ClassPathResource("icon_sx.jpeg");
+//            bufferImg = ImageIO.read(classPathResource.getInputStream());
 
             // 进行转码，使其支持中文文件名
 //			codedFileName = java.net.URLEncoder.encode("中文", "UTF-8");
-            response.setHeader("content-disposition", "attachment;filename="
-                    + wmOmNoticeH.getOmNoticeId() + ".xls");
-            ImageIO.write(bufferImg, "jpg", byteArrayOut);
+//            response.setHeader("content-disposition", "attachment;filename="
+//                    + wmOmNoticeH.getOmNoticeId() + ".xls");
+//            ImageIO.write(bufferImg, "jpg", byteArrayOut);
 
             HSSFWorkbook wb = new HSSFWorkbook();
             HSSFSheet sheet = wb.createSheet("出库单");
