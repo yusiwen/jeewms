@@ -94,8 +94,9 @@ public class RequestHandler {
     public void setParameter(String parameter, Object parameterValue) {
         String v = "";
         if(null != parameterValue) {
-            if(parameterValue instanceof String)
+            if(parameterValue instanceof String) {
                 v = ((String) parameterValue).trim();
+            }
         }
         this.parameters.put(parameter, v);
     }

@@ -29,8 +29,9 @@ public class MutiLangTag implements TemplateDirectiveModel {
 
 	private static final Logger LOG = LoggerFactory.getLogger(MutiLangTag.class);
 
-	public void execute(Environment env, Map params, TemplateModel[] loopVars,
-			TemplateDirectiveBody body) throws TemplateException, IOException {
+	@Override
+    public void execute(Environment env, Map params, TemplateModel[] loopVars,
+                        TemplateDirectiveBody body) throws TemplateException, IOException {
 
 		// 多语言key
 		String langKey = getAttribute(params, "langKey");

@@ -3,14 +3,14 @@
 <t:base type="jquery,easyui,tools,DatePicker"></t:base>
 <div class="easyui-layout" fit="true">
   <div region="center" style="padding:0px;border:0px">
-  <t:datagrid name="mdSupList" checkbox="true" pagination="true" fitColumns="false" title="供应商" actionUrl="mdSupController.do?datagrid" idField="id" fit="true" queryMode="group">
+  <t:datagrid name="mdSupList" checkbox="true" pagination="true" fitColumns="false" title="供应商" actionUrl="mdSupController.do?datagrid" idField="id" fit="false" queryMode="group">
     <t:dgCol title="主键"  field="id"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
-    <t:dgCol title="创建人"  field="createName"     queryMode="group"  width="50"></t:dgCol>
+    <t:dgCol title="创建人"  field="createName"   hidden="true"    queryMode="group"  width="50"></t:dgCol>
     <t:dgCol title="创建人登录名称"  field="createBy"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
-    <t:dgCol title="创建日期"  field="createDate" formatter="yyyy-MM-dd"  queryMode="group"  width="120"></t:dgCol>
-    <t:dgCol title="审核人"  field="updateName"    queryMode="group"  width="50"></t:dgCol>
+    <t:dgCol title="创建日期"  field="createDate"  hidden="true" formatter="yyyy-MM-dd"  queryMode="group"  width="120"></t:dgCol>
+    <t:dgCol title="审核人"  field="updateName"   hidden="true"   queryMode="group"  width="50"></t:dgCol>
     <t:dgCol title="更新人登录名称"  field="updateBy"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
-    <t:dgCol title="审核日期"  field="updateDate" formatter="yyyy-MM-dd"  queryMode="group"  width="120"></t:dgCol>
+    <t:dgCol title="审核日期"  field="updateDate"  hidden="true"  formatter="yyyy-MM-dd"  queryMode="group"  width="120"></t:dgCol>
     <t:dgCol title="所属部门"  field="sysOrgCode"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
     <t:dgCol title="所属公司"  field="sysCompanyCode"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
     <t:dgCol title="中文全称"  field="zhongWenQch"   query="true" queryMode="single"  width="180"></t:dgCol>
@@ -57,56 +57,26 @@
     <t:dgCol title="操作" field="opt" width="100"></t:dgCol>
     <t:dgDelOpt title="删除" url="mdSupController.do?doDel&id={id}" urlclass="ace_button"  urlfont="fa-trash-o"/>
    <t:dgToolBar title="录入" icon="icon-add" url="mdSupController.do?goAdd" funname="add"></t:dgToolBar>
-   <t:dgToolBar title="审核" icon="icon-edit" url="mdSupController.do?goUpdate" funname="update"></t:dgToolBar>
-<%--    <t:dgToolBar title="批量删除"  icon="icon-remove" url="mdSupController.do?doBatchDel" funname="deleteALLSelect"></t:dgToolBar> --%>
+   <t:dgToolBar title="编辑" icon="icon-edit" url="mdSupController.do?goUpdate" funname="update"></t:dgToolBar>
+    <t:dgToolBar title="批量删除"  icon="icon-remove" url="mdSupController.do?doBatchDel" funname="deleteALLSelect"></t:dgToolBar>
    <t:dgToolBar title="查看" icon="icon-search" url="mdSupController.do?goUpdate" funname="detail"></t:dgToolBar>
-    <t:dgToolBar operationCode="uasimpcus" title="第三方系统导入" icon="icon-put" funname="otherimp"></t:dgToolBar>
 
     <t:dgToolBar title="导入" icon="icon-put" funname="ImportXls"></t:dgToolBar>
    <t:dgToolBar title="导出" icon="icon-putout" funname="ExportXls"></t:dgToolBar>
    <t:dgToolBar title="模板下载" icon="icon-putout" funname="ExportXlsByT"></t:dgToolBar>
   </t:datagrid>
-    <div name="searchColums1" style="float: left; padding-left: 0px;padding-top: 5px;">
-      <%--<input type="text" name="batchbin" style="width: 100px; height: 30px;">--%>
-      日期：<input type="text" name="batchdate"    class="form-control" onClick="WdatePicker()" style="width: 100px; height: 30px;">
 
-    </div>
   </div>
  </div>
- <script src = "webpage/com/zzjee/md/mdSupList.js"></script>		
+ <script src = "webpage/com/zzjee/md/mdSupList.js"></script>
  <script type="text/javascript">
  $(document).ready(function(){
  });
 
 
- function  otherimp() {
-     var batchdate;
-     batchdate = $('input[name="batchdate"]').attr("value");
-     if(batchdate==""){
-         alert("日期不能为空");
-     }else{
-         var url = "mdSupController.do?doGet&formDate="+batchdate;
-         $.ajax({
-             async : false,
-             cache : false,
-             type : 'POST',
-             url : url,// 请求的action路径
-             error : function() {// 请求失败处理函数
-             },
-             success : function(data) {
-                 var d = $.parseJSON(data);
-                 if (d.success) {
-
-                 }
-             }
-         });
-         tip("获取成功");
-         $('#mdSupList').datagrid('reload',{});
-     }
- }
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'mdSupController.do?upload', "mdSupList");
+	openwindow('Excel导入', 'mdSupController.do?upload', "mdSupList");
 }
 
 //导出

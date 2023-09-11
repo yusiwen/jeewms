@@ -12,22 +12,26 @@ import org.jeecgframework.web.cgform.service.impl.config.util.ColumnMeta;
 public class DbTableMysqlHandleImpl implements DbTableHandleI {
 
 	
-	public String getAddColumnSql(ColumnMeta columnMeta) {
+	@Override
+    public String getAddColumnSql(ColumnMeta columnMeta) {
 		return " ADD COLUMN "+getAddFieldDesc(columnMeta)+";";
 	}
 
 	
-	public String getReNameFieldName(ColumnMeta columnMeta) {
+	@Override
+    public String getReNameFieldName(ColumnMeta columnMeta) {
 		return "CHANGE COLUMN  "+columnMeta.getOldColumnName() +" "+getRenameFieldDesc(columnMeta)+ " ;";
 	}
 
 	
-	public String getUpdateColumnSql(ColumnMeta cgformcolumnMeta,ColumnMeta datacolumnMeta) {
+	@Override
+    public String getUpdateColumnSql(ColumnMeta cgformcolumnMeta, ColumnMeta datacolumnMeta) {
 		return " MODIFY COLUMN  "+getUpdateFieldDesc(cgformcolumnMeta,datacolumnMeta)+";";
 	}
 
 	
-	public String getMatchClassTypeByDataType(String dataType,int digits) {
+	@Override
+    public String getMatchClassTypeByDataType(String dataType, int digits) {
 		String result ="";
 		if (dataType.equalsIgnoreCase("varchar")) {
 			result="string";
@@ -50,12 +54,14 @@ public class DbTableMysqlHandleImpl implements DbTableHandleI {
 	}
 
 	
-	public String dropTableSQL(String tableName) {
+	@Override
+    public String dropTableSQL(String tableName) {
 		return " DROP TABLE IF EXISTS "+tableName+" ;";
 	}
 
 	
-	public String getDropColumnSql(String fieldName) {
+	@Override
+    public String getDropColumnSql(String fieldName) {
 		 return " DROP COLUMN "+fieldName+";";
 	}
 	/**
@@ -109,13 +115,15 @@ public class DbTableMysqlHandleImpl implements DbTableHandleI {
 	 * Mysql注释是和修改的sql一起的,所以返回空字符串就可以了
 	 */
 	
-	public String getCommentSql(ColumnMeta columnMeta) {
+	@Override
+    public String getCommentSql(ColumnMeta columnMeta) {
 		return "";
 	}
 
 	
-	public String getSpecialHandle(ColumnMeta cgformcolumnMeta,
-			ColumnMeta datacolumnMeta) {
+	@Override
+    public String getSpecialHandle(ColumnMeta cgformcolumnMeta,
+                                   ColumnMeta datacolumnMeta) {
 		return null;
 	}
 

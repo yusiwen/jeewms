@@ -49,8 +49,9 @@ public class FormUtil {
 		JSONArray jsonArray = new JSONArray().fromObject(contentData);
 		for (int f = 0; f < jsonArray.size(); f++) {
 			if (jsonArray.getJSONObject(f) == null
-					|| "".equals(jsonArray.getJSONObject(f)))
-				continue;
+					|| "".equals(jsonArray.getJSONObject(f))) {
+                continue;
+            }
 
 			JSONObject json = jsonArray.getJSONObject(f);// 获取对象
 
@@ -59,10 +60,11 @@ public class FormUtil {
 			
 			}
 			String leipiplugins = json.getString("leipiplugins").toString();
-			if ("checkboxs".equals(leipiplugins))
-				name = json.getString("parse_name").toString();
-			else
-				name = json.getString("name").toString();
+			if ("checkboxs".equals(leipiplugins)) {
+                name = json.getString("parse_name").toString();
+            } else {
+                name = json.getString("name").toString();
+            }
 
 			String temp_html = "";
 			if ("text".equals(leipiplugins)) {
@@ -104,23 +106,27 @@ public class FormUtil {
 
 		String value = formData.get(name) == null ? null : formData.get(name)
 				.toString();
-		if (value == null)
-			value = item.getString("value") == null ? "" : item.getString(
-					"value").toString();
+		if (value == null) {
+            value = item.getString("value") == null ? "" : item.getString(
+                    "value").toString();
+        }
 		String style = item.getString("style") == null ? "" : item.getString(
 				"style").toString();
 		String temp_html = MessageFormat.format(temp, value, name, style);
-		if ("view".equals(action))
-			return MessageFormat.format(temp_view, style, value);
-		else
-			return temp_html;
+		if ("view".equals(action)) {
+            return MessageFormat.format(temp_view, style, value);
+        } else {
+            return temp_html;
+        }
 	}
 	// popup
 	private static String GetPopUp(JSONObject item,
 			Map<String, Object> formData, String action) {
 		String dictionary = item.getString("dictionary").toString();
 		String[]dic = new String[]{"","",""};
-		 if(dictionary.split(",").length>1)dic = dictionary.split(",");
+		 if(dictionary.split(",").length>1) {
+             dic = dictionary.split(",");
+         }
 		String temp = "<input type=\"text\" value=\"{0}\"   class=\"searchbox-inputtext\" value=\"\"  name=\"{1}\"  style=\"{2}\" onClick=\"inputClick(this,''{3}'',''{4}'');\" />";
 		String name = item.getString("name").toString();
 
@@ -131,25 +137,28 @@ public class FormUtil {
 		String style = item.getString("style") == null ? "" : item.getString(
 				"style").toString();
 		String temp_html = MessageFormat.format(temp, value, name, style,dic[1],dic[0]);
-		if ("view".equals(action))
-			return MessageFormat.format(temp_view, style, value,dic[1],dic[0]);
-		else
-			return temp_html;
+		if ("view".equals(action)) {
+            return MessageFormat.format(temp_view, style, value,dic[1],dic[0]);
+        } else {
+            return temp_html;
+        }
 	}
 	// TextArea
 	private static String GetTextArea(JSONObject item,
 			Map<String, Object> formData, String action) {
 		String script = "";
 		if (item.getString("orgrich") != null
-				&& "1".equals(item.getString("orgrich").toString()))
-			script = "orgrich=\"true\" ";
+				&& "1".equals(item.getString("orgrich").toString())) {
+            script = "orgrich=\"true\" ";
+        }
 		String name = item.getString("name").toString();
 
 		String value = formData.get(name) == null ? null : formData.get(name)
 				.toString();
-		if (value == null)
-			value = item.getString("value") == null ? "" : item.getString(
-					"value").toString();
+		if (value == null) {
+            value = item.getString("value") == null ? "" : item.getString(
+                    "value").toString();
+        }
 		String style = item.getString("style") == null ? "" : item.getString(
 				"style").toString();
 
@@ -158,10 +167,11 @@ public class FormUtil {
 		String temp_html = MessageFormat.format(temp, name, name, style,
 				script, value);
 
-		if ("view".equals(action))
-			return MessageFormat.format(temp_view, style, value);
-		else
-			return temp_html;
+		if ("view".equals(action)) {
+            return MessageFormat.format(temp_view, style, value);
+        } else {
+            return temp_html;
+        }
 	}
 
 	// Radios
@@ -196,10 +206,11 @@ public class FormUtil {
 			temp_html += MessageFormat.format(temp, name, cvalue, Ischecked,
 					cvalue);
 		}
-		if ("view".equals(action))
-			return MessageFormat.format(temp_view, "&nbsp;", cvalue_);
-		else
-			return temp_html;
+		if ("view".equals(action)) {
+            return MessageFormat.format(temp_view, "&nbsp;", cvalue_);
+        } else {
+            return temp_html;
+        }
 	}
 
 	// Checkboxs
@@ -237,10 +248,11 @@ public class FormUtil {
 					cvalue);
 
 		}
-		if ("view".equals(action))
-			return MessageFormat.format(temp_view, "&nbsp;", view_value);
-		else
-			return temp_html;
+		if ("view".equals(action)) {
+            return MessageFormat.format(temp_view, "&nbsp;", view_value);
+        } else {
+            return temp_html;
+        }
 	}
 
 	// Select(比较特殊)
@@ -264,8 +276,9 @@ public class FormUtil {
 			return MessageFormat.format(temp_view, "&nbsp;",
 					value != null ? value : item.getString("value").toString()
 							.split(",")[0]);
-		} else
-			return temp_html;
+		} else {
+            return temp_html;
+        }
 	}
 
 	// Macros
@@ -331,9 +344,10 @@ public class FormUtil {
 			}
 			// endregion
 		}
-		if ("view".equals(action))
-			return value.replace("${userId}",  ClientManager.getInstance().getClient().getUser().getId())
-			.replace("${userName}",  ClientManager.getInstance().getClient().getUser().getUserName());
+		if ("view".equals(action)) {
+            return value.replace("${userId}",  ClientManager.getInstance().getClient().getUser().getId())
+            .replace("${userName}",  ClientManager.getInstance().getClient().getUser().getUserName());
+        }
 		if(value!=null){
 			temp_html = temp_html.replace("type=\"text\"","type=\""+microtype+"\" ");
 			return temp_html.replace("{macros}", value);
@@ -360,8 +374,9 @@ public class FormUtil {
 			orgType = "电话";
 		}
 		String qrcode_value = "";
-		if (item.getString("value") != null)
-			qrcode_value = item.getString("value").toString();
+		if (item.getString("value") != null) {
+            qrcode_value = item.getString("value").toString();
+        }
 		// print_R($qrcode_value);exit; //array(value,qrcode_url)
 		if ("edit".equals(action)) {
 			temp = orgType
@@ -432,10 +447,12 @@ public class FormUtil {
 
 		String trTitle = "";// 标题
 		for (int i = 0; i < tdCount; i++) {
-			if (i == tdCount - 1)
-				listTitle.set(i, "操作");
-			if ("view".equals(action) && i == tdCount - 1)
-				continue;// 如果是查看最后一列不显示
+			if (i == tdCount - 1) {
+                listTitle.set(i, "操作");
+            }
+			if ("view".equals(action) && i == tdCount - 1) {
+                continue;// 如果是查看最后一列不显示
+            }
 			trTitle += MessageFormat.format("<th>{0}</th>", listTitle.get(i));
 		}
 		trTitle = "<tr>" + trTitle + "</tr>";
@@ -470,8 +487,9 @@ public class FormUtil {
 				{
 					// region 计算统计值
 					float tempTdValue = 0;
-					if (SumValueDic.containsKey(i))
-						tempTdValue = SumValueDic.get(i);
+					if (SumValueDic.containsKey(i)) {
+                        tempTdValue = SumValueDic.get(i);
+                    }
 					try {
 						float resultTdTemp = 0;
 						resultTdTemp = Float.parseFloat(tdValue);
@@ -480,21 +498,24 @@ public class FormUtil {
 					} catch (Exception e) {
 						tdValue = "0";
 					}
-					if (SumValueDic.containsKey(i))
-						SumValueDic.subMap(i, (int) tempTdValue);
-					else
-						SumValueDic.put(i, tempTdValue);
+					if (SumValueDic.containsKey(i)) {
+                        SumValueDic.subMap(i, (int) tempTdValue);
+                    } else {
+                        SumValueDic.put(i, tempTdValue);
+                    }
 					// endregion
 
 				}
 
 				if (i == tdCount - 1)// 最后一列不显示
 				{
-					if ("view".equals(action))
-						continue;
+					if ("view".equals(action)) {
+                        continue;
+                    }
 					// tr += "<td></td>";
-					else
-						tr += "<td><a href=\"javascript:void(0);\" class=\"delrow \">删除</a></td>";
+					else {
+                        tr += "<td><a href=\"javascript:void(0);\" class=\"delrow \">删除</a></td>";
+                    }
 					// tr +=
 					// string.Format("<td><a href=\"javascript:void(0);\" class=\"delrow {0}\">删除</a></td>",
 					// dataValue != null ? "" : "hide");
@@ -502,26 +523,27 @@ public class FormUtil {
 					if ("view".equals(action)) {
 						tr += MessageFormat.format("<td>{0}</td>", tdValue);
 					} else {
-						if ("text".equals(type))
-							tr += MessageFormat
-									.format(
-											"<td><input class=\"input-medium\" type=\"text\" value=\"{0}\" name=\"{1}[]\" {2}></td>",
-											tdValue, tdname, sum);
-						else if ("int".equals(type))
-							tr += MessageFormat
-									.format(
-											"<td><input class=\"input-medium\" type=\"text\" value=\"{0}\" name=\"{1}[]\" {2}></td>",
-											tdValue, tdname, sum);
-						else if ("textarea".equals(type))
-							tr += MessageFormat
-									.format(
-											"<td><textarea class=\"input-medium\" name=\"{0}\" >{1}</textarea></td>",
-											tdname, tdValue, sum);
-						else if ("calc".equals(type))
-							tr += MessageFormat
-									.format(
-											"<td><input class=\"input-medium\" type=\"text\" value=\"{0}\" name=\"{1}[]\" {2}></td>",
-											tdValue, tdname, sum);
+						if ("text".equals(type)) {
+                            tr += MessageFormat
+                                    .format(
+                                            "<td><input class=\"input-medium\" type=\"text\" value=\"{0}\" name=\"{1}[]\" {2}></td>",
+                                            tdValue, tdname, sum);
+                        } else if ("int".equals(type)) {
+                            tr += MessageFormat
+                                    .format(
+                                            "<td><input class=\"input-medium\" type=\"text\" value=\"{0}\" name=\"{1}[]\" {2}></td>",
+                                            tdValue, tdname, sum);
+                        } else if ("textarea".equals(type)) {
+                            tr += MessageFormat
+                                    .format(
+                                            "<td><textarea class=\"input-medium\" name=\"{0}\" >{1}</textarea></td>",
+                                            tdname, tdValue, sum);
+                        } else if ("calc".equals(type)) {
+                            tr += MessageFormat
+                                    .format(
+                                            "<td><input class=\"input-medium\" type=\"text\" value=\"{0}\" name=\"{1}[]\" {2}></td>",
+                                            tdValue, tdname, sum);
+                        }
 					}
 				}
 
@@ -529,15 +551,16 @@ public class FormUtil {
 				{
 					// region
 					if (sum != "") {
-						if ("view".equals(action))
-							tdSum += MessageFormat.format(
-									"<td>合计：value{0}{1}</td>", i, listUnit
-											.get(i));
-						else
-							tdSum += MessageFormat
-									.format(
-											"<td>合计：<input class=\"input-small\" type=\"text\" value=\"value{0}\" name=\"{1}[total]\" {2}\">{3}</td>",
-											i, tdname, sum, listUnit.get(i));
+						if ("view".equals(action)) {
+                            tdSum += MessageFormat.format(
+                                    "<td>合计：value{0}{1}</td>", i, listUnit
+                                            .get(i));
+                        } else {
+                            tdSum += MessageFormat
+                                    .format(
+                                            "<td>合计：<input class=\"input-small\" type=\"text\" value=\"value{0}\" name=\"{1}[total]\" {2}\">{3}</td>",
+                                            i, tdname, sum, listUnit.get(i));
+                        }
 					} else {
 						tdSum += "<td></td>";
 					}
@@ -564,12 +587,13 @@ public class FormUtil {
 						"<tbody class=\"sum\"><tr>{0}</tr></tbody>", tdSum);
 			}
 		}
-		if ("view".equals(action))
-			theader = MessageFormat
-					.format(theader, tdCount, title, "", trTitle);
-		else
-			theader = MessageFormat.format(theader, tdCount, title, btnAdd,
-					trTitle);
+		if ("view".equals(action)) {
+            theader = MessageFormat
+                    .format(theader, tdCount, title, "", trTitle);
+        } else {
+            theader = MessageFormat.format(theader, tdCount, title, btnAdd,
+                    trTitle);
+        }
 
 		temp_html = MessageFormat.format(temp, theader, sbTr.toString(), tdSum);
 

@@ -344,40 +344,58 @@ public class WaveToFjController extends BaseController {
 	@RequestMapping(value = "/list/tofj",  method = RequestMethod.GET)
 	@ResponseBody
 	public ResponseEntity<?> list(@RequestParam(value="username", required=false) String username,
-								  @RequestParam(value="searchstr", required=false)String searchstr,
-								  @RequestParam(value="searchstr2", required=false)String searchstr2,
-								  @RequestParam(value="searchstr3", required=false)String searchstr3) {
+								  @RequestParam(value="searchstr", required=false)String searchstr,//波次号
+								  @RequestParam(value="searchstr2", required=false)String searchstr2,//一次容器
+								  @RequestParam(value="searchstr3", required=false)String searchstr3,//商品编码
+								  @RequestParam(value="searchstr4", required=false)String searchstr4,//二次容器
+								  @RequestParam(value="searchstr5", required=false)String searchstr5)//排序方式
+	{
 		ResultDO D0 = new  ResultDO();
 		D0.setOK(true);
 		String hql="from WaveToDownEntity where waveId = ?  ";
 
 		List<WaveToFjEntity> listWaveToFjs =new ArrayList<>();
 		List<WaveToFjEntity> listWaveToFjsnew =new ArrayList<>();
-
+		if(StringUtil.isEmpty(searchstr5)||"null".equals(searchstr5)){
+			searchstr5 = "asc";
+		}
+      String orderby = "order by secondRq  " + searchstr5;
 		if(StringUtil.isEmpty(searchstr)&&StringUtil.isEmpty(searchstr2)){
-			hql="from WaveToFjEntity    ";
+			hql="from WaveToFjEntity  where 1 =  1  "+orderby;
 			listWaveToFjs=waveToFjService.findHql(hql);
 		}
 		if(StringUtil.isNotEmpty(searchstr)&&StringUtil.isEmpty(searchstr2)){
-			hql="from WaveToFjEntity where waveId = ?  ";
+			hql="from WaveToFjEntity where waveId = ?  "+orderby;
 			listWaveToFjs=waveToFjService.findHql(hql,searchstr);
 		}
 		if(StringUtil.isEmpty(searchstr)&&StringUtil.isNotEmpty(searchstr2)){
-			hql="from WaveToFjEntity where firstRq = ?  ";
+			hql="from WaveToFjEntity where firstRq = ?  "+orderby;
 			listWaveToFjs=waveToFjService.findHql(hql,searchstr2);
 		}
 		if(StringUtil.isNotEmpty(searchstr)&&StringUtil.isNotEmpty(searchstr2)){
-			hql="from WaveToFjEntity where waveId = ? and  firstRq = ?";
+			hql="from WaveToFjEntity where waveId = ? and  firstRq = ?"+orderby;
 			listWaveToFjs=waveToFjService.findHql(hql,searchstr,searchstr2);
 		}
+
 //		List<WaveToFjEntity> listWaveToFjs=waveToFjService.getList(WaveToFjEntity.class);
 		String omnoticeid="1";
 		String siji = "";
 		String chehao = "";
- 		for(WaveToFjEntity t:listWaveToFjs) {
+		System.out.println("11111searchstr3="+searchstr3);
+
+		for(WaveToFjEntity t:listWaveToFjs) {
+ 			System.out.println("searchstr4="+searchstr4);
+			if(StringUtil.isNotEmpty(searchstr4)){
+				if ( !StringUtil.strPos(t.getSecondRq(), searchstr4) ) {
+					continue;
+				}
+			}
+
 			if (StringUtil.isNotEmpty(searchstr3)) {
+				System.out.println("t.getGoodsId()="+t.getGoodsId());
+				System.out.println("searchstr3="+searchstr3);
 				try{
-					if (!StringUtil.strPos(t.getGoodsId(), searchstr3)||StringUtil.strPos(t.getShpTiaoMa(),searchstr3)) {
+					if (!(StringUtil.strPos(t.getGoodsId(), searchstr3)||StringUtil.strPos(t.getShpTiaoMa(),searchstr3))) {
 						continue;
 					}
 				}catch (Exception e){
@@ -439,6 +457,7 @@ public class WaveToFjController extends BaseController {
 			if (wmOmQmI != null&&wmOmQmI.getBinSta().equals("H")) {
 				wmOmQmI.setBinSta("Y");
 				wmOmQmI.setSecondRq(waveToFj.getSecondRq());
+				wmOmQmI.setUpdateBy(waveToFj.getCreateBy());//分拣人
 				systemService.saveOrUpdate(wmOmQmI);
 				String hql = "From WmOmQmIEntity where omNoticeId = ? and  binSta = ?";
 				List<WmOmQmIEntity> listom = systemService.findHql(hql,wmOmQmI.getOmNoticeId(),"H");
@@ -449,13 +468,17 @@ public class WaveToFjController extends BaseController {
 				}
 				WmOmNoticeHEntity wmom = systemService.findUniqueByProperty(WmOmNoticeHEntity.class, "omNoticeId", omnoticeid);
 				wmom.setOmSta("操作中");
+
 				systemService.updateEntitie(wmom);
+				D0.setOK(true);
 			}
 			} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity(HttpStatus.NO_CONTENT);
+			D0.setOK(false);
+
+			return new ResponseEntity(D0, HttpStatus.OK);
 		}
-		return new ResponseEntity(waveToFj, HttpStatus.OK);
+		return new ResponseEntity(D0, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/jsonfj", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)

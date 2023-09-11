@@ -14,7 +14,7 @@
 	<t:dgCol title="common.updateby" field="updateBy" hidden="true"></t:dgCol>
 	<t:dgCol title="common.updatetime" field="updateDate" formatter="yyyy-MM-dd" hidden="true"></t:dgCol>
 	<t:dgCol title="common.status" sortable="true" field="status" replace="common.active_1,common.inactive_0,super.admin_-1" ></t:dgCol>
-	
+
 	<t:dgCol title="common.operation" field="opt" width="100"></t:dgCol>
 	<t:dgFunOpt funname="deleteDialog(id)" title="common.delete" urlclass="ace_button"  urlfont="fa-trash-o"></t:dgFunOpt>
 	<t:dgToolBar title="common.add.param" langArg="common.user" icon="icon-add" url="userController.do?addorupdate" funname="add"></t:dgToolBar>
@@ -88,7 +88,7 @@ function lockuploadify(url, id) {
 		type : 'POST',
 		url : url,// 请求的action路径
 		error : function() {// 请求失败处理函数
-		
+
 		},
 		success : function(data) {
 			var d = $.parseJSON(data);
@@ -105,7 +105,7 @@ function lockuploadify(url, id) {
 <script type="text/javascript">
 	//导入
 	function ImportXls() {
-		openuploadwin('Excel导入', 'userController.do?upload', "userList");
+		openwindow('Excel导入', 'userController.do?upload', "userList");
 	}
 
 	//导出

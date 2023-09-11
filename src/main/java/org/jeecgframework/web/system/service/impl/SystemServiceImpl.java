@@ -43,11 +43,13 @@ public class SystemServiceImpl extends CommonServiceImpl implements SystemServic
 	@Autowired
 	private JeecgDictDao jeecgDictDao;
 
+	@Override
 	public TSUser checkUserExits(TSUser user) throws Exception {
 		return this.commonDao.getUserByUserIdAndUserNameExits(user);
 	}
 
-	public List<DictEntity> queryDict(String dicTable, String dicCode,String dicText){
+	@Override
+	public List<DictEntity> queryDict(String dicTable, String dicCode, String dicText){
 		List<DictEntity> dictList = null;
 		//step.1 如果没有字典表则使用系统字典表
 		if(StringUtil.isEmpty(dicTable)){
@@ -65,6 +67,7 @@ public class SystemServiceImpl extends CommonServiceImpl implements SystemServic
 	/**
 	 * 添加日志
 	 */
+	@Override
 	public void addLog(String logcontent, Short loglevel, Short operatetype) {
 		HttpServletRequest request = ContextHolderUtils.getRequest();
 		String broswer = BrowserUtils.checkBrowse(request);
@@ -88,6 +91,7 @@ public class SystemServiceImpl extends CommonServiceImpl implements SystemServic
 	 * @param typename
 	 * @return
 	 */
+	@Override
 	public TSType getType(String typecode, String typename, TSTypegroup tsTypegroup) {
 		//TSType actType = commonDao.findUniqueByProperty(TSType.class, "typecode", typecode,tsTypegroup.getId());
 		List<TSType> ls = commonDao.findHql("from TSType where typecode = ? and typegroupid = ?",typecode,tsTypegroup.getId());
@@ -108,10 +112,11 @@ public class SystemServiceImpl extends CommonServiceImpl implements SystemServic
 	/**
 	 * 根据类型分组编码和名称获取TypeGroup,如果为空则创建一个
 	 *
-	 * @param typecode
-	 * @param typename
+	 * @param typegroupcode
+	 * @param typgroupename
 	 * @return
 	 */
+	@Override
 	public TSTypegroup getTypeGroup(String typegroupcode, String typgroupename) {
 		TSTypegroup tsTypegroup = commonDao.findUniqueByProperty(TSTypegroup.class, "typegroupcode", typegroupcode);
 		if (tsTypegroup == null) {
@@ -124,12 +129,14 @@ public class SystemServiceImpl extends CommonServiceImpl implements SystemServic
 	}
 
 
+	@Override
 	public TSTypegroup getTypeGroupByCode(String typegroupCode) {
 		TSTypegroup tsTypegroup = commonDao.findUniqueByProperty(TSTypegroup.class, "typegroupcode", typegroupCode);
 		return tsTypegroup;
 	}
 
 
+	@Override
 	public void initAllTypeGroups() {
 		List<TSTypegroup> typeGroups = this.commonDao.loadAll(TSTypegroup.class);
 		for (TSTypegroup tsTypegroup : typeGroups) {
@@ -140,6 +147,7 @@ public class SystemServiceImpl extends CommonServiceImpl implements SystemServic
 	}
 
 
+	@Override
 	public void refleshTypesCach(TSType type) {
 		TSTypegroup tsTypegroup = type.getTSTypegroup();
 		TSTypegroup typeGroupEntity = this.commonDao.get(TSTypegroup.class, tsTypegroup.getId());
@@ -148,6 +156,7 @@ public class SystemServiceImpl extends CommonServiceImpl implements SystemServic
 	}
 
 
+	@Override
 	public void refleshTypeGroupCach() {
 		ResourceUtil.allTypeGroups.clear();
 		List<TSTypegroup> typeGroups = this.commonDao.loadAll(TSTypegroup.class);
@@ -163,6 +172,7 @@ public class SystemServiceImpl extends CommonServiceImpl implements SystemServic
 	 * @param functionId
 	 * @return
 	 */
+	@Override
 	public Set<String> getOperationCodesByRoleIdAndFunctionId(String roleId, String functionId) {
 		Set<String> operationCodes = new HashSet<String>();
 		TSRole role = commonDao.get(TSRole.class, roleId);
@@ -185,10 +195,11 @@ public class SystemServiceImpl extends CommonServiceImpl implements SystemServic
 
 	/**
 	 * 根据用户ID 和 菜单Id 获取 具有操作权限的按钮Codes
-	 * @param roleId
+	 * @param userId
 	 * @param functionId
 	 * @return
 	 */
+	@Override
 	public Set<String> getOperationCodesByUserIdAndFunctionId(String userId, String functionId) {
 		Set<String> operationCodes = new HashSet<String>();
 		List<TSRoleUser> rUsers = findByProperty(TSRoleUser.class, "TSUser.id", userId);
@@ -214,8 +225,8 @@ public class SystemServiceImpl extends CommonServiceImpl implements SystemServic
 	/**
 	 * 获取页面控件权限控制的
 	 * JS片段
-	 * @param out
 	 */
+	@Override
 	public String getAuthFilterJS() {
 		StringBuilder out = new StringBuilder();
 		out.append("<script type=\"text/javascript\">");
@@ -227,8 +238,9 @@ public class SystemServiceImpl extends CommonServiceImpl implements SystemServic
 			Set<String> operationCodes = (Set<String>) request.getAttribute(Globals.OPERATIONCODES);
 			if (null!=operationCodes) {
 				for (String MyoperationCode : operationCodes) {
-					if (oConvertUtils.isEmpty(MyoperationCode))
-						break;
+					if (oConvertUtils.isEmpty(MyoperationCode)) {
+                        break;
+                    }
 					TSOperation operation = this.getEntity(TSOperation.class, MyoperationCode);
 					if (operation.getOperationcode().startsWith(".") || operation.getOperationcode().startsWith("#")){
 						if (operation.getOperationType().intValue()==Globals.OPERATION_TYPE_HIDE){
@@ -251,6 +263,7 @@ public class SystemServiceImpl extends CommonServiceImpl implements SystemServic
 		return out.toString();
 	}
 	
+	@Override
 	public void flushRoleFunciton(String id, TSFunction newFunction) {
 		TSFunction functionEntity = this.getEntity(TSFunction.class, id);
 		if (functionEntity.getTSIcon() == null || !StringUtil.isNotEmpty(functionEntity.getTSIcon().getId())) {
@@ -269,7 +282,8 @@ public class SystemServiceImpl extends CommonServiceImpl implements SystemServic
 		}
 	}
 
-    public String generateOrgCode(String id, String pid) {
+    @Override
+	public String generateOrgCode(String id, String pid) {
 
         int orgCodeLength = 2; // 默认编码长度
         if ("3".equals(ResourceUtil.getOrgCodeLengthType())) { // 类型2-编码长度为3，如001
@@ -306,8 +320,9 @@ public class SystemServiceImpl extends CommonServiceImpl implements SystemServic
         return newOrgCode;
     }
 
+	@Override
 	public Set<String> getOperationCodesByRoleIdAndruleDataId(String roleId,
-			String functionId) {
+															  String functionId) {
 		Set<String> operationCodes = new HashSet<String>();
 		TSRole role = commonDao.get(TSRole.class, roleId);
 		CriteriaQuery cq1 = new CriteriaQuery(TSRoleFunction.class);
@@ -327,8 +342,9 @@ public class SystemServiceImpl extends CommonServiceImpl implements SystemServic
 		return operationCodes;
 	}
 
+	@Override
 	public Set<String> getOperationCodesByUserIdAndDataId(String userId,
-			String functionId) {
+														  String functionId) {
 		// TODO Auto-generated method stub
 		Set<String> dataRulecodes = new HashSet<String>();
 		List<TSRoleUser> rUsers = findByProperty(TSRoleUser.class, "TSUser.id", userId);
@@ -355,6 +371,7 @@ public class SystemServiceImpl extends CommonServiceImpl implements SystemServic
 	 * 加载所有图标
 	 * @return
 	 */
+	@Override
 	public  void initAllTSIcons() {
 		List<TSIcon> list = this.loadAll(TSIcon.class);
 		for (TSIcon tsIcon : list) {
@@ -365,6 +382,7 @@ public class SystemServiceImpl extends CommonServiceImpl implements SystemServic
 	 * 更新图标
 	 * @param icon
 	 */
+	@Override
 	public  void upTSIcons(TSIcon icon) {
 		ResourceUtil.allTSIcons.put(icon.getId(), icon);
 	}
@@ -372,6 +390,7 @@ public class SystemServiceImpl extends CommonServiceImpl implements SystemServic
 	 * 更新图标
 	 * @param icon
 	 */
+	@Override
 	public  void delTSIcons(TSIcon icon) {
 		ResourceUtil.allTSIcons.remove(icon.getId());
 	}

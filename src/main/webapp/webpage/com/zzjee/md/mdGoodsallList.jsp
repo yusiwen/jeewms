@@ -13,7 +13,7 @@
     <t:dgCol title="更新日期"  field="updateDate" formatter="yyyy-MM-dd" hidden="true"  queryMode="group"  width="120"></t:dgCol>
     <t:dgCol title="所属部门"  field="sysOrgCode"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
     <t:dgCol title="所属公司"  field="sysCompanyCode"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
-    <t:dgCol title="所属客户"  field="suoShuKeHu"   query="true" queryMode="single"  width="120"></t:dgCol>
+    <t:dgCol title="所属供应商"  field="suoShuKeHu"   query="true" queryMode="single"  width="120"></t:dgCol>
     <t:dgCol title="商品名称"  field="shpMingCheng"   query="true" queryMode="single"  width="160"></t:dgCol>
     <t:dgCol title="商品简称"  field="shpJianCheng"  hidden="true"  queryMode="single"  width="120"></t:dgCol>
     <t:dgCol title="商品编码"  field="shpBianMa"   query="true" queryMode="single"  width="90"></t:dgCol>
@@ -26,7 +26,7 @@
 
     <t:dgCol title="商品颜色"  field="shpYanSe"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
     <t:dgCol title="产品属性"  field="chpShuXing"  queryMode="single" dictionary="ba_goods_type,goods_type_code,goods_type_name"   width="120"></t:dgCol>
-    <t:dgCol title="存放温层"  field="cfWenCeng"   query="true" queryMode="single" dictionary="ba_deg_type,deg_type_code,deg_type_name"  width="80"></t:dgCol>
+    <t:dgCol title="产品大类"  field="cfWenCeng"   query="true" queryMode="single" dictionary="ba_deg_type,deg_type_code,deg_type_name"  width="80"></t:dgCol>
     <t:dgCol title="拆零控制"  field="chlKongZhi"    queryMode="group" dictionary="sf_yn" width="60"></t:dgCol>
     <t:dgCol title="码盘单层数量"  field="mpDanCeng"   style="text-align:right"  queryMode="group"  width="60"></t:dgCol>
     <t:dgCol title="码盘层高"  field="mpCengGao"  style="text-align:right"   queryMode="group"  width="60"></t:dgCol>
@@ -76,7 +76,7 @@
 
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'mdGoodsController.do?upload', "mdGoodsList");
+	openwindow('Excel导入', 'mdGoodsController.do?upload', "mdGoodsList");
 }
 
 //导出

@@ -223,8 +223,8 @@ public class CriteriaQuery {
 	/**
 	 * 创建外键表关联对象
 	 * 
-	 * @param name外键表实体名
-	 * @param value引用名
+	 * @param name 外键表实体名
+	 * @param value 引用名
 	 */
 	public void createAlias(String name, String value) {
 		if(!alias.contains(name)){
@@ -260,8 +260,8 @@ public class CriteriaQuery {
 	 * 设置条件之间and关系
 	 * 
 	 * @param query
-	 * @param source
-	 * @param dest
+	 * @param souce
+	 * @param c
 	 *            hql:(this_.0 like ? or this_.1 like ?) 表示法:cq.add(cq.or(cq, 0,
 	 *            1));
 	 * @return
@@ -288,9 +288,8 @@ public class CriteriaQuery {
 	/**
 	 * 设置组合后的Criterion OR关系
 	 * 
-	 * @param query
-	 * @param source
-	 * @param dest
+	 * @param c1
+	 * @param c2
 	 * @return
 	 */
 	public Criterion getor(Criterion c1,Criterion c2) {
@@ -301,9 +300,8 @@ public class CriteriaQuery {
 	/**
 	 * 设置条件之间and关系
 	 * 
-	 * @param query
-	 * @param source
-	 * @param dest
+	 * @param c1
+	 * @param c2
 	 * @return
 	 */
 	public Criterion and(Criterion c1, Criterion c2)
@@ -316,8 +314,8 @@ public class CriteriaQuery {
 	 * 设置Or查询
 	 * 
 	 * @param query
-	 * @param source条件1
-	 * @param dest条件2
+	 * @param source 条件1
+	 * @param dest 条件2
 	 * @return
 	 */
 	public Criterion or(CriteriaQuery query, int source, int dest) {
@@ -328,9 +326,9 @@ public class CriteriaQuery {
 	/**
 	 * 设置or(Criterion c, CriteriaQuery query, int source)（或）查询条件
 	 * 
-	 * @param keyname
-	 * @param keyvalue1
-	 * @param keyvalue2
+	 * @param c
+	 * @param query
+	 * @param source
 	 */
 	public Criterion or(Criterion c, CriteriaQuery query, int source) {
 		return Restrictions.or(c, query.getCriterionList().getParas(source));
@@ -339,9 +337,8 @@ public class CriteriaQuery {
 	/**
 	 * 设置or(Criterion c1, Criterion c2)（或）查询条件
 	 * 
-	 * @param keyname
-	 * @param keyvalue1
-	 * @param keyvalue2
+	 * @param c1
+	 * @param c2
 	 *            两个条件或查询： Restrictions.or(Restrictions.in("username",list1),
 	 *            Restrictions.idEq(1)); 三个或多个条件查询:（使用嵌套方式）
 	 *            criteria.add(Restrictions
@@ -367,9 +364,8 @@ public class CriteriaQuery {
 	/**
 	 * 设置order（排序）查询条件
 	 * 
-	 * @param ordername
+	 * @param map
 	 *            ：排序字段名
-	 * @param ordervalue
 	 *            ：排序字段值（"asc","desc"）
 	 */
 	public void setOrder(Map<String, Object> map) {
@@ -426,8 +422,7 @@ public class CriteriaQuery {
 	 * 设置notEq(不等)查询条件
 	 * 
 	 * @param keyname
-	 * @param keyvalue1
-	 * @param keyvalue2
+	 * @param keyvalue
 	 */
 	public void notEq(String keyname, Object keyvalue) {
 		if (keyvalue != null && keyvalue != "") {
@@ -443,8 +438,7 @@ public class CriteriaQuery {
 	 * 设置like(模糊)查询条件
 	 * 
 	 * @param keyname
-	 * @param keyvalue1
-	 * @param keyvalue2
+	 * @param keyvalue
 	 */
 	public void like(String keyname, Object keyvalue) {
 		if (keyvalue != null && keyvalue != "") {
@@ -461,8 +455,7 @@ public class CriteriaQuery {
 	 * 设置gt(>)查询条件
 	 * 
 	 * @param keyname
-	 * @param keyvalue1
-	 * @param keyvalue2
+	 * @param keyvalue
 	 */
 	public void gt(String keyname, Object keyvalue) {
 		if (keyvalue != null && keyvalue != "") {
@@ -478,8 +471,7 @@ public class CriteriaQuery {
 	 * 设置lt(<)查询条件
 	 * 
 	 * @param keyname
-	 * @param keyvalue1
-	 * @param keyvalue2
+	 * @param keyvalue
 	 */
 	public void lt(String keyname, Object keyvalue) {
 		if (keyvalue != null && keyvalue != "") {
@@ -495,8 +487,7 @@ public class CriteriaQuery {
 	 * 设置le(<=)查询条件
 	 * 
 	 * @param keyname
-	 * @param keyvalue1
-	 * @param keyvalue2
+	 * @param keyvalue
 	 */
 	public void le(String keyname, Object keyvalue) {
 		if (keyvalue != null && keyvalue != "") {
@@ -512,8 +503,7 @@ public class CriteriaQuery {
 	 * 设置ge(>=)查询条件
 	 * 
 	 * @param keyname
-	 * @param keyvalue1
-	 * @param keyvalue2
+	 * @param keyvalue
 	 */
 	public void ge(String keyname, Object keyvalue) {
 		if (keyvalue != null && keyvalue != "") {
@@ -529,8 +519,7 @@ public class CriteriaQuery {
 	 * 设置in(包含)查询条件
 	 * 
 	 * @param keyname
-	 * @param keyvalue1
-	 * @param keyvalue2
+	 * @param keyvalue
 	 */
 	public void in(String keyname, Object[] keyvalue) {
 		if (keyvalue != null&&keyvalue.length>0&& keyvalue[0] != "") {
@@ -542,8 +531,6 @@ public class CriteriaQuery {
 	 * 设置isNull查询条件
 	 * 
 	 * @param keyname
-	 * @param keyvalue1
-	 * @param keyvalue2
 	 */
 	public void isNull(String keyname) {
 		criterionList.addPara(Restrictions.isNull(keyname));
@@ -553,8 +540,6 @@ public class CriteriaQuery {
 	 * 设置isNull查询条件
 	 * 
 	 * @param keyname
-	 * @param keyvalue1
-	 * @param keyvalue2
 	 */
 	public void isNotNull(String keyname) {
 		criterionList.addPara(Restrictions.isNotNull(keyname));
@@ -564,8 +549,7 @@ public class CriteriaQuery {
 	 * 保存查询条件
 	 * 
 	 * @param keyname
-	 * @param keyvalue1
-	 * @param keyvalue2
+	 * @param keyvalue
 	 */
 	public void put(String keyname, Object keyvalue) {
 		if (keyvalue != null && keyvalue != "") {

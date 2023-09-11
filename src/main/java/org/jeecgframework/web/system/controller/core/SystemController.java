@@ -7,14 +7,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -32,15 +25,7 @@ import org.jeecgframework.core.constant.Globals;
 import org.jeecgframework.core.extend.hqlsearch.parse.ObjectParseUtil;
 import org.jeecgframework.core.extend.hqlsearch.parse.PageValueConvertRuleEnum;
 import org.jeecgframework.core.extend.hqlsearch.parse.vo.HqlRuleEnum;
-import org.jeecgframework.core.util.JSONHelper;
-import org.jeecgframework.core.util.ListUtils;
-import org.jeecgframework.core.util.MutiLangSqlCriteriaUtil;
-import org.jeecgframework.core.util.MutiLangUtil;
-import org.jeecgframework.core.util.ResourceUtil;
-import org.jeecgframework.core.util.SetListSort;
-import org.jeecgframework.core.util.StringUtil;
-import org.jeecgframework.core.util.YouBianCodeUtil;
-import org.jeecgframework.core.util.oConvertUtils;
+import org.jeecgframework.core.util.*;
 import org.jeecgframework.tag.core.easyui.TagUtil;
 import org.jeecgframework.tag.vo.datatable.SortDirection;
 import org.jeecgframework.tag.vo.easyui.ComboTreeModel;
@@ -143,7 +128,7 @@ public class SystemController extends BaseController {
 		return ajaxJson;
 	}
 
-	
+
 	/**
 	 * 类型字典列表页面跳转
 	 *
@@ -196,7 +181,7 @@ public class SystemController extends BaseController {
             }
             MutiLangSqlCriteriaUtil.assembleCondition(typegroupnameKeyList, cq, "typegroupname", typegroupname);
         }
-        
+
         String typegroupcode = request.getParameter("typegroupcode");
         if(oConvertUtils.isNotEmpty(typegroupcode)) {
         	 cq.eq("typegroupcode", typegroupcode);
@@ -277,36 +262,6 @@ public class SystemController extends BaseController {
 		return new ModelAndView("system/type/typeListForTypegroup");
 	}
 
-//	@RequestMapping(params = "typeGroupTree")
-//	@ResponseBody
-//	public List<ComboTree> typeGroupTree(HttpServletRequest request, HttpServletResponse response, DataGrid dataGrid) {
-//		CriteriaQuery cq = new CriteriaQuery(TSTypegroup.class);
-//		List<TSTypegroup> typeGroupList = systemService.getListByCriteriaQuery(cq, false);
-//		List<ComboTree> trees = new ArrayList<ComboTree>();
-//		for (TSTypegroup obj : typeGroupList) {
-//			ComboTree tree = new ComboTree();
-//			tree.setId(obj.getId());
-//			tree.setText(obj.getTypegroupname());
-//			List<TSType> types = obj.getTSTypes();
-//			if (types != null) {
-//				if (types.size() > 0) {
-//					//tree.setState("closed");
-//					List<ComboTree> children = new ArrayList<ComboTree>();
-//					for (TSType type : types) {
-//						ComboTree tree2 = new ComboTree();
-//						tree2.setId(type.getId());
-//						tree2.setText(type.getTypename());
-//						children.add(tree2);
-//					}
-//					tree.setChildren(children);
-//				}
-//			}
-//			//tree.setChecked(false);
-//			trees.add(tree);
-//		}
-//		return trees;
-//	}
-
 	@RequestMapping(params = "typeGridTree")
 	@ResponseBody
     @Deprecated // add-begin-end--Author:zhangguoming  Date:20140928 for：数据字典修改，该方法启用，数据字典不在已树结构展示了
@@ -359,41 +314,6 @@ public class SystemController extends BaseController {
 		MutiLangUtil.setMutiTree(treeGrids);
 		return treeGrids;
 	}
-
-//    private void assembleConditionForMutilLang(CriteriaQuery cq, String typegroupname, List<String> typegroupnameKeyList) {
-//        Map<String,String> typegroupnameMap = new HashMap<String, String>();
-//        for (String nameKey : typegroupnameKeyList) {
-//            String name = mutiLangService.getLang(nameKey);
-//            typegroupnameMap.put(nameKey, name);
-//        }
-//        List<String> tepegroupnameParamList = new ArrayList<String>();
-//        for (Map.Entry<String, String> entry : typegroupnameMap.entrySet()) {
-//            String key = entry.getKey();
-//            String value = entry.getValue();
-//            if (typegroupname.startsWith("*") && typegroupname.endsWith("*")) {
-//                if (value.contains(typegroupname)) {
-//                    tepegroupnameParamList.add(key);
-//                }
-//            } else if(typegroupname.startsWith("*")) {
-//                if (value.endsWith(typegroupname.substring(1))) {
-//                    tepegroupnameParamList.add(key);
-//                }
-//            } else if(typegroupname.endsWith("*")) {
-//                if (value.startsWith(typegroupname.substring(0, typegroupname.length() -1))) {
-//                    tepegroupnameParamList.add(key);
-//                }
-//            } else {
-//                if (value.equals(typegroupname)) {
-//                    tepegroupnameParamList.add(key);
-//                }
-//            }
-//        }
-//
-//        if (tepegroupnameParamList.size() > 0) {
-//            cq.in("typegroupname", tepegroupnameParamList.toArray());
-//            cq.add();
-//        }
-//    }
 
     /**
 	 * 删除类型分组或者类型（ID以G开头的是分组）
@@ -1040,8 +960,8 @@ public class SystemController extends BaseController {
 			}
 		}
 	}
-	
-	
+
+
 	/**
 	 * 在线用户列表
 	 * @param request
@@ -1188,7 +1108,7 @@ public class SystemController extends BaseController {
 				}else{
 					dataLogDiff.setValue1("");
 				}
-				
+
 				if (map2.containsKey(string)) {
 					value2 = map2.get(string).toString();
 					if (value2 == null) {
@@ -1200,7 +1120,7 @@ public class SystemController extends BaseController {
 					dataLogDiff.setValue2("");
 				}
 
-				
+
 				if (value1 == null && value2 == null) {
 					dataLogDiff.setDiff("N");
 				}else {
@@ -1229,7 +1149,7 @@ public class SystemController extends BaseController {
 		return new ModelAndView("system/dataLog/diffDataVersion");
 	}
 
-	
+
 	/**
 	 * WebUploader
 	 * 文件上传处理/删除处理
@@ -1247,15 +1167,17 @@ public class SystemController extends BaseController {
 	        //如果是上传操作
 	        if("1".equals(upFlag)){
 	        	String fileName = null;
-	        	String nowday=new SimpleDateFormat("yyyyMMddHHmmss").format(new Date());
+	        	String nowday=new SimpleDateFormat("yyyyMMdd").format(new Date());
 	    		File file = new File(ctxPath+File.separator+nowday);
 	    		if (!file.exists()) {
-	    			file.mkdir();// 创建文件根目录
+	    			file.mkdirs();// 创建文件根目录
 	    		}
 	            MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 	            MultipartFile mf=multipartRequest.getFile("file");// 获取上传文件对象
 	    		fileName = mf.getOriginalFilename();// 获取文件名
-	    		String savePath = file.getPath() + File.separator + fileName;
+				String fileExt = fileName.substring(fileName.lastIndexOf(".") + 1).toLowerCase();
+				// TODO: 2022/11/30 判断文件后缀 
+				String savePath = file.getPath() + File.separator + fileName;
 	    		File savefile = new File(savePath);
 	    		FileCopyUtils.copy(mf.getBytes(), savefile);
 				msg="上传成功";
@@ -1311,7 +1233,7 @@ public class SystemController extends BaseController {
 		}else{
 			response.setContentType("image/jpeg;charset=utf-8");
 		}
-	
+
 		InputStream inputStream = null;
 		OutputStream outputStream=null;
 		try {
@@ -1336,5 +1258,5 @@ public class SystemController extends BaseController {
 			}
 		}
 	}
-	
+
 }

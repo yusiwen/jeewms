@@ -9,6 +9,8 @@ import com.zzjee.wm.entity.WmImNoticeHEntity;
 import com.zzjee.wm.entity.WmImNoticeIEntity;
 import com.zzjee.wm.entity.WmInQmIEntity;
 
+import org.jeecgframework.core.util.*;
+import org.jeecgframework.web.system.sms.util.Constants;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -16,11 +18,6 @@ import java.util.List;
 
 import org.jeecgframework.core.common.exception.BusinessException;
 import org.jeecgframework.core.common.service.impl.CommonServiceImpl;
-import org.jeecgframework.core.util.DateUtils;
-import org.jeecgframework.core.util.MyBeanUtils;
-import org.jeecgframework.core.util.ResourceUtil;
-import org.jeecgframework.core.util.StringUtil;
-import org.jeecgframework.core.util.oConvertUtils;
 import org.jeecgframework.web.system.pojo.base.TSRole;
 import org.jeecgframework.web.system.pojo.base.TSRoleUser;
 import org.jeecgframework.web.system.pojo.base.TSUser;
@@ -33,26 +30,31 @@ import java.io.Serializable;
 @Service("wmImNoticeHService")
 @Transactional
 public class WmImNoticeHServiceImpl extends CommonServiceImpl implements WmImNoticeHServiceI {
-	
- 	public <T> void delete(T entity) {
+
+ 	@Override
+    public <T> void delete(T entity) {
  		super.delete(entity);
  		//执行删除操作配置的sql增强
 		this.doDelSql((WmImNoticeHEntity)entity);
  	}
-	
-	public void addMain(WmImNoticeHEntity wmImNoticeH,
-	        List<WmImNoticeIEntity> wmImNoticeIList){
+
+	@Override
+    public synchronized void addMain(WmImNoticeHEntity wmImNoticeH,
+                        List<WmImNoticeIEntity> wmImNoticeIList){
 			//保存主信息
+				if(StringUtil.isEmpty(wmImNoticeH.getOrderTypeCode())){
+					wmImNoticeH.setOrderTypeCode("01");
+				}
 			this.save(wmImNoticeH);
-		
+
 			/**保存-进货通知明细*/
 			for(WmImNoticeIEntity wmImNoticeI:wmImNoticeIList){
 				//外键设置
-				MvGoodsEntity mvgoods = this.findUniqueByProperty(MvGoodsEntity.class, "goodsCode", wmImNoticeI.getGoodsCode()) ;		
+				MvGoodsEntity mvgoods = this.findUniqueByProperty(MvGoodsEntity.class, "goodsCode", wmImNoticeI.getGoodsCode()) ;
 				if(mvgoods!=null){
 					wmImNoticeI.setGoodsName(mvgoods.getGoodsName());
 					wmImNoticeI.setBarCode(mvgoods.getShpTiaoMa());
-
+					wmImNoticeI.setChpShuXing(mvgoods.getChpShuXing());
 					try {
 						try {
 							wmImNoticeI.setGoodsFvol(String.valueOf(Double.parseDouble(mvgoods.getTiJiCm())*Double.parseDouble(wmImNoticeI.getGoodsCount())));
@@ -78,7 +80,7 @@ public class WmImNoticeHServiceImpl extends CommonServiceImpl implements WmImNot
 					} catch (Exception e) {
 						// TODO: handle exception
 					}
-					
+
 					try {
 //						wmImNoticeI.setGoodsFvol(String.valueOf(Long.parseLong(mdgoods.getTiJiCm())*Long.parseLong(wmImNoticeI.getGoodsCount())));
 						wmImNoticeI.setGoodsWeight(String.valueOf(Double.parseDouble(mvgoods.getZhlKg())*Double.parseDouble(wmImNoticeI.getGoodsCount())));
@@ -87,7 +89,7 @@ public class WmImNoticeHServiceImpl extends CommonServiceImpl implements WmImNot
 					} catch (Exception e) {
 						// TODO: handle exception
 					}
-					
+
 				}
 				if("04".equals(wmImNoticeH.getOrderTypeCode())){//越库任务
 					wmImNoticeI.setGoodsQmCount("0");
@@ -118,37 +120,33 @@ public class WmImNoticeHServiceImpl extends CommonServiceImpl implements WmImNot
 				}else{
 					wmImNoticeI.setBinPre("N");
 					wmImNoticeI.setGoodsQmCount("0");
-					TSUser user = ResourceUtil.getSessionUserName();
-					String roles = "";
-					if (user != null) {
-						List<TSRoleUser> rUsers = this.findByProperty(TSRoleUser.class, "TSUser.id", user.getId());
-						for (TSRoleUser ru : rUsers) {
-							TSRole role = ru.getTSRole();
-							roles += role.getRoleCode() + ",";
-						}
-						if (roles.length() > 0) {
-							roles = roles.substring(0, roles.length() - 1);
-						}
-						if(roles.equals("CUS")){
+					try{
+						if(wmImNoticeH.getImSta().equals(Constants.wm_sta0)){
 							wmImNoticeI.setBinPre("I");
 						}
+					}catch (Exception e){
+
 					}
-					
+
 					wmImNoticeI.setImNoticeId(wmImNoticeH.getNoticeId());
 					wmImNoticeI.setImBeizhu(wmImNoticeH.getImBeizhu());
 					wmImNoticeI.setImCusCode(wmImNoticeH.getImCusCode());
+					if(StringUtil.isEmpty(wmImNoticeI.getOtherId())){
+						wmImNoticeI.setOtherId(UUIDGenerator.generate().toString());
+					}
 					this.save(wmImNoticeI);
 				}
 
-	
+
 			}
 			//执行新增操作配置的sql增强
  			this.doAddSql(wmImNoticeH);
 	}
 
-	
-	public void updateMain(WmImNoticeHEntity wmImNoticeH,
-	        List<WmImNoticeIEntity> wmImNoticeIList) {
+
+	@Override
+    public void updateMain(WmImNoticeHEntity wmImNoticeH,
+                           List<WmImNoticeIEntity> wmImNoticeIList) {
 		//保存主表信息
 		this.saveOrUpdate(wmImNoticeH);
 		//===================================================================================
@@ -180,14 +178,14 @@ public class WmImNoticeHServiceImpl extends CommonServiceImpl implements WmImNot
 		    		//如果数据库存在的明细，前台没有传递过来则是删除-进货通知明细
 		    		super.delete(oldE);
 	    		}
-	    		
+
 			}
 			//3.持久化新增的数据-进货通知明细
 			for(WmImNoticeIEntity wmImNoticeI:wmImNoticeIList){
 				if(oConvertUtils.isEmpty(wmImNoticeI.getId())){
 					//外键设置
 					MvGoodsEntity mvgoods = new MvGoodsEntity();
-					mvgoods = this.findUniqueByProperty(MvGoodsEntity.class, "goodsCode", wmImNoticeI.getGoodsCode()) ;				
+					mvgoods = this.findUniqueByProperty(MvGoodsEntity.class, "goodsCode", wmImNoticeI.getGoodsCode()) ;
 					if(mvgoods!=null){
 						try {
 							wmImNoticeI.setGoodsUnit(mvgoods.getShlDanWei());
@@ -231,8 +229,9 @@ public class WmImNoticeHServiceImpl extends CommonServiceImpl implements WmImNot
  		this.doUpdateSql(wmImNoticeH);
 	}
 
-	
-	public void delMain(WmImNoticeHEntity wmImNoticeH) {
+
+	@Override
+    public void delMain(WmImNoticeHEntity wmImNoticeH) {
 		//删除主表信息
 		this.delete(wmImNoticeH);
 		//===================================================================================
@@ -244,30 +243,33 @@ public class WmImNoticeHServiceImpl extends CommonServiceImpl implements WmImNot
 	    List<WmImNoticeIEntity> wmImNoticeIOldList = this.findHql(hql0,id0);
 		this.deleteAllEntitie(wmImNoticeIOldList);
 	}
-	
- 	
+
+
  	/**
 	 * 默认按钮-sql增强-新增操作
 	 * @return
 	 */
- 	public boolean doAddSql(WmImNoticeHEntity t){
+ 	@Override
+    public boolean doAddSql(WmImNoticeHEntity t){
 	 	return true;
  	}
  	/**
 	 * 默认按钮-sql增强-更新操作
 	 * @return
 	 */
- 	public boolean doUpdateSql(WmImNoticeHEntity t){
+ 	@Override
+    public boolean doUpdateSql(WmImNoticeHEntity t){
 	 	return true;
  	}
  	/**
 	 * 默认按钮-sql增强-删除操作
 	 * @return
 	 */
- 	public boolean doDelSql(WmImNoticeHEntity t){
+ 	@Override
+    public boolean doDelSql(WmImNoticeHEntity t){
 	 	return true;
  	}
- 	
+
  	/**
 	 * 替换sql中的变量
 	 * @param sql

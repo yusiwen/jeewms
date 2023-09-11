@@ -13,119 +13,7 @@
   <t:formvalid formid="formobj" dialog="true" usePlugin="password" layout="table" action="mdCusOtherController.do?doAdd" >
 		<input id="id" name="id" type="hidden" value="${mdCusOtherPage.id }"/>
 		<table style="width: 600px;" cellpadding="0" cellspacing="1" class="formtable">
-				<%--<tr>--%>
-					<%--<td align="right">--%>
-						<%--<label class="Validform_label">--%>
-							<%--创建人名称:--%>
-						<%--</label>--%>
-					<%--</td>--%>
-					<%--<td class="value">--%>
-					     	 <%--<input id="createName" name="createName" type="text" style="width: 150px" class="inputxt" --%>
-					     	  <%----%>
-					     	  <%--ignore="ignore"--%>
-					     	  <%--/>--%>
-							<%--<span class="Validform_checktip"></span>--%>
-							<%--<label class="Validform_label" style="display: none;">创建人名称</label>--%>
-						<%--</td>--%>
-					<%--<td align="right">--%>
-						<%--<label class="Validform_label">--%>
-							<%--创建人登录名称:--%>
-						<%--</label>--%>
-					<%--</td>--%>
-					<%--<td class="value">--%>
-					     	 <%--<input id="createBy" name="createBy" type="text" style="width: 150px" class="inputxt" --%>
-					     	  <%----%>
-					     	  <%--ignore="ignore"--%>
-					     	  <%--/>--%>
-							<%--<span class="Validform_checktip"></span>--%>
-							<%--<label class="Validform_label" style="display: none;">创建人登录名称</label>--%>
-						<%--</td>--%>
-					<%--</tr>--%>
-				<%--<tr>--%>
-					<%--<td align="right">--%>
-						<%--<label class="Validform_label">--%>
-							<%--创建日期:--%>
-						<%--</label>--%>
-					<%--</td>--%>
-					<%--<td class="value">--%>
-							   <%--<input id="createDate" name="createDate" type="text" style="width: 150px" class="Wdate" onClick="WdatePicker()" --%>
-					      						 <%----%>
-					      						<%--ignore="ignore"--%>
-					      						<%--/>    --%>
-							<%--<span class="Validform_checktip"></span>--%>
-							<%--<label class="Validform_label" style="display: none;">创建日期</label>--%>
-						<%--</td>--%>
-					<%--<td align="right">--%>
-						<%--<label class="Validform_label">--%>
-							<%--更新人名称:--%>
-						<%--</label>--%>
-					<%--</td>--%>
-					<%--<td class="value">--%>
-					     	 <%--<input id="updateName" name="updateName" type="text" style="width: 150px" class="inputxt" --%>
-					     	  <%----%>
-					     	  <%--ignore="ignore"--%>
-					     	  <%--/>--%>
-							<%--<span class="Validform_checktip"></span>--%>
-							<%--<label class="Validform_label" style="display: none;">更新人名称</label>--%>
-						<%--</td>--%>
-					<%--</tr>--%>
-				<%--<tr>--%>
-					<%--<td align="right">--%>
-						<%--<label class="Validform_label">--%>
-							<%--更新人登录名称:--%>
-						<%--</label>--%>
-					<%--</td>--%>
-					<%--<td class="value">--%>
-					     	 <%--<input id="updateBy" name="updateBy" type="text" style="width: 150px" class="inputxt" --%>
-					     	  <%----%>
-					     	  <%--ignore="ignore"--%>
-					     	  <%--/>--%>
-							<%--<span class="Validform_checktip"></span>--%>
-							<%--<label class="Validform_label" style="display: none;">更新人登录名称</label>--%>
-						<%--</td>--%>
-					<%--<td align="right">--%>
-						<%--<label class="Validform_label">--%>
-							<%--更新日期:--%>
-						<%--</label>--%>
-					<%--</td>--%>
-					<%--<td class="value">--%>
-							   <%--<input id="updateDate" name="updateDate" type="text" style="width: 150px" class="Wdate" onClick="WdatePicker()" --%>
-					      						 <%----%>
-					      						<%--ignore="ignore"--%>
-					      						<%--/>    --%>
-							<%--<span class="Validform_checktip"></span>--%>
-							<%--<label class="Validform_label" style="display: none;">更新日期</label>--%>
-						<%--</td>--%>
-					<%--</tr>--%>
-				<%--<tr>--%>
-					<%--<td align="right">--%>
-						<%--<label class="Validform_label">--%>
-							<%--所属部门:--%>
-						<%--</label>--%>
-					<%--</td>--%>
-					<%--<td class="value">--%>
-					     	 <%--<input id="sysOrgCode" name="sysOrgCode" type="text" style="width: 150px" class="inputxt" --%>
-					     	  <%----%>
-					     	  <%--ignore="ignore"--%>
-					     	  <%--/>--%>
-							<%--<span class="Validform_checktip"></span>--%>
-							<%--<label class="Validform_label" style="display: none;">所属部门</label>--%>
-						<%--</td>--%>
-					<%--<td align="right">--%>
-						<%--<label class="Validform_label">--%>
-							<%--所属公司:--%>
-						<%--</label>--%>
-					<%--</td>--%>
-					<%--<td class="value">--%>
-					     	 <%--<input id="sysCompanyCode" name="sysCompanyCode" type="text" style="width: 150px" class="inputxt" --%>
-					     	  <%----%>
-					     	  <%--ignore="ignore"--%>
-					     	  <%--/>--%>
-							<%--<span class="Validform_checktip"></span>--%>
-							<%--<label class="Validform_label" style="display: none;">所属公司</label>--%>
-						<%--</td>--%>
-					<%--</tr>--%>
-				<%--<tr>--%>
+
 					<td align="right">
 						<label class="Validform_label">
 							所属客户:
@@ -145,8 +33,8 @@
 						</label>
 					</td>
 					<td class="value">
-					     	 <input id="zhongWenQch" name="zhongWenQch" type="text" style="width: 150px" class="inputxt" 
-					     	  
+					     	 <input id="zhongWenQch" name="zhongWenQch" type="text" style="width: 150px" class="inputxt"
+
 					     	  ignore="ignore"
 					     	  />
 							<span class="Validform_checktip"></span>
@@ -160,8 +48,8 @@
 						</label>
 					</td>
 					<td class="value">
-					     	 <input id="zhuJiMa" name="zhuJiMa" type="text" style="width: 150px" class="inputxt" 
-					     	  
+					     	 <input id="zhuJiMa" name="zhuJiMa" type="text" style="width: 150px" class="inputxt"
+
 					     	  ignore="ignore"
 					     	  />
 							<span class="Validform_checktip"></span>
@@ -173,8 +61,8 @@
 						</label>
 					</td>
 					<td class="value">
-					     	 <input id="keHuJianCheng" name="keHuJianCheng" type="text" style="width: 150px" class="inputxt" 
-					     	  
+					     	 <input id="keHuJianCheng" name="keHuJianCheng" type="text" style="width: 150px" class="inputxt"
+
 					     	  ignore="ignore"
 					     	  />
 							<span class="Validform_checktip"></span>
@@ -188,8 +76,8 @@
 						</label>
 					</td>
 					<td class="value">
-					     	 <input id="keHuBianMa" name="keHuBianMa" type="text" style="width: 150px" class="inputxt" 
-					     	  
+					     	 <input id="keHuBianMa" name="keHuBianMa" type="text" style="width: 150px" class="inputxt"
+
 					     	  ignore="ignore"
 					     	  />
 							<span class="Validform_checktip"></span>
@@ -201,8 +89,8 @@
 						</label>
 					</td>
 					<td class="value">
-					     	 <input id="keHuYingWen" name="keHuYingWen" type="text" style="width: 150px" class="inputxt" 
-					     	  
+					     	 <input id="keHuYingWen" name="keHuYingWen" type="text" style="width: 150px" class="inputxt"
+
 					     	  ignore="ignore"
 					     	  />
 							<span class="Validform_checktip"></span>
@@ -216,8 +104,8 @@
 						</label>
 					</td>
 					<td class="value">
-					     	 <input id="zengYongQi" name="zengYongQi" type="text" style="width: 150px" class="inputxt" 
-					     	  
+					     	 <input id="zengYongQi" name="zengYongQi" type="text" style="width: 150px" class="inputxt"
+
 					     	  ignore="ignore"
 					     	  />
 							<span class="Validform_checktip"></span>
@@ -229,8 +117,8 @@
 						</label>
 					</td>
 					<td class="value">
-					     	 <input id="zengYongQiYe" name="zengYongQiYe" type="text" style="width: 150px" class="inputxt" 
-					     	  
+					     	 <input id="zengYongQiYe" name="zengYongQiYe" type="text" style="width: 150px" class="inputxt"
+
 					     	  ignore="ignore"
 					     	  />
 							<span class="Validform_checktip"></span>
@@ -244,8 +132,8 @@
 						</label>
 					</td>
 					<td class="value">
-					     	 <input id="keHuZhuangTai" name="keHuZhuangTai" type="text" style="width: 150px" class="inputxt" 
-					     	  
+					     	 <input id="keHuZhuangTai" name="keHuZhuangTai" type="text" style="width: 150px" class="inputxt"
+
 					     	  ignore="ignore"
 					     	  />
 							<span class="Validform_checktip"></span>
@@ -257,8 +145,8 @@
 						</label>
 					</td>
 					<td class="value">
-					     	 <input id="xingYeFenLei" name="xingYeFenLei" type="text" style="width: 150px" class="inputxt" 
-					     	  
+					     	 <input id="xingYeFenLei" name="xingYeFenLei" type="text" style="width: 150px" class="inputxt"
+
 					     	  ignore="ignore"
 					     	  />
 							<span class="Validform_checktip"></span>
@@ -272,8 +160,8 @@
 						</label>
 					</td>
 					<td class="value">
-					     	 <input id="keHuDengJi" name="keHuDengJi" type="text" style="width: 150px" class="inputxt" 
-					     	  
+					     	 <input id="keHuDengJi" name="keHuDengJi" type="text" style="width: 150px" class="inputxt"
+
 					     	  ignore="ignore"
 					     	  />
 							<span class="Validform_checktip"></span>
@@ -285,8 +173,8 @@
 						</label>
 					</td>
 					<td class="value">
-					     	 <input id="suoShuXingYe" name="suoShuXingYe" type="text" style="width: 150px" class="inputxt" 
-					     	  
+					     	 <input id="suoShuXingYe" name="suoShuXingYe" type="text" style="width: 150px" class="inputxt"
+
 					     	  ignore="ignore"
 					     	  />
 							<span class="Validform_checktip"></span>
@@ -300,10 +188,10 @@
 						</label>
 					</td>
 					<td class="value">
-							   <input id="shouQianRiQi" name="shouQianRiQi" type="text" style="width: 150px" class="Wdate" onClick="WdatePicker()" 
-					      						 
+							   <input id="shouQianRiQi" name="shouQianRiQi" type="text" style="width: 150px" class="Wdate" onClick="WdatePicker()"
+
 					      						ignore="ignore"
-					      						/>    
+					      						/>
 							<span class="Validform_checktip"></span>
 							<label class="Validform_label" style="display: none;">首签日期</label>
 						</td>
@@ -313,10 +201,10 @@
 						</label>
 					</td>
 					<td class="value">
-							   <input id="zhongZhiHeShiJian" name="zhongZhiHeShiJian" type="text" style="width: 150px" class="Wdate" onClick="WdatePicker()" 
-					      						 
+							   <input id="zhongZhiHeShiJian" name="zhongZhiHeShiJian" type="text" style="width: 150px" class="Wdate" onClick="WdatePicker()"
+
 					      						ignore="ignore"
-					      						/>    
+					      						/>
 							<span class="Validform_checktip"></span>
 							<label class="Validform_label" style="display: none;">终止合作时间</label>
 						</td>
@@ -328,10 +216,10 @@
 						</label>
 					</td>
 					<td class="value">
-							   <input id="shenQingShiJian" name="shenQingShiJian" type="text" style="width: 150px" class="Wdate" onClick="WdatePicker()" 
-					      						 
+							   <input id="shenQingShiJian" name="shenQingShiJian" type="text" style="width: 150px" class="Wdate" onClick="WdatePicker()"
+
 					      						ignore="ignore"
-					      						/>    
+					      						/>
 							<span class="Validform_checktip"></span>
 							<label class="Validform_label" style="display: none;">申请时间</label>
 						</td>
@@ -341,8 +229,8 @@
 						</label>
 					</td>
 					<td class="value">
-					     	 <input id="keHuShuXing" name="keHuShuXing" type="text" style="width: 150px" class="inputxt" 
-					     	  
+					     	 <input id="keHuShuXing" name="keHuShuXing" type="text" style="width: 150px" class="inputxt"
+
 					     	  ignore="ignore"
 					     	  />
 							<span class="Validform_checktip"></span>
@@ -356,8 +244,8 @@
 						</label>
 					</td>
 					<td class="value">
-					     	 <input id="guiShuZuZh" name="guiShuZuZh" type="text" style="width: 150px" class="inputxt" 
-					     	  
+					     	 <input id="guiShuZuZh" name="guiShuZuZh" type="text" style="width: 150px" class="inputxt"
+
 					     	  ignore="ignore"
 					     	  />
 							<span class="Validform_checktip"></span>
@@ -369,8 +257,8 @@
 						</label>
 					</td>
 					<td class="value">
-					     	 <input id="guiShuSheng" name="guiShuSheng" type="text" style="width: 150px" class="inputxt" 
-					     	  
+					     	 <input id="guiShuSheng" name="guiShuSheng" type="text" style="width: 150px" class="inputxt"
+
 					     	  ignore="ignore"
 					     	  />
 							<span class="Validform_checktip"></span>
@@ -384,8 +272,8 @@
 						</label>
 					</td>
 					<td class="value">
-					     	 <input id="guiShuShiDai" name="guiShuShiDai" type="text" style="width: 150px" class="inputxt" 
-					     	  
+					     	 <input id="guiShuShiDai" name="guiShuShiDai" type="text" style="width: 150px" class="inputxt"
+
 					     	  ignore="ignore"
 					     	  />
 							<span class="Validform_checktip"></span>
@@ -397,8 +285,8 @@
 						</label>
 					</td>
 					<td class="value">
-					     	 <input id="guiShu" name="guiShu" type="text" style="width: 150px" class="inputxt" 
-					     	  
+					     	 <input id="guiShu" name="guiShu" type="text" style="width: 150px" class="inputxt"
+
 					     	  ignore="ignore"
 					     	  />
 							<span class="Validform_checktip"></span>
@@ -412,8 +300,8 @@
 						</label>
 					</td>
 					<td class="value">
-					     	 <input id="diZhi" name="diZhi" type="text" style="width: 150px" class="inputxt" 
-					     	  
+					     	 <input id="diZhi" name="diZhi" type="text" style="width: 150px" class="inputxt"
+
 					     	  ignore="ignore"
 					     	  />
 							<span class="Validform_checktip"></span>
@@ -425,8 +313,8 @@
 						</label>
 					</td>
 					<td class="value">
-					     	 <input id="youZhengBianMa" name="youZhengBianMa" type="text" style="width: 150px" class="inputxt" 
-					     	  
+					     	 <input id="youZhengBianMa" name="youZhengBianMa" type="text" style="width: 150px" class="inputxt"
+
 					     	  ignore="ignore"
 					     	  />
 							<span class="Validform_checktip"></span>
@@ -440,8 +328,8 @@
 						</label>
 					</td>
 					<td class="value">
-					     	 <input id="zhuLianXiRen" name="zhuLianXiRen" type="text" style="width: 150px" class="inputxt" 
-					     	  
+					     	 <input id="zhuLianXiRen" name="zhuLianXiRen" type="text" style="width: 150px" class="inputxt"
+
 					     	  ignore="ignore"
 					     	  />
 							<span class="Validform_checktip"></span>
@@ -453,8 +341,8 @@
 						</label>
 					</td>
 					<td class="value">
-					     	 <input id="dianHua" name="dianHua" type="text" style="width: 150px" class="inputxt" 
-					     	  
+					     	 <input id="dianHua" name="dianHua" type="text" style="width: 150px" class="inputxt"
+
 					     	  ignore="ignore"
 					     	  />
 							<span class="Validform_checktip"></span>
@@ -468,8 +356,8 @@
 						</label>
 					</td>
 					<td class="value">
-					     	 <input id="shouJi" name="shouJi" type="text" style="width: 150px" class="inputxt" 
-					     	  
+					     	 <input id="shouJi" name="shouJi" type="text" style="width: 150px" class="inputxt"
+
 					     	  ignore="ignore"
 					     	  />
 							<span class="Validform_checktip"></span>
@@ -481,8 +369,8 @@
 						</label>
 					</td>
 					<td class="value">
-					     	 <input id="chuanZhen" name="chuanZhen" type="text" style="width: 150px" class="inputxt" 
-					     	  
+					     	 <input id="chuanZhen" name="chuanZhen" type="text" style="width: 150px" class="inputxt"
+
 					     	  ignore="ignore"
 					     	  />
 							<span class="Validform_checktip"></span>
@@ -496,8 +384,8 @@
 						</label>
 					</td>
 					<td class="value">
-					     	 <input id="emaildiZhi" name="emaildiZhi" type="text" style="width: 150px" class="inputxt" 
-					     	  
+					     	 <input id="emaildiZhi" name="emaildiZhi" type="text" style="width: 150px" class="inputxt"
+
 					     	  ignore="ignore"
 					     	  />
 							<span class="Validform_checktip"></span>
@@ -509,8 +397,8 @@
 						</label>
 					</td>
 					<td class="value">
-					     	 <input id="wangYeDiZhi" name="wangYeDiZhi" type="text" style="width: 150px" class="inputxt" 
-					     	  
+					     	 <input id="wangYeDiZhi" name="wangYeDiZhi" type="text" style="width: 150px" class="inputxt"
+
 					     	  ignore="ignore"
 					     	  />
 							<span class="Validform_checktip"></span>
@@ -524,8 +412,8 @@
 						</label>
 					</td>
 					<td class="value">
-					     	 <input id="faRenDaiBiao" name="faRenDaiBiao" type="text" style="width: 150px" class="inputxt" 
-					     	  
+					     	 <input id="faRenDaiBiao" name="faRenDaiBiao" type="text" style="width: 150px" class="inputxt"
+
 					     	  ignore="ignore"
 					     	  />
 							<span class="Validform_checktip"></span>
@@ -537,8 +425,8 @@
 						</label>
 					</td>
 					<td class="value">
-					     	 <input id="faRenShenFen" name="faRenShenFen" type="text" style="width: 150px" class="inputxt" 
-					     	  
+					     	 <input id="faRenShenFen" name="faRenShenFen" type="text" style="width: 150px" class="inputxt"
+
 					     	  ignore="ignore"
 					     	  />
 							<span class="Validform_checktip"></span>
@@ -552,8 +440,8 @@
 						</label>
 					</td>
 					<td class="value">
-					     	 <input id="zhuCeZiJin" name="zhuCeZiJin" type="text" style="width: 150px" class="inputxt" 
-					     	  
+					     	 <input id="zhuCeZiJin" name="zhuCeZiJin" type="text" style="width: 150px" class="inputxt"
+
 					     	  ignore="ignore"
 					     	  />
 							<span class="Validform_checktip"></span>
@@ -565,8 +453,8 @@
 						</label>
 					</td>
 					<td class="value">
-					     	 <input id="biBie" name="biBie" type="text" style="width: 150px" class="inputxt" 
-					     	  
+					     	 <input id="biBie" name="biBie" type="text" style="width: 150px" class="inputxt"
+
 					     	  ignore="ignore"
 					     	  />
 							<span class="Validform_checktip"></span>
@@ -580,8 +468,8 @@
 						</label>
 					</td>
 					<td class="value">
-					     	 <input id="yingYeZhiZhao" name="yingYeZhiZhao" type="text" style="width: 150px" class="inputxt" 
-					     	  
+					     	 <input id="yingYeZhiZhao" name="yingYeZhiZhao" type="text" style="width: 150px" class="inputxt"
+
 					     	  ignore="ignore"
 					     	  />
 							<span class="Validform_checktip"></span>
@@ -593,8 +481,8 @@
 						</label>
 					</td>
 					<td class="value">
-					     	 <input id="shuiWuDeng" name="shuiWuDeng" type="text" style="width: 150px" class="inputxt" 
-					     	  
+					     	 <input id="shuiWuDeng" name="shuiWuDeng" type="text" style="width: 150px" class="inputxt"
+
 					     	  ignore="ignore"
 					     	  />
 							<span class="Validform_checktip"></span>
@@ -609,8 +497,8 @@
 						</label>
 					</td>
 					<td class="value">
-					     	 <input id="daoLuYunShu" name="daoLuYunShu" type="text" style="width: 150px" class="inputxt" 
-					     	  
+					     	 <input id="daoLuYunShu" name="daoLuYunShu" type="text" style="width: 150px" class="inputxt"
+
 					     	  ignore="ignore"
 					     	  />
 							<span class="Validform_checktip"></span>
@@ -624,8 +512,8 @@
 						</label>
 					</td>
 					<td class="value">
-					     	 <input id="zhuYingYeWu" name="zhuYingYeWu" type="text" style="width: 150px" class="inputxt" 
-					     	  
+					     	 <input id="zhuYingYeWu" name="zhuYingYeWu" type="text" style="width: 150px" class="inputxt"
+
 					     	  ignore="ignore"
 					     	  />
 							<span class="Validform_checktip"></span>
@@ -637,8 +525,8 @@
 						</label>
 					</td>
 					<td class="value">
-					     	 <input id="heYiXiang" name="heYiXiang" type="text" style="width: 150px" class="inputxt" 
-					     	  
+					     	 <input id="heYiXiang" name="heYiXiang" type="text" style="width: 150px" class="inputxt"
+
 					     	  ignore="ignore"
 					     	  />
 							<span class="Validform_checktip"></span>
@@ -652,8 +540,8 @@
 						</label>
 					</td>
 					<td class="value">
-					     	 <input id="piZhunJiGuan" name="piZhunJiGuan" type="text" style="width: 150px" class="inputxt" 
-					     	  
+					     	 <input id="piZhunJiGuan" name="piZhunJiGuan" type="text" style="width: 150px" class="inputxt"
+
 					     	  ignore="ignore"
 					     	  />
 							<span class="Validform_checktip"></span>
@@ -665,8 +553,8 @@
 						</label>
 					</td>
 					<td class="value">
-					     	 <input id="piZhunWenHao" name="piZhunWenHao" type="text" style="width: 150px" class="inputxt" 
-					     	  
+					     	 <input id="piZhunWenHao" name="piZhunWenHao" type="text" style="width: 150px" class="inputxt"
+
 					     	  ignore="ignore"
 					     	  />
 							<span class="Validform_checktip"></span>
@@ -680,10 +568,10 @@
 						</label>
 					</td>
 					<td class="value">
-							   <input id="zhuCeRiQi" name="zhuCeRiQi" type="text" style="width: 150px" class="Wdate" onClick="WdatePicker()" 
-					      						 
+							   <input id="zhuCeRiQi" name="zhuCeRiQi" type="text" style="width: 150px" class="Wdate" onClick="WdatePicker()"
+
 					      						ignore="ignore"
-					      						/>    
+					      						/>
 							<span class="Validform_checktip"></span>
 							<label class="Validform_label" style="display: none;">注册日期</label>
 						</td>
@@ -693,8 +581,8 @@
 						</label>
 					</td>
 					<td class="value">
-					     	 <input id="beiZhu" name="beiZhu" type="text" style="width: 150px" class="inputxt" 
-					     	  
+					     	 <input id="beiZhu" name="beiZhu" type="text" style="width: 150px" class="inputxt"
+
 					     	  ignore="ignore"
 					     	  />
 							<span class="Validform_checktip"></span>
@@ -708,8 +596,8 @@
 						</label>
 					</td>
 					<td class="value">
-					     	 <input id="zhuLianXiRen1" name="zhuLianXiRen1" type="text" style="width: 150px" class="inputxt" 
-					     	  
+					     	 <input id="zhuLianXiRen1" name="zhuLianXiRen1" type="text" style="width: 150px" class="inputxt"
+
 					     	  ignore="ignore"
 					     	  />
 							<span class="Validform_checktip"></span>
@@ -721,26 +609,26 @@
 						</label>
 					</td>
 					<td class="value">
-					     	 <input id="dianHua1" name="dianHua1" type="text" style="width: 150px" class="inputxt" 
-					     	  
+					     	 <input id="dianHua1" name="dianHua1" type="text" style="width: 150px" class="inputxt"
+
 					     	  ignore="ignore"
 					     	  />
 							<span class="Validform_checktip"></span>
 							<label class="Validform_label" style="display: none;">电话1</label>
 						</td>
 					</tr>
-					<div class="row show-grid">
-						<div class="col-xs-3 text-center">
-							<b>附件：</b>
-						</div>
-						<div class="col-xs-3">
-							<t:webUploader auto="true"   name="zuZhiJiGou" duplicate="true" fileNumLimit="3"></t:webUploader>
+<%--					<div class="row show-grid">--%>
+<%--						<div class="col-xs-3 text-center">--%>
+<%--							<b>附件：</b>--%>
+<%--						</div>--%>
+<%--						<div class="col-xs-3">--%>
+<%--							<t:webUploader auto="true"   name="zuZhiJiGou" duplicate="true" fileNumLimit="3"></t:webUploader>--%>
 
-							<span class="Validform_checktip" style="float:left;height:0px;"></span>
-							<label class="Validform_label" style="display: none">营业执照</label>
-						</div>
-					</div>
+<%--							<span class="Validform_checktip" style="float:left;height:0px;"></span>--%>
+<%--							<label class="Validform_label" style="display: none">营业执照</label>--%>
+<%--						</div>--%>
+<%--					</div>--%>
 			</table>
 		</t:formvalid>
  </body>
-  <script src = "webpage/com/zzjee/md/mdCusOther.js"></script>		
+  <script src = "webpage/com/zzjee/md/mdCusOther.js"></script>

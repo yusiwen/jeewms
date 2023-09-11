@@ -36,7 +36,7 @@ function setfunbyrole(id,roleName) {
 		}
 	);
 	//$('#function-panel').panel("refresh" );
-	
+
 }
 
 function userListbyrole(id,roleName) {
@@ -47,7 +47,7 @@ function userListbyrole(id,roleName) {
 		}
 	);
 	//$('#function-panel').panel("refresh" );
-	
+
 }
 
 //删除角色
@@ -63,7 +63,7 @@ function delRole(id){
 }
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'roleController.do?upload', "roleList");
+	openwindow('Excel导入', 'roleController.do?upload', "roleList");
 }
 
 //导出

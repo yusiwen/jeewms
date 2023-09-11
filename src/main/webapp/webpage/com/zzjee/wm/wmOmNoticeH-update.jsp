@@ -111,22 +111,22 @@
 			<div class="tab-wrapper">
 			    <!-- tab -->
 			    <ul class="nav nav-tabs">
-			      <li role="presentation" class="active"><a href="javascript:void(0);">出货通知</a></li>
-			      ${wmOmNoticeHPage.omNoticeId}
+			      <li role="presentation" class="active"><a href="javascript:void(0);">出货通知( ${wmOmNoticeHPage.omNoticeId})</a></li>
+
 			    </ul>
 			    <!-- tab内容 -->
 			    <div class="con-wrapper" style="display: block;">
 			      <div class="row form-wrapper">
 							<div class="row show-grid">
 			          <div class="col-xs-1 text-center">
-			          	<b>客户：</b>
+			          	<b>货主：</b>
 			          </div>
 			          <div class="col-xs-2">
-			          <t:dictSelect field="cusCode" type="list" extendJson="{class:'form-control',datatype:'*',style:'width:230px'}"
-						readonly="${wmOmNoticeHPage.readonly}" 		dictTable="mv_cus" dictField="cus_code" dictText="cus_name"  defaultVal='${wmOmNoticeHPage.cusCode}'  hasLabel="false"  title="客户编码"></t:dictSelect>
+			          <t:dictSelect field="cusCode" type="list" extendJson="{class:'form-control',datatype:'*',style:'width:220px'}"
+						readonly="${wmOmNoticeHPage.readonly}" 		dictTable="mv_cus" dictField="cus_code" dictText="cus_name"  defaultVal='${wmOmNoticeHPage.cusCode}'  hasLabel="false"  title="货主编码"></t:dictSelect>
 
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
-						<label class="Validform_label" style="display: none">客户</label>
+						<label class="Validform_label" style="display: none">货主</label>
 			          </div>
 
 
@@ -144,7 +144,7 @@
 			          	<b>订单类型：</b>
 			          </div>
 			          <div class="col-xs-2">
-								<t:dictSelect field="orderTypeCode" type="list" extendJson="{class:'form-control',style:'width:150px'}"
+								<t:dictSelect field="orderTypeCode" type="list" extendJson="{class:'form-control',style:'width:220px'}"
 								dictTable="ba_order_type" dictField="order_type_code" dictText="order_type_name"  defaultVal="${wmOmNoticeHPage.orderTypeCode}" hasLabel="false"  title="订单类型"></t:dictSelect>
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
 						<label class="Validform_label" style="display: none">订单类型</label>
@@ -172,18 +172,18 @@
 						  <input id="ocusCode" name="ocusCode"
 								 value="${wmOmNoticeHPage.ocusCode}"	  hasLabel="false"  class="form-control"/>
 						  <span class="Validform_checktip" style="float:left;height:0px;"></span>
-						  <label class="Validform_label" style="display: none">三方客户</label>
+						  <label class="Validform_label" style="display: none">客户</label>
 					  </div>
 
 					  <div class="col-xs-1 text-center">
-						  <b>三方客户名称：</b>
+						  <b>客户名称：</b>
 					  </div>
 					  <div class="col-xs-2">
 						  <input id="ocusName" name="ocusName" type="text" class="form-control"
 								 ignore="checked"  value='${wmOmNoticeHPage.ocusName}'
 								 class="form-control" />
 						  <span class="Validform_checktip" style="float:left;height:0px;"></span>
-						  <label class="Validform_label" style="display: none">三方客户名称</label>
+						  <label class="Validform_label" style="display: none">客户名称</label>
 					  </div>
 						  <div class="col-xs-1 text-center">
 							  <b>收货人：</b>
@@ -255,7 +255,7 @@
 
 
 			          <div class="col-xs-1 text-center">
-			          	<b>发货运单号或车号：</b>
+			          	<b>运单号或车号：</b>
 			          </div>
 			          <div class="col-xs-2">
 								<input id="reCarno" name="reCarno" type="text" class="form-control"
@@ -263,6 +263,17 @@
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
 						<label class="Validform_label" style="display: none">发货运单号或车号</label>
 			          </div>
+						  <div class="col-xs-1 text-center">
+							  <b>送货方式：</b>
+						  </div>
+						  <div class="col-xs-2">
+
+							  <t:dictSelect field="delvMethod" type="list" extendJson="{class:'form-control',style:'width:220px'}"
+											typeGroupCode="tms_thfs"  defaultVal="${wmOmNoticeHPage.delvMethod}" hasLabel="false"  title="送货方式"></t:dictSelect>
+
+							  <span class="Validform_checktip" style="float:left;height:0px;"></span>
+							  <label class="Validform_label" style="display: none">送货方式</label>
+						  </div>
 
 							</div>
 
@@ -303,17 +314,24 @@
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
 						<label class="Validform_label" style="display: none">状态</label>
 			          </div>
-
+								<div class="col-xs-1 text-center">
+									<b>仓库：</b>
+								</div>
+								<div class="col-xs-2">
+									<t:dictSelect id="storeCode" field="storeCode" type="list" extendJson="{class:'form-control',style:'width:220px'}" defaultVal="${wmOmNoticeHPage.storeCode}"
+												  dictTable="ba_store" dictField="store_code" dictText="store_name"  hasLabel="false"  title="仓库"></t:dictSelect>
+									<span class="Validform_checktip" style="float:left;height:0px;"></span>
+									<label class="Validform_label" style="display: none">仓库</label>
+								</div>
 
 <div class="col-xs-1 text-center">
 			          	<b>附件</b>
 			          </div>
 			          </div>
-			          <div class="col-xs-2">
+			          <div class="col-xs-2" style="line-height: 20px" >
 			<t:webUploader auto="true" pathValues="${wmOmNoticeHPage.fuJian}" name="fuJian" duplicate="true" fileNumLimit="3"></t:webUploader>
 
-						<span class="Validform_checktip" style="float:left;height:0px;"></span>
-						<label class="Validform_label" style="display: none">附件</label>
+
 			          </div>
 							</div>
 
@@ -479,12 +497,12 @@
 							typeGroupCode="sf_yn"  hasLabel="false"  title="下架任务是否已生成"></t:dictSelect>
 			  <label class="Validform_label" style="display: none;">下架任务是否已生成</label>
 		  </td>
-		  <%--<td align="left">--%>
-			  <%--<input name="wmOmNoticeIList[#index#].binOm" maxlength="32"--%>
-					 <%--ignore="ignore"--%>
-					 <%--type="text" class="form-control"  style="width:120px;" >--%>
-			  <%--<label class="Validform_label" style="display: none;">出货储位</label>--%>
-		  <%--</td>--%>
+		  <td align="left">
+			  <input name="wmOmNoticeIList[#index#].sku" maxlength="32" readonly="readonly"
+					 ignore="ignore"
+					 type="text" class="form-control"  style="width:120px;" >
+			  <label class="Validform_label" style="display: none;">sku</label>
+		  </td>
 
 		  <%--<td align="left">--%>
 			  <%--<input name="wmOmNoticeIList[#index#].binId" maxlength="32"--%>

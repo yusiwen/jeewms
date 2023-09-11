@@ -82,9 +82,11 @@ public class UploadTag extends TagSupport {
 	public void setName(String name) {
 		this.name = name;
 	}
+	@Override
 	public int doStartTag() throws JspTagException {
 		return EVAL_PAGE;
 	}
+	@Override
 	public int doEndTag() throws JspTagException {
 		JspWriter out = null;
 		try {
@@ -180,8 +182,9 @@ public class UploadTag extends TagSupport {
 				}
 				else
 				{
-				  if(callback!=null)
-				  sb.append(""+callback+"();");
+				  if(callback!=null) {
+                      sb.append(""+callback+"();");
+                  }
 				}
 				if(view)
 				{
@@ -259,6 +262,7 @@ public class UploadTag extends TagSupport {
 		return uploader+"&sessionId="+pageContext.getSession().getId()+"',";
 	}
 	
+	@Override
 	public void setId(String id) {
 		this.id = id;
 	}

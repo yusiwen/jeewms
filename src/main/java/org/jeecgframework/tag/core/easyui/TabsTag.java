@@ -42,7 +42,8 @@ public class TabsTag extends TagSupport {
 		this.tabs = tabs;
 	}
 
-	public void setId(String id) {
+	@Override
+    public void setId(String id) {
 		this.id = id;
 	}
 
@@ -88,12 +89,14 @@ public class TabsTag extends TagSupport {
 
 	private List<Tab> tabList = new ArrayList<Tab>();
 
-	public int doStartTag() throws JspTagException {
+	@Override
+    public int doStartTag() throws JspTagException {
 		tabList.clear();
 		return EVAL_PAGE;
 	}
 
-	public int doEndTag() throws JspTagException {
+	@Override
+    public int doEndTag() throws JspTagException {
 		JspWriter out = null;
 		try {
 			out = this.pageContext.getOut();

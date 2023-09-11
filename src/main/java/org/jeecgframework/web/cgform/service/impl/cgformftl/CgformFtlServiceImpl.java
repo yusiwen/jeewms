@@ -33,7 +33,8 @@ public class CgformFtlServiceImpl extends CommonServiceImpl implements CgformFtl
 	 * 根据tableName获取form模板信息
 	 */
 
-	public Map<String,Object> getCgformFtlByTableName(String tableName) {
+	@Override
+    public Map<String,Object> getCgformFtlByTableName(String tableName) {
 		StringBuilder sql = new StringBuilder("");
 		sql.append("select ftl.* from cgform_ftl ftl,cgform_head head");
 		sql.append(" where ftl.cgform_id=head.id");
@@ -47,7 +48,8 @@ public class CgformFtlServiceImpl extends CommonServiceImpl implements CgformFtl
 	}
 
 	
-	public int getNextVarsion(String cgformId) {
+	@Override
+    public int getNextVarsion(String cgformId) {
 		StringBuilder sql = new StringBuilder("");
 		sql.append("select (max(ftl_version)+1) as varsion from cgform_ftl");
 		sql.append(" where cgform_id = ? ");
@@ -60,7 +62,8 @@ public class CgformFtlServiceImpl extends CommonServiceImpl implements CgformFtl
 	}
 
 	
-	public boolean hasActive(String cgformId) {
+	@Override
+    public boolean hasActive(String cgformId) {
 		StringBuilder sql = new StringBuilder("");
 		sql.append("select * from cgform_ftl");
 		sql.append(" where ftl_status = '1' ");

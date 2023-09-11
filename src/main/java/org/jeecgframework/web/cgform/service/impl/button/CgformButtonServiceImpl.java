@@ -19,7 +19,8 @@ public class CgformButtonServiceImpl extends CommonServiceImpl implements Cgform
 	 * @return
 	 */
 	
-	public List<CgformButtonEntity> getCgformButtonListByFormId(String formId) {
+	@Override
+    public List<CgformButtonEntity> getCgformButtonListByFormId(String formId) {
 		StringBuilder hql = new StringBuilder("");
 		hql.append(" from CgformButtonEntity t");
 		hql.append(" where t.formId=? order by t.orderNum asc");
@@ -33,7 +34,8 @@ public class CgformButtonServiceImpl extends CommonServiceImpl implements Cgform
 	 * @return
 	 */
 	
-	public List<CgformButtonEntity> checkCgformButton(CgformButtonEntity cgformButtonEntity) {
+	@Override
+    public List<CgformButtonEntity> checkCgformButton(CgformButtonEntity cgformButtonEntity) {
 		StringBuilder hql = new StringBuilder("");
 		hql.append(" from CgformButtonEntity t");
 		hql.append(" where t.formId='").append(cgformButtonEntity.getFormId()).append("'");

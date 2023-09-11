@@ -16,7 +16,7 @@
     <t:dgCol title="所属公司"  field="sysCompanyCode"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
       <t:dgCol title="操作" field="opt" width="100"></t:dgCol>
 
-      <t:dgCol title="所属客户"  field="suoShuKeHu"   query="true" queryMode="single" dictionary="mv_cus,cus_code,cus_name"  width="120"></t:dgCol>
+      <t:dgCol title="所属货主"  field="suoShuKeHu"   query="true" queryMode="single" dictionary="mv_cus,cus_code,cus_name"  width="120"></t:dgCol>
     <t:dgCol title="商品名称"  field="shpMingCheng"   query="true" queryMode="single"  width="160"></t:dgCol>
     <t:dgCol title="英文名称"  field="ywMingCheng"   query="true" queryMode="single"  width="160"></t:dgCol>
     <t:dgCol title="日文名称"  field="rwMingCheng"   query="true" queryMode="single"  width="160"></t:dgCol>
@@ -29,7 +29,8 @@
     <t:dgCol title="商品规格"  field="shpGuiGe"   queryMode="group"  width="80"></t:dgCol>
     <t:dgCol title="商品颜色"  field="shpYanSe"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
     <t:dgCol title="产品属性"  field="chpShuXing" query="true"  queryMode="single" dictionary="ba_goods_type,goods_type_code,goods_type_name"   width="120"></t:dgCol>
-    <t:dgCol title="存放温层"  field="cfWenCeng"    queryMode="single" dictionary="ba_deg_type,deg_type_code,deg_type_name"  width="80"></t:dgCol>
+    <t:dgCol title="商品类目"  field="categoryCode"   query="true" queryMode="single"  width="90"></t:dgCol>
+    <t:dgCol title="产品大类"  field="cfWenCeng"    queryMode="single" dictionary="ba_deg_type,deg_type_code,deg_type_name"  width="80"></t:dgCol>
     <t:dgCol title="拆零控制"  field="chlKongZhi"    queryMode="group" dictionary="sf_yn" width="60"></t:dgCol>
     <t:dgCol title="码盘单层数量"  field="mpDanCeng"   style="text-align:right"  queryMode="group"  width="60"></t:dgCol>
     <t:dgCol title="码盘层高"  field="mpCengGao"  style="text-align:right"   queryMode="group"  width="60"></t:dgCol>
@@ -55,29 +56,21 @@
     <t:dgCol title="长"  field="chZhXiang"     queryMode="group"  width="80"></t:dgCol>
     <t:dgCol title="宽"  field="kuZhXiang"    queryMode="group"  width="80"></t:dgCol>
      <t:dgCol title="高"  field="gaoZhXiang"     queryMode="group"  width="80"></t:dgCol>
-    <%--<t:dgCol title="基准温度"  field="jiZhunwendu"     queryMode="group"  width="80"></t:dgCol>--%>
+    <t:dgCol title="sku"  field="sku"     queryMode="group"  width="80"></t:dgCol>
     <t:dgCol title="商品描述"  field="shpMiaoShu"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
     <t:dgCol title="停用"  field="zhuangTai"   query="true" dictionary="sf_yn" width="120"></t:dgCol>
       <t:dgFunOpt title="打印" funname="doprint(id)"  urlclass="ace_button"      />
 
-      <t:dgDelOpt title="删除" operationCode="mdgoodsdel" url="mdGoodsController.do?doDel&id={id}" urlclass="ace_button"  urlfont="fa-trash-o"/>
-   <t:dgToolBar title="录入" icon="icon-add" url="mdGoodsController.do?goAdd" funname="add"></t:dgToolBar>
-   <t:dgToolBar title="编辑" icon="icon-edit" operationCode="mdgoodsedit" url="mdGoodsController.do?goUpdate" funname="update"></t:dgToolBar>
-<%--    <t:dgToolBar title="批量删除"  icon="icon-remove" url="mdGoodsController.do?doBatchDel" funname="deleteALLSelect"></t:dgToolBar> --%>
-   <t:dgToolBar title="查看" icon="icon-search" url="mdGoodsController.do?goUpdate" funname="detail"></t:dgToolBar>
+      <t:dgDelOpt title="删除"   url="mdGoodsController.do?doDel&id={id}" urlclass="ace_button"  urlfont="fa-trash-o"/>
+   <t:dgToolBar title="录入" height="760" width="740" icon="icon-add" url="mdGoodsController.do?goAdd" funname="add"></t:dgToolBar>
+   <t:dgToolBar title="编辑" height="720" width="740"  icon="icon-edit" operationCode="mdgoodsedit" url="mdGoodsController.do?goUpdate" funname="update"></t:dgToolBar>
+    <t:dgToolBar title="批量删除"  icon="icon-remove" url="mdGoodsController.do?doBatchDel" funname="deleteALLSelect"></t:dgToolBar>
+   <t:dgToolBar title="查看" height="720" width="740"  icon="icon-search" url="mdGoodsController.do?goUpdate" funname="detail"></t:dgToolBar>
    <t:dgToolBar title="导入" icon="icon-put" funname="ImportXls"></t:dgToolBar>
-    <t:dgToolBar operationCode="uasimpgoods" title="第三方系统导入" icon="icon-put" funname="otherimp"></t:dgToolBar>
 
     <t:dgToolBar title="导出" icon="icon-putout" funname="ExportXls"></t:dgToolBar>
    <t:dgToolBar title="模板下载" icon="icon-putout" funname="ExportXlsByT"></t:dgToolBar>
   </t:datagrid>
-
-      <div name="searchColums1" style="float: left; padding-left: 0px;padding-top: 5px;">
-          <%--<input type="text" name="batchbin" style="width: 100px; height: 30px;">--%>
-          日期：<input type="text" name="batchdate"    class="form-control" onClick="WdatePicker()" style="width: 100px; height: 30px;">
-          商品编码：<input type="text" name="othercode"    class="form-control"  style="width: 100px; height: 30px;">
-
-      </div>
   </div>
  </div>
  <script src = "webpage/com/zzjee/md/mdGoodsList.js"></script>
@@ -85,32 +78,6 @@
  $(document).ready(function(){
      // $('#mdGoodsList').datagrid('reload',{});
  });
-
-   function  otherimp() {
-       var batchdate;
-       batchdate = $('input[name="batchdate"]').attr("value");
-       othercode = $('input[name="othercode"]').attr("value");
-
-
-                               var url = "mdGoodsController.do?doGet&formDate="+batchdate+"&othercode="+othercode;
-                       $.ajax({
-                           async : true,
-                           cache : false,
-                           type : 'POST',
-                           url : url,// 请求的action路径
-                           error : function() {// 请求失败处理函数
-                           },
-                           success : function(data) {
-                               var d = $.parseJSON(data);
-                               if (d.success) {
-
-                               }
-                           }
-                       });
-                tip("获取成功");
-               $('#mdGoodsList').datagrid('reload',{});
-
-   }
  function doprint(id){
      var url = "mdGoodsController.do?doPrintmdgoods&id="+id;
      createdetailwindow(" 商品标签", url, 400, 300);
@@ -119,7 +86,7 @@
  }
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'mdGoodsController.do?upload', "mdGoodsList");
+	openwindow('Excel导入', 'mdGoodsController.do?upload', "mdGoodsList");
 }
 
 //导出

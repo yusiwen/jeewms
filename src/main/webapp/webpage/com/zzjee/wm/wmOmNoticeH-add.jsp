@@ -144,13 +144,13 @@
 			      <div class="row form-wrapper">
 							<div class="row show-grid">
 			          <div class="col-xs-1 text-center">
-			          	<b>客户：</b>
+			          	<b>货主：</b>
 			          </div>
 			          <div class="col-xs-2">
-								<t:dictSelect  field="cusCode" type="list" extendJson="{class:'form-control',datatype:'*',style:'width:230px'}"
-									defaultVal="${wmOmNoticeHPage.cusCode}" 	 	readonly="${wmOmNoticeHPage.readonly}" 	  dictTable="mv_cus" dictField="cus_code" dictText="cus_name"  hasLabel="false"  title="客户编码"></t:dictSelect>
+								<t:dictSelect  field="cusCode" type="list" extendJson="{class:'form-control',datatype:'*',style:'width:220px'}"
+									defaultVal="${wmOmNoticeHPage.cusCode}" 	 	readonly="${wmOmNoticeHPage.readonly}" 	  dictTable="mv_cus" dictField="cus_code" dictText="cus_name"  hasLabel="false"  title="货主编码"></t:dictSelect>
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
-						<label class="Validform_label" style="display: none">客户编码</label>
+						<label class="Validform_label" style="display: none">货主编码</label>
 			          </div>
 
 
@@ -169,7 +169,7 @@
 			          	<b>订单类型：</b>
 			          </div>
 			          <div class="col-xs-2">
-								<t:dictSelect field="orderTypeCode" type="list" extendJson="{class:'form-control',style:'width:150px'}"
+								<t:dictSelect field="orderTypeCode" type="list" extendJson="{class:'form-control',style:'width:220px'}"
 								dictTable="ba_order_type" dictField="order_type_code" dictText="order_type_name"  defaultVal="${wmOmNoticeHPage.orderTypeCode}" hasLabel="false"  title="订单类型"></t:dictSelect>
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
 						<label class="Validform_label" style="display: none">订单类型</label>
@@ -181,27 +181,26 @@
 									<input id="imCusCode" name="imCusCode" type="text" class="form-control"
 										   required="required"   ignore="ignore" datatype="*"  validType="wm_om_notice_h,im_cus_code,id"
 										    />
-									<span class="Validform_checktip"> 不能重复</span>
+<%--									<span class="Validform_checktip"> 不能重复</span>--%>
  								</div>
  							</div>
 					  <div class="row show-grid">
 
 					  <div class="col-xs-1 text-center">
-						  <b>三方客户：</b>
+						  <b>客户：</b>
 					  </div>
 					  <div class="col-xs-5">
 
-<%--						  <t:autocomplete   entityName="MvCusOtherEntity" searchField="cusName" name="ocusCode"></t:autocomplete>--%>
+						  <t:autocomplete   entityName="MvCusOtherEntity" searchField="cusName" name="ocusName"></t:autocomplete>
 
 
-						  <t:dictSelect id="ocusCodeid" field="ocusCode" type="list" extendJson="{class:'form-control',style:'width:230px'}"
-										 	 	  dictTable="mv_cus_other" dictField="cus_code" dictText="cus_name"  hasLabel="false"  title="三方客户编码"></t:dictSelect>
-						  <span class="Validform_checktip" style="float:left;height:0px;"></span>
-						  <label class="Validform_label" style="display: none">三方客户</label>
+<%--						  <t:dictSelect id="ocusCodeid" field="ocusCode" type="list" extendJson="{class:'form-control',style:'width:230px'}"--%>
+<%--										 	 	  dictTable="mv_cus_other" dictField="cus_code" dictText="cus_name"  hasLabel="false"  title="客户编码"></t:dictSelect>--%>
+<%--						  <span class="Validform_checktip" style="float:left;height:0px;"></span>--%>
+<%--						  <label class="Validform_label" style="display: none">客户</label>--%>
 					  </div>
 
-
-					  <%--<div class="col-xs-1 text-center">--%>
+				  <%--<div class="col-xs-1 text-center">--%>
 						  <%--<b>三方客户名称：</b>--%>
 					  <%--</div>--%>
 					  <%--<div class="col-xs-2">--%>
@@ -211,15 +210,6 @@
 						  <%--<span class="Validform_checktip" style="float:left;height:0px;"></span>--%>
 						  <%--<label class="Validform_label" style="display: none">三方客户名称</label>--%>
 					  <%--</div>--%>
-
-
-
-
-
-
-
-
-
 
 			          <div class="col-xs-1 text-center">
 			          	<b>收货人：</b>
@@ -284,17 +274,28 @@
 
 
 			          <div class="col-xs-1 text-center">
-			          	<b>发货运单号或车号：</b>
+			          	<b>运单号或车号：</b>
 			          </div>
 			          <div class="col-xs-2">
 
-						  <t:autocomplete   entityName="TmsMdCheliangEntity" searchField="chepaihao" name="reCarno"></t:autocomplete>
+						  <t:autocomplete    entityName="TmsMdCheliangEntity" searchField="chepaihao" name="reCarno"></t:autocomplete>
 
 <%--						  <input id="reCarno" name="reCarno" type="text" class="form-control"--%>
 <%--									/>--%>
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
-						<label class="Validform_label" style="display: none">发货运单号或车号</label>
+						<label class="Validform_label" style="display: none">运单号或车号</label>
 			          </div>
+
+								<div class="col-xs-1 text-center">
+									<b>送货方式：</b>
+								</div>
+								<div class="col-xs-2">
+
+									<t:dictSelect field="delvMethod" type="list" extendJson="{class:'form-control',style:'width:220px'}"
+												  typeGroupCode="tms_thfs"  defaultVal="${wmOmNoticeHPage.delvMethod}" title="送货方式"></t:dictSelect>
+									<span class="Validform_checktip" style="float:left;height:0px;"></span>
+									<label class="Validform_label" style="display: none">送货方式</label>
+								</div>
 							</div>
 
 
@@ -303,7 +304,7 @@
 			          	<b>发货月台：</b>
 			          </div>
 			          <div class="col-xs-2">
-								<t:dictSelect field="omPlatNo" type="list" extendJson="{class:'form-control',style:'width:150px'}"
+								<t:dictSelect field="omPlatNo" type="list" extendJson="{class:'form-control',style:'width:220px'}"
 								dictTable="ba_platform" dictField="platform_code" dictText="platform_name" hasLabel="false"  title="月台"></t:dictSelect>
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
 						<label class="Validform_label" style="display: none">月台</label>
@@ -319,15 +320,23 @@
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
 						<label class="Validform_label" style="display: none">备注</label>
 			          </div>
+								<div class="col-xs-1 text-center">
+									<b>仓库：</b>
+								</div>
+								<div class="col-xs-2">
+									<t:dictSelect id="storeCode" field="storeCode" type="list" extendJson="{class:'form-control',style:'width:220px'}"
+												  dictTable="ba_store" dictField="store_code" dictText="store_name"  hasLabel="false"  title="仓库"></t:dictSelect>
+									<span class="Validform_checktip" style="float:left;height:0px;"></span>
+									<label class="Validform_label" style="display: none">仓库</label>
+								</div>
 
 			          			         		<div class="col-xs-1 text-center">
 			          	<b>附件 </b>
 			          </div>
-			          <div class="col-xs-2">
+			          <div class="col-xs-2" style="line-height: 20px" >
 			<t:webUploader auto="true"   name="fuJian" duplicate="true" fileNumLimit="3"></t:webUploader>
 
-						<span class="Validform_checktip" style="float:left;height:0px;"></span>
-						<label class="Validform_label" style="display: none">附件</label>
+
 			          </div>
 
 							</div>
@@ -552,12 +561,12 @@
 										typeGroupCode="sf_yn"  hasLabel="false"  title="下架任务是否已生成"></t:dictSelect>
 					  <label class="Validform_label" style="display: none;">下架任务是否已生成</label>
 					</td>
-  						  <%--<td align="left">--%>
- 							  	<%--<input name="wmOmNoticeIList[#index#].binOm" maxlength="32"--%>
- 									<%--ignore="ignore"--%>
- 							  		<%--type="text" class="form-control"  style="width:120px;" >--%>
- 						  <%--<label class="Validform_label" style="display: none;">出货储位</label>--%>
- 						  <%--</td>--%>
+  						  <td align="left">
+ 							  	<input name="wmOmNoticeIList[#index#].sku" maxlength="32" readonly="readonly"
+ 									ignore="ignore"
+ 							  		type="text" class="form-control"  style="width:120px;" >
+ 						  <label class="Validform_label" style="display: none;">SKU</label>
+ 						  </td>
 
  						  <%--<td align="left">--%>
  							  	<%--<input name="wmOmNoticeIList[#index#].binId" maxlength="32"--%>

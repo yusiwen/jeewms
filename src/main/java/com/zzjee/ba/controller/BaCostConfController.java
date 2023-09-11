@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.ConstraintViolation;
 import javax.validation.Validator;
 
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.apache.log4j.Logger;
 import org.jeecgframework.core.beanvalidator.BeanValidators;
 import org.jeecgframework.core.common.controller.BaseController;
@@ -50,16 +52,17 @@ import org.springframework.web.util.UriComponentsBuilder;
 import com.zzjee.ba.entity.BaCostConfEntity;
 import com.zzjee.ba.service.BaCostConfServiceI;
 
-/**   
- * @Title: Controller  
+/**
+ * @Title: Controller
  * @Description: 计费配置
  * @author erzhongxmu
  * @date 2017-09-26 15:11:40
- * @version V1.0   
+ * @version V1.0
  *
  */
 @Controller
 @RequestMapping("/baCostConfController")
+@Api(tags = "dwq")
 public class BaCostConfController extends BaseController {
 	/**
 	 * Logger for this class
@@ -72,12 +75,12 @@ public class BaCostConfController extends BaseController {
 	private SystemService systemService;
 	@Autowired
 	private Validator validator;
-	
+
 
 
 	/**
 	 * 计费配置列表 页面跳转
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "list")
@@ -87,7 +90,7 @@ public class BaCostConfController extends BaseController {
 
 	/**
 	 * easyui AJAX请求数据
-	 * 
+	 *
 	 * @param request
 	 * @param response
 	 * @param dataGrid
@@ -95,6 +98,7 @@ public class BaCostConfController extends BaseController {
 	 */
 
 	@RequestMapping(params = "datagrid")
+	@ApiOperation("")
 	public void datagrid(BaCostConfEntity baCostConf,HttpServletRequest request, HttpServletResponse response, DataGrid dataGrid) {
 		CriteriaQuery cq = new CriteriaQuery(BaCostConfEntity.class, dataGrid);
 		//查询条件组装器
@@ -108,10 +112,10 @@ public class BaCostConfController extends BaseController {
 		this.baCostConfService.getDataGridReturn(cq, true);
 		TagUtil.datagrid(response, dataGrid);
 	}
-	
+
 	/**
 	 * 删除计费配置
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "doDel")
@@ -132,10 +136,10 @@ public class BaCostConfController extends BaseController {
 		j.setMsg(message);
 		return j;
 	}
-	
+
 	/**
 	 * 批量删除计费配置
-	 * 
+	 *
 	 * @return
 	 */
 	 @RequestMapping(params = "doBatchDel")
@@ -146,7 +150,7 @@ public class BaCostConfController extends BaseController {
 		message = "计费配置删除成功";
 		try{
 			for(String id:ids.split(",")){
-				BaCostConfEntity baCostConf = systemService.getEntity(BaCostConfEntity.class, 
+				BaCostConfEntity baCostConf = systemService.getEntity(BaCostConfEntity.class,
 				id
 				);
 				baCostConfService.delete(baCostConf);
@@ -164,7 +168,7 @@ public class BaCostConfController extends BaseController {
 
 	/**
 	 * 添加计费配置
-	 * 
+	 *
 	 * @param ids
 	 * @return
 	 */
@@ -185,10 +189,10 @@ public class BaCostConfController extends BaseController {
 		j.setMsg(message);
 		return j;
 	}
-	
+
 	/**
 	 * 更新计费配置
-	 * 
+	 *
 	 * @param ids
 	 * @return
 	 */
@@ -211,11 +215,11 @@ public class BaCostConfController extends BaseController {
 		j.setMsg(message);
 		return j;
 	}
-	
+
 
 	/**
 	 * 计费配置新增页面跳转
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "goAdd")
@@ -228,7 +232,7 @@ public class BaCostConfController extends BaseController {
 	}
 	/**
 	 * 计费配置编辑页面跳转
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "goUpdate")
@@ -239,10 +243,10 @@ public class BaCostConfController extends BaseController {
 		}
 		return new ModelAndView("com/zzjee/ba/baCostConf-update");
 	}
-	
+
 	/**
 	 * 导入功能跳转
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "upload")
@@ -250,10 +254,10 @@ public class BaCostConfController extends BaseController {
 		req.setAttribute("controller_name","baCostConfController");
 		return new ModelAndView("common/upload/pub_excel_upload");
 	}
-	
+
 	/**
 	 * 导出excel
-	 * 
+	 *
 	 * @param request
 	 * @param response
 	 */
@@ -272,7 +276,7 @@ public class BaCostConfController extends BaseController {
 	}
 	/**
 	 * 导出excel 使模板
-	 * 
+	 *
 	 * @param request
 	 * @param response
 	 */
@@ -286,13 +290,13 @@ public class BaCostConfController extends BaseController {
     	modelMap.put(NormalExcelConstants.DATA_LIST,new ArrayList());
     	return NormalExcelConstants.JEECG_EXCEL_VIEW;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	@RequestMapping(params = "importExcel", method = RequestMethod.POST)
 	@ResponseBody
 	public AjaxJson importExcel(HttpServletRequest request, HttpServletResponse response) {
 		AjaxJson j = new AjaxJson();
-		
+
 		MultipartHttpServletRequest multipartRequest = (MultipartHttpServletRequest) request;
 		Map<String, MultipartFile> fileMap = multipartRequest.getFileMap();
 		for (Map.Entry<String, MultipartFile> entity : fileMap.entrySet()) {
@@ -320,14 +324,14 @@ public class BaCostConfController extends BaseController {
 		}
 		return j;
 	}
-	
+
 	@RequestMapping(method = RequestMethod.GET)
 	@ResponseBody
 	public List<BaCostConfEntity> list() {
 		List<BaCostConfEntity> listBaCostConfs=baCostConfService.getList(BaCostConfEntity.class);
 		return listBaCostConfs;
 	}
-	
+
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	@ResponseBody
 	public ResponseEntity<?> get(@PathVariable("id") String id) {

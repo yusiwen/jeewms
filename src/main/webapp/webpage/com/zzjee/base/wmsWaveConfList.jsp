@@ -40,7 +40,7 @@
 
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'wmsWaveConfController.do?upload', "wmsWaveConfList");
+	openwindow('Excel导入', 'wmsWaveConfController.do?upload', "wmsWaveConfList");
 }
 
 //导出

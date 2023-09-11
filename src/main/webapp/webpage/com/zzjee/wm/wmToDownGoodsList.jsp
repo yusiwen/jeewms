@@ -37,7 +37,7 @@
 <%--    <t:dgCol title="操作" field="opt" width="100"></t:dgCol> --%>
 <%--    <t:dgDelOpt title="删除" url="wmToDownGoodsController.do?doDel&id={id}" urlclass="ace_button"  urlfont="fa-trash-o"/> --%>
    <%--<t:dgToolBar title="手工添加下架" icon="icon-add" url="wmToDownGoodsController.do?goAdd" funname="add"></t:dgToolBar>--%>
-   <t:dgToolBar title="编辑" icon="icon-edit" url="wmToDownGoodsController.do?goUpdate" funname="update"></t:dgToolBar>
+   <t:dgToolBar title="编辑" height="300" icon="icon-edit" url="wmToDownGoodsController.do?goUpdate" funname="update"></t:dgToolBar>
 <%--    <t:dgToolBar title="批量删除"  icon="icon-remove" url="wmToDownGoodsController.do?doBatchDel" funname="deleteALLSelect"></t:dgToolBar> --%>
    <t:dgToolBar title="查看" icon="icon-search" url="wmToDownGoodsController.do?goUpdate" funname="detail"></t:dgToolBar>
 <%--    <t:dgToolBar title="导入" icon="icon-put" funname="ImportXls"></t:dgToolBar> --%>
@@ -50,7 +50,7 @@
   </t:datagrid>
   </div>
  </div>
- <script src = "webpage/com/zzjee/wm/wmToDownGoodsList.js"></script>		
+ <script src = "webpage/com/zzjee/wm/wmToDownGoodsList.js"></script>
  <script type="text/javascript">
  $(document).ready(function(){
  });
@@ -124,10 +124,10 @@
 
 
  }
- 
+
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'wmToDownGoodsController.do?upload', "wmToDownGoodsList");
+	openwindow('Excel导入', 'wmToDownGoodsController.do?upload', "wmToDownGoodsList");
 }
 
 //导出

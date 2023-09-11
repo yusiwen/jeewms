@@ -37,19 +37,19 @@
   </t:datagrid>
   </div>
  </div>
- <script src = "webpage/com/zzjee/wm/wvStockSttBinList.js"></script>		
+ <script src = "webpage/com/zzjee/wm/wvStockSttBinList.js"></script>
  <script type="text/javascript">
  $(document).ready(function(){
  });
- 
- 
+
+
  function dosttALLSelect(){
 
 	 var ids = [];
 	 var rows = $('#wvStockSttBinList').datagrid('getSelections');
 	 for(var i=0; i<rows.length; i++){
 		 if(rows[i].sttSta=="计划中"){
-		
+
 		 }else{
 			 var url = "wvStockSttBinController.do?dostt&id="+rows[i].id+"&stttype=02";
 				$.ajax({
@@ -63,8 +63,8 @@
 						 var d = $.parseJSON(data);
 						if (d.success) {
 // 							tip("添加到盘点清单成功");
-					 
-						}		
+
+						}
 					}
 				});
 			 	ids.push(rows[i].id);
@@ -84,11 +84,11 @@
 // 				if (d.success) {
 // 					tip("添加到盘点清单成功");
 // 			        $('#wvStockList').datagrid('reload',{});
-// 				}		
+// 				}
 // 			}
 // 		});
 	}
- 
+
  function dostt(id){
 		var url = "wvStockSttBinController.do?dostt&id="+id+"&stttype=02";
 		$.ajax({
@@ -103,16 +103,16 @@
 				if (d.success) {
 					tip("添加到盘点清单成功");
 			        $('#wvStockSttBinList').datagrid('reload',{});
-				}		
+				}
 			}
 		});
 	}
- 
-   
- 
+
+
+
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'wvStockSttBinController.do?upload', "wvStockSttBinList");
+	openwindow('Excel导入', 'wvStockSttBinController.do?upload', "wvStockSttBinList");
 }
 
 //导出

@@ -69,6 +69,8 @@ import java.net.URI;
 import org.springframework.http.MediaType;
 import org.springframework.web.util.UriComponentsBuilder;
 
+import static com.xiaoleilu.hutool.date.DateTime.now;
+
 /**
  * @Title: Controller
  * @Description: wave_to_down
@@ -108,18 +110,15 @@ public class WaveToDownController extends BaseController {
 	 * easyui AJAX请求数据
 	 *
 	 * @param request
-	 * @param response
-	 * @param dataGrid
-	 * @param user
 	 */
 	@RequestMapping(params = "doPrintpage")
 	public ModelAndView doPrint(String waveid,HttpServletRequest request) {
 		String hql = "from WmOmQmIEntity where waveId = ? ";
 		List<WmOmQmIEntity> wavelist = systemService.findHql(hql,waveid);
-		for(WmOmQmIEntity t: wavelist ){
-			t.setFirstRq("已打印");
-			systemService.updateEntitie(t);
-		}
+//		for(WmOmQmIEntity t: wavelist ){
+//			t.setFirstRq("已打印");
+//			systemService.updateEntitie(t);
+//		}
 		request.setAttribute("kprq",DateUtils.date2Str(DateUtils.date_sdf));
 		request.setAttribute("comname", ResourceUtil.getConfigByName("comname"));
 		request.setAttribute("waveid",waveid);
@@ -200,7 +199,6 @@ public class WaveToDownController extends BaseController {
 	/**
 	 * 添加wave_to_down
 	 *
-	 * @param ids
 	 * @return
 	 */
 	@RequestMapping(params = "doAdd")
@@ -391,8 +389,12 @@ public class WaveToDownController extends BaseController {
             hql="from WaveToDownEntity where waveId = ? and  binId = ?";
 			listWaveToDowns = waveToDownService.findHql(hql,searchstr,searchstr2);
 		}
+		System.out.println("11111searchstr3="+searchstr3);
+
 		if(StringUtil.isNotEmpty(searchstr3)){
 			for(WaveToDownEntity t: listWaveToDowns ){
+				System.out.println("t.getGoodsId()="+t.getGoodsId());
+				System.out.println("searchstr3="+searchstr3);
 				try{
 					if(StringUtil.strPos(t.getGoodsId(),searchstr3)||StringUtil.strPos(t.getShpTiaoMa(),searchstr3)){
 						listWaveToDownsnew.add(t);
@@ -447,20 +449,26 @@ public class WaveToDownController extends BaseController {
                 wmToDownGoods.setOmBeizhu(wmOmQmI.getOmBeizhu());//备注
                 wmToDownGoods.setImCusCode(wmOmQmI.getImCusCode());//客户单号
                 wmToDownGoods.setOrderType("99");//默认为01
+				wmToDownGoods.setCreateBy(waveToDown.getCreateBy());
+				wmToDownGoods.setCreateDate(now());
                 systemService.save(wmToDownGoods);
                 wmOmQmI.setBinSta("H");
+				wmOmQmI.setUpdateBy(waveToDown.getCreateBy());
 				wmOmQmI.setFirstRq(waveToDown.getFirstRq());
                 systemService.saveOrUpdate(wmOmQmI);
             }
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity(HttpStatus.NO_CONTENT);
+			D0.setOK(false);
+			return new ResponseEntity(D0, HttpStatus.OK);
 		}
+		D0.setOK(true);
+
+		return new ResponseEntity(D0, HttpStatus.OK);
 
 
-		return new ResponseEntity(waveToDown, HttpStatus.OK);
-	}
+ 	}
 
 	@RequestMapping(value = "/jsondown", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<?> update(@RequestBody WaveToDownEntity waveToDown) {
@@ -492,19 +500,21 @@ public class WaveToDownController extends BaseController {
 				wmToDownGoods.setOmBeizhu(wmOmQmI.getOmBeizhu());//备注
 				wmToDownGoods.setImCusCode(wmOmQmI.getImCusCode());//客户单号
 				wmToDownGoods.setOrderType("99");//默认为01
+				wmToDownGoods.setCreateDate(now());
+
 				systemService.save(wmToDownGoods);
 				wmOmQmI.setBinSta("H");
 				wmOmQmI.setFirstRq(waveToDown.getFirstRq());
 				systemService.saveOrUpdate(wmOmQmI);
 			}
+			D0.setOK(true);
 
 		} catch (Exception e) {
 			e.printStackTrace();
-			return new ResponseEntity(HttpStatus.NO_CONTENT);
+			D0.setOK(false);
+			return new ResponseEntity(D0, HttpStatus.OK);
 		}
-
-
-		return new ResponseEntity(waveToDown, HttpStatus.OK);
+		return new ResponseEntity(D0, HttpStatus.OK);
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)

@@ -2,6 +2,7 @@ package com.zzjee.wm.controller;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -530,7 +531,9 @@ public class WmSttInGoodsController extends BaseController {
 	//PDA接口
 	@RequestMapping(method = RequestMethod.GET)
 	@ResponseBody
-	public ResponseEntity<?>  list( @RequestParam(value="username", required=false) String username, @RequestParam(value="searchstr", required=false)String searchstr, @RequestParam(value="searchstr2", required=false)String searchstr2) {
+	public ResponseEntity<?>  list( @RequestParam(value="username", required=false) String username,
+									@RequestParam(value="searchstr", required=false)String searchstr,
+									@RequestParam(value="searchstr2", required=false)String searchstr2) {
 //		return listWvGis;
 
 
@@ -612,8 +615,10 @@ public class WmSttInGoodsController extends BaseController {
 		//保存
 		try{
 			WmSttInGoodsEntity t = systemService.get(WmSttInGoodsEntity.class,wmSttInGoods.getId());
+
 			MyBeanUtils.copyBeanNotNull2Bean(wmSttInGoods,t);
 			t.setSttSta(Constants.wm_sta4);
+			t.setUpdateDate(new Date());
 			wmSttInGoodsService.saveOrUpdate(t);
 			D0.setOK(true);
 		} catch (Exception e) {

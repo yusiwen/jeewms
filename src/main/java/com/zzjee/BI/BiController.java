@@ -180,8 +180,13 @@ public class BiController extends BaseController {
             for (Map<String,Object> object : maplist) {
                 map = new HashMap<String, Object>();
                 Map<String,Object> obj =   object;
-                map.put("name", obj.get("create_date").toString());
-                map.put("y",  (int) Double.parseDouble(obj.get("amount").toString()));
+                try{
+
+                    map.put("name", obj.get("create_date").toString());
+                    map.put("y",  (int) Double.parseDouble(obj.get("amount").toString()));
+                }catch (Exception e){
+
+                }
                 Double groupCount = 0.00;
                 try{
                     groupCount =  Double.parseDouble(obj.get("amount").toString());

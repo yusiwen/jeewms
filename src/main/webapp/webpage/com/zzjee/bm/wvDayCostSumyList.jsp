@@ -29,16 +29,16 @@
   </t:datagrid>
   </div>
  </div>
- <script src = "webpage/com/zzjee/bm/wvDayCostSumList.js"></script>		
+ <script src = "webpage/com/zzjee/bm/wvDayCostSumList.js"></script>
  <script type="text/javascript">
  $(document).ready(function(){
  });
- 
-   
- 
+
+
+
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'wvDayCostSumController.do?upload', "wvDayCostSumList");
+	openwindow('Excel导入', 'wvDayCostSumController.do?upload', "wvDayCostSumList");
 }
 
 //导出

@@ -16,8 +16,8 @@
 			}
 		});
 	});
-	
-	
+
+
 	function loadFormByType(jformCategory){
 		var url = 'cgFormHeadController.do?datagrid';
 		$("#tablePropertyList").datagrid('reload',{jformCategory:jformCategory});
@@ -35,11 +35,11 @@
 </div>
 <div region="center" style="padding:0px;border:0px">
 <t:datagrid queryBuilder="true" sortName="createDate" sortOrder="desc" name="tablePropertyList" title="smart.form.config"
-            fitColumns="false" actionUrl="cgFormHeadController.do?datagrid" idField="id" fit="true" 
+            fitColumns="false" actionUrl="cgFormHeadController.do?datagrid" idField="id" fit="true"
             queryMode="group" checkbox="true" >
 	<t:dgCol title="common.id" field="id" hidden="true"></t:dgCol>
 	<t:dgCol title="hasPeizhi" field="hasPeizhi" hidden="true"></t:dgCol>
-	
+
 	<t:dgCol title="table.type" field="jformType" replace="single.table_1,master.table_2,slave.table_3" query="true"></t:dgCol>
 	<t:dgCol title="table.name" field="tableName" query="true" autocomplete="true" />
 	<!--add-start--Author:luobaoli  Date:20150607 for：增加表单分类展现-->
@@ -59,7 +59,7 @@
 	<t:dgCol title="common.operation" field="opt"></t:dgCol>
 	<t:dgFunOpt funname="delCgForm(id,tableName)" title="common.delete" urlclass="ace_button" urlStyle="background-color:#ec4758;" urlfont="fa-trash-o"></t:dgFunOpt>
 	<t:dgFunOpt funname="remCgForm(id)" title="common.remove" urlclass="ace_button" urlStyle="background-color:#FFA500;" urlfont="fa-remove"></t:dgFunOpt>
-	<%-- 
+	<%--
 	<t:dgFunOpt funname="importFields(id,content)" title="导入字段" urlclass="ace_button"  urlfont="fa-download"></t:dgFunOpt>
 	--%>
 	<t:dgFunOpt exp="isDbSynch#eq#N" title="sync.db" funname="doDbsynch(id,content)" urlclass="ace_button"  urlfont="fa-database"/>
@@ -132,7 +132,7 @@
 		}, function(){
 		}).zindex();
 	}
-	
+
 	function removeThis(id){
 		doSubmit("cgFormHeadController.do?rem&id="+id,"tablePropertyList");
 	}
@@ -187,7 +187,7 @@
 		    cancel: true /*为true等价于function(){}*/
 		});
 	}
-	
+
 	/**
 	*	弹出菜单链接
 	*/
@@ -251,7 +251,7 @@
 		});
 	}
 
-	
+
 	//js增强
 	function enhanceJs(title,url,id){
 		var rowsData = $('#'+id).datagrid('getSelections');
@@ -281,7 +281,7 @@
 		    cancel: true /*为true等价于function(){}*/
 		});
 	}
-	
+
 	//add-begin--Author:luobaoli  Date:20150630 for：新增java增强按钮处理逻辑
 	//java增强
 	function javaEnhance(title,url,id){
@@ -327,7 +327,7 @@
 
 	//表单  sql导入
 	function toCgformMigrate(){
-		openuploadwin('<t:mutiLang langKey="form.sqlimport"/>', 'cgformSqlController.do?toCgformMigrate', "tablePropertyList");
+		openwindow('<t:mutiLang langKey="form.sqlimport"/>', 'cgformSqlController.do?toCgformMigrate', "tablePropertyList");
 	}
 	//代码生成
 	function generate(title,url,id){
@@ -351,8 +351,8 @@
 			tip('<t:mutiLang langKey="please.syncdb"/>');
 			return;
 		}
-				
-		
+
+
 		url += '&id='+rowsData[0].id;
 		$.dialog({
 			content: "url:"+url,
@@ -386,8 +386,8 @@
 		}
 		ids = ids.substring(0,ids.length-1);
 		return ids;
-	}	
-	
+	}
+
 	/**
 	 * 以多种方式同步数据库
 	 * @param id 表单id
@@ -422,14 +422,14 @@
 		    }]
 		}).zindex();
 	}
-	
+
 	//$(function(){
 		//if($.cookie("JEECGINDEXSTYLE") == "ace"){
 			//$("#tablePropertyListtb").css("height","125");
 		//}
 	//})
-	
-	
+
+
 	function importFields(id,content) {
 		openuploadwin('【'+content+'】Excel导入Online字段', 'cgFormHeadController.do?upload&id='+id, "tablePropertyList");
 	}
@@ -437,7 +437,7 @@
 		//-- update -start--Author:chenj  Date:20160812 for:TASK #1283 【功能】复制表这个功能，点击的时候，弹出一个是否确认的页面
 		$.dialog.confirm('<t:mutiLang langKey="confirm.copy.form"/>', function(){
 			$.post("cgFormHeadController.do?copyOnline",
-					{id : id},	
+					{id : id},
 					function(data){
 					var d = $.parseJSON(data);
 					if (d.success) {
@@ -449,13 +449,13 @@
 		}, function(){
 		}).zindex();
 		//-- update -end--Author:chenj  Date:20160812 for:TASK #1283 【功能】复制表这个功能，点击的时候，弹出一个是否确认的页面
-		
-		
+
+
 	}
-	
+
 	function propertyTable(id){
 		$.post("cgFormHeadController.do?getConfigId",
-				{id : id},	
+				{id : id},
 				function(data){
 				var d = $.parseJSON(data);
 				if (d.success) {

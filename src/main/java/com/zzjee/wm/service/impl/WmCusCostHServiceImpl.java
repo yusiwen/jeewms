@@ -21,14 +21,16 @@ import java.io.Serializable;
 @Transactional
 public class WmCusCostHServiceImpl extends CommonServiceImpl implements WmCusCostHServiceI {
 	
- 	public <T> void delete(T entity) {
+ 	@Override
+    public <T> void delete(T entity) {
  		super.delete(entity);
  		//执行删除操作配置的sql增强
 		this.doDelSql((WmCusCostHEntity)entity);
  	}
 	
-	public void addMain(WmCusCostHEntity wmCusCostH,
-	        List<WmCusCostIEntity> wmCusCostIList){
+	@Override
+    public void addMain(WmCusCostHEntity wmCusCostH,
+                        List<WmCusCostIEntity> wmCusCostIList){
 			//保存主信息
 			this.save(wmCusCostH);
 		
@@ -43,8 +45,9 @@ public class WmCusCostHServiceImpl extends CommonServiceImpl implements WmCusCos
 	}
 
 	
-	public void updateMain(WmCusCostHEntity wmCusCostH,
-	        List<WmCusCostIEntity> wmCusCostIList) {
+	@Override
+    public void updateMain(WmCusCostHEntity wmCusCostH,
+                           List<WmCusCostIEntity> wmCusCostIList) {
 		//保存主表信息
 		this.saveOrUpdate(wmCusCostH);
 		//===================================================================================
@@ -92,7 +95,8 @@ public class WmCusCostHServiceImpl extends CommonServiceImpl implements WmCusCos
 	}
 
 	
-	public void delMain(WmCusCostHEntity wmCusCostH) {
+	@Override
+    public void delMain(WmCusCostHEntity wmCusCostH) {
 		//删除主表信息
 		this.delete(wmCusCostH);
 		//===================================================================================
@@ -108,26 +112,29 @@ public class WmCusCostHServiceImpl extends CommonServiceImpl implements WmCusCos
  	
  	/**
 	 * 默认按钮-sql增强-新增操作
-	 * @param id
+	 * @param t
 	 * @return
 	 */
- 	public boolean doAddSql(WmCusCostHEntity t){
+ 	@Override
+    public boolean doAddSql(WmCusCostHEntity t){
 	 	return true;
  	}
  	/**
 	 * 默认按钮-sql增强-更新操作
-	 * @param id
+	 * @param t
 	 * @return
 	 */
- 	public boolean doUpdateSql(WmCusCostHEntity t){
+ 	@Override
+    public boolean doUpdateSql(WmCusCostHEntity t){
 	 	return true;
  	}
  	/**
 	 * 默认按钮-sql增强-删除操作
-	 * @param id
+	 * @param t
 	 * @return
 	 */
- 	public boolean doDelSql(WmCusCostHEntity t){
+ 	@Override
+    public boolean doDelSql(WmCusCostHEntity t){
 	 	return true;
  	}
  	

@@ -30,7 +30,7 @@
 <%--    <t:dgFunOpt title="预约通知" funname="print(id)"  urlclass="ace_button"  urlfont="	fa-print" exp="imSta#ne#已删除"/> --%>
 <%--    <t:dgFunOpt title="验收单" funname="printysd(id)"  urlclass="ace_button"  urlfont="	fa-print" exp="imSta#ne#已删除"/> --%>
 <%--       <t:dgFunOpt title="货品ID" funname="printhpid(id)"  urlclass="ace_button"  urlfont="	fa-print" exp="imSta#ne#已删除"/> --%>
-   
+
    <t:dgToolBar title="录入" icon="icon-add" url="wmImNoticeHController.do?goAdd&orderTypeCode=03" funname="add" width="100%" height="100%"></t:dgToolBar>
 <%--    <t:dgToolBar title="编辑" icon="icon-edit" url="wmImNoticeHController.do?goUpdate" funname="update" width="100%" height="100%"></t:dgToolBar> --%>
 <%--    <t:dgToolBar title="批量删除"  icon="icon-remove" url="wmImNoticeHController.do?doBatchDel" funname="deleteALLSelect"></t:dgToolBar> --%>
@@ -41,7 +41,7 @@
   </t:datagrid>
   </div>
  </div>
- <script src = "webpage/com/zzjee/wm/wmImNoticeHList.js"></script>		
+ <script src = "webpage/com/zzjee/wm/wmImNoticeHList.js"></script>
  <script type="text/javascript">
  $(document).ready(function(){
 	 $("#wmImNoticeHListtb").find("input[name='imData_begin1']").attr("class","Wdate").click(function(){WdatePicker({dateFmt:'yyyy-MM-dd hh:mm:ss'});});
@@ -50,23 +50,23 @@
  });
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'wmImNoticeHController.do?upload', "wmImNoticeHList");
+ openwindow('Excel导入', 'wmImNoticeHController.do?upload', "wmImNoticeHList");
 }
 
 function print(id){
 	var url = "wmImNoticeHController.do?doPrint&id="+id;
-	
+
 	window.open(url);
 }
 function printysd(id){
 	var url = "wmImNoticeHController.do?doPrintysd&id="+id;
-	
+
 	window.open(url);
 }
 
 function printhpid(id){
 	var url = "wmImNoticeHController.do?doPrinthpid&id="+id;
-	
+
 	window.open(url);
 }
 //导出

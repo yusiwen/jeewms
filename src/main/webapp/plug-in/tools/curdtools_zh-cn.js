@@ -1,4 +1,4 @@
-﻿﻿﻿﻿// update--begin--author:zhangjiaqiang date:20170621 for:如何避免console.log引起javascript的兼容问题 
+﻿﻿﻿﻿// update--begin--author:zhangjiaqiang date:20170621 for:如何避免console.log引起javascript的兼容问题
 if(!window.console){
     window.console = {};
 }
@@ -62,8 +62,14 @@ function popClickone(obj,name,url) {
                     return false;
                 }else {
                     for(var i1=0;i1<names.length;i1++){
+                        console.log("names*********"+names)
+                        console.log("names.length*********"+names.length)
+
                         var str = "";
                         $.each( selected, function(i, n){
+                            console.log("n*********"+n)
+                            console.log("n*********"+n)
+
                             if (i==0)
                                 str+= n[names[i1]];
                             else{
@@ -1096,7 +1102,7 @@ function closetab(title) {
     //tip("添加成功");
 }
 
-//popup  
+//popup
 //object: this  name:需要选择的列表的字段  code:动态报表的code
 function inputClick(obj,name,code) {
     if(name==""||code==""){
@@ -1116,6 +1122,7 @@ function inputClick(obj,name,code) {
             height: 400,
             cache:false,
             ok: function(){
+                console.log("")
                 iframe = this.iframe.contentWindow;
                 var selected = iframe.getSelectRows();
                 if (selected == '' || selected == null ){
@@ -1360,7 +1367,7 @@ function viewNotCreateWin(title,url, id,isRestful)
 //add--end--Author:xugj date:20160531 for: TASK #1089 【demo】针对jeecgdemo，实现一个新的页面方式
 
 //add--start--Author:gengjiajia date:20160802 for: TASK #1175 批量添加数据的时popup多值的传递
-//popup  
+//popup
 //object: pobj当前操作的文本框. tablefield:对应字典TEXT,要从popup报表中获取的字段.inputnames:对应字典CODE,当前需要回填数据的文本框名称. pcode:动态报表的code
 /**
  *   object: pobj当前操作的文本框.

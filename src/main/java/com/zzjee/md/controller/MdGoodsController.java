@@ -13,10 +13,10 @@ import javax.servlet.http.HttpServletResponse;
 import javax.validation.Validator;
 
 import com.zzjee.md.entity.MdCusEntity;
-import com.zzjee.wm.entity.WmOmQmIEntity;
+
 import com.zzjee.wm.page.WmOmNoticeImpnewPage;
-import com.zzjee.wm.page.WmTmsNoticeHPage;
-import com.zzjee.wmutil.dsc.dscUtil;
+
+import org.apache.commons.lang.StringUtils;
 import org.apache.log4j.Logger;
 import org.jeecgframework.core.common.controller.BaseController;
 import org.jeecgframework.core.common.exception.BusinessException;
@@ -45,16 +45,14 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import com.zzjee.api.ResultDO;
-import com.zzjee.md.entity.MdCusOtherEntity;
 import com.zzjee.md.entity.MdGoodsEntity;
 import com.zzjee.md.entity.MvGoodsEntity;
 import com.zzjee.md.service.MdGoodsServiceI;
 import com.zzjee.wm.entity.WmOmNoticeHEntity;
 import com.zzjee.wm.entity.WmOmNoticeIEntity;
 import com.zzjee.wm.service.WmOmNoticeHServiceI;
-import com.zzjee.wmutil.wmIntUtil;
 import com.zzjee.wmutil.wmUtil;
-import com.zzjee.wmutil.yyUtil;
+
 
 /**
  * @Title: Controller
@@ -213,39 +211,50 @@ public class MdGoodsController extends BaseController {
 		AjaxJson j = new AjaxJson();
 		message = "商品信息添加成功";
 		try {
-			MdGoodsEntity mdGoods1 = systemService.findUniqueByProperty(
-					MdGoodsEntity.class, "shpBianMa", mdGoods.getShpBianMa());
-
-			if(mdGoods1 ==null ){
-				if(StringUtil.isEmpty(mdGoods.getChlKongZhi()) ){
-					mdGoods.setChlKongZhi("N");
-				}
-				if("N".equals(mdGoods.getChlKongZhi() )){
-					mdGoods.setChlShl("1");
-					mdGoods.setJshDanWei(mdGoods.getShlDanWei());
-
-				}
-
-				try {
-					if(StringUtil.isEmpty(mdGoods.getZhlKgm())){
-						if(!StringUtil.isEmpty(mdGoods.getBzhiQi())){
-							int bzhiq = Integer.parseInt(mdGoods.getBzhiQi());
-							mdGoods.setZhlKgm(Integer.toString(bzhiq));
-						}
-
+			if(StringUtil.isEmpty(mdGoods.getChlKongZhi()) ){
+				mdGoods.setChlKongZhi("N");
+				mdGoods.setChlShl("1");
+				mdGoods.setJshDanWei(mdGoods.getShlDanWei());
+			}
+			try {
+				if(StringUtil.isEmpty(mdGoods.getZhlKgm())){
+					if(!StringUtil.isEmpty(mdGoods.getBzhiQi())){
+						int bzhiq = Integer.parseInt(mdGoods.getBzhiQi());
+						mdGoods.setZhlKgm(Integer.toString(bzhiq));
 					}
-				} catch (Exception e) {
-					// TODO: handle exception
 				}
-
+			} catch (Exception e) {
+				// TODO: handle exception
+			}
+			if(StringUtil.isEmpty(mdGoods.getShpBianMa())){
+				//查询当前商品类型的商品数量
+				Map<String, Object> countMap = systemService.findOneForJdbc("select right(shp_bian_ma,7) shp_bian_ma  from md_goods where category_code =? and suo_shu_ke_hu  = ? and shp_bian_ma like ? ORDER BY shp_bian_ma desc LIMIT 1",mdGoods.getCategoryCode(),mdGoods.getSuoShuKeHu(),mdGoods.getSuoShuKeHu()+mdGoods.getCategoryCode()+"%");
+				if (countMap == null) {
+					mdGoods.setShpBianMa(mdGoods.getSuoShuKeHu()+mdGoods.getCategoryCode()+String.format("%07d", 1));
+				}else {
+					Object goodsCode = countMap.get("shp_bian_ma");
+					if (goodsCode != null) {
+						mdGoods.setShpBianMa(mdGoods.getSuoShuKeHu()+mdGoods.getCategoryCode()+String.format("%07d",Integer.parseInt(((String) goodsCode))+1));
+					}else {
+						mdGoods.setShpBianMa(mdGoods.getSuoShuKeHu()+mdGoods.getCategoryCode()+String.format("%07d", 1));
+					}
+				}
 				mdGoodsService.save(mdGoods);
 				systemService.addLog(message, Globals.Log_Type_INSERT,
 						Globals.Log_Leavel_INFO);
 			}else{
-				message = "商品编码或者条码已经存在";
-				j.setSuccess(false);
-			}
+				MdGoodsEntity mdGoods1 = systemService.findUniqueByProperty(
+						MdGoodsEntity.class, "shpBianMa", mdGoods.getShpBianMa());
+				if(mdGoods1 != null){
+					message = "商品编码已经存在";
+					j.setSuccess(false);
+				}else{
+					mdGoodsService.save(mdGoods);
+					systemService.addLog(message, Globals.Log_Type_INSERT,
+							Globals.Log_Leavel_INFO);
+				}
 
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 			message = "商品信息添加失败";
@@ -255,46 +264,7 @@ public class MdGoodsController extends BaseController {
 		return j;
 	}
 
-	/**
-	 * 更新商品信息
-	 *
-	 * @return
-	 */
-	@RequestMapping(params = "doGet")
-	@ResponseBody
-	public AjaxJson dogetfromother(String formDate,String othercode, HttpServletRequest request) {
-		String message = null;
-		AjaxJson j = new AjaxJson();
-		message = "商品信息读取成功";
 
-		try {
-
-			if ("U8".equals(ResourceUtil.getConfigByName("interfacetype"))){
-				yyUtil.getProduct(othercode);
-
-			}
-			if ("UAS".equals(ResourceUtil.getConfigByName("interfacetype"))){
-				if(StringUtil.isEmpty(formDate)){
-					formDate = "2011-01-01";
-				}
-				wmIntUtil.getproduct(formDate);
-
-			}
-			if ("DSC".equals(ResourceUtil.getConfigByName("interfacetype"))){
-
-				dscUtil.updateGoodsFromDsc();
-
-			}
-			systemService.addLog(message, Globals.Log_Type_UPDATE,
-					Globals.Log_Leavel_INFO);
-		} catch (Exception e) {
-			e.printStackTrace();
-			message = "商品信息读取失败";
-			throw new BusinessException(e.getMessage());
-		}
-		j.setMsg(message);
-		return j;
-	}
 
 	/**
 	 * 更新商品信息
@@ -331,8 +301,7 @@ public class MdGoodsController extends BaseController {
 	@RequestMapping(params = "goAdd")
 	public ModelAndView goAdd(MdGoodsEntity mdGoods, HttpServletRequest req) {
 		if (StringUtil.isNotEmpty(mdGoods.getId())) {
-			mdGoods = mdGoodsService.getEntity(MdGoodsEntity.class,
-					mdGoods.getId());
+			mdGoods = mdGoodsService.getEntity(MdGoodsEntity.class,mdGoods.getId());
 			req.setAttribute("mdGoodsPage", mdGoods);
 		}
 		return new ModelAndView("com/zzjee/md/mdGoods-add");
@@ -436,6 +405,26 @@ public class MdGoodsController extends BaseController {
 							MdGoodsEntity.class, "shpBianMa", mdGoods.getShpBianMa());
 					if(mdGoods1 ==null ){
 						try {
+							if(StringUtil.isEmpty(mdGoods.getShpBianMa())){//商品编码为空则自动编码
+								if (StringUtils.isEmpty(mdGoods.getCategoryCode())) {
+									j.setSuccess(false);
+									j.setMsg("类目编码为空：");
+									return j;
+								}
+								Map<String, Object> countMap = systemService.findOneForJdbc("select right(shp_bian_ma,7) shp_bian_ma  from md_goods where category_code =? and suo_shu_ke_hu  = ? and shp_bian_ma like ? ORDER BY shp_bian_ma desc LIMIT 1",mdGoods.getCategoryCode(),mdGoods.getSuoShuKeHu(),mdGoods.getSuoShuKeHu()+mdGoods.getCategoryCode()+"%");
+								if (countMap == null) {
+									mdGoods.setShpBianMa(mdGoods.getSuoShuKeHu()+mdGoods.getCategoryCode()+String.format("%07d", 1));
+								}else {
+									Object goodsCode = countMap.get("shp_bian_ma");
+									if (goodsCode != null) {
+										mdGoods.setShpBianMa(mdGoods.getSuoShuKeHu()+mdGoods.getCategoryCode()+String.format("%07d",Integer.parseInt(((String) goodsCode))+1));
+									}else {
+										mdGoods.setShpBianMa(mdGoods.getSuoShuKeHu()+mdGoods.getCategoryCode()+String.format("%07d", 1));
+									}
+								}
+							}
+
+
 							if(StringUtil.isEmpty(mdGoods.getZhlKgm())){
 								if(!StringUtil.isEmpty(mdGoods.getBzhiQi())){
 									int bzhiq = Integer.parseInt(mdGoods.getBzhiQi());
@@ -453,10 +442,9 @@ public class MdGoodsController extends BaseController {
 
 							}
 
-
-
 						} catch (Exception e) {
 							// TODO: handle exception
+							e.printStackTrace();
 						}
 						mdGoodsService.save(mdGoods);
 					}else{
@@ -469,6 +457,7 @@ public class MdGoodsController extends BaseController {
 
 							}
 						} catch (Exception e) {
+							e.printStackTrace();
 							// TODO: handle exception
 						}
 				  		MyBeanUtils.copyBeanNotNull2Bean(mdGoods, mdGoods1);
@@ -509,14 +498,7 @@ public class MdGoodsController extends BaseController {
 		if(!StringUtil.isEmpty(searchstr)) {
 			hql=hql+"  and  (shpBianMa = '" + searchstr + "'";
             hql=hql+"  or   shpTiaoMa = '" + searchstr + "')";
-
         }
-		if(!StringUtil.isEmpty(searchstr2)) {
-			hql=hql+"  and (shpTiaoMa = '" + searchstr2 + "'";
-            hql=hql+"  or shpBianMa = '" + searchstr2 + "')";
-
-        }
-
 		List<MdGoodsEntity> listMdGoodss = mdGoodsService.findHql(hql);
 		D0.setOK(true);
 		List<MdGoodsEntity> result = new ArrayList<MdGoodsEntity>();
@@ -528,9 +510,6 @@ public class MdGoodsController extends BaseController {
 							break;
 						}
 					}
-					t.setShpYanSe(searchstrin1);
-					t.setPpTuPian(searchstrin2);
-					t.setJjZhongBi(searchstrin3);
 			result.add(t);
 		}
 
@@ -552,14 +531,6 @@ public class MdGoodsController extends BaseController {
 	@ResponseBody
 	public ResponseEntity<?> create(@RequestParam String mdGoodsstr,
 			UriComponentsBuilder uriBuilder) {
-		// 调用JSR303 Bean Validator进行校验，如果出错返回含400错误码及json格式的错误信息.
-//		Set<ConstraintViolation<MdGoodsEntity>> failures = validator
-//				.validate(mdGoods);
-//		if (!failures.isEmpty()) {
-//			return new ResponseEntity(
-//					BeanValidators.extractPropertyAndMessage(failures),
-//					HttpStatus.BAD_REQUEST);
-//		}
 		ResultDO D0 = new  ResultDO();
 		MdGoodsEntity mdGoods  = (MdGoodsEntity)JSONHelper.json2Object(mdGoodsstr,MdGoodsEntity.class);
 

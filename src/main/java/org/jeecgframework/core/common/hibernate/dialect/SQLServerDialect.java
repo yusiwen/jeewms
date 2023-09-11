@@ -3,11 +3,13 @@ package org.jeecgframework.core.common.hibernate.dialect;
 
 public class SQLServerDialect extends Dialect
 {
+  @Override
   public boolean supportsLimitOffset()
   {
     return false;
   }
 
+  @Override
   public boolean supportsLimit()
   {
     return true;
@@ -20,11 +22,13 @@ public class SQLServerDialect extends Dialect
     return selectIndex + (selectDistinctIndex == selectIndex ? 15 : 6);
   }
 
+  @Override
   public String getLimitString(String sql, int offset, int limit)
   {
     return getLimitString(sql, offset, null, limit, null);
   }
 
+  @Override
   public String getLimitString(String querySelect, int offset, String offsetPlaceholder, int limit, String limitPlaceholder)
   {
     if (offset > 0)

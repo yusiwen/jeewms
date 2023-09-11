@@ -37,7 +37,7 @@
 
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'baStoreController.do?upload', "baStoreList");
+	openwindow('Excel导入', 'baStoreController.do?upload', "baStoreList");
 }
 
 //导出

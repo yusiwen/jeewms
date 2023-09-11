@@ -90,11 +90,13 @@ public class DictSelectTag extends TagSupport {
 	public void setDatatype(String datatype) {
 		this.datatype = datatype;
 	}
-	public int doStartTag() throws JspTagException {
+	@Override
+    public int doStartTag() throws JspTagException {
 		return EVAL_PAGE;
 	}
 
-	public int doEndTag() throws JspTagException {
+	@Override
+    public int doEndTag() throws JspTagException {
 		JspWriter out = null;
 		try {
 			out = this.pageContext.getOut();
@@ -407,11 +409,13 @@ public class DictSelectTag extends TagSupport {
 		this.typeGroupCode = typeGroupCode;
 	}
 
-	public String getId() {
+	@Override
+    public String getId() {
 		return id;
 	}
 
-	public void setId(String id) {
+	@Override
+    public void setId(String id) {
 		this.id = id;
 	}
 

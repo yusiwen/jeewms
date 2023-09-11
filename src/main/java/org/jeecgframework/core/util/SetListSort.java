@@ -16,7 +16,8 @@ public class SetListSort implements Comparator {
 	/**
 	 * 菜单排序比较器
 	 */
-	public int compare(Object o1, Object o2) {
+	@Override
+    public int compare(Object o1, Object o2) {
 		TSFunction c1 = (TSFunction) o1;
 		TSFunction c2 = (TSFunction) o2;
 		if (c1.getFunctionOrder() != null && c2.getFunctionOrder() != null) {

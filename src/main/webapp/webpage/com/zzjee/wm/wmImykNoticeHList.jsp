@@ -14,7 +14,7 @@
    <t:dgCol title="所属部门"  field="sysOrgCode"  hidden="true"  queryMode="single"  width="120"></t:dgCol>
    <t:dgCol title="所属公司"  field="sysCompanyCode"  hidden="true"  queryMode="single"  width="120"></t:dgCol>
    <t:dgCol title="通知单号"  field="noticeId" query="true" sortable="true"    queryMode="single"  width="120"></t:dgCol>
-   <t:dgCol title="客户编码"  field="cusCode"     queryMode="single" dictionary="mv_cus,cus_code,cus_name"  width="200"></t:dgCol>
+   <t:dgCol title="货主编码"  field="cusCode"     queryMode="single" dictionary="mv_cus,cus_code,cus_name"  width="200"></t:dgCol>
    <t:dgCol title="预计到货时间"  field="imData" formatter="yyyy-MM-dd hh:mm:ss"  query="true" queryMode="group"  width="120"></t:dgCol>
    <t:dgCol title="客户订单号"  field="imCusCode"   query="true" queryMode="single"  width="90"></t:dgCol>
    <t:dgCol title="车号"  field="imCarNo"   query="true" queryMode="single"  width="50"></t:dgCol>
@@ -30,7 +30,7 @@
    <t:dgFunOpt title="越库通知" funname="print(id)"  urlclass="ace_button"  urlfont="	fa-print" exp="imSta#ne#已删除"/>
    <t:dgFunOpt title="越库单" funname="printysd(id)"  urlclass="ace_button"  urlfont="	fa-print" exp="imSta#ne#已删除"/>
       <t:dgFunOpt title="完成" funname="closeor(id)"  urlclass="ace_button"  urlfont="	fa-print" exp="imSta#ne#已完成"/>
-   
+
    <t:dgToolBar title="录入" icon="icon-add" url="wmImNoticeHController.do?goAdd&orderTypeCode=04" funname="add" width="100%" height="100%"></t:dgToolBar>
    <t:dgToolBar title="编辑" icon="icon-edit" url="wmImNoticeHController.do?goUpdate" funname="update" width="100%" height="100%"></t:dgToolBar>
 <%--    <t:dgToolBar title="批量删除"  icon="icon-remove" url="wmImNoticeHController.do?doBatchDel" funname="deleteALLSelect"></t:dgToolBar> --%>
@@ -41,7 +41,7 @@
   </t:datagrid>
   </div>
  </div>
- <script src = "webpage/com/zzjee/wm/wmImNoticeHList.js"></script>		
+ <script src = "webpage/com/zzjee/wm/wmImNoticeHList.js"></script>
  <script type="text/javascript">
  $(document).ready(function(){
 	 $("#wmImNoticeHListtb").find("input[name='imData_begin1']").attr("class","Wdate").click(function(){WdatePicker({dateFmt:'yyyy-MM-dd hh:mm:ss'});});
@@ -50,23 +50,23 @@
  });
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'wmImNoticeHController.do?upload', "wmImNoticeHList");
+ openwindow('Excel导入', 'wmImNoticeHController.do?upload', "wmImNoticeHList");
 }
 
 function print(id){
 	var url = "wmImNoticeHController.do?doPrint&id="+id;
-	
+
 	window.open(url);
 }
 function printysd(id){
 	var url = "wmImNoticeHController.do?doPrintysd&id="+id;
-	
+
 	window.open(url);
 }
 
 function closeor(id){
 	var url = "wmImNoticeHController.do?close&id="+id;
-	
+
 	$.ajax({
 		async : false,
 		cache : false,
@@ -79,7 +79,7 @@ function closeor(id){
 			if (d.success) {
 				tip("成功");
 		        $('#wmImNoticeHList').datagrid('reload',{});
-			}		
+			}
 		}
 	});
 }

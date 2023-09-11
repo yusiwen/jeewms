@@ -55,7 +55,7 @@ public class TagUtil {
 	/**
 	 * 
 	 * 获取对象内对应字段的值
-	 * @param fields
+	 * @param FiledName
 	 */
 	public static Object fieldNametoValues(String FiledName, Object o){
 		Object value = "";
@@ -139,7 +139,6 @@ public class TagUtil {
 	 * 对象转数组
 	 * @param fields
 	 * @param o
-	 * @param stack
 	 * @return
 	 * @throws Exception
 	 */
@@ -157,7 +156,7 @@ public class TagUtil {
 	 * @param total
 	 * @param list
 	 * @param dataStyle 
-	 * @param page 
+	 * @param pageSize
 	 */
 	private static String listtojson(String[] fields, int total, List<?> list, String[] footers, String dataStyle, int pageSize) throws Exception {
 		//Object[] values = new Object[fields.length];
@@ -165,7 +164,9 @@ public class TagUtil {
 
 		if("jqgrid".equals(dataStyle)){
 			int totalPage = total % pageSize > 0 ? total / pageSize + 1 : total / pageSize;
-			if(totalPage == 0) totalPage = 1;
+			if(totalPage == 0) {
+                totalPage = 1;
+            }
 			jsonTemp.append("{\"total\":" + totalPage );
 		}else{
 			jsonTemp.append("{\"total\":" + total );
@@ -182,9 +183,9 @@ public class TagUtil {
 			Object fieldValue = null;
 			for (i = 0; i < fields.length; ++i) {
 				fieldName = fields[i].toString();
-				if (list.get(j) instanceof Map)
-					fieldValue = ((Map<?, ?>) list.get(j)).get(fieldName);
-				else {
+				if (list.get(j) instanceof Map) {
+                    fieldValue = ((Map<?, ?>) list.get(j)).get(fieldName);
+                } else {
 					fieldValue = fieldNametoValues(fieldName, list.get(j));
 				}
 
@@ -194,9 +195,9 @@ public class TagUtil {
 					jsonTemp.append(",");
 				}
 			}
-			if (j != list.size() - 1)
-				jsonTemp.append("},");
-			else {
+			if (j != list.size() - 1) {
+                jsonTemp.append("},");
+            } else {
 				jsonTemp.append("}");
 			}
 		}
@@ -209,9 +210,9 @@ public class TagUtil {
 			for(i=0;i<footers.length;i++){
 				String footerFiled = footers[i].split(":")[0];
 				Object value = null;
-				if (footers[i].split(":").length == 2)
-					value = footers[i].split(":")[1];
-				else {
+				if (footers[i].split(":").length == 2) {
+                    value = footers[i].split(":")[1];
+                } else {
 					value = getTotalValue(footerFiled, list);
 				}
 				if(i==0){
@@ -235,7 +236,7 @@ public class TagUtil {
 	
 	/**
 	 * 计算指定列的合计
-	 * @param filed 字段名
+	 * @param fieldName 字段名
 	 * @param list 列表数据
 	 * @return
 	 */
@@ -259,8 +260,7 @@ public class TagUtil {
 	}
 	/**
 	 * 循环LIST对象拼接自动完成控件数据
-	 * @param fields
-	 * @param total
+	 * @param autocomplete
 	 * @param list
 	 * @throws Exception 
 	 */
@@ -295,7 +295,7 @@ public class TagUtil {
 	}
 	/**
 	 * 循环LIST对象拼接DATATABLE格式的JSON数据
-	 * @param fields
+	 * @param field
 	 * @param total
 	 * @param list
 	 */
@@ -326,8 +326,7 @@ public class TagUtil {
 	
 	/**
 	 * 返回列表JSONObject对象
-	 * @param field
-	 * @param dataGrid
+	 * @param dg
 	 * @return
 	 */
 	private static JSONObject getJson(DataGrid dg) {
@@ -349,7 +348,7 @@ public class TagUtil {
 	/**
 	 * 返回列表JSONObject对象
 	 * @param field
-	 * @param dataGrid
+	 * @param dataTable
 	 * @return
 	 */
 	private static JSONObject getJson(DataTableReturn dataTable,String field) {
@@ -464,7 +463,7 @@ public class TagUtil {
 	 * 控件类型：easyui
 	 * 返回datagrid JSON数据
 	 * @param response
-	 * @param dataGrid
+	 * @param dg
 	 */
 	public static void datagrid(HttpServletResponse response,DataGrid dg) {
 		response.setContentType("application/json");
@@ -496,7 +495,7 @@ public class TagUtil {
 	 * 控件类型：easyui
 	 * 返回treegrid JSON数据
 	 * @param response
-	 * @param dataGrid
+	 * @param dg
 	 */
 	public static void treegrid(HttpServletResponse response,DataGrid dg) {
 		response.setContentType("application/json");
@@ -526,7 +525,7 @@ public class TagUtil {
 	 * 控件类型：easyui
 	 * 返回datagrid JSON数据
 	 * @param response
-	 * @param dataGrid
+	 * @param dg
 	 * @param extMap 数据列表的扩展
 	 */
 	public static void datagrid(HttpServletResponse response,DataGrid dg,Map<String,Map<String,Object>>  extMap) {
@@ -562,7 +561,7 @@ public class TagUtil {
 	 * 控件类型：datatable
 	 * 返回datatable JSON数据
 	 * @param response
-	 * @param datatable
+	 * @param dataTableReturn
 	 */
 	public static void datatable(HttpServletResponse response, DataTableReturn dataTableReturn,String field) {
 		response.setContentType("application/json");

@@ -17,14 +17,16 @@ import org.springframework.transaction.annotation.Transactional;
 @Transactional
 public class CgDynamGraphConfigHeadServiceImpl extends CommonServiceImpl implements CgDynamGraphConfigHeadServiceI {
 		
-	 	public <T> void delete(T entity) {
+	 	@Override
+        public <T> void delete(T entity) {
 	 		super.delete(entity);
 	 		//执行删除操作配置的sql增强
 			this.doDelSql((CgDynamGraphConfigHeadEntity)entity);
 	 	}
 		
-	 	public void addMain(CgDynamGraphConfigHeadEntity cgDynamGraphConfigHead,
-		        List<CgDynamGraphConfigItemEntity> cgDynamGraphConfigItemList,List<CgDynamGraphConfigParamEntity> cgDynamGraphConfigParamList){
+	 	@Override
+        public void addMain(CgDynamGraphConfigHeadEntity cgDynamGraphConfigHead,
+                            List<CgDynamGraphConfigItemEntity> cgDynamGraphConfigItemList, List<CgDynamGraphConfigParamEntity> cgDynamGraphConfigParamList){
 				//保存主信息
 				this.save(cgDynamGraphConfigHead);
 			
@@ -47,8 +49,9 @@ public class CgDynamGraphConfigHeadServiceImpl extends CommonServiceImpl impleme
 		}
 
 		
-		public void updateMain(CgDynamGraphConfigHeadEntity cgDynamGraphConfigHead,
-		        List<CgDynamGraphConfigItemEntity> cgDynamGraphConfigItemList,List<CgDynamGraphConfigParamEntity> cgDynamGraphConfigParamList) {
+		@Override
+        public void updateMain(CgDynamGraphConfigHeadEntity cgDynamGraphConfigHead,
+                               List<CgDynamGraphConfigItemEntity> cgDynamGraphConfigItemList, List<CgDynamGraphConfigParamEntity> cgDynamGraphConfigParamList) {
 			//保存主表信息
 			this.saveOrUpdate(cgDynamGraphConfigHead);
 			//===================================================================================
@@ -130,7 +133,8 @@ public class CgDynamGraphConfigHeadServiceImpl extends CommonServiceImpl impleme
 		}
 
 		
-		public void delMain(CgDynamGraphConfigHeadEntity cgDynamGraphConfigHead) {
+		@Override
+        public void delMain(CgDynamGraphConfigHeadEntity cgDynamGraphConfigHead) {
 			//删除主表信息
 			this.delete(cgDynamGraphConfigHead);
 			//===================================================================================
@@ -150,26 +154,29 @@ public class CgDynamGraphConfigHeadServiceImpl extends CommonServiceImpl impleme
 	 	
 	 	/**
 		 * 默认按钮-sql增强-新增操作
-		 * @param id
+		 * @param t
 		 * @return
 		 */
-	 	public boolean doAddSql(CgDynamGraphConfigHeadEntity t){
+	 	@Override
+        public boolean doAddSql(CgDynamGraphConfigHeadEntity t){
 		 	return true;
 	 	}
 	 	/**
 		 * 默认按钮-sql增强-更新操作
-		 * @param id
+		 * @param t
 		 * @return
 		 */
-	 	public boolean doUpdateSql(CgDynamGraphConfigHeadEntity t){
+	 	@Override
+        public boolean doUpdateSql(CgDynamGraphConfigHeadEntity t){
 		 	return true;
 	 	}
 	 	/**
 		 * 默认按钮-sql增强-删除操作
-		 * @param id
+		 * @param t
 		 * @return
 		 */
-	 	public boolean doDelSql(CgDynamGraphConfigHeadEntity t){
+	 	@Override
+        public boolean doDelSql(CgDynamGraphConfigHeadEntity t){
 		 	return true;
 	 	}
 	 	

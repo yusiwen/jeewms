@@ -25,10 +25,12 @@ public class DataGridConfOptTag extends TagSupport {
 	private String urlclass;//自定义按钮样式
 	private String urlfont;//自定义按钮图标样式
 
-	public int doStartTag() throws JspTagException {
+	@Override
+    public int doStartTag() throws JspTagException {
 		return EVAL_PAGE;
 	}
-	public int doEndTag() throws JspTagException {
+	@Override
+    public int doEndTag() throws JspTagException {
 		Tag t = findAncestorWithClass(this, DataGridTag.class);
 		DataGridTag parent = (DataGridTag) t;
 

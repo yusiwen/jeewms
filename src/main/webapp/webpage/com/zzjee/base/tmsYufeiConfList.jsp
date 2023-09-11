@@ -33,16 +33,16 @@
   </t:datagrid>
   </div>
  </div>
- <script src = "webpage/com/zzjee/base/tmsYufeiConfList.js"></script>		
+ <script src = "webpage/com/zzjee/base/tmsYufeiConfList.js"></script>
  <script type="text/javascript">
  $(document).ready(function(){
  });
- 
-   
- 
+
+
+
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'tmsYufeiConfController.do?upload', "tmsYufeiConfList");
+	openwindow('Excel导入', 'tmsYufeiConfController.do?upload', "tmsYufeiConfList");
 }
 
 //导出

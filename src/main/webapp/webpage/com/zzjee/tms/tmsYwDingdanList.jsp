@@ -58,7 +58,7 @@
   </t:datagrid>
   </div>
  </div>
- <script src = "webpage/com/zzjee/tms/tmsYwDingdanList.js"></script>		
+ <script src = "webpage/com/zzjee/tms/tmsYwDingdanList.js"></script>
  <script type="text/javascript">
  $(document).ready(function(){
  });
@@ -71,10 +71,10 @@
      createwindow("编辑",url,"100%","100%");
 
  }
- 
+
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'tmsYwDingdanController.do?upload', "tmsYwDingdanList");
+	openwindow('Excel导入', 'tmsYwDingdanController.do?upload', "tmsYwDingdanList");
 }
 
 //导出

@@ -32,7 +32,7 @@
    <t:dgCol title="高米"  field="gao"    queryMode="group"  width="70"></t:dgCol>
    <t:dgCol title="代收款金额"  field="daishouk"  queryMode="group"  width="80"></t:dgCol>
    <t:dgCol title="是否等通知"  field="dengtongzhi"  queryMode="group"  dictionary="sf_yn"  width="80"></t:dgCol>
-   <%--<t:dgCol title="价格"  field="jiage"  queryMode="group"  width="120"></t:dgCol>--%>
+   <t:dgCol title="区域"  field="by1"   query="true"  queryMode="single"   width="120"></t:dgCol>
    <%--<t:dgCol title="下单附件"  field="xiadanfj"  hidden="true"  queryMode="group"  image="true" imageSize="50,50"  width="120"></t:dgCol>--%>
    <%--<t:dgCol title="回单附件"  field="huidanfj"  hidden="true"  queryMode="group"  image="true" imageSize="50,50"  width="120"></t:dgCol>--%>
    <%--<t:dgCol title="状态"  field="zhuangtai"  query="true"  queryMode="single"  width="120"></t:dgCol>--%>
@@ -138,7 +138,7 @@
 
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'tmsYwDingdanController.do?upload', "tmsYwDingdanList");
+	openwindow('Excel导入', 'tmsYwDingdanController.do?upload', "tmsYwDingdanList");
 }
 
 //导出

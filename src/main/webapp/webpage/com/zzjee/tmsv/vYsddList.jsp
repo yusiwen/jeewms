@@ -37,16 +37,16 @@
   </t:datagrid>
   </div>
  </div>
- <script src = "webpage/com/zzjee/tmsv/vYsddList.js"></script>		
+ <script src = "webpage/com/zzjee/tmsv/vYsddList.js"></script>
  <script type="text/javascript">
  $(document).ready(function(){
  });
- 
-   
- 
+
+
+
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'vYsddController.do?upload', "vYsddList");
+	openwindow('Excel导入', 'vYsddController.do?upload', "vYsddList");
 }
 
 //导出

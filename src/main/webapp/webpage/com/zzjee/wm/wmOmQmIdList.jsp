@@ -28,7 +28,7 @@
     <t:dgCol title="备注"  field="itemText"    queryMode="group"  width="50"></t:dgCol>
     <t:dgCol title="生产日期"  field="proData"      queryMode="group"  width="80"></t:dgCol>
     <t:dgCol title="托盘"  field="tinId"   query="true"   queryMode="single"  width="70"></t:dgCol>
-   
+
 <%--     <t:dgCol title="批次"  field="goodsBatch"    queryMode="group"  width="120"></t:dgCol> --%>
     <t:dgCol title="仓位"  field="binId"   query="true"   queryMode="single"  width="90"></t:dgCol>
 <%--     <t:dgCol title="体积"  field="tinTj"    queryMode="group"  width="70"></t:dgCol> --%>
@@ -46,7 +46,7 @@
 <%--    <t:dgToolBar title="录入" icon="icon-add" url="wmOmQmIController.do?goAdd" funname="add"></t:dgToolBar> --%>
 <%--    <t:dgToolBar title="编辑" icon="icon-edit" url="wmOmQmIController.do?goUpdate" funname="update"></t:dgToolBar> --%>
 <%--          <t:dgFunOpt title="任务确认" funname="taskassign(id)"  urlclass="ace_button"  exp="binSta#eq#I"  /> --%>
-   
+
 <%--    <t:dgToolBar title="批量删除"  icon="icon-remove" url="wmOmQmIController.do?doBatchDel" funname="deleteALLSelect"></t:dgToolBar> --%>
    <t:dgToolBar title="查看" icon="icon-search" url="wmOmQmIController.do?goUpdate" funname="detail"></t:dgToolBar>
 <%--    <t:dgToolBar title="导入" icon="icon-put" funname="ImportXls"></t:dgToolBar> --%>
@@ -55,7 +55,7 @@
   </t:datagrid>
   </div>
  </div>
- <script src = "webpage/com/zzjee/wm/wmOmQmIList.js"></script>		
+ <script src = "webpage/com/zzjee/wm/wmOmQmIList.js"></script>
  <script type="text/javascript">
  $(document).ready(function(){
  });
@@ -73,15 +73,15 @@
 				if (d.success) {
 					tip("下架成功");
 			        $('#wmOmQmIList').datagrid('reload',{});
-				}		
+				}
 			}
 		});
 	}
-   
- 
+
+
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'wmOmQmIController.do?upload', "wmOmQmIList");
+	openwindow('Excel导入', 'wmOmQmIController.do?upload', "wmOmQmIList");
 }
 
 //导出

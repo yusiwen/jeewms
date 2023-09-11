@@ -33,6 +33,7 @@ import org.jeecgframework.poi.excel.entity.ExportParams;
 import org.jeecgframework.poi.excel.entity.ImportParams;
 import org.jeecgframework.poi.excel.entity.vo.NormalExcelConstants;
 import org.jeecgframework.tag.core.easyui.TagUtil;
+import org.jeecgframework.web.system.pojo.base.TSBaseUser;
 import org.jeecgframework.web.system.service.SystemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -100,7 +101,7 @@ public class WmToUpGoodsController extends BaseController {
 	 * @param request
 	 * @param response
 	 * @param dataGrid
- 	 */
+	 */
 
 	@RequestMapping(params = "datagrid")
 	public void datagrid(WmToUpGoodsEntity wmToUpGoods,HttpServletRequest request, HttpServletResponse response, DataGrid dataGrid) {
@@ -108,7 +109,7 @@ public class WmToUpGoodsController extends BaseController {
 		//查询条件组装器
 		org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq, wmToUpGoods, request.getParameterMap());
 		try{
-		//自定义追加查询条件
+			//自定义追加查询条件
 		}catch (Exception e) {
 			throw new BusinessException(e.getMessage());
 		}
@@ -169,7 +170,7 @@ public class WmToUpGoodsController extends BaseController {
 	 *
 	 * @return
 	 */
-	 @RequestMapping(params = "doBatchDel")
+	@RequestMapping(params = "doBatchDel")
 	@ResponseBody
 	public AjaxJson doBatchDel(String ids,HttpServletRequest request){
 		String message = null;
@@ -178,7 +179,7 @@ public class WmToUpGoodsController extends BaseController {
 		try{
 			for(String id:ids.split(",")){
 				WmToUpGoodsEntity wmToUpGoods = systemService.getEntity(WmToUpGoodsEntity.class,
-				id
+						id
 				);
 				wmToUpGoodsService.delete(wmToUpGoods);
 				systemService.addLog(message, Globals.Log_Type_DEL, Globals.Log_Leavel_INFO);
@@ -193,24 +194,24 @@ public class WmToUpGoodsController extends BaseController {
 	}
 
 
-		@RequestMapping(params = "doGettextzy",method ={RequestMethod.GET, RequestMethod.POST})
-		@ResponseBody
-		public AjaxJson doGettextzy(HttpServletRequest request) {
-			AjaxJson j = new AjaxJson();
-			MvGoodsEntity mvgoods = systemService.findUniqueByProperty(MvGoodsEntity.class, "goodsCode", oConvertUtils.getString(request.getParameter("goodsid"))) ;
-			if(mvgoods==null){
-				j.setSuccess(false);
-				j.setMsg("不存在此商品");
-			}
-			j.setObj(mvgoods);
-			return j;
+	@RequestMapping(params = "doGettextzy",method ={RequestMethod.GET, RequestMethod.POST})
+	@ResponseBody
+	public AjaxJson doGettextzy(HttpServletRequest request) {
+		AjaxJson j = new AjaxJson();
+		MvGoodsEntity mvgoods = systemService.findUniqueByProperty(MvGoodsEntity.class, "goodsCode", oConvertUtils.getString(request.getParameter("goodsid"))) ;
+		if(mvgoods==null){
+			j.setSuccess(false);
+			j.setMsg("不存在此商品");
 		}
+		j.setObj(mvgoods);
+		return j;
+	}
 
 
 	/**
 	 * 添加上架列表
 	 *
- 	 * @return
+	 * @return
 	 */
 	@RequestMapping(params = "doAdd")
 	@ResponseBody
@@ -227,22 +228,22 @@ public class WmToUpGoodsController extends BaseController {
 			if(mvgoods!=null){
 				wmToUpGoods.setGoodsName(mvgoods.getGoodsName());
 				wmToUpGoods.setBaseUnit(mvgoods.getBaseunit());
-			wmToUpGoods.setGoodsUnit(mvgoods.getShlDanWei());
-			if (!mvgoods.getBaseunit().equals(mvgoods.getShlDanWei())) {
-				try {
-					wmToUpGoods.setBaseGoodscount(String.valueOf(Double
-							.parseDouble(mvgoods.getChlShl())
-							* Double.parseDouble(wmToUpGoods.getGoodsQua())));
-				} catch (Exception e) {
-					// TODO: handle exception
-				}
+				wmToUpGoods.setGoodsUnit(mvgoods.getShlDanWei());
+				if (!mvgoods.getBaseunit().equals(mvgoods.getShlDanWei())) {
+					try {
+						wmToUpGoods.setBaseGoodscount(String.valueOf(Double
+								.parseDouble(mvgoods.getChlShl())
+								* Double.parseDouble(wmToUpGoods.getGoodsQua())));
+					} catch (Exception e) {
+						// TODO: handle exception
+					}
 
-			} else {
-				wmToUpGoods.setBaseGoodscount(wmToUpGoods
-						.getGoodsQua());
-			}
-			wmToUpGoodsService.save(wmToUpGoods);
-			systemService.addLog(message, Globals.Log_Type_INSERT, Globals.Log_Leavel_INFO);
+				} else {
+					wmToUpGoods.setBaseGoodscount(wmToUpGoods
+							.getGoodsQua());
+				}
+				wmToUpGoodsService.save(wmToUpGoods);
+				systemService.addLog(message, Globals.Log_Type_INSERT, Globals.Log_Leavel_INFO);
 			}
 		}catch(Exception e){
 			e.printStackTrace();
@@ -256,7 +257,7 @@ public class WmToUpGoodsController extends BaseController {
 	/**
 	 * 更新上架列表
 	 *
- 	 * @return
+	 * @return
 	 */
 	@RequestMapping(params = "doUpdate")
 	@ResponseBody
@@ -363,7 +364,7 @@ public class WmToUpGoodsController extends BaseController {
 		modelMap.put(NormalExcelConstants.FILE_NAME,"上架列表");
 		modelMap.put(NormalExcelConstants.CLASS,WmToUpGoodsEntity.class);
 		modelMap.put(NormalExcelConstants.PARAMS,new ExportParams("上架列表列表", "导出人:"+ResourceUtil.getSessionUserName().getRealName(),
-			"导出信息"));
+				"导出信息"));
 		modelMap.put(NormalExcelConstants.DATA_LIST,wmToUpGoodss);
 		return NormalExcelConstants.JEECG_EXCEL_VIEW;
 	}
@@ -376,12 +377,12 @@ public class WmToUpGoodsController extends BaseController {
 	@RequestMapping(params = "exportXlsByT")
 	public String exportXlsByT(WmToUpGoodsEntity wmToUpGoods,HttpServletRequest request,HttpServletResponse response
 			, DataGrid dataGrid,ModelMap modelMap) {
-    	modelMap.put(NormalExcelConstants.FILE_NAME,"上架列表");
-    	modelMap.put(NormalExcelConstants.CLASS,WmToUpGoodsEntity.class);
-    	modelMap.put(NormalExcelConstants.PARAMS,new ExportParams("上架列表列表", "导出人:"+ResourceUtil.getSessionUserName().getRealName(),
-    	"导出信息"));
-    	modelMap.put(NormalExcelConstants.DATA_LIST,new ArrayList());
-    	return NormalExcelConstants.JEECG_EXCEL_VIEW;
+		modelMap.put(NormalExcelConstants.FILE_NAME,"上架列表");
+		modelMap.put(NormalExcelConstants.CLASS,WmToUpGoodsEntity.class);
+		modelMap.put(NormalExcelConstants.PARAMS,new ExportParams("上架列表列表", "导出人:"+ResourceUtil.getSessionUserName().getRealName(),
+				"导出信息"));
+		modelMap.put(NormalExcelConstants.DATA_LIST,new ArrayList());
+		return NormalExcelConstants.JEECG_EXCEL_VIEW;
 	}
 
 	@SuppressWarnings("unchecked")
@@ -453,15 +454,15 @@ public class WmToUpGoodsController extends BaseController {
 		}
 
 		if(StringUtil.isEmpty(wmToUpGoods.getKuWeiBianMa())){
-            D0.setOK(false);
-            D0.setErrorMsg("储位不能为空");
-            return new ResponseEntity(D0, HttpStatus.OK);
-        }else{
-            if (!wmUtil.checkbin(wmToUpGoods.getKuWeiBianMa())) {
-                D0.setOK(false);
-                D0.setErrorMsg("储位不存在");
-                return new ResponseEntity(D0, HttpStatus.OK);            }
-        }
+			D0.setOK(false);
+			D0.setErrorMsg("储位不能为空");
+			return new ResponseEntity(D0, HttpStatus.OK);
+		}else{
+			if (!wmUtil.checkbin(wmToUpGoods.getKuWeiBianMa())) {
+				D0.setOK(false);
+				D0.setErrorMsg("储位不存在");
+				return new ResponseEntity(D0, HttpStatus.OK);            }
+		}
 
 
 		//保存
@@ -486,8 +487,8 @@ public class WmToUpGoodsController extends BaseController {
 				List<WmToUpGoodsEntity> wmToUpGoodsEntity = systemService.findByProperty(WmToUpGoodsEntity.class,"orderIdI",wmToUpGoods.getWmToUpId());
 				if(wmToUpGoodsEntity!=null&&wmToUpGoodsEntity.size()>0){
 					D0.setOK(false);
-                    D0.setErrorMsg("已经上架，不能重复上架");
-                    return new ResponseEntity(D0, HttpStatus.OK);
+					D0.setErrorMsg("已经上架，不能重复上架");
+					return new ResponseEntity(D0, HttpStatus.OK);
 				}
 			}else{
 				D0.setOK(false);
@@ -498,6 +499,12 @@ public class WmToUpGoodsController extends BaseController {
 
 			wmToUpGoods.setGoodsName(wmInQmIEntity.getGoodsName());
 			wmToUpGoods.setCreateDate(DateUtils.getDate());
+
+			TSBaseUser user = systemService.findUniqueByProperty(TSBaseUser.class,"userName",wmToUpGoods.getCreateBy());
+			if (user != null ) {
+				wmToUpGoods.setCreateName(user.getRealName());
+			}
+
 			wmToUpGoodsService.save(wmToUpGoods);
 		} catch (Exception e) {
 			e.printStackTrace();

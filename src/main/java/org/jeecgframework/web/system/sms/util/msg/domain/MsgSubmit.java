@@ -59,7 +59,8 @@ public class MsgSubmit extends MsgHead {
 	 * 
 	 * @return byte[]
 	 */
-	public byte[] toByteArry() {
+	@Override
+    public byte[] toByteArry() {
 		ByteArrayOutputStream bous = new ByteArrayOutputStream();
 		DataOutputStream dous = new DataOutputStream(bous);
 		try {

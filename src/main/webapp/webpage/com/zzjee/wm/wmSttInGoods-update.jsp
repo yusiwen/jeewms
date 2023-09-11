@@ -12,10 +12,10 @@
   <link rel="stylesheet" href="online/template/ledefault/css/bootstrap-theme.css">
   <link rel="stylesheet" href="online/template/ledefault/css/bootstrap.css">
   <link rel="stylesheet" href="online/template/ledefault/css/app.css">
-  
+
   <link rel="stylesheet" href="plug-in/Validform/css/metrole/style.css" type="text/css"/>
   <link rel="stylesheet" href="plug-in/Validform/css/metrole/tablefrom.css" type="text/css"/>
-  
+
   <script type="text/javascript" src="plug-in/jquery/jquery-1.8.3.js"></script>
   <script type="text/javascript" src="plug-in/tools/dataformat.js"></script>
   <script type="text/javascript" src="plug-in/easyui/jquery.easyui.min.1.3.2.js"></script>
@@ -40,8 +40,8 @@
 	<t:formvalid formid="formobj" dialog="true" usePlugin="password" layout="table" action="wmSttInGoodsController.do?doUpdate" tiptype="1" >
 			<input type="hidden" id="btn_sub" class="btn_sub"/>
 			<input type="hidden" name="id" value='${wmSttInGoodsPage.id}' >
-			
-			
+
+
 			<div class="tab-wrapper">
 			    <!-- tab -->
 			    <ul class="nav nav-tabs">
@@ -61,10 +61,7 @@
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
 						<label class="Validform_label" style="display: none">储位</label>
 			          </div>
-						</div>
-			          
-			        
-							<div class="row show-grid">
+
 			          <div class="col-xs-3 text-center">
 			          	<b>托盘编码：</b>
 			          </div>
@@ -76,8 +73,8 @@
 						<label class="Validform_label" style="display: none">托盘编码</label>
 			          </div>
 						</div>
-			          
-			        
+
+
 							<div class="row show-grid">
 			          <div class="col-xs-3 text-center">
 			          	<b>商品编码：</b>
@@ -89,10 +86,7 @@
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
 						<label class="Validform_label" style="display: none">商品编码</label>
 			          </div>
-						</div>
-			          
-			        
-							<div class="row show-grid">
+
 			          <div class="col-xs-3 text-center">
 			          	<b>商品名称：</b>
 			          </div>
@@ -104,8 +98,8 @@
 						<label class="Validform_label" style="display: none">商品名称</label>
 			          </div>
 						</div>
-			          
-			        
+
+
 							<div class="row show-grid">
 			          <div class="col-xs-3 text-center">
 			          	<b>数量：</b>
@@ -117,10 +111,7 @@
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
 						<label class="Validform_label" style="display: none">数量</label>
 			          </div>
-						</div>
-			          
-			        
-							<div class="row show-grid">
+
 			          <div class="col-xs-3 text-center">
 			          	<b>单位：</b>
 			          </div>
@@ -132,23 +123,20 @@
 						<label class="Validform_label" style="display: none">单位</label>
 			          </div>
 						</div>
-			          
-			        
+
+
 							<div class="row show-grid">
 			          <div class="col-xs-3 text-center">
 			          	<b>生产日期：</b>
 			          </div>
 			          <div class="col-xs-3">
-								<input id="goodsProData" name="goodsProData" type="text" 
+								<input id="goodsProData" name="goodsProData" type="text"
 									ignore="ignore"
 								style="background: url('plug-in/ace/images/datetime.png') no-repeat scroll right center transparent;"  class="form-control" onClick="WdatePicker()" value='${wmSttInGoodsPage.goodsProData}' />
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
 						<label class="Validform_label" style="display: none">生产日期</label>
 			          </div>
-						</div>
-			          
-			        
-							<div class="row show-grid">
+
 			          <div class="col-xs-3 text-center">
 			          	<b>批次：</b>
 			          </div>
@@ -160,8 +148,8 @@
 						<label class="Validform_label" style="display: none">批次</label>
 			          </div>
 						</div>
-			          
-			        
+
+
 							<div class="row show-grid">
 			          <div class="col-xs-3 text-center">
 			          	<b>盘点数量：</b>
@@ -174,9 +162,19 @@
 						<label class="Validform_label" style="display: none">盘点数量</label>
 			          </div>
 						</div>
-			          
-			        
-							<div class="row show-grid">
+
+					  <div class="row show-grid">
+						  <div class="col-xs-3 text-center">
+							  <b>客户：</b>
+						  </div>
+						  <div class="col-xs-3">
+							  <input id="cusCode" name="cusCode" type="text" class="form-control"
+									 ignore="ignore"
+									 value='${wmSttInGoodsPage.cusCode}' />
+							  <span class="Validform_checktip" style="float:left;height:0px;"></span>
+							  <label class="Validform_label" style="display: none">客户</label>
+						  </div>
+
 			          <div class="col-xs-3 text-center">
 			          	<b>客户名称：</b>
 			          </div>
@@ -188,22 +186,11 @@
 						<label class="Validform_label" style="display: none">客户名称</label>
 			          </div>
 						</div>
-			          
-			        
-							<div class="row show-grid">
-			          <div class="col-xs-3 text-center">
-			          	<b>客户：</b>
-			          </div>
-			          <div class="col-xs-3">
-								<input id="cusCode" name="cusCode" type="text" class="form-control"
-									ignore="ignore"
-								   value='${wmSttInGoodsPage.cusCode}' />
-						<span class="Validform_checktip" style="float:left;height:0px;"></span>
-						<label class="Validform_label" style="display: none">客户</label>
-			          </div>
-						</div>
-			          
-			        
+
+
+
+
+
 							<div class="row show-grid">
 			          <div class="col-xs-3 text-center">
 			          	<b>盘点状态：</b>
@@ -215,8 +202,7 @@
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
 						<label class="Validform_label" style="display: none">盘点状态</label>
 			          </div>
-						</div>
-			          	<div class="row show-grid">
+
 			          <div class="col-xs-3 text-center">
 			          	<b>盘点类型：</b>
 			          </div>
@@ -228,9 +214,9 @@
 						<label class="Validform_label" style="display: none">盘点类型</label>
 			          </div>
 						</div>
-			        
 
-			       
+
+
 			          <div class="row" id = "sub_tr" style="display: none;">
 				        <div class="col-xs-12 layout-header">
 				          <div class="col-xs-6"></div>
@@ -239,7 +225,7 @@
 				      </div>
 			     </div>
 			   </div>
-			   
+
 			   <div class="con-wrapper" id="con-wrapper2" style="display: block;"></div>
 			 </div>
   </t:formvalid>
@@ -250,7 +236,7 @@
 	if(location.href.indexOf("load=detail")!=-1){
 		$(".jeecgDetail").hide();
 	}
-	
+
 	if(location.href.indexOf("mode=read")!=-1){
 		//查看模式控件禁用
 		$("#formobj").find(":input").attr("disabled","disabled");
@@ -263,11 +249,11 @@
 
   var neibuClickFlag = false;
   function neibuClick() {
-	  neibuClickFlag = true; 
+	  neibuClickFlag = true;
 	  $('#btn_sub').trigger('click');
   }
 
 </script>
  </body>
-<script src = "webpage/com/zzjee/wm/wmSttInGoods.js"></script>		
+<script src = "webpage/com/zzjee/wm/wmSttInGoods.js"></script>
 </html>

@@ -22,11 +22,11 @@
    <#if btn.buttonStyle =='button' && btn.buttonStatus == '1'>
    	<t:dgToolBar title="${btn.buttonName}" icon="${btn.buttonIcon}" <#if btn.optType=='action'> url="${entityName?uncap_first}Controller.do?do${btn.buttonCode?cap_first}" funname="do${btn.buttonCode?cap_first}"<#else> funname="${btn.buttonCode}"</#if> ></t:dgToolBar>
   	</#if>
-   </#list> 
+   </#list>
   </t:datagrid>
   </div>
  </div>
- <script src = "webpage/${bussiPackage?replace('.','/')}/${entityPackage}/${entityName?uncap_first}List.js"></script>		
+ <script src = "webpage/${bussiPackage?replace('.','/')}/${entityPackage}/${entityName?uncap_first}List.js"></script>
  <script type="text/javascript">
  <#list buttons as btn>
  	<#if btn.buttonStyle =='button' && btn.optType=='action'>
@@ -41,11 +41,11 @@
  		createdialog('确认 ', '确定'+title+'吗 ?', url,gridname);
  	}
  	</#if>
- </#list> 
- 
+ </#list>
+
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', '${entityName?uncap_first}Controller.do?upload', "${entityName?uncap_first}List");
+	openwindow('Excel导入', '${entityName?uncap_first}Controller.do?upload', "${entityName?uncap_first}List");
 }
 
 //导出

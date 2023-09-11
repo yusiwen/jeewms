@@ -182,6 +182,10 @@ function downloadqrcode() {
 			<td colspan=1 style='mso-ignore:colspan'></td>
 		</tr>
 		<tr height=40 style='mso-height-source:userset;height:30.0pt'>
+			<td colspan=9 height=40 class=xl68 width=242 style='height:30.0pt;width:182pt'>仓库：${storeName}</td>
+			<td></td>
+		</tr>
+		<tr height=40 style='mso-height-source:userset;height:30.0pt'>
 			<td colspan=5 height=40 class=xl68 width=242 style='height:30.0pt;width:182pt'>货主：${cusname}</td>
 			<td colspan=4 height=40 class=xl68 width=242 style='height:30.0pt;width:182pt'>客户：${wmOmNoticeHPage.delvMember}${wmOmNoticeHPage.delvMobile}</td>
 			<td></td>
@@ -246,12 +250,14 @@ function downloadqrcode() {
 		<tr height=20 style='height:25.0pt'>
 			<td height=20 class=xl66 colspan=8 style='height:15.0pt;mso-ignore:colspan;text-align: justify'>主管：<span
 					style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-  </span>制单： ${wmOmNoticeHPage.createBy}<span
+  </span>制单： ${wmOmNoticeHPage.createName}<span
 					style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   </span>仓管：<span
 					style='mso-spacerun:yes'>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
   </span>叉车：<span
-					style='mso-spacerun:yes'></span></td>
+					style='mso-spacerun:yes'></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+				拣货员:
+			</td>
 			<td></td>
 		</tr>
 

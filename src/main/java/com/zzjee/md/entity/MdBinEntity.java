@@ -39,8 +39,10 @@ public class MdBinEntity implements java.io.Serializable {
 	private java.lang.String sysOrgCode;
 	/**所属公司*/
 	private java.lang.String sysCompanyCode;
-	@Excel(name="库存地点")
+//	@Excel(name="库存地点")
 	private java.lang.String kuWeiMingCheng;
+	@Excel(name="仓库")
+	private java.lang.String binStore;
 	/**库位编码*/
 	@Excel(name="库位编码")
 	private java.lang.String kuWeiBianMa;
@@ -113,11 +115,16 @@ public class MdBinEntity implements java.io.Serializable {
 	@Excel(name="动线")
 	private java.lang.String mingXi3;
 	/**仓库*/
-	@Excel(name="仓库")
-	private java.lang.String binStore;
+
 	/**仓库*/
 	@Excel(name="电子标签ID")
 	private java.lang.String lorabqId;
+	@Excel(name="X坐标")
+	private java.lang.String xnode;
+	@Excel(name="y坐标")
+	private java.lang.String ynode;
+	@Excel(name="z坐标")
+	private java.lang.String znode;
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  主键
@@ -666,5 +673,32 @@ public class MdBinEntity implements java.io.Serializable {
 
 	public void setLorabqId(String lorabqId) {
 		this.lorabqId = lorabqId;
+	}
+
+	@Column(name ="XNODE",nullable=true,length=32)
+	public String getXnode() {
+		return xnode;
+	}
+
+	public void setXnode(String xnode) {
+		this.xnode = xnode;
+	}
+
+	@Column(name ="YNODE",nullable=true,length=32)
+	public String getYnode() {
+		return ynode;
+	}
+
+	public void setYnode(String ynode) {
+		this.ynode = ynode;
+	}
+
+	@Column(name ="ZNODE",nullable=true,length=32)
+	public String getZnode() {
+		return znode;
+	}
+
+	public void setZnode(String znode) {
+		this.znode = znode;
 	}
 }

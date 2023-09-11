@@ -23,8 +23,8 @@
     <t:dgCol title="生产日期"  field="goodsProData" formatter="yyyy-MM-dd"  query="true" queryMode="single"  width="80"></t:dgCol>
     <t:dgCol title="批次"  field="goodsBatch"   query="true" queryMode="single"  width="80"></t:dgCol>
     <t:dgCol title="盘点数量"  field="sttQua"    queryMode="group"  width="80"></t:dgCol>
-    <t:dgCol title="客户名称"  field="cusName"   query="true" queryMode="single"  width="120"></t:dgCol>
-    <t:dgCol title="客户"  field="cusCode"   query="true" queryMode="single"  width="120"></t:dgCol>
+    <t:dgCol title="货主名称"  field="cusName"   query="true" queryMode="single"  width="120"></t:dgCol>
+    <t:dgCol title="货主"  field="cusCode"   query="true" queryMode="single"  width="120"></t:dgCol>
     <t:dgCol title="盘点状态"  field="sttSta"   query="true"     width="120"></t:dgCol>
 
        <t:dgFunOpt title="复盘" funname="dosttfp(id)"  urlclass="ace_button"  exp="sttSta#eq#已完成"  />
@@ -40,11 +40,11 @@
   </t:datagrid>
   </div>
  </div>
- <script src = "webpage/com/zzjee/wm/wmSttInGoodsList.js"></script>		
+ <script src = "webpage/com/zzjee/wm/wmSttInGoodsList.js"></script>
  <script type="text/javascript">
  $(document).ready(function(){
  });
- 
+
  function dosttfp(id){
 		var url = "wmSttInGoodsController.do?dostt&id="+id;
 		$.ajax({
@@ -59,11 +59,11 @@
 				if (d.success) {
 					tip("添加到盘点清单成功");
 			        $('#wmSttInGoodsList').datagrid('reload',{});
-				}		
+				}
 			}
 		});
-	}  
- 
+	}
+
  function dorun(id){
 		var url = "wmSttInGoodsController.do?dorun&id="+id;
 		$.ajax({
@@ -78,13 +78,13 @@
 				if (d.success) {
 					tip("盘点过账成功");
 			        $('#wmSttInGoodsList').datagrid('reload',{});
-				}		
+				}
 			}
 		});
 	}
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'wmSttInGoodsController.do?upload', "wmSttInGoodsList");
+	openwindow('Excel导入', 'wmSttInGoodsController.do?upload', "wmSttInGoodsList");
 }
 
 //导出

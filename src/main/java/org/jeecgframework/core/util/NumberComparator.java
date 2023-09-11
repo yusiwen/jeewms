@@ -21,7 +21,8 @@ public class NumberComparator implements Comparator<Object> {
 		this.ignoreCase = ignoreCase;
 	}
 
-	public int compare(Object obj1, Object obj2) {
+	@Override
+    public int compare(Object obj1, Object obj2) {
 		String o1 = "";
 		String o2 = "";
 		if (ignoreCase) {

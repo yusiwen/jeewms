@@ -41,7 +41,7 @@
   </t:datagrid>
   </div>
  </div>
- <script src = "webpage/com/zzjee/wave/waveToDownList.js"></script>		
+ <script src = "webpage/com/zzjee/wave/waveToDownList.js"></script>
  <script type="text/javascript">
  $(document).ready(function(){
  });
@@ -52,10 +52,10 @@
 
      // window.open(url);
  }
- 
+
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'waveToDownController.do?upload', "waveToDownList");
+  openwindow('Excel导入', 'waveToDownController.do?upload', "waveToDownList");
 }
 
 //导出

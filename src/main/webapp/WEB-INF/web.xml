@@ -123,7 +123,7 @@
 		<servlet-name>springMvc</servlet-name>
 		<url-pattern>*.action</url-pattern>
 	</servlet-mapping>
-	
+
 	<!-- restUrl风格配置 -->
 	<servlet>
 		<servlet-name>restSpringMvc</servlet-name>
@@ -138,7 +138,7 @@
 		<servlet-name>restSpringMvc</servlet-name>
 		<url-pattern>/rest/*</url-pattern>
 	</servlet-mapping>
-	
+
 	<!-- druid -->
 	<servlet>
 		<servlet-name>druidStatView</servlet-name>
@@ -148,7 +148,7 @@
 		<servlet-name>druidStatView</servlet-name>
 		<url-pattern>/webpage/system/druid/*</url-pattern>
 	</servlet-mapping>
-	
+
 	<!-- 验证码 -->
     <servlet>
         <servlet-name>RandCodeImage</servlet-name>
@@ -158,7 +158,7 @@
         <servlet-name>RandCodeImage</servlet-name>
         <url-pattern>/randCodeImage</url-pattern>
     </servlet-mapping>
-    
+
 <!--     barcode -->
 	 <servlet>
 	<servlet-name>CreateBarCode</servlet-name>
@@ -168,8 +168,8 @@
 	<servlet-name>CreateBarCode</servlet-name>
 	<url-pattern>/CreateBarCode</url-pattern>
 	</servlet-mapping>
-    
-    
+
+
 	<!-- 404错误页面 -->
     <error-page>
         <error-code>404</error-code>

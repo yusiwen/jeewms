@@ -18,12 +18,12 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.SequenceGenerator;
 import org.jeecgframework.poi.excel.annotation.Excel;
 
-/**   
+/**
  * @Title: Entity
  * @Description: 盘点
  * @author erzhongxmu
  * @date 2017-09-11 15:25:24
- * @version V1.0   
+ * @version V1.0
  *
  */
 @Entity
@@ -56,11 +56,11 @@ public class WmSttInGoodsEntity implements java.io.Serializable {
 	/**所属公司*/
 	@Excel(name="所属公司")
 	private java.lang.String sysCompanyCode;
-	
+
 	/**盘点单号*/
 	@Excel(name="盘点单号")
 	private java.lang.String sttId;
-	
+
 	/**库位编码*/
 	@Excel(name="库位编码")
 	private java.lang.String binId;
@@ -91,10 +91,10 @@ public class WmSttInGoodsEntity implements java.io.Serializable {
 	@Excel(name="盘点数量")
 	private java.lang.String sttQua;
 	/**客户名称*/
-	@Excel(name="客户名称")
+	@Excel(name="货主名称")
 	private java.lang.String cusName;
 	/**客户*/
-	@Excel(name="客户")
+	@Excel(name="货主编码")
 	private java.lang.String cusCode;
 	/**盘点状态*/
 	@Excel(name="盘点状态")
@@ -108,7 +108,7 @@ public class WmSttInGoodsEntity implements java.io.Serializable {
 	/**基本单位数量*/
 	@Excel(name="基本单位数量")
 	private java.lang.String baseGoodscount;
-	
+
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  主键
@@ -256,10 +256,10 @@ public class WmSttInGoodsEntity implements java.io.Serializable {
 	public void setSysCompanyCode(java.lang.String sysCompanyCode){
 		this.sysCompanyCode = sysCompanyCode;
 	}
-	
-	
-	
-	
+
+
+
+
 	@Column(name ="STT_ID",nullable=true,length=36)
 	public java.lang.String getSttId() {
 		return sttId;
@@ -285,7 +285,7 @@ public class WmSttInGoodsEntity implements java.io.Serializable {
 	public void setBinId(java.lang.String binId){
 		this.binId = binId;
 	}
-	
+
 	@Column(name ="DONG_XIAN",nullable=true,length=36)
 	public java.lang.String getDongXian(){
 		return this.dongXian;
@@ -298,8 +298,8 @@ public class WmSttInGoodsEntity implements java.io.Serializable {
 	public void setDongXian(java.lang.String dongXian){
 		this.dongXian = dongXian;
 	}
-	
-	
+
+
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  托盘编码
@@ -308,7 +308,7 @@ public class WmSttInGoodsEntity implements java.io.Serializable {
 	public java.lang.String getTinId(){
 		return this.tinId;
 	}
-	
+
 	/**
 	 *方法: 设置java.lang.String
 	 *@param: java.lang.String  托盘编码

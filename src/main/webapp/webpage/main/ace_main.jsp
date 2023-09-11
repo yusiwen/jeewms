@@ -66,7 +66,7 @@
 
 				<div class="navbar-header pull-right" role="navigation">
 					<ul class="nav ace-nav">
-					<!-- 
+					<!--
 						<li class="grey">
 							<a data-toggle="dropdown" class="dropdown-toggle" href="#">
 								<i class="icon-tasks"></i>
@@ -184,11 +184,11 @@
 
 								<li>
 									<a href="#" id="messageContent">
-										
+
 									</a>
 								</li>
 
-								
+
 
 								<li>
 									<a href="javascript:goAllMessage();" id="messageFooter">
@@ -197,7 +197,7 @@
 									</a>
 								</li>
 							</ul>
-						</li> 
+						</li>
 
 						<li class="light-blue">
 							<a data-toggle="dropdown" href="#" class="dropdown-toggle" onclick="bindFrameClick()">
@@ -236,21 +236,21 @@
 										 <t:mutiLang langKey="common.my.style"/>
 									</a>
 								</li>
-								
+
 <!-- 								<li> -->
 <!-- 									<a href="http://yun.jeecg.org" target="_blank"> -->
 <!-- 										<i class="icon-cloud"></i> -->
 <!-- 										 云应用中心 -->
 <!-- 									</a> -->
 <!-- 								</li> -->
-								
+
 								<li>
 									<a href="javascript:clearLocalstorage()">
 										<i class="icon-cog"></i>
 										<t:mutiLang langKey="common.clear.localstorage"/>
 									</a>
 								</li>
-		
+
 								<li class="divider"></li>
 
 								<li>
@@ -345,7 +345,7 @@
 						</div><!-- /.row -->
 					</div><!-- /.page-content -->
 				</div><!-- /.main-content -->
-   
+
 				<div class="ace-settings-container" id="ace-settings-container">
 					<div class="btn btn-app btn-xs btn-warning ace-settings-btn" id="ace-settings-btn">
 						<i class="icon-cog bigger-150"></i>
@@ -365,12 +365,12 @@
 						</div>
 
 						<div>
-							<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-navbar" />
+							<input type="checkbox"  checked="checked"class="ace ace-checkbox-2" id="ace-settings-navbar" />
 							<label class="lbl" for="ace-settings-navbar"> 固定导航条</label>
 						</div>
 
 						<div>
-							<input type="checkbox" class="ace ace-checkbox-2" id="ace-settings-sidebar" />
+							<input type="checkbox"   class="ace ace-checkbox-2" id="ace-settings-sidebar" />
 							<label class="lbl" for="ace-settings-sidebar"> 固定滑动条</label>
 						</div>
 
@@ -517,14 +517,14 @@
 						size: size
 					});
 				})
-			
+
 				$('.sparkline').each(function(){
 					var $box = $(this).closest('.infobox');
 					var barColor = !$box.hasClass('infobox-dark') ? $box.css('color') : '#FFF';
 					$(this).sparkline('html', {tagValuesAttribute:'data-values', type: 'bar', barColor: barColor , chartRangeMin:$(this).data('min') || 0} );
 				});
-				
-			
+
+
 				$('#tasks').sortable({
 					opacity:0.8,
 					revert:true,
@@ -542,11 +542,11 @@
 					if(this.checked) $(this).closest('li').addClass('selected');
 					else $(this).closest('li').removeClass('selected');
 				});
-				
-			
+
+
 			})
 		</script>
-		
+
 		<script type="text/javascript">
 
 		function loadModule(title,url,target){
@@ -554,7 +554,7 @@
 			    $("#mainTitle").text(title);
       			$("#center").attr("src",url);
       	}
-		
+
 
 	  	function logout(){
 	  		bootbox.confirm("<t:mutiLang langKey="common.exit.confirm"/>", function(result) {
@@ -569,7 +569,7 @@
 				title:title,
 				buttons:{
 				OK:{
-				label: "OK", 
+				label: "OK",
 				callback:function(){
 					    var indexStyle = $('input[name="indexStyle"]:checked').val();
 					    if(indexStyle==undefined||indexStyle==""){
@@ -598,13 +598,13 @@
 		        			}
 						});
 					}
-			},Cancel: {label: "CLOSE", 
+			},Cancel: {label: "CLOSE",
 				callback:function() {
 						//alert('close');//$("#dialog").dialog("close");
 					}
 				}
 			}});
-  			
+
   	}
 		function changepass(title,url,target){
 			//$("#dialog").attr("src",url);
@@ -614,7 +614,7 @@
 				title:title,
 				buttons:{
 				OK:{
-				label: "OK", 
+				label: "OK",
 				callback:function(){
 					//alert('not implement');
 						$.ajax({
@@ -635,13 +635,13 @@
 		        			}
 						});
 					}
-			},Cancel: {label: "CLOSE", 
+			},Cancel: {label: "CLOSE",
 				callback:function() {
 						alert('close');//$("#dialog").dialog("close");
 					}
 				}
 			}});
-  			
+
   	}
 		function profile(title,url,target){
 			//$("#dialog").attr("src",url);
@@ -653,7 +653,7 @@
 				label: "OK"},Cancel: {label: "CLOSE"
 				}
 			}});
-  			
+
   	}
 
 			function clearLocalstorage(){
@@ -691,7 +691,7 @@
     				noticeTip += "<i class='icon-warning-sign'></i>";
     				noticeTip += noticeCount+" "+data.attributes.tip;
     				$("#noticeTip").html(noticeTip);
-    				
+
     				//加载公告条目
     				var noticeContent = "";
     				if(noticeList.length > 0){
@@ -704,15 +704,15 @@
     				}
     				//alert(noticeContent);
     				$("#noticeContent").html(noticeContent);
-    				
+
     				//加载公告底部文字
     				var noticeSeeAll = data.attributes.seeAll +"<i class='ace-icon fa fa-arrow-right'></i>";
     				$("#noticeFooter").html(noticeSeeAll);
     			}
     		}
     	});
-		
-		
+
+
 		//加载消息
 		var url = "tSSmsController.do?getMessageList";
 		$.ajax({
@@ -735,7 +735,7 @@
 					messageTip += "<i class='ace-icon fa fa-envelope-o'></i>";
 					messageTip += messageCount+" "+data.attributes.tip;
     				$("#messageTip").html(messageTip);
-    				
+
     				//加载消息条目（有限）
     				var messageContent = "";
     				if(messageList.length > 0){
@@ -760,7 +760,7 @@
     			}
     		}
     	});
-		
+
 	});
 
     function goAllNotice(){
@@ -772,12 +772,12 @@
   		var addurl = "noticeController.do?goNotice&id="+id;
 		createdetailwindow("通知公告详情", addurl, 750, 600);
     }
-    
+
     function goAllMessage(){
     	var addurl = "tSSmsController.do?getSysInfos";
   		createdetailwindow("消息", addurl, 800, 400);
     }
-    
+
     function goMessage(id){
     	var title = $("#"+id+"_title").val();
     	var content = $("#"+id+"_content").val();
@@ -795,7 +795,7 @@
     	$('.theme-popover').slideDown(200000);
     	readMessage();
     }
-    
+
     function readMessage(){
     	var msgId = $("#msgId").val();
   		  var url = "tSSmsController.do?readMessage";
@@ -816,12 +816,12 @@
     }
 
     //个人信息弹出层回缩
-    function frameBodyClick(){ 
+    function frameBodyClick(){
 		$(".user-menu").parent().removeClass("open");
 	}
     //新增iframe中绑定click事件回调父级函数
     function bindFrameClick(){
-    	$("iframe").contents().find("body").attr("onclick", "parent.frameBodyClick()"); 
+    	$("iframe").contents().find("body").attr("onclick", "parent.frameBodyClick()");
     }
 
 		</script>

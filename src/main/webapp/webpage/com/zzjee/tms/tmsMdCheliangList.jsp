@@ -14,20 +14,22 @@
    <t:dgCol title="所属部门"  field="sysOrgCode"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
    <t:dgCol title="所属公司"  field="sysCompanyCode"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
    <t:dgCol title="流程状态"  field="bpmStatus"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
-   <t:dgCol title="车牌号"  field="chepaihao"  query="true"  queryMode="single"  width="120"></t:dgCol>
+   <t:dgCol title="车号"  field="chepaihao"  query="true"  queryMode="single"  width="120"></t:dgCol>
    <t:dgCol title="车型"  field="chexing"  query="true"  queryMode="single"  width="120"></t:dgCol>
    <t:dgCol title="最大体积"  field="zuidatiji"  queryMode="group"  width="120"></t:dgCol>
    <t:dgCol title="载重"  field="zaizhong"  queryMode="group"  width="120"></t:dgCol>
    <t:dgCol title="载人数"  field="zairen"  queryMode="group"  width="120"></t:dgCol>
    <t:dgCol title="准驾驾照"  field="jiazhao"  query="true"  queryMode="single"  width="120"></t:dgCol>
-   <t:dgCol title="是否可用"  field="zhuangtai"  queryMode="group"  dictionary="sf_yn"  width="120"></t:dgCol>
-   <t:dgCol title="备注"  field="beizhu"  queryMode="group"  width="120"></t:dgCol>
+   <t:dgCol title="姓名"  field="zhuangtai"  queryMode="group"  width="120"></t:dgCol>
+   <t:dgCol title="电话"  field="beizhu"  queryMode="group"  width="120"></t:dgCol>
    <t:dgCol title="默认司机"  field="username"  queryMode="group"  width="120"></t:dgCol>
-   <t:dgCol title="gps"  field="gpsid"  queryMode="group"  width="120"></t:dgCol>
+   <t:dgCol title="车牌号"  field="gpsid"  queryMode="group"  width="120"></t:dgCol>
    <t:dgCol title="区域"  field="quyu"  queryMode="single"  width="120"></t:dgCol>
 
    <t:dgCol title="操作" field="opt" width="100"></t:dgCol>
    <t:dgDelOpt title="删除" url="tmsMdCheliangController.do?doDel&id={id}" urlclass="ace_button"  urlfont="fa-trash-o"/>
+   <t:dgToolBar title="重排车号"     funname="dowaveALLSelect"></t:dgToolBar>
+
    <t:dgToolBar title="录入" icon="icon-add" url="tmsMdCheliangController.do?goAdd" funname="add"></t:dgToolBar>
    <t:dgToolBar title="编辑" icon="icon-edit" url="tmsMdCheliangController.do?goUpdate" funname="update"></t:dgToolBar>
    <t:dgToolBar title="批量删除"  icon="icon-remove" url="tmsMdCheliangController.do?doBatchDel" funname="deleteALLSelect"></t:dgToolBar>
@@ -38,16 +40,42 @@
   </t:datagrid>
   </div>
  </div>
- <script src = "webpage/com/zzjee/tms/tmsMdCheliangList.js"></script>		
+ <script src = "webpage/com/zzjee/tms/tmsMdCheliangList.js"></script>
  <script type="text/javascript">
  $(document).ready(function(){
  });
- 
-   
- 
+
+ function dowaveALLSelect(){
+
+  var ids = [];
+  var rows = $('#tmsMdCheliangList').datagrid('getSelections');
+  for(var i=0; i<rows.length; i++){
+   ids.push(rows[i].id);
+  }
+  var url = "tmsMdCheliangController.do?doassignwave";
+  $.ajax({
+   async : true,
+   cache : false,
+   type : 'POST',
+   data : {
+    ids : ids.join(',')
+   },
+   url : url,// 请求的action路径
+   error : function() {// 请求失败处理函数
+   },
+   success : function(data) {
+    var d = $.parseJSON(data);
+    if (d.success) {
+     tip("重排车号成功");
+     $('#tmsMdCheliangList').datagrid('reload',{});
+    }
+   }
+  });
+ }
+
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'tmsMdCheliangController.do?upload', "tmsMdCheliangList");
+	openwindow('Excel导入', 'tmsMdCheliangController.do?upload', "tmsMdCheliangList");
 }
 
 //导出

@@ -246,8 +246,9 @@ public class TemplateUtil {
 				{
 					// region 计算统计值
 					float tempTdValue = 0;
-					if (SumValueDic.containsKey(i))
-						tempTdValue = SumValueDic.get(i);
+					if (SumValueDic.containsKey(i)) {
+                        tempTdValue = SumValueDic.get(i);
+                    }
 					try {
 						float resultTdTemp = 0;
 						resultTdTemp = Float.parseFloat(tdValue);

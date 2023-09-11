@@ -40,12 +40,14 @@ public class BaseTag extends TagSupport {
 	}
 
 	
-	public int doStartTag() throws JspException {
+	@Override
+    public int doStartTag() throws JspException {
 		return EVAL_PAGE;
 	}
 
 	
-	public int doEndTag() throws JspException {
+	@Override
+    public int doEndTag() throws JspException {
 		JspWriter out = null;
 		StringBuffer sb = new StringBuffer();
 		String types[] = type.split(",");

@@ -31,14 +31,14 @@
     <t:dgCol title="基本单位数量"  field="baseGoodscount" extendParams="editor:'text'"    queryMode="group"  width="80"></t:dgCol>
 <%--    <t:dgCol title="操作" field="opt" width="100"></t:dgCol> --%>
 <%--    <t:dgDelOpt title="删除" url="wmToUpGoodsController.do?doDel&id={id}" urlclass="ace_button"  urlfont="fa-trash-o"/> --%>
-   <t:dgToolBar title="录入" icon="icon-add" url="wmToUpGoodsController.do?goAdd" funname="add"></t:dgToolBar>
-   <t:dgToolBar title="编辑" icon="icon-edit" url="wmToUpGoodsController.do?goUpdate" funname="update"></t:dgToolBar>
+<%--   <t:dgToolBar title="录入" icon="icon-add" url="wmToUpGoodsController.do?goAdd" funname="add"></t:dgToolBar>--%>
+   <t:dgToolBar title="编辑" height="300" icon="icon-edit" url="wmToUpGoodsController.do?goUpdate" funname="update"></t:dgToolBar>
 <%--    <t:dgToolBar title="批量删除"  icon="icon-remove" url="wmToUpGoodsController.do?doBatchDel" funname="deleteALLSelect"></t:dgToolBar> --%>
    <t:dgToolBar title="查看" icon="icon-search" url="wmToUpGoodsController.do?goUpdate" funname="detail"></t:dgToolBar>
     <t:dgToolBar title="导入库存" icon="icon-put" funname="ImportXls"></t:dgToolBar>
-    <t:dgToolBar title="清空基础数据" icon="icon-put" funname="ImportXls"></t:dgToolBar>
-    <t:dgToolBar title="清空库存数据" icon="icon-put" funname="ImportXls"></t:dgToolBar>
-    <t:dgToolBar title="清空业务数据" icon="icon-put" funname="ImportXls"></t:dgToolBar>
+<%--    <t:dgToolBar title="清空基础数据" icon="icon-put" funname="ImportXls"></t:dgToolBar>--%>
+<%--    <t:dgToolBar title="清空库存数据" icon="icon-put" funname="ImportXls"></t:dgToolBar>--%>
+<%--    <t:dgToolBar title="清空业务数据" icon="icon-put" funname="ImportXls"></t:dgToolBar>--%>
     <t:dgToolBar title="导出" icon="icon-putout" funname="ExportXls"></t:dgToolBar>
     <t:dgToolBar title="模板下载" icon="icon-putout" funname="ExportXlsByT"></t:dgToolBar>
 
@@ -131,7 +131,7 @@
 
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'wmToUpGoodsController.do?upload', "wmToUpGoodsList");
+	openwindow('Excel导入', 'wmToUpGoodsController.do?upload', "wmToUpGoodsList");
 }
 
 //导出

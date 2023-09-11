@@ -9,7 +9,7 @@
         <t:dgCol title="创建人名称"  field="createName"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
     <t:dgCol title="创建人登录名称"  field="createBy"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
     <t:dgCol title="移动日期"  field="lastMove" formatter="yyyy-MM-dd hh:mm:ss" query="true"  queryMode="group"  width="120"></t:dgCol>
-       
+
     <t:dgCol title="库存类型"  field="kuctype"   query="true" queryMode="single"  width="120"></t:dgCol>
     <t:dgCol title="储位"  field="kuWeiBianMa"   query="true" queryMode="single"  width="120"></t:dgCol>
     <t:dgCol title="托盘"  field="binId"   query="true" queryMode="single"  width="120"></t:dgCol>
@@ -25,7 +25,7 @@
 
       <t:dgFunOpt title="生成库存转移" funname="dosttkczy(id)"  urlclass="ace_button"  exp="moveSta#ne#计划中"  />
       <t:dgToolBar title="批量生成库存转移"   url="wvStockController.do?doBatchSttkczy" funname="dosttALLSelect"></t:dgToolBar>
-   
+
 <%--    <t:dgDelOpt title="删除" url="wvStockController.do?doDel&id={id}" urlclass="ace_button"  urlfont="fa-trash-o"/> --%>
 <%--    <t:dgToolBar title="录入" icon="icon-add" url="wvStockController.do?goAdd" funname="add"></t:dgToolBar> --%>
 <%--    <t:dgToolBar title="编辑" icon="icon-edit" url="wvStockController.do?goUpdate" funname="update"></t:dgToolBar> --%>
@@ -38,19 +38,19 @@
   </t:datagrid>
   </div>
  </div>
- <script src = "webpage/com/zzjee/wm/wvStockList.js"></script>		
+ <script src = "webpage/com/zzjee/wm/wvStockList.js"></script>
  <script type="text/javascript">
  $(document).ready(function(){
 
  });
- 
+
  function dosttALLSelect(){
 
 	 var ids = [];
 	 var rows = $('#wvStockList').datagrid('getSelections');
 	 for(var i=0; i<rows.length; i++){
 		 if(rows[i].moveSta=="计划中"){
-		
+
 		 }else{
 			 	ids.push(rows[i].id);
 		 }
@@ -68,11 +68,11 @@
 				if (d.success) {
 					tip("添加到库存转移清单成功");
 			        $('#wvStockList').datagrid('reload',{});
-				}		
+				}
 			}
 		});
 	}
- 
+
  function dosttkczy(id){
 		var url = "wvStockController.do?dosttkczy&id="+id;
 		$.ajax({
@@ -87,14 +87,14 @@
 				if (d.success) {
 					tip("添加到库存转移清单成功");
 			        $('#wvStockList').datagrid('reload',{});
-				}		
+				}
 			}
 		});
 	}
- 
+
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'wvStockController.do?upload', "wvStockList");
+	openwindow('Excel导入', 'wvStockController.do?upload', "wvStockList");
 }
 
 //导出

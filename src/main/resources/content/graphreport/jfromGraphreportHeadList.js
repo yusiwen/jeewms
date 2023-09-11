@@ -137,12 +137,12 @@ jQuery(function() {
 			}
 			return value;
 		}
-		
+
 		//查询列表数据
 		function jformGraphreportHeadListSearch(){
 			//判断是否满足验证规则
 			if(!jQuery("#jformGraphreportHeadList").Validform({
-				tiptype:3			
+				tiptype:3
 			}).check()){
 				//校验规则不满足
 				return false;
@@ -150,14 +150,14 @@ jQuery(function() {
 			var queryParams = jQuery("#jformGraphreportHeadList").datagrid("options").queryParams;
 			jQuery("#jformGraphreportHeadListtb").find('*').each(function(){
 				queryParams[jQuery(this).attr('name')] = jQuery(this).val();
-			});	
+			});
 			jQuery('#jformGraphreportHeadList').datagrid({
 				url: 'jformGraphreportHeadController.do?datagrid&field=id,code,name,cgrSql,content,ytext,categories,isShowList,xpageJs,',
 				pageNumber : 1
 			});
 		}
-		
-		
+
+
 		//监测回车键
 		function EnterPress(e) {
 			var e = e || window.event;
@@ -165,7 +165,7 @@ jQuery(function() {
 				jformGraphreportHeadListSearch();
 			}
 		}
-		
+
 		//切换到功能测试tab页面
 		function addlisttab(tableName,content){
 			 addOneTab( '<t:mutiLang langKey="form.datalist"/>' + "["+content+"]", "graphReportController.do?list&id="+tableName);
@@ -182,14 +182,13 @@ jQuery(function() {
    			height:80,drag:false,min:false,max:false
    		}).zindex();
    	}
-		
+
 		//导入
 		function ImportXls() {
-			openuploadwin('Excel导入', 'jformGraphreportHeadVMController.do?goImportExcel', "jformGraphreportHeadList");
+			openwindow('Excel导入', 'jformGraphreportHeadVMController.do?goImportExcel', "jformGraphreportHeadList");
 		}
 
 		//导出
 		function ExportXls() {
 			JeecgExcelExport("jformGraphreportHeadController.do?exportXls","jformGraphreportHeadList");
 		}
-		

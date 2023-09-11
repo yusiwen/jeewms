@@ -13,8 +13,8 @@ public class ApplicationContextUtil implements ApplicationContextAware {
 
 	private static ApplicationContext context;
 
-	
-	public void setApplicationContext(ApplicationContext context)
+	@Override
+    public void setApplicationContext(ApplicationContext context)
 			throws BeansException {
 		this.context = context;
 	}

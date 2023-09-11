@@ -18,14 +18,16 @@ import java.util.UUID;
 @Transactional
 public class JformGraphreportHeadServiceImpl extends CommonServiceImpl implements JformGraphreportHeadServiceI {
 	
- 	public <T> void delete(T entity) {
+ 	@Override
+    public <T> void delete(T entity) {
  		super.delete(entity);
  		//执行删除操作配置的sql增强
 		this.doDelSql((JformGraphreportHeadEntity)entity);
  	}
 	
-	public void addMain(JformGraphreportHeadEntity jformGraphreportHead,
-	        List<JformGraphreportItemEntity> jformGraphreportItemList){
+	@Override
+    public void addMain(JformGraphreportHeadEntity jformGraphreportHead,
+                        List<JformGraphreportItemEntity> jformGraphreportItemList){
 			//保存主信息
 			this.save(jformGraphreportHead);
 		
@@ -40,8 +42,9 @@ public class JformGraphreportHeadServiceImpl extends CommonServiceImpl implement
 	}
 
 	
-	public void updateMain(JformGraphreportHeadEntity jformGraphreportHead,
-	        List<JformGraphreportItemEntity> jformGraphreportItemList) {
+	@Override
+    public void updateMain(JformGraphreportHeadEntity jformGraphreportHead,
+                           List<JformGraphreportItemEntity> jformGraphreportItemList) {
 		//保存主表信息
 		this.saveOrUpdate(jformGraphreportHead);
 		//===================================================================================
@@ -87,7 +90,8 @@ public class JformGraphreportHeadServiceImpl extends CommonServiceImpl implement
 	}
 
 	
-	public void delMain(JformGraphreportHeadEntity jformGraphreportHead) {
+	@Override
+    public void delMain(JformGraphreportHeadEntity jformGraphreportHead) {
 		//删除主表信息
 		this.delete(jformGraphreportHead);
 		//===================================================================================
@@ -106,7 +110,8 @@ public class JformGraphreportHeadServiceImpl extends CommonServiceImpl implement
 	 * @param
 	 * @return
 	 */
- 	public boolean doAddSql(JformGraphreportHeadEntity t){
+ 	@Override
+    public boolean doAddSql(JformGraphreportHeadEntity t){
 	 	return true;
  	}
  	/**
@@ -114,7 +119,8 @@ public class JformGraphreportHeadServiceImpl extends CommonServiceImpl implement
 	 * @param
 	 * @return
 	 */
- 	public boolean doUpdateSql(JformGraphreportHeadEntity t){
+ 	@Override
+    public boolean doUpdateSql(JformGraphreportHeadEntity t){
 	 	return true;
  	}
  	/**
@@ -122,7 +128,8 @@ public class JformGraphreportHeadServiceImpl extends CommonServiceImpl implement
 	 * @param
 	 * @return
 	 */
- 	public boolean doDelSql(JformGraphreportHeadEntity t){
+ 	@Override
+    public boolean doDelSql(JformGraphreportHeadEntity t){
 	 	return true;
  	}
  	

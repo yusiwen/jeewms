@@ -23,7 +23,7 @@ public class NoticeServiceImpl extends CommonServiceImpl implements NoticeServic
 	
 	/**
 	 * 
-	 * @param noticeTilte 标题
+	 * @param noticeTitle 标题
 	 * @param noticeContent 内容
 	 * @param noticeType 类型
 	 * @param noticeLevel 级别
@@ -31,9 +31,10 @@ public class NoticeServiceImpl extends CommonServiceImpl implements NoticeServic
 	 * @param createUser 创建者
 	 * @return
 	 */
-	public String addNotice(String noticeTitle, String noticeContent,
-			String noticeType, String noticeLevel, Date noticeTerm,
-			String createUser) {
+	@Override
+    public String addNotice(String noticeTitle, String noticeContent,
+                            String noticeType, String noticeLevel, Date noticeTerm,
+                            String createUser) {
 		String noticeId=null;
 		TSNotice notice = new TSNotice();
 		notice.setNoticeTitle(noticeTitle);
@@ -51,7 +52,8 @@ public class NoticeServiceImpl extends CommonServiceImpl implements NoticeServic
     /**
      * 追加通告授权用户
      */
-	public void addNoticeAuthorityUser(String noticeId, String userid) {
+	@Override
+    public void addNoticeAuthorityUser(String noticeId, String userid) {
 		if(noticeId != null && userid!=null){
 			TSNoticeAuthorityUser entity = new  TSNoticeAuthorityUser();
 			entity.setNoticeId(noticeId);
@@ -62,7 +64,8 @@ public class NoticeServiceImpl extends CommonServiceImpl implements NoticeServic
 		}
 	}
 	
-	public <T> void delete(T entity) {
+	@Override
+    public <T> void delete(T entity) {
 
 		TSNotice notice = (TSNotice)entity;
 		super.deleteAllEntitie(super.findByProperty(TSNoticeReadUser.class, "noticeId", notice.getId()));
@@ -74,14 +77,16 @@ public class NoticeServiceImpl extends CommonServiceImpl implements NoticeServic
 
  	}
  	
- 	public <T> Serializable save(T entity) {
+ 	@Override
+    public <T> Serializable save(T entity) {
  		Serializable t = super.save(entity);
  		//执行新增操作配置的sql增强
  		this.doAddSql((TSNotice)entity);
  		return t;
  	}
  	
- 	public <T> void saveOrUpdate(T entity) {
+ 	@Override
+    public <T> void saveOrUpdate(T entity) {
  		super.saveOrUpdate(entity);
  		//执行更新操作配置的sql增强
  		this.doUpdateSql((TSNotice)entity);
@@ -89,26 +94,29 @@ public class NoticeServiceImpl extends CommonServiceImpl implements NoticeServic
  	
  	/**
 	 * 默认按钮-sql增强-新增操作
-	 * @param id
+	 * @param t
 	 * @return
 	 */
- 	public boolean doAddSql(TSNotice t){
+ 	@Override
+    public boolean doAddSql(TSNotice t){
 	 	return true;
  	}
  	/**
 	 * 默认按钮-sql增强-更新操作
-	 * @param id
+	 * @param t
 	 * @return
 	 */
- 	public boolean doUpdateSql(TSNotice t){
+ 	@Override
+    public boolean doUpdateSql(TSNotice t){
 	 	return true;
  	}
  	/**
 	 * 默认按钮-sql增强-删除操作
-	 * @param id
+	 * @param t
 	 * @return
 	 */
- 	public boolean doDelSql(TSNotice t){
+ 	@Override
+    public boolean doDelSql(TSNotice t){
 	 	return true;
  	}
  	

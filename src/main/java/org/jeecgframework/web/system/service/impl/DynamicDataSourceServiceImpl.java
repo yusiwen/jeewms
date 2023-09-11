@@ -15,6 +15,7 @@ import org.jeecgframework.web.system.pojo.base.DynamicDataSourceEntity;
 public class DynamicDataSourceServiceImpl extends CommonServiceImpl implements DynamicDataSourceServiceI {
 
 	/**初始化数据库信息，TOMCAT启动时直接加入到内存中**/
+	@Override
 	public List<DynamicDataSourceEntity> initDynamicDataSource() {
 		ResourceUtil.dynamicDataSourceMap.clear();
 
@@ -32,6 +33,7 @@ public class DynamicDataSourceServiceImpl extends CommonServiceImpl implements D
 		return dynamicDataSourceEntity;
 	}
 
+	@Override
 	public void refleshCache() {
 		initDynamicDataSource();
 	}
@@ -40,8 +42,9 @@ public class DynamicDataSourceServiceImpl extends CommonServiceImpl implements D
 
 	public DynamicDataSourceEntity getDynamicDataSourceEntityForDbKey(String dbKey){
 		List<DynamicDataSourceEntity> dynamicDataSourceEntitys = commonDao.findHql("from DynamicDataSourceEntity where dbKey = ?", dbKey);
-		if(dynamicDataSourceEntitys.size()>0)
-			return dynamicDataSourceEntitys.get(0);
+		if(dynamicDataSourceEntitys.size()>0) {
+            return dynamicDataSourceEntitys.get(0);
+        }
 		return null;
 	}
 

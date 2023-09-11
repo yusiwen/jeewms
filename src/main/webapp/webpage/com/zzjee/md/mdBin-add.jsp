@@ -50,18 +50,18 @@
 			    <!-- tab内容 -->
 			    <div class="con-wrapper" id="con-wrapper1" style="display: block;">
 			      <div class="row form-wrapper">
-					  <div class="row show-grid">
-						  <div class="col-xs-3 text-center">
-							  <b style="color:red">库存地点</b>
-						  </div>
-						  <div class="col-xs-3">
-							  <t:dictSelect field="kuWeiMingCheng" type="list" extendJson="{class:'form-control',datatype:'*'}"
-											dictTable="t_wz_location" dictField="MAT_LOCATION" dictText="MAT_LOCATION" hasLabel="false"  title="库存地点"></t:dictSelect>
-							  <span class="Validform_checktip" style="float:left;height:0px;"></span>
-							  <label class="Validform_label" style="display: none">库存地点</label>
-						  </div>
+<%--					  <div class="row show-grid">--%>
+<%--						  <div class="col-xs-3 text-center">--%>
+<%--							  <b style="color:red">库存地点</b>--%>
+<%--						  </div>--%>
+<%--						  <div class="col-xs-3">--%>
+<%--							  <t:dictSelect field="kuWeiMingCheng" type="list" extendJson="{class:'form-control',datatype:'*'}"--%>
+<%--											dictTable="t_wz_location" dictField="MAT_LOCATION" dictText="MAT_LOCATION" hasLabel="false"  title="库存地点"></t:dictSelect>--%>
+<%--							  <span class="Validform_checktip" style="float:left;height:0px;"></span>--%>
+<%--							  <label class="Validform_label" style="display: none">库存地点</label>--%>
+<%--						  </div>--%>
 
-					  </div>
+<%--					  </div>--%>
 			      					<div class="row show-grid">
 							          <div class="col-xs-3 text-center">
 			          	<b style="color:red">仓&emsp;&emsp;库</b>
@@ -339,6 +339,46 @@
 									 ignore="ignore" style="text-align:right"/>
 							  <span class="Validform_checktip" style="float:left;height:0px;"></span>
 							  <label class="Validform_label" style="display: none">储位组别</label>
+						  </div>
+
+					  </div>
+
+
+					  <div class="row show-grid">
+
+
+
+						  <div class="col-xs-3 text-center">
+							  <b>X坐标</b>
+						  </div>
+
+						  <div class="col-xs-3">
+							  <input id="xnode" name="xnode" type="text" class="form-control"
+									 ignore="ignore" style="text-align:right" />
+							  <span class="Validform_checktip" style="float:left;height:0px;"></span>
+							  <label class="Validform_label" style="display: none">X坐标</label>
+						  </div>
+
+						  <div class="col-xs-3 text-center">
+							  <b>y坐标</b>
+						  </div>
+
+						  <div class="col-xs-3">
+							  <input id="ynode" name="ynode" type="text" class="form-control"
+									 ignore="ignore" style="text-align:right"/>
+							  <span class="Validform_checktip" style="float:left;height:0px;"></span>
+							  <label class="Validform_label" style="display: none">y坐标</label>
+						  </div>
+
+						  <div class="col-xs-3 text-center">
+							  <b>z坐标</b>
+						  </div>
+
+						  <div class="col-xs-3">
+							  <input id="znode" name="znode" type="text" class="form-control"
+									 ignore="ignore" style="text-align:right"/>
+							  <span class="Validform_checktip" style="float:left;height:0px;"></span>
+							  <label class="Validform_label" style="display: none">z坐标</label>
 						  </div>
 
 					  </div>

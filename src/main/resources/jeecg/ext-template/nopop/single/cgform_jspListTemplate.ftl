@@ -12,7 +12,7 @@
    <t:dgDelOpt title="删除" url="${entityName?uncap_first}Controller.do?doDel&id={id}" urlclass="ace_button"  urlfont="fa-trash-o"/>
     <#list buttons as btn>
     <#if btn.buttonStyle =='link' && btn.buttonStatus == '1'>
-    <t:dgFunOpt funname="do${btn.buttonCode?cap_first}(id)" title="${btn.buttonName}" urlclass="ace_button"  
+    <t:dgFunOpt funname="do${btn.buttonCode?cap_first}(id)" title="${btn.buttonName}" urlclass="ace_button"
 		<#if  btn.buttonName?index_of("下载") gt -1>
 			urlfont="fa-download"
 		<#else>
@@ -20,7 +20,7 @@
 		</#if>
 	/>
   	</#if>
-   </#list> 
+   </#list>
    <#--//update-end--Author:zhangjiaqiang  Date:20160925 for：TASK #1344 [链接图标] online功能测试的按钮链接图标修改 -->
    <t:dgToolBar title="录入" icon="icon-add" url="${entityName?uncap_first}Controller.do?goAdd" funname="add"></t:dgToolBar>
    <t:dgToolBar title="编辑" icon="icon-edit" url="${entityName?uncap_first}Controller.do?goUpdate" funname="update"></t:dgToolBar>
@@ -37,11 +37,11 @@
 		<t:dgToolBar title="${btn.buttonName}" icon="${btn.buttonIcon}" funname="do${btn.buttonCode?cap_first}"></t:dgToolBar>
 	</#if>
    	</#if>
-   </#list> 
+   </#list>
   </t:datagrid>
   </div>
  </div>
- <script src = "webpage/${bussiPackage?replace('.','/')}/${entityPackage}/${entityName?uncap_first}List.js"></script>		
+ <script src = "webpage/${bussiPackage?replace('.','/')}/${entityPackage}/${entityName?uncap_first}List.js"></script>
  <script type="text/javascript">
  <#list buttons as btn>
     <#if btn.buttonStyle =='button' && btn.buttonStatus == '1'>
@@ -63,8 +63,8 @@
 	 	}
 	</#if>
    	</#if>
-   </#list> 
-   
+   </#list>
+
    <#list buttons as btn>
    <#if btn.buttonStyle =='link' && btn.buttonStatus == '1'>
      <#if btn.optType == 'action'>
@@ -81,11 +81,11 @@
 	 	}
 	</#if>
   	</#if>
-   </#list> 
- 
+   </#list>
+
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', '${entityName?uncap_first}Controller.do?upload', "${entityName?uncap_first}List");
+	openwindow('Excel导入', '${entityName?uncap_first}Controller.do?upload', "${entityName?uncap_first}List");
 }
 
 //导出

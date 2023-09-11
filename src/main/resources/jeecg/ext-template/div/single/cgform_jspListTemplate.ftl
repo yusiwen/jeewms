@@ -20,7 +20,7 @@
 			</#if>
     	  />
   	</#if>
-   </#list> 
+   </#list>
    <#--//update-end--Author:zhangjiaqiang  Date:20160925 for：TASK #1344 [链接图标] online功能测试的按钮链接图标修改 -->
    <t:dgToolBar title="录入" icon="icon-add" url="${entityName?uncap_first}Controller.do?goAdd" funname="add"></t:dgToolBar>
    <t:dgToolBar title="编辑" icon="icon-edit" url="${entityName?uncap_first}Controller.do?goUpdate" funname="update"></t:dgToolBar>
@@ -37,11 +37,11 @@
 		<t:dgToolBar title="${btn.buttonName}" icon="${btn.buttonIcon}" funname="do${btn.buttonCode?cap_first}"></t:dgToolBar>
 	</#if>
    	</#if>
-   </#list> 
+   </#list>
   </t:datagrid>
   </div>
  </div>
- <script src = "webpage/${bussiPackage?replace('.','/')}/${entityPackage}/${entityName?uncap_first}List.js"></script>		
+ <script src = "webpage/${bussiPackage?replace('.','/')}/${entityPackage}/${entityName?uncap_first}List.js"></script>
  <script type="text/javascript">
  $(document).ready(function(){
 		<#if cgformConfig.cgFormHead.isTree == 'Y'>
@@ -56,7 +56,7 @@
  		});
  		</#if>
  });
- 
+
  <#list buttons as btn>
     <#if btn.buttonStyle =='button' && btn.buttonStatus == '1'>
     <#if btn.optType == 'action'>
@@ -77,8 +77,8 @@
 	 	}
 	</#if>
    	</#if>
-   </#list> 
-   
+   </#list>
+
    <#list buttons as btn>
    <#if btn.buttonStyle =='link' && btn.buttonStatus == '1'>
      <#if btn.optType == 'action'>
@@ -95,11 +95,11 @@
 	 	}
 	</#if>
   	</#if>
-   </#list> 
- 
+   </#list>
+
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', '${entityName?uncap_first}Controller.do?upload', "${entityName?uncap_first}List");
+	openwindow('Excel导入', '${entityName?uncap_first}Controller.do?upload', "${entityName?uncap_first}List");
 }
 
 //导出

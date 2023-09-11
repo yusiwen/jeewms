@@ -66,15 +66,15 @@ public class PagerUtil {
 		sb.append(" }" + "\n");
 		sb.append("</script>" + "\n");
 		sb.append("&nbsp;<span class=pageArea id=pageArea>共<b>" + rowsCount + "</b>条&nbsp;当前第" + curPageNO + "/" + pageCount + "页&nbsp;&nbsp;&nbsp;");
-		if (isFirst())
-			sb.append("<a class=\"pageFirstDisable\"  title=\"首页\" onMouseMove=\"style.cursor='hand'\">&nbsp;</a><a class=\"pagePreviousDisable\" title=\"上一页\"  onMouseMove=\"style.cursor='hand'\">&nbsp;</a>");
-		else {
+		if (isFirst()) {
+            sb.append("<a class=\"pageFirstDisable\"  title=\"首页\" onMouseMove=\"style.cursor='hand'\">&nbsp;</a><a class=\"pagePreviousDisable\" title=\"上一页\"  onMouseMove=\"style.cursor='hand'\">&nbsp;</a>");
+        } else {
 			sb.append("<a href='" + actionUrl + join + "curPageNO=1" + conditions + "' class=pageFirst title=首页 onMouseMove=\"style.cursor='hand'\"></a>");
 			sb.append("<a class=\"pagePrevious\" href='" + actionUrl + join + "curPageNO=" + previous() + conditions + "' title=\"上一页\"  onMouseMove=\"style.cursor='hand'\")\">&nbsp;</a>");
 		}
-		if (curPageNO - pageCount == 0 || pageCount == 0 || pageCount == 1)
-			sb.append("<a class=pageNextDisable  title=下一页 onMouseMove=\"style.cursor='hand'\">&nbsp;<a class=pageLastDisable title=尾页 onMouseMove=\"style.cursor='hand'\">&nbsp;</a>&nbsp;");
-		else {
+		if (curPageNO - pageCount == 0 || pageCount == 0 || pageCount == 1) {
+            sb.append("<a class=pageNextDisable  title=下一页 onMouseMove=\"style.cursor='hand'\">&nbsp;<a class=pageLastDisable title=尾页 onMouseMove=\"style.cursor='hand'\">&nbsp;</a>&nbsp;");
+        } else {
 			sb.append("<a class=pageNext href='" + actionUrl + join + "curPageNO=" + next() + conditions + "' title=下一页 onMouseMove=\"style.cursor='hand'\")\">&nbsp;</a>");
 			sb.append("<a class=pageLast href='" + actionUrl + join + "curPageNO=" + pageCount + conditions + "' title=尾页 onMouseMove=\"style.cursor='hand'\" )\">&nbsp;</a>");
 		}
@@ -95,15 +95,15 @@ public class PagerUtil {
 
 		String str = "";
 		str += "";
-		if (isFirst())
-			sb.append("第" + curPageNO + "页&nbsp;共" + pageCount + "页&nbsp;首页 ");
-		else {
+		if (isFirst()) {
+            sb.append("第" + curPageNO + "页&nbsp;共" + pageCount + "页&nbsp;首页 ");
+        } else {
 			sb.append("第" + curPageNO + "页&nbsp;共" + pageCount + "页&nbsp;<a href='" + actionUrl + join + "curPageNO=1" + conditions + "'>首页</a>&nbsp;");
 			sb.append("<a href='" + actionUrl + join + "curPageNO=" + previous() + conditions + "' onMouseMove=\"style.cursor='hand'\" alt=\"上一页\">上一页</a>&nbsp;");
 		}
-		if (isLast() || rowsCount == 0)
-			sb.append("尾页&nbsp;");
-		else {
+		if (isLast() || rowsCount == 0) {
+            sb.append("尾页&nbsp;");
+        } else {
 			sb.append("<a href='" + actionUrl + join + "curPageNO=" + next() + conditions + "' onMouseMove=\"style.cursor='hand'\" >下一页</a>&nbsp;");
 			sb.append("<a href='" + actionUrl + join + "curPageNO=" + pageCount + conditions + "'>尾页</a>&nbsp;");
 		}
@@ -113,10 +113,11 @@ public class PagerUtil {
 		int begin = (curPageNO > 10) ? curPageNO - 10 : 1;
 		int end = (pageCount - curPageNO > 10) ? curPageNO + 10 : pageCount;
 		for (int i = begin; i <= end; i++) {
-			if (i == curPageNO)
-				str += "<option value='" + i + "' selected>第" + i + "页</option>";
-			else
-				str += "<option value='" + i + "'>第" + i + "页</option>";
+			if (i == curPageNO) {
+                str += "<option value='" + i + "' selected>第" + i + "页</option>";
+            } else {
+                str += "<option value='" + i + "'>第" + i + "页</option>";
+            }
 		}
 		str += "</select>";
 		sb.append(str);

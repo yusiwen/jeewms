@@ -180,9 +180,9 @@ public class HttpClientUtil {
     }
     /**
      * 获取SSLContext
-     * @param trustFile
+     * @param trustFileInputStream
      * @param trustPasswd
-     * @param keyFile
+     * @param keyFileInputStream
      * @param keyPasswd
      * @return
      * @throws NoSuchAlgorithmException
@@ -225,7 +225,9 @@ public class HttpClientUtil {
      * @return char[]
      */
     public static char[] str2CharArray(String str) {
-        if(null == str) return null;
+        if(null == str) {
+            return null;
+        }
 
         return str.toCharArray();
     }
@@ -248,8 +250,9 @@ public class HttpClientUtil {
         byte[] data = new byte[BUFFER_SIZE];
         int count = -1;
 
-        while((count = in.read(data,0,BUFFER_SIZE)) != -1)
+        while((count = in.read(data,0,BUFFER_SIZE)) != -1) {
             outStream.write(data, 0, count);
+        }
 
         data = null;
         byte[] outByte = outStream.toByteArray();

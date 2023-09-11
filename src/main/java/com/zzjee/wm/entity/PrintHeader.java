@@ -21,6 +21,16 @@ public class PrintHeader {
     private String header18;
     private String header19;
     private String header20;
+    private String header21;
+
+    public String getHeader21() {
+        return header21;
+    }
+
+    public PrintHeader setHeader21(String header21) {
+        this.header21 = header21;
+        return this;
+    }
 
     public String getHeader01() {
         return header01;

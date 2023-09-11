@@ -28,16 +28,16 @@
   </t:datagrid>
   </div>
  </div>
- <script src = "webpage/com/zzjee/report/rpWmHisStockKuList.js"></script>		
+ <script src = "webpage/com/zzjee/report/rpWmHisStockKuList.js"></script>
  <script type="text/javascript">
  $(document).ready(function(){
  });
- 
-   
- 
+
+
+
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'rpWmHisStockKuController.do?upload', "rpWmHisStockKuList");
+	openwindow('Excel导入', 'rpWmHisStockKuController.do?upload', "rpWmHisStockKuList");
 }
 
 //导出

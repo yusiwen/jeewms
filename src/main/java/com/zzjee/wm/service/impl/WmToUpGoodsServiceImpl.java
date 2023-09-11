@@ -1,42 +1,65 @@
 package com.zzjee.wm.service.impl;
+import com.zzjee.api.ResultDO;
+import com.zzjee.wm.entity.WmInQmIEntity;
 import com.zzjee.wm.service.WmToUpGoodsServiceI;
+import com.zzjee.wmutil.wmUtil;
+import org.jeecgframework.core.beanvalidator.BeanValidators;
 import org.jeecgframework.core.common.service.impl.CommonServiceImpl;
 import com.zzjee.wm.entity.WmToUpGoodsEntity;
+import org.jeecgframework.core.util.DateUtils;
+import org.jeecgframework.core.util.JSONHelper;
+import org.jeecgframework.web.system.pojo.base.TSBaseUser;
+import org.jeecgframework.web.system.service.SystemService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 import java.io.Serializable;
 import org.jeecgframework.core.util.ApplicationContextUtil;
 import org.jeecgframework.core.util.MyClassLoader;
 import org.jeecgframework.core.util.StringUtil;
 import org.jeecgframework.web.cgform.enhance.CgformEnhanceJavaInter;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import javax.validation.ConstraintViolation;
 
 @Service("wmToUpGoodsService")
 @Transactional
 public class WmToUpGoodsServiceImpl extends CommonServiceImpl implements WmToUpGoodsServiceI {
 
-	
- 	public void delete(WmToUpGoodsEntity entity) throws Exception{
+	@Autowired
+	private SystemService systemService;
+
+
+ 	@Override
+	public void delete(WmToUpGoodsEntity entity) throws Exception{
  		super.delete(entity);
  		//执行删除操作增强业务
 		this.doDelBus(entity);
  	}
- 	
- 	public Serializable save(WmToUpGoodsEntity entity) throws Exception{
+
+ 	@Override
+	public synchronized Serializable save(WmToUpGoodsEntity entity) throws Exception{
  		Serializable t = super.save(entity);
  		//执行新增操作增强业务
  		this.doAddBus(entity);
  		return t;
  	}
- 	
- 	public void saveOrUpdate(WmToUpGoodsEntity entity) throws Exception{
+
+ 	@Override
+	public void saveOrUpdate(WmToUpGoodsEntity entity) throws Exception{
  		super.saveOrUpdate(entity);
  		//执行更新操作增强业务
  		this.doUpdateBus(entity);
  	}
- 	
+
  	/**
 	 * 新增操作增强业务
 	 * @param t
@@ -45,7 +68,7 @@ public class WmToUpGoodsServiceImpl extends CommonServiceImpl implements WmToUpG
 	private void doAddBus(WmToUpGoodsEntity t) throws Exception{
 		//-----------------sql增强 start----------------------------
 	 	//-----------------sql增强 end------------------------------
-	 	
+
 	 	//-----------------java增强 start---------------------------
 	 	//-----------------java增强 end-----------------------------
  	}
@@ -57,23 +80,23 @@ public class WmToUpGoodsServiceImpl extends CommonServiceImpl implements WmToUpG
 	private void doUpdateBus(WmToUpGoodsEntity t) throws Exception{
 		//-----------------sql增强 start----------------------------
 	 	//-----------------sql增强 end------------------------------
-	 	
+
 	 	//-----------------java增强 start---------------------------
 	 	//-----------------java增强 end-----------------------------
  	}
  	/**
 	 * 删除操作增强业务
-	 * @param id
+	 * @param t
 	 * @return
 	 */
 	private void doDelBus(WmToUpGoodsEntity t) throws Exception{
 	    //-----------------sql增强 start----------------------------
 	 	//-----------------sql增强 end------------------------------
-	 	
+
 	 	//-----------------java增强 start---------------------------
 	 	//-----------------java增强 end-----------------------------
  	}
- 	
+
  	private Map<String,Object> populationMap(WmToUpGoodsEntity t){
 		Map<String,Object> map = new HashMap<String,Object>();
 		map.put("id", t.getId());
@@ -102,7 +125,7 @@ public class WmToUpGoodsServiceImpl extends CommonServiceImpl implements WmToUpG
 		map.put("base_goodscount", t.getBaseGoodscount());
 		return map;
 	}
- 	
+
  	/**
 	 * 替换sql中的变量
 	 * @param sql
@@ -137,7 +160,7 @@ public class WmToUpGoodsServiceImpl extends CommonServiceImpl implements WmToUpG
  		sql  = sql.replace("#{UUID}",UUID.randomUUID().toString());
  		return sql;
  	}
- 	
+
  	/**
 	 * 执行JAVA增强
 	 */
@@ -158,7 +181,7 @@ public class WmToUpGoodsServiceImpl extends CommonServiceImpl implements WmToUpG
 			} catch (Exception e) {
 				e.printStackTrace();
 				throw new Exception("执行JAVA增强出现异常！");
-			} 
+			}
 		}
  	}
 }

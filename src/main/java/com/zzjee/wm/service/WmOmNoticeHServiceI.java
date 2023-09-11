@@ -12,12 +12,13 @@ import java.io.Serializable;
 
 public interface WmOmNoticeHServiceI extends CommonService{
 	
- 	public <T> void delete(T entity);
+ 	@Override
+    public <T> void delete(T entity);
 	/**
 	 * 添加一对多
 	 * 
 	 */
-	public void addMain(WmOmNoticeHEntity wmOmNoticeH,
+	public  void addMain(WmOmNoticeHEntity wmOmNoticeH,
 	        List<WmOmNoticeIEntity> wmOmNoticeIList) ;
 	public void addMaintms(WmTmsNoticeHEntity wmOmNoticeH,
 						List<WmTmsNoticeIEntity> wmOmNoticeIList) ;
@@ -31,19 +32,19 @@ public interface WmOmNoticeHServiceI extends CommonService{
 	
  	/**
 	 * 默认按钮-sql增强-新增操作
-	 * @param id
+	 * @param t
 	 * @return
 	 */
  	public boolean doAddSql(WmOmNoticeHEntity t);
  	/**
 	 * 默认按钮-sql增强-更新操作
-	 * @param id
+	 * @param t
 	 * @return
 	 */
  	public boolean doUpdateSql(WmOmNoticeHEntity t);
  	/**
 	 * 默认按钮-sql增强-删除操作
-	 * @param id
+	 * @param t
 	 * @return
 	 */
  	public boolean doDelSql(WmOmNoticeHEntity t);

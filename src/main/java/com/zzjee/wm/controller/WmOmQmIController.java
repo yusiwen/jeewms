@@ -1,5 +1,6 @@
 package com.zzjee.wm.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.zzjee.wm.entity.*;
 import com.zzjee.wm.page.Delrowpage;
 import com.zzjee.wm.page.omqmpage;
@@ -15,6 +16,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.log4j.Logger;
 import org.jeecgframework.core.util.*;
+import org.jeecgframework.web.system.pojo.base.TSRole;
 import org.jeecgframework.web.system.sms.util.Constants;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -59,6 +61,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.jeecgframework.core.beanvalidator.BeanValidators;
 
+import java.util.Random;
 import java.util.Set;
 
 import javax.validation.ConstraintViolation;
@@ -198,6 +201,15 @@ public class WmOmQmIController extends BaseController {
 		message = "添加到下架任务清单成功";
 		WmOmQmIEntity t = wmOmQmIService.get(WmOmQmIEntity.class, request
 				.getParameter("id").toString());
+		//查询所有拣货员
+		List<String> usernameList = systemService.findListbySql("SELECT u.username  FROM t_s_role_user ru LEFT JOIN t_s_role r ON ru.roleid=r.id LEFT JOIN t_s_base_user u ON ru.userid=u.id LEFT JOIN (\n" +
+				"SELECT assign_to,count(1) num FROM wm_om_qm_i WHERE bin_sta='N' GROUP BY assign_to) i ON u.username=i.assign_to WHERE r.rolecode='jhy' ORDER BY num");
+		if (usernameList != null && usernameList.size() > 0) {
+			//查询正在进行操作的拣货员
+			System.out.println(JSON.toJSONString(usernameList));
+			wmOmQmI.setAssignTo(usernameList.get(0));
+		}
+
 		if(!wmUtil.checkstcoka( t.getBinId(),t.getTinId(),t.getGoodsId(),t.getProData(),t.getBaseGoodscount())){
 			message = "库存不足";
 			j.setMsg(message);
@@ -239,6 +251,16 @@ public class WmOmQmIController extends BaseController {
 					if(StringUtil.isNotEmpty(firstrongqi)){
 						t.setFirstRq(firstrongqi);
 					}
+
+
+					String recarno = "";
+					try{
+						WmOmNoticeHEntity wmOmNoticeHEntity = systemService.findUniqueByProperty(WmOmNoticeHEntity.class,"omNoticeId",t.getOmNoticeId());
+						recarno = wmOmNoticeHEntity.getReCarno();
+					}catch (Exception e){
+
+					}
+					t.setSecondRq(recarno);
 					systemService.updateEntitie(t);
 					systemService.addLog(message, Globals.Log_Type_UPDATE,
 							Globals.Log_Leavel_INFO);
@@ -361,11 +383,9 @@ public class WmOmQmIController extends BaseController {
 		return j;
 	}
 
-
-
-	@RequestMapping(params = "dotodown")
+	@RequestMapping(params = "dotowavedown")
 	@ResponseBody
-	public AjaxJson dotodown(HttpServletRequest request) {
+	public synchronized AjaxJson dotowavedown(HttpServletRequest request) {
 		String message = null;
 		AjaxJson j = new AjaxJson();
 		message = "下架成功";
@@ -392,8 +412,15 @@ public class WmOmQmIController extends BaseController {
 				wmToDownGoods.setImCusCode(wmOmQmI.getImCusCode());//客户单号
 				wmToDownGoods.setOrderType("01");//默认为01
 				systemService.save(wmToDownGoods);
-				wmOmQmI.setBinSta("Y");
+				wmOmQmI.setBinSta("H");
 				systemService.saveOrUpdate(wmOmQmI);
+				try{
+					String orderId = wmOmQmI.getOmNoticeId();
+					String type = "jh";
+					String username = ResourceUtil.getSessionUserName().getRealName();
+					updateUser(orderId,type,username);
+				}catch (Exception e){
+				}
 				systemService.addLog(message, Globals.Log_Type_DEL,
 						Globals.Log_Leavel_INFO);
 			} else {
@@ -412,6 +439,67 @@ public class WmOmQmIController extends BaseController {
 		return j;
 	}
 
+
+
+
+	@RequestMapping(params = "dotodown")
+	@ResponseBody
+	public synchronized AjaxJson dotodown(HttpServletRequest request) {
+		String message = null;
+		AjaxJson j = new AjaxJson();
+		message = "下架成功";
+	  	String id = request.getParameter("id").toString();
+        boolean isok = todown(id);
+        if (!isok){
+        	j.setSuccess(isok);
+        	message = "下架失败";
+		}
+		j.setMsg(message);
+		return j;
+	}
+
+
+	public boolean todown(String id){
+		try {
+			WmOmQmIEntity wmOmQmI = systemService.getEntity(
+					WmOmQmIEntity.class, id);
+			if (wmOmQmI != null&&wmOmQmI.getBinSta().equals("N")) {
+				WmToDownGoodsEntity wmToDownGoods = new WmToDownGoodsEntity();
+				wmToDownGoods.setBinIdFrom(wmOmQmI.getTinId());//下架托盘
+				wmToDownGoods.setKuWeiBianMa(wmOmQmI.getBinId());//储位
+				wmToDownGoods.setBinIdTo(wmOmQmI.getOmNoticeId());//到托盘
+				wmToDownGoods.setCusCode(wmOmQmI.getCusCode());//货主
+				wmToDownGoods.setGoodsId(wmOmQmI.getGoodsId());//
+				wmToDownGoods.setGoodsProData(wmOmQmI.getProData());//生产日期
+				wmToDownGoods.setOrderId(wmOmQmI.getOmNoticeId());//出货通知单
+				wmToDownGoods.setOrderIdI(wmOmQmI.getId());//出货通知项目
+				wmToDownGoods.setBaseUnit(wmOmQmI.getBaseUnit());//基本单位
+				wmToDownGoods.setBaseGoodscount(wmOmQmI.getBaseGoodscount());//基本单位数量
+				wmToDownGoods.setGoodsUnit(wmOmQmI.getGoodsUnit());//出货单位
+				wmToDownGoods.setGoodsQua(wmOmQmI.getQmOkQuat());//出货数量
+				wmToDownGoods.setGoodsQuaok(wmOmQmI.getQmOkQuat());//出货数量
+				wmToDownGoods.setGoodsName(wmOmQmI.getGoodsName());//商品名称
+				wmToDownGoods.setOmBeizhu(wmOmQmI.getOmBeizhu());//备注
+				wmToDownGoods.setImCusCode(wmOmQmI.getImCusCode());//客户单号
+				wmToDownGoods.setOrderType("01");//默认为01
+				systemService.save(wmToDownGoods);
+				wmOmQmI.setBinSta("Y");
+				systemService.saveOrUpdate(wmOmQmI);
+				try{
+					String orderId = wmOmQmI.getOmNoticeId();
+					String type = "jh";
+					String username = ResourceUtil.getSessionUserName().getRealName();
+					updateUser(orderId,type,username);
+				}catch (Exception e){
+				}
+				 return true;
+			} else {
+				 return false;
+			}
+		} catch (Exception e) {
+		 return false;
+		}
+	}
 
 	/**
 	 * 批量删除下架任务
@@ -727,6 +815,23 @@ public class WmOmQmIController extends BaseController {
 
 		//按Restful约定，返回204状态码, 无内容. 也可以返回200状态码.
 		return new ResponseEntity(HttpStatus.NO_CONTENT);
+	}
+
+
+	void  updateUser(String orderId,String type,String userName){
+		try{
+			WmOmNoticeHEntity wmOmNoticeHEntity = systemService.findUniqueByProperty(WmOmNoticeHEntity.class,"omNoticeId",orderId);
+			if ("jh".equals(type)){
+				wmOmNoticeHEntity.setJhUser(userName);
+			}
+			if ("fh".equals(type)){
+				wmOmNoticeHEntity.setFhUser(userName);
+			}
+			systemService.updateEntitie(wmOmNoticeHEntity);
+		}catch (Exception e){
+
+		}
+
 	}
 
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)

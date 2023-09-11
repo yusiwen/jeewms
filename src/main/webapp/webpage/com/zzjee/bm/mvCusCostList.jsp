@@ -3,7 +3,7 @@
 <t:base type="jquery,easyui,tools,DatePicker"></t:base>
 <div class="easyui-layout" fit="true">
   <div region="center" style="padding:0px;border:0px">
- 				
+
   <t:datagrid name="mvCusCostList" checkbox="true" pagination="true" fitColumns="false" title="客户账单" actionUrl="mvCusCostController.do?datagrid" idField="id" fit="false" queryMode="group">
     <t:dgCol title="主键"  field="id"  hidden="true"  queryMode="group"  width="120"></t:dgCol>
     <t:dgCol title="客户编码"  field="cusCode" query="true"    queryMode="single"  width="120"></t:dgCol>
@@ -23,19 +23,19 @@
 <%--    <t:dgToolBar title="模板下载" icon="icon-putout" funname="ExportXlsByT"></t:dgToolBar> --%>
   </t:datagrid>
 
-    
+
     <div name="searchColums" style="float: left; padding-left: 0px;padding-top: 5px;">
       <span style="vertical-align:middle;display:-moz-inline-box;display:inline-block;width: 90px;text-align:right;" title="计费周期">计费周期: </span>
               <input type="text" name="outtime_begin" style="width: 100px; height: 30px;">~
               <input type="text" name="outtime_end" style="width: 100px; height: 30px; margin-right: 20px;">
          </span>
          </div>
-       
+
   </div>
 
  </div>
 
- <script src = "webpage/com/zzjee/bm/mvCusCostList.js"></script>		
+ <script src = "webpage/com/zzjee/bm/mvCusCostList.js"></script>
  <script type="text/javascript">
  $(document).ready(function(){
 	 $("#mvCusCostListtb").find("input[name='outtime_begin']").attr("class","Wdate").click(function(){WdatePicker({dateFmt:'yyyy-MM-dd'});});
@@ -89,7 +89,7 @@
  }
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'mvCusCostController.do?upload', "mvCusCostList");
+	openwindow('Excel导入', 'mvCusCostController.do?upload', "mvCusCostList");
 }
 
 //导出

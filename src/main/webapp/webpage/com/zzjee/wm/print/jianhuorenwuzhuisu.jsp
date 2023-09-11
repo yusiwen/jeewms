@@ -20,7 +20,7 @@ function printview(){
 function make2DCode() {
     $("#qrcode").html("");//清空二维码
     var qrcode;
-    var codesize = 80;
+    var codesize = 100;
     console.log(codesize);
     qrcode = new QRCode(document.getElementById("qrcode"), {
         width : codesize,
@@ -177,9 +177,13 @@ function downloadqrcode() {
 				</td>
 		</tr>
 		<tr height=40 style='mso-height-source:userset;height:30.0pt'>
-			<td colspan=5 height=40 class=xl67 style='height:30.0pt'><span style="font-size: 18pt">拣货单</span></td>
+			<td colspan=5 height=40 class=xl67 style='height:30.0pt'><span style="font-size: 18pt">追溯单</span></td>
 			<td colspan=4 class=xl68 width=168 style='width:126pt'>单号：${noticeid}</td>
 			<td colspan=1 style='mso-ignore:colspan'></td>
+		</tr>
+		<tr height=40 style='mso-height-source:userset;height:30.0pt'>
+			<td colspan=9 height=40 class=xl68 width=242 style='height:30.0pt;width:182pt'>仓库：${storeName}</td>
+			<td ></td>
 		</tr>
 		<tr height=40 style='mso-height-source:userset;height:30.0pt'>
 			<td colspan=5 height=40 class=xl68 width=242 style='height:30.0pt;width:182pt'>货主：${cusname}</td>

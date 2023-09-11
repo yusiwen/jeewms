@@ -158,7 +158,7 @@ public class ResourceUtil {
 	/**
 	 * 获取配置文件参数
 	 * 
-	 * @param name
+	 * @param path
 	 * @return
 	 */
 	public static final Map<Object, Object> getConfigMap(String path) {
@@ -347,14 +347,15 @@ public class ResourceUtil {
     /**
      * 处理数据权限规则变量
      * 以用户变量为准  先得到用户变量，如果用户没有设置，则获到 系统变量
-     * @param key
+     * @param ruleValue
      * 			Session 中的值
      * @return
      */
 	public static String converRuleValue(String ruleValue) {
 		String value = ResourceUtil.getSessionData(ruleValue);
-		if(StringUtil.isEmpty(value))
-			value = ResourceUtil.getUserSystemData(ruleValue);
+		if(StringUtil.isEmpty(value)) {
+            value = ResourceUtil.getUserSystemData(ruleValue);
+        }
 		return value!= null ? value : ruleValue;
 	}
 

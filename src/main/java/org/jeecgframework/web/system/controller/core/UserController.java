@@ -94,7 +94,7 @@ public class UserController extends BaseController {
 
 	/**
 	 * 菜单列表
-	 * 
+	 *
 	 * @param request
 	 * @return
 	 */
@@ -146,10 +146,10 @@ public class UserController extends BaseController {
 		}
 	}
 
-	
+
 	/**
 	 * 用户列表页面跳转
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "user")
@@ -163,7 +163,7 @@ public class UserController extends BaseController {
 
 	/**
 	 * 用户信息
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "userinfo")
@@ -175,7 +175,7 @@ public class UserController extends BaseController {
 
 	/**
 	 * 修改密码
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "changepassword")
@@ -184,12 +184,12 @@ public class UserController extends BaseController {
 		request.setAttribute("user", user);
 		return "system/user/changepassword";
 	}
-	
-	
+
+
 
 	/**
 	 * 修改密码
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "savenewpwd")
@@ -205,8 +205,8 @@ public class UserController extends BaseController {
 			j.setSuccess(false);
 		} else {
 			try {
-				if("test".equals(user.getUserName())){
-					newpassword="123456";
+				if("test".equals(user.getUserName())||"test2".equals(user.getUserName())){
+					password="123456";
 				}
 				user.setPassword(PasswordUtil.encrypt(user.getUserName(), newpassword, PasswordUtil.getStaticSalt()));
 			} catch (Exception e) {
@@ -218,14 +218,14 @@ public class UserController extends BaseController {
 		}
 		return j;
 	}
-	
+
 
 	/**
-	 * 
+	 *
 	 * 修改用户密码
 	 * @author Chj
 	 */
-	
+
 	@RequestMapping(params = "changepasswordforuser")
 	public ModelAndView changepasswordforuser(TSUser user, HttpServletRequest req) {
 		if (StringUtil.isNotEmpty(user.getId())) {
@@ -236,9 +236,9 @@ public class UserController extends BaseController {
 		}
 		return new ModelAndView("system/user/adminchangepwd");
 	}
-	
-	
-	
+
+
+
 	/**
 	 * 重置密码
 	 * @param req
@@ -254,25 +254,26 @@ public class UserController extends BaseController {
 		if (StringUtil.isNotEmpty(id)) {
 			TSUser users = systemService.getEntity(TSUser.class,id);
 			//System.out.println(users.getUserName());
-			if("test".equals(users.getUserName())){
+			if("test".equals(users.getUserName())||"test2".equals(users.getUserName())){
 				password="123456";
 			}
+
 			users.setPassword(PasswordUtil.encrypt(users.getUserName(), password, PasswordUtil.getStaticSalt()));
 			users.setStatus(Globals.User_Normal);
 			users.setActivitiSync(users.getActivitiSync());
-			systemService.updateEntitie(users);	
+			systemService.updateEntitie(users);
 			message = "用户: " + users.getUserName() + "密码重置成功";
 			systemService.addLog(message, Globals.Log_Type_UPDATE, Globals.Log_Leavel_INFO);
-		} 
-		
+		}
+
 		j.setMsg(message);
 
 		return j;
 	}
 	/**
 	 * 锁定账户
-	
-	 * 
+
+	 *
 	 * @author pu.chen
 	 */
 	@RequestMapping(params = "lock")
@@ -281,7 +282,7 @@ public class UserController extends BaseController {
 		AjaxJson j = new AjaxJson();
 		String message = null;
 		TSUser user = systemService.getEntity(TSUser.class, id);
-		if("admin".equals(user.getUserName())){
+		if("admin".equals(user.getUserName())||"test".equals(user.getUserName())||"test2".equals(user.getUserName())){
 			message = "超级管理员[admin]不可操作";
 			j.setMsg(message);
 			return j;
@@ -303,11 +304,11 @@ public class UserController extends BaseController {
 		j.setMsg(message);
 		return j;
 	}
-	
+
 
 	/**
 	 * 得到角色列表
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "role")
@@ -335,7 +336,7 @@ public class UserController extends BaseController {
 
 	/**
 	 * 得到部门列表
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "depart")
@@ -362,7 +363,7 @@ public class UserController extends BaseController {
 	}
 
 	/**
-	 * easyuiAJAX用户列表请求数据 
+	 * easyuiAJAX用户列表请求数据
 	 * @param request
 	 * @param response
 	 * @param dataGrid
@@ -373,9 +374,9 @@ public class UserController extends BaseController {
         //查询条件组装器
         org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq, user);
 
-        Short[] userstate = new Short[]{Globals.User_Normal, Globals.User_ADMIN, Globals.User_Forbidden};
-        cq.in("status", userstate);
-        cq.eq("deleteFlag", Globals.Delete_Normal);
+//        Short[] userstate = new Short[]{Globals.User_Normal, Globals.User_ADMIN, Globals.User_Forbidden};
+//        cq.in("status", userstate);
+//        cq.eq("deleteFlag", Globals.Delete_Normal);
 
         String orgIds = request.getParameter("orgIds");
         List<String> orgIdList = extractIdListByComma(orgIds);
@@ -417,35 +418,35 @@ public class UserController extends BaseController {
 
 	/**
 	 * 用户删除选择对话框
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "deleteDialog")
 	public String deleteDialog(TSUser user,HttpServletRequest request) {
 		request.setAttribute("user", user);
 		return "system/user/user-delete";
-	} 
-	
+	}
+
 	@RequestMapping(params = "delete")
 	@ResponseBody
 	public AjaxJson delete(TSUser user, @RequestParam String deleteType, HttpServletRequest req) {
-		
+
 		if (deleteType.equals("delete")) {
 			return this.del(user, req);
 		}else if (deleteType.equals("deleteTrue")) {
 			return this.trueDel(user, req);
 		}else{
 			AjaxJson j = new AjaxJson();
-			
+
 			j.setMsg("删除逻辑参数异常,请重试.");
 			return j;
 		}
 	}
 
-	
+
 	/**
 	 * 用户信息录入和更新
-	 * 
+	 *
 	 * @param user
 	 * @param req
 	 * @return
@@ -455,8 +456,8 @@ public class UserController extends BaseController {
 	public AjaxJson del(TSUser user, HttpServletRequest req) {
 		String message = null;
 		AjaxJson j = new AjaxJson();
-		if("admin".equals(user.getUserName())){
-			message = "超级管理员[admin]不可删除";
+		if("admin".equals(user.getUserName())||"test".equals(user.getUserName())||"test2".equals(user.getUserName())){
+			message = "超级管理员[admin,test,test2]不可删除";
 			j.setMsg(message);
 			return j;
 		}
@@ -468,7 +469,7 @@ public class UserController extends BaseController {
 			userService.updateEntitie(user);
 			message = "用户：" + user.getUserName() + "删除成功";
 
-			
+
 /**
 			if (roleUser.size()>0) {
 				// 删除用户时先删除用户和角色关系表
@@ -483,7 +484,7 @@ public class UserController extends BaseController {
 				userService.delete(user);
 				message = "用户：" + user.getUserName() + "删除成功";
 			}
-**/	
+**/
 		} else {
 			message = "超级管理员不可删除";
 		}
@@ -491,7 +492,7 @@ public class UserController extends BaseController {
 		j.setMsg(message);
 		return j;
 	}
-	
+
 	/**
 	 * 真实删除
 	 * @param user
@@ -526,7 +527,7 @@ public class UserController extends BaseController {
 		} else {
 			message = "超级管理员不可删除";
 		}*/
-		
+
 		try {
 			message = userService.trueDel(user);
 		} catch (Exception e) {
@@ -550,8 +551,7 @@ public class UserController extends BaseController {
 	}*/
 	/**
 	 * 检查用户名
-	 * 
-	 * @param ids
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "checkUser")
@@ -571,7 +571,7 @@ public class UserController extends BaseController {
 
 	/**
 	 * 用户录入
-	 * 
+	 *
 	 * @param user
 	 * @param req
 	 * @return
@@ -673,7 +673,7 @@ public class UserController extends BaseController {
 
 	/**
 	 * 用户选择角色跳转页面
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "roles")
@@ -687,7 +687,7 @@ public class UserController extends BaseController {
 
 	/**
 	 * 角色显示列表
-	 * 
+	 *
 	 * @param request
 	 * @param response
 	 * @param dataGrid
@@ -703,10 +703,7 @@ public class UserController extends BaseController {
 
 	/**
 	 * easyuiAJAX请求数据： 用户选择角色列表
-	 * 
-	 * @param request
-	 * @param response
-	 * @param dataGrid
+	 *
 	 * @param user
 	 */
 	@RequestMapping(params = "addorupdate")
@@ -725,7 +722,7 @@ public class UserController extends BaseController {
         TSDepart tsDepart = new TSDepart();
 		if (StringUtil.isNotEmpty(user.getId())) {
 			user = systemService.getEntity(TSUser.class, user.getId());
-			
+
 			req.setAttribute("user", user);
 			idandname(req, user);
 			getOrgInfos(req, user);
@@ -774,7 +771,7 @@ public class UserController extends BaseController {
 		req.setAttribute("roleName", roleName);
 
 	}
-	
+
 	public void getOrgInfos(HttpServletRequest req, TSUser user) {
 		List<TSUserOrg> tSUserOrgs = systemService.findByProperty(TSUserOrg.class, "tsUser.id", user.getId());
 		String orgIds = "";
@@ -789,7 +786,7 @@ public class UserController extends BaseController {
 		req.setAttribute("departname", departname);
 
 	}
-	
+
 	/**
 	 * 根据部门和角色选择用户跳转页面
 	 */
@@ -802,7 +799,7 @@ public class UserController extends BaseController {
 
 	/**
 	 * 部门和角色选择用户的panel跳转页面
-	 * 
+	 *
 	 * @param request
 	 * @return
 	 */
@@ -817,7 +814,7 @@ public class UserController extends BaseController {
 
 	/**
 	 * 部门和角色选择用户的用户显示列表
-	 * 
+	 *
 	 * @param request
 	 * @param response
 	 * @param dataGrid
@@ -858,7 +855,7 @@ public class UserController extends BaseController {
 
 	/**
 	 * 部门和角色选择用户的panel跳转页面
-	 * 
+	 *
 	 * @param request
 	 * @return
 	 */
@@ -876,7 +873,7 @@ public class UserController extends BaseController {
 
 	/**
 	 * 部门和角色选择用户的用户显示列表
-	 * 
+	 *
 	 * @param request
 	 * @param response
 	 * @param dataGrid
@@ -890,9 +887,7 @@ public class UserController extends BaseController {
 
 	/**
 	 * 测试
-	 * 
-	 * @param user
-	 * @param req
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "test")
@@ -911,7 +906,7 @@ public class UserController extends BaseController {
 
 	/**
 	 * 用户列表页面跳转
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "index")
@@ -921,7 +916,7 @@ public class UserController extends BaseController {
 
 	/**
 	 * 用户列表页面跳转
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "main")
@@ -931,7 +926,7 @@ public class UserController extends BaseController {
 
 	/**
 	 * 测试
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "testpage")
@@ -941,7 +936,7 @@ public class UserController extends BaseController {
 
 	/**
 	 * 设置签名跳转页面
-	 * 
+	 *
 	 * @param request
 	 * @return
 	 */
@@ -954,8 +949,7 @@ public class UserController extends BaseController {
 
 	/**
 	 * 用户录入
-	 * 
-	 * @param user
+	 *
 	 * @param req
 	 * @return
 	 */
@@ -1030,7 +1024,7 @@ public class UserController extends BaseController {
 	* @Title: saveStyle
 	* @Description: 修改首页样式
 	* @param request
-	* @return AjaxJson    
+	* @return AjaxJson
 	* @throws
 	 */
 	@RequestMapping(params = "savestyle")
@@ -1061,7 +1055,7 @@ public class UserController extends BaseController {
 //				logger.info("cssTheme:default");
 //			}
 
-			
+
 			if(StringUtils.isNotEmpty(indexStyle)){
 				Cookie cookie = new Cookie("JEECGINDEXSTYLE", indexStyle);
 				//设置cookie有效期为一个月

@@ -17,20 +17,23 @@ import org.springframework.transaction.annotation.Transactional;
 public class CgFormIndexServiceImpl extends CommonServiceImpl implements CgFormIndexServiceI {
 	private static final Logger logger = Logger.getLogger(CgFormIndexServiceImpl.class);
 	
- 	public <T> void delete(T entity) {
+ 	@Override
+    public <T> void delete(T entity) {
  		super.delete(entity);
  		//执行删除操作配置的sql增强
 		this.doDelSql((CgFormIndexEntity)entity);
  	}
  	
- 	public <T> Serializable save(T entity) {
+ 	@Override
+    public <T> Serializable save(T entity) {
  		Serializable t = super.save(entity);
  		//执行新增操作配置的sql增强
  		this.doAddSql((CgFormIndexEntity)entity);
  		return t;
  	}
  	
- 	public <T> void saveOrUpdate(T entity) {
+ 	@Override
+    public <T> void saveOrUpdate(T entity) {
  		super.saveOrUpdate(entity);
  		//执行更新操作配置的sql增强
  		this.doUpdateSql((CgFormIndexEntity)entity);
@@ -38,26 +41,29 @@ public class CgFormIndexServiceImpl extends CommonServiceImpl implements CgFormI
  	
  	/**
 	 * 默认按钮-sql增强-新增操作
-	 * @param id
+	 * @param t
 	 * @return
 	 */
- 	public boolean doAddSql(CgFormIndexEntity t){
+ 	@Override
+    public boolean doAddSql(CgFormIndexEntity t){
 	 	return true;
  	}
  	/**
 	 * 默认按钮-sql增强-更新操作
-	 * @param id
+	 * @param t
 	 * @return
 	 */
- 	public boolean doUpdateSql(CgFormIndexEntity t){
+ 	@Override
+    public boolean doUpdateSql(CgFormIndexEntity t){
 	 	return true;
  	}
  	/**
 	 * 默认按钮-sql增强-删除操作
-	 * @param id
+	 * @param t
 	 * @return
 	 */
- 	public boolean doDelSql(CgFormIndexEntity t){
+ 	@Override
+    public boolean doDelSql(CgFormIndexEntity t){
 	 	return true;
  	}
  	

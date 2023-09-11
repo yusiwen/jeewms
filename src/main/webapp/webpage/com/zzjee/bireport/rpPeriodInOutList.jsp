@@ -27,6 +27,12 @@
     <t:dgCol title="期末数量"  field="goodsQm"    queryMode="single"  width="120"></t:dgCol>
 
     <t:dgCol title="现库存"  field="goodsNow"    queryMode="single"  width="120"></t:dgCol>
+
+
+    <t:dgCol title="供应商编号"  field="supCode"   query="true" queryMode="single"  width="100"></t:dgCol>
+
+    <t:dgCol title="供应商名称"  field="supName"   query="true" queryMode="single"  width="120"></t:dgCol>
+
    <%--<t:dgCol title="操作" field="opt" width="100"></t:dgCol>--%>
    <%--<t:dgDelOpt title="删除" url="rpPeriodInOutController.do?doDel&id={id}" urlclass="ace_button"  urlfont="fa-trash-o"/>--%>
    <%--<t:dgToolBar title="录入" icon="icon-add" url="rpPeriodInOutController.do?goAdd" funname="add"></t:dgToolBar>--%>
@@ -35,19 +41,19 @@
    <%--<t:dgToolBar title="查看" icon="icon-search" url="rpPeriodInOutController.do?goUpdate" funname="detail"></t:dgToolBar>--%>
    <%--<t:dgToolBar title="导入" icon="icon-put" funname="ImportXls"></t:dgToolBar>--%>
    <t:dgToolBar title="导出" icon="icon-putout" funname="ExportXls"></t:dgToolBar>
-   <%--<t:dgToolBar title="模板下载" icon="icon-putout" funname="ExportXlsByT"></t:dgToolBar>--%>
+   <t:dgToolBar title="模板下载" icon="icon-putout" funname="ExportXlsByT"></t:dgToolBar>
   </t:datagrid>
   </div>
  </div>
  <script type="text/javascript">
  $(document).ready(function(){
  });
- 
-   
- 
+
+
+
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'rpPeriodInOutController.do?upload', "rpPeriodInOutList");
+	openwindow('Excel导入', 'rpPeriodInOutController.do?upload', "rpPeriodInOutList");
 }
 
 //导出

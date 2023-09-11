@@ -45,30 +45,30 @@
   </t:datagrid>
   </div>
  </div>
- <script src = "webpage/com/zzjee/wm/wmOmNoticeHList.js"></script>		
+ <script src = "webpage/com/zzjee/wm/wmOmNoticeHList.js"></script>
  <script type="text/javascript">
- 
+
  $(document).ready(function(){
 	 $("#wmOmNoticeHListtb").find("input[name='delvData_begin']").attr("class","Wdate").click(function(){WdatePicker({dateFmt:'yyyy-MM-dd hh:mm:ss'});});
 	 $("#wmOmNoticeHListtb").find("input[name='delvData_end']").attr("class","Wdate").click(function(){WdatePicker({dateFmt:'yyyy-MM-dd hh:mm:ss'});});
 
  });
- 
+
  function print(id){
 		var url = "wmOmNoticeHController.do?doPrint&id="+id;
-		
+
 		window.open(url);
 	}
- 
+
  function printckd(id){
 		var url = "wmOmNoticeHController.do?doPrintckd&id="+id;
-		
+
 		window.open(url);
 	}
- 
+
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'wmOmNoticeHController.do?upload', "wmOmNoticeHList");
+	openwindow('Excel导入', 'wmOmNoticeHController.do?upload', "wmOmNoticeHList");
 }
 
 //导出

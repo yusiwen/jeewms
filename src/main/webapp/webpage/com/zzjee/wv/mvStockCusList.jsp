@@ -17,8 +17,8 @@
       <t:dgCol title="库存单位"  field="baseUnit"    queryMode="group"  width="90"></t:dgCol>
 <%--     <t:dgCol title="储位编码"  field="kuWeiBianMa"   query="true" queryMode="single"  width="90"></t:dgCol> --%>
 <%--     <t:dgCol title="托盘"  field="binId"   query="true" queryMode="single"  width="70"></t:dgCol> --%>
-    <t:dgCol title="客户"  field="cusCode"   query="true" queryMode="single"  width="80"></t:dgCol>
-    <t:dgCol title="客户名称"  field="zhongWenQch"    queryMode="group"  width="120"></t:dgCol>
+    <t:dgCol title="供应商编码"  field="cusCode"   query="true" queryMode="single"  width="80"></t:dgCol>
+    <t:dgCol title="供应商名称"  field="zhongWenQch"    queryMode="group"  width="120"></t:dgCol>
 
 <%--     <t:dgCol title="单位"  field="shlDanWei"    queryMode="group"  width="120"></t:dgCol> --%>
     <t:dgCol title="生产日期"  field="goodsProData" formatter="yyyy-MM-dd"  query="true" queryMode="single"  width="90"></t:dgCol>
@@ -26,7 +26,7 @@
     <t:dgCol title="到期日"  field="dqr"    queryMode="group"  width="70"></t:dgCol>
     <t:dgCol title="HITI"  field="hiti"    queryMode="group"  width="50"></t:dgCol>
         <t:dgCol title="库位类型"  field="kuWeiLeiXing"    queryMode="group"  width="50"></t:dgCol>
-    
+
 <%--     <t:dgCol title="取货次序"  field="quHuoCiXu"    queryMode="group"  width="90"></t:dgCol> --%>
 <%--     <t:dgCol title="上架次序"  field="shangJiaCiXu"    queryMode="group"  width="90"></t:dgCol> --%>
 <%--    <t:dgCol title="操作" field="opt" width="100"></t:dgCol> --%>
@@ -41,16 +41,16 @@
   </t:datagrid>
   </div>
  </div>
- <script src = "webpage/com/zzjee/wv/mvStockCusList.js"></script>		
+ <script src = "webpage/com/zzjee/wv/mvStockCusList.js"></script>
  <script type="text/javascript">
  $(document).ready(function(){
  });
- 
-   
- 
+
+
+
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'mvStockCusController.do?upload', "mvStockCusList");
+	openwindow('Excel导入', 'mvStockCusController.do?upload', "mvStockCusList");
 }
 
 //导出

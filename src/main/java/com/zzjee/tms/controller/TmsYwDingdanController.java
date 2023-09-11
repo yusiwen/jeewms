@@ -6,6 +6,7 @@ import com.zzjee.api.ResultDO;
 import com.zzjee.md.entity.MdGoodsEntity;
 import com.zzjee.rfid.entity.RfidBuseEntity;
 import com.zzjee.tms.entity.DdPage;
+import com.zzjee.tms.entity.TmsMdCheliangEntity;
 import com.zzjee.tms.entity.TmsMdDzEntity;
 import com.zzjee.tms.entity.TmsYwDingdanEntity;
 import com.zzjee.tms.service.TmsYwDingdanServiceI;
@@ -428,7 +429,7 @@ public class TmsYwDingdanController extends BaseController {
 		String message = null;
 		AjaxJson j = new AjaxJson();
  		message = "运输订单派车成功";
-		try{
+ 		try{
 			for(String id1:id.split(",")) {
 				TmsYwDingdanEntity tmsYwDingdan = systemService.getEntity(TmsYwDingdanEntity.class,
 						id1
@@ -441,6 +442,7 @@ public class TmsYwDingdanController extends BaseController {
 				systemService.addLog(message, Globals.Log_Type_DEL, Globals.Log_Leavel_INFO);
 			}
 			Map<String,String> maphz = new HashMap<>();
+			Map<String,String> mapsfoderid = new HashMap<>();
 
 			for(String id1:id.split(",")) {//计算总货主和单数
 				TmsYwDingdanEntity tmsYwDingdan1 = systemService.getEntity(TmsYwDingdanEntity.class,
@@ -456,10 +458,15 @@ public class TmsYwDingdanController extends BaseController {
 
 				if(!maphz.containsKey(wmsom.getCusCode())){
 					maphz.put(wmsom.getCusCode(),wmsom.getOmNoticeId());
+					mapsfoderid.put(wmsom.getCusCode(),wmsom.getOmBeizhu());
 				}else{
 					String ys = maphz.get(wmsom.getCusCode());
 					ys = ys+";"+wmsom.getOmNoticeId();
 					maphz.put(wmsom.getCusCode(),ys);
+				   String 	 sforderid = mapsfoderid.get(wmsom.getCusCode());
+				   sforderid = sforderid+";"+wmsom.getOmBeizhu();
+				   mapsfoderid.put(wmsom.getCusCode(),sforderid);
+
 				}
 			}
 			Set<String> keySets = maphz.keySet();
@@ -470,6 +477,7 @@ public class TmsYwDingdanController extends BaseController {
 				wmOmNoticeH.setReMember(siji);//司机
 				String mapkey = ki.next();
 				String mapvv = maphz.get(mapkey);
+				String sforderid = mapsfoderid.get(mapkey);
 				String[]   strva= mapvv.split(";");
 				String sqla = "(" ;
 				for(int a = 0;a<strva.length;a++){
@@ -491,6 +499,7 @@ public class TmsYwDingdanController extends BaseController {
 				wmOmNoticeH.setOmNoticeId(noticeid);
 				List<WmOmNoticeIEntity> wmOmNoticeIListnew = new ArrayList<>();
 				wmOmNoticeH.setCusCode(mapkey);
+				wmOmNoticeH.setPiClass(sforderid);//三方单号
 				if (resultz != null && resultz.size() > 0) {
 					for (int i = 0; i < resultz.size(); i++) {
 						WmOmNoticeIEntity t = new  WmOmNoticeIEntity();
@@ -534,11 +543,11 @@ public class TmsYwDingdanController extends BaseController {
 
 		List<WmTmsNoticeHEntity> listWaveToDowns =new ArrayList<>();
 		if(StringUtil.isNotEmpty(searchstr)&&!"null".equals(searchstr)){
-			hql="from WmTmsNoticeHEntity where  omSta <> ? and  reMember = ? and  delvMobile like ?";
-			listWaveToDowns = wmOmNoticeHService.findHql(hql,"已送货",username,"%"+searchstr+"%");
+			hql="from WmTmsNoticeHEntity where  omSta = ? and  reMember = ? and  delvMobile like ?";
+			listWaveToDowns = wmOmNoticeHService.findHql(hql,"复核完成",username,"%"+searchstr+"%");
 		}else{
-			hql="from WmTmsNoticeHEntity where omSta <> ? and reMember = ? ";
-			listWaveToDowns = wmOmNoticeHService.findHql(hql,"已送货",username);
+			hql="from WmTmsNoticeHEntity where omSta = ? and reMember = ? ";
+			listWaveToDowns = wmOmNoticeHService.findHql(hql,"复核完成",username);
 
 		}
 		D0.setObj(listWaveToDowns);
@@ -554,10 +563,21 @@ public class TmsYwDingdanController extends BaseController {
         D0.setOK(true);
 		System.out.println("/list/omNoticeId"+omnoticeid );
 
-		String hql="from WmTmsNoticeIEntity  where omNoticeId = ?";
+		String hql="from WmTmsNoticeIEntity  where omNoticeId = ? order by goodsId";
         List<WmTmsNoticeIEntity> listWaveToDowns =new ArrayList<>();
         listWaveToDowns = wmOmNoticeHService.findHql(hql,omnoticeid);
-        D0.setObj(listWaveToDowns);
+        for(WmTmsNoticeIEntity t: listWaveToDowns){
+			try{
+				t.setGoodsQua( (int) Math.round(Double.parseDouble(t.getGoodsQua()))+"");
+				t.setBaseGoodscount( (int) Math.round(Double.parseDouble(t.getBaseGoodscount()))+"");
+				t.setBaseUnit("份");
+				t.setGoodsUnit("份");
+			}catch (Exception e){
+			}
+		}
+//		tout.setPiClass( (int) Math.round(Double.parseDouble(dt2.getBaseGoodscount()))  + "份");
+
+		D0.setObj(listWaveToDowns);
         try{
 			System.out.println("/listdetail/songhuolistWaveToDowns==="+listWaveToDowns.get(0).toString()+listWaveToDowns.size());
 
@@ -572,7 +592,8 @@ public class TmsYwDingdanController extends BaseController {
     @RequestMapping(value = "/update/songhuo",  method = RequestMethod.GET)   //总订单
     @ResponseBody
     public ResponseEntity<?> updatesonghuo(
-            @RequestParam(value="omnoticeid", required=false)String omnoticeid) {
+            @RequestParam(value="omnoticeid", required=false)String omnoticeid,
+			@RequestParam(value="remark", required=false)String remark) {
         ResultDO D0 = new  ResultDO();
         D0.setOK(true);
         String hql="from WmTmsNoticeHEntity  where  omNoticeId = ?";
@@ -616,13 +637,51 @@ public class TmsYwDingdanController extends BaseController {
 			, HttpServletRequest request) {
 
 		try{
+            String hqlom = "from WmTmsNoticeHEntity where omBeizhu = ?";
+            List<WmTmsNoticeHEntity> listom = systemService.findHql(hqlom,username);
+            String sji = "siji";
+            String orderstatus = "";
 
+            try{
+				orderstatus = listom.get(0).getOmSta();
+			}catch (Exception e){
+
+			}
+			try{
+				String hqlomh = "from WmOmNoticeHEntity where piClass like '%" +username+
+						"%'";
+				List<WmOmNoticeHEntity> listomh = systemService.findHql(hqlomh);
+				if(StringUtil.isNotEmpty(orderstatus)){
+					orderstatus = orderstatus+"-"+listomh.get(0).getOmSta();
+
+				}else{
+					orderstatus =  listomh.get(0).getOmSta();
+
+				}
+			}catch (Exception e){
+
+			}
+            try{
+				sji = listom.get(0).getReMember();
+			}catch (Exception e){
+
+			}
 			String hql = "from RfidBuseEntity where rfidId1 = ? order by createDate desc";
-			List<RfidBuseEntity> lista = systemService.findHql(hql,username);
+			List<RfidBuseEntity> lista = systemService.findHql(hql,sji);
 			if(lista!=null&&lista.size()>0){
-				return Result.success(lista.get(0));
+				RfidBuseEntity out = lista.get(0);
+				try{
+
+					TmsMdCheliangEntity tmsMdCheliangEntity = systemService.findUniqueByProperty(TmsMdCheliangEntity.class,"username",sji);
+					out.setRfidBuseno(tmsMdCheliangEntity.getZhuangtai());
+					out.setRfidBusecont(tmsMdCheliangEntity.getBeizhu());
+					out.setRfidType(orderstatus);
+				}catch (Exception e){
+
+				}
+				return Result.success(out);
 			}else{
-				return Result.error("暂无司机位置");
+				return Result.error(orderstatus+"-暂无司机位置");
 
 			}
 
@@ -725,7 +784,7 @@ public class TmsYwDingdanController extends BaseController {
 		try{
 			tmsYwDingdan.setZhuangtai("已装车");
 			tmsYwDingdanService.updateEntitie(tmsYwDingdan);
-			systemService.addLog(message, Globals.Log_Type_DEL, Globals.Log_Leavel_INFO);
+//			systemService.addLog(message, Globals.Log_Type_DEL, Globals.Log_Leavel_INFuO);
 		}catch(Exception e){
 			e.printStackTrace();
 			message = "运输订单取消回单失败";

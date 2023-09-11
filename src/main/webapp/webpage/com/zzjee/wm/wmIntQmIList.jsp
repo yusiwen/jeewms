@@ -36,7 +36,7 @@
     <t:dgCol title="基本单位数量"  field="baseGoodscount"    queryMode="single"  width="50"></t:dgCol>
     <t:dgCol title="货主"  field="cusCode"  query="true"  queryMode="single" dictionary="mv_cus,cus_code,cus_name"  width="180"></t:dgCol>
     <t:dgCol title="是否已上架"  field="binSta"  query="true"  queryMode="single" dictionary="sf_yn" width="120"></t:dgCol>
-    
+
 <%--    <t:dgDelOpt title="删除" url="wmInQmIController.do?doDel&id={id}" urlclass="ace_button"  urlfont="fa-trash-o"/> --%>
    <t:dgFunOpt title="上架" funname="wmtoup(id)"  urlclass="ace_button"   exp="binSta#ne#Y"/>
 
@@ -50,11 +50,11 @@
   </t:datagrid>
   </div>
  </div>
- <script src = "webpage/com/zzjee/wm/wmInQmIList.js"></script>		
+ <script src = "webpage/com/zzjee/wm/wmInQmIList.js"></script>
  <script type="text/javascript">
  $(document).ready(function(){
  });
- 
+
  function wmtoup(id){
 		var url = "wmInQmIController.do?dotoup&id="+id;
 		$.ajax({
@@ -69,14 +69,14 @@
 				if (d.success) {
 					tip("上架成功");
 			        $('#wmInQmIList').datagrid('reload',{});
-				}		
+				}
 			}
 		});
 	}
- 
+
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'wmInQmIController.do?upload', "wmInQmIList");
+	openwindow('Excel导入', 'wmInQmIController.do?upload', "wmInQmIList");
 }
 
 //导出

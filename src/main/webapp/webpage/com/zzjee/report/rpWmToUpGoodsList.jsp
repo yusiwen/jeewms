@@ -32,16 +32,16 @@
   </t:datagrid>
   </div>
  </div>
- <script src = "webpage/com/zzjee/report/rpWmToUpGoodsList.js"></script>		
+ <script src = "webpage/com/zzjee/report/rpWmToUpGoodsList.js"></script>
  <script type="text/javascript">
  $(document).ready(function(){
  });
- 
-   
- 
+
+
+
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'rpWmToUpGoodsController.do?upload', "rpWmToUpGoodsList");
+	openwindow('Excel导入', 'rpWmToUpGoodsController.do?upload', "rpWmToUpGoodsList");
 }
 
 //导出

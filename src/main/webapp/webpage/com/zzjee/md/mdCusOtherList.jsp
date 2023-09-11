@@ -59,55 +59,25 @@
     <%--<t:dgCol title="电话1"  field="dianHua1"    queryMode="group"  width="120"></t:dgCol>--%>
    <t:dgCol title="操作" field="opt" width="100"></t:dgCol>
    <t:dgDelOpt title="删除" url="mdCusOtherController.do?doDel&id={id}" urlclass="ace_button"  urlfont="fa-trash-o"/>
-   <t:dgToolBar title="录入" icon="icon-add" url="mdCusOtherController.do?goAdd" funname="add"></t:dgToolBar>
-   <t:dgToolBar title="编辑" icon="icon-edit" url="mdCusOtherController.do?goUpdate" funname="update"></t:dgToolBar>
+   <t:dgToolBar title="录入" width="700" icon="icon-add" url="mdCusOtherController.do?goAdd" funname="add"></t:dgToolBar>
+   <t:dgToolBar title="编辑" width="700"  icon="icon-edit" url="mdCusOtherController.do?goUpdate" funname="update"></t:dgToolBar>
    <t:dgToolBar title="批量删除"  icon="icon-remove" url="mdCusOtherController.do?doBatchDel" funname="deleteALLSelect"></t:dgToolBar>
-   <t:dgToolBar title="查看" icon="icon-search" url="mdCusOtherController.do?goUpdate" funname="detail"></t:dgToolBar>
+   <t:dgToolBar title="查看" width="700"  icon="icon-search" url="mdCusOtherController.do?goUpdate" funname="detail"></t:dgToolBar>
    <t:dgToolBar title="导入" icon="icon-put" funname="ImportXls"></t:dgToolBar>
-    <t:dgToolBar operationCode="uasimpcus" title="第三方系统导入" icon="icon-put" funname="otherimp"></t:dgToolBar>
-
     <t:dgToolBar title="导出" icon="icon-putout" funname="ExportXls"></t:dgToolBar>
    <t:dgToolBar title="模板下载" icon="icon-putout" funname="ExportXlsByT"></t:dgToolBar>
   </t:datagrid>
-    <div name="searchColums1" style="float: left; padding-left: 0px;padding-top: 5px;">
-      <%--<input type="text" name="batchbin" style="width: 100px; height: 30px;">--%>
-      日期：<input type="text" name="batchdate"    class="form-control" onClick="WdatePicker()" style="width: 100px; height: 30px;">
 
-    </div>
   </div>
  </div>
- <script src = "webpage/com/zzjee/md/mdCusOtherList.js"></script>		
+ <script src = "webpage/com/zzjee/md/mdCusOtherList.js"></script>
  <script type="text/javascript">
  $(document).ready(function(){
  });
- function  otherimp() {
-     var batchdate;
-     batchdate = $('input[name="batchdate"]').attr("value");
 
-         var url = "mdCusOtherController.do?doGet&formDate="+batchdate;
-         $.ajax({
-             async : false,
-             cache : false,
-             type : 'POST',
-             url : url,// 请求的action路径
-             error : function() {// 请求失败处理函数
-             },
-             success : function(data) {
-                 var d = $.parseJSON(data);
-                 if (d.success) {
-
-                 }
-             }
-         });
-         tip("获取成功");
-         $('#mdCusOtherList').datagrid('reload',{});
-
- }
-   
- 
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'mdCusOtherController.do?upload', "mdCusOtherList");
+	openwindow('Excel导入', 'mdCusOtherController.do?upload', "mdCusOtherList");
 }
 
 //导出

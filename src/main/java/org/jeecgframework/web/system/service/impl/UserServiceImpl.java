@@ -30,21 +30,26 @@ import org.springframework.transaction.annotation.Transactional;
 @Service("userService")
 @Transactional
 public class UserServiceImpl extends CommonServiceImpl implements UserService {
-	public TSUser checkUserExits(String username,String password){
+	@Override
+    public TSUser checkUserExits(String username, String password){
 		return this.commonDao.findUserByAccountAndPassword(username,password);
 	}
-	public TSUser checkUserExits(TSUser user){
+	@Override
+    public TSUser checkUserExits(TSUser user){
 		return this.commonDao.getUserByUserIdAndUserNameExits(user);
 	}
-	public String getUserRole(TSUser user){
+	@Override
+    public String getUserRole(TSUser user){
 		return this.commonDao.getUserRole(user);
 	}
 	
-	public void pwdInit(TSUser user,String newPwd) {
+	@Override
+    public void pwdInit(TSUser user, String newPwd) {
 			this.commonDao.pwdInit(user,newPwd);
 	}
 	
-	public int getUsersOfThisRole(String id) {
+	@Override
+    public int getUsersOfThisRole(String id) {
 		Criteria criteria = getSession().createCriteria(TSRoleUser.class);
 		criteria.add(Restrictions.eq("TSRole.id", id));
 		int allCounts = ((Long) criteria.setProjection(

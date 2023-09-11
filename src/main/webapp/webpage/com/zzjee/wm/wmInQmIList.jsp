@@ -26,7 +26,7 @@
    <t:dgCol title="到货数量"  field="imQuat"    queryMode="single"  width="80"></t:dgCol>
     <t:dgCol title="数量"  field="qmOkQuat"    queryMode="single"  width="80"></t:dgCol>
     <t:dgCol title="备注"  field="itemText"    queryMode="single"  width="50"></t:dgCol>
-    <t:dgCol title="温度"  field="recDeg"  hidden="true" queryMode="single"  width="120"></t:dgCol>
+    <t:dgCol title="温度"  field="recDeg"    queryMode="single"  width="120"></t:dgCol>
     <t:dgCol title="生产日期"  field="proData" formatter="yyyy-MM-dd"   queryMode="group"  width="120"></t:dgCol>
     <t:dgCol title="托盘"  field="tinId"  query="true"  queryMode="single"  width="80"></t:dgCol>
     <t:dgCol title="单位"  field="goodsUnit"    queryMode="single"  width="50"></t:dgCol>
@@ -36,6 +36,8 @@
     <t:dgCol title="重量"  field="tinZhl"    queryMode="single"  width="50"></t:dgCol>
     <t:dgCol title="基本单位"  field="baseUnit"  queryMode="single"  width="50"></t:dgCol>
     <t:dgCol title="基本单位数量"  field="baseGoodscount"    queryMode="single"  width="50"></t:dgCol>
+    <t:dgCol title="数量1"  field="baseInGoodscount"    queryMode="single"  width="50"></t:dgCol>
+    <t:dgCol title="数量2"  field="baseOutGoodscount"    queryMode="single"  width="50"></t:dgCol>
     <t:dgCol title="货主"  field="cusCode"  query="true"  queryMode="single" dictionary="mv_cus,cus_code,cus_name"  width="180"></t:dgCol>
     <t:dgCol title="是否已上架"  field="binSta"  query="true"  queryMode="single" dictionary="sf_yn" width="120"></t:dgCol>
 
@@ -77,7 +79,7 @@
  $(document).ready(function(){
  });
 
- 
+
  function batchupdatepro() {
      var batchdate;
      batchdate = $('input[name="batchdate"]').attr("value");
@@ -111,7 +113,7 @@
 
      }
  }
- 
+
  function  batchupbin() {
      var rows = $('#wmInQmIList').datagrid('getSelections');
      if(rows.length > 0){
@@ -185,7 +187,7 @@ function batchupdate() {
 				if (d.success) {
 					tip("上架成功");
 			        $('#wmInQmIList').datagrid('reload',{});
-				}		
+				}
 			}
 		});
 	}
@@ -194,7 +196,7 @@ function batchupdate() {
 
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'wmInQmIController.do?upload', "wmInQmIList");
+	openwindow('Excel导入', 'wmInQmIController.do?upload', "wmInQmIList");
 }
 
 //导出

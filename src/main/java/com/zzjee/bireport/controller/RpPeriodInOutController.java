@@ -1,6 +1,7 @@
 package com.zzjee.bireport.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -64,7 +65,6 @@ public class RpPeriodInOutController extends BaseController {
      * @param request
      * @param response
      * @param dataGrid
-     * @param user
      */
 
     @RequestMapping(params = "datagrid")
@@ -77,6 +77,7 @@ public class RpPeriodInOutController extends BaseController {
             //自定义追加查询条件
             String query_datePeriod_begin = request.getParameter("createDate1_begin");
             String query_datePeriod_end = request.getParameter("createDate1_end");
+            System.out.println("query_datePeriod_begin:"+query_datePeriod_begin+" query_datePeriod_end:"+query_datePeriod_end);
             try {
                 if (!StringUtil.isNotEmpty(query_datePeriod_begin)) {
                     query_datePeriod_begin = "2018-01-01";
@@ -86,6 +87,7 @@ public class RpPeriodInOutController extends BaseController {
                 }
                 wmUtil.genrp(query_datePeriod_begin, query_datePeriod_end, ResourceUtil.getSessionUserName().getUserName());
             } catch (Exception e) {
+                e.printStackTrace();
             }
             rpPeriodInOut.setCreateDate(null);
             org.jeecgframework.core.extend.hqlsearch.HqlGenerateUtil.installHql(cq, rpPeriodInOut, request.getParameterMap());

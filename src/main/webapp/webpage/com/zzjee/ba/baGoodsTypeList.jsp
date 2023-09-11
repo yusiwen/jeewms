@@ -36,7 +36,7 @@
 
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'baGoodsTypeController.do?upload', "baGoodsTypeList");
+	openwindow('Excel导入', 'baGoodsTypeController.do?upload', "baGoodsTypeList");
 }
 
 //导出

@@ -39,16 +39,16 @@
   </t:datagrid>
   </div>
  </div>
- <script src = "webpage/com/zzjee/conf/wxConfigList.js"></script>		
+ <script src = "webpage/com/zzjee/conf/wxConfigList.js"></script>
  <script type="text/javascript">
  $(document).ready(function(){
  });
- 
-   
- 
+
+
+
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'wxConfigController.do?upload', "wxConfigList");
+	openwindow('Excel导入', 'wxConfigController.do?upload', "wxConfigList");
 }
 
 //导出

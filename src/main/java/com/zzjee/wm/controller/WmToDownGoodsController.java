@@ -17,6 +17,7 @@ import com.zzjee.wmapi.entity.WvGiNoticeEntity;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.log4j.Logger;
 import org.jeecgframework.core.util.*;
+import org.jeecgframework.web.system.pojo.base.TSBaseUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -61,6 +62,7 @@ import org.springframework.http.MediaType;
 import org.springframework.web.util.UriComponentsBuilder;
 
 import static com.xiaoleilu.hutool.date.DateTime.now;
+import static org.jeecgframework.web.system.sms.util.Constants.wm_sta6;
 
 /**
  * @Title: Controller
@@ -294,6 +296,13 @@ public class WmToDownGoodsController extends BaseController {
 		try {
 			t.setDownSta(Constants.wm_sta5);//直接修改状态
 			wmToDownGoodsService.saveOrUpdate(t);
+			try{
+				String orderId = t.getOrderId();
+				String type = "fh";
+				String username = ResourceUtil.getSessionUserName().getRealName();
+				updateUser(orderId,type,username);
+			}catch (Exception e){
+			}
 			systemService.addLog(message, Globals.Log_Type_UPDATE,
 					Globals.Log_Leavel_INFO);
 		} catch (Exception e) {
@@ -325,6 +334,13 @@ public class WmToDownGoodsController extends BaseController {
 					try {
 						MyBeanUtils.copyBeanNotNull2Bean(jeecgDemo, t);
 						systemService.saveOrUpdate(t);
+						try{
+							String orderId = t.getOrderId();
+							String type = "fh";
+							String username = ResourceUtil.getSessionUserName().getRealName();
+							updateUser(orderId,type,username);
+						}catch (Exception e){
+						}
 					} catch (Exception e) {
 						e.printStackTrace();
 					}
@@ -354,6 +370,15 @@ public class WmToDownGoodsController extends BaseController {
 						MyBeanUtils.copyBeanNotNull2Bean(jeecgDemo, t);
 						t.setDownSta(Constants.wm_sta5);
 						systemService.saveOrUpdate(t);
+
+						try{
+							String orderId = t.getOrderId();
+							String type = "fh";
+							String username = ResourceUtil.getSessionUserName().getRealName();
+							updateUser(orderId,type,username);
+						}catch (Exception e){
+						}
+
 						systemService.addLog(message, Globals.Log_Type_UPDATE, Globals.Log_Leavel_INFO);
 					} catch (Exception e) {
 						e.printStackTrace();
@@ -703,7 +728,7 @@ public class WmToDownGoodsController extends BaseController {
 	//下架
 	@RequestMapping(method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public ResponseEntity<?> create(@RequestParam String wmToDownGoodsstr,
+	public synchronized ResponseEntity<?> create(@RequestParam String wmToDownGoodsstr,
 			UriComponentsBuilder uriBuilder) {
 		ResultDO D0 = new  ResultDO();
 		WmToDownGoodsEntity wmToDownGoods  = (WmToDownGoodsEntity)JSONHelper.json2Object(wmToDownGoodsstr,WmToDownGoodsEntity.class);
@@ -728,44 +753,15 @@ public class WmToDownGoodsController extends BaseController {
 		}
 
 
-       try{
-		    t = systemService.get(WvGiNoticeEntity.class,wmToDownGoods.getOrderIdI());
-		   if(t!=null&&StringUtil.isEmpty(wmToDownGoods.getBinIdFrom())){
-		   	wmToDownGoods.setGoodsName(t.getShpMingCheng());
-			   wmToDownGoods.setBinIdFrom(t.getTinId());
-		   }
-	   }catch (Exception e){
 
-	   }
 		// 保存
 		try {
-			wmToDownGoods.setCreateDate(DateUtils.getDate());
-			if(wmUtil.checkstcokk(wmToDownGoods.getCusCode(),wmToDownGoods.getKuWeiBianMa(),wmToDownGoods.getBinIdFrom(),wmToDownGoods.getGoodsId(),wmToDownGoods.getGoodsProData(),wmToDownGoods.getBaseGoodscount()))
-			{
-				WmOmQmIEntity wmOmQmIEntity = systemService.get(WmOmQmIEntity.class,t.getId());
-				wmToDownGoods.setImCusCode(wmOmQmIEntity.getImCusCode());
-				wmToDownGoods.setOmBeizhu(wmOmQmIEntity.getOmBeizhu());
-
-				try{
-					List<WmToDownGoodsEntity> wmToDownGoodslist1 = systemService.findByProperty(WmToDownGoodsEntity.class,"orderIdI",wmToDownGoods.getOrderIdI());
-					if (wmToDownGoodslist1!=null&&wmToDownGoodslist1.size()>0){
-						D0.setOK(false);
-						D0.setErrorMsg("重复保存");
-
-						return new ResponseEntity(D0,HttpStatus.OK);
-					}
-				}catch (Exception e){
-
-				}
-
-
-				wmToDownGoodsService.save(wmToDownGoods);
-				D0.setOK(true);
-			}else{
-				D0.setOK(false);
-				D0.setErrorMsg("库存不足");
-			};
-
+			//查询create_name
+			TSBaseUser user = systemService.findUniqueByProperty(TSBaseUser.class, "userName", wmToDownGoods.getCreateBy());
+			if (user != null) {
+				wmToDownGoods.setCreateName(user.getRealName());
+			}
+  			todown(wmToDownGoods.getOrderIdI(),wmToDownGoods.getCreateBy(),wmToDownGoods.getCreateName());
 		} catch (Exception e) {
 			e.printStackTrace();
 			D0.setOK(false);
@@ -776,14 +772,59 @@ public class WmToDownGoodsController extends BaseController {
 
 //		return new ResponseEntity(headers, HttpStatus.CREATED);
 	}
+
+
+	public boolean todown(String id,String username,String realname){
+		try {
+			WmOmQmIEntity wmOmQmI = systemService.getEntity(
+					WmOmQmIEntity.class, id);
+			if (wmOmQmI != null&&wmOmQmI.getBinSta().equals("N")) {
+				WmToDownGoodsEntity wmToDownGoods = new WmToDownGoodsEntity();
+				wmToDownGoods.setCreateBy(username);
+				wmToDownGoods.setCreateName(realname);
+				wmToDownGoods.setCreateDate(now());
+				wmToDownGoods.setBinIdFrom(wmOmQmI.getTinId());//下架托盘
+				wmToDownGoods.setKuWeiBianMa(wmOmQmI.getBinId());//储位
+				wmToDownGoods.setBinIdTo(wmOmQmI.getOmNoticeId());//到托盘
+				wmToDownGoods.setCusCode(wmOmQmI.getCusCode());//货主
+				wmToDownGoods.setGoodsId(wmOmQmI.getGoodsId());//
+				wmToDownGoods.setGoodsProData(wmOmQmI.getProData());//生产日期
+				wmToDownGoods.setOrderId(wmOmQmI.getOmNoticeId());//出货通知单
+				wmToDownGoods.setOrderIdI(wmOmQmI.getId());//出货通知项目
+				wmToDownGoods.setBaseUnit(wmOmQmI.getBaseUnit());//基本单位
+				wmToDownGoods.setBaseGoodscount(wmOmQmI.getBaseGoodscount());//基本单位数量
+				wmToDownGoods.setGoodsUnit(wmOmQmI.getGoodsUnit());//出货单位
+				wmToDownGoods.setGoodsQua(wmOmQmI.getQmOkQuat());//出货数量
+				wmToDownGoods.setGoodsQuaok(wmOmQmI.getQmOkQuat());//出货数量
+				wmToDownGoods.setGoodsName(wmOmQmI.getGoodsName());//商品名称
+				wmToDownGoods.setOmBeizhu(wmOmQmI.getOmBeizhu());//备注
+				wmToDownGoods.setImCusCode(wmOmQmI.getImCusCode());//客户单号
+				wmToDownGoods.setOrderType("01");//默认为01
+				systemService.save(wmToDownGoods);
+				wmOmQmI.setBinSta("Y");
+				systemService.saveOrUpdate(wmOmQmI);
+				try{
+					String orderId = wmOmQmI.getOmNoticeId();
+					String type = "jh";
+ 					updateUser(orderId,type,username);
+				}catch (Exception e){
+				}
+				return true;
+			} else {
+				return false;
+			}
+		} catch (Exception e) {
+			return false;
+		}
+	}
+
 	//装车复核
 	@RequestMapping(value = "/change", method = RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
 	@ResponseBody
-	public ResponseEntity<?> update(@RequestParam String wmToDownGoodsstr,
+	public  ResponseEntity<?> update(@RequestParam String wmToDownGoodsstr,
 									UriComponentsBuilder uriBuilder) {
 		// 调用JSR303 Bean Validator进行校验，如果出错返回含400错误码及json格式的错误信息.
 		ResultDO D0 = new  ResultDO();
-
 		WmToDownGoodsEntity wmToDownGoods  = (WmToDownGoodsEntity)JSONHelper.json2Object(wmToDownGoodsstr,WmToDownGoodsEntity.class);
 		WmToDownGoodsEntity t = wmToDownGoodsService.get(WmToDownGoodsEntity.class,wmToDownGoods.getId());
 		// 保存
@@ -792,16 +833,38 @@ public class WmToDownGoodsController extends BaseController {
 			t.setDownSta(Constants.wm_sta5);
 			t.setUpdateDate(now());
 			wmToDownGoodsService.saveOrUpdate(t);
+			try{
+				String orderId = t.getOrderId();
+				String type = "fh";
+				String username = wmToDownGoods.getUpdateBy();
+				updateUser(orderId,type,username);
+			}catch (Exception e){
+			}
+
 			D0.setOK(true);
 		} catch (Exception e) {
 			e.printStackTrace();
 			D0.setOK(false);
 		}
-
 		// 按Restful约定，返回204状态码, 无内容. 也可以返回200状态码.
 		return new ResponseEntity(D0, HttpStatus.OK);
 	}
+	void  updateUser(String orderId,String type,String userName){
+		try{
+			WmOmNoticeHEntity wmOmNoticeHEntity = systemService.findUniqueByProperty(WmOmNoticeHEntity.class,"omNoticeId",orderId);
+			if ("jh".equals(type)){
+				wmOmNoticeHEntity.setJhUser(userName);
+			}
+			if ("fh".equals(type)){
+				wmOmNoticeHEntity.setFhUser(userName);
+				wmOmNoticeHEntity.setOmSta(wm_sta6);
+			}
+			systemService.updateEntitie(wmOmNoticeHEntity);
+		}catch (Exception e){
 
+		}
+
+	}
 	@RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
 	@ResponseStatus(HttpStatus.NO_CONTENT)
 	public void delete(@PathVariable("id") String id) {

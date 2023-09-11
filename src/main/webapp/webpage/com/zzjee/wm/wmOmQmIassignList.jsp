@@ -132,11 +132,14 @@
              for(var i=0; i<rows.length; i++){
                  ids.push(rows[i].id);
              }
-             var url = "wmOmQmIController.do?doassignwave&ids="+ids+"&firstrongqi="+firstrongqi;
+             var url = "wmOmQmIController.do?doassignwave"+"&firstrongqi="+firstrongqi;
              $.ajax({
                  async : true,
                  cache : false,
                  type : 'POST',
+                 data : {
+                     ids : ids.join(',')
+                 },
                  url : url,// 请求的action路径
                  error : function() {// 请求失败处理函数
                  },
@@ -159,11 +162,14 @@
 	 for(var i=0; i<rows.length; i++){
 			 	ids.push(rows[i].id);
 	 }
-		var url = "wmOmQmIController.do?doassignwave&ids="+ids;
+		var url = "wmOmQmIController.do?doassignwave";
 		$.ajax({
 			async : true,
 			cache : false,
 			type : 'POST',
+            data : {
+                ids : ids.join(',')
+            },
 			url : url,// 请求的action路径
 			error : function() {// 请求失败处理函数
 			},
@@ -223,7 +229,7 @@
 			success : function(data) {
 				 var d = $.parseJSON(data);
 				if (d.success) {
-					tip("添加到下架任务清单成功");
+					tip(data.msg);
 			        $('#wmOmQmIList').datagrid('reload',{});
 				}
 			}
@@ -242,7 +248,7 @@
 			success : function(data) {
 				 var d = $.parseJSON(data);
 				if (d.success) {
-					tip("添加到下架任务清单成功");
+					tip(d.msg);
 			        $('#wmOmQmIList').datagrid('reload',{});
                     windows.open("http://192.168.0.102:9080/fxj-boot/fxj/base/getxiajia");
 
@@ -334,7 +340,7 @@
  }
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'wmOmQmIController.do?upload', "wmOmQmIList");
+	openwindow('Excel导入', 'wmOmQmIController.do?upload', "wmOmQmIList");
 }
 
 //导出

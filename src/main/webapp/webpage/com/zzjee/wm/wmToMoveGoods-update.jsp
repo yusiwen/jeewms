@@ -12,10 +12,10 @@
   <link rel="stylesheet" href="online/template/ledefault/css/bootstrap-theme.css">
   <link rel="stylesheet" href="online/template/ledefault/css/bootstrap.css">
   <link rel="stylesheet" href="online/template/ledefault/css/app.css">
-  
+
   <link rel="stylesheet" href="plug-in/Validform/css/metrole/style.css" type="text/css"/>
   <link rel="stylesheet" href="plug-in/Validform/css/metrole/tablefrom.css" type="text/css"/>
-  
+
   <script type="text/javascript" src="plug-in/jquery/jquery-1.8.3.js"></script>
   <script type="text/javascript" src="plug-in/tools/dataformat.js"></script>
   <script type="text/javascript" src="plug-in/easyui/jquery.easyui.min.1.3.2.js"></script>
@@ -40,8 +40,8 @@
 	<t:formvalid formid="formobj" dialog="true" usePlugin="password" layout="table" action="wmToMoveGoodsController.do?doUpdate" tiptype="1" >
 			<input type="hidden" id="btn_sub" class="btn_sub"/>
 			<input type="hidden" name="id" value='${wmToMoveGoodsPage.id}' >
-			
-			
+
+
 			<div class="tab-wrapper">
 			    <!-- tab -->
 			    <ul class="nav nav-tabs">
@@ -62,8 +62,8 @@
 						<label class="Validform_label" style="display: none">商品编码</label>
 			          </div>
 						</div>
-			          
-			        
+
+
 							<div class="row show-grid">
 			          <div class="col-xs-3 text-center">
 			          	<b>商品名称：</b>
@@ -76,8 +76,8 @@
 						<label class="Validform_label" style="display: none">商品名称</label>
 			          </div>
 						</div>
-			          
-			        
+
+
 							<div class="row show-grid">
 			          <div class="col-xs-3 text-center">
 			          	<b>现有数量：</b>
@@ -89,8 +89,7 @@
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
 						<label class="Validform_label" style="display: none">数量</label>
 			          </div>
-						</div>
-					  <div class="row show-grid">
+
 						  <div class="col-xs-3 text-center">
 							  <b>移动数量：</b>
 						  </div>
@@ -102,7 +101,7 @@
 							  <label class="Validform_label" style="display: none">移动数量</label>
 						  </div>
 					  </div>
-			        
+
 							<div class="row show-grid">
 			          <div class="col-xs-3 text-center">
 			          	<b>生产日期：</b>
@@ -125,8 +124,8 @@
 									<label class="Validform_label" style="display: none">到生产日期</label>
 								</div>
 						</div>
-			          
-			        
+
+
 							<div class="row show-grid">
 			          <div class="col-xs-3 text-center">
 			          	<b>单位：</b>
@@ -139,8 +138,8 @@
 						<label class="Validform_label" style="display: none">单位</label>
 			          </div>
 						</div>
-			          
-			        
+
+
 							<div class="row show-grid">
 			          <div class="col-xs-3 text-center">
 			          	<b>货主编码：</b>
@@ -152,9 +151,21 @@
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
 						<label class="Validform_label" style="display: none">货主编码</label>
 			          </div>
+
+								<div class="col-xs-3 text-center">
+									<b>转移客户：</b>
+								</div>
+								<div class="col-xs-3">
+									<t:dictSelect     field="toCusCode" type="list"   extendJson="  {class:'form-control',datatype:'*',style:'width:230px'}"
+													  defaultVal="${wmToMoveGoodsPage.toCusCode}" dictTable="mv_cus" dictField="cus_code" dictText="cus_name"   hasLabel="false"  title="客户编码"></t:dictSelect>
+
+									<span class="Validform_checktip" style="float:left;height:0px;"></span>
+									<label class="Validform_label" style="display: none">转移客户</label>
+								</div>
+
 						</div>
-			          
-			        
+
+
 							<div class="row show-grid">
 			          <div class="col-xs-3 text-center">
 			          	<b>货主名称：</b>
@@ -167,8 +178,8 @@
 						<label class="Validform_label" style="display: none">货主名称</label>
 			          </div>
 						</div>
-			          
-			        
+
+
 							<div class="row show-grid">
 			          <div class="col-xs-3 text-center">
 			          	<b>源托盘：</b>
@@ -180,10 +191,7 @@
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
 						<label class="Validform_label" style="display: none">源托盘</label>
 			          </div>
-						</div>
-			          
-			        
-							<div class="row show-grid">
+
 			          <div class="col-xs-3 text-center">
 			          	<b>到托盘：</b>
 			          </div>
@@ -195,8 +203,8 @@
 						<label class="Validform_label" style="display: none">到托盘</label>
 			          </div>
 						</div>
-			          
-			        
+
+
 							<div class="row show-grid">
 			          <div class="col-xs-3 text-center">
 			          	<b>源储位：</b>
@@ -208,10 +216,7 @@
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
 						<label class="Validform_label" style="display: none">源储位</label>
 			          </div>
-						</div>
-			          
-			        
-							<div class="row show-grid">
+
 			          <div class="col-xs-3 text-center">
 			          	<b>到储位：</b>
 			          </div>
@@ -223,15 +228,15 @@
 						<label class="Validform_label" style="display: none">到储位</label>
 			          </div>
 						</div>
-			          
-			        
+
+
 							<div class="row show-grid">
 			          <div class="col-xs-3 text-center">
 			          	<b>状态：</b>
 			          </div>
-			              <div class="col-xs-3">
+			              <div class="col-xs-8">
 								<t:dictSelect field="moveSta" type="radio" extendJson="{class:'form-control'}"
-								typeGroupCode="move_sta" defaultVal="${wmToMoveGoodsPage.moveSta}" hasLabel="false"  title="状态"></t:dictSelect>     
+								typeGroupCode="move_sta" defaultVal="${wmToMoveGoodsPage.moveSta}" hasLabel="false"  title="状态"></t:dictSelect>
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
 						<label class="Validform_label" style="display: none">状态</label>
 			          </div>
@@ -243,22 +248,13 @@
 <!-- 						<label class="Validform_label" style="display: none">状态</label> -->
 <!-- 			          </div> -->
 						</div>
-			          
-			        
-							<div class="row show-grid">
-			          <div class="col-xs-3 text-center">
-			          	<b>转移客户：</b>
-			          </div>
-			          <div class="col-xs-3">
-						  <t:dictSelect     field="toCusCode" type="list"   extendJson="  {class:'form-control',datatype:'*',style:'width:230px'}"
-										 defaultVal="${wmToMoveGoodsPage.toCusCode}" dictTable="mv_cus" dictField="cus_code" dictText="cus_name"   hasLabel="false"  title="客户编码"></t:dictSelect>
 
-						<span class="Validform_checktip" style="float:left;height:0px;"></span>
-						<label class="Validform_label" style="display: none">转移客户</label>
-			          </div>
-						</div>
-			          
-			        
+
+
+
+
+
+
 							<%--<div class="row show-grid">--%>
 			          <%--<div class="col-xs-3 text-center">--%>
 			          	<%--<b>转移客户名称：</b>--%>
@@ -271,10 +267,10 @@
 						<%--<label class="Validform_label" style="display: none">转移客户名称</label>--%>
 			          <%--</div>--%>
 						</div>
-			          
-			        
 
-			       
+
+
+
 			          <div class="row" id = "sub_tr" style="display: none;">
 				        <div class="col-xs-12 layout-header">
 				          <div class="col-xs-6"></div>
@@ -283,7 +279,7 @@
 				      </div>
 			     </div>
 			   </div>
-			   
+
 			   <div class="con-wrapper" id="con-wrapper2" style="display: block;"></div>
 			 </div>
   </t:formvalid>
@@ -307,11 +303,11 @@
 
   var neibuClickFlag = false;
   function neibuClick() {
-	  neibuClickFlag = true; 
+	  neibuClickFlag = true;
 	  $('#btn_sub').trigger('click');
   }
 
 </script>
  </body>
-<script src = "webpage/com/zzjee/wm/wmToMoveGoods.js"></script>		
+<script src = "webpage/com/zzjee/wm/wmToMoveGoods.js"></script>
 </html>

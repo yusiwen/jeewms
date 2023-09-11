@@ -29,10 +29,12 @@ public class TabTag extends TagSupport {
 	private boolean closable=false;//是否带关闭按钮
 	private String langArg;
 	
-	public int doStartTag() throws JspTagException {
+	@Override
+    public int doStartTag() throws JspTagException {
 		return EVAL_PAGE;
 	}
-	public int doEndTag() throws JspTagException {
+	@Override
+    public int doEndTag() throws JspTagException {
 		Tag t = findAncestorWithClass(this, TabsTag.class);
 		TabsTag parent = (TabsTag) t;
 		parent.setTab( id, title,iframe, href, icon, cache, content, width, heigth,closable);
@@ -41,7 +43,8 @@ public class TabTag extends TagSupport {
 	public void setHref(String href) {
 		this.href = href;
 	}
-	public void setId(String id) {
+	@Override
+    public void setId(String id) {
 		this.id = id;
 	}
 	public void setTitle(String title) {

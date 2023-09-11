@@ -19,22 +19,22 @@ import javax.persistence.SequenceGenerator;
 import org.jeecgframework.poi.excel.annotation.Excel;
 import org.jeecgframework.poi.excel.annotation.ExcelCollection;
 
-/**   
+/**
  * @Title: Entity
  * @Description: 预约进货抬头
  * @author erzhongxmu
  * @date 2017-09-11 15:08:34
- * @version V1.0   
+ * @version V1.0
  *
  */
 public class WmImNoticeHPage   {
 	/**主键*/
 	private java.lang.String id;
 	/**创建人名称*/
-  
+
 	private java.lang.String createName;
 	/**创建人登录名称*/
-   
+
 	private java.lang.String createBy;
 	/**创建日期*/
 
@@ -43,20 +43,20 @@ public class WmImNoticeHPage   {
 
 	private java.lang.String updateName;
 	/**更新人登录名称*/
-    
+
 	private java.lang.String updateBy;
 	/**更新日期*/
- 
+
 	private java.util.Date updateDate;
 	/**所属部门*/
 
-	
+
 	private java.lang.String readonly;
 	private java.lang.String wherecon;
-	
+
 	private java.lang.String sysOrgCode;
 	/**所属公司*/
-  
+
 	private java.lang.String sysCompanyCode;
 	/**客户编码*/
 	private java.lang.String cusCode;
@@ -91,6 +91,8 @@ public class WmImNoticeHPage   {
 	private java.lang.String piClass;
 
 	private java.lang.String piMaster;
+
+	private java.lang.String areaCode;
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  主键
@@ -407,9 +409,9 @@ public class WmImNoticeHPage   {
 		this.fuJian = fuJian;
 	}
 
-	
-	
-	
+
+
+
 	public java.lang.String getReadonly() {
 		return readonly;
 	}
@@ -458,6 +460,14 @@ public class WmImNoticeHPage   {
 		this.piMaster = piMaster;
 	}
 
+	public String getAreaCode() {
+		return areaCode;
+	}
+
+	public WmImNoticeHPage setAreaCode(String areaCode) {
+		this.areaCode = areaCode;
+		return this;
+	}
 
 	private List<WmImNoticeIEntity> wmImNoticeIList = new ArrayList<WmImNoticeIEntity>();
 		public List<WmImNoticeIEntity> getWmImNoticeIList() {

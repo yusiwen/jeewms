@@ -47,7 +47,8 @@ public class QueryCondition {
 	public void setRelation(String relation) {
 		this.relation = relation;
 	}
-	public String toString(){
+	@Override
+    public String toString(){
 		StringBuffer sb =new StringBuffer();
 		sb.append(this.relation).append(" ");
 		sb.append(this.field).append(" ")

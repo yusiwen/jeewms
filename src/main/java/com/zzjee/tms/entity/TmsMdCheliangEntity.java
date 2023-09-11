@@ -6,12 +6,12 @@ import org.jeecgframework.poi.excel.annotation.Excel;
 import javax.persistence.*;
 import java.util.Date;
 
-/**   
+/**
  * @Title: Entity
  * @Description: 车辆管理
  * @author onlineGenerator
  * @date 2018-01-29 21:57:07
- * @version V1.0   
+ * @version V1.0
  *
  */
 @Entity
@@ -39,7 +39,7 @@ public class TmsMdCheliangEntity implements java.io.Serializable {
 	/**流程状态*/
 	private String bpmStatus;
 	/**车牌号*/
-    @Excel(name="车牌号",width=15)
+    @Excel(name="车号",width=15)
 	private String chepaihao;
 	/**车型*/
     @Excel(name="车型",width=15)
@@ -57,16 +57,16 @@ public class TmsMdCheliangEntity implements java.io.Serializable {
     @Excel(name="准假驾照",width=15)
 	private String jiazhao;
 	/**是否可用*/
-    @Excel(name="是否可用",width=15,dicCode="sf_yn")
+    @Excel(name="姓名",width=15)
 	private String zhuangtai;
 	/**备注*/
-    @Excel(name="备注",width=15)
+    @Excel(name="电话",width=15)
 	private String beizhu;
 	/**默认司机*/
     @Excel(name="默认司机",width=15)
 	private String username;
 	/**gps*/
-    @Excel(name="gps",width=15)
+    @Excel(name="车牌号",width=15)
 	private String gpsid;
 	@Excel(name="区域",width=15)
 	private java.lang.String quyu;

@@ -50,7 +50,6 @@ import org.springframework.web.util.UriComponentsBuilder;
 
 import com.zzjee.md.entity.MdSupEntity;
 import com.zzjee.md.service.MdSupServiceI;
-import com.zzjee.wmutil.wmIntUtil;
 
 /**
  * @Title: Controller
@@ -78,17 +77,21 @@ public class MdSupController extends BaseController {
 
 	/**
 	 * 供应商列表 页面跳转
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "list")
 	public ModelAndView list(HttpServletRequest request) {
 		return new ModelAndView("com/zzjee/md/mdSupList");
 	}
+	@RequestMapping(params = "listsel")
+	public ModelAndView listsel(HttpServletRequest request) {
+		return new ModelAndView("com/zzjee/md/mdSupselList");
+	}
 
 	/**
 	 * easyui AJAX请求数据
-	 * 
+	 *
 	 * @param request
 	 * @param response
 	 * @param dataGrid
@@ -114,7 +117,7 @@ public class MdSupController extends BaseController {
 
 	/**
 	 * 删除供应商
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "doDel")
@@ -139,7 +142,7 @@ public class MdSupController extends BaseController {
 
 	/**
 	 * 批量删除供应商
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "doBatchDel")
@@ -167,7 +170,7 @@ public class MdSupController extends BaseController {
 
 	/**
 	 * 添加供应商
-	 * 
+	 *
 	 * @param ids
 	 * @return
 	 */
@@ -197,31 +200,10 @@ public class MdSupController extends BaseController {
 		j.setMsg(message);
 		return j;
 	}
-	@RequestMapping(params = "doGet")
-	@ResponseBody
-	public AjaxJson dogetfromother(String formDate, HttpServletRequest request) {
-		String message = null;
-		AjaxJson j = new AjaxJson();
-		message = "商品信息读取成功";
 
-		try {
-			if(StringUtil.isEmpty(formDate)){
-				formDate = "2011-01-01";
-			}
-			wmIntUtil.getSup(formDate);
-			systemService.addLog(message, Globals.Log_Type_UPDATE,
-					Globals.Log_Leavel_INFO);
-		} catch (Exception e) {
-			e.printStackTrace();
-			message = "商品信息读取失败";
-			throw new BusinessException(e.getMessage());
-		}
-		j.setMsg(message);
-		return j;
-	}
 	/**
 	 * 更新供应商
-	 * 
+	 *
 	 * @param ids
 	 * @return
 	 */
@@ -248,7 +230,7 @@ public class MdSupController extends BaseController {
 
 	/**
 	 * 供应商新增页面跳转
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "goAdd")
@@ -262,7 +244,7 @@ public class MdSupController extends BaseController {
 
 	/**
 	 * 供应商编辑页面跳转
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "goUpdate")
@@ -276,7 +258,7 @@ public class MdSupController extends BaseController {
 
 	/**
 	 * 导入功能跳转
-	 * 
+	 *
 	 * @return
 	 */
 	@RequestMapping(params = "upload")
@@ -287,7 +269,7 @@ public class MdSupController extends BaseController {
 
 	/**
 	 * 导出excel
-	 * 
+	 *
 	 * @param request
 	 * @param response
 	 */
@@ -310,7 +292,7 @@ public class MdSupController extends BaseController {
 
 	/**
 	 * 导出excel 使模板
-	 * 
+	 *
 	 * @param request
 	 * @param response
 	 */

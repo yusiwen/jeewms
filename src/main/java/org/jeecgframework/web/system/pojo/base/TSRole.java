@@ -13,6 +13,8 @@ import org.hibernate.annotations.GenericGenerator;
 import org.jeecgframework.core.common.entity.IdEntity;
 import org.jeecgframework.poi.excel.annotation.Excel;
 
+import java.util.Random;
+
 /**
  * 角色表
  *  @author  admin

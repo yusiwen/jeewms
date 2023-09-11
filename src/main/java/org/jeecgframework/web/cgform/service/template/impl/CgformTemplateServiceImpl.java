@@ -15,20 +15,23 @@ import java.util.UUID;
 public class CgformTemplateServiceImpl extends CommonServiceImpl implements CgformTemplateServiceI {
 
 	
- 	public <T> void delete(T entity) {
+ 	@Override
+    public <T> void delete(T entity) {
  		super.delete(entity);
  		//执行删除操作配置的sql增强
 		this.doDelSql((CgformTemplateEntity)entity);
  	}
  	
- 	public <T> Serializable save(T entity) {
+ 	@Override
+    public <T> Serializable save(T entity) {
  		Serializable t = super.save(entity);
  		//执行新增操作配置的sql增强
  		this.doAddSql((CgformTemplateEntity)entity);
  		return t;
  	}
  	
- 	public <T> void saveOrUpdate(T entity) {
+ 	@Override
+    public <T> void saveOrUpdate(T entity) {
  		super.saveOrUpdate(entity);
  		//执行更新操作配置的sql增强
  		this.doUpdateSql((CgformTemplateEntity)entity);
@@ -39,7 +42,8 @@ public class CgformTemplateServiceImpl extends CommonServiceImpl implements Cgfo
 	 * @param
 	 * @return
 	 */
- 	public boolean doAddSql(CgformTemplateEntity t){
+ 	@Override
+    public boolean doAddSql(CgformTemplateEntity t){
 	 	return true;
  	}
  	/**
@@ -47,7 +51,8 @@ public class CgformTemplateServiceImpl extends CommonServiceImpl implements Cgfo
 	 * @param
 	 * @return
 	 */
- 	public boolean doUpdateSql(CgformTemplateEntity t){
+ 	@Override
+    public boolean doUpdateSql(CgformTemplateEntity t){
 	 	return true;
  	}
  	/**
@@ -55,7 +60,8 @@ public class CgformTemplateServiceImpl extends CommonServiceImpl implements Cgfo
 	 * @param
 	 * @return
 	 */
- 	public boolean doDelSql(CgformTemplateEntity t){
+ 	@Override
+    public boolean doDelSql(CgformTemplateEntity t){
 	 	return true;
  	}
  	

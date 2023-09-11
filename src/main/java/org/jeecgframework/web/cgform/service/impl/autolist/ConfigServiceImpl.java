@@ -43,7 +43,8 @@ public class ConfigServiceImpl implements ConfigServiceI {
 	/**
 	 * tableName 表单名
 	 */
-	@Ehcache
+	@Override
+    @Ehcache
 	public Map<String, Object> queryConfigs(String tableName,String jversion) {
 		//step.1 要返回的配置数据
 		Map<String, Object> configs = new HashMap<String,Object>();

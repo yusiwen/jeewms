@@ -115,21 +115,21 @@
 	<div class="tab-wrapper">
 		<!-- tab -->
 		<ul class="nav nav-tabs">
-			<li role="presentation" class="active"><a href="javascript:void(0);"> 预约通知</a></li>
-			<b style="margin-top: 10px">${wmImNoticeHPage.noticeId}</b>
+			<li role="presentation" class="active"><a href="javascript:void(0);"> 预约通知(${wmImNoticeHPage.noticeId})</a></li>
+<%--			<b style="margin-top: 10px"></b>--%>
 		</ul>
 		<!-- tab内容 -->
 		<div class="con-wrapper" style="display: block;">
 			<div class="row form-wrapper">
 				<div class="row show-grid">
 					<div class="col-xs-1 text-center">
-						<b>客户编码：</b>
+						<b>货主：</b>
 					</div>
 					<div class="col-xs-2">
-						<t:dictSelect readonly="${wmImNoticeHPage.readonly}"  field="cusCode" type="list" extendJson="{class:'form-control',style:'width:230px'}"
-									  dictTable="mv_cus" dictField="cus_code" dictText="cus_name"   defaultVal="${wmImNoticeHPage.cusCode}" hasLabel="false"  title="客户编码"></t:dictSelect>
+						<t:dictSelect readonly="${wmImNoticeHPage.readonly}"  field="cusCode" type="list" extendJson="{class:'form-control',style:'width:220px'}"
+									  dictTable="mv_cus" dictField="cus_code" dictText="cus_name"   defaultVal="${wmImNoticeHPage.cusCode}" hasLabel="false"  title="货主"></t:dictSelect>
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
-						<label class="Validform_label" style="display: none">客户编码</label>
+						<label class="Validform_label" style="display: none">货主编码</label>
 					</div>
 
 
@@ -201,9 +201,8 @@
 					<input id="supCode" name="supCode" type="text" class="form-control"
 						   ignore="ignore" value='${wmImNoticeHPage.supCode}'
 					/>
-					<span class="Validform_checktip" style="float:left;height:0px;"></span>
-					<label class="Validform_label" style="display: none">供应商编码</label>
 				</div>
+
 				<div class="col-xs-1 text-center">
 					<b>供应商名称：</b>
 				</div>
@@ -214,18 +213,54 @@
 					<span class="Validform_checktip" style="float:left;height:0px;"></span>
 					<label class="Validform_label" style="display: none">司机电话</label>
 				</div>
-
+					<div class="col-xs-1 text-center">
+						<b>预约库区：</b>
+					</div>
+					<div class="col-xs-2">
+						<t:dictSelect   field="areaCode" type="list"   extendJson="  {class:'form-control',style:'width:220px'}"
+										defaultVal="${wmImNoticeHPage.areaCode}" typeGroupCode="area_type"    hasLabel="false"  title="预约库区"></t:dictSelect>
+						<span class="Validform_checktip" style="float:left;height:0px;"></span>
+						<label class="Validform_label" style="display: none">预约库区</label>
+						<%-- 						<t:autocomplete    searchField="cusName"   name="cusCode" entityName="MvCusEntity" ></t:autocomplete> --%>
+					</div>
 					<div class="col-xs-1 text-center">
 						<b>订单类型：</b>
 					</div>
 					<div class="col-xs-2">
-						<t:dictSelect field="orderTypeCode" type="list" extendJson="{class:'form-control',style:'width:150px'}"
+						<t:dictSelect field="orderTypeCode" type="list" extendJson="{class:'form-control',style:'width:220px'}"
 									  dictTable="ba_order_type" dictField="order_type_code" dictText="order_type_name"  defaultVal="${wmImNoticeHPage.orderTypeCode}" hasLabel="false"  title="订单类型"></t:dictSelect>
 						<span class="Validform_checktip" style="float:left;height:0px;"></span>
 						<label class="Validform_label" style="display: none">订单类型</label>
 					</div>
+					<div class="col-xs-1 text-center">
+						<b>仓库：</b>
+					</div>
+					<div class="col-xs-2">
+						<t:dictSelect   field="storeCode" type="list"   extendJson="  {class:'form-control',style:'width:220px'}"
+										dictTable="ba_store" dictField="store_code" dictText="store_name" defaultVal="${wmImNoticeHPage.storeCode}"></t:dictSelect>
+						<span class="Validform_checktip" style="float:left;height:0px;"></span>
+						<label class="Validform_label" style="display: none">仓库</label>
+						<%-- 						<t:autocomplete    searchField="cusName"   name="cusCode" entityName="MvCusEntity" ></t:autocomplete> --%>
+					</div>
+					<div class="col-xs-1 text-center">
+						<b>备注：</b>
+					</div>
+					<div class="col-xs-2">
+						<input id="imBeizhu" name="imBeizhu" type="text" class="form-control"
+							   ignore="ignore"
+							   value='${wmImNoticeHPage.imBeizhu}' />
+						<span class="Validform_checktip" style="float:left;height:0px;"></span>
+						<label class="Validform_label" style="display: none">备注</label>
+					</div>
+
+					<div class="col-xs-1 text-center">
+						<b>附件 ：</b>
+					</div>
+					<div class="col-xs-2" style="line-height: 20px" >
+						<t:webUploader auto="true" pathValues="${wmImNoticeHPage.fuJian}" name="fuJian" duplicate="true" fileNumLimit="3"></t:webUploader>
 
 
+					</div>
 					<%--<div class="col-xs-1 text-center">--%>
 						<%--<b>月台：</b>--%>
 					<%--</div>--%>
@@ -238,30 +273,12 @@
 				</div>
 
 
-				<div class="row show-grid">
-					<div class="col-xs-1 text-center">
-						<b>备注：</b>
-					</div>
-					<div class="col-xs-5">
-						<input id="imBeizhu" name="imBeizhu" type="text" class="form-control"
-							   ignore="ignore"
-							   value='${wmImNoticeHPage.imBeizhu}' />
-						<span class="Validform_checktip" style="float:left;height:0px;"></span>
-						<label class="Validform_label" style="display: none">备注</label>
-					</div>
+<%--				<div class="row show-grid">--%>
+<%--					--%>
 
 
-					<div class="col-xs-1 text-center">
-						<b>附件 ：</b>
-					</div>
-					<div class="col-xs-5">
-						<t:webUploader auto="true" pathValues="${wmImNoticeHPage.fuJian}" name="fuJian" duplicate="true" fileNumLimit="3"></t:webUploader>
 
-						<span class="Validform_checktip" style="float:left;height:0px;"></span>
-						<label class="Validform_label" style="display: none">附件</label>
-					</div>
-
-				</div>
+<%--				</div>--%>
 			</div>
 		</div>
 

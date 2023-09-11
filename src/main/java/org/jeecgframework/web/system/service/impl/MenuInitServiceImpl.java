@@ -31,7 +31,8 @@ public class MenuInitServiceImpl extends CommonServiceImpl implements
 	private static final String MENU_TYPE_CSS = ".";//采用Css样式方式的code前缀
 	
 	
-	public void initMenu() {
+	@Override
+    public void initMenu() {
 		// 1.扫描项目下，所有class，判断带有标签@AutoMenu
 		// TODO
 		// 2.循环判断@AutoMenu在系统中是否存在,如果不存在进行插入，如果存在不再插入

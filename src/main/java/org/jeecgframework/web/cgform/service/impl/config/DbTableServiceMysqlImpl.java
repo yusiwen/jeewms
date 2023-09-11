@@ -25,7 +25,8 @@ public class DbTableServiceMysqlImpl implements DbTableServiceI {
 	
 
 	
-	public String createTableSQL(CgFormHeadEntity cgFormHead) {
+	@Override
+    public String createTableSQL(CgFormHeadEntity cgFormHead) {
 		StringBuilder sb = new StringBuilder();
 		sb.append("CREATE TABLE ");
 		sb.append(cgFormHead.getTableName()+" (");
@@ -47,12 +48,14 @@ public class DbTableServiceMysqlImpl implements DbTableServiceI {
 	}
 
 	
-	public String dropTableSQL(CgFormHeadEntity tableProperty) {
+	@Override
+    public String dropTableSQL(CgFormHeadEntity tableProperty) {
 		return " DROP TABLE IF EXISTS "+tableProperty.getTableName()+" ;";
 	}
 	
 	
-	public String updateTableSQL(CgFormHeadEntity cgFormHead, JdbcTemplate jdbcTemplate) {
+	@Override
+    public String updateTableSQL(CgFormHeadEntity cgFormHead, JdbcTemplate jdbcTemplate) {
 		String sql = "select column_name,data_type,column_comment,numeric_precision,numeric_scale,character_maximum_length," +
 				"is_nullable nullable from information_schema.columns where table_name =  '"+cgFormHead.getTableName()+"'and table_schema = '"+CodeResourceUtil.DATABASE_NAME+"';";
 
@@ -167,7 +170,8 @@ public class DbTableServiceMysqlImpl implements DbTableServiceI {
 	}
 	
 	
-	public String createIsExitSql(String tableName) {
+	@Override
+    public String createIsExitSql(String tableName) {
 		return "SELECT COUNT(*) FROM information_schema.TABLES WHERE TABLE_NAME='"+tableName+"' and table_schema = '"+CodeResourceUtil.DATABASE_NAME+"';";
 	}
 

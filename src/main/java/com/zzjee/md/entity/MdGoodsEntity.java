@@ -9,12 +9,12 @@ import javax.persistence.Table;
 import org.hibernate.annotations.GenericGenerator;
 import org.jeecgframework.poi.excel.annotation.Excel;
 
-/**   
+/**
  * @Title: Entity
  * @Description: 商品信息
  * @author erzhongxmu
  * @date 2017-08-15 23:16:53
- * @version V1.0   
+ * @version V1.0
  *
  */
 @Entity
@@ -40,9 +40,9 @@ public class MdGoodsEntity implements java.io.Serializable {
 	/**所属公司*/
 	private java.lang.String sysCompanyCode;
 	/**所属客户*/
-	@Excel(name="所属客户")
+	@Excel(name="供应商编码")
 	private java.lang.String suoShuKeHu;
-	@Excel(name="客户名称")
+	@Excel(name="供应商名称")
 	private java.lang.String cusName;
 	@Excel(name="配送点")
 	private java.lang.String peisongdian;
@@ -70,8 +70,8 @@ public class MdGoodsEntity implements java.io.Serializable {
 	/**产品属性*/
 	@Excel(name="产品属性")
 	private java.lang.String chpShuXing;
-	/**存放温层*/
-	@Excel(name="存放温层")
+	/**产品大类*/
+	@Excel(name="产品大类")
 	private java.lang.String cfWenCeng;
 	/**拆零控制*/
 	@Excel(name="拆零控制")
@@ -145,7 +145,37 @@ public class MdGoodsEntity implements java.io.Serializable {
 	private java.lang.String shpMiaoShu;
 	/**停用*/
 	private java.lang.String zhuangTai;
-	
+	private java.lang.String minStock;
+
+	@Excel(name="sku")
+	private String sku;
+
+//	@Excel(name="类目id")
+	private Integer categoryId;
+
+	@Excel(name="类目编码")
+	private String categoryCode;
+
+	@Column(name ="category_code",nullable=false,length=50)
+	public String getCategoryCode() {
+		return categoryCode;
+	}
+
+	public MdGoodsEntity setCategoryCode(String categoryCode) {
+		this.categoryCode = categoryCode;
+		return this;
+	}
+
+	@Column(name ="category_id",nullable=false,length=36)
+	public Integer getCategoryId() {
+		return categoryId;
+	}
+
+	public MdGoodsEntity setCategoryId(Integer categoryId) {
+		this.categoryId = categoryId;
+		return this;
+	}
+
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  主键
@@ -439,7 +469,7 @@ public class MdGoodsEntity implements java.io.Serializable {
 	}
 	/**
 	 *方法: 取得java.lang.String
-	 *@return: java.lang.String  存放温层
+	 *@return: java.lang.String  产品大类
 	 */
 	@Column(name ="CF_WEN_CENG",nullable=true,length=32)
 	public java.lang.String getCfWenCeng(){
@@ -448,7 +478,7 @@ public class MdGoodsEntity implements java.io.Serializable {
 
 	/**
 	 *方法: 设置java.lang.String
-	 *@param: java.lang.String  存放温层
+	 *@param: java.lang.String  产品大类
 	 */
 	public void setCfWenCeng(java.lang.String cfWenCeng){
 		this.cfWenCeng = cfWenCeng;
@@ -833,7 +863,7 @@ public class MdGoodsEntity implements java.io.Serializable {
 	public void setGaoZhXiang(java.lang.String gaoZhXiang){
 		this.gaoZhXiang = gaoZhXiang;
 	}
-	
+
 	@Column(name ="JIZHUN_WENDU",nullable=true,length=32)
 	public java.lang.String getJiZhunwendu(){
 		return this.jiZhunwendu;
@@ -846,7 +876,7 @@ public class MdGoodsEntity implements java.io.Serializable {
 	public void setJiZhunwendu(java.lang.String jiZhunwendu){
 		this.jiZhunwendu = jiZhunwendu;
 	}
-	
+
 	/**
 	 *方法: 取得java.lang.String
 	 *@return: java.lang.String  商品描述
@@ -915,5 +945,23 @@ public class MdGoodsEntity implements java.io.Serializable {
 
 	public void setPeisongdian(String peisongdian) {
 		this.peisongdian = peisongdian;
+	}
+
+	@Column(name ="min_stock",nullable=true,length=32)
+	public String getMinStock() {
+		return minStock;
+	}
+
+	public void setMinStock(String minStock) {
+		this.minStock = minStock;
+	}
+
+	@Column(name ="sku",nullable=true,length=32)
+	public String getSku() {
+		return sku;
+	}
+
+	public void setSku(String sku) {
+		this.sku = sku;
 	}
 }

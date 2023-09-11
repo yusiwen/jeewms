@@ -16,7 +16,7 @@
    <t:dgCol title="操作" field="opt" width="350"></t:dgCol>
 
    <t:dgCol title="通知单号"  field="noticeId" query="true" sortable="true"    queryMode="single"  width="120"></t:dgCol>
-   <t:dgCol title="客户编码"  field="cusCode"     queryMode="single" dictionary="mv_cus,cus_code,cus_name"  width="200"></t:dgCol>
+   <t:dgCol title="货主编码"  field="cusCode"     queryMode="single" dictionary="mv_cus,cus_code,cus_name"  width="200"></t:dgCol>
    <t:dgCol title="预计到货时间"  field="imData" formatter="yyyy-MM-dd hh:mm:ss"  query="true" queryMode="group"  width="120"></t:dgCol>
    <t:dgCol title="客户订单号"  field="imCusCode"   query="true" queryMode="single"  width="90"></t:dgCol>
    <t:dgCol title="车号"  field="imCarNo"   query="true" queryMode="single"  width="50"></t:dgCol>
@@ -53,7 +53,7 @@
  });
 //导入
 function ImportXls() {
-	openuploadwin('Excel导入', 'wmImNoticeHController.do?upload', "wmImNoticeHList");
+ openwindow('Excel导入', 'wmImNoticeHController.do?upload', "wmImNoticeHList");
 }
 
 function print(id){

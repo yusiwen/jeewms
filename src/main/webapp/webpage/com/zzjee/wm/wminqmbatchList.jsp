@@ -3,7 +3,7 @@
 <t:base type="jquery,easyui,tools,DatePicker"></t:base>
 <div  class="easyui-layout" fit="true">
     <div region="center" style="padding:0px;border:0px">
-  <t:datagrid autoLoadData="false" name="wmInQmIbatchList" checkbox="true"  pageSize="100" fitColumns="false" title="批量收货" actionUrl="wmImNoticeHController.do?datagridbatch" sortName="createDate"  sortOrder="desc" idField="id" fit="true" queryMode="group">
+  <t:datagrid  name="wmInQmIbatchList" checkbox="true"  pageSize="10" fitColumns="false" title="批量收货" actionUrl="wmImNoticeHController.do?datagridbatch" sortName="createDate"  sortOrder="desc" idField="id" fit="true" queryMode="group">
    <t:dgCol title="操作" field="opt" width="50"></t:dgCol>
     <t:dgCol title="主键"  field="id"  hidden="true"  queryMode="single"  width="120"></t:dgCol>
     <t:dgCol title="创建人名称"  field="createName"    queryMode="single"  width="80"></t:dgCol>
@@ -26,6 +26,7 @@
    <t:dgCol title="生产日期"  field="goodsPrdData"  extendParams="editor:'datebox'"   formatter="yyyy-MM-dd "  queryMode="single"  width="120"></t:dgCol>
    <t:dgCol title="批次"  field="goodsBatch"  extendParams="editor:'text'"   queryMode="single"  width="120"></t:dgCol>
    <t:dgCol title="储位"  field="binPlan"  extendParams="editor:'text'"   queryMode="single"  width="120"></t:dgCol>
+   <t:dgCol title="托盘"  field="tinId"  extendParams="editor:'text'"   queryMode="single"  width="120"></t:dgCol>
 
     <t:dgCol title="单位"  field="goodsUnit"    queryMode="single"  width="50"></t:dgCol>
 <%--    <t:dgDelOpt title="删除" url="wmInQmIController.do?doDel&id={id}" urlclass="ace_button"  urlfont="fa-trash-o"/> --%>
@@ -50,9 +51,9 @@
     function saveData(title,addurl,gname){
         if(!endEdit(gname))
             return false;
-        var rows=$('#'+gname).datagrid("getChanges","inserted");
-        var uprows=$('#'+gname).datagrid("getChanges","updated");
-        rows=rows.concat(uprows);
+        var rows=$('#'+gname).datagrid("getSelections");
+        // var uprows=$('#'+gname).datagrid("getChanges","updated");
+        // rows=rows.concat(uprows);
         if(rows.length<=0){
             tip("没有需要保存的数据！")
             return false;
@@ -128,7 +129,7 @@
 }
     //导入
     function ImportXls() {
-        openuploadwin('Excel导入', 'departController.do?upload', "departList");
+        openwindow('Excel导入', 'departController.do?upload', "departList");
     }
 
     //导出
